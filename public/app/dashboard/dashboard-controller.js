@@ -2,8 +2,8 @@ define(['dashboard/module', 'lodash'], function(module, _) {
 
   'use strict';
 
-  module.registerController('DashboardCtrl', ['$scope', '$interval', 'CalendarEvent',
-    function($scope, $interval, CalendarEvent) {
+  module.registerController('DashboardCtrl', ['$scope', '$interval'/*, 'CalendarEvent'*/,
+    function($scope, $interval/*, CalendarEvent*/) {
 
       function getFakeItem(index, prevValue) {
         var limitUp = Math.min(100, prevValue + 5);
@@ -278,9 +278,9 @@ define(['dashboard/module', 'lodash'], function(module, _) {
 
       $scope.events = [];
 
-      CalendarEvent.query().$promise.then(function(events) {
+      /*CalendarEvent.query().$promise.then(function(events) {
         $scope.events = events;
-      });
+      });*/
 
       // bird eye widget data
       $scope.countriesVisitsData = {

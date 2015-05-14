@@ -28,7 +28,10 @@ define([
           }
         }
       });
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise(function($injector, $location) {
+      var $state = $injector.get("$state");
+      $state.go('app.dashboard');
+    });
   }]);
 
   module.run(['$couchPotato', function($couchPotato) {

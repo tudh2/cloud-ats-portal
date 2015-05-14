@@ -29,12 +29,12 @@ define([
     'app.layout',
     'app.dashboard',
     'app.auth',
-    'app.graphs',
     'app.widgets',
-    'app.calendar',
-    'app.chat',
-    'app.inbox',
-    'app.forms'
+    //'app.graphs',
+    //'app.calendar',
+    //'app.chat',
+    //'app.inbox',
+    //'app.forms'
   ]);
 
   couchPotato.configureApp(app);

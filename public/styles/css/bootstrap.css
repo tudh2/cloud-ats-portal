@@ -1,9 +1,5 @@
 /*!
- * SmartAdmin v1.5.1 ()
- * Copyright 2011-2014 
- */
-/*!
- * Bootstrap v3.3.1.1
+ * Bootstrap v3.3
  *
  * Copyright 2013 Twitter, Inc
  * Licensed under the Apache License v2.0
@@ -280,7 +276,7 @@ th {
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.tff') format('truetype'), url('../fonts/glyphicons-halflings-regular.sgv#glyphicons_halflingsregular') format('svg');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -2408,25 +2404,56 @@ textarea.form-control {
 input[type="search"] {
   -webkit-appearance: none;
 }
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  input[type="date"],
-  input[type="time"],
-  input[type="datetime-local"],
-  input[type="month"] {
-    line-height: 32px;
-  }
-  input[type="date"].input-sm,
-  input[type="time"].input-sm,
-  input[type="datetime-local"].input-sm,
-  input[type="month"].input-sm {
-    line-height: 30px;
-  }
-  input[type="date"].input-lg,
-  input[type="time"].input-lg,
-  input[type="datetime-local"].input-lg,
-  input[type="month"].input-lg {
-    line-height: 45px;
-  }
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"] {
+  line-height: 32px;
+  line-height: 1.42857143 \0;
+}
+input[type="date"].input-sm,
+input[type="time"].input-sm,
+input[type="datetime-local"].input-sm,
+input[type="month"].input-sm {
+  line-height: 30px;
+  line-height: 1.5 \0;
+}
+input[type="date"].input-lg,
+input[type="time"].input-lg,
+input[type="datetime-local"].input-lg,
+input[type="month"].input-lg {
+  line-height: 45px;
+  line-height: 1.33 \0;
+}
+_:-ms-fullscreen,
+:root input[type="date"],
+_:-ms-fullscreen,
+:root input[type="time"],
+_:-ms-fullscreen,
+:root input[type="datetime-local"],
+_:-ms-fullscreen,
+:root input[type="month"] {
+  line-height: 1.42857143;
+}
+_:-ms-fullscreen.input-sm,
+:root input[type="date"].input-sm,
+_:-ms-fullscreen.input-sm,
+:root input[type="time"].input-sm,
+_:-ms-fullscreen.input-sm,
+:root input[type="datetime-local"].input-sm,
+_:-ms-fullscreen.input-sm,
+:root input[type="month"].input-sm {
+  line-height: 1.5;
+}
+_:-ms-fullscreen.input-lg,
+:root input[type="date"].input-lg,
+_:-ms-fullscreen.input-lg,
+:root input[type="time"].input-lg,
+_:-ms-fullscreen.input-lg,
+:root input[type="datetime-local"].input-lg,
+_:-ms-fullscreen.input-lg,
+:root input[type="month"].input-lg {
+  line-height: 1.33;
 }
 .form-group {
   margin-bottom: 15px;
@@ -3339,6 +3366,10 @@ tbody.collapse.in {
 .btn-group-vertical > .btn.active {
   z-index: 2;
 }
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus {
+  outline: 0;
+}
 .btn-group .btn + .btn,
 .btn-group .btn + .btn-group,
 .btn-group .btn-group + .btn,
@@ -4120,8 +4151,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-top-left-radius: 0;
 }
 .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
-  border-top-right-radius: 2px;
-  border-top-left-radius: 2px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -4605,16 +4634,10 @@ a.badge:focus {
   text-decoration: none;
   cursor: pointer;
 }
-.list-group-item.active > .badge,
+a.list-group-item.active > .badge,
 .nav-pills > .active > a > .badge {
   color: #3276b1;
   background-color: #ffffff;
-}
-.list-group-item > .badge {
-  float: right;
-}
-.list-group-item > .badge + .badge {
-  margin-right: 5px;
 }
 .nav-pills > li > a > .badge {
   margin-left: 3px;
@@ -4648,8 +4671,7 @@ a.badge:focus {
   .jumbotron {
     padding: 48px 0;
   }
-  .container .jumbotron,
-  .container-fluid .jumbotron {
+  .container .jumbotron {
     padding-left: 60px;
     padding-right: 60px;
   }
@@ -4898,6 +4920,12 @@ a.thumbnail.active {
   margin-bottom: 0;
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 2px;
+}
+.list-group-item > .badge {
+  float: right;
+}
+.list-group-item > .badge + .badge {
+  margin-right: 5px;
 }
 a.list-group-item {
   color: #555555;
@@ -5482,9 +5510,10 @@ button.close {
   outline: 0;
 }
 .modal-backdrop {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
+  bottom: 0;
   left: 0;
   background-color: #000000;
 }
@@ -5557,9 +5586,7 @@ button.close {
   z-index: 1030;
   display: block;
   visibility: visible;
-  font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
   font-size: 12px;
-  font-weight: normal;
   line-height: 1.4;
   opacity: 0;
   filter: alpha(opacity=0);
@@ -5609,15 +5636,13 @@ button.close {
 }
 .tooltip.top-left .tooltip-arrow {
   bottom: 0;
-  right: 5px;
-  margin-bottom: -5px;
+  left: 5px;
   border-width: 5px 5px 0;
   border-top-color: #000000;
 }
 .tooltip.top-right .tooltip-arrow {
   bottom: 0;
-  left: 5px;
-  margin-bottom: -5px;
+  right: 5px;
   border-width: 5px 5px 0;
   border-top-color: #000000;
 }
@@ -5644,15 +5669,13 @@ button.close {
 }
 .tooltip.bottom-left .tooltip-arrow {
   top: 0;
-  right: 5px;
-  margin-top: -5px;
+  left: 5px;
   border-width: 0 5px 5px;
   border-bottom-color: #000000;
 }
 .tooltip.bottom-right .tooltip-arrow {
   top: 0;
-  left: 5px;
-  margin-top: -5px;
+  right: 5px;
   border-width: 0 5px 5px;
   border-bottom-color: #000000;
 }
@@ -5664,7 +5687,6 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1.42857143;

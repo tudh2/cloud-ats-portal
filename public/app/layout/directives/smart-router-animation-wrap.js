@@ -8,7 +8,7 @@ define(['layout/module', 'lodash'], function(module, _) {
         element.removeAttr('smart-router-animation-wrap data-smart-router-animation-wrap wrap-for data-wrap-for');
         element.addClass('router-animation-container');
 
-        //$('<div class="router-animation-loader"><i class="fa fa-gear fa-4x fa-spin"></i></div>').appendTo(element);
+        $('<div class="router-animation-loader"><i class="fa fa-gear fa-4x fa-spin"></i></div>').appendTo(element);
 
         var animateElementSelector = attributes.wrapFor;
         var viewsToMatch = attributes.smartRouterAnimationWrap.split(/\s/);

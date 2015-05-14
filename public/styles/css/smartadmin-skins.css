@@ -1,7 +1,3 @@
-/*!
- * SmartAdmin v1.5.1 ()
- * Copyright 2011-2014 
- */
 /*---------------------------------------------------
     LESS Elements 0.9
   ---------------------------------------------------
@@ -1370,9 +1366,7 @@ body.smart-style-4 {
   color: #ffffff;
 }
 .smart-style-4 nav ul ul,
-.smart-style-4 nav ul li.open > a,
-.smart-style-4.minified nav ul ul,
-.smart-style-4.minified nav li li {
+.smart-style-4 nav ul li.open > a {
   background: #363a4b;
 }
 .smart-style-4 nav > ul > li > ul:before,
@@ -1415,7 +1409,7 @@ body.smart-style-4 {
   .smart-style-4 #hide-menu > :first-child > a {
     border-color: #FFFFFF !important;
   }
-  .smart-style-4:not(.menu-on-top) #left-panel {
+  .smart-style4:not(.menu-on-top) #left-panel {
     margin-top: 0px !important;
   }
   .smart-style-4 #project-selector,
@@ -1434,7 +1428,7 @@ body.smart-style-4 {
 
 */
 .smart-style-5 {
-  background: url(../img/glass.html) no-repeat center top fixed;
+  background: url(../img/glass.jpg) no-repeat center top fixed;
   background-size: cover;
   color: #fff;
 }
@@ -1908,10 +1902,6 @@ body.smart-style-4 {
 .smart-style-5 .dt-toolbar {
   border-color: rgba(255, 255, 225, 0.15);
 }
-.smart-style-5 .table-striped > tbody > tr:nth-child(odd),
-.smart-style-5 .table-hover > tbody > tr:hover {
-  background-color: transparent !important;
-}
 .smart-style-5 .dt-toolbar-footer,
 .smart-style-5 .table-striped > tbody > tr:nth-child(odd) > th,
 .smart-style-5 .table-hover > tbody > tr:hover > td,
@@ -2233,7 +2223,7 @@ body.smart-style-4 {
   background: none;
 }
 .smart-style-5 .ui-dialog {
-  background: url(../img/glass.html) no-repeat;
+  background: url(../img/glass.jpg) no-repeat;
 }
 .smart-style-5 .slider-track {
   background: rgba(0, 0, 0, 0.43);
@@ -2681,14 +2671,14 @@ body.smart-style-4 {
 .smart-style-5 .modal-content,
 .smart-style-5 .MessageBoxContainer,
 .smart-style-5 .ajax-dropdown {
-  background: url(../img/glass.html) no-repeat 0 0;
+  background: url(../img/glass.jpg) no-repeat 0 0;
   color: #fff;
 }
 .smart-style-5 .ui-chatbox-titlebar {
   background: #2A4F58!important;
 }
-.smart-style-5 .ui-chatbox-titlebar.ui-state-focus {
-  background: #204149 !important;
+.smart-style5 .ui-chatbox-titlebar.ui-state-focus {
+  background: 0D1F24 !important;
 }
 .smart-style-5 .ui-chatbox .ui-widget-content {
   background: rgba(51, 103, 105, 0.6);
@@ -2729,7 +2719,7 @@ body.smart-style-4 {
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
 }
 .smart-style-5 #jarviswidget-fullscreen-mode .jarviswidget {
-  background: url(../img/glass.html) no-repeat center bottom fixed;
+  background: url(../img/glass.jpg) no-repeat center bottom fixed;
   background-size: cover;
 }
 .smart-style-5.hidden-menu aside#left-panel {

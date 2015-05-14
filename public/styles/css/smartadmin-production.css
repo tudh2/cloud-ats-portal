@@ -1,8 +1,4 @@
 /*!
- * SmartAdmin v1.5.1 ()
- * Copyright 2011-2014 
- */
-/*!
  * SmartAdmin - Responsive WebApp
  *
  * Copyright 2014 bootstraphunter.com
@@ -10559,9 +10555,6 @@ body.container {
 }
 body.container.hidden-menu:not(.mobile-view-activated) {
   overflow: hidden;
-}
-body.container.modal-open {
-  padding: 0px !important;
 }
 /*
  * Headers
