@@ -27,6 +27,22 @@ define([
           'auth/controllers/login-controller'
         ])
       }
+    }).state('register',{
+      url: '/register',
+      views: {
+        root: {
+          templateUrl: 'app/auth/views/register.html'
+        }
+      },
+      data: {
+        title: 'Register',
+        htmlId: 'extr-page'
+      },
+      resolve: {
+        deps: $couchPotatoProvider.resolveDependencies([
+          'auth/controllers/register-controller'
+        ])
+      }
     })
   }]);
 
