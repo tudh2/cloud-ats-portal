@@ -44,7 +44,7 @@ define([
   'auth/services/authentication-service',
   'auth/models/User',
   'auth/controllers/logout-controller',
-  'auth/directives/signin-form',
+  'auth/directives/login-form',
   //components
 
   //activities
