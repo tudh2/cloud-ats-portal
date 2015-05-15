@@ -10,17 +10,17 @@ define(['auth/module', 'bootstrap-validator'], function(module) {
 			link: function(scope, form) {
 				form.bootstrapValidator({
 
-					feedbackIcons: {
-						valid: 'glyphicon glyphicon-ok',
-						invalid: 'glyphicon glyphicon-remove',
-						validating: 'glyphicon glyphicon-refresh'
+					feedbackIcons : {
+						valid : 'glyphicon glyphicon-ok',
+						invalid : 'glyphicon glyphicon-remove',
+						validating : 'glyphicon glyphicon-refresh'
 					},
 
-					fields: {
-						email: {
+					fields : {
+						email : {
 							validators : {
 								notEmpty : {
-									message: 'The email address is required'
+									message : 'The email address is required'
 								},
 								emailAddress : {
 									message : 'The email address is not valid'
