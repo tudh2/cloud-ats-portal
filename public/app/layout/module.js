@@ -19,10 +19,10 @@ define([
             templateUrl: 'app/layout/layout.tpl.html',
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
-                'auth/directives/login-info',
-                'modules/graphs/directives/inline/sparkline-container',
-                'components/chat/api/chat-api',
-                'components/inbox/directives/unread-messages-count'
+                'auth/directives/login-info'
+                // 'modules/graphs/directives/inline/sparkline-container',
+                // 'components/chat/api/chat-api',
+                // 'components/inbox/directives/unread-messages-count'
               ])
             }
           }

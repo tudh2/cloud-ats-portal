@@ -13,7 +13,9 @@
     <div data-smart-include="app/components/activities/activities.html"></div>
   </div>
 
-  <recent-projects></recent-projects>
+  <div class="hidden-xs tenant">
+    <span class="label tenant">{{getWord('Tenant')}} {{context.tenant._id}}</span>
+  </div>
 
   <!-- pull right nav area-->
   <div class="pull-right">

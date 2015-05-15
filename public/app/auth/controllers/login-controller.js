@@ -20,7 +20,11 @@ define(['auth/module'], function(module) {
           $cookies.put('authToken', data.authToken, {
             expires: expires
           });
-          $state.go('app.dashboard');
+
+          AuthenticationService.context().then(function(context) {
+            var tenant = context.tenant._id.toLowerCase();
+            $state.go('app.dashboard', { tenant : tenant });
+          });
         }
       });
     }

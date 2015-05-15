@@ -17,3 +17,10 @@
  * - BODY
  * - CUSTOM STYLES
  */
+ header .tenant {
+  margin-top: 16px;
+ }
+
+ header .tenant span.label {
+  text-transform: uppercase;
+ }

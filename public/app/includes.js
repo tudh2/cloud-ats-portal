@@ -42,9 +42,9 @@ define([
   'auth/module',
   'auth/controllers/login-controller',
   'auth/services/authentication-service',
-  'auth/models/User',
   'auth/controllers/logout-controller',
   'auth/directives/login-form',
+
   //components
 
   //activities
