@@ -21,10 +21,13 @@ define(['app'], function(app) {
         callback(data);
       })
       .error(function(data, status, headers, config) {
-        console.log(data);
-        console.log(status);
-        console.log(headers);
-        console.log(config);
+        if(status === 401) {
+          var data = {
+            error: true,
+            message : 'Username or password is incorrect'
+          }
+          callback(data);
+        }
       });
     };
 

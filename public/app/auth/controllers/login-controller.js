@@ -14,11 +14,15 @@ define(['auth/module'], function(module) {
       expires.setDate(expires.getDate() + 365);
 
       AuthenticationService.login($scope.email, $scope.password, function(data) {
-        $cookies.put('authToken', data.authToken, {
-          expires: expires
-        });
-        $state.go('app.dashboard');
-      })
+        if (data.error) {
+          $scope.message = data.message;          
+        } else {
+          $cookies.put('authToken', data.authToken, {
+            expires: expires
+          });
+          $state.go('app.dashboard');
+        }
+      });
     }
   }
 });
