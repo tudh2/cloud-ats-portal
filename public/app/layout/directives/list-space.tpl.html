@@ -4,8 +4,12 @@
     <i ng-if="spaces.length" class="fa fa-angle-down"></i>
   </span>
   <ul class="dropdown-menu" ng-if="spaces.length">
+    <li>
+      <a ng-click="select()">{{getWord('Public')}}</a>
+    </li>
+    <li class="divider"></li>
     <li ng-repeat="space in spaces">
-      <a href="{{space._id}}">{{space.name}}</a>
+      <a ng-click="select(space)">{{space.name}}</a>
     </li>
   </ul>
 </div>
