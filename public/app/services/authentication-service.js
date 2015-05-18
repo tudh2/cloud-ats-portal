@@ -49,6 +49,19 @@ define(['app'], function(app) {
       })
     };
 
+    function register(email, password, firstname, lastname, callback) {
+      var request = {
+        method: 'POST',
+        url: 'http://localhost:9000/api/v1/user/register',
+        data: {
+          email: email,
+          password: password,
+          firstname: firstname,
+          lastname: lastname
+        }
+      }
+    };
+
     function context() {
 
       var dfd = $q.defer();

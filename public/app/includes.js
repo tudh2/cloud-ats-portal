@@ -32,6 +32,9 @@ define([
   'auth/module',
   'auth/directives/login-form',
 
+  'auth/controllers/register-controller',
+  //components
+
   //activities
 
   //language
