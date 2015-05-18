@@ -60,6 +60,21 @@ define(['app'], function(app) {
           lastname: lastname
         }
       }
+
+      $http(request)
+      .success(function(data) {
+        callback(data);
+      })
+      .error(function(data, status, headers, config) {
+        if(status === 401) {
+
+           var data = {
+            error: true,
+            message : 'register fail'
+          }
+          callback(data);
+        }
+      });
     };
 
     function context() {
@@ -92,6 +107,12 @@ define(['app'], function(app) {
       },
       context: function() {
         return context();
+      },
+      verifyState: function(state) {
+        return verifyState(state);
+      },
+      register: function(email, password, firstname, lastname, callback) {
+        register(email, password, firstname, lastname, callback);
       }
     }
   }]);
