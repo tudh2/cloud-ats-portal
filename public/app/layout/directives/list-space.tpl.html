@@ -1,0 +1,11 @@
+<div class="project-context hidden-xs dropdown">
+  <span class="label">{{getWord('Space')}}: {{space}}</span>
+  <span class="project-selector dropdown-toggle">{{getWord('Select Space')}}
+    <i ng-if="spaces.length" class="fa fa-angle-down"></i>
+  </span>
+  <ul class="dropdown-menu" ng-if="spaces.length">
+    <li ng-repeat="space in spaces">
+      <a href="{{space._id}}">{{space.name}}</a>
+    </li>
+  </ul>
+</div>

@@ -1,4 +1,8 @@
 define([
+
+  //services
+  'services/user-service',
+
   //layout
   'layout/module',
   'layout/actions/minify-menu',
@@ -6,6 +10,7 @@ define([
   'layout/actions/full-screen',
   'layout/actions/reset-widgets',
 
+  'layout/directives/list-space',
   'layout/directives/smart-context',
   'layout/directives/smart-include',
   'layout/directives/smart-menu',

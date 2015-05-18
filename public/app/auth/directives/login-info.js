@@ -8,7 +8,6 @@ define(['auth/module'], function(module) {
       link: function($scope, $element) {
         var context = $rootScope.context;
         $scope.currentUser = context.user;
-        console.log(context);
       }
     };
   }]);
