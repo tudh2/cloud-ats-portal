@@ -29,6 +29,7 @@ define([
     'app.layout',
     'app.dashboard',
     'app.auth',
+    'app.fk',
     'app.widgets',
     //'app.graphs',
     //'app.calendar',

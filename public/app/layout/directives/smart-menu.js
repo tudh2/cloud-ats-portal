@@ -77,8 +77,23 @@ define(['layout/module', 'jquery'], function(module) {
             $li.smartCollapToggle();
             $li.find('li.active').parents('li').addClass('active');
           }
-
         });
+
+        //click on route link
+        element.on('click', 'a[data-ui-sref]', function(e) {
+          //collapse all siblings to element parents and remove active markers
+          $(this)
+            .parents('li').addClass('active')
+            .each(function() {
+              $(this).siblings('li.open').smartCollapToggle();
+              $(this).siblings('li').removeClass('active');
+            });
+
+          if ($body.hasClass('mobile-view-activated')) {
+            $rootScope.$broadcast('requestToggleMenu');
+          }
+        });
+
       }
     };
 

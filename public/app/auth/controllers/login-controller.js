@@ -23,7 +23,7 @@ define(['auth/module'], function(module) {
 
           AuthenticationService.context().then(function(context) {
             var tenant = context.tenant._id.toLowerCase();
-            $state.go('app.dashboard', { tenant : tenant });
+            $state.go('app.dashboard');
           });
         }
       });

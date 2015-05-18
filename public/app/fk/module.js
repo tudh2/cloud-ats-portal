@@ -4,27 +4,27 @@ define([
   'angular-ui-router',
   'angular-resource'
 ], function(ng, couchPotato) {
-  "use strict";
+  'use strict';
 
-  var module = ng.module('app.dashboard', ['ui.router', 'ngResource']);
+  var module = ng.module('app.fk', ['ui.router', 'ngResource']);
 
-  module.config(function ($stateProvider, $couchPotatoProvider) {
+  module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
-      .state('app.dashboard', {
-        url: '/dashboard',
+      .state('app.fk', {
+        url: '/fk',
         views: {
           "content@app": {
-            controller: 'DashboardCtrl',
-            templateUrl: 'app/dashboard/dashboard.html',
+            controller: 'FKCtrl',
+            templateUrl: 'app/fk/fk.html',
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
-                'dashboard/dashboard-controller'
+                'fk/fk-controller'
               ])
             }
           }
         },
         data: {
-          title: 'Dashboard',
+          title: 'Keyworks Framework',
           requireLogin: true
         }
       });
@@ -37,4 +37,4 @@ define([
   });
 
   return module;
-});
+})

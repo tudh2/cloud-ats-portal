@@ -2,6 +2,7 @@ define([
 
   //services
   'services/user-service',
+  'services/authentication-service',
 
   //layout
   'layout/module',
@@ -22,10 +23,7 @@ define([
   'layout/directives/smart-layout',
   'layout/directives/smart-fit-app-view',
   'layout/directives/state-breadcrumbs',
-  'layout/directives/big-breadcrumbs',
   'layout/directives/href-void',
-  'layout/directives/demo/demo-states',
-
   'layout/service/smart-css',
   
   'modules/widgets/directives/widget-grid',
@@ -34,19 +32,21 @@ define([
   //dashboard
   'dashboard/module',
 
+  //fk
+  'fk/module',
+
   //graphs
-  'modules/graphs/module',
+  // 'modules/graphs/module',
 
   //widgets
-  'modules/widgets/module',
+  // 'modules/widgets/module',
 
   //forms
-  'modules/forms/module',
+  // 'modules/forms/module',
 
   //account
   'auth/module',
   'auth/controllers/login-controller',
-  'auth/services/authentication-service',
   'auth/controllers/logout-controller',
   'auth/directives/login-form',
 
@@ -58,14 +58,14 @@ define([
   'components/activities/activities-dropdown-toggle-directive',
 
   //calendar
-  'components/calendar/module',
-  'components/calendar/models/calendar-event',
-  'components/calendar/directives/full-calendar',
+  // 'components/calendar/module',
+  // 'components/calendar/models/calendar-event',
+  // 'components/calendar/directives/full-calendar',
 
   'components/shortcut/toggle-shortcut',
 
   //chat
-  'components/chat/module',
+  // 'components/chat/module',
 
   //language
   'components/language/Language',
@@ -73,8 +73,8 @@ define([
   'components/language/language-controller',
 
   //projects
-  'components/projects/Projects',
-  'components/projects/recent-projects',
+  // 'components/projects/Projects',
+  // 'components/projects/recent-projects',
 
   //todo
   'components/todo/todo-container',
@@ -82,9 +82,9 @@ define([
   'components/todo/directives/todo-list',
 
   //inbox
-  'components/inbox/module',
-  'components/inbox/models/inbox-config',
-  'components/inbox/models/inbox-message'
+  // 'components/inbox/module',
+  // 'components/inbox/models/inbox-config',
+  // 'components/inbox/models/inbox-message'
 
 ], function() {
   'use strict';
