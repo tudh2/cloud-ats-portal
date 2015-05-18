@@ -77,6 +77,16 @@ define(['app'], function(app) {
       });
     };
 
+    function getTenants(callback) {
+      var request = {
+        method: 'GET',
+        url: 'http://localhost:9000/api/v1/user/tenants',
+      }
+
+      $http(request).success(function(data){
+        callback(data);
+      });
+    };
     function context() {
 
       var dfd = $q.defer();
@@ -113,6 +123,9 @@ define(['app'], function(app) {
       },
       register: function(email, password, firstname, lastname, callback) {
         register(email, password, firstname, lastname, callback);
+      },
+      getTenants: function(callback){
+        getTenants(callback);
       }
     }
   }]);

@@ -9,6 +9,14 @@ define(['auth/module'], function(module) {
 		$scope.firstname = '';
 		$scope.lastname = '';
 
+		AuthenticationService.getTenants(function(data){
+			$scope.tenants = data;
+		});
+
+
+		$scope.checkTenant = function() {
+			return false;
+		}
 
     $scope.submit = function() {
       AuthenticationService.register($scope.email, $scope.password, $scope.firstname, $scope.lastname, function(data) {
