@@ -18,7 +18,7 @@ define(['auth/module'], function(module) {
         $scope.checkTenant = false;
       }
 		});
-
+    
     $scope.submit = function() {
       var expires = new Date();
       expires.setDate(expires.getDate() + 365);
@@ -30,7 +30,10 @@ define(['auth/module'], function(module) {
           $cookies.put('authToken', data.authToken, {
             expires: expires
           });
-        	$state.go('app.dashboard');
+        	AuthenticationService.context().then(function(context) {
+            var tenant = context.tenant._id.toLowerCase();
+            $state.go('app.dashboard');
+          });
         }
       	
       });
