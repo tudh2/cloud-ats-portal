@@ -83,17 +83,15 @@
                         <fieldset>
                             <div class="row">
                                 <section class="col col-6">
-                                    <div ng-show="checkTenant()">
+                                    <div ng-show="!checkTenant">
                                         <label class="input">
                                             <input type="text" name="tenant" ng-model="tenant" placeholder="Tenant">
                                         </label>
                                     </div>
-                                    <div ng-show="!checkTenant()">
+                                    <div ng-show="checkTenant">
                                          
                                             <div>
-                                                <select class="form-control" name="tenant" ng-model="tenant">
-                                                    <option value="" disabled selected>Select your tenant</option>
-                                                    <option  ng-repeat="tenant in tenants" value="{{tenant.value}}">{{tenant._id}}</option>
+                                                <select class="form-control" ng-model="selectedTenant" ng-options="tenant._id for tenant in tenants">
                                                 </select>
                                             </div>
 

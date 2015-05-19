@@ -49,7 +49,7 @@ define(['app'], function(app) {
       })
     };
 
-    function register(email, password, firstname, lastname, callback) {
+    function register(email, password, firstname, lastname, tenant, space, callback) {
       var request = {
         method: 'POST',
         url: 'http://localhost:9000/api/v1/user/register',
@@ -57,7 +57,9 @@ define(['app'], function(app) {
           email: email,
           password: password,
           firstname: firstname,
-          lastname: lastname
+          lastname: lastname,
+          tenant: tenant,
+          space: space
         }
       }
 
@@ -121,8 +123,8 @@ define(['app'], function(app) {
       verifyState: function(state) {
         return verifyState(state);
       },
-      register: function(email, password, firstname, lastname, callback) {
-        register(email, password, firstname, lastname, callback);
+      register: function(email, password, firstname, lastname, tenant, space, callback) {
+        register(email, password, firstname, lastname, tenant, space, callback);
       },
       getTenants: function(callback){
         getTenants(callback);
