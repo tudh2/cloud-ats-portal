@@ -1,7 +1,7 @@
-define(['app'], function(app) {
+define(['layout/module'], function(app) {
   "use strict";
 
-  app.directive('languageSelector', function(Language) {
+  app.registerDirective('languageSelector', function(Language) {
     return {
       restrict: 'EA',
       replace: true,

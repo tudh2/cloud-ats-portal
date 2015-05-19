@@ -1,7 +1,7 @@
-define(['app'], function(app) {
+define(['layout/module'], function(app) {
   "use strict";
 
-  app.factory('Language', ['$http', '$log', function($http, $log) {
+  app.registerFactory('Language', ['$http', '$log', function($http, $log) {
     
     function getLanguage(key, callback) {
       $http.get('api/langs/' + key + '.json').success(function(data) {

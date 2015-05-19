@@ -1,7 +1,7 @@
-define(['app'], function(app) {
+define(['layout/module'], function(app) {
   "use strict";
 
-  return app.factory('activityService', ['$http', '$log', function($http, $log) {
+  return app.registerFactory('activityService', ['$http', '$log', function($http, $log) {
 
     function getActivities(callback) {
 

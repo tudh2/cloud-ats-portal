@@ -18,7 +18,12 @@ define([
             templateUrl: 'app/dashboard/dashboard.html',
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
-                'dashboard/dashboard-controller'
+                'dashboard/dashboard-controller',
+                'components/todo/todo-container',
+                'components/todo/models/todo',
+                'components/todo/directives/todo-list',
+                'modules/widgets/directives/widget-grid',
+                'modules/widgets/directives/jarvis-widget'
               ])
             }
           }

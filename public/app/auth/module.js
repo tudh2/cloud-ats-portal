@@ -40,7 +40,8 @@ define([
       },
       resolve: {
         deps: $couchPotatoProvider.resolveDependencies([
-          'auth/controllers/register-controller'
+          'auth/controllers/register-controller',
+          'auth/controllers/login-controller',
         ])
       }
     })

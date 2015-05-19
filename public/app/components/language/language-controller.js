@@ -1,7 +1,7 @@
-define(['app'], function(app) {
+define(['layout/module'], function(app) {
   "use strict";
 
-  return app.controller('LanguageCtrl', ['$scope', '$rootScope', '$log', 'Language',LanguageCtrl]);
+  return app.registerController('LanguageCtrl', ['$scope', '$rootScope', '$log', 'Language',LanguageCtrl]);
 
   function LanguageCtrl($scope, $rootScope, $log, Language) {
     

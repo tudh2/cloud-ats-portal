@@ -18,7 +18,10 @@ define([
             templateUrl: 'app/fk/fk.html',
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
-                'fk/fk-controller'
+                'fk/fk-controller',
+                'modules/forms/common',
+                'modules/widgets/directives/widget-grid',
+                'modules/widgets/directives/jarvis-widget'
               ])
             }
           }
