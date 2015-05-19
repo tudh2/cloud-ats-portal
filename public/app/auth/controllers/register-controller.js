@@ -18,14 +18,18 @@ define(['auth/module'], function(module) {
         $scope.checkTenant = false;
       }
 		});
-    console.log($scope.selectedTenant);
+
     $scope.submit = function() {
+      var expires = new Date();
+      expires.setDate(expires.getDate() + 365);
+
       AuthenticationService.register($scope.email, $scope.password, $scope.firstname, $scope.lastname, $scope.selectedTenant, $scope.space, function(data) {
       	if (data.error) {
-      		console.log("error");
           $scope.message = data.message;          
         } else {
-        	console.log("success");
+          $cookies.put('authToken', data.authToken, {
+            expires: expires
+          });
         	$state.go('app.dashboard');
         }
       	
