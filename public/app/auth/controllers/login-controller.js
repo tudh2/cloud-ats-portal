@@ -1,9 +1,9 @@
 define(['auth/module'], function(module) {
   'use strict';
 
-  return module.registerController('LoginCtrl', ['$scope', '$cookies', '$state' , 'AuthenticationService', LoginCtrl]);
+  return module.registerController('LoginCtrl', ['$scope', '$cookies', '$state', '$window', '$rootScope', 'AuthenticationService', LoginCtrl]);
 
-  function LoginCtrl($scope, $cookies, $state, AuthenticationService) {
+  function LoginCtrl($scope, $cookies, $state, $window, $rootScope, AuthenticationService) {
     $scope.email = '';
     $scope.password = '';
 
@@ -22,6 +22,11 @@ define(['auth/module'], function(module) {
           });
 
           $state.go('app.dashboard');
+          AuthenticationService.context().then(function(context) {
+            $window.sessionStorage.setItem('context', JSON.stringify(context));
+            $rootScope.context = context;
+            $state.go('app.dashboard');
+          });
         }
       });
     }

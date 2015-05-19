@@ -1,9 +1,9 @@
 define(['auth/module'], function(module) {
   'use strict';
 
-  return module.registerController('RegisterCtrl', ['$scope', '$cookies', '$state' , 'AuthenticationService', RegisterCtrl]);
+  return module.registerController('RegisterCtrl', ['$scope', '$cookies', '$state', '$window', '$rootScope' , 'AuthenticationService', RegisterCtrl]);
 
-  function RegisterCtrl($scope, $cookies, $state, AuthenticationService) {
+  function RegisterCtrl($scope, $cookies, $state, $window, $rootScope, AuthenticationService) {
     $scope.email = '';
 		$scope.password = '';
 		$scope.firstname = '';
@@ -27,11 +27,15 @@ define(['auth/module'], function(module) {
       	if (data.error) {
           $scope.message = data.message;          
         } else {
+          $window.sessionStorage.removeItem('context');
+
           $cookies.put('authToken', data.authToken, {
             expires: expires
           });
         	AuthenticationService.context().then(function(context) {
             var tenant = context.tenant._id.toLowerCase();
+            $window.sessionStorage.setItem('context', JSON.stringify(context));
+            $rootScope.context = context;
             $state.go('app.dashboard');
           });
         }

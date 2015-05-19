@@ -45,6 +45,7 @@ define(['app'], function(app) {
       .success(function() {
         $cookies.remove('authToken');
         $window.sessionStorage.removeItem('context');
+        $rootScope.context = null;
         callback();
       })
     };
