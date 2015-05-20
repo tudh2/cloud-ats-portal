@@ -63,8 +63,10 @@
 
                             <section>
                                 <label class="input"> <i class="icon-append fa fa-envelope"></i>
-                                    <input class="form-control" type="email" name="email" ng-model="email" placeholder="Email address" email-validate pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                    <input class="form-control" type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
                                     <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                                    <em ng-show="checkEmailPattern" id="email-error" class="invalid" style="display: inline;">{{notify}}</em>
+
                             </section>
 
                             <section>
