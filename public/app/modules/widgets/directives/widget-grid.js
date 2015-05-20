@@ -1,4 +1,4 @@
-define(['modules/widgets/module', 'lodash'], function(module, _) {
+define(['layout/module', 'lodash'], function(module, _) {
   'use strict';
 
   module.registerDirective('widgetGrid', ['$rootScope', '$compile', '$q', '$state', '$timeout',

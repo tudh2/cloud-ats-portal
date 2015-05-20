@@ -44,6 +44,28 @@ define([
           'auth/controllers/login-controller',
         ])
       }
+    }).state('403',  {
+      url: '/403.html',
+      views: {
+        root: {
+          templateUrl: 'app/auth/views/errors/403.html'
+        }
+      },
+      data: {
+        title: 'Forbidden',
+        htmlId: 'extr-page'
+      }
+    }).state('401',  {
+      url: '/401.html',
+      views: {
+        root: {
+          templateUrl: 'app/auth/views/errors/401.html'
+        }
+      },
+      data: {
+        title: 'Unauthorized',
+        htmlId: 'extr-page'
+      }
     })
   }]);
 

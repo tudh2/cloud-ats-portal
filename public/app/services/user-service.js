@@ -1,8 +1,8 @@
 define(['app'], function(app) {
   'use strict';
 
-  app.factory('UserService', ['$http', '$q', '$cookies', '$rootScope', '$window',
-    function($http, $q, $cookies, $rootScope, $window){
+  app.factory('UserService', ['$http', '$q', '$cookies', '$rootScope', '$window', '$state',
+    function($http, $q, $cookies, $rootScope, $window, $state){
     return {
       spaces: function(){
         var dfd = $q.defer();
@@ -19,7 +19,17 @@ define(['app'], function(app) {
         .success(function(response) {
           dfd.resolve(response);
         })
-        .error(dfd.reject);
+        .error(function(data, status) {
+          switch (status) {
+            case 403:
+              $state.go('403');
+              break;
+            case 401:
+              $state.go('401');
+              break;
+          }
+          dfd.reject;
+        });
 
         return dfd.promise;
       },

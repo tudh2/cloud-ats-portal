@@ -1,4 +1,4 @@
-define(['modules/widgets/module'], function(module) {
+define(['layout/module'], function(module) {
   'use strict';
 
   module.registerDirective('jarvisWidget', ['$rootScope', function($rootScope) {

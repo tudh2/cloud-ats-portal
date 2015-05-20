@@ -21,10 +21,7 @@ define(['auth/module'], function(module) {
             expires: expires
           });
 
-          AuthenticationService.context().then(function(context) {
-            var tenant = context.tenant._id.toLowerCase();
-            $state.go('app.dashboard');
-          });
+          $state.go('app.dashboard');
         }
       });
     }
