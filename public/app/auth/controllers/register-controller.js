@@ -27,17 +27,23 @@ define(['auth/module'], function(module) {
       	if (data.error) {
           $scope.message = data.message;          
         } else {
-          $window.sessionStorage.removeItem('context');
+          if (data == 'false') {
+            $state.go('register');
+            $scope.checkEmail = true;
+            $scope.message = 'Email exists';
+          } else {
+            $window.sessionStorage.removeItem('context');
 
-          $cookies.put('authToken', data.authToken, {
-            expires: expires
-          });
-        	AuthenticationService.context().then(function(context) {
-            var tenant = context.tenant._id.toLowerCase();
-            $window.sessionStorage.setItem('context', JSON.stringify(context));
-            $rootScope.context = context;
-            $state.go('app.dashboard');
-          });
+            $cookies.put('authToken', data.authToken, {
+              expires: expires
+            });
+          	AuthenticationService.context().then(function(context) {
+              //var tenant = context.tenant._id.toLowerCase();
+              $window.sessionStorage.setItem('context', JSON.stringify(context));
+              $rootScope.context = context;
+              $state.go('app.dashboard');
+            });
+          }
         }
       	
       });

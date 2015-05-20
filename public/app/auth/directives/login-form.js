@@ -22,9 +22,8 @@ define(['auth/module', 'bootstrap-validator'], function(module) {
 								notEmpty : {
 									message : 'The email address is required'
 								},
-								emailAddress : {
-									message : 'The email address is not valid'
-
+								regexp: {
+									message: 'The email must contain "., @" character '
 								}
 							}
 						},
