@@ -24,7 +24,8 @@ define([
       },
       resolve: {
         deps: $couchPotatoProvider.resolveDependencies([
-          'auth/controllers/login-controller'
+          'auth/controllers/login-controller',
+          'auth/directives/login-form'
         ])
       }
     }).state('register',{
@@ -42,6 +43,8 @@ define([
         deps: $couchPotatoProvider.resolveDependencies([
           'auth/controllers/register-controller',
           'auth/controllers/login-controller',
+          'auth/directives/email-validate',
+          'auth/directives/form-validate'
         ])
       }
     }).state('403',  {

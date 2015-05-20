@@ -49,7 +49,7 @@
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                 <div class="well no-padding">
 
-                    <form id="smart-form-register" class="smart-form client-form" ng-submit="submit()" ng-controller="RegisterCtrl">
+                    <form id="smart-form-register" class="smart-form client-form" ng-submit="submit()" ng-controller="RegisterCtrl" form-validate>
                         <header>
                             Registration is FREE*
                         </header>
@@ -63,7 +63,7 @@
 
                             <section>
                                 <label class="input"> <i class="icon-append fa fa-envelope"></i>
-                                    <input type="email" name="email" ng-model="email" placeholder="Email address">
+                                    <input class="form-control" type="email" name="email" ng-model="email" placeholder="Email address" email-validate pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                                     <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
                             </section>
 
@@ -113,12 +113,12 @@
                             <div class="row">
                                 <section class="col col-6">
                                     <label class="input">
-                                        <input type="text" name="firstname" ng-model="firstname" placeholder="First name">
+                                        <input type="text" name="firstname" ng-model="firstname" placeholder="First name" required>
                                     </label>
                                 </section>
                                 <section class="col col-6">
                                     <label class="input">
-                                        <input type="text" name="lastname" ng-model="lastname" placeholder="Last name">
+                                        <input type="text" name="lastname" ng-model="lastname" placeholder="Last name" required>
                                     </label>
                                 </section>
                             </div>

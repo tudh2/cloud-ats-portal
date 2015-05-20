@@ -27,11 +27,6 @@ define(['auth/module'], function(module) {
       	if (data.error) {
           $scope.message = data.message;          
         } else {
-          if (data == 'false') {
-            $state.go('register');
-            $scope.checkEmail = true;
-            $scope.message = 'Email exists';
-          } else {
             $window.sessionStorage.removeItem('context');
 
             $cookies.put('authToken', data.authToken, {
@@ -44,7 +39,7 @@ define(['auth/module'], function(module) {
               $state.go('app.dashboard');
             });
           }
-        }
+        
       	
       });
     }

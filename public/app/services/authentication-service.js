@@ -83,7 +83,7 @@ define(['app'], function(app) {
     function getTenants(callback) {
       var request = {
         method: 'GET',
-        url: 'http://localhost:9000/api/v1/user/tenants',
+        url: 'http://localhost:9000/api/v1/user/tenants'
       }
 
       $http(request).success(function(data){
@@ -111,6 +111,18 @@ define(['app'], function(app) {
       return dfd.promise;
     };
 
+    function checkAccount(email, callback) {
+      var request = {
+        method: 'GET',
+        url: 'http://localhost:9000/api/v1/user/checkAccount?email='+email
+        
+      }
+
+      $http(request).success(function(data){
+        callback(data);
+      });
+    };
+
     return {
       login: function(email, password, callback) {
         login(email, password, callback);
@@ -129,6 +141,9 @@ define(['app'], function(app) {
       },
       getTenants: function(callback){
         getTenants(callback);
+      },
+      checkAccount: function(email, callback) {
+        checkAccount(email, callback);
       }
     }
   }]);
