@@ -12,10 +12,6 @@ define(['auth/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-val
         		form.validate(angular.extend({
 
         			rules: {
-        				email: {
-        					required: true
-        					
-        				},
         				password: {
         					required: true,
         					minlength: 3,
@@ -38,9 +34,6 @@ define(['auth/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-val
         			},
 
         			messages: {
-        				email: {
-        				//	required: 'Please enter your email address'
-        				},
         				password: {
         					required: 'Please enter your password'
         				},

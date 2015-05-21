@@ -10,13 +10,13 @@ define(['auth/module'], function (module) {
 
 				element.on('blur', function() {
 
-					console.log(scope.selectedTenant);
-
 					if (scope.selectedTenant != null) {
 						scope.chooseTenant = false;
 					} else {
 						scope.chooseTenant = true;
 						scope.alert = 'You have to choose a tenant';
+						element.parent().removeClass('state-success');
+						element.parent().addClass('state-error');
 					}
 				});
 				

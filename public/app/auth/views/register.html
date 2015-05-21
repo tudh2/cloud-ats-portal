@@ -58,10 +58,11 @@
 
               <section>
                 <label class="input"> <i class="icon-append fa fa-envelope"></i>
-                <input  type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
-                <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
-                <em ng-show="checkEmailPattern">{{notify}}</em>
-                <em ng-show="checkEmail">{{message}}</em>
+                  <input  type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
+                  <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> 
+                </label>
+                <em ng-show="checkEmailPattern" style="color: red;">{{notify}}</em>
+                <em ng-show="checkEmail" style="color: red;">{{message}}</em>
               </section>
 
               <section>
@@ -93,7 +94,7 @@
                           <option value="" selected="">--choose tenant--</option>
                         </select><i></i>
                       </label>
-                      <em ng-show="chooseTenant">{{alert}}</em>
+                      <em ng-show="chooseTenant" style="color: red;">{{alert}}</em>
                     </div>
 
                   </div>

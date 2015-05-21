@@ -16,6 +16,8 @@ define(['auth/module'], function(module) {
 					if (checkAccount == false) {
 						scope.checkEmailPattern = true;
 						scope.notify = 'The email must contain "., @" characters and not be empty';
+						element.parent().removeClass('state-success');
+						element.parent().addClass('state-error');
 					} else {
 						scope.checkEmailPattern = false;
 					}
@@ -24,7 +26,9 @@ define(['auth/module'], function(module) {
 						AuthenticationService.checkAccount(email, function(data){
 							if (data == 'false') {
 		            scope.checkEmail = true;
-		            scope.message = 'The email exists';
+		            scope.message = 'The email exists, you can use another email';
+		            element.parent().removeClass('state-success');
+		            element.parent().addClass('state-error');
 		          } else {
 		          	scope.checkEmail = false;
 		          }
