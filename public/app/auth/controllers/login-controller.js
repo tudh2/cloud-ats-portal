@@ -21,7 +21,6 @@ define(['auth/module'], function(module) {
             expires: expires
           });
 
-          $state.go('app.dashboard');
           AuthenticationService.context().then(function(context) {
             $window.sessionStorage.setItem('context', JSON.stringify(context));
             $rootScope.context = context;
