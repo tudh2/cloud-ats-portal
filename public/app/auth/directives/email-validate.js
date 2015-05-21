@@ -18,16 +18,18 @@ define(['auth/module'], function(module) {
 						scope.notify = 'The email must contain "., @" character ';
 					} else {
 						scope.checkEmailPattern = false;
-						scope.notify = 'The email must contain "., @" character ';
 					}
-					AuthenticationService.checkAccount(email, function(data){
-						if (data == 'false') {
-	            scope.checkEmail = true;
-	            scope.message = 'Email exists';
-	          } else {
-	          	scope.checkEmail = false;
-	          }
-					});
+					if (email.length > 0) {
+
+						AuthenticationService.checkAccount(email, function(data){
+							if (data == 'false') {
+		            scope.checkEmail = true;
+		            scope.message = 'The email exists';
+		          } else {
+		          	scope.checkEmail = false;
+		          }
+						});
+					}
 				});
 			}	
 		}

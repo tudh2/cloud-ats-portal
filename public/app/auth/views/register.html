@@ -58,15 +58,15 @@
 
               <section>
                 <label class="input"> <i class="icon-append fa fa-envelope"></i>
-                <input class="form-control" type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
+                <input type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
                 <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
-                <em ng-show="checkEmailPattern" id="email-error" class="invalid" style="display: inline;">{{notify}}</em>
+                <em ng-show="checkEmailPattern">{{notify}}</em>
 
               </section>
 
               <section>
                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                  <input type="password" name="password" ng-model="password" placeholder="Password" id="password">
+                  <input type="password" name="password" ng-model="password" placeholder="Password" id="password" minlength="3">
                 <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
               </section>
 
@@ -82,17 +82,18 @@
                 <section class="col col-6">
                   <div ng-show="!checkTenant">
                     <label class="input">
-                      <input type="text" name="tenant" ng-model="tenant" placeholder="Tenant">
+                      <input type="text" name="tenant" ng-model="selectedTenant" placeholder="Tenant" tenant-validate required>
                     </label>
                   </div>
                   <div ng-show="checkTenant">
                                          
                     <div>
                       <label class="select">
-                        <select  ng-model="selectedTenant" ng-options="tenant._id for tenant in tenants">
+                        <select  ng-model="selectedTenant" ng-options="tenant._id for tenant in tenants" tenant-validate>
                           <option value="" selected="">--choose tenant--</option>
                         </select><i></i>
                       </label>
+                      <em ng-show="chooseTenant">{{alert}}</em>
                     </div>
 
                   </div>

@@ -44,7 +44,8 @@ define([
           'auth/controllers/register-controller',
           'auth/controllers/login-controller',
           'auth/directives/email-validate',
-          'auth/directives/form-validate'
+          'auth/directives/form-validate',
+          'auth/directives/tenant-validate'
         ])
       }
     }).state('403',  {
