@@ -58,10 +58,10 @@
 
               <section>
                 <label class="input"> <i class="icon-append fa fa-envelope"></i>
-                <input type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
+                <input  type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
                 <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
                 <em ng-show="checkEmailPattern">{{notify}}</em>
-
+                <em ng-show="checkEmail">{{message}}</em>
               </section>
 
               <section>
@@ -130,7 +130,7 @@
                   <i></i>I agree with the <a href="#" data-toggle="modal" data-target="#myModal"> Terms and Conditions </a>
                 </label>
               </section>
-              <div ng-show="checkEmail" class="alert alert-danger">{{message}}</div>
+              
             </fieldset>
               <footer>
                 <button type="submit" class="btn btn-primary">

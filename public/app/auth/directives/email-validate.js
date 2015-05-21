@@ -15,7 +15,7 @@ define(['auth/module'], function(module) {
 
 					if (checkAccount == false) {
 						scope.checkEmailPattern = true;
-						scope.notify = 'The email must contain "., @" character ';
+						scope.notify = 'The email must contain "., @" characters and not be empty';
 					} else {
 						scope.checkEmailPattern = false;
 					}
@@ -29,6 +29,9 @@ define(['auth/module'], function(module) {
 		          	scope.checkEmail = false;
 		          }
 						});
+					}
+					else {
+						scope.checkEmail = false;
 					}
 				});
 			}	

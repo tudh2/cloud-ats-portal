@@ -22,26 +22,27 @@ define(['auth/module'], function(module) {
     $scope.submit = function() {
       var expires = new Date();
       expires.setDate(expires.getDate() + 365);
+      if ($scope.checkEmailPattern == false && $scope.checkEmail == false && $scope.selectedTenant != null && $scope.firstname != null && $scope.lastname != null && ($scope.password == $scope.repass)) {
+        AuthenticationService.register($scope.email, $scope.password, $scope.firstname, $scope.lastname, $scope.selectedTenant, $scope.space, function(data) {
+        	if (data.error) {
+            $scope.message = data.message;          
+          } else {
+              $window.sessionStorage.removeItem('context');
 
-      AuthenticationService.register($scope.email, $scope.password, $scope.firstname, $scope.lastname, $scope.selectedTenant, $scope.space, function(data) {
-      	if (data.error) {
-          $scope.message = data.message;          
-        } else {
-            $window.sessionStorage.removeItem('context');
-
-            $cookies.put('authToken', data.authToken, {
-              expires: expires
-            });
-          	AuthenticationService.context().then(function(context) {
-              //var tenant = context.tenant._id.toLowerCase();
-              $window.sessionStorage.setItem('context', JSON.stringify(context));
-              $rootScope.context = context;
-              $state.go('app.dashboard');
-            });
-          }
-        
-      	
-      });
+              $cookies.put('authToken', data.authToken, {
+                expires: expires
+              });
+            	AuthenticationService.context().then(function(context) {
+                //var tenant = context.tenant._id.toLowerCase();
+                $window.sessionStorage.setItem('context', JSON.stringify(context));
+                $rootScope.context = context;
+                $state.go('app.dashboard');
+              });
+            }
+          
+        	
+        });
+      }
     }
   }
 });

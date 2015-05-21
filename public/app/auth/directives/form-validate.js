@@ -39,7 +39,7 @@ define(['auth/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-val
 
         			messages: {
         				email: {
-        					required: 'Please enter your email address'
+        				//	required: 'Please enter your email address'
         				},
         				password: {
         					required: 'Please enter your password'
