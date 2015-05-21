@@ -20,6 +20,8 @@ define([
               deps: $couchPotatoProvider.resolveDependencies([
                 'fk/fk-controller',
                 'modules/forms/common',
+                'modules/forms/directives/validate/smart-validate-form',
+                'modules/forms/directives/wizard/smart-wizard',
                 'modules/widgets/directives/widget-grid',
                 'modules/widgets/directives/jarvis-widget'
               ])

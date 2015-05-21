@@ -1,0 +1,110 @@
+<form data-smart-validate-form>
+  <div class="col-sm-12" data-smart-wizard data-smart-wizard-callback="fkWizardCompleteCallback">
+    <div class="form-bootstrapWizard clearfix">
+      <ul class="bootstrapWizard">
+        <li data-smart-wizard-tab="1">
+          <a href="#">
+            <span class="step">1</span> <span class="title">Project</span>
+          </a>
+        </li>
+        <li data-smart-wizard-tab="2">
+          <a href="#">
+            <span class="step">2</span> <span class="title">Data Provider</span>
+          </a>
+        </li>
+        <li data-smart-wizard-tab="3">
+          <a href="#">
+            <span class="step">3</span> <span class="title">Suite</span>
+          </a>
+        </li>
+        <li data-smart-wizard-tab="4">
+          <a href="#">
+            <span class="step">4</span> <span class="title">Finish</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane" data-smart-wizard-pane="1">
+        <br>
+        <h3><strong>Step 1</strong> - Project Information</h3>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lg fa-fw fa-slack"></i></span>
+                <input class="form-control input-lg" 
+                  placeholder="Project Name" type="text" name="project.name"
+                  data-smart-validate-input
+                  data-required
+                  data-message-required="Project name can not be empty">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lg fa-fw fa-home"></i></span>
+                <input class="form-control input-lg" disabled="disabled" value="Fsoft">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lg fa-fw fa-group"></i></span>
+                <select name="space" class="form-control input-lg">
+                  <option value="public" selected="selected">Public</option>
+                  <option ng-repeat="space in spaces" value="{{space._id}}">{{space.name}}</option>
+                </select>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" data-smart-wizard-pane="2">
+        <br>
+        <h3><strong>Step 2</strong> - Data Provider</h3>
+        <div data-smart-include="app/fk/directives/data-provider.tpl.html"></div>
+      </div>
+
+      <div class="tab-pane" data-smart-wizard-pane="3">
+        <br>
+        <h3><strong>Step 3</strong> - Suite Information</h3>
+      </div>
+
+      <div class="tab-pane" data-smart-wizard-pane="4">
+        <br>
+        <h3><strong>Step 4</strong> - Finish</h3>
+        <br>
+
+        <h1 class="text-center text-success">
+          <strong><i class="fa fa-check fa-lg"></i> Complete</strong>
+        </h1>
+        <h4 class="text-center">Click next to finish</h4>
+        <br>
+        <br>
+      </div>
+
+      <div class="form-actions">
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="pager wizard no-margin">
+              <li class="previous" data-smart-wizard-prev>
+                <a href="#" class="btn btn-lg btn-default"> Previous </a>
+              </li>
+              <li class="next" data-smart-wizard-next>
+                <a href="#" class="btn btn-lg txt-color-darken"> Next </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
