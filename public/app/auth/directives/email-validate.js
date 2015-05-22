@@ -7,7 +7,6 @@ define(['auth/module'], function(module) {
 			restrict: 'A',
 			link: function(scope, element, attributes) {
 
-
 				element.on('blur', function() {
 					
 					var email = element.val();

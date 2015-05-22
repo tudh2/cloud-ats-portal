@@ -9,6 +9,26 @@ define(['auth/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-val
 
         	restrict: 'A',
         	link: function (scope, form) {
+
+                form.on('submit', function() {
+                    if (scope.email == '') {
+                        
+                        scope.checkEmail = true;
+                        scope.checkEmailPattern = false;
+                        scope.message = 'The email is not empty';
+
+                        form.find('[name=email]').parent().removeClass('state-success');
+                        form.find('[name=email]').parent().addClass('state-error');
+                    }
+
+                    if (scope.selectedTenant == null) {
+                        scope.chooseTenant = true;
+                        scope.alert = 'You have to choose a tenant';
+                        form.find('.select').removeClass('state-success');
+                        form.find('.select').addClass('state-error');
+
+                    }
+                });
         		form.validate(angular.extend({
 
         			rules: {
