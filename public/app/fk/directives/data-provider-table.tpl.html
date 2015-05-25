@@ -1,0 +1,44 @@
+<table class="table table-bordered" style="overflow: auto;">
+  <thead>
+    <tr>
+      <th ng-if="editable">
+        <a ng-click="newField()" class="btn btn-primary btn-xs">
+          <i class="fa fa-plus"></i> New Field
+        </a>
+        <a ng-if="rows.length == 0" ng-click="newRow()" class="btn btn-primary btn-xs">
+          <i class="fa fa-plus"></i> New Row
+        </a>
+      </th>
+      <th ng-repeat="field in fieldNames" class="filedName">
+        <a ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)" class="btn btn-danger btn-xs">
+          <i class="fa fa-minus"></i>
+        </a>
+        <a ng-if="editable" href-void data-type="text" smart-xeditable data-ng-model="fieldName" data-options="editableOptions" class="editable editable-click">{{field}}</a>
+        <span ng-if="!editable" class="text-info">{{field}}</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in rows" class="fieldValues">
+      <td ng-if="!$last && editable">
+        <a ng-click="removeRow($index)" class="btn btn-danger btn-xs">
+          <i class="fa fa-minus"></i> This Row
+        </a>
+      </td>
+
+      <td ng-if="$last && editable">
+        <a ng-click="removeRow($index)" class="btn btn-danger btn-xs">
+          <i class="fa fa-minus"></i> This Row
+        </a>
+        <a ng-click="newRow()" class="btn btn-primary btn-xs">
+          <i class="fa fa-plus"></i> New Row
+        </a>
+      </td>
+
+      <td ng-repeat="cell in row">
+        <a ng-if="editable" href-void data-type="text" smart-xeditable data-ng-model="cell" data-options="editableOptions" class="editable editable-click">{{cell}}</a>
+        <span ng-if="!editable" class="text-success">{{cell}}</span>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,6 +1,7 @@
 define([
 
   //services
+  'services/data-service',
   'services/user-service',
   'services/authentication-service',
 

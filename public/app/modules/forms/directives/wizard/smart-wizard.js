@@ -5,7 +5,8 @@ define(['layout/module', 'lodash'], function(module, _) {
     return {
       restrict: 'A',
       scope: {
-        'smartWizardCallback': '&'
+        'smartWizardCallback': '&',
+        'smartStepCallback': '&'
       },
       link: function(scope, element, attributes) {
         var stepsCount = $('[data-smart-wizard-tab]').length;
@@ -24,6 +25,14 @@ define(['layout/module', 'lodash'], function(module, _) {
             .addClass('active').siblings('[data-smart-wizard-tab]').removeClass('active');
 
           $prev.toggleClass('disabled', step == 1);
+
+          if(typeof scope.smartStepCallback() === 'function') {
+            var data = {};
+            _.each($form.serializeArray(), function(field) {
+              data[field.name] = field.value;
+            });
+            scope.smartStepCallback()(currentStep, data);
+          }
         }
 
         element.on('click', '[data-smart-wizard-tab]', function(e) {
@@ -78,7 +87,7 @@ define(['layout/module', 'lodash'], function(module, _) {
             } else {
               var data = {};
               _.each($form.serializeArray(), function(field) {
-                data[field.name] = field.name;
+                data[field.name] = field.value;
               });
               if(typeof scope.smartWizardCallback() === 'function') {
                 scope.smartWizardCallback()(data);
