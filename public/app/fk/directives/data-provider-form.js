@@ -6,7 +6,6 @@ define(['fk/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-valid
     return {
       restrict: 'E',
       replace: true,
-      scope: true,
       templateUrl: 'app/fk/directives/data-provider-form.tpl.html',
       link: function(scope, form) {
 

@@ -1,5 +1,5 @@
 
-<form class="smart-form create-data-provider">
+<form ng-submit="createDataProvider()" class="smart-form create-data-provider">
   
   <fieldset class="no-padding">
     <div class="row">
@@ -14,7 +14,7 @@
 
   <footer>
     <button class="btn btn-primary" type="submit">Create</button>
-    <button class="btn btn-danger">Cancel</button>
+    <button ng-click="cancelCreateDataProvider()" class="btn btn-danger">Cancel</button>
   </footer>
 
 </form>

@@ -34,7 +34,7 @@ define(['app'], function(app) {
         return dfd.promise;
       },
 
-      go: function(space) {
+      go: function(space, callback) {
         var request = {
           method: 'GET',
           url: 'http://localhost:9000/api/v1/user/go/' + space._id,
@@ -46,6 +46,9 @@ define(['app'], function(app) {
         $http(request).success(function(context) {
           $window.sessionStorage.setItem('context', JSON.stringify(context));
           $rootScope.context = context;
+          if (typeof callback === 'function') {
+            callback(context);
+          }
         });
       }
     };

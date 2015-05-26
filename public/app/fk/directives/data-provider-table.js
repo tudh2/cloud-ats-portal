@@ -28,8 +28,8 @@ define(['fk/module', 'lodash'], function(module, _) {
         var init = function(dataset) {
 
           if (dataset.length == 0 && scope.editable) {
-            scope.fieldNames = ['New Field'];
-            scope.rows = [['New Value']];
+            scope.fieldNames = ['New_Field'];
+            scope.rows = [['New_Value']];
             return;
           } else if (dataset.length > 0) {
             var filedNames = [];
@@ -61,14 +61,14 @@ define(['fk/module', 'lodash'], function(module, _) {
         init(scope.dataset);
         // init([]);
 
-        var rebuildScope = function() {
-          var fieldNames = [];
-          $(element).find('thead th.filedName').each(function(index, obj) {
-            var fieldName = $(obj).text().trim();
-            fieldNames[index] = fieldName;
-          });
-          scope.fieldNames = fieldNames;
-        };
+        // scope.rebuildScope = function() {
+        //   var fieldNames = [];
+        //   $(element).find('thead th.filedName').each(function(index, obj) {
+        //     var fieldName = $(obj).text().trim();
+        //     fieldNames[index] = fieldName;
+        //   });
+        //   scope.fieldNames = fieldNames;
+        // };
 
         scope.removeField = function(index) {
           // rebuildScope();
@@ -83,13 +83,11 @@ define(['fk/module', 'lodash'], function(module, _) {
         }
 
         scope.newField = function() {
-          scope.fieldNames.push("New Field " + (scope.count));
-
-          console.log(scope.count);
+          scope.fieldNames.push("New_Field_" + (scope.count));
 
           var length = scope.fieldNames.length;
           _.forEach(scope.rows, function(row) {
-            row[length - 1] = "New Value " + (scope.count);
+            row[length - 1] = "New_Value_" + (scope.count);
           });
           scope.count++; 
         }
@@ -97,7 +95,7 @@ define(['fk/module', 'lodash'], function(module, _) {
         scope.newRow = function() {
           var row = [];
           for (var i = 0; i < scope.fieldNames.length; i++) {
-            row[i] = "New Value " + i + "." + scope.count;
+            row[i] = "New_Value_" + i + "." + scope.count;
           }
           scope.rows.push(row);
         }

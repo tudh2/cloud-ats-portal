@@ -4,6 +4,27 @@ define(['app'], function(app) {
   app.factory('DataService', ['$http', '$q', '$cookies', '$rootScope', '$window', '$state',
     function($http, $q, $cookies, $rootScope, $window, $state){
       return {
+        create: function(name, space, dataset, callback) {
+          var request = {
+            method: 'POST',
+            url: 'http://localhost:9000/api/v1/data',
+            headers: {
+              'X-AUTH-TOKEN': $cookies.get('authToken')
+            },
+            data: {
+              name: name,
+              space: space,
+              dataset: dataset
+            }
+          };
+
+          $http(request).success(function(data, status) {
+            callback(data, status);
+          }). error(function(data, status) {
+            callback(data, status);
+          })
+        },
+
         list: function(tenant, space) {
           var dfd = $q.defer();
 

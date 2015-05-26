@@ -1,4 +1,4 @@
-<table class="table table-bordered" style="overflow: auto;">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th ng-if="editable">
@@ -35,7 +35,7 @@
         </a>
       </td>
 
-      <td ng-repeat="cell in row">
+      <td class="cell" ng-repeat="cell in row">
         <a ng-if="editable" href-void data-type="text" smart-xeditable data-ng-model="cell" data-options="editableOptions" class="editable editable-click">{{cell}}</a>
         <span ng-if="!editable" class="text-success">{{cell}}</span>
       </td>
