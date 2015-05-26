@@ -42,6 +42,25 @@ define([
           title: 'Keyworks Framework',
           requireLogin: true
         }
+      }).state('app.provider', {
+
+        url: '/provider',
+        views: {
+          "content@app": {
+            controller: 'ProviderCtrl',
+            templateUrl: 'app/fk/data-provider.html',
+            resolve: {
+              deps: $couchPotatoProvider.resolveDependencies([
+                'fk/provider-controller',
+                'modules/widgets/directives/jarvis-widget'
+              ])
+            }
+          }
+        },
+        data: {
+          title: 'Data Provider',
+          requireLogin: true
+        }
       });
   });
 

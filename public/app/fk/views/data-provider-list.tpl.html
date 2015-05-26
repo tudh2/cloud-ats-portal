@@ -1,0 +1,86 @@
+<div style= "margin-left: 10px;">
+<div class="row" ng-show="list">
+  <div class="col-sm-5 col-md-4">
+    <div id="datadriven" class="panel-group smart-accordion-default">
+      <div class="panel panel-default">
+        
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#space-public" data-parent="#datadriven" data-toggle="collapse">
+              <i class="fa fa-lg fa-angle-down pull-right"></i>
+              <i class="fa fa-lg fa-angle-up pull-right"></i> <strong class="text-info">Public</strong>
+            </a>
+          </h4>
+        </div>
+
+        <div id="space-public" class="panel-collapse collapse in">
+          <div class="panel-body padding-7">
+            <ul class="list-unstyled padding-7">
+              <li ng-if="data.public.length == 0" class="padding-5">
+                <span class="text-muted">The data provider in public is empty.</span>
+              </li>
+              <li class="padding-5" ng-repeat="sel in data.public">
+                <a href-void class="text-info"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+              </li>
+              <li class="padding-5">
+                <a ng-click="showCreateDataProviderForm(null)" class="btn btn-primary btn-xs">Create a new and share to public</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="panel panel-default" ng-repeat="space in spaces">
+        
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#{{space._id}}" data-parent="#datadriven" data-toggle="collapse">
+              <i class="fa fa-lg fa-angle-down pull-right"></i>
+              <i class="fa fa-lg fa-angle-up pull-right"></i> <strong class="text-info">{{space.name}}</strong>
+            </a>
+          </h4>
+        </div>
+
+        <div id="{{space._id}}" class="panel-collapse collapse">
+          <div class="panel-body padding-7">
+            <ul class="list-unstyled padding-7">
+              <li ng-if="data[space.name].length == 0" class="padding-5">
+                <span class="text-muted">The data provider in public is empty.</span>
+              </li>
+              <li class="padding-5" ng-repeat="sel in data[space._id]">
+                <a href-void class="text-info"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+              </li>
+              <!-- <li class="padding-5">
+                <a href-void class="text-success"><i class="fa fa-check"></i> <strong><u>Data 2</u></strong></a>
+              </li>
+              -->
+              <li class="padding-5"><a ng-click="showCreateDataProviderForm(space._id)" class="btn btn-primary btn-xs">Create a new and share to {{space.name}}</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="col-sm-7 col-md-8 text-align-center">
+    <h1><u><i>None data provider selected.</i></u></h1>
+  </div>
+</div>
+
+<div class="data-provider">
+<div class="row" ng-if="!list">
+  <div class="col-sm-12">
+    <provider-form></provider-form>
+  </div>
+</div>
+<div class="row" ng-if="!list">
+  <div class="col-sm-12">
+    <provider-table data-dataset="[]" data-editable="true"></provider-table>
+  </div>
+</div>
+</div>
+
+</div>
