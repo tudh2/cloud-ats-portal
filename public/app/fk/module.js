@@ -52,7 +52,13 @@ define([
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
                 'fk/provider-controller',
-                'modules/widgets/directives/jarvis-widget'
+                'modules/widgets/directives/jarvis-widget',
+                'modules/forms/directives/input/smart-select2',
+                'fk/directives/data-provider-table',
+                'fk/directives/tick-box',
+                'modules/forms/directives/input/smart-xeditable'
+
+
               ])
             }
           }
