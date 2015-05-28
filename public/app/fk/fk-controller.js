@@ -6,7 +6,8 @@ define(['fk/module'], function(module) {
     function($rootScope, $scope, userService, dataService) {
 
     $scope.list = true;
-
+    $scope.showDetailDataset = true;
+    $scope.currentDataSet =[];
     userService.spaces().then(function(spaces) {
       $scope.spaces = spaces;
     });
@@ -105,5 +106,18 @@ define(['fk/module'], function(module) {
           break;
       }
     }
+    
+    $scope.clickDataProviderShow = function(provider) {
+      $scope.showDetailDataset = $scope.showDetailDataset === false ? true: false;
+      $scope.clickItem = provider;
+      var dataset = JSON.parse(provider.data_source);
+      $scope.currentDataSet = dataset;
+    }
+
+    $scope.showItemChoosed = function(provider) {
+      $scope.provider = provider;
+      return angular.equals($scope.provider, $scope.clickItem);
+    }
+
   }]);
 })

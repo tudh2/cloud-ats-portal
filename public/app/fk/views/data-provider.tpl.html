@@ -20,7 +20,9 @@
                 <span class="text-muted">The data provider in public is empty.</span>
               </li>
               <li class="padding-5" ng-repeat="sel in data.public">
-                <a href-void class="text-info"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                <!-- <a href-void class="text-info"><i class="fa fa-circle-o"></i> {{sel.name}}</a> -->
+                <a href-void class="text-info" ng-if="!showItemChoosed(sel)" ng-click="clickDataProviderShow(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                <a href-void class="text-success" ng-if="showItemChoosed(sel)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
               </li>
               <li class="padding-5">
                 <a ng-click="showCreateDataProviderForm(null)" class="btn btn-primary btn-xs">Create a new and share to public</a>
@@ -50,7 +52,8 @@
                 <span class="text-muted">The data provider in public is empty.</span>
               </li>
               <li class="padding-5" ng-repeat="sel in data[space._id]">
-                <a href-void class="text-info"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                <a href-void class="text-info" ng-if="!showItemChoosed(sel)" ng-click="clickDataProviderShow(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                <a href-void class="text-success" ng-if="showItemChoosed(sel)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
               </li>
               <!-- <li class="padding-5">
                 <a href-void class="text-success"><i class="fa fa-check"></i> <strong><u>Data 2</u></strong></a>
@@ -66,7 +69,16 @@
     </div>
   </div>
   <div class="col-sm-7 col-md-8 text-align-center">
-    <h1><u><i>None data provider selected.</i></u></h1>
+    <h1 ng-hide="clickItem"><u><i>None data provider selected.</i></u></h1>
+    <div class="row">
+      <div class="col-sm-12" ng-if="showDetailDataset">
+        <provider-table data-dataset="currentDataSet" data-editable="false"></provider-table>
+      </div>
+      <div class="col-sm-12" ng-if="!showDetailDataset">
+        <provider-table data-dataset="currentDataSet" data-editable="false"></provider-table>
+      </div>
+    </div>
+
   </div>
 </div>
 
