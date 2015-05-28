@@ -18,6 +18,7 @@ define(['fk/module'], function (module) {
 							element.find('i').addClass('fa-circle-o');
 						}
 				});
+
 			}
 		}
 

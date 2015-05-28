@@ -86,8 +86,7 @@ define(['app'], function(app) {
           return dfd.promise;
         },
 
-        deleteDataSet: function (id) {
-          var dfd = $q.defer();
+        deleteDataSetById: function (id) {
           var request = {
             method: 'DELETE',
             url: 'http://localhost:9000/api/v1/data/delete/' + id,
@@ -97,7 +96,8 @@ define(['app'], function(app) {
             }
           };
 
-          $http(request).success().error(function (data, status) {
+          $http(request).success(function (response) {
+          }).error(function (data, status) {
             switch (status) {
               case 403:
                 $state.go('403');
@@ -106,9 +106,7 @@ define(['app'], function(app) {
                 $state.go('401');
                 break;
             }
-            dfd.reject;
           });
-          return dfd.promise;
         }
       }
   }]);

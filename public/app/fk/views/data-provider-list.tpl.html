@@ -16,7 +16,7 @@
       <ul ng-if='data.length > 0' class="list-group">
          <li class="padding-5 list-group-item" ng-repeat="sel in data">
                 <a class="text-info" ng-click='getDataSet(sel._id)'  tick-box><i class="fa fa-circle-o"></i> {{sel.name}}</a>
-                <a ng-if="delete" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right"><i class="glyphicon glyphicon-trash"></i> </a>
+                <a ng-if="delete" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
           </li>
       </ul>
   </div>

@@ -35,9 +35,8 @@ define(['fk/module'], function(module) {
       }
 
       $scope.deleteDataSet = function (dataSetId) {
-        DataService.deleteDataSet(dataSetId).then(function (response) {
-          console.log(response);
-        });
+        DataService.deleteDataSetById(dataSetId);
+
       }
 
     }]);

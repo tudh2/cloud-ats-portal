@@ -56,8 +56,8 @@ define([
                 'modules/forms/directives/input/smart-select2',
                 'fk/directives/data-provider-table',
                 'fk/directives/tick-box',
-                'modules/forms/directives/input/smart-xeditable'
-
+                'modules/forms/directives/input/smart-xeditable',
+                'fk/directives/data-delete'
 
               ])
             }
