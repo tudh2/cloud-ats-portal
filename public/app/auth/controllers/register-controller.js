@@ -22,7 +22,7 @@ define(['auth/module'], function(module) {
     $scope.submit = function() {
       var expires = new Date();
       expires.setDate(expires.getDate() + 365);
-      if ($scope.checkEmailPattern == false && $scope.checkEmail == false && $scope.selectedTenant != null && $scope.firstname != null && $scope.lastname != null && ($scope.password == $scope.repass)) {
+      if ($scope.checkEmailPattern == false && $scope.checkEmail == false && $scope.selectedTenant != null && $scope.firstname != "" && $scope.lastname != "" && ($scope.password == $scope.repass)) {
         AuthenticationService.register($scope.email, $scope.password, $scope.firstname, $scope.lastname, $scope.selectedTenant, $scope.space, function(data) {
         	if (data.error) {
             $scope.message = data.message;          
