@@ -48,7 +48,12 @@ define(['fk/module'], function(module) {
       }
 
       $scope.cancelCreateDataProvider = function () {
-        console.log("cancle");
+        $scope.list = true;
+      }
+
+      $scope.newdata = function () {
+
+        $scope.list = false;
       }
 
     }]);

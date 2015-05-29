@@ -57,7 +57,8 @@ define([
                 'fk/directives/data-provider-table',
                 'fk/directives/tick-box',
                 'modules/forms/directives/input/smart-xeditable',
-                'fk/directives/data-delete'
+                'fk/directives/data-delete',
+                'fk/directives/new-data-provider-form'
 
               ])
             }
@@ -65,34 +66,6 @@ define([
         },
         data: {
           title: 'Data Provider',
-          requireLogin: true
-        }
-      }).state('app.newdata', {
-        url: '/newdata',
-        views: {
-          "content@app": {
-            controller: 'ProviderCtrl',
-            templateUrl: 'app/fk/new-data-provider.html',
-            resolve: {
-              deps: $couchPotatoProvider.resolveDependencies([
-                'fk/provider-controller',
-                'modules/forms/directives/input/smart-xeditable',
-                'fk/directives/data-provider-table',
-                'fk/directives/data-provider-form',
-                'fk/directives/new-data-provider-form',
-                'modules/forms/common',
-                'modules/forms/directives/validate/smart-validate-form',
-                'modules/forms/directives/wizard/smart-wizard',
-                'modules/widgets/directives/widget-grid',
-                'modules/widgets/directives/jarvis-widget',
-                'modules/forms/directives/input/smart-select2'
-
-              ])
-            }
-          }
-        },
-        data: {
-          title: 'New data provider',
           requireLogin: true
         }
       });

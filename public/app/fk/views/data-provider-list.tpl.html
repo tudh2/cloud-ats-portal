@@ -1,17 +1,36 @@
 <div style= "margin-left: 10px;">
-<div class="row" ng-show="list">
-  <div class="col-sm-5 col-md-4">
-      <a href="#/newdata" ng-click="newdata()"><span class="glyphicon glyphicon-plus"></span> Create data provider </a>
-      <div class="form-group">
-        <select data-smart-select2 style="width:100%" class="select2" ng-change="getDateSetName(space)" ng-model='space'>
-            <optgroup label="Private Space">
-                <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
-            </optgroup>
-            <optgroup label="Public Space">
-                <option value="null" selected="">Public</option>
-            </optgroup>
-        </select>
+  <div class="row" ng-if="list">
+    <div class="col-sm-5 col-md-4">
+        <div style="padding-bottom: 5px;">
+          <a href="" ng-click="newdata()"><span class="glyphicon glyphicon-plus"></span> Create data provider </a>
+        </div>
+        <div class="form-group">
+          <select data-smart-select2 style="width:100%" class="select2" ng-change="getDateSetName(space)" ng-model='space'>
+              <optgroup label="Private Space">
+                  <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
+              </optgroup>
+              <optgroup label="Public Space">
+                  <option value="null" selected="">Public</option>
+              </optgroup>
+          </select>
 
+        </div>
+        <ul ng-if='data.length > 0' class="list-group">
+           <li class="padding-5 list-group-item" ng-repeat="sel in data">
+                  <a class="text-info" ng-click='getDataSet(sel._id)'  tick-box><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                  <a ng-if="delete" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-7 col-md-8 text-align-center" ng-if='data.length < 1'>
+      <h1><u><i>None data provider selected.</i></u></h1>
+    </div>
+    <div ng-if="data.length > 0">
+      <div class="col-sm-7 col-md-8" ng-if="dataCurrent != null">
+
+        <provider-table data-dataset="dataCurrent" data-editable="true"></provider-table>
+
+        <span>{{dataCurrent}}</span>
       </div>
       <ul ng-if='data.length > 0' class="list-group">
          <li class="padding-5 list-group-item" ng-repeat="sel in data">
@@ -29,8 +48,18 @@
     <div class="col-sm-7 col-md-8" ng-if="showDetailDataset && clickItem">
 
       <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
+    </div>
+  </div>
+  <div class="row" ng-if="!list">
+   <div class="col-md-12">
+        <new-provider-form></new-provider-form>
+    </div>
+    <div class="col-md-12">
+
+      <provider-table data-dataset="[]" data-editable="true"></provider-table>
 
     </div>
+
   </div>
 <!--   <div class="row">
       <div class="col-sm-12" ng-if="showDetailDataset && clickItem">
@@ -39,4 +68,3 @@
     </div> -->
 </div>
 
-</div>

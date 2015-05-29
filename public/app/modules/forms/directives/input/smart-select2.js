@@ -5,7 +5,7 @@ define(['fk/module', 'select2'], function (module) {
     module.registerDirective('smartSelect2', function () {
         return {
             restrict: 'A',
-            compile: function (element, attributes) {
+            link: function (scope, element, attributes) {
                 element.removeAttr('smart-select2 data-smart-select2');
                 element.select2();
             }
