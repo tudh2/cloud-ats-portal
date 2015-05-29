@@ -1,0 +1,34 @@
+
+<form ng-submit="createDataProvider()" class="smart-form create-data-provider">
+  
+  <fieldset class="no-padding">
+    <div class="row">
+      <section class="col col-md-5" style="margin-top: 15px;">
+        <label class="input">
+          <i class="icon-prepend fa fa-slack"></i>
+          <input type="text" name="provider_name" placeholder="Data Provider Name">
+        </label>
+      </section>
+
+      <div class="col col-md-3" style="margin-top: 20px;">
+        <span class="pull-right">In Space: </span>
+      </div>
+      <div class="col col-md-4 form-group">
+        <select data-smart-select2 style="width:100%" class="select2" ng-model='space'>
+            <optgroup label="Private Space">
+                <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
+            </optgroup>
+            <optgroup label="Public Space">
+                <option value="null" selected="">Public</option>
+            </optgroup>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <footer>
+    <button class="btn btn-primary" type="submit">Create</button>
+    <button ng-click="cancelCreateDataProvider()" class="btn btn-danger">Cancel</button>
+  </footer>
+
+</form>

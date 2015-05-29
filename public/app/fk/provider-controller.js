@@ -41,5 +41,9 @@ define(['fk/module'], function(module) {
 
       }
 
+      $scope.cancelCreateDataProvider = function () {
+        console.log("cancle");
+      }
+
     }]);
 })
