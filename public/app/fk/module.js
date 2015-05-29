@@ -67,6 +67,31 @@ define([
           title: 'Data Provider',
           requireLogin: true
         }
+      }).state('app.newdata', {
+        url: '/newdata',
+        views: {
+          "content@app": {
+            controller: '',
+            templateUrl: 'app/fk/new-data-provider.html',
+            resolve: {
+              deps: $couchPotatoProvider.resolveDependencies([
+                'modules/forms/directives/input/smart-xeditable',
+                'fk/directives/data-provider-table',
+                'fk/directives/data-provider-form',
+                'modules/forms/common',
+                'modules/forms/directives/validate/smart-validate-form',
+                'modules/forms/directives/wizard/smart-wizard',
+                'modules/widgets/directives/widget-grid',
+                'modules/widgets/directives/jarvis-widget'
+
+              ])
+            }
+          }
+        },
+        data: {
+          title: 'New data provider',
+          requireLogin: true
+        }
       });
   });
 

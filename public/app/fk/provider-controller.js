@@ -6,6 +6,8 @@ define(['fk/module'], function(module) {
 
 
   		$scope.list = true;
+      $scope.spacename = 'Public';
+
   		UserService.spaces().then(function(spaces) {
         $scope.spaces = spaces;
       });
@@ -22,7 +24,7 @@ define(['fk/module'], function(module) {
           $scope.data = '';
         }
         DataService.list(tenant, space).then(function (response){
-           $scope.delete = false;
+          $scope.delete = false;
           $scope.data = response;
         });
       }

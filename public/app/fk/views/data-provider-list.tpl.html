@@ -1,7 +1,7 @@
 <div style= "margin-left: 10px;">
 <div class="row" ng-show="list">
   <div class="col-sm-5 col-md-4">
-      
+      <a href="#/newdata" ng-click="newdata()"><span class="glyphicon glyphicon-plus"></span> Create data provider </a>
       <div class="form-group">
         <select data-smart-select2 style="width:100%" class="select2" ng-change="getDateSetName(space)" ng-model='space'>
             <optgroup label="Private Space">
