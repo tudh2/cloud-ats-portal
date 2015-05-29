@@ -110,7 +110,6 @@ define(['fk/module'], function(module) {
     $scope.clickDataProviderShow = function(provider) {
       $scope.showDetailDataset = $scope.showDetailDataset === false ? true: false;
       $scope.clickItem = provider;
-      console.log(provider);
       var dataset = JSON.parse(provider.data_source);
       $scope.currentDataSet = dataset;
     }
