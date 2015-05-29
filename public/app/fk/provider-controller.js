@@ -56,5 +56,52 @@ define(['fk/module'], function(module) {
         $scope.list = false;
       }
 
+      $scope.createDataProvider = function() {
+        var name = $('form input[name="provider_name"]').val();
+        if (name === undefined || name === '') return;
+
+        var fieldNames = [];
+        $('table thead th.filedName').each(function(index, obj) {
+          var fieldName = $(obj).text().trim();
+          fieldNames[index] = fieldName;
+        });
+
+        var rows = [];
+        $('table tbody tr.fieldValues').each(function(index, tr) {
+          var row = [];
+          $(tr).find('td.cell').each(function(i, td) {
+            row[i] = $(td).text().trim();
+          });
+          rows[index] = row;
+        });
+
+        var dataset = [];
+        _.forEach(rows, function(row) {
+          var obj = {};
+          $(fieldNames).each(function(index, field) {
+            obj[field] = row[index];
+          });
+          dataset.push(obj);
+        });
+
+        var spaceId = $('select').find(':selected').val();
+        DataService.create(name, spaceId, dataset, function(data, status) {
+         
+          if (status == 200) {
+            if (spaceId === 'Public') {
+              $scope.getDateSetName(null);
+            } else {
+              $scope.getDateSetName(spaceId);
+            }
+            
+            $scope.cancelCreateDataProvider();
+            if (spaceId === 'Public') {
+            } else {
+            }
+            
+          }
+        });
+      };
+
     }]);
 })
