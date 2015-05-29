@@ -15,22 +15,28 @@
       </div>
       <ul ng-if='data.length > 0' class="list-group">
          <li class="padding-5 list-group-item" ng-repeat="sel in data">
-                <a class="text-info" ng-click='getDataSet(sel._id)'  tick-box><i class="fa fa-circle-o"></i> {{sel.name}}</a>
-                <a ng-if="delete" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
+                <!-- <a class="text-info" ng-click='getDataSet(sel._id)'><i class="fa fa-circle-o"></i> {{sel.name}}</a> -->
+                <a href-void class="text-info" ng-if="!showItemChoosed(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                <a href-void class="text-success" ng-if="showItemChoosed(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
+                <a ng-if="showItemChoosed(sel,showDetailDataset)" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
           </li>
       </ul>
   </div>
   <div class="col-sm-7 col-md-8 text-align-center" ng-if='data.length < 1'>
     <h1><u><i>None data provider selected.</i></u></h1>
   </div>
-  <div ng-if="data.length > 0">
-    <div class="col-sm-7 col-md-8" ng-if="dataCurrent != null">
+  <div>
+    <div class="col-sm-7 col-md-8" ng-if="showDetailDataset && clickItem">
 
-      <provider-table data-dataset="dataCurrent" data-editable="true"></provider-table>
+      <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
 
-      <span>{{dataCurrent}}</span>
     </div>
   </div>
+<!--   <div class="row">
+      <div class="col-sm-12" ng-if="showDetailDataset && clickItem">
+        <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
+      </div>
+    </div> -->
 </div>
 
 </div>

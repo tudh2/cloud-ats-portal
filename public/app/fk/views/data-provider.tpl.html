@@ -52,7 +52,7 @@
                 <span class="text-muted">The data provider in public is empty.</span>
               </li>
               <li class="padding-5" ng-repeat="sel in data[space._id]">
-                <a href-void class="text-info" ng-if="!showItemChoosed(sel)" ng-click="clickDataProviderShow(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                <a href-void class="text-info" ng-if="!showItemChoosed(sel,showDetailDataset)" ng-click="clickDataProviderShow(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
                 <a href-void class="text-success" ng-if="showItemChoosed(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
               </li>
               <!-- <li class="padding-5">

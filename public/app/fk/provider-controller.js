@@ -19,7 +19,7 @@ define(['fk/module'], function(module) {
         $scope.data = response;
       });
       $scope.getDateSetName = function (space) {
-
+        $scope.clickItem = false;
         if (space == null) {
           $scope.data = '';
         }
@@ -29,11 +29,17 @@ define(['fk/module'], function(module) {
         });
       }
 
-      $scope.getDataSet = function (dataSetId) {
-        DataService.dataSet(dataSetId).then(function (response) {
-         // $scope.dataCurrent = JSON.parse(response.data.data_source);
+      $scope.getDataSet = function (provider) {
+          $scope.showDetailDataset = $scope.showDetailDataset === false ? true: false;
+          $scope.clickItem = provider;
+          var dataset = JSON.parse(provider.data_source);
+          $scope.currentDataSet = dataset;
+      }
 
-        });
+      $scope.showItemChoosed = function(provider,showDetailDataset) {
+        $scope.showDetailDataset = showDetailDataset === true ? false: true;
+        $scope.provider = provider;
+        return angular.equals($scope.provider, $scope.clickItem);
       }
 
       $scope.deleteDataSet = function (dataSetId) {
