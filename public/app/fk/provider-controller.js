@@ -7,7 +7,7 @@ define(['fk/module'], function(module) {
 
   		$scope.list = true;
       $scope.spacename = 'Public';
-
+      $scope.chooseSpace = 'Public';
   		UserService.spaces().then(function(spaces) {
         $scope.spaces = spaces;
       });
@@ -20,8 +20,8 @@ define(['fk/module'], function(module) {
       });
       $scope.getDateSetName = function (space) {
         $scope.clickItem = false;
-        if (space == null) {
-          $scope.data = '';
+        if (space === 'Public' ) {
+          space = null;
         }
         DataService.list(tenant, space).then(function (response){
           $scope.delete = false;
@@ -84,16 +84,15 @@ define(['fk/module'], function(module) {
           dataset.push(obj);
         });
 
-        var spaceId = $('select').find(':selected').val();
+        var spaceId = $scope.chooseSpace;
+       
+        if (spaceId === 'Public') {
+          spaceId = null;
+        }
+        console.log(spaceId);
         DataService.create(name, spaceId, dataset, function(data, status) {
-         
           if (status == 200) {
-            if (spaceId === 'Public') {
-              $scope.getDateSetName(null);
-            } else {
-              $scope.getDateSetName(spaceId);
-            }
-            
+            $scope.getDateSetName(spaceId);
             $scope.cancelCreateDataProvider();
             if (spaceId === 'Public') {
             } else {
