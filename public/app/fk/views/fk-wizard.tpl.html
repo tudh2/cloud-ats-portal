@@ -11,12 +11,12 @@
         </li>
         <li data-smart-wizard-tab="2">
           <a href="#">
-            <span class="step">2</span> <span class="title">Data Provider</span>
+            <span class="step">2</span> <span class="title">Test Case</span>
           </a>
         </li>
         <li data-smart-wizard-tab="3">
           <a href="#">
-            <span class="step">3</span> <span class="title">Suite</span>
+            <span class="step">3</span> <span class="title">Data Driven</span>
           </a>
         </li>
         <li data-smart-wizard-tab="4">
@@ -26,6 +26,8 @@
         </li>
       </ul>
     </div>
+
+    <div ng-repeat="space in spaces"></div>
 
     <div class="tab-content">
 
@@ -72,13 +74,14 @@
 
       <div class="tab-pane" data-smart-wizard-pane="2">
         <br>
-        <h3><strong>Step 2</strong> - <span>Data Provider</span></h3>
-        <div data-smart-include="app/fk/views/data-provider.tpl.html"></div>
+        <h3><strong>Step 2</strong> - <span>Create Test Case</span></h3>
+        <keywords></keywords>
       </div>
 
       <div class="tab-pane" data-smart-wizard-pane="3">
         <br>
-        <h3><strong>Step 3</strong> - Suite Information</h3>
+        <h3><strong>Step 3</strong> - Select Or Create New Data Driven</h3>
+        <div data-smart-include="app/fk/views/data-provider.tpl.html"></div>
       </div>
 
       <div class="tab-pane" data-smart-wizard-pane="4">

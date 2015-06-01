@@ -24,3 +24,32 @@
  header .tenant span.label {
   text-transform: uppercase;
  }
+
+ .li-popup {
+  margin: 0 !important; 
+  padding: 0 !important;
+ }
+
+.li-popup:before,
+.li-popup:after {
+  content: '';
+  left: -20px;
+  position: absolute;
+  right: auto;
+}
+.li-popup:before {
+  border-left: none !important;
+  bottom: auto !important;
+  height: auto !important;
+  top: auto !important;
+  width: auto !important;
+}
+.li-popup:after {
+  border-top: none !important;
+  height: auto !important;
+  top: auto !important;
+  width: auto !important;
+}
+.editinline span {
+  border: none !important;
+}

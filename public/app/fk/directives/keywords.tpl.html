@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="tree">
+      <ul class="smart-treeview-group">
+        <li>
+          <span class="editinline">
+          <a href-void class="fa fa-fw fa-folder-open txt-color-darken"></a>
+          
+          <a href-void data-type="text" smart-xeditable data-ng-model="case" data-options="editableOptions" class="editable editable-click">NewCase</a>
+
+          <div style="padding-left: 25px;" class="btn-group dropup" data-dropdown>
+            <a href="#" class="dropdown-toggle txt-color-darken" data-dropdown-toggle>
+              <i class="fa fa-cog"></i>
+            </a>
+            <ul class="dropdown-menu no-padding">
+              <li class="li-popup">
+                  <a href-void class="txt-color-blueDark"><i class="fa fa-plus"></i> Create new suite</a>
+              </li>
+              <li class="li-popup divider"></li>
+              <li class="li-popup">
+                  <a href-void class="txt-color-redLight"><i class="fa fa-minus"></i> Delete this suite</a>
+              </li>
+            </ul>
+          </div>
+
+          </span>
+
+          <!-- action steps -->
+          <ul class="smart-treeview-group"
+            data-drop="true" 
+            ng-model="list" 
+            jqyoui-droppable="{multiple:true}">
+
+            <li ng-repeat="keyword in list track by $index" 
+              data-drag="true" 
+              data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
+              ng-model="list"
+              jqyoui-draggable="{index: {{$index}}, animate: true}">
+
+              <span>
+                <div class="pull-left margin-right-5">
+                  <a ng-if="!$first" ng-click="moveUpAction(keyword)" data-tooltip-placement="left" data-tooltip="Move Up" class="txt-color-orange">
+                      <i class="fa fa-arrow-up"></i>
+                  </a>
+                  <a ng-if="!$last && !$first" ng-click="moveDownAction(keyword)" data-tooltip-placement="left" data-tooltip="Move Down" class="txt-color-purple">
+                      <i class="fa fa-arrow-down"></i>
+                  </a>
+                </div>
+                <a href-void class="txt-color-blue">
+                  <strong>{{buildActionDisplay(keyword)}}</strong>
+                </a>
+
+                <div class="pull-right" style="padding-left: 25px;">
+                  
+                  <a ng-click="removeAction(keyword)" data-tooltip-placement="right" data-tooltip="Remove" class="txt-color-red">
+                    <i class="fa fa-times-circle"></i>
+                  </a>  
+                </div>
+                
+              </span>
+
+              <ul class="smart-treeview-group" ng-if="keyword.params.length > 0">
+                <li class="editinline" ng-repeat="param in keyword.params">
+                  <span class="label label-success">{{param}}</span>
+                  
+                  <span ng-if="param === 'locator'" class="label label-info">by</span>
+                  <a ng-if="param === 'locator'" href-void smart-xeditable data-ng-model="locator" data-options="editableOptions" data-type="select" data-value="id" data-source="['id', 'name', 'link text', 'css selector','xpath']" data-showbuttons="false" data-original-title="Select group" class="editable editable-click">id</a>
+
+                  <span ng-if="param === 'locator'" class="label label-info">value</span>
+
+                  <a href-void data-type="text" smart-xeditable data-ng-model="param" data-options="editableOptions" class="editable editable-click"></a>
+                </li>
+              </ul>  
+
+            </li>
+
+            <li class="placeholder" ng-if="showMe()"> 
+              <span class="label label-success">Drop action here</span>
+            </li>
+          </ul>
+          <!-- end action steps -->
+
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-3">
+
+    <div class="panel-group smart-accordion-default" id="keyword-list">
+      
+      <div ng-init="query[cat] = ''" class="panel panel-default" ng-repeat="cat in cats">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a ng-click="selectCat(cat)" data-toggle="collapse" data-parent="#keyword-list" href="#{{cat}}" 
+              ng-class="{collapsed: !$first}">
+              <i class="fa fa-fw fa-plus-circle txt-color-green"></i>
+              <i class="fa fa-fw fa-minus-circle txt-color-red"></i>
+              {{cat}}
+            </a>
+          </h4>
+        </div>
+        <div id="{{cat}}" class="panel-collapse collapse" ng-class="{in: $first}">
+          <div class="panel-body">
+            
+            <ul class="list-unstyled" ng-init="keywords = getKeywordsByCat(cat)"
+              style="max-height: 200px; overflow-x: hidden; overflow-y: auto;">
+            
+              <li>
+                <div class="input-group padding-bottom-10">
+                  <input ng-model="query[cat]" class="form-control" type="text" placeholder="Filter...">
+                </div>
+              </li>
+            
+              <li ng-repeat="keyword in keywords | filter:query[cat]" 
+                style="border-bottom: 1px solid #e5e5e5; min-height: 25px;"
+                data-drag="true"
+                data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+                ng-model="keywords"
+                jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}">
+
+                <a href-void class="txt-color-blue"><strong>{{buildKeywordFullyQualified(keyword)}}</strong></a>
+                <br>
+                <span ng-if="keyword.type.length > 10 && keyword.params"><strong>params:</strong> {{buildParamsDisplay(keyword.params)}}</span>
+
+              </li>
+
+            </ul>
+          </div>
+        </div>        
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -2,11 +2,12 @@ define([
   'angular',
   'angular-couch-potato',
   'angular-ui-router',
-  'angular-resource'
+  'angular-resource',
+  'angular-dragdrop'
 ], function(ng, couchPotato) {
   'use strict';
 
-  var module = ng.module('app.fk', ['ui.router', 'ngResource']);
+  var module = ng.module('app.fk', ['ui.router', 'ngResource', 'ngDragDrop']);
 
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
@@ -21,6 +22,8 @@ define([
                 'fk/fk-controller',
                 'fk/directives/data-provider-form',
                 'fk/directives/data-provider-table',
+                'fk/directives/keywords',
+                'services/keyword-service',
                 'modules/forms/common',
                 'modules/forms/directives/validate/smart-validate-form',
                 'modules/forms/directives/wizard/smart-wizard',

@@ -12,6 +12,7 @@ var require = {
         'angular-sanitize': '../plugin/angular-sanitize/angular-sanitize',
         'angular-animate': '../plugin/angular-animate/angular-animate',
         'angular-loading-bar': '../plugin/angular-loading-bar/build/loading-bar',
+        'angular-dragdrop': '../plugin/angular-dragdrop/src/angular-dragdrop',
 
         'domReady': '../plugin/requirejs-domready/domReady',
 
@@ -135,6 +136,7 @@ var require = {
         'angular-ui-router': { deps: ['angular'] },
         'angular-google-maps': { deps: ['angular'] },
         'angular-loading-bar': {deps: ['angular']},
+        'angular-dragdrop': {deps: ['angular', 'jquery-ui']},
 
         'angular-couch-potato': { deps: ['angular'] },
 
