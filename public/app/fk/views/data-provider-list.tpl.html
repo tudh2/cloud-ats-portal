@@ -1,5 +1,5 @@
 <div style= "margin-left: 10px;">
-  <div class="row" ng-show="list">
+  <div class="row" ng-if="list">
     <div class="col-sm-5 col-md-4">
         <div style="padding-bottom: 5px;">
           <a href="" ng-click="newdata()"><span class="glyphicon glyphicon-plus"></span> Create data provider </a>
@@ -32,17 +32,17 @@
     <div class="col-sm-7 col-md-8" ng-if="showDetailDataset && clickItem">
 
       <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
+      <button ng-click="UpdateDataProvider()" class="btn btn-primary pull-right" type="submit" style="margin-right: 5px;">Update</button>
     </div>
   </div>
 </div>
-  <div class="row" ng-show="!list">
+  <div class="row" ng-if="!list">
    <div class="col-md-12">
         <new-provider-form></new-provider-form>
     </div>
     <div class="col-md-12">
 
       <provider-table data-dataset="[]" data-editable="true"></provider-table>
-
     </div>
 
   </div>

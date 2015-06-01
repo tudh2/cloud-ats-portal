@@ -8,6 +8,8 @@ define(['fk/module'], function(module) {
   		$scope.list = true;
       $scope.spacename = 'Public';
       $scope.chooseSpace = 'Public';
+
+      $scope.updateDataId = null;
   		UserService.spaces().then(function(spaces) {
         $scope.spaces = spaces;
       });
@@ -29,14 +31,21 @@ define(['fk/module'], function(module) {
         });
       }
 
+      $scope.setSpace = function (space) {
+        $scope.chooseSpace = space;
+      }
+
       $scope.getDataSet = function (provider) {
           $scope.showDetailDataset = $scope.showDetailDataset === false ? true: false;
           $scope.clickItem = provider;
           var dataset = JSON.parse(provider.data_source);
           $scope.currentDataSet = dataset;
+
+          $scope.updateDataId = provider._id;
       }
 
       $scope.showItemChoosed = function(provider,showDetailDataset) {
+
         $scope.showDetailDataset = showDetailDataset === true ? false: true;
         $scope.provider = provider;
         return angular.equals($scope.provider, $scope.clickItem);
@@ -54,6 +63,8 @@ define(['fk/module'], function(module) {
       $scope.newdata = function () {
 
         $scope.list = false;
+        //$scope.currentDataSet = [];
+        //$scope.dataset = [];
       }
 
       $scope.createDataProvider = function() {
@@ -89,7 +100,7 @@ define(['fk/module'], function(module) {
         if (spaceId === 'Public') {
           spaceId = null;
         }
-        console.log(spaceId);
+        
         DataService.create(name, spaceId, dataset, function(data, status) {
           if (status == 200) {
             $scope.getDateSetName(spaceId);
@@ -106,6 +117,11 @@ define(['fk/module'], function(module) {
           }
         });
       };
+
+      $scope.UpdateDataProvider = function () {
+
+        console.log($scope.updateDataId);
+      }
 
     }]);
 })
