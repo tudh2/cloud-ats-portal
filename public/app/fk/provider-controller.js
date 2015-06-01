@@ -29,6 +29,8 @@ define(['fk/module'], function(module) {
           $scope.delete = false;
           $scope.data = response;
         });
+
+        $scope.chooseSpace = space;
       }
 
       $scope.setSpace = function (space) {
@@ -145,9 +147,19 @@ define(['fk/module'], function(module) {
         });
 
         DataService.update($scope.updateDataId, dataset, function(data, status) {
-
-
+          if ($scope.chooseSpace === 'Public' ) {
+            $scope.chooseSpace = null;
+          }
+          DataService.list(tenant, $scope.chooseSpace).then(function (response){
+            $scope.delete = false;
+            $scope.data = response;
+          });
         });
+      }
+
+      $scope.CancelUpdateDataProvider = function () {
+        $scope.showDetailDataset = false;
+        $scope.clickItem = false;
       }
 
     }]);
