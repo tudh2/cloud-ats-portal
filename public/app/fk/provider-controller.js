@@ -100,7 +100,7 @@ define(['fk/module'], function(module) {
         if (spaceId === 'Public') {
           spaceId = null;
         }
-        
+
         DataService.create(name, spaceId, dataset, function(data, status) {
           if (status == 200) {
             $scope.getDateSetName(spaceId);
@@ -120,7 +120,34 @@ define(['fk/module'], function(module) {
 
       $scope.UpdateDataProvider = function () {
 
-        console.log($scope.updateDataId);
+        var fieldNames = [];
+        $('table thead th.filedName').each(function(index, obj) {
+          var fieldName = $(obj).text().trim();
+          fieldNames[index] = fieldName;
+        });
+
+        var rows = [];
+        $('table tbody tr.fieldValues').each(function(index, tr) {
+          var row = [];
+          $(tr).find('td.cell').each(function(i, td) {
+            row[i] = $(td).text().trim();
+          });
+          rows[index] = row;
+        });
+
+        var dataset = [];
+        _.forEach(rows, function(row) {
+          var obj = {};
+          $(fieldNames).each(function(index, field) {
+            obj[field] = row[index];
+          });
+          dataset.push(obj);
+        });
+
+        DataService.update($scope.updateDataId, dataset, function(data, status) {
+
+
+        });
       }
 
     }]);

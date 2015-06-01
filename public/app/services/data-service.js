@@ -107,6 +107,33 @@ define(['app'], function(app) {
                 break;
             }
           });
+        }, 
+
+        update: function (id, dataset, callback) {
+          var request = {
+            method: 'PUT',
+            url: 'http://localhost:9000/api/v1/data/update',
+            headers: {
+              'X-AUTH-TOKEN': $cookies.get('authToken')
+            },
+            data: {
+              id: id,
+              dataset: dataset
+            }
+          };
+
+          $http(request).success(function (response) {
+            callback(response);
+          }).error(function (data, status) {
+            switch(status) {
+              case 403:
+                $state.go('403');
+                break;
+              case 401:
+                $state.go('401');
+                break;
+            }
+          });
         }
       }
   }]);
