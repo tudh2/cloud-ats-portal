@@ -12,6 +12,14 @@ define(['layout/module', 'x-editable'], function(module) {
         var options = scope.options || {};
         var initOptions = angular.extend(defaults, options);
         element.editable('destroy');
+
+        if(typeof scope.successCallback() === 'function') {
+          angular.extend(initOptions, {
+            success: function(resp, newValue) {
+              scope.successCallback()(newValue, attrs);
+            }
+          });
+        }
         element.editable(initOptions);
       }
 
@@ -25,7 +33,8 @@ define(['layout/module', 'x-editable'], function(module) {
       restrict: 'A',
       require: 'ngModel',
       scope: {
-        options: '='
+        options: '=',
+        successCallback: '&'
       },
       link: link
     }

@@ -1,13 +1,13 @@
 define(['fk/module', 'lodash'], function(module, _) {
   'use strict';
 
-  module.registerDirective("keywords", [function() {
+  module.registerDirective("keywords", ['$filter', 'KeywordService', function($filter, keywordService) {
     return {
       restrict: 'E',
       replace: true,
       templateUrl: 'app/fk/directives/keywords.tpl.html',
-      controller: ['$scope', '$filter', 'KeywordService', function($scope, $filter, keywordService) {
-        
+      link: function($scope, element, attributes) {
+
         $scope.list = [
         ];
 
@@ -15,6 +15,17 @@ define(['fk/module', 'lodash'], function(module, _) {
         }
 
         $scope.keywords = {
+        }
+
+        $scope.editableOptions = {
+          mode: 'inline',
+          disabled: false
+        }
+
+        $scope.changeParamValue = function(value, attributes) {
+          var listIndex = attributes.listIndex;
+          var keywordParam = attributes.keywordParam;
+          $scope.list[listIndex][keywordParam] = value;
         }
 
         $scope.selectCat = function(cat) {
@@ -89,17 +100,24 @@ define(['fk/module', 'lodash'], function(module, _) {
           var keywordList = $scope.keywordList;
 
           _.forEach(keywordList[cat], function(content, keyword) {
-            keyword = { "type": keyword }
+            var keyword = { "type": keyword };
             var paramsList = content.params;
             var params = [];
             _.forEach(paramsList, function(desc, param) {
+              if (param === 'locator') {
+                var locator = { "type" : "id", "value": "" };
+                keyword.locator = locator;
+              } else {
+                keyword[param] = "";  
+              }
+              
               params.push(param);
             })
             keyword.params = params;
             keywords.push(keyword);
           });
           $scope.keywords[cat] = keywords;
-
+          
           return keywords;
         };
 
@@ -121,16 +139,9 @@ define(['fk/module', 'lodash'], function(module, _) {
           return displayParams;
         };
 
-      }],
-
-      link: function(scope, element) {
-
-        scope.editableOptions = {
-          mode: 'inline',
-          disabled: false
-        }
-
       }
+
     }
+
   }]);
 });

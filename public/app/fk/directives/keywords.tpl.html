@@ -31,7 +31,7 @@
             ng-model="list" 
             jqyoui-droppable="{multiple:true}">
 
-            <li ng-repeat="keyword in list track by $index" 
+            <li ng-init="listIndex = $index" ng-repeat="keyword in list track by $index" 
               data-drag="true" 
               data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
               ng-model="list"
@@ -68,7 +68,14 @@
 
                   <span ng-if="param === 'locator'" class="label label-info">value</span>
 
-                  <a href-void data-type="text" smart-xeditable data-ng-model="param" data-options="editableOptions" class="editable editable-click"></a>
+                  <a href-void data-type="text" 
+                    smart-xeditable 
+                    ng-model="list[listIndex][param]" 
+                    data-options="editableOptions"
+                    data-success-callback="changeParamValue"
+                    data-list-index = "{{listIndex}}"
+                    data-keyword-param = "{{param}}"
+                    class="editable editable-click">{{list[listIndex][param] || 'empty' }}</a>
                 </li>
               </ul>  
 
