@@ -1,17 +1,16 @@
 <div style= "margin-left: 10px;">
-  <div class="row" ng-if="list">
-    <div class="col-sm-5 col-md-4">
-        <div style="padding-bottom: 5px;">
+  <div class="row" ng-show="list">
+    <div class="col-md-12">
+      <div style="padding-bottom: 5px;">
           <a class="btn btn-primary btn-sm" ng-click="newdata()" href=""><span class="glyphicon glyphicon-plus"></span> Create data provider</a>
         </div>
+    </div>
+    <div class="col-sm-5 col-md-4">
+        
         <div class="form-group listspace">
           <select data-smart-select2 style="width:100%" class="select2" ng-change="getDateSetName(space)" ng-model='space'>
-              <optgroup label="Private Space">
                   <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
-              </optgroup>
-              <optgroup label="Public Space">
-                  <option selected="">Public</option>
-              </optgroup>
+                  <option>Public</option>
           </select>
 
         </div>
@@ -37,7 +36,7 @@
     </div>
   </div>
 </div>
-  <div class="row" ng-if="!list">
+  <div class="row" ng-show="!list">
    <div class="col-md-12">
         <new-provider-form></new-provider-form>
     </div>

@@ -30,6 +30,7 @@ define(['fk/module'], function(module) {
           $scope.data = response;
         });
 
+        //$scope.chooseSpace = space;
       }
 
       $scope.setSpace = function (space) {
@@ -64,8 +65,6 @@ define(['fk/module'], function(module) {
       $scope.newdata = function () {
 
         $scope.list = false;
-        //$scope.currentDataSet = [];
-        //$scope.dataset = [];
       }
 
       $scope.createDataProvider = function() {
@@ -97,7 +96,7 @@ define(['fk/module'], function(module) {
         });
 
         var spaceId = $scope.chooseSpace;
-       
+        
         if (spaceId === 'Public') {
           spaceId = null;
         }
@@ -110,11 +109,8 @@ define(['fk/module'], function(module) {
             } else {
             }
             
-
-            //var space = $('.col.col-md-4.form-group.listSpaceNew select').select2('data').text;
-           // console.log(space);
-           // console.log($('.form-group.listspace select'));
-           // $('.form-group.listspace div a.select2-choice').text(space);
+            var space = $('.col.col-md-4.form-group.listSpaceNew select').select2('data').text;
+            $('.form-group.listspace div a.select2-choice span.select2-chosen').text(space);
           }
         });
       };
