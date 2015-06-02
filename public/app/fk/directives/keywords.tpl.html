@@ -64,13 +64,36 @@
                   <span class="label label-success">{{param}}</span>
                   
                   <span ng-if="param === 'locator'" class="label label-info">by</span>
-                  <a ng-if="param === 'locator'" href-void smart-xeditable data-ng-model="locator" data-options="editableOptions" data-type="select" data-value="id" data-source="['id', 'name', 'link text', 'css selector','xpath']" data-showbuttons="false" data-original-title="Select group" class="editable editable-click">id</a>
+
+                  <a ng-if="param === 'locator'"
+                    data-list-index = "{{listIndex}}"
+                    data-keyword-param = "locator.type"
+                    data-success-callback="changeParamValue"
+                    href-void smart-xeditable 
+                    data-ng-model="list[listIndex][param].type" 
+                    data-options="editableOptions" 
+                    data-type="select" 
+                    data-value="{{list[listIndex][param].type}}" 
+                    data-source="['id', 'name', 'link text', 'css selector','xpath']" 
+                    data-showbuttons="false" 
+                    class="editable editable-click">{{list[listIndex][param].type}}</a>
 
                   <span ng-if="param === 'locator'" class="label label-info">value</span>
 
-                  <a href-void data-type="text" 
+                  <a ng-if="param === 'locator'" href-void data-type="text" 
+                    smart-xeditable
+                    data-list-index = "{{listIndex}}"
+                    data-keyword-param = "locator.value" 
+                    data-ng-model="list[listIndex][param]" 
+                    data-options="editableOptions"
+                    data-success-callback="changeParamValue"
+                    data-list-index = "{{listIndex}}"
+                    data-keyword-param = "{{param}}"
+                    class="editable editable-click">{{list[listIndex][param].value || 'empty' }}</a>
+
+                  <a ng-if="param !== 'locator'" href-void data-type="text" 
                     smart-xeditable 
-                    ng-model="list[listIndex][param]" 
+                    data-ng-model="list[listIndex][param]" 
                     data-options="editableOptions"
                     data-success-callback="changeParamValue"
                     data-list-index = "{{listIndex}}"

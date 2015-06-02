@@ -25,7 +25,14 @@ define(['fk/module', 'lodash'], function(module, _) {
         $scope.changeParamValue = function(value, attributes) {
           var listIndex = attributes.listIndex;
           var keywordParam = attributes.keywordParam;
-          $scope.list[listIndex][keywordParam] = value;
+          
+          if (keywordParam === 'locator.type') {
+            $scope.list[listIndex].locator.type = value;
+          } else if (keywordParam === 'locator.value') {
+            $scope.list[listIndex].locator.value = value;
+          } else {
+            $scope.list[listIndex][keywordParam] = value;
+          }
         }
 
         $scope.selectCat = function(cat) {
