@@ -2,7 +2,7 @@
   <div class="row" ng-if="list">
     <div class="col-sm-5 col-md-4">
         <div style="padding-bottom: 5px;">
-          <a href="" ng-click="newdata()"><span class="glyphicon glyphicon-plus"></span> Create data provider </a>
+          <a class="btn btn-primary btn-sm" ng-click="newdata()" href=""><span class="glyphicon glyphicon-plus"></span> Create data provider</a>
         </div>
         <div class="form-group listspace">
           <select data-smart-select2 style="width:100%" class="select2" ng-change="getDateSetName(space)" ng-model='space'>
