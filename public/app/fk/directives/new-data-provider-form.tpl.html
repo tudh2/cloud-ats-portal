@@ -3,17 +3,17 @@
   
   <fieldset class="no-padding">
     <div class="row">
-      <section class="col col-md-5" style="margin-top: 15px;">
+      <section class="col col-md-5" style="margin-top: 5px;">
         <label class="input">
           <i class="icon-prepend fa fa-slack"></i>
           <input type="text" name="provider_name" placeholder="Data Provider Name">
         </label>
       </section>
 
-      <div class="col col-md-3" style="margin-top: 20px;">
+      <div class="col col-md-3" style="margin-top: 10px;">
         <span class="pull-right">In Space: </span>
       </div>
-      <div class="col col-md-4 form-group listSpaceNew" style="margin-top: 12px;">
+      <div class="col col-md-4 form-group listSpaceNew" style="margin-top: 4px;">
         <select data-smart-select2 style="width:100%" class="select2" ng-model='chooseSpace' ng-change="setSpace(chooseSpace)">
                 <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
                 <option>Public</option>

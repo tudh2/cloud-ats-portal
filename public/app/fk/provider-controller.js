@@ -8,7 +8,7 @@ define(['fk/module'], function(module) {
   		$scope.list = true;
       $scope.space = 'Public';
       $scope.chooseSpace = 'Public';
-
+      $scope.updatedNothing = false;
       $scope.updateDataId = null;
   		UserService.spaces().then(function(spaces) {
         $scope.spaces = spaces;
@@ -41,7 +41,7 @@ define(['fk/module'], function(module) {
           $scope.clickItem = provider;
           var dataset = JSON.parse(provider.data_source);
           $scope.currentDataSet = dataset;
-
+          $scope.updatedNothing = false;
           $scope.updateDataId = provider._id;
       }
 
@@ -107,9 +107,6 @@ define(['fk/module'], function(module) {
           if (status == 200) {
             $scope.getDateSetName(spaceId);
             $scope.cancelCreateDataProvider();
-            if (spaceId === 'Public') {
-            } else {
-            }
             
             var space = $('.col.col-md-4.form-group.listSpaceNew select').select2('data').text;
             $('.form-group.listspace div a.select2-choice span.select2-chosen').text(space);
@@ -144,13 +141,18 @@ define(['fk/module'], function(module) {
         });
 
         DataService.update($scope.updateDataId, dataset, function(data, status) {
+          
           if ($scope.space === 'Public' ) {
             $scope.space = null;
           }
+
           DataService.list(tenant, $scope.space).then(function (response){
             $scope.delete = false;
             $scope.data = response;
+
+            $scope.updatedNothing = true;
           });
+
         });
       }
 

@@ -9,7 +9,7 @@
           <i class="fa fa-plus"></i> New Row
         </a>
       </th>
-      <th ng-repeat="field in fieldNames" class="filedName">
+      <th ng-repeat="field in fieldNames track by $index" class="filedName">
         <a ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)" class="btn btn-danger btn-xs">
           <i class="fa fa-minus"></i>
         </a>
@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="row in rows" class="fieldValues">
+    <tr ng-repeat="row in rows track by $index" class="fieldValues">
       <td ng-if="!$last && editable">
         <a ng-click="removeRow($index)" class="btn btn-danger btn-xs">
           <i class="fa fa-minus"></i> This Row
@@ -35,7 +35,7 @@
         </a>
       </td>
 
-      <td class="cell" ng-repeat="cell in row">
+      <td class="cell" ng-repeat="cell in row track by $index">
         <a ng-if="editable" href-void data-type="text" smart-xeditable data-ng-model="cell" data-options="editableOptions" class="editable editable-click">{{cell}}</a>
         <span ng-if="!editable" class="text-success">{{cell}}</span>
       </td>
