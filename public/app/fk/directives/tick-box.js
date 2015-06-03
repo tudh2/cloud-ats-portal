@@ -4,18 +4,14 @@ define(['fk/module'], function (module) {
 
 		return {
 			restrict: 'A',
+			scope: {
+				sel: '=',
+				someCtrlFn: '&callFun'
+			},
 			link: function (scope, element, attribute) {
 				element.on('click', function () {
-					if (element.children().hasClass("fa-circle-o")){
-						scope.delete = true;
-						element.find('i').removeClass('fa-circle-o');
-						element.find('i').addClass('fa-check-circle-o');
-						element.removeClass('active');
-					} else {
-							element.addClass("active");
-							scope.delete = false;
-							element.find('i').removeClass('fa-check-circle-o');
-							element.find('i').addClass('fa-circle-o');
+						if(!element.children().hasClass("text-success")) {
+				          	scope.someCtrlFn(scope.sel);
 						}
 				});
 
