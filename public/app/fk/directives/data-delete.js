@@ -6,7 +6,7 @@ define(['fk/module'], function (module) {
 			restrict: 'A',
 			link: function (scope, element, attribute) {
 				element.on('click', function () {
-					element.parent().hide();
+					element.parent().remove();
 				});
 
 			}

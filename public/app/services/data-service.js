@@ -86,7 +86,7 @@ define(['app'], function(app) {
           return dfd.promise;
         },
 
-        deleteDataSetById: function (id) {
+        deleteDataSetById: function (id, callback) {
           var request = {
             method: 'DELETE',
             url: 'http://localhost:9000/api/v1/data/delete/' + id,
@@ -97,6 +97,7 @@ define(['app'], function(app) {
           };
 
           $http(request).success(function (response) {
+            callback(response);
           }).error(function (data, status) {
             switch (status) {
               case 403:

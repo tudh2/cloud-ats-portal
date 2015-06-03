@@ -6,7 +6,7 @@ define(['fk/module'], function(module) {
 
 
   		$scope.list = true;
-      $scope.spacename = 'Public';
+      $scope.space = 'Public';
       $scope.chooseSpace = 'Public';
 
       $scope.updateDataId = null;
@@ -30,7 +30,6 @@ define(['fk/module'], function(module) {
           $scope.data = response;
         });
 
-        //$scope.chooseSpace = space;
       }
 
       $scope.setSpace = function (space) {
@@ -54,7 +53,10 @@ define(['fk/module'], function(module) {
       }
 
       $scope.deleteDataSet = function (dataSetId) {
-        DataService.deleteDataSetById(dataSetId);
+
+        DataService.deleteDataSetById(dataSetId, function (response) {
+          $scope.clickItem = false;
+        });
 
       }
 
@@ -142,10 +144,10 @@ define(['fk/module'], function(module) {
         });
 
         DataService.update($scope.updateDataId, dataset, function(data, status) {
-          if ($scope.chooseSpace === 'Public' ) {
-            $scope.chooseSpace = null;
+          if ($scope.space === 'Public' ) {
+            $scope.space = null;
           }
-          DataService.list(tenant, $scope.chooseSpace).then(function (response){
+          DataService.list(tenant, $scope.space).then(function (response){
             $scope.delete = false;
             $scope.data = response;
           });
