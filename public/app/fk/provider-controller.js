@@ -62,11 +62,14 @@ define(['fk/module'], function(module) {
 
       $scope.cancelCreateDataProvider = function () {
         $scope.list = true;
+        $scope.updatedNothing = false;
+        $scope.clickItem = false;
       }
 
       $scope.newdata = function () {
 
         $scope.list = false;
+        $scope.chooseSpace = 'Public';
       }
 
       $scope.createDataProvider = function() {
