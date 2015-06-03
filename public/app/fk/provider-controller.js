@@ -70,17 +70,17 @@ define(['fk/module'], function(module) {
       }
 
       $scope.createDataProvider = function() {
-        var name = $('form input[name="provider_name"]').val();
+        var name = $('div.data-provider form input[name="provider_name"]').val();
         if (name === undefined || name === '') return;
 
         var fieldNames = [];
-        $('table thead th.filedName').each(function(index, obj) {
+        $('div.data-provider table thead th.filedName').each(function(index, obj) {
           var fieldName = $(obj).text().trim();
           fieldNames[index] = fieldName;
         });
 
         var rows = [];
-        $('table tbody tr.fieldValues').each(function(index, tr) {
+        $('div.data-provider table tbody tr.fieldValues').each(function(index, tr) {
           var row = [];
           $(tr).find('td.cell').each(function(i, td) {
             row[i] = $(td).text().trim();

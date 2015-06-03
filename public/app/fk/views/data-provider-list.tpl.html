@@ -36,15 +36,18 @@
     </div>
   </div>
 </div>
-  <div class="row" ng-show="!list">
-   <div class="col-md-12">
+
+  <div class="data-provider">
+    <div class="row" ng-if="!list">
+      <div class="col-sm-12">
         <new-provider-form></new-provider-form>
+      </div>
     </div>
-    <div class="col-md-12">
-
-      <provider-table data-dataset="[]" data-editable="true"></provider-table>
+    <div class="row" ng-if="!list">
+      <div class="col-sm-12">
+        <provider-table data-dataset="[]" data-editable="true"></provider-table>
+      </div>
     </div>
-
   </div>
 <!--   <div class="row">
       <div class="col-sm-12" ng-if="showDetailDataset && clickItem">
