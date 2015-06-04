@@ -145,15 +145,11 @@ define(['fk/module'], function(module) {
 
         DataService.update($scope.updateDataId, dataset, function(data, status) {
           
-          if ($scope.space === 'Public' ) {
-            $scope.space = null;
-          }
+          _.forEach($scope.data, function (data) {
 
-          DataService.list(tenant, $scope.space).then(function (response){
-            $scope.delete = false;
-            $scope.data = response;
-
-            $scope.updatedNothing = true;
+            if (data._id === $scope.updateDataId) {
+              data.data_source = JSON.stringify(dataset);
+            }
           });
 
         });
