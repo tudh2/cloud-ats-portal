@@ -23,7 +23,11 @@ define([
                 'fk/directives/data-provider-form',
                 'fk/directives/data-provider-table',
                 'fk/directives/keywords',
+                'fk/directives/keyword-params',
+                'fk/directives/steps',
+
                 'services/keyword-service',
+                
                 'modules/forms/common',
                 'modules/forms/directives/validate/smart-validate-form',
                 'modules/forms/directives/wizard/smart-wizard',

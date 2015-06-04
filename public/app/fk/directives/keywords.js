@@ -8,39 +8,28 @@ define(['fk/module', 'lodash'], function(module, _) {
       templateUrl: 'app/fk/directives/keywords.tpl.html',
       link: function($scope, element, attributes) {
 
-        $scope.list = [
+        $scope.cases = [
+          {
+            "name": "NewCase",
+            "steps": []
+          }
         ];
 
-        $scope.query = {
-        }
-
-        $scope.keywords = {
-        }
-
+        $scope.query = {}
+        $scope.keywords = {}
+        
         $scope.editableOptions = {
           mode: 'inline',
           disabled: false
         }
 
-        $scope.changeParamValue = function(value, attributes) {
-          var listIndex = attributes.listIndex;
-          var keywordParam = attributes.keywordParam;
-          
-          if (keywordParam === 'locator.type') {
-            $scope.list[listIndex].locator.type = value;
-          } else if (keywordParam === 'locator.value') {
-            $scope.list[listIndex].locator.value = value;
-          } else {
-            $scope.list[listIndex][keywordParam] = value;
-          }
+        $scope.changeCaseName = function(value, attributes) {
+          var index = attributes.index;
+          $scope.cases[index].name = value;
         }
 
         $scope.selectCat = function(cat) {
           $scope.cat = cat;
-        }
-
-        $scope.showMe = function() {
-          return $scope.list.length == 0;
         }
 
         $scope.filterIt = function() {
@@ -53,29 +42,6 @@ define(['fk/module', 'lodash'], function(module, _) {
             return $filter('filter')($scope.keywords, "");
           }
         };
-
-        $scope.removeAction = function(keyword) {
-          var index = _.indexOf($scope.list, keyword);
-          $scope.list.splice(index, 1);
-        }
-
-        $scope.moveUpAction = function(keyword) {
-          var index = _.indexOf($scope.list, keyword);
-          var upAction = $scope.list[index - 1];
-          if (upAction === undefined || upAction === null) return;
-
-          $scope.list[index] = upAction;
-          $scope.list[index - 1] = keyword;
-        }
-
-        $scope.moveDownAction = function(keyword) {
-          var index = _.indexOf($scope.list, keyword);
-          var downAction = $scope.list[index + 1];
-          if (downAction === undefined || downAction === null) return;
-
-          $scope.list[index] = downAction;
-          $scope.list[index + 1] = keyword;
-        }
 
         $scope.buildActionDisplay = function(data) {
           var keyword = data.type;

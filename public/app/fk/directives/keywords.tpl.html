@@ -2,11 +2,16 @@
   <div class="col-md-9">
     <div class="tree">
       <ul class="smart-treeview-group">
-        <li>
+        <li ng-repeat="case in cases">
           <span class="editinline">
           <a href-void class="fa fa-fw fa-folder-open txt-color-darken"></a>
           
-          <a href-void data-type="text" smart-xeditable data-ng-model="case" data-options="editableOptions" class="editable editable-click">NewCase</a>
+          <a href-void data-type="text" 
+            smart-xeditable data-ng-model="cases[$index]" 
+            data-options="editableOptions" 
+            data-index="{{$index}}" 
+            data-success-callback="changeCaseName"
+            class="editable editable-click">{{case.name}}</a>
 
           <div style="padding-left: 25px;" class="btn-group dropup" data-dropdown>
             <a href="#" class="dropdown-toggle txt-color-darken" data-dropdown-toggle>
@@ -17,7 +22,7 @@
                   <a href-void class="txt-color-blueDark"><i class="fa fa-plus"></i> Create new suite</a>
               </li>
               <li class="li-popup divider"></li>
-              <li class="li-popup">
+              <li class="li-popup" ng-if="!$first">
                   <a href-void class="txt-color-redLight"><i class="fa fa-minus"></i> Delete this suite</a>
               </li>
             </ul>
@@ -26,88 +31,7 @@
           </span>
 
           <!-- action steps -->
-          <ul class="smart-treeview-group"
-            data-drop="true" 
-            ng-model="list" 
-            jqyoui-droppable="{multiple:true}">
-
-            <li ng-init="listIndex = $index" ng-repeat="keyword in list track by $index" 
-              data-drag="true" 
-              data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" 
-              ng-model="list"
-              jqyoui-draggable="{index: {{$index}}, animate: true}">
-
-              <span>
-                <div class="pull-left margin-right-5">
-                  <a ng-if="!$first" ng-click="moveUpAction(keyword)" data-tooltip-placement="left" data-tooltip="Move Up" class="txt-color-orange">
-                      <i class="fa fa-arrow-up"></i>
-                  </a>
-                  <a ng-if="!$last && !$first" ng-click="moveDownAction(keyword)" data-tooltip-placement="left" data-tooltip="Move Down" class="txt-color-purple">
-                      <i class="fa fa-arrow-down"></i>
-                  </a>
-                </div>
-                <a href-void class="txt-color-blue">
-                  <strong>{{buildActionDisplay(keyword)}}</strong>
-                </a>
-
-                <div class="pull-right" style="padding-left: 25px;">
-                  
-                  <a ng-click="removeAction(keyword)" data-tooltip-placement="right" data-tooltip="Remove" class="txt-color-red">
-                    <i class="fa fa-times-circle"></i>
-                  </a>  
-                </div>
-                
-              </span>
-
-              <ul class="smart-treeview-group" ng-if="keyword.params.length > 0">
-                <li class="editinline" ng-repeat="param in keyword.params">
-                  <span class="label label-success">{{param}}</span>
-                  
-                  <span ng-if="param === 'locator'" class="label label-info">by</span>
-
-                  <a ng-if="param === 'locator'"
-                    data-list-index = "{{listIndex}}"
-                    data-keyword-param = "locator.type"
-                    data-success-callback="changeParamValue"
-                    href-void smart-xeditable 
-                    data-ng-model="list[listIndex][param].type" 
-                    data-options="editableOptions" 
-                    data-type="select" 
-                    data-value="{{list[listIndex][param].type}}" 
-                    data-source="['id', 'name', 'link text', 'css selector','xpath']" 
-                    data-showbuttons="false" 
-                    class="editable editable-click">{{list[listIndex][param].type}}</a>
-
-                  <span ng-if="param === 'locator'" class="label label-info">value</span>
-
-                  <a ng-if="param === 'locator'" href-void data-type="text" 
-                    smart-xeditable
-                    data-list-index = "{{listIndex}}"
-                    data-keyword-param = "locator.value" 
-                    data-ng-model="list[listIndex][param]" 
-                    data-options="editableOptions"
-                    data-success-callback="changeParamValue"
-                    data-list-index = "{{listIndex}}"
-                    data-keyword-param = "{{param}}"
-                    class="editable editable-click">{{list[listIndex][param].value || 'empty' }}</a>
-
-                  <a ng-if="param !== 'locator'" href-void data-type="text" 
-                    smart-xeditable 
-                    data-ng-model="list[listIndex][param]" 
-                    data-options="editableOptions"
-                    data-success-callback="changeParamValue"
-                    data-list-index = "{{listIndex}}"
-                    data-keyword-param = "{{param}}"
-                    class="editable editable-click">{{list[listIndex][param] || 'empty' }}</a>
-                </li>
-              </ul>  
-
-            </li>
-
-            <li class="placeholder" ng-if="showMe()"> 
-              <span class="label label-success">Drop action here</span>
-            </li>
-          </ul>
+          <list-steps data-list="case.steps"></list-steps>
           <!-- end action steps -->
 
         </li>
