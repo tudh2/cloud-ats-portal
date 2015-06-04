@@ -10,7 +10,7 @@ define(['fk/module', 'lodash'], function(module, _) {
         list: '='
       },
       link: function($scope, element, attributes) {
-        console.log($scope);
+
         $scope.update = false;
 
         $scope.showMe = function() {

@@ -17,10 +17,31 @@ define(['fk/module', 'lodash'], function(module, _) {
 
         $scope.query = {}
         $scope.keywords = {}
-        
         $scope.editableOptions = {
           mode: 'inline',
           disabled: false
+        }
+
+        $scope.newCase = function() {
+          $scope.cases.push({
+            "name": "NewCase",
+            "steps": []
+          })
+        }
+
+        $scope.deleteCase = function(index) {
+          $scope.cases.splice(index, 1); 
+        }
+
+        $scope.toggleExpand = function($event) {
+          var a = $event.currentTarget;
+          $(a).toggleClass('fa-folder-open');
+          $(a).toggleClass('fa-folder');
+
+          var li = $(a).closest('li');
+
+          var $div = li.find('div.steps.expand');
+          $div.slideToggle(200);
         }
 
         $scope.changeCaseName = function(value, attributes) {

@@ -4,7 +4,7 @@
       <ul class="smart-treeview-group">
         <li ng-repeat="case in cases">
           <span class="editinline">
-          <a href-void class="fa fa-fw fa-folder-open txt-color-darken"></a>
+          <a ng-click="toggleExpand($event)" class="fa fa-fw fa-folder-open txt-color-darken"></a>
           
           <a href-void data-type="text" 
             smart-xeditable data-ng-model="cases[$index]" 
@@ -19,11 +19,11 @@
             </a>
             <ul class="dropdown-menu no-padding">
               <li class="li-popup">
-                  <a href-void class="txt-color-blueDark"><i class="fa fa-plus"></i> Create new suite</a>
+                  <a ng-click="newCase()" class="txt-color-blueDark"><i class="fa fa-plus"></i> Create new suite</a>
               </li>
               <li class="li-popup divider"></li>
-              <li class="li-popup" ng-if="!$first">
-                  <a href-void class="txt-color-redLight"><i class="fa fa-minus"></i> Delete this suite</a>
+              <li class="li-popup" ng-if="cases.length > 1">
+                  <a ng-click="deleteCase($index)" class="txt-color-redLight"><i class="fa fa-minus"></i> Delete this suite</a>
               </li>
             </ul>
           </div>
@@ -31,7 +31,9 @@
           </span>
 
           <!-- action steps -->
+          <div class="steps expand">
           <list-steps data-list="case.steps"></list-steps>
+          </div>
           <!-- end action steps -->
 
         </li>
@@ -40,7 +42,7 @@
   </div>
   <div class="col-md-3">
 
-    <div class="panel-group smart-accordion-default" id="keyword-list">
+    <div class="panel-group smart-accordion-default animated fadeInDown" id="keyword-list">
       
       <div ng-init="query[cat] = ''" class="panel panel-default" ng-repeat="cat in cats">
         <div class="panel-heading">
