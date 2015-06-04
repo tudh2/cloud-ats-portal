@@ -2,52 +2,46 @@
   <div class="row" ng-show="list">
     <div class="col-md-12">
       <div class = "col-md-4" style="padding-bottom: 15px;">
-          <a class="btn btn-primary btn-sm" ng-click="newdata()" href=""><span class="glyphicon glyphicon-plus"></span> Create data provider</a>
+        <a class="btn btn-primary btn-sm" ng-click="newdata()" href=""><span class="glyphicon glyphicon-plus"></span> Create data provider</a>
       </div>
       <div class="col-md-8" ng-if="updatedDataAlert">
         <div class="alert alert-info">The dataset is updated</div>
       </div>
     </div>
-    <div class="col-sm-5 col-md-4">
+    <div class="col-md-12">
+      <div class="col-sm-5 col-md-4">
         
         <div class="form-group listspace">
-          <select data-smart-select2 style="width:100%" class="select2" ng-change="getDateSetName(space)" ng-model='space'>
-                  <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
-                  <option>Public</option>
+          <select data-smart-select2 style="width:100%" class="select2" ng-change="getDataSetName(space)" ng-model='space'>
+            <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
+            <option>Public</option>
           </select>
 
         </div>
         
-      <ul ng-if='data.length > 0' class="list-group" style="max-height: 200px; overflow-x: hidden; overflow-y: auto;">
-        <div class="icon-addon addon-sm">
-          <input type="text" placeholder="Filter" class="form-control" ng-model="query">
-          <label for="email" class="glyphicon glyphicon-search" rel="tooltip" title="dataset"></label>
-        </div>
-        <li class="padding-5 list-group-item" ng-repeat="sel in data | filter:query" tick-box sel="sel" call-fun="getDataSet(sel)">
-                <!-- <a class="text-info" ng-click='getDataSet(sel._id)'><i class="fa fa-circle-o"></i> {{sel.name}}</a> -->
-                <a href-void class="text-info" ng-if="!showItemChose(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
-                <a href-void class="text-success" ng-if="showItemChose(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
-                <a ng-if="showItemChose(sel,showDetailDataset)" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
+        <ul ng-if='data.length > 0' class="list-group" style="max-height: 200px; overflow-x: hidden; overflow-y: auto;">
+          <div class="icon-addon addon-sm">
+            <input type="text" name="query" placeholder="Filter" class="form-control" ng-model="query">
+            <label for="email" class="glyphicon glyphicon-search" rel="tooltip" title="dataset"></label>
+          </div>
+          <li class="padding-5 list-group-item" ng-repeat="sel in data | filter:query" tick-box sel="sel" call-fun="getDataSet(sel)">
+            <a href-void class="text-info" ng-if="!showItemChose(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+            <a href-void class="text-success" ng-if="showItemChose(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
+            <a ng-if="showItemChose(sel,showDetailDataset)" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
           </li>
-                <a href-void class="text-info" ng-if="!showItemChoosed(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
-                <a href-void class="text-success" ng-if="showItemChoosed(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
-                <a ng-if="showItemChoosed(sel,showDetailDataset)" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
-        </li>
-      </ul>
-  </div>
-  <div class="col-sm-7 col-md-8 text-align-center" ng-if='!clickItem'>
-    <h1><u><i>None data provider selected.</i></u></h1>
-  </div>
-  <div>
-    <div class="col-sm-7 col-md-8" ng-if="showDetailDataset && clickItem">
+        </ul>
+      </div>
+      <div class="col-sm-7 col-md-8 text-align-center" ng-if='!clickItem'>
+        <h1><u><i>None data provider selected.</i></u></h1>
+      </div>
+      <div class="col-sm-7 col-md-8" ng-if="showDetailDataset && clickItem">
 
-      <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
-      <button ng-click="UpdateDataProvider()" class="btn btn-primary pull-right" type="submit" style="margin-right: 5px;">Update</button>
-      <button ng-click="CancelUpdateDataProvider()" class="btn btn-danger pull-right" type="submit" style="margin-right: 5px;">Cancel</button>
+        <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
+        <button ng-click="UpdateDataProvider()" class="btn btn-primary pull-right" type="submit" style="margin-right: 5px;">Update</button>
+        <button ng-click="CancelUpdateDataProvider()" class="btn btn-danger pull-right" type="submit" style="margin-right: 5px;">Cancel</button>
+      </div>
     </div>
   </div>
-</div>
-
   <div class="data-provider">
     <div class="row" ng-if="!list">
       <div class="col-sm-12">
@@ -60,11 +54,5 @@
       </div>
     </div>
   </div>
-<!--   <div class="row">
-      <div class="col-sm-12" ng-if="showDetailDataset && clickItem">
-        <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
-      </div>
-    </div> -->
-
 </div>
 

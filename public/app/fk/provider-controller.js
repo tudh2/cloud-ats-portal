@@ -4,7 +4,6 @@ define(['fk/module'], function(module) {
   module.registerController('ProviderCtrl',['$rootScope', '$scope', 'UserService', 'DataService', 
   	function ($rootScope, $scope, UserService, DataService) {
 
-
   		$scope.list = true;
       $scope.space = 'Public';
       $scope.chooseSpace = 'Public';
@@ -21,7 +20,8 @@ define(['fk/module'], function(module) {
         $scope.delete = false;
         $scope.data = response;
       });
-      $scope.getDateSetName = function (space) {
+      $scope.getDataSetName = function (space) {
+        
         $scope.clickItem = false;
         if (space === 'Public' ) {
           space = null;
@@ -29,8 +29,8 @@ define(['fk/module'], function(module) {
         DataService.list(tenant, space).then(function (response){
           $scope.delete = false;
           $scope.data = response;
-        });
 
+        });
       }
 
       $scope.setSpace = function (space) {
@@ -58,7 +58,6 @@ define(['fk/module'], function(module) {
         DataService.deleteDataSetById(dataSetId, function (response) {
           $scope.clickItem = false;
         });
-
       }
 
       $scope.cancelCreateDataProvider = function () {
@@ -109,7 +108,7 @@ define(['fk/module'], function(module) {
 
         DataService.create(name, spaceId, dataset, function(data, status) {
           if (status == 200) {
-            $scope.getDateSetName(spaceId);
+            $scope.getDataSetName(spaceId);
             $scope.cancelCreateDataProvider();
             
             var space = $('.col.col-md-4.form-group.listSpaceNew select').select2('data').text;
