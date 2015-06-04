@@ -108,6 +108,7 @@ define(['fk/module'], function(module) {
     }
     
     $scope.clickDataProviderShow = function(provider) {
+      console.log($scope.showDetailDataset);
       $scope.showDetailDataset = $scope.showDetailDataset === false ? true: false;
       $scope.clickItem = provider;
       if(provider.data_source instanceof Object) {
@@ -118,7 +119,7 @@ define(['fk/module'], function(module) {
       }
     }
 
-    $scope.showItemChoosed = function(provider,showDetailDataset) {
+    $scope.showItemChose = function(provider,showDetailDataset) {
       $scope.showDetailDataset = showDetailDataset === true ? false: true;
       $scope.provider = provider;
       return angular.equals($scope.provider, $scope.clickItem);

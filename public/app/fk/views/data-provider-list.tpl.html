@@ -21,9 +21,9 @@
       <ul ng-if='data.length > 0' class="list-group">
          <li class="padding-5 list-group-item" ng-repeat="sel in data" tick-box sel="sel" call-fun="getDataSet(sel)">
                 <!-- <a class="text-info" ng-click='getDataSet(sel._id)'><i class="fa fa-circle-o"></i> {{sel.name}}</a> -->
-                <a href-void class="text-info" ng-if="!showItemChoosed(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
-                <a href-void class="text-success" ng-if="showItemChoosed(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
-                <a ng-if="showItemChoosed(sel,showDetailDataset)" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
+                <a href-void class="text-info" ng-if="!showItemChose(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                <a href-void class="text-success" ng-if="showItemChose(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
+                <a ng-if="showItemChose(sel,showDetailDataset)" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
           </li>
       </ul>
   </div>

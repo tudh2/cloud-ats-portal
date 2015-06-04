@@ -10,6 +10,7 @@ define(['fk/module'], function(module) {
       $scope.chooseSpace = 'Public';
       $scope.updatedDataAlert = false;
       $scope.updateDataId = null;
+      $scope.showDetailDataset = false;
   		UserService.spaces().then(function(spaces) {
         $scope.spaces = spaces;
       });
@@ -45,7 +46,7 @@ define(['fk/module'], function(module) {
           $scope.updateDataId = provider._id;
       }
 
-      $scope.showItemChoosed = function(provider,showDetailDataset) {
+      $scope.showItemChose = function(provider,showDetailDataset) {
 
         $scope.showDetailDataset = showDetailDataset === true ? false: true;
         $scope.provider = provider;
