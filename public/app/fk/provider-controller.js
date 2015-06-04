@@ -8,7 +8,7 @@ define(['fk/module'], function(module) {
   		$scope.list = true;
       $scope.space = 'Public';
       $scope.chooseSpace = 'Public';
-      $scope.updatedNothing = false;
+      $scope.updatedDataAlert = false;
       $scope.updateDataId = null;
   		UserService.spaces().then(function(spaces) {
         $scope.spaces = spaces;
@@ -41,7 +41,7 @@ define(['fk/module'], function(module) {
           $scope.clickItem = provider;
           var dataset = JSON.parse(provider.data_source);
           $scope.currentDataSet = dataset;
-          $scope.updatedNothing = false;
+          $scope.updatedDataAlert = false;
           $scope.updateDataId = provider._id;
       }
 
@@ -62,7 +62,7 @@ define(['fk/module'], function(module) {
 
       $scope.cancelCreateDataProvider = function () {
         $scope.list = true;
-        $scope.updatedNothing = false;
+        $scope.updatedDataAlert = false;
         $scope.clickItem = false;
       }
 
@@ -151,7 +151,7 @@ define(['fk/module'], function(module) {
               data.data_source = JSON.stringify(dataset);
             }
           });
-
+          $scope.updatedDataAlert = true;
         });
       }
 
