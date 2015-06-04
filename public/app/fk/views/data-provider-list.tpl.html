@@ -18,13 +18,21 @@
 
         </div>
         
-      <ul ng-if='data.length > 0' class="list-group">
-         <li class="padding-5 list-group-item" ng-repeat="sel in data" tick-box sel="sel" call-fun="getDataSet(sel)">
+      <ul ng-if='data.length > 0' class="list-group" style="max-height: 200px; overflow-x: hidden; overflow-y: auto;">
+        <div class="icon-addon addon-sm">
+          <input type="text" placeholder="Filter" class="form-control" ng-model="query">
+          <label for="email" class="glyphicon glyphicon-search" rel="tooltip" title="dataset"></label>
+        </div>
+        <li class="padding-5 list-group-item" ng-repeat="sel in data | filter:query" tick-box sel="sel" call-fun="getDataSet(sel)">
                 <!-- <a class="text-info" ng-click='getDataSet(sel._id)'><i class="fa fa-circle-o"></i> {{sel.name}}</a> -->
                 <a href-void class="text-info" ng-if="!showItemChose(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
                 <a href-void class="text-success" ng-if="showItemChose(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
                 <a ng-if="showItemChose(sel,showDetailDataset)" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
           </li>
+                <a href-void class="text-info" ng-if="!showItemChoosed(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+                <a href-void class="text-success" ng-if="showItemChoosed(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
+                <a ng-if="showItemChoosed(sel,showDetailDataset)" ng-click='deleteDataSet(sel._id)' class="btn btn-labeled btn-danger pull-right" delete-data><i class="glyphicon glyphicon-trash"></i> </a>
+        </li>
       </ul>
   </div>
   <div class="col-sm-7 col-md-8 text-align-center" ng-if='!clickItem'>
