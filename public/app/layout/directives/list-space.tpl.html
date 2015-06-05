@@ -1,6 +1,6 @@
-<div class="project-context hidden-xs dropdown">
+<div class="project-context hidden-xs dropdown" data-dropdown>
   <span class="label">{{getWord('Space')}}: {{space}}</span>
-  <span class="project-selector dropdown-toggle">{{getWord('Select Space')}}
+  <span class="project-selector dropdown-toggle" data-dropdown-toggle>{{getWord('Select Space')}}
     <i ng-if="spaces.length" class="fa fa-angle-down"></i>
   </span>
   <ul class="dropdown-menu" ng-if="spaces.length">
