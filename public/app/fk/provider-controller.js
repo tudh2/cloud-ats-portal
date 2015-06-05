@@ -22,6 +22,7 @@ define(['fk/module'], function(module) {
       });
       $scope.getDataSetName = function (space) {
         
+        $scope.query = '';
         $scope.clickItem = false;
         if (space === 'Public' ) {
           space = null;
@@ -152,6 +153,7 @@ define(['fk/module'], function(module) {
             }
           });
           $scope.updatedDataAlert = true;
+
         });
       }
 

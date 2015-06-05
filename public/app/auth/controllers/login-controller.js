@@ -12,22 +12,24 @@ define(['auth/module'], function(module) {
 
       var expires = new Date();
       expires.setDate(expires.getDate() + 365);
+      if ($scope.email != '' && $scope.password != '') {
 
-      AuthenticationService.login($scope.email, $scope.password, function(data) {
-        if (data.error) {
-          $scope.message = data.message;          
-        } else {
-          $cookies.put('authToken', data.authToken, {
-            expires: expires
-          });
+        AuthenticationService.login($scope.email, $scope.password, function(data) {
+          if (data.error) {
+            $scope.message = data.message;          
+          } else {
+            $cookies.put('authToken', data.authToken, {
+              expires: expires
+            });
 
-          AuthenticationService.context().then(function(context) {
-            $window.sessionStorage.setItem('context', JSON.stringify(context));
-            $rootScope.context = context;
-            $state.go('app.dashboard');
-          });
-        }
-      });
+            AuthenticationService.context().then(function(context) {
+              $window.sessionStorage.setItem('context', JSON.stringify(context));
+              $rootScope.context = context;
+              $state.go('app.dashboard');
+            });
+          }
+        });
+      }
     }
   }
 });

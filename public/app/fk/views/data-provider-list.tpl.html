@@ -1,11 +1,13 @@
-<div style= "margin-left: 10px; margin-top: 15px;">
+<div style= "margin-left: 10px; margin-top: 15px; margin-right: 5px;">
   <div class="row" ng-show="list">
     <div class="col-md-12">
       <div class = "col-md-4" style="padding-bottom: 15px;">
         <a class="btn btn-primary btn-sm" ng-click="newdata()" href=""><span class="glyphicon glyphicon-plus"></span> Create data provider</a>
       </div>
       <div class="col-md-8" ng-if="updatedDataAlert">
-        <div class="alert alert-info">The dataset is updated</div>
+        <div class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert">x</button>The dataset is updated
+        </div>
       </div>
     </div>
     <div class="col-md-12">
@@ -18,12 +20,12 @@
           </select>
 
         </div>
-        
+        <div class="icon-addon addon-sm" style="margin-bottom: 2px;">
+          <input type="text" name="query" placeholder="Filter" class="form-control" ng-model="query">
+          <label for="search" class="glyphicon glyphicon-search" rel="tooltip" title="dataset"></label>
+        </div>
         <ul ng-if='data.length > 0' class="list-group" style="max-height: 200px; overflow-x: hidden; overflow-y: auto;">
-          <div class="icon-addon addon-sm">
-            <input type="text" name="query" placeholder="Filter" class="form-control" ng-model="query">
-            <label for="email" class="glyphicon glyphicon-search" rel="tooltip" title="dataset"></label>
-          </div>
+          
           <li class="padding-5 list-group-item" ng-repeat="sel in data | filter:query" tick-box sel="sel" call-fun="getDataSet(sel)">
             <a href-void class="text-info" ng-if="!showItemChose(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
             <a href-void class="text-success" ng-if="showItemChose(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
@@ -37,7 +39,7 @@
       <div class="col-sm-7 col-md-8" ng-if="showDetailDataset && clickItem">
 
         <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
-        <button ng-click="UpdateDataProvider()" class="btn btn-primary pull-right" type="submit" style="margin-right: 5px;">Update</button>
+        <button ng-click="UpdateDataProvider()" class="btn btn-primary pull-right" type="submit">Update</button>
         <button ng-click="CancelUpdateDataProvider()" class="btn btn-danger pull-right" type="submit" style="margin-right: 5px;">Cancel</button>
       </div>
     </div>

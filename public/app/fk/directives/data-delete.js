@@ -4,11 +4,18 @@ define(['fk/module'], function (module) {
 
 		return {
 			restrict: 'A',
+			priority: 1,
+			terminal: true,
 			link: function (scope, element, attribute) {
-				element.on('click', function () {
-					element.parent().remove();
-				});
 
+				var msg = "Are you sure?";
+				var clickAction = attribute.ngClick;
+				element.bind('click', function () {
+					if (window.confirm(msg)) {
+						scope.$eval(clickAction);
+						element.parent().remove();
+					}
+				});
 			}
 		}
 
