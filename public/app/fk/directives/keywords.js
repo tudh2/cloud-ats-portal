@@ -94,13 +94,16 @@ define(['fk/module', 'lodash'], function(module, _) {
           var keywordList = $scope.keywordList;
 
           _.forEach(keywordList[cat], function(content, keyword) {
-            var keyword = { "type": keyword };
+            var keyword = { "type": keyword, "description": content.description };
             var paramsList = content.params;
             var params = [];
             _.forEach(paramsList, function(desc, param) {
               if (param === 'locator') {
                 var locator = { "type" : "id", "value": "" };
                 keyword.locator = locator;
+              } else if (param === 'targetLocator') {
+                var locator = { "type": "id", "value": ""};
+                keyword.targetLocator = locator;
               } else {
                 keyword[param] = "";  
               }
@@ -132,6 +135,15 @@ define(['fk/module', 'lodash'], function(module, _) {
           }
           return displayParams;
         };
+
+        $scope.buildParamsPopover = function(cat, keyword) {
+          var params = $scope.keywordList[cat][keyword.type].params;
+          var display = "<p>" + keyword.description + "</p>";
+          _.forEach(params, function(desc, name) {
+            display += ("<p><strong>" + name + "</strong>: " + desc + "</p>");
+          });
+          return display;
+        }
 
       }
 

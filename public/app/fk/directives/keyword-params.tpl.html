@@ -1,9 +1,9 @@
 <ul class="smart-treeview-group">
   <li class="editinline" ng-repeat="param in params">
     <span class="label label-success">{{param.name}}</span>
-    <span ng-if="param.name === 'locator'" class="label label-info">by</span>
-    <a ng-if="param.name === 'locator'"
-      data-keyword-param = "locator.type"
+    <span ng-if="param.name === 'locator' || param.name === 'targetLocator'" class="label label-info">by</span>
+    <a ng-if="param.name === 'locator' || param.name === 'targetLocator'"
+      data-keyword-param = "{{param.name}}.type"
       data-success-callback="changeParamValue"
       href-void smart-xeditable 
       data-ng-model="fake" 
@@ -14,17 +14,17 @@
       data-showbuttons="false" 
       class="editable editable-click">{{param.type}}</a>
 
-    <span ng-if="param.name === 'locator'" class="label label-info">value</span>
+    <span ng-if="param.name === 'locator' || param.name === 'targetLocator'" class="label label-info">value</span>
 
-    <a ng-if="param.name === 'locator'" href-void data-type="text" 
+    <a ng-if="param.name === 'locator' || param.name === 'targetLocator'" href-void data-type="text" 
       smart-xeditable
-      data-keyword-param = "locator.value" 
+      data-keyword-param = "{{param.name}}.value" 
       data-success-callback="changeParamValue"
       data-ng-model="fake" 
       data-options="editableOptions"
       class="editable editable-click">{{param.value || 'empty' }}</a>
 
-    <a ng-if="param.name !== 'locator'" href-void data-type="text" 
+    <a ng-if="param.name !== 'locator' && param.name !== 'targetLocator'" href-void data-type="text" 
       smart-xeditable 
       data-ng-model="fake" 
       data-options="editableOptions"

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-7">
     <div class="tree">
       <ul class="smart-treeview-group">
         <li ng-repeat="case in cases">
@@ -40,7 +40,7 @@
       </ul>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-5">
 
     <div class="panel-group smart-accordion-default animated fadeInDown" id="keyword-list">
       
@@ -49,17 +49,16 @@
           <h4 class="panel-title">
             <a ng-click="selectCat(cat)" data-toggle="collapse" data-parent="#keyword-list" href="#{{cat}}" 
               ng-class="{collapsed: !$first}">
-              <i class="fa fa-fw fa-plus-circle txt-color-green"></i>
-              <i class="fa fa-fw fa-minus-circle txt-color-red"></i>
-              {{cat}}
+              <i class="fa fa-fw fa-plus-square-o"></i>
+              <i class="fa fa-fw fa-minus-square-o"></i>
+              <strong>{{cat}}</strong>
             </a>
           </h4>
         </div>
         <div id="{{cat}}" class="panel-collapse collapse" ng-class="{in: $first}">
           <div class="panel-body">
             
-            <ul class="list-unstyled" ng-init="keywords = getKeywordsByCat(cat)"
-              style="max-height: 200px; overflow-x: hidden; overflow-y: auto;">
+            <ul class="list-unstyled" ng-init="keywords = getKeywordsByCat(cat)">
             
               <li>
                 <div class="input-group padding-bottom-10">
@@ -74,7 +73,12 @@
                 ng-model="keywords"
                 jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}">
 
-                <a href-void class="txt-color-blue"><strong>{{buildKeywordFullyQualified(keyword)}}</strong></a>
+                <a href-void class="txt-color-blue"
+                  data-popover-placement="right"
+                  data-popover-title="<strong>{{buildActionDisplay(keyword)}}</strong>"
+                  data-smart-html-popover="<p>{{buildParamsPopover(cat, keyword)}}</p>" data-html="true">
+                  <strong>{{buildKeywordFullyQualified(keyword)}}</strong>
+                </a>
                 <br>
                 <span ng-if="keyword.type.length > 10 && keyword.params"><strong>params:</strong> {{buildParamsDisplay(keyword.params)}}</span>
 

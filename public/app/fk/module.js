@@ -27,7 +27,7 @@ define([
                 'fk/directives/steps',
 
                 'services/keyword-service',
-                
+                'modules/ui/directives/smart-html-popover',
                 'modules/forms/common',
                 'modules/forms/directives/validate/smart-validate-form',
                 'modules/forms/directives/wizard/smart-wizard',

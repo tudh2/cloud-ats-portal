@@ -31,7 +31,11 @@ define(['fk/module', 'lodash'], function(module, _) {
             scope.list[listIndex].locator.type = value;
           } else if (keywordParam === 'locator.value') {
             scope.list[listIndex].locator.value = value;
-          } else {
+          } else if (keywordParam === 'targetLocator.type') {
+            scope.list[listIndex].targetLocator.type = value;
+          } else if (keywordParam === 'targetLocator.value') {
+          scope.list[listIndex].targetLocator.value = value;
+            } else {
             scope.list[listIndex][keywordParam] = value;
           }
         };
@@ -49,7 +53,16 @@ define(['fk/module', 'lodash'], function(module, _) {
               } else {
                 param.type = locator.type;
                 param.value = locator.value;
-              } 
+              }
+            } else if (paramName === 'targetLocator') {
+              var targetLocator = keyword.targetLocator;
+              if (targetLocator === undefined) {
+                param.type = "id";
+                param.value = "";
+              } else {
+                param.type = targetLocator.type;
+                param.value = targetLocator.value;
+              }
             } else {
               param.value = keyword[paramName] ? keyword[paramName] : "";
             }
