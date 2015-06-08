@@ -6,13 +6,14 @@ define(['fk/module', 'notification'], function(module) {
 
   		$scope.list = true;
       $scope.space = 'Public';
-      $scope.chooseSpace = 'Public';
       $scope.updatedDataAlert = false;
       $scope.updateDataId = null;
       $scope.showDetailDataset = false;
+
   		UserService.spaces().then(function(spaces) {
         $scope.spaces = spaces;
       });
+
       $scope.data = {};
       var tenant = $rootScope.context.tenant._id;
 
@@ -21,8 +22,7 @@ define(['fk/module', 'notification'], function(module) {
         $scope.data = response;
       });
       $scope.getDataSetName = function (space) {
-        
-        $scope.query = '';
+        $scope.space = space;
         $scope.clickItem = false;
         if (space === 'Public' ) {
           space = null;
@@ -35,7 +35,7 @@ define(['fk/module', 'notification'], function(module) {
       }
 
       $scope.setSpace = function (space) {
-        $scope.chooseSpace = space;
+        $scope.space = space;
       }
 
       $scope.getDataSet = function (provider) {
@@ -79,9 +79,8 @@ define(['fk/module', 'notification'], function(module) {
       }
 
       $scope.newdata = function () {
-
         $scope.list = false;
-        $scope.chooseSpace = 'Public';
+        $scope.space = 'Public';
       }
 
       $scope.createDataProvider = function() {
@@ -112,7 +111,7 @@ define(['fk/module', 'notification'], function(module) {
           dataset.push(obj);
         });
 
-        var spaceId = $scope.chooseSpace;
+        var spaceId = $scope.space;
         
         if (spaceId === 'Public') {
           spaceId = null;

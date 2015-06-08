@@ -14,7 +14,7 @@
         <span class="pull-right">In Space: </span>
       </div>
       <div class="col col-md-4 form-group listSpaceNew" style="margin-top: 4px;">
-        <select data-smart-select2 style="width:100%" class="select2" ng-model='chooseSpace' ng-change="setSpace(chooseSpace)">
+        <select data-smart-select2 style="width:100%" class="select2" ng-model='space' ng-change="setSpace(space)">
                 <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
                 <option>Public</option>
         </select>
