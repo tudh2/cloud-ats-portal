@@ -16,11 +16,10 @@ define([
         views: {
           "content@app": {
             controller: 'FKCtrl',
-            templateUrl: 'app/fk/fk.html',
+            templateUrl: 'app/fk/views/fk.html',
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
-                'fk/fk-controller',
-                'fk/directives/data-provider-form',
+                'fk/controllers/fk-controller',
                 'fk/directives/data-provider-table',
                 'fk/directives/keywords',
                 'fk/directives/keyword-params',
@@ -48,18 +47,18 @@ define([
         views: {
           "content@app": {
             controller: 'ProviderCtrl',
-            templateUrl: 'app/fk/data-provider.html',
+            templateUrl: 'app/fk/views/data-provider.html',
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
-                'fk/provider-controller',
-                'modules/widgets/directives/jarvis-widget',
-                'modules/forms/directives/input/smart-select2',
+                'fk/controllers/provider-controller',
                 'fk/directives/data-provider-table',
                 'fk/directives/tick-box',
-                'modules/forms/directives/input/smart-xeditable',
                 'fk/directives/data-delete',
-                'fk/directives/new-data-provider-form'
+                'fk/directives/new-data-provider-form',
 
+                'modules/widgets/directives/jarvis-widget',
+                'modules/forms/directives/input/smart-select2',
+                'modules/forms/directives/input/smart-xeditable'
               ])
             }
           }
