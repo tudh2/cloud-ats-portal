@@ -1,4 +1,4 @@
-define(['fk/module'], function(module) {
+define(['fk/module', 'notification'], function(module) {
   
   'use strict';
   module.registerController('ProviderCtrl',['$rootScope', '$scope', 'UserService', 'DataService', 
@@ -54,11 +54,22 @@ define(['fk/module'], function(module) {
         return angular.equals($scope.provider, $scope.clickItem);
       }
 
-      $scope.deleteDataSet = function (dataSetId) {
+      $scope.deleteDataSet = function ($event, data) {
+        var element = $event.currentTarget;
 
-        DataService.deleteDataSetById(dataSetId, function (response) {
-          $scope.clickItem = false;
+        $.SmartMessageBox({
+          title: "Data Driven",
+          content: "Are you sure to delete '" + data.name + "'?",
+          buttons: '[No][Yes]'
+        }, function(ButtonPressed) {
+          if (ButtonPressed === "Yes") {
+            DataService.deleteDataSetById(data._id, function (response) {
+              $scope.clickItem = false;
+              $(element).parent().remove();
+            });
+          }
         });
+
       }
 
       $scope.cancelCreateDataProvider = function () {

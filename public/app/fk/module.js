@@ -53,7 +53,6 @@ define([
                 'fk/controllers/provider-controller',
                 'fk/directives/data-provider-table',
                 'fk/directives/tick-box',
-                'fk/directives/data-delete',
                 'fk/directives/new-data-provider-form',
 
                 'modules/widgets/directives/jarvis-widget',
