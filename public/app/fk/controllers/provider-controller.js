@@ -6,7 +6,6 @@ define(['fk/module', 'notification'], function(module) {
 
   		$scope.list = true;
       $scope.space = 'Public';
-      $scope.updatedDataAlert = false;
       $scope.updateDataId = null;
       $scope.showDetailDataset = false;
 
@@ -43,7 +42,6 @@ define(['fk/module', 'notification'], function(module) {
           $scope.clickItem = provider;
           var dataset = JSON.parse(provider.data_source);
           $scope.currentDataSet = dataset;
-          $scope.updatedDataAlert = false;
           $scope.updateDataId = provider._id;
       }
 
@@ -69,12 +67,10 @@ define(['fk/module', 'notification'], function(module) {
             });
           }
         });
-
       }
 
       $scope.cancelCreateDataProvider = function () {
         $scope.list = true;
-        $scope.updatedDataAlert = false;
         $scope.clickItem = false;
       }
 
@@ -162,8 +158,14 @@ define(['fk/module', 'notification'], function(module) {
               data.data_source = JSON.stringify(dataset);
             }
           });
-          $scope.updatedDataAlert = true;
 
+          $.smallBox({
+            title: "Data Driven",
+            content: "<i class='fa fa-clock-o'></i> <i>Your data driven has updated.</i>",
+            color: "#659265",
+            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+            timeout: 2000
+          });
         });
       }
 
