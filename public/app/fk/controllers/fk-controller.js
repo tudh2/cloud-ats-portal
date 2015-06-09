@@ -21,6 +21,9 @@ define(['fk/module'], function(module) {
       getParams(newCases[0]);
     });
 
+    $scope.showDetailDataset = false;
+    $scope.currentDataSet =[];
+   
     userService.spaces().then(function(spaces) {
       $scope.spaces = spaces;
     });

@@ -24,7 +24,8 @@ define([
                 'fk/directives/keywords',
                 'fk/directives/keyword-params',
                 'fk/directives/steps',
-
+                'fk/directives/suites',
+                'fk/directives/cases',
                 'services/keyword-service',
                 'modules/ui/directives/smart-html-popover',
                 'modules/forms/common',
