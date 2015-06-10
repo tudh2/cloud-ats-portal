@@ -1,8 +1,32 @@
-<div>
-	<ul class="smart-treeview-group ng-pristine ng-untouched ng-valid ng-isolate-scope ui-droppable" jqyoui-droppable="{multiple:true}" ng-model="suites.cases" data-drop="true" data-list="suite.cases">
-              <li class="placeholder ng-scope">
-                <span class="label label-success">Drop test cases here</span>
-              </li>
-            </ul>
-            {{dataList}}
-</div>
+<ul class="smart-treeview-group"
+  data-drop="true" 
+  ng-model="list" 
+  jqyoui-droppable="{multiple:true}">
+  <li ng-init="listIndex = $index" ng-repeat="case in list track by $index">
+  	<span>
+      <div class="pull-left margin-right-5">
+        <a ng-if="!$first" ng-click="moveUpAction(keyword)" data-tooltip-placement="left" data-tooltip="Move Up" class="txt-color-orange">
+            <i class="fa fa-arrow-up"></i>
+        </a>
+        <a ng-if="!$last && !$first" ng-click="moveDownAction(keyword)" data-tooltip-placement="left" data-tooltip="Move Down" class="txt-color-purple">
+            <i class="fa fa-arrow-down"></i>
+        </a>
+      </div>
+      <a href-void class="txt-color-blue">
+        <strong>{{case.name}}</strong>
+      </a>
+
+      <div class="pull-right" style="padding-left: 25px;">
+        
+        <a ng-click="removeCase(case,$index)" data-tooltip-placement="right" data-tooltip="Remove" class="txt-color-red">
+          <i class="fa fa-times-circle"></i>
+        </a>  
+      </div>
+      
+    </span>
+    {{$index}}
+  </li>
+  <li class="placeholder" ng-if="showMe()"> 
+    <span class="label label-success">Drop action here</span>
+  </li>
+</ul>

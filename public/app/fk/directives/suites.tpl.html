@@ -1,8 +1,5 @@
 <div class="row">
   <div class="col-md-7">
-    <!-- <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="suites.cases" jqyoui-droppable style='height:50px;'>
-    <div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="suites.cases" jqyoui-draggable ng-hide="!suites.cases.name">{{suites.cases.name}}</div>
-    </div> -->
     <div class="tree">
       <ul class="smart-treeview-group">
         <li ng-repeat="suite in suites">
@@ -12,7 +9,7 @@
               smart-xeditable data-ng-model="suites[$index]" 
               data-options="editableOptions" 
               data-index="{{$index}}" 
-              data-success-callback="changeCaseName"
+              data-success-callback="changeSuiteName"
               class="editable editable-click">{{suite.name}}
             </a>
             <div class="btn-group dropup" data-dropdown="" style="padding-left: 25px;">
@@ -25,18 +22,13 @@
               </li>
               <li class="li-popup divider"></li>
               <li class="li-popup" ng-if="suites.length > 1">
-                  <a ng-click="" class="txt-color-redLight"><i class="fa fa-minus"></i> Delete this suite</a>
+                  <a ng-click="delSuite($index)" class="txt-color-redLight"><i class="fa fa-minus"></i> Delete this suite</a>
               </li>
             </ul>
             </div>
           </span>
           <div class="steps expand">
-            <!-- <ul class="smart-treeview-group ng-pristine ng-untouched ng-valid ng-isolate-scope ui-droppable" jqyoui-droppable="{multiple:true}" ng-model="suites.cases" data-drop="true" data-list="suite.cases">
-              <li class="placeholder ng-scope">
-                <span class="label label-success">Drop test cases here</span>
-              </li>
-            </ul> -->
-            <list-cases data-list="suite.cases"></list-steps>
+            <list-cases data-list="suite.cases" data-index="$index"></list-steps>
           </div>
 
         </li>
@@ -44,29 +36,35 @@
       </ul>
       
     </div>
-    {{suites}}
   </div>
 
   <div class="col-md-5">
 
     <div panel-group smart-accordion-default animated fadeInDown>
-      <h4 class="panel-title">
-          <strong>List Test Cases</strong>
-      </h4>
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <div>
+            <strong>List Test Cases</strong>
+          </div>
+        </h4>
+      </div>
+      <div class="panel-body">
       <ul class="list-unstyled">
-        <li ng-repeat="case in cases"
+        <li ng-repeat="case in cases" 
             style="border-bottom: 1px solid #e5e5e5; min-height: 25px;"
+            data-drag="true"
             data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
             ng-model="case"
-            data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="case" jqyoui-draggable="{animate:true}" ng-hide="!case.name"
-            >
+            jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}">
             <a href-void class="txt-color-blue"
                data-popover-placement="right"
-               data-html="true">
+               data-popover-title="<strong>{{case.name}}</strong>"
+               data-smart-html-popover="<p>{{case.steps}}</p>" data-html="true">
                <strong>{{case.name}}</strong>
             </a>
         </li>
         </ul>
+      </div>
     </div>
   </div>
 </div>

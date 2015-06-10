@@ -10,11 +10,14 @@ define(['fk/module','lodash'], function(module,_) {
 			templateUrl: 'app/fk/directives/cases.tpl.html',
 
 			link: function($scope,element,attributes) {
-				$scope.dataList = [];
-				var init = function(list) {
-					$scope.dataList.push(list);
+
+				$scope.showMe = function() {
+					return $scope.list.length === 0;
 				}
-				init();
+
+				$scope.removeCase = function(caseValue,index) {
+					$scope.list.splice(index,1);
+				}
 			}
 		}
 	}]);
