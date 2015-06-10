@@ -4,16 +4,16 @@ define(['app'], function(app) {
   app.factory('DataService', ['$http', '$q', '$cookies', '$rootScope', '$window', '$state',
     function($http, $q, $cookies, $rootScope, $window, $state){
       return {
-        create: function(name, space, dataset, callback) {
+        create: function(name, dataset, callback) {
           var request = {
             method: 'POST',
             url: 'http://localhost:9000/api/v1/data',
             headers: {
-              'X-AUTH-TOKEN': $cookies.get('authToken')
+              'X-AUTH-TOKEN': $cookies.get('authToken'),
+              'X-SPACE': $cookies.get('space'),
             },
             data: {
               name: name,
-              space: space,
               dataset: dataset
             }
           };

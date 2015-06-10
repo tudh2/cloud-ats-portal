@@ -5,56 +5,49 @@ define(['fk/module', 'notification'], function(module) {
   	function ($rootScope, $scope, UserService, DataService) {
 
   		$scope.list = true;
-      $scope.space = 'Public';
-      $scope.updateDataId = null;
-      $scope.showDetailDataset = false;
+      $scope.selected = undefined;
+      $scope.selectedDataSet = [];
 
-  		UserService.spaces().then(function(spaces) {
-        $scope.spaces = spaces;
-      });
-
-      $scope.data = {};
-      var tenant = $rootScope.context.tenant._id;
-
-      DataService.list(tenant, null).then(function (response) {
-        $scope.delete = false;
-        $scope.data = response;
-      });
-      $scope.getDataSetName = function (space) {
-        $scope.space = space;
-        $scope.clickItem = false;
-        if (space === 'Public' ) {
-          space = null;
+      $rootScope.$watch('context', function(newContext) {
+        var tenant = newContext.tenant._id;
+        var space = newContext.space;
+        if (space === undefined ) {
+          space = {_id: null};
         }
-        DataService.list(tenant, space).then(function (response){
-          $scope.delete = false;
+        loadDataList(tenant, space);
+      });
+
+      var loadDataList = function (tenant, space) {
+        DataService.list(tenant, space._id).then(function (response){
           $scope.data = response;
-
+          if (response.length > 0) {
+            $scope.selected = response[0];
+          }
         });
+      };
+
+      var tenant = $rootScope.context.tenant._id;
+      var space = $rootScope.context.space;
+      if (space === undefined ) {
+        space = {_id: null};
+      }
+      loadDataList(tenant, space);
+
+      $scope.$watch('selected', function(newValue) {
+        updateCurrentDataSet();
+      });
+
+      $scope.select = function(driven) {
+        $scope.selected = driven;
+        $scope.selected.editable = false;
       }
 
-      $scope.setSpace = function (space) {
-        $scope.space = space;
+      var updateCurrentDataSet = function() {
+        if ($scope.selected === undefined) return [];
+        $scope.selectedDataSet = JSON.parse($scope.selected.data_source);
       }
 
-      $scope.getDataSet = function (provider) {
-          $scope.showDetailDataset = $scope.showDetailDataset === false ? true: false;
-          $scope.clickItem = provider;
-          var dataset = JSON.parse(provider.data_source);
-          $scope.currentDataSet = dataset;
-          $scope.updateDataId = provider._id;
-      }
-
-      $scope.showItemChose = function(provider,showDetailDataset) {
-
-        $scope.showDetailDataset = showDetailDataset === true ? false: true;
-        $scope.provider = provider;
-        return angular.equals($scope.provider, $scope.clickItem);
-      }
-
-      $scope.deleteDataSet = function ($event, data) {
-        var element = $event.currentTarget;
-
+      $scope.deleteDataSet = function (data) {
         $.SmartMessageBox({
           title: "Data Driven",
           content: "Are you sure to delete '" + data.name + "'?",
@@ -62,24 +55,18 @@ define(['fk/module', 'notification'], function(module) {
         }, function(ButtonPressed) {
           if (ButtonPressed === "Yes") {
             DataService.deleteDataSetById(data._id, function (response) {
-              $scope.clickItem = false;
-              $(element).parent().remove();
+              _.remove($scope.data, function(driven) {
+                return driven._id == data._id;
+              });
+              if ($scope.data.length > 0) {
+                $scope.selected = $scope.data[0];
+              }
             });
           }
         });
       }
 
-      $scope.cancelCreateDataProvider = function () {
-        $scope.list = true;
-        $scope.clickItem = false;
-      }
-
-      $scope.newdata = function () {
-        $scope.list = false;
-        $scope.space = 'Public';
-      }
-
-      $scope.createDataProvider = function() {
+      $scope.createDataSet = function() {
         var name = $('div.data-provider form input[name="provider_name"]').val();
         if (name === undefined || name === '') return;
 
@@ -107,25 +94,16 @@ define(['fk/module', 'notification'], function(module) {
           dataset.push(obj);
         });
 
-        var spaceId = $scope.space;
-        
-        if (spaceId === 'Public') {
-          spaceId = null;
-        }
-
-        DataService.create(name, spaceId, dataset, function(data, status) {
+        DataService.create(name, dataset, function(data, status) {
           if (status == 200) {
-            $scope.getDataSetName(spaceId);
-            $scope.cancelCreateDataProvider();
-            
-            var space = $('.col.col-md-4.form-group.listSpaceNew select').select2('data').text;
-            $('.form-group.listspace div a.select2-choice span.select2-chosen').text(space);
+            $scope.data.push(data);
+            $scope.list = true;
+            $scope.selected = data;
           }
         });
       };
 
-      $scope.UpdateDataProvider = function () {
-
+      $scope.saveUpdateDataSet = function () {
         var fieldNames = [];
         $('table thead th.filedName').each(function(index, obj) {
           var fieldName = $(obj).text().trim();
@@ -150,14 +128,13 @@ define(['fk/module', 'notification'], function(module) {
           dataset.push(obj);
         });
 
-        DataService.update($scope.updateDataId, dataset, function(data, status) {
+        DataService.update($scope.selected._id, dataset, function(data, status) {
           
-          _.forEach($scope.data, function (data) {
-
-            if (data._id === $scope.updateDataId) {
-              data.data_source = JSON.stringify(dataset);
-            }
+          $scope.selected = data;
+          var index = _.findIndex($scope.data, function(driven) {
+            return driven._id == data._id;
           });
+          $scope.data[index] = data;
 
           $.smallBox({
             title: "Data Driven",
@@ -169,9 +146,8 @@ define(['fk/module', 'notification'], function(module) {
         });
       }
 
-      $scope.CancelUpdateDataProvider = function () {
-        $scope.showDetailDataset = false;
-        $scope.clickItem = false;
+      $scope.cancelUpdateDataSet = function () {
+        $scope.selected.editable = false;
       }
 
     }]);

@@ -30,13 +30,19 @@
         </ul>
       </li>
 
-      <li data-menu-collapse>
+      <!-- <li data-menu-collapse>
         <a href="#"><i class="fa fa-lg fa-fw fa-cogs"></i>
           <span class="menu-item-parent">{{getWord('Automation Scripts')}}</span>
         </a>
+      </li> -->
+
+      <li data-ui-sref-active="active">
+        <a data-ui-sref="app.performance" title="Performance"><i class="fa fa-lg fa-fw fa-bolt"></i>
+          <span class="menu-item-parent">{{getWord('Performance')}}</span>
+        </a>
       </li>
 
-      <li data-menu-collapse>
+      <!-- <li data-menu-collapse>
         <a href="#"><i class="fa fa-lg fa-fw fa-bolt"></i>
           <span class="menu-item-parent">{{getWord('Performance')}}</span>
         </a>
@@ -48,7 +54,7 @@
             <a href-void><i class="fa fa-fw fa-cogs"></i> {{getWord('Performance Scripts')}}</a>
           </li>
         </ul>
-      </li>
+      </li> -->
       
       <!-- <li data-ui-sref-active="active">
         <a data-ui-sref="app.inbox.folder({folder: 'inbox'})" title="Inbox"><i class="fa fa-lg fa-fw fa-inbox"></i>

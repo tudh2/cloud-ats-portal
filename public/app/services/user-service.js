@@ -46,6 +46,16 @@ define(['app'], function(app) {
         $http(request).success(function(context) {
           $window.sessionStorage.setItem('context', JSON.stringify(context));
           $rootScope.context = context;
+          
+          var expires = new Date();
+          expires.setDate(expires.getDate() + 365);
+
+          var spaceId = context.space !== undefined ? context.space._id : null;
+
+          $cookies.put('space', spaceId, {
+            expires: expires
+          });
+          
           if (typeof callback === 'function') {
             callback(context);
           }

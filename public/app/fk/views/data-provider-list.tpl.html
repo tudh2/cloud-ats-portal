@@ -1,50 +1,63 @@
 <div style= "margin-left: 10px; margin-top: 15px; margin-right: 5px;">
-  <div class="row" ng-show="list">
+  <div class="row" ng-show="list && data.length > 0">
     <div class="col-md-12">
       <div class = "col-md-4" style="padding-bottom: 15px;">
-        <a class="btn btn-primary btn-sm" ng-click="newdata()" href=""><span class="glyphicon glyphicon-plus"></span> Create New Data Driven</a>
+        <a class="btn btn-primary btn-sm" ng-click="list = false;" href=""><span class="glyphicon glyphicon-plus"></span> Create New Data Driven</a>
       </div>
     </div>
     <div class="col-md-12">
       <div class="col-sm-5 col-md-4">
         
-        <div class="form-group listspace">
-          <select data-smart-select2 style="width:100%" class="select2" ng-change="getDataSetName(space)" ng-model='space'>
-            <option ng-repeat="space in spaces" value={{space._id}}>{{space.name}}</option>
-            <option>Public</option>
-          </select>
-
-        </div>
-       
-        <ul ng-if='data.length > 0' class="list-group" style="max-height: 200px; overflow-x: hidden; overflow-y: auto;">
+        <ul class="list-group">
+          
           <li class="padding-5 list-group-item">
-            <input type="text" name="query" placeholder="Filter" class="form-control" ng-model="query[space]">
+            <input type="text" placeholder="Filter" class="form-control" ng-model="query">
           </li>
-          <li class="padding-5 list-group-item" ng-repeat="sel in data | filter:query[space]" tick-box sel="sel" call-fun="getDataSet(sel)">
-            <a href-void class="text-info" ng-if="!showItemChose(sel)" ng-click="getDataSet(sel)"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
-            <a href-void class="text-success" ng-if="showItemChose(sel,showDetailDataset)"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
-            <a ng-if="showItemChose(sel,showDetailDataset)" ng-click='deleteDataSet($event, sel)' class="btn btn-labeled btn-danger pull-right"><i class="glyphicon glyphicon-trash"></i> </a>
+
+          <li class="padding-5 list-group-item" style="cursor: pointer" 
+            ng-repeat="sel in data | filter:query" ng-click="select(sel)">
+            <a class="text-info" ng-if="sel._id != selected._id">
+              <i class="fa fa-circle-o"></i> {{sel.name}}
+            </a>
+
+            <a class="text-success" ng-if="sel._id == selected._id">
+              <i class="fa fa-check"></i><strong><u>{{sel.name}}</u></strong>
+            </a>
+
+            <a ng-if="sel._id == selected._id" ng-click='deleteDataSet(sel)' 
+              class="btn btn-labeled btn-danger pull-right">
+              <i class="glyphicon glyphicon-trash"></i>
+            </a>
           </li>
         </ul>
       </div>
-      <div class="col-sm-7 col-md-8 text-align-center" ng-if='!clickItem'>
-        <h1><u><i>None data provider selected.</i></u></h1>
-      </div>
-      <div class="col-sm-7 col-md-8" ng-if="showDetailDataset && clickItem">
+      
+      <div class="col-sm-7 col-md-8" ng-if="selected">
 
-        <provider-table data-dataset="currentDataSet" data-editable="true"></provider-table>
-        <button ng-click="UpdateDataProvider()" class="btn btn-primary pull-right" type="submit">Update</button>
-        <button ng-click="CancelUpdateDataProvider()" class="btn btn-danger pull-right" type="submit" style="margin-right: 5px;">Cancel</button>
+        <provider-table data-dataset="selectedDataSet" data-editable="selected.editable"></provider-table>
+
+        <a class="btn btn-primary pull-right" ng-click="selected.editable = true;" ng-show="!selected.editable">
+          <i class="fa fa-fw fa-edit"></i> Edit
+        </a>
+
+        <a class="btn btn-primary pull-right" ng-click="saveUpdateDataSet()" ng-show="selected.editable">
+          <i class="fa fa-fw fa-save"></i> Save
+        </a>
+
+        <a class="btn btn-warning margin-right-5 pull-right" ng-click="cancelUpdateDataSet()" ng-if="selected.editable">
+          <i class="fa fa-fw fa-rotate-left"></i> Cancel
+        </a>
       </div>
     </div>
   </div>
-  <div class="data-provider">
-    <div class="row" ng-if="!list">
+
+  <div class="data-provider" ng-if="!list || data.length == 0">
+    <div class="row">
       <div class="col-sm-12">
         <new-provider-form></new-provider-form>
       </div>
     </div>
-    <div class="row" ng-if="!list">
+    <div class="row">
       <div class="col-sm-12">
         <provider-table data-dataset="[]" data-editable="true"></provider-table>
       </div>

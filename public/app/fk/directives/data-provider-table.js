@@ -16,14 +16,13 @@ define(['fk/module', 'lodash'], function(module, _) {
           disabled: false
         }
 
-        // scope.dataset = [
-        //   { "field1": "value 1", "field2": "value 2"},
-        //   { "field1": "value 1.1", "field2": "value 2.2"}
-        // ];
-
         scope.count = 0;
         scope.fieldNames = [];
         scope.rows = [];
+
+        scope.$watch('dataset', function(newdata) {
+          init(newdata);
+        });
 
         var init = function(dataset) {
 
@@ -59,19 +58,8 @@ define(['fk/module', 'lodash'], function(module, _) {
         }
 
         init(scope.dataset);
-        // init([]);
-
-        // scope.rebuildScope = function() {
-        //   var fieldNames = [];
-        //   $(element).find('thead th.filedName').each(function(index, obj) {
-        //     var fieldName = $(obj).text().trim();
-        //     fieldNames[index] = fieldName;
-        //   });
-        //   scope.fieldNames = fieldNames;
-        // };
 
         scope.removeField = function(index) {
-          // rebuildScope();
           scope.fieldNames.splice(index, 1);
           _.forEach(scope.rows, function(row) {
             row.splice(index, 1);
