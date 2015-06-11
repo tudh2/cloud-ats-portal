@@ -45,6 +45,7 @@
         <h4 class="panel-title">
           <div>
             <strong>List Test Cases</strong>
+            {{cases}}
           </div>
         </h4>
       </div>
@@ -59,7 +60,7 @@
             <a href-void class="txt-color-blue"
                data-popover-placement="right"
                data-popover-title="<strong>{{case.name}}</strong>"
-               data-smart-html-popover="<p>{{case.steps}}</p>" data-html="true">
+               data-smart-html-popover="<p>{{displayToolTip(case.steps)}}</p>" data-html="true">
                <strong>{{case.name}}</strong>
             </a>
         </li>
