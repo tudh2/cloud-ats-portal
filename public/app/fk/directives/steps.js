@@ -17,8 +17,7 @@ define(['fk/module', 'lodash'], function(module, _) {
           return $scope.list.length == 0;
         }
 
-        $scope.removeAction = function(keyword) {
-          var index = _.indexOf($scope.list, keyword);
+        $scope.removeAction = function(index) {
           $scope.list.splice(index, 1);
         }
 
