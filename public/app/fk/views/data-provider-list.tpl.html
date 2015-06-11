@@ -1,54 +1,53 @@
 <div style= "margin-left: 10px; margin-top: 15px; margin-right: 5px;">
-  <div class="row" ng-show="list && data.length > 0">
-    <div class="col-md-12">
-      <div class = "col-md-4" style="padding-bottom: 15px;">
-        <a class="btn btn-primary btn-sm" ng-click="list = false;" href=""><span class="glyphicon glyphicon-plus"></span> Create New Data Driven</a>
-      </div>
+  <div ng-show="list && data.length > 0">
+  <div class="row">
+    <div class = "col-md-4" style="padding-bottom: 15px;">
+      <a class="btn btn-primary btn-sm" ng-click="list = false;" href="">
+        <span class="glyphicon glyphicon-plus"></span> Create New Data Driven
+      </a>
     </div>
-    <div class="col-md-12">
-      <div class="col-sm-5 col-md-4">
-        
-        <ul class="list-group">
-          
-          <li class="padding-5 list-group-item">
-            <input type="text" placeholder="Filter" class="form-control" ng-model="query">
-          </li>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="list-group">
+        <li class="padding-5 list-group-item">
+          <input type="text" placeholder="Filter" class="form-control" ng-model="query">
+        </li>
 
-          <li class="padding-5 list-group-item" style="cursor: pointer" 
-            ng-repeat="sel in data | filter:query" ng-click="select(sel)">
-            <a class="text-info" ng-if="sel._id != selected._id">
-              <i class="fa fa-circle-o"></i> {{sel.name}}
-            </a>
+        <li class="padding-5 list-group-item" style="cursor: pointer" 
+          ng-repeat="sel in data | filter:query" ng-click="select(sel)">
+          <a class="text-info" ng-if="sel._id != selected._id">
+            <i class="fa fa-circle-o"></i> {{sel.name}}
+          </a>
 
-            <a class="text-success" ng-if="sel._id == selected._id">
-              <i class="fa fa-check"></i><strong><u>{{sel.name}}</u></strong>
-            </a>
+          <a class="text-success" ng-if="sel._id == selected._id">
+            <i class="fa fa-check"></i><strong><u>{{sel.name}}</u></strong>
+          </a>
 
-            <a ng-if="sel._id == selected._id" ng-click='deleteDataSet(sel)' 
-              class="btn btn-labeled btn-danger pull-right">
-              <i class="glyphicon glyphicon-trash"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="col-sm-7 col-md-8" ng-if="selected">
-
-        <provider-table data-dataset="selectedDataSet" data-editable="selected.editable"></provider-table>
-
-        <a class="btn btn-primary pull-right" ng-click="selected.editable = true;" ng-show="!selected.editable">
-          <i class="fa fa-fw fa-edit"></i> Edit
-        </a>
-
-        <a class="btn btn-primary pull-right" ng-click="saveUpdateDataSet()" ng-show="selected.editable">
-          <i class="fa fa-fw fa-save"></i> Save
-        </a>
-
-        <a class="btn btn-warning margin-right-5 pull-right" ng-click="cancelUpdateDataSet()" ng-if="selected.editable">
-          <i class="fa fa-fw fa-rotate-left"></i> Cancel
-        </a>
-      </div>
+          <a ng-if="sel._id == selected._id" ng-click='deleteDataSet(sel)' 
+            class="btn btn-labeled btn-danger pull-right">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </li>
+      </ul>
     </div>
+    <div class="col-md-8" ng-if="selected">
+
+      <provider-table data-dataset="selectedDataSet" data-editable="selected.editable"></provider-table>
+
+      <a class="btn btn-primary pull-right" ng-click="selected.editable = true;" ng-show="!selected.editable">
+        <i class="fa fa-fw fa-edit"></i> Edit
+      </a>
+
+      <a class="btn btn-primary pull-right" ng-click="saveUpdateDataSet()" ng-show="selected.editable">
+        <i class="fa fa-fw fa-save"></i> Save
+      </a>
+
+      <a class="btn btn-warning margin-right-5 pull-right" ng-click="cancelUpdateDataSet()" ng-if="selected.editable">
+        <i class="fa fa-fw fa-rotate-left"></i> Cancel
+      </a>
+    </div>
+  </div>
   </div>
 
   <div class="data-provider" ng-if="!list || data.length == 0">
