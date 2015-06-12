@@ -64,6 +64,17 @@ define(['fk/module','lodash'], function(module, _) {
 					});
 					return display;
 				}
+
+				$scope.toggleExpand = function($event) {
+		            var a = $event.currentTarget;
+		            $(a).toggleClass('fa-folder-open');
+		            $(a).toggleClass('fa-folder');
+
+		            var li = $(a).closest('li');
+
+		            var $div = li.find('div.steps.expand');
+		            $div.slideToggle(200);
+        		}
 			} 
 		}
 	}]);
