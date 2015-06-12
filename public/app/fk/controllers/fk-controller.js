@@ -18,7 +18,7 @@ define(['fk/module'], function(module) {
       }
     ];
     $scope.$watch('cases', function (newCases) {
-      getParams(newCases[0]);
+      $scope.selected = newCases[0];
     });
 
     $scope.showDetailDataset = false;
@@ -63,10 +63,12 @@ define(['fk/module'], function(module) {
       });
       currentDataSet.push(obj);
 
-      currentDataSet = JSON.stringify(currentDataSet);
-      $scope.currentDataSet = JSON.parse(currentDataSet);
+      //currentDataSet = JSON.stringify(currentDataSet);
+      //$scope.currentDataSet = JSON.parse(currentDataSet);
+      $scope.currentDataSet = currentDataSet;
       $scope.selected.editable = true;
     }
+    $scope.getParams = getParams;
 
     $scope.getDataset = function (testcase) {
       getParams(testcase);
@@ -75,10 +77,10 @@ define(['fk/module'], function(module) {
     $scope.chooseDataset = function (dataset) {
 
       if (dataset === "newDataset") {
-        $scope.currentDataSet = [{'newdata': '12345'}];
+        getParams($scope.selected);
         $scope.showDatasetName = false;
         $scope.datasetName = '';
-        $scope.selected.editable = true;
+        //$scope.selected.editable = true;
         $scope.create = true;
       } else {
 
@@ -165,10 +167,12 @@ define(['fk/module'], function(module) {
       });
     };
 
-    /*$scope.fkWizardStepCallback = function(step, wizardData) {
+    $scope.fkWizardStepCallback = function(step, wizardData) {
       switch(step) {
-        case 2:
-          $scope.data = {};
+        case 3:
+
+          getParams($scope.selected);
+         /* $scope.data = {};
           var tenant = $rootScope.context.tenant._id;
 
           dataService.list(tenant, null).then(function(response) {
@@ -182,12 +186,12 @@ define(['fk/module'], function(module) {
             dataService.list(tenant, spaceId).then(function(response) {
               $scope.data[spaceId] = response;
             });
-          });
+          });*/
           break;
         default:
           break;
       }
-    }*/
+    }
     var tenant = $rootScope.context.tenant._id;
     dataService.list(tenant, null).then(function (response) {
         $scope.data = response;
