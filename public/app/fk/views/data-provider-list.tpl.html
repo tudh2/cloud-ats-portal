@@ -2,13 +2,14 @@
   <div ng-show="list && data.length > 0">
   <div class="row">
     <div class = "col-md-4" style="padding-bottom: 15px;">
+      <a class="btn btn-default btn-sm" ng-click="toggleList()"><i class="fa fa-fw fa-reorder"></i></a>
       <a class="btn btn-primary btn-sm" ng-click="list = false;" href="">
         <span class="glyphicon glyphicon-plus"></span> Create New Data Driven
       </a>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3 list-data-driven">
       <ul class="list-group">
         <li class="padding-5 list-group-item">
           <input type="text" placeholder="Filter" class="form-control" ng-model="query">
@@ -31,7 +32,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-md-8" ng-if="selected">
+    <div class="col-md-9 data-driven-container" ng-if="selected">
 
       <div class="smart-form padding-bottom-10" ng-if="selected.editable">
         <div class="row">

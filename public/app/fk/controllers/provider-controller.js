@@ -42,6 +42,14 @@ define(['fk/module', 'notification'], function(module) {
         $scope.selected.editable = false;
       }
 
+      $scope.toggleList = function() {
+        var $list = $('div.list-data-driven');
+        var $container = $('div.data-driven-container');
+        $list.slideToggle(200);
+        $container.toggleClass('col-md-9');
+        $container.toggleClass('col-md-12');
+      }
+
       var updateCurrentDataSet = function() {
         if ($scope.selected === undefined) return [];
         $scope.selectedDataSet = JSON.parse($scope.selected.data_source);
