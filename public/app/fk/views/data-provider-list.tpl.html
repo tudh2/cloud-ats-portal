@@ -33,6 +33,16 @@
     </div>
     <div class="col-md-8" ng-if="selected">
 
+      <div class="smart-form padding-bottom-10" ng-if="selected.editable">
+        <div class="row">
+          <div class="col col-5">
+            <label class="input"> <i class="icon-prepend fa fa-slack"></i>
+              <input type="text" name="driven-name" placeholder="Data Driven Name" value="{{selected.name}}">
+            </label>            
+          </div>
+        </div>
+      </div>
+
       <provider-table data-dataset="selectedDataSet" data-editable="selected.editable"></provider-table>
 
       <a class="btn btn-primary pull-right" ng-click="selected.editable = true;" ng-show="!selected.editable">

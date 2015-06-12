@@ -11,7 +11,7 @@ define(['fk/module', 'notification'], function(module) {
       $rootScope.$watch('context', function(newContext) {
         var tenant = newContext.tenant._id;
         var space = newContext.space;
-        if (space === undefined ) {
+        if (space === undefined) {
           space = {_id: null};
         }
         loadDataList(tenant, space);
@@ -28,7 +28,7 @@ define(['fk/module', 'notification'], function(module) {
 
       var tenant = $rootScope.context.tenant._id;
       var space = $rootScope.context.space;
-      if (space === undefined ) {
+      if (space === undefined) {
         space = {_id: null};
       }
       loadDataList(tenant, space);
@@ -128,7 +128,8 @@ define(['fk/module', 'notification'], function(module) {
           dataset.push(obj);
         });
 
-        DataService.update($scope.selected._id, dataset, function(data, status) {
+        var name = $('div.smart-form input[name="driven-name"]').val();
+        DataService.update($scope.selected._id, name, dataset, function(data, status) {
           
           $scope.selected = data;
           var index = _.findIndex($scope.data, function(driven) {

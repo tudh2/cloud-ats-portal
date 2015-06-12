@@ -110,7 +110,7 @@ define(['app'], function(app) {
           });
         }, 
 
-        update: function (id, dataset, callback) {
+        update: function (id, name, dataset, callback) {
           var request = {
             method: 'PUT',
             url: 'http://localhost:9000/api/v1/data/update',
@@ -119,6 +119,7 @@ define(['app'], function(app) {
             },
             data: {
               id: id,
+              name: name,
               dataset: dataset
             }
           };
