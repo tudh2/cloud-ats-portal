@@ -32,7 +32,9 @@ define([
                 'modules/forms/directives/wizard/smart-wizard',
                 'modules/forms/directives/input/smart-xeditable',
                 'modules/widgets/directives/widget-grid',
-                'modules/widgets/directives/jarvis-widget'
+                'modules/widgets/directives/jarvis-widget',
+                'modules/forms/directives/input/smart-select2',
+                'fk/directives/ui-if'
               ])
             }
           }
@@ -54,7 +56,7 @@ define([
                 'fk/directives/data-provider-table',
                 'fk/directives/tick-box',
                 'fk/directives/new-data-provider-form',
-
+               
                 'modules/widgets/directives/jarvis-widget',
                 'modules/forms/directives/input/smart-select2',
                 'modules/forms/directives/input/smart-xeditable'

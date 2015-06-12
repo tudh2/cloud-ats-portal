@@ -6,11 +6,90 @@ define(['fk/module'], function(module) {
     function($rootScope, $scope, userService, dataService) {
 
     $scope.list = true;
-    $scope.showDetailDataset = false;
-    $scope.currentDataSet =[];
+    $scope.showDetailDataset = true;
+    $scope.create = true;
+    $scope.showDatasetName = false;
+    $scope.clickItem = false;
+    $scope.selected = undefined;
+    $scope.cases = [
+      {
+        "name": "NewCase",
+        "steps": []
+      }
+    ];
+    $scope.$watch('cases', function (newCases) {
+      getParams(newCases[0]);
+    });
+
     userService.spaces().then(function(spaces) {
       $scope.spaces = spaces;
     });
+
+    $rootScope.$watch('context', function (newContext) {
+      var space = newContext.space;
+      var tenant = newContext.tenant._id;
+      if (space === undefined ) {
+          space = {_id: null, name: 'Public'};
+      }
+      $scope.spaceName = space.name;
+      $scope.selected = $scope.cases[0];
+      loadDataList(tenant, space);
+    });
+
+    var loadDataList = function (tenant, space) {
+
+      dataService.list(tenant, space._id).then(function (response) {
+        $scope.data = response;
+        if (response.length > 0) {
+          $scope.selected.editable = true;
+        }
+      });
+    }
+    
+    var getParams = function (testcase) {
+      $scope.selected = testcase;
+      var currentDataSet = [];
+      var obj = {};
+      _.forEach(testcase.steps, function (object) {
+        _.forEach(object.params, function (param) {
+          var param = object[param];
+          var text = param.substring(2, param.length -1);
+          obj[text] = 'New_value';
+        });
+        
+      });
+      currentDataSet.push(obj);
+
+      currentDataSet = JSON.stringify(currentDataSet);
+      $scope.currentDataSet = JSON.parse(currentDataSet);
+      $scope.selected.editable = true;
+    }
+
+    $scope.getDataset = function (testcase) {
+      getParams(testcase);
+    }
+
+    $scope.chooseDataset = function (dataset) {
+
+      if (dataset === "newDataset") {
+        $scope.currentDataSet = [{'newdata': '12345'}];
+        $scope.showDatasetName = false;
+        $scope.datasetName = '';
+        $scope.selected.editable = true;
+        $scope.create = true;
+      } else {
+
+        var driven = JSON.parse(dataset);
+
+        $scope.currentDataSet = JSON.parse(driven.data_source);
+
+        var datasetName = $('form.create-data-provider fieldset div div.listDataset .select2-container a.select2-choice span.select2-chosen').text(); 
+        $scope.showDatasetName = true;
+        $scope.selected.editable = false;
+        $scope.datasetName = datasetName;
+        $scope.create = false;
+      }
+    }
 
     $scope.showCreateDataProviderForm = function(space) {
       var $container = $('#fk-wizard-widget div.tab-pane[data-smart-wizard-pane="2"]');
@@ -83,7 +162,7 @@ define(['fk/module'], function(module) {
       });
     };
 
-    $scope.fkWizardStepCallback = function(step, wizardData) {
+    /*$scope.fkWizardStepCallback = function(step, wizardData) {
       switch(step) {
         case 2:
           $scope.data = {};
@@ -105,10 +184,18 @@ define(['fk/module'], function(module) {
         default:
           break;
       }
-    }
-    
+    }*/
+    var tenant = $rootScope.context.tenant._id;
+    dataService.list(tenant, null).then(function (response) {
+        $scope.data = response;
+       // $scope.selected = response[0];
+    });
+
+    $scope.setSpace = function (space) {
+      $scope.space = space;
+    } 
+
     $scope.clickDataProviderShow = function(provider) {
-      console.log($scope.showDetailDataset);
       $scope.showDetailDataset = $scope.showDetailDataset === false ? true: false;
       $scope.clickItem = provider;
       if(provider.data_source instanceof Object) {

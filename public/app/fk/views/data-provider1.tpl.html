@@ -1,0 +1,57 @@
+<div>
+  <div class="data-provider">
+    <div class="row">
+      <div class="col-sm-3" style="margin-top: 5px;">
+        <div class="form-group listTestCase">
+          <ul class="list-group">
+            <li class="list-group-item" ng-click="getDataset(sel)" ng-repeat="sel in cases" style="cursor: pointer;">
+              <a class="text-info" ng-if="sel.name != selected.name"><i class="fa fa-circle-o"></i> {{sel.name}}</a>
+              <a class="text-success" ng-if="sel.name == selected.name"><i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong></a>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        
+        <form ng-submit="createDataProvider()" class="smart-form create-data-provider">
+          
+          <fieldset class="no-padding">
+            <div class="row">
+              <section class="col col-md-4" style="margin-top: 5px;">
+                <label class="input">
+                  <i class="icon-prepend fa fa-slack"></i>
+                  <input type="text" name="provider_name" placeholder="Data Provider Name" ng-model="datasetName" ng-disabled="showDatasetName">
+                </label>
+              </section>
+              <div class="col col-md-3 listDataset" style="margin-top: 5px;">
+                <select data-smart-select2 style="width:100%" class="select2" ng-model="dataset" ng-change="chooseDataset(dataset)">
+                        <option value="newDataset">New Dataset</option>
+                        <option ng-repeat="sel in data" value={{sel}}>{{sel.name}}</option>
+                </select>
+              </div>
+              <div class="col col-md-2" style="margin-top: 10px;">
+                <span class="pull-right">In Space: </span>
+              </div>
+              <div class="col col-md-3 form-group" style="margin-top: 4px;">
+                <label class="input">
+                  <i class="icon-prepend fa fa-user"></i>
+                  <input type="text" disabled="" ng-model="spaceName">
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <footer class="no-padding" style="margin-bottom: 10px;">
+            <button class="btn btn-primary pull-right" type="submit" ng-if="create">Create</button>
+            <button type="button" class="btn btn-info pull-right" ng-if="!create">Choose</button>
+          </footer>
+
+        </form>
+        <div ng-if="selected">
+          <provider-table data-dataset="currentDataSet" data-editable="selected.editable"></provider-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
