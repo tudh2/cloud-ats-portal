@@ -31,6 +31,7 @@ define([
     'app.auth',
     'app.fk',
     'app.performance',
+    'app.functional'
     ///'app.widgets',
     //'app.graphs',
     //'app.calendar',

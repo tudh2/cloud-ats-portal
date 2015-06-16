@@ -1,0 +1,98 @@
+<div id="content">
+<!-- <div class="row">
+    <big-breadcrumbs items="['Forms', 'Dropzone']" icon="table"
+                     class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    <div smart-include="/app/layout/partials/sub-header.tpl.html"></div>
+</div> -->
+
+
+<!-- widget grid -->
+
+
+<section id="widget-grid" widget-grid>
+
+<!-- row -->
+<div class="row">
+
+    <!-- NEW WIDGET START -->
+    <article class="col-sm-12">
+
+        <p>
+				<span class="label label-warning">
+				NOTE</span> &nbsp; This plugins works only on Latest Chrome, Firefox, Safari, Opera &amp; Internet Explorer 10.
+        </p>
+
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div jarvis-widget data-widget-color="blueLight" id="wid-id-0" data-widget-editbutton="false">
+            <!-- widget options:
+            usage: <div jarvis-widget id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+            -->
+            <header>
+                <span class="widget-icon"> <i class="fa fa-cloud"></i> </span>
+                <h2>My Dropzone! </h2>
+
+            </header>
+
+            <!-- widget div-->
+            <div>
+
+
+                <!-- widget content -->
+                <div class="widget-body">
+
+                  <!--   <form action="http://localhost:9000/api/v1/functional/upload" class="dropzone" method="POST" data-smart-dropzone></form> -->
+                  <form class="dropzone" ng-submit="upload()">
+			
+					    <input type="file" name="file" id="file" multiple onchange="angular.element(this).scope().uploadedFile(this)" />
+					    etc...
+
+					    <input type="submit" value="Upload"/>
+					  
+				  </form>
+                    
+
+                </div>
+                <!-- end widget content -->
+
+            </div>
+            <!-- end widget div -->
+
+        </div>
+        <!-- end widget -->
+
+    </article>
+    <!-- WIDGET END -->
+
+</div>
+
+<!-- end row -->
+
+<!-- row -->
+
+<div class="row">
+
+<div class="col-sm-12 col-md-12">
+
+</div>
+
+</div>
+
+<!-- end row -->
+
+</section>
+
+
+<!-- end widget grid -->
+
+
+</div>

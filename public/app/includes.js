@@ -29,6 +29,9 @@ define([
   //forms
   // 'modules/forms/module',
 
+  //functional
+  'functional/module',
+
   //account
   'auth/module',
   'performance/module',
