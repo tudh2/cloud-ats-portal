@@ -30,6 +30,7 @@ define([
     'app.dashboard',
     'app.auth',
     'app.fk',
+    'app.performance',
     ///'app.widgets',
     //'app.graphs',
     //'app.calendar',

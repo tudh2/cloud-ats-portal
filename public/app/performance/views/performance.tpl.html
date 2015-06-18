@@ -1,0 +1,20 @@
+<div class="row" >
+	
+	<div class="col-md-12" ng-if="list">
+		<div class="col-md-4"></div>
+
+		<div class="col-md-8">
+			<a class="btn btn-default pull-right" href-void ng-click="createNewPerformanceTest()">Create new performance test</a>
+		</div>
+		
+	</div>
+	
+	<div class="col-md-12" ng-if="!list">
+		<div ng-if='!wizard'>
+			<new-performance-test></new-performance-test>
+		</div>
+		<div ng-if='wizard'>
+			<new-performance-test-wizard></new-performance-test-wizard>
+		</div>
+	</div>
+</div>

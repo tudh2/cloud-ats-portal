@@ -1,0 +1,86 @@
+<div style="padding: 5px; margin: 5px;">
+<!-- widget options:
+usage: <div jarvis-widget id="wid-id-0" data-widget-editbutton="false">
+
+data-widget-colorbutton="false"
+data-widget-editbutton="false"
+data-widget-togglebutton="false"
+data-widget-deletebutton="false"
+data-widget-fullscreenbutton="false"
+data-widget-custombutton="false"
+data-widget-collapsed="true"
+data-widget-sortable="false"
+
+    <!-- widget content -->
+    <div class="widget-body fuelux"  data-smart-fuelux-wizard data-smart-wizard-callback="wizard2TestPerformanceCompleteCallback">
+
+        <div class="wizard">
+            <ul class="steps">
+                <li data-step="1" class="active">
+                    <span class="badge badge-info">1</span>Step 1<span class="chevron"></span>
+                </li>
+                <li data-step="2">
+                    <span class="badge">2</span>Step 2<span class="chevron"></span>
+                </li>
+            </ul>
+            <div class="actions">
+                <button type="button" class="btn btn-sm btn-warning btn-danger" ng-click="cancelWizard()"><i class="fa fa-power-off"></i> Cancel</button>
+                <button type="button" class="btn btn-sm btn-primary btn-prev">
+                    <i class="fa fa-arrow-left"></i>Prev
+                </button>
+                <button type="button" class="btn btn-sm btn-success btn-next" data-last="Finish">
+                    Next<i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        <div class="step-content">
+          <fieldset>
+            <form class="form-horizontal">
+
+                <div class="step-pane active" data-step="1">
+                    <h3><strong>Step 1 </strong> - Configuration</h3>
+
+                    <!-- wizard form starts here -->
+                    <div class="col-md-6">
+                    <label>Users</label>
+                      <input data-smart-uislider type="text" class="slider slider-primary" id="sa5" 
+                   data-slider-min="100"
+                   data-slider-max="1000"
+                   data-slider-selection = "before"
+                   data-slider-handle="round" ng-model="configuration.users" name="userSlider">
+                   <label>Ram up</label>
+                   <input data-smart-uislider type="text" class="slider slider-primary" id="sa5" 
+                   data-slider-min="5"
+                   data-slider-max="100"
+                   data-slider-selection = "before"
+                   data-slider-handle="round" ng-model="configuration.ramup" name="ramupSlider">
+                   <label>Loops</label>
+                   <input data-smart-uislider type="text" class="slider slider-primary" id="sa5" 
+                   data-slider-min="1"
+                   data-slider-max="10"
+                   data-slider-selection = "before"
+                   data-slider-handle="round" ng-model="configuration.loops" name="loopsSlider">
+                   <label>Duration</label>
+                   <input data-smart-uislider type="text" class="slider slider-primary" id="sa5" 
+                   data-slider-min="0"
+                   data-slider-max="10"
+                   data-slider-selection = "before"
+                   data-slider-handle="round" ng-model="configuration.duration" name="durationSlider">
+                    </div>
+                </div>
+
+                <div class="step-pane" data-step="2">
+                  <h3><strong>Step 2 </strong> - Samplers  </h3> 
+                  <wizard-samplers></wizard-samplers>
+                </div>
+
+            </form>
+          </fieldset>
+        </div>
+
+    </div>
+    <!-- end widget content -->
+
+  </div>
+<!-- end widget div -->
+

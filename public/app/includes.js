@@ -31,7 +31,7 @@ define([
 
   //account
   'auth/module',
-  
+  'performance/module',
   //components
 
   //activities

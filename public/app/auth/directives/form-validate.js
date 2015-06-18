@@ -1,5 +1,4 @@
 
-
 define(['auth/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-validation'], function (module, formsCommon) {
 
 	'use strict';
