@@ -20,9 +20,6 @@ define(['fk/module','lodash'], function(module,_) {
 				}
 
 				$scope.moveUpAction = function(index,caseMove) {
-					/*var temp = $scope.list[index];
-					$scope.list[index] = $scope.list[index-1];
-					$scope.list[index-1] = temp;*/
 					var caseTemp = {};
 					var caseCopy = {};
 					angular.copy($scope.list[index-1], caseTemp);
@@ -30,13 +27,9 @@ define(['fk/module','lodash'], function(module,_) {
 					angular.copy(caseMove,caseCopy);
 					$scope.list[index] = caseTemp;
 					$scope.list[index-1] = caseCopy;
-					console.log($scope.list);
 				}
 
 				$scope.moveDownAction = function(index,caseMove) {
-					/*var temp = $scope.list[index];
-					$scope.list[index] = $scope.list[index+1];
-					$scope.list[index+1] = temp;*/
 					var caseTemp = {};
 					var caseCopy = {};
 					angular.copy($scope.list[index+1], caseTemp);
@@ -44,7 +37,6 @@ define(['fk/module','lodash'], function(module,_) {
 					angular.copy(caseMove,caseCopy);
 					$scope.list[index] = caseTemp;
 					$scope.list[index+1] = caseCopy;
-					console.log($scope.list);
 				}
 			}
 		}

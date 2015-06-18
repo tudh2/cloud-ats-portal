@@ -1,0 +1,100 @@
+<div>
+  <div class="data-provider">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group listTestCase">
+          <ul class="list-group">
+            <li class="list-group-item" ng-click="selectCase(sel)" ng-repeat="sel in cases" style="cursor: pointer;">
+              <a class="text-info" ng-if="sel.name != selected.name">
+                <i class="fa fa-circle-o"></i> {{sel.name}}
+              </a>
+              <a class="text-success" ng-if="sel.name == selected.name">
+                <i class="fa fa-check"></i> <strong><u>{{sel.name}}</u></strong>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="well" ng-show="!showCreateForm">
+          <a class="btn btn-primary btn-xs" ng-click="showCreateFormFn()" ng-if="!selected.driven.isNew">
+            <i class="fa fa-fw fa-plus"></i> New Data
+          </a>
+          <a class="btn btn-primary btn-xs" ng-click="showCreateFormFn()" ng-if="selected.driven.isNew">
+            <i class="fa fa-fw fa-edit"></i> Update New Data
+          </a>
+          <a class="btn btn-warning btn-xs" ng-click="chooseDataDriven()">
+            <i class="fa fa-fw fa-search"></i> Choose Existed Data
+          </a>
+        </div>
+
+        <div class="text-center" ng-show="!selected.driven && !showCreateForm">
+          <h1><u>None data selected.</u></h1>
+        </div>
+
+        <!-- Present data -->
+        <div ng-if="selected.driven && !showCreateForm" class="padding-top-10">
+          <div class="alert alert-success fade in">
+            <i class="fa-fw fa fa-check"></i>
+            <strong>Data Driven Name</strong> {{selected.driven.name}}.
+            <br>
+            <span ng-if="selected.driven.isNew"> 
+              (Your data driven will be created after finish all steps)
+            </span>
+          </div>
+          <provider-table data-dataset="selected.driven.data" data-editable="false"></provider-table>
+        </div>
+        <!-- End present data -->
+
+        <!-- Update data -->
+        <div ng-if="selected.driven && showCreateForm">
+          <div class="smart-form padding-bottom-10">
+            <div class="row">
+              <div class="col col-5">
+                <label class="input state-success"> <i class="icon-prepend fa fa-slack"></i>
+                  <input type="text" name="driven-name" placeholder="Data Driven Name" value="{{selected.driven.name}}">
+                </label>            
+              </div>
+            </div>
+          </div>        
+
+          <provider-table data-dataset="selected.driven.data" data-editable="true"></provider-table>
+
+          <a class="btn btn-primary pull-right" ng-click="createNewData()">
+            <i class="fa fa-fw fa-save"></i> Save
+          </a>
+          <a class="btn btn-danger pull-right margin-right-5" ng-click="destroyCreateFormFn()">
+            <i class="fa fa-fw fa-rotate-left"></i> Cancel
+          </a>
+
+        </div>
+        <!-- End update data -->
+
+        <!-- Create new data -->
+        <div ng-if="!selected.driven && showCreateForm" ng-init="dataset = buildDataset()">
+
+          <div class="smart-form padding-bottom-10">
+            <div class="row">
+              <div class="col col-5">
+                <label class="input state-error"> <i class="icon-prepend fa fa-slack"></i>
+                  <input type="text" name="driven-name" placeholder="Data Driven Name" value="" autofocus>
+                </label>            
+              </div>
+            </div>
+          </div>
+
+          <provider-table data-dataset="dataset" data-editable="true"></provider-table>
+
+          <a class="btn btn-primary pull-right" ng-click="createNewData()">
+            <i class="fa fa-fw fa-save"></i> Save
+          </a>
+          <a class="btn btn-danger pull-right margin-right-5" ng-click="destroyCreateFormFn()">
+            <i class="fa fa-fw fa-rotate-left"></i> Cancel
+          </a>
+        </div>
+        <!-- End create new data -->
+        
+      </div>
+    </div>
+  </div>
+</div>

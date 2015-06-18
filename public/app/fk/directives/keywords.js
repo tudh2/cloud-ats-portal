@@ -8,13 +8,7 @@ define(['fk/module', 'lodash'], function(module, _) {
       templateUrl: 'app/fk/directives/keywords.tpl.html',
       link: function($scope, element, attributes) {
 
-        $scope.cases = [
-          {
-            "name": "NewCase",
-            "steps": []
-          }
-        ];
-
+        $scope.casecount = 0;
         $scope.query = {}
         $scope.keywords = {}
         $scope.editableOptions = {
@@ -23,8 +17,9 @@ define(['fk/module', 'lodash'], function(module, _) {
         }
 
         $scope.newCase = function() {
+          $scope.casecount++;
           $scope.cases.push({
-            "name": "NewCase",
+            "name": "NewCase" + $scope.casecount,
             "steps": []
           })
         }

@@ -1,9 +1,9 @@
-<form>
+<form data-smart-validate-form>
 <!-- form  data-smart-validate-form -->
   <div class="col-sm-12" data-smart-wizard 
     data-smart-wizard-callback="fkWizardCompleteCallback"
     data-smart-step-callback="fkWizardStepCallback">
-    <div class="form-bootstrapWizard clearfix" ng-show="list">
+    <div class="form-bootstrapWizard clearfix">
       <ul class="bootstrapWizard">
         <li data-smart-wizard-tab="1">
           <a href="#">
@@ -86,7 +86,7 @@
       <div class="tab-pane" data-smart-wizard-pane="3">
         <br>
         <h3><strong>Step 3</strong> - Select Or Create New Data Driven</h3>
-        <div data-smart-include="app/fk/views/data-provider1.tpl.html"></div>
+        <driven-selector></driven-selector>
       </div>
 
       <div class="tab-pane" data-smart-wizard-pane="4">
@@ -108,7 +108,7 @@
         <br>
       </div>
 
-      <div class="form-actions" ng-show="list">
+      <div class="form-actions">
         <div class="row">
           <div class="col-sm-12">
             <ul class="pager wizard no-margin">

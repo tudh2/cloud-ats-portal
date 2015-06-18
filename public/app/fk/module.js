@@ -26,6 +26,7 @@ define([
                 'fk/directives/steps',
                 'fk/directives/suites',
                 'fk/directives/cases',
+                'fk/directives/data-driven-selector',
                 'services/keyword-service',
                 'modules/ui/directives/smart-html-popover',
                 'modules/forms/common',

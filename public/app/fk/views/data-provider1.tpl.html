@@ -1,7 +1,7 @@
 <div>
   <div class="data-provider">
     <div class="row">
-      <div class="col-sm-3" style="margin-top: 5px;">
+      <div class="col-sm-3">
         <div class="form-group listTestCase">
           <ul class="list-group">
             <li class="list-group-item" ng-click="getDataset(sel)" ng-repeat="sel in cases" style="cursor: pointer;">
@@ -13,8 +13,14 @@
         </div>
       </div>
       <div class="col-sm-9">
-        
-        <form ng-submit="createDataProvider()" class="smart-form create-data-provider">
+        <div class="well">
+          <a class="btn btn-primary btn-xs"><i class="fa fa-fw fa-plus"></i> New Data</a>
+          <a class="btn btn-warning btn-xs"><i class="fa fa-fw fa-search"></i> Choose Existed Data</a>
+        </div>
+        <div class="text-center">
+          <h1><u>None data selected.</u></h1>
+        </div>
+        <!-- <form ng-submit="createDataProvider()" class="smart-form create-data-provider">
           
           <fieldset class="no-padding">
             <div class="row">
@@ -30,15 +36,7 @@
                         <option ng-repeat="sel in data" value={{sel}}>{{sel.name}}</option>
                 </select>
               </div>
-              <div class="col col-md-2" style="margin-top: 10px;">
-                <span class="pull-right">In Space: </span>
-              </div>
-              <div class="col col-md-3 form-group" style="margin-top: 4px;">
-                <label class="input">
-                  <i class="icon-prepend fa fa-user"></i>
-                  <input type="text" disabled="" ng-model="spaceName">
-                </label>
-              </div>
+
             </div>
           </fieldset>
 
@@ -50,7 +48,7 @@
         </form>
         <div ng-if="selected">
           <provider-table data-dataset="currentDataSet" data-editable="selected.editable"></provider-table>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
