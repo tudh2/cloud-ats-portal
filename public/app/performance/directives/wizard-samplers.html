@@ -1,0 +1,98 @@
+	<div class="col-sm-4">	
+   	
+    <ul class="list-group">
+    	<li class="padding-5 list-group-item" ng-repeat="sampler in samplers track by $index" style="cursor: pointer" ng-click="select(sampler)">
+
+    		 <a class="text-info" ng-if="sampler.sampler_name != selected.sampler_name">
+            <i class="fa fa-circle-o"></i> {{sampler.sampler_name}}
+          </a>
+
+          <a class="text-success" ng-if="sampler.sampler_name == selected.sampler_name">
+            <i class="fa fa-check"></i><strong><u>{{sampler.sampler_name}}</u></strong>
+          </a>
+           <a ng-if="sampler.sampler_name == selected.sampler_name" ng-click='deleteSampler(sampler)' 
+            class="btn btn-labeled btn-danger pull-right">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+    	</li>
+    	
+    </ul>
+	</div>
+	<div class="col-sm-8">
+		<div class="form-group">
+			<div class="input-group">
+				<span class="input-group-addon" style="min-width:150px;text-align:left;">Sampler Name</span>
+				<input class="form-control" type="text" ng-model="selected.sampler_name" data-smart-validate-input data-required data-message-required="Project name is not empty">
+			</div>
+		</div>
+		<div class="form-group">
+    	<div class="input-group">
+      	<span class="input-group-addon" style="min-width:150px;text-align:left;">Sampler Method</span>
+        <select class="form-control" ng-model="selected.sampler_method" ng-init="selected.sampler_method='GET'">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+    	<div class="input-group">
+        <span class="input-group-addon" style="min-width:150px;text-align:left;">Sampler Url</span>
+        <input class="form-control" type="text" ng-model="selected.sampler_url">
+      </div>
+      <div class="input-group">
+         <a data-toggle="collapse" class="btn btn-default btn-xs" href="#collapseOne-1">	<i class="fa fa-fw fa-sort-down  txt-color-green"></i>Parameters </a>
+
+         <a class="add" ng-click="addParamBlock()"><i class="fa fa-plus-circle"></i></a>
+         <div id="collapseOne-1" data-role="collapsible" class="panel-collapse collapse in">
+
+            <div class="panel-body" style="text-align: center;">
+
+              <div class="param-block" ng-repeat="param in selected.params track by $index">
+
+							  <a class="remove" href-void  ng-click="removeParamBlock($index)"><i class="fa fa-minus-circle"></i></a>
+
+							  <input class="input-small sampler-param-name" type="text" placeholder="Param Name"  ng-model="param.name">
+
+							  <input class="input-small sampler-param-value" type="text" placeholder="Param Value"  ng-model="param.value">
+
+							</div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- <a href-void="" class="btn btn-default btn-xs pull-right" href="#"><i class="fa fa-plus-circle"></i>Paremeters</a> -->
+    </div>
+    	
+     <div class="form-group">
+     	<div class="input-group">
+        <span class="input-group-addon" style="min-width:150px;text-align:left;">Assertion Text</span>
+        <input class="form-control" type="text" ng-model="selected.sampler_assertionTime">
+      </div>
+    </div>
+    <div class="form-group">
+    	<div class="input-group">
+        <span class="input-group-addon" style="min-width:150px;text-align:left;">Constant time(s)</span>
+            <select class="form-control" ng-model="selected.sampler_constantTime" ng-init="selected.sampler_constantTime='0'">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group" ng-show="create">
+    	<div class="input-group">
+   			<a type="submit" class="btn btn-primary pull-right" ng-click='addSampler()'>Create</a>
+    	</div>
+    </div>
+    <div class="form-group" ng-show="!create">
+    	<div class="input-group">
+    		<a class="btn btn-default pull-right" ng-click="clickNewSamplerButton()">Reset form</a>
+    	</div>
+    </div>
+	</div>

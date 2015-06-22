@@ -9,7 +9,7 @@ define(['layout/module', 'lodash'], function(module, _) {
         'smartStepCallback': '&'
       },
       link: function(scope, element, attributes) {
-        var stepsCount = $('[data-smart-wizard-tab]').length;
+        var stepsCount = $('[data-smart-wizard-tab]', element).length;
         var currentStep = 1;
         var validSteps = [];
 
@@ -73,6 +73,7 @@ define(['layout/module', 'lodash'], function(module, _) {
                 .html('<i class="fa fa-check"></i>');
             }
           }
+
           if (currentStep < stepsCount) {
             setStep(currentStep + 1);
           } else {

@@ -1,0 +1,96 @@
+<form data-smart-validate-form>
+  <div class="col-sm-12" data-smart-wizard 
+    data-smart-wizard-callback="uploadTestPerformanceCompleteCallback"
+    data-smart-step-callback="uploadTestPerformanceStepCallback">
+    <div class="form-bootstrapWizard clearfix">
+      <ul class="bootstrapWizard">
+        <li data-smart-wizard-tab="1">
+          <a href="#">
+            <span class="step">1</span> <span class="title">Tools</span>
+          </a>
+        </li>
+        <li data-smart-wizard-tab="2">
+          <a href="#">
+            <span class="step">2</span> <span class="title">Scripts</span>
+          </a>
+        </li>
+
+      </ul>
+      <div>
+          <a class="btn btn-warning pull-right" ng-click="ExitToListPage()">Exit</a>
+      </div>
+    </div>
+    <div class="tab-content">
+
+      <div class="tab-pane" data-smart-wizard-pane="1">
+        <br>
+        <h3><strong>Step 1</strong> - Choose tool</h3>
+
+                    <!-- wizard form starts here -->
+         <div class="row">
+            <div class="col-sm-6">
+              <div class="smart-form">
+                <label class="radio state-success"><input type="radio" name="tool" checked=""><i></i>Jmeter</label>
+              </div>
+              <div class="smart-form">
+                <label class="radio state-success"><input name="tool" type="radio"><i></i>LoadUI</label>
+              </div>
+              <div class="smart-form">
+                <label class="radio state-success"><input name="tool" type="radio"><i></i>LoadRunner</label>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" data-smart-wizard-pane="2">
+        <br>
+        <h3><strong>Step 2</strong> - <span> Upload Scripts</span></h3>
+        <div class="row">
+         
+         <div class="col-sm-6">
+           <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon" style="min-width:150px;text-align:left;">Project Name</span>
+              <input class="form-control input-sm" type="text" name="project_name" ng-model="project_name"
+                data-smart-validate-input data-required data-message-required="Project name is not empty">
+            </div>
+           </div>
+         </div>    
+        </div>   
+        <div class="row">
+          <div class="col-sm-6">
+            <section class="smart-form">
+              <div class="input input-file">
+                <span class="button"><input type="file" id="upload_file" onchange="this.parentNode.nextSibling.value = this.value"
+                  placeholder="Project Name">Upload File</span><input type="text" readonly required>
+              </div>
+            </section>
+          </div>
+
+          <div class="col-sm-6">
+              <span class="badge">Or</span>
+              <span class="glyphicon glyphicon-hand-right" style="margin-right: 10px;"></span>
+            <a class="btn btn-default" href-void ng-click="createNewPerformanceTestWizard()">Use Wizard</a>
+              
+          </div>
+        </div>     
+      </div>
+      <div class="form-actions">
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="pager wizard no-margin">
+              <li class="previous" data-smart-wizard-prev>
+                <a href="#" class="btn btn-lg btn-default">&lt; Previous </a>
+              </li>
+              <li class="next" data-smart-wizard-next>
+                <a ng-if="!finish" href="#" class="btn btn-lg txt-color-darken"> Next &gt;</a>
+                <a ng-if="finish" href="#" class="btn btn-lg txt-color-darken"> Finish &gt;</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

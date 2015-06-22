@@ -9,7 +9,6 @@ define(['performance/module'], function (module) {
 				element.on('click', function () {
 
 					var $parentElement = element.parent();
-					console.log($parentElement);
 					$parentElement.remove();
 				});
 

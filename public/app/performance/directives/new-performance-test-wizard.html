@@ -1,0 +1,102 @@
+<form data-smart-validate-form>
+  <div class="col-sm-12" data-smart-wizard data-smart-wizard-callback="wizard2TestPerformanceCompleteCallback"
+    data-smart-step-callback="wizard2TestPerformanceStepCallback">
+    <div class="form-bootstrapWizard clearfix">
+      <ul class="bootstrapWizard">
+        <li data-smart-wizard-tab="1">
+          <a href="#">
+            <span class="step">1</span> <span class="title">Configuration</span>
+          </a>
+        </li>
+        <li data-smart-wizard-tab="2">
+          <a href="#">
+            <span class="step">2</span> <span class="title">Samplers</span>
+          </a>
+        </li>
+      </ul>
+      <div>
+          <a class="btn btn-warning pull-right" ng-click="ExitToUploadFilePage()">Exit</a>
+      </div>
+    </div>
+    <div class="tab-content">
+
+      <div class="tab-pane" data-smart-wizard-pane="1">
+        <br>
+        <h3><strong>Step 1</strong> - Configuration</h3>
+
+                    <!-- wizard form starts here -->
+        <div class="row">
+         
+         <div class="col-sm-6">
+           <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon" style="min-width:150px;text-align:left;">Project Name</span>
+              <input class="form-control input-sm" type="text" name="project_name" ng-model="project_name"
+                data-smart-validate-input data-required data-message-required="Project name is not empty">
+            </div>
+           </div>
+         </div>    
+        </div>   
+        <div class="row">
+            <div class="col-sm-6">
+              <label>Users<span class="badge bg-color-blue" id="usersSliderVal">200</span></label>
+              <input data-smart-uislider type="text" class="slider slider-primary" id="users" 
+                data-slider-id="usersSlider"
+                data-slider-min="100"
+                data-slider-max="1000"
+                data-slider-selection = "before"
+                data-slider-tooltip="hide"
+                data-slider-handle="round" ng-model="configuration.users">
+              <label>Ram up<span class="badge bg-color-blue" id="ramupSliderVal">5</span></label>
+              <input data-smart-uislider type="text" class="slider slider-primary" id="ramup"   
+                     data-slider-id="ramupSlider"
+                     data-slider-min="5"
+                     data-slider-max="100"
+                     data-slider-selection = "before"
+                     data-slider-tooltip="hide"
+                     data-slider-handle="round" ng-model="configuration.ramup">
+              <label>Loops<span class="badge bg-color-blue" id="loopsSliderVal">1</span></label>
+              <input data-smart-uislider type="text" class="slider slider-primary" id="loops" 
+                     data-slider-min="1"
+                     data-slider-max="10"
+                     data-slider-selection = "before"
+                     data-slider-tooltip="hide"
+                     data-slider-handle="round" ng-model="configuration.loops">
+              <label>Duration<span class="badge bg-color-blue" id="durationSliderVal">0</span></label>
+              <input data-smart-uislider type="text" class="slider slider-primary" id="duration" 
+                     data-slider-min="0"
+                     data-slider-max="10"
+                     data-slider-selection = "before"
+                     data-slider-tooltip="hide"
+                     data-slider-handle="round" ng-model="configuration.duration">
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" data-smart-wizard-pane="2">
+        <br>
+        <h3><strong>Step 2</strong> - <span>Samplers</span></h3>
+        <div class="row">
+          <div class="col-sm-12">
+            <wizard-samplers></wizard-samplers>
+          </div>
+        </div>
+        
+      </div>
+      <div class="form-actions">
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="pager wizard no-margin">
+              <li class="previous" data-smart-wizard-prev>
+                <a href="#" class="btn btn-lg btn-default">&lt; Previous </a>
+              </li>
+              <li class="next" data-smart-wizard-next>
+                <a href="#" class="btn btn-lg txt-color-darken"> Next &gt;</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

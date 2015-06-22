@@ -4,28 +4,41 @@ define(['performance/module', 'lodash'], function (module, _) {
 
 		return {
 			restrict: 'E',
-			templateUrl: 'app/performance/views/wizard-samplers.html',
+			templateUrl: 'app/performance/directives/wizard-samplers.html',
 			link: function (scope, element, attribute) {
 
+				scope.selected = {
+					sampler_method: 'GET',
+					sampler_constantTime: '0',
+					params: []
+				};
+
+				scope.addParamBlock = function() {
+					var param = {'name' : '', 'value' : ''};
+					scope.selected.params.push(param);
+
+					var $collapse = $('#collapseOne-1');
+
+					$collapse.collapse('show');
+				}
+
+				scope.removeParamBlock = function(index) {
+					scope.selected.params.splice(index, 1);
+				}
+
 				scope.addSampler = function () {
-					var sampler = {};
-					sampler.sampler_name = scope.sampler.sampler_name;
-					sampler.assertText = scope.sampler.assertText;
-					sampler.sampler_method = scope.sampler.sampler_method;
-					sampler.sampler_url = scope.sampler.sampler_url;
-					sampler.sampler_constantTime = scope.sampler.sampler_constantTime;
-					sampler.params = scope.params;
-					scope.samplers.push(sampler);
-					scope.selected = sampler;
-					scope.update = true;
+					scope.samplers.push(scope.selected);
+					scope.selected = {
+						sampler_method: 'GET',
+						sampler_constantTime: '0',
+						params: []
+					};
 				}
 
 				scope.select = function (sampler) {
-					console.log(sampler);
 					scope.selected = sampler;
-					scope.sampler = sampler;
-					scope.params = sampler.params;
-					scope.update = true;
+
+					scope.create = false;
 				}
 
 				scope.deleteSampler = function (sampler) {
@@ -38,26 +51,31 @@ define(['performance/module', 'lodash'], function (module, _) {
 	            _.remove(scope.samplers, function(data) {
             		return sampler == data;
 		          });
-		          scope.selected = scope.samplers[0];
-		          scope.sampler = scope.samplers[0];
-		          scope.params = scope.sampler.params;
+		          if (scope.samplers.length > 0) {
+		          	 scope.selected = scope.samplers[0];
+		          } else {
+		          	scope.selected = {
+									sampler_method: 'GET',
+									sampler_constantTime: '0',
+									params: []
+								};
+								scope.create = true;
+		          }
+		         
 	          }
 	        });
 				}
 				scope.clickNewSamplerButton = function () {
-					scope.update = false;
-					scope.sampler = {};
-					scope.params = [{'name' : '', 'value' : ''}];
-
+					scope.selected = {
+						sampler_method: 'GET',
+						sampler_constantTime: '0',
+						params: []
+					};
+					scope.create = true;
 				}
-
 				scope.updateSampler = function () {
 
 				}
-
-				scope.$watch('params', function (newParams) {
-					scope.params = newParams;
-				});
 			}
 		}
 	}]);

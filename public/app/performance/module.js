@@ -23,12 +23,12 @@ define([
 								'performance/directives/new-performance-test',
 								'performance/directives/new-performance-test-wizard',
 								'performance/directives/wizard-samplers',
-								'performance/directives/add-param-block',
 								'performance/directives/remove-param-block',
 								'modules/widgets/directives/widget-grid',
                 'modules/widgets/directives/jarvis-widget',
-                'modules/forms/directives/wizard/smart-fuelux-wizard',
-                'modules/forms/directives/input/smart-uislider'
+                'modules/forms/directives/input/smart-uislider',
+                'modules/forms/directives/validate/smart-validate-form',
+                'modules/forms/directives/wizard/smart-wizard'
 							])
 						}
 					}
