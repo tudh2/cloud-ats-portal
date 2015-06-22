@@ -7,7 +7,7 @@ define([
 ], function(ng, couchPotato) {
   'use strict';
 
-  var module = ng.module('app.functional', ['ui.router', 'ngResource', 'ngDragDrop']);
+  var module = ng.module('app.functional', ['ui.router', 'ngResource']);
 
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider

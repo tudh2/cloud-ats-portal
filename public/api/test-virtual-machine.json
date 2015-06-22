@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "name": "fsoft-Gui-0",
+            "public-ip": "172.27.4.27",
+            "offering": "Small",
+            "status": "Running",
+            "action": ""
+        },
+        {
+            "name": "fsoft-Non-Gui-1",
+            "public-ip": "172.27.4.27",
+            "offering": "Small",
+            "status": "Ready",
+            "action": ""
+        }
+    ]
+}

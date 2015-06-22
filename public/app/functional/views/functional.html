@@ -53,9 +53,9 @@
                   <!--   <form action="http://localhost:9000/api/v1/functional/upload" class="dropzone" method="POST" data-smart-dropzone></form> -->
                   <form class="dropzone" ng-submit="upload()">
 			
-					    <input type="file" name="file" id="file" multiple onchange="angular.element(this).scope().uploadedFile(this)" />
+					    <input type="file" name="file" id="file" onchange="angular.element(this).scope().uploadedFile(this)"  />
 					    etc...
-
+					    <!-- Accept file type,example accept zip file,add accept attribute into input tag: accept="application/zip" -->
 					    <input type="submit" value="Upload"/>
 					  
 				  </form>

@@ -1,0 +1,102 @@
+<div style= "margin-left: 10px; margin-top: 15px; margin-right: 5px;">
+    <div class="row">
+        <div class="col-md-4">
+            <ul class="list-group">
+
+                <li class="padding-10 list-group-item" ng-click="systemVMs()" style="cursor: pointer" >
+                    <a class="text-info" ng-if="checkSystem">
+                        <i class="fa fa-lg fa-fw fa-cogs"></i>System VMs
+                    </a>
+
+                    <a class="text-success" ng-if="!checkSystem">
+                        <i class="fa fa-lg fa-fw fa-cogs"></i><strong><u>System VMs</u></strong>
+                    </a>
+                </li>
+                <li class="padding-10 list-group-item" ng-click="testVMs()" style="cursor: pointer">
+                    <a class="text-info" ng-if="checkTest">
+                        <i class="fa fa-lg fa-fw fa-cog"></i>Test VMs
+                    </a>
+                    <a class="text-success" ng-if="!checkTest">
+                        <i class="fa fa-lg fa-fw fa-cog"></i><strong><u>Test VMs</u></strong>
+                    </a>            
+                </li>
+                <li class="padding-10 list-group-item" ng-click="offering()" style="cursor: pointer">
+                    <a class="text-info" ng-if="checkOffer">
+                        <i class="fa fa-lg fa-fw fa-random"></i>Offering
+                    </a>
+                    <a class="text-success" ng-if="!checkOffer">
+                        <i class="fa fa-lg fa-fw fa-random"></i><strong><u>Offering</u></strong>
+                    </a>            
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+    <!--
+        The ID "widget-grid" will start to initialize all widgets below
+        You do not need to use widgets if you dont want to. Simply remove
+        the <section></section> and you can use wells or panels instead
+        -->
+    <!-- widget grid -->
+    <section id="widget-grid" data-widget-grid>
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="well" id="widget-title-widget" >
+                    <!-- widget options:
+                        usage: <div data-jarvis-widget id="wid-id-0" data-widget-editbutton="false">
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+                    -->
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                        {{tableOptions.data}}
+                            <table datatable-basic data-table-options="tableOptions"
+                                   class="display projects-table table table-striped table-bordered table-hover"
+                                   cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Public IP</th>
+                                    <th>Offering</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <caption class="smart-datatable-child-format" data-child-control="td.details-control">
+                                    <table cellpadding="5" cellspacing="0" border="0"
+                                           class="table table-hover table-condensed">
+                                           <div class="row">
+      <article class="col-sm-12">
+        <div smart-include="/app/virtual/views/tab.tpl.html" class="placeholder-live-feeds"></div>
+      </article>
+    </div>
+                                    </table>
+                                </caption>
+                            </table>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+
+        </div>
+    </div>
+</div>

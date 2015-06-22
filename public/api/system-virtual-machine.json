@@ -1,0 +1,11 @@
+{
+    "data": [
+        {
+            "name": "fsoft-system",
+            "public-ip": "172.27.4.27",
+            "offering": "Medium",
+            "status": "Ready",
+            "action": ""
+        }
+    ]
+}
