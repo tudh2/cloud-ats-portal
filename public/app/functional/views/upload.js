@@ -1,7 +1,7 @@
 define(['functional/module'], function(module) {
   'use strict';
 
-  module.registerFactory('FunctionalService', ['$http', function($http) {
+  module.registerFactory('Functional', ['$http', function($http) {
     return {
 
       /*upload:function(callback) {

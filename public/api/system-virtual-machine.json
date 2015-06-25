@@ -1,11 +1,11 @@
 {
     "data": [
         {
-            "name": "fsoft-system",
-            "public-ip": "172.27.4.27",
-            "offering": "Medium",
-            "status": "Ready",
-            "action": ""
+            "name":"<span class='label label-primary'>fsoft-system</span>",
+            "public-ip": "<span class='label label-success'>172.27.4.27</span>",
+            "offering": "<span class='label label-info'>Small</span>",
+            "status": "<span class='label label-default active'>Running</span>",
+            "action": "<span class='label label-default active'></span>"
         }
     ]
 }

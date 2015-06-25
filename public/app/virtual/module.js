@@ -21,15 +21,20 @@ define([
                         templateUrl: 'app/virtual/views/virtual.html',
                         controller: 'VirtualCtrl',
                         resolve: {
-                            projects: function($http){
+                            projectsSystem: function($http) {
+                                return $http.get('api/system-virtual-machine.json')
+                            },
+                            projectsTest: function($http) {
                                 return $http.get('api/test-virtual-machine.json')
+                            },
+                            logs: function($http) {
+
                             },
                             deps: $couchPotatoProvider.resolveDependencies([
                                 'virtual/controllers/virtual-controller',
                                 'services/virtual-service',
-                                'modules/graphs/directives/inline/sparkline-container',
-                                'modules/tables/directives/datatables/datatableBasic'
-                                
+                                'virtual/directives/my-table',
+                                'modules/graphs/directives/inline/sparkline-container'
                             ])
                         }
                     }
