@@ -20,10 +20,8 @@ define([
 						resolve: {
 							deps: $couchPotatoProvider.resolveDependencies([
 								'performance/controllers/performance-controller',
-								'performance/directives/new-performance-test',
 								'performance/directives/new-performance-test-wizard',
 								'performance/directives/wizard-samplers',
-								'performance/directives/remove-param-block',
 								'modules/widgets/directives/widget-grid',
                 'modules/widgets/directives/jarvis-widget',
                 'modules/forms/directives/input/smart-uislider',

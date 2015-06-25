@@ -12,6 +12,11 @@ define(['performance/module', 'notification'], function (module) {
 			$scope.wizard = false;
 		}
 
+		$scope.createNewPerformanceTestWizard = function () {
+			console.log('test wizard');
+			$scope.wizard = true;
+		}
+
 		$scope.wizard2TestPerformanceCompleteCallback = function (wizardData) {
 			
 			var $users = $('#users').bootstrapSlider('getValue');
@@ -24,39 +29,49 @@ define(['performance/module', 'notification'], function (module) {
 			performanceService.createPerformanceTestWizard(object, function (data, status) {
 				if (status == 200) {
 					$.smallBox({
-		        title: "Data Driven",
+		        title: "Perfomance Test",
 		        content: "<i class='fa fa-clock-o'></i> <i>Your performance test wizard has saved.</i>",
 		       	color: "#659265",
 		        iconSmall: "fa fa-check fa-2x fadeInRight animated",
 		        timeout: 2000
 		      });
+
+		      $scope.list = true;
 				}
 			});
 		}
 
 		$scope.uploadTestPerformanceCompleteCallback = function (wizardData) {
 			
-			if ($('#upload_file').val() != '') {
-				console.log('uploaded file');
-			}
+			performanceService.createPerformanceTestByUpload($scope.file, wizardData.project_name, function (data, status){
+				
+				if (status == 200) {
+					$.smallBox({
+		       	title: "Performance Test",
+		        content: "<i class='fa fa-clock-o'></i> <i>Your uploaded file has saved.</i>",
+		       	color: "#659265",
+		        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+		        timeout: 2000
+		      });
+
+		      $scope.list = true;
+				}
+			});
+				
 		}
 
-		$scope.uploadTestPerformanceStepCallback = function (step, wizardData) {
-			if (step == 2) {
-				$('.next').on('click', function () {
-					var $file = $('#upload_file').val();
+		$scope.uploadFile = function (element) {
+			$scope.file = element.files[0];
 
-					if ($file == '') {
-						$('.input.input-file').addClass('has-error');
-					} else {
-						$('.input.input-file').removeClass('has-error');
-						$('.input.input-file').addClass('has-success');
-					}
-				});
-			}
 		}
+
 		$scope.ExitToListPage = function () {
 			$scope.list = true;
+		}
+
+		$scope.ExitToUploadFilePage = function () {
+			$scope.list = false;
+			$scope.wizard = false;
 		}
 
 	}]);

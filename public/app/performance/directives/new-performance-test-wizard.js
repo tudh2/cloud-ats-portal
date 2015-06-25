@@ -38,10 +38,6 @@ define(['performance/module'], function (module) {
 			    $("#durationSliderVal").text(slideEvt.value);
 			  });
 
-			  scope.ExitToUploadFilePage = function () {
-					scope.$parent.list = false;
-					scope.$parent.wizard = false;
-				}
 			}
 		}
 	}]);
