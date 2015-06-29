@@ -9,7 +9,7 @@ define(['virtual/module', 'lodash'], function(module, _) {
         $scope.checkTest = true;
         $scope.checkOffer = true;
 
-        var init = function(dataShow,url) {
+        var init = function(dataShow) {
             $scope.projects = dataShow;
             $scope.tableOptions =  {
             "data": dataShow.data.data,
@@ -19,7 +19,6 @@ define(['virtual/module', 'lodash'], function(module, _) {
                 {
                     "class":          'details-control',
                     "orderable":      false,
-                    "data": null,
                     "defaultContent": ''
                 },
                 { "data": "name" },
@@ -33,11 +32,13 @@ define(['virtual/module', 'lodash'], function(module, _) {
         }
 
         init(projectsSystem);
+        console.log(projectsSystem.data);
         /*VirtualService.getList(urlSystem,function(listData) {
+            console.log(listData);
             $scope.someData = listData;
-            init($scope.someData,urlSystem);
-        });*/
-
+            init($scope.someData);
+        });
+*/
         $scope.systemVMs = function() {
             $scope.check = $scope.check === false ? true: false;
             if($scope.checkSystem) {

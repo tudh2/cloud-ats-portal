@@ -27,6 +27,8 @@ define(['virtual/module',
                     "bStateSave": true,
                     "bInfo": false,
                     "bDestroy": true,
+                    /*"processing": true,
+        			"serverSide": true,*/
                     "smartResponsiveHelper": null,
                     "preDrawCallback": function () {
                         // Initialize the responsive datatables helper once.
