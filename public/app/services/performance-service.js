@@ -22,9 +22,13 @@ define(['performance/module'], function (module) {
 
 				});
 			},
-			createPerformanceTestByUpload: function (file, project_name, callback) {
+			createPerformanceTestByUpload: function (files, project_name, callback) {
 				var formData = new FormData();
-				formData.append("uploadedFile", file);
+				$.each(files, function (key, value) {
+
+					formData.append(key, value);
+				});
+
 				var request = {
 					method: 'POST',
 					url: 'http://localhost:9000/api/v1/performance/uploadFile?project_name='+project_name,

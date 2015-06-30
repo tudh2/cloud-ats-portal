@@ -3,7 +3,10 @@
 		<div class="col-md-4"></div>
 
 		<div class="col-md-8">
-			<a class="btn btn-default pull-right" href-void ng-click="createNewPerformanceTest()">Create new performance test</a>
+			<button class="btn btn-success pull-right" href-void ng-click="createNewPerformanceTest()">
+        <i class="fa fa-plus"></i>
+        <span class="hidden-mobile">Create new performance test</span>
+      </button>
 		</div>
 		
 	</div>
@@ -75,7 +78,7 @@
 			            <div class="input-group">
 			              <span class="input-group-addon" style="min-width:150px;text-align:left;">File upload (.jmx)</span>
 			              <input class="form-control input-sm" type="file" name="upload_file" ng-model="upload_file" onchange="angular.element(this).scope().uploadFile(this)"
-			                data-smart-validate-input data-required data-message-required="File upload is not empty" accept=".jmx">
+			                data-smart-validate-input data-required data-message-required="File upload is not empty" accept=".jmx" multiple>
 			            </div>
 			           </div>
 			         </div>    

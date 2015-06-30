@@ -39,36 +39,44 @@
         </div>   
         <div class="row">
             <div class="col-sm-6">
-              <label>Users<span class="badge bg-color-blue" id="usersSliderVal">200</span></label>
-              <input data-smart-uislider type="text" class="slider slider-primary" id="users" 
+              <p><strong>Users 
+                <span class="badge bg-color-greenLight" id="usersSliderVal">200</span>
+              </strong></p>
+              <input data-smart-uislider type="text" class="slider slider-success" id="users" 
                 data-slider-id="usersSlider"
                 data-slider-min="100"
                 data-slider-max="1000"
                 data-slider-selection = "before"
                 data-slider-tooltip="hide"
-                data-slider-handle="round" ng-model="configuration.users">
-              <label>Ram up<span class="badge bg-color-blue" id="ramupSliderVal">5</span></label>
-              <input data-smart-uislider type="text" class="slider slider-primary" id="ramup"   
+                data-slider-handle="triangle" ng-model="configuration.users">
+              <p><strong>Ram up 
+                <span class="badge bg-color-greenLight" id="ramupSliderVal">5</span>
+              </strong></p>
+              <input data-smart-uislider type="text" class="slider slider-success" id="ramup"   
                      data-slider-id="ramupSlider"
                      data-slider-min="5"
                      data-slider-max="100"
                      data-slider-selection = "before"
                      data-slider-tooltip="hide"
-                     data-slider-handle="round" ng-model="configuration.ramup">
-              <label>Loops<span class="badge bg-color-blue" id="loopsSliderVal">1</span></label>
-              <input data-smart-uislider type="text" class="slider slider-primary" id="loops" 
+                     data-slider-handle="triangle" ng-model="configuration.ramup">
+              <p><strong>Loops 
+                <span class="badge bg-color-greenLight" id="loopsSliderVal">1</span>
+              </strong></p>
+              <input data-smart-uislider type="text" class="slider slider-success" id="loops" 
                      data-slider-min="1"
                      data-slider-max="10"
                      data-slider-selection = "before"
                      data-slider-tooltip="hide"
-                     data-slider-handle="round" ng-model="configuration.loops">
-              <label>Duration<span class="badge bg-color-blue" id="durationSliderVal">0</span></label>
-              <input data-smart-uislider type="text" class="slider slider-primary" id="duration" 
+                     data-slider-handle="triangle" ng-model="configuration.loops">
+              <p><strong>Duration 
+                <span class="badge bg-color-greenLight" id="durationSliderVal">0</span>
+              </strong></p>
+              <input data-smart-uislider type="text" class="slider slider-success" id="duration" 
                      data-slider-min="0"
                      data-slider-max="10"
                      data-slider-selection = "before"
                      data-slider-tooltip="hide"
-                     data-slider-handle="round" ng-model="configuration.duration">
+                     data-slider-handle="triangle" ng-model="configuration.duration">
           </div>
         </div>
       </div>

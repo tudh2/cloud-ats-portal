@@ -13,7 +13,6 @@ define(['performance/module', 'notification'], function (module) {
 		}
 
 		$scope.createNewPerformanceTestWizard = function () {
-			console.log('test wizard');
 			$scope.wizard = true;
 		}
 
@@ -61,7 +60,8 @@ define(['performance/module', 'notification'], function (module) {
 		}
 
 		$scope.uploadFile = function (element) {
-			$scope.file = element.files[0];
+			$scope.file = element.files;
+			delete $scope.file.length;
 
 		}
 
