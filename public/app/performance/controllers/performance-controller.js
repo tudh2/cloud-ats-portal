@@ -6,7 +6,61 @@ define(['performance/module', 'notification'], function (module) {
 		$scope.samplers = [];
 		$scope.create = true;
 		$scope.wizard = false;
+		$scope.finish = false;
+		$scope.totalProjects = 22;
 
+		// handle project list
+		performanceService.list(1, function (data) {
+			$scope.projects = data.data;
+			$scope.currentPage = 1;
+		});
+
+		// get project list when page number was changed
+		$scope.pageChanged = function (currentPage) {
+			performanceService.list(currentPage, function (data) {
+				$scope.projects = data.data;
+			});
+		}
+
+		// show and hide scripts into each project
+		$scope.showScripts = function ($event) {
+
+			var $td = $event.currentTarget;
+
+			var $div = $($td).closest("tr").next("tr").find("div.scripts");
+			var $icon = $($td).find("i.fa");
+
+			if ($($div).css('display') == 'none') {
+				$($div).slideDown(400);
+				$($icon).removeClass("fa-plus");
+				$($icon).addClass("fa-minus");
+			} else {
+				$($div).slideUp(400);
+				$($icon).removeClass("fa-minus");
+				$($icon).addClass("fa-plus");
+			}
+		}
+    
+		// when click delete project button
+		$scope.deleteProject = function (id) {
+			$.SmartMessageBox({
+          title: "Sampler",
+          content: "Are you sure to delete project '" + id + "'?",
+          buttons: '[No][Yes]'
+	        }, function(ButtonPressed) {
+	          if (ButtonPressed === "Yes") {
+	            
+	            _.remove($scope.projects, function (data) {
+	            	return data._id == id;
+
+	            });
+	            console.log($scope.currentPage);
+		         
+	          }
+	        });
+		}
+
+		// moving between directives
 		$scope.createNewPerformanceTest = function () {
 			$scope.list = false;
 			$scope.wizard = false;
@@ -16,6 +70,7 @@ define(['performance/module', 'notification'], function (module) {
 			$scope.wizard = true;
 		}
 
+		// click finish button when using wizard samplers
 		$scope.wizard2TestPerformanceCompleteCallback = function (wizardData) {
 			
 			var $users = $('#users').bootstrapSlider('getValue');
@@ -40,6 +95,7 @@ define(['performance/module', 'notification'], function (module) {
 			});
 		}
 
+		// click finish button when using files upload
 		$scope.uploadTestPerformanceCompleteCallback = function (wizardData) {
 			
 			performanceService.createPerformanceTestByUpload($scope.file, wizardData.project_name, function (data, status){
@@ -59,6 +115,14 @@ define(['performance/module', 'notification'], function (module) {
 				
 		}
 
+		// check step when using wizard directive
+		$scope.wizard2TestPerformanceStepCallback = function (step, data) {
+			if (step == 2) {
+				$scope.finish = true;
+			} else $scope.finish = false;
+		}
+
+		// get files after files were uploaded
 		$scope.uploadFile = function (element) {
 			$scope.file = element.files;
 			delete $scope.file.length;

@@ -99,7 +99,8 @@
                 <a href="#" class="btn btn-lg btn-default">&lt; Previous </a>
               </li>
               <li class="next" data-smart-wizard-next>
-                <a href="#" class="btn btn-lg txt-color-darken"> Next &gt;</a>
+                <a ng-if="!finish" href="#" class="btn btn-lg txt-color-darken"> Next &gt;</a>
+                <a ng-if="finish" href="#" class="btn btn-lg btn-success txt-color-darken"> Finish &gt;</a>
               </li>
             </ul>
           </div>

@@ -5,6 +5,17 @@ define(['performance/module'], function (module) {
 	module.registerFactory('PerformanceService', ['$http', '$cookies', function ($http, $cookies) {
 
 		return {
+
+			list: function (pageNumber, callback) {
+				var request = {
+					method: 'GET',
+					url: 'api/project-list-'+pageNumber+'.json'
+				}
+
+				$http(request).success(function (data) {
+					callback(data);
+				}).error(function () {});
+			},
 			createPerformanceTestWizard : function (data, callback) {
 				var request = {
 					method: 'POST',
