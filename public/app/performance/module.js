@@ -28,7 +28,6 @@ define([
                 'modules/forms/directives/input/smart-uislider',
                 'modules/forms/directives/validate/smart-validate-form',
                 'modules/forms/directives/wizard/smart-wizard',
-                'modules/tables/directives/datatable-basic',
                 'modules/graphs/directives/inline/sparkline-container'
 							])
 						}

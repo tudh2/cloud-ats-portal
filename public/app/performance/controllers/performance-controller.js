@@ -7,12 +7,21 @@ define(['performance/module', 'notification'], function (module) {
 		$scope.create = true;
 		$scope.wizard = false;
 		$scope.finish = false;
+		$scope.update = false;
 		$scope.totalProjects = 22;
+		$scope.currentPage = 1;
 
+		$scope.configuration = {
+			'users': 200,
+			'ramup': 5,
+			'loops': 1,
+			'duration': 0
+		};
+
+		$scope.scriptId = undefined;
 		// handle project list
 		performanceService.list(1, function (data) {
 			$scope.projects = data.data;
-			$scope.currentPage = 1;
 		});
 
 		// get project list when page number was changed
@@ -20,6 +29,7 @@ define(['performance/module', 'notification'], function (module) {
 			performanceService.list(currentPage, function (data) {
 				$scope.projects = data.data;
 			});
+			$scope.currentPage = currentPage;
 		}
 
 		// show and hide scripts into each project
@@ -43,21 +53,60 @@ define(['performance/module', 'notification'], function (module) {
     
 		// when click delete project button
 		$scope.deleteProject = function (id) {
+			var totalProjects = $scope.totalProjects;
 			$.SmartMessageBox({
-          title: "Sampler",
-          content: "Are you sure to delete project '" + id + "'?",
-          buttons: '[No][Yes]'
-	        }, function(ButtonPressed) {
-	          if (ButtonPressed === "Yes") {
-	            
-	            _.remove($scope.projects, function (data) {
-	            	return data._id == id;
+        title: "Sampler",
+        content: "Are you sure to delete project '" + id + "'?",
+        buttons: '[No][Yes]'
+        }, function(ButtonPressed) {
+          if (ButtonPressed === "Yes") {
+            
+            _.remove($scope.projects, function (data) {
+            	return data._id == id;
 
-	            });
-	            console.log($scope.currentPage);
-		         
-	          }
-	        });
+            });
+
+            // push a new project into current project list
+            $scope.totalProjects = totalProjects - 1;
+            var numPages = $scope.totalProjects/10;
+            if ($scope.totalProjects/10 - Math.round($scope.totalProjects/10) != 0) {
+            	numPages = Math.round($scope.totalProjects/10) + 1;
+            }
+            // get a new project from next page
+						if ($scope.currentPage != numPages) {
+							performanceService.list($scope.currentPage + 1, function (data) {
+								if (data.data.length > 0) {
+									var project = data.data[0];
+									$scope.projects.push(project);
+								}
+								
+							});		 
+						}
+						        
+          }
+        });
+		}
+
+		// moving update project page by id
+		$scope.updateProject = function (id) {
+			console.log(id);			
+		}
+
+		// moving update script page by id
+		$scope.updateScript = function (script) {
+
+			$scope.list = false;
+			$scope.wizard = true;
+			$scope.project_name = script.name;
+			$scope.samplers = script.samplers;
+			$scope.configuration = {
+				'users': script.users,
+				'ramup': script.ramup,
+				'loops': script.loops,
+				'duration': script.duration
+			};
+
+			$scope.scriptId = script._id;
 		}
 
 		// moving between directives
@@ -70,6 +119,7 @@ define(['performance/module', 'notification'], function (module) {
 			$scope.wizard = true;
 		}
 
+
 		// click finish button when using wizard samplers
 		$scope.wizard2TestPerformanceCompleteCallback = function (wizardData) {
 			
@@ -79,20 +129,37 @@ define(['performance/module', 'notification'], function (module) {
 			var $duration = $('#duration').bootstrapSlider('getValue');
 
 			var object = {'project_name': wizardData.project_name, 'users' : $users, 'ramup' : $ramup, 'loops' : $loops, 'duration' : $duration, 'samplers': $scope.samplers};
+			if ($scope.scriptId != undefined) {
+				$scope.scriptId = '2228c45e-6e27-4fd2-9aff-b7b5764cd9e8';
+				object = {'script_id': $scope.scriptId,'project_name': wizardData.project_name, 'users' : $users, 'ramup' : $ramup, 'loops' : $loops, 'duration' : $duration, 'samplers': $scope.samplers};
+				performanceService.updatePerformanceTestWizard(object, function (data, status) {
 
-			performanceService.createPerformanceTestWizard(object, function (data, status) {
-				if (status == 200) {
-					$.smallBox({
-		        title: "Perfomance Test",
-		        content: "<i class='fa fa-clock-o'></i> <i>Your performance test wizard has saved.</i>",
-		       	color: "#659265",
-		        iconSmall: "fa fa-check fa-2x fadeInRight animated",
-		        timeout: 2000
-		      });
+					if (status == 200) {
+						$.smallBox({
+			        title: "Perfomance Test",
+			        content: "<i class='fa fa-clock-o'></i> <i>Your performance test wizard has updated.</i>",
+			       	color: "#659265",
+			        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+			        timeout: 2000
+			      });
+			      $scope.list = true;
+					}
+				});
+			} else {
+				performanceService.createPerformanceTestWizard(object, function (data, status) {
+					if (status == 200) {
+						$.smallBox({
+			        title: "Perfomance Test",
+			        content: "<i class='fa fa-clock-o'></i> <i>Your performance test wizard has saved.</i>",
+			       	color: "#659265",
+			        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+			        timeout: 2000
+			      });
 
-		      $scope.list = true;
-				}
-			});
+			      $scope.list = true;
+					}
+				});
+			}
 		}
 
 		// click finish button when using files upload

@@ -55,6 +55,22 @@ define(['performance/module'], function (module) {
 				$http(request).success(function (data, status){
 					callback(data, status);
 				}).error(function() {});
+			},
+			updatePerformanceTestWizard: function (data, callback) {
+
+				var request = {
+					method: "PUT",
+					url: 'http://localhost:9000/api/v1/performance/updateScript',
+					headers: {
+						'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+					},
+					data: data
+				}
+
+				$http(request).success(function (data, status) {
+					callback(data, status);
+				}).error(function () {});
 			}
 		}
 	}]);

@@ -60,16 +60,18 @@
 	                			<strong>{{project.last_run}}</strong>
 	                		</td>
 	                		<td>
-	                			<span class='label label-success'>{{project.status}}</span>
+	                			<span ng-if="project.status == 'running'" class="label label-warning">{{project.status}}</span>
+	                			<span ng-if="project.status == 'complete'" class='label label-success'>{{project.status}}</span>
+	                			<span ng-if="project.status == 'error'" class="label label-danger">{{project.status}}</span>
 	                		</td>
 	                		<td>
 	                			<a class="btn ui-btn-xs btn-info" title="View Report *" rel="tooltip" ><i class="fa fa-bar-chart-o"></i></a>
 	                		</td>
 	                		<td>
-	                			<button class='btn btn-xs btn-default ng-scope' tooltip='Run Project' tooltip-append-to-body='true' ng-click='runProject(project._id)'><i class='fa fa-play'></i></button>
-	                			<button class='btn btn-xs btn-default ng-scope' tooltip='Edit Project' tooltip-append-to-body='true' ng-click='updateProject(project._id)'><i class='fa fa-pencil'></i></button>
-	                			<button class='btn btn-xs btn-default ng-scope' tooltip='Stop Project' tooltip-append-to-body='true' ng-click='stopProject(project._id)'><i class='fa fa-stop'></i></button>
-	                			<button class='btn btn-xs btn-default ng-scope' tooltip='Delete' tooltip-append-to-body='true' ng-click='deleteProject(project._id)'><i class='fa fa-times'></i></button>
+	                			<button class='btn btn-xs btn-default ng-scope run-project' tooltip='Run Project' tooltip-append-to-body='true' ng-click='runProject(project._id)'><i class='fa fa-play'></i></button>
+	                			<button class='btn btn-xs btn-default ng-scope update-project' tooltip='Edit Project' tooltip-append-to-body='true' ng-click='updateProject(project._id)'><i class='fa fa-pencil'></i></button>
+	                			<button class='btn btn-xs btn-default ng-scope stop-project' tooltip='Stop Project' tooltip-append-to-body='true' ng-click='stopProject(project._id)'><i class='fa fa-stop'></i></button>
+	                			<button class='btn btn-xs btn-default ng-scope delete-project' tooltip='Delete' tooltip-append-to-body='true' ng-click='deleteProject(project._id)'><i class='fa fa-times'></i></button>
 	                		</td>
 	                	</tr>
 	                	<tr>
@@ -97,7 +99,7 @@
 
 	                						<td>
 	                							<button class='btn btn-xs btn-default ng-scope' tooltip='Run Script' tooltip-append-to-body='true' ng-click='runScript(script._id)'><i class='fa fa-play'></i></button>
-	                							<button class='btn btn-xs btn-default ng-scope' tooltip='Edit Script' tooltip-append-to-body='true' ng-click='updateScript(script._id)'><i class='fa fa-pencil'></i></button>
+	                							<button class='btn btn-xs btn-default ng-scope' tooltip='Edit Script' tooltip-append-to-body='true' ng-click='updateScript(script)'><i class='fa fa-pencil'></i></button>
 	                							<button class='btn btn-xs btn-default ng-scope' tooltip='Stop Script' tooltip-append-to-body='true' ng-click='stopScript(script._id)'><i class='fa fa-stop'></i></button>
 	                							<button class='btn btn-xs btn-default ng-scope' tooltip='Delete' tooltip-append-to-body='true' ng-click='deleteScript(script._id)'><i class='fa fa-times'></i></button>
 	                						</td>
@@ -111,7 +113,7 @@
                     
               </div>
               <div class="pageList" style="text-align: center">
-                <pagination total-items="totalProjects" ng-model="currentPage" ng-change="pageChanged(currentPage)"></pagination>
+                <pagination total-items="totalProjects" ng-model="currentPage" ng-change="pageChanged(currentPage)" num-pages="totalPage"></pagination>
               </div>
             </div>
         </div>
