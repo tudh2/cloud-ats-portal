@@ -1,0 +1,61 @@
+<div>
+	
+	<div class="row" style="margin-top:20px;">
+		<div class="col-sm-12">
+			<div class="col-sm-3">
+	        <section class="smart-form">
+	                <label class="input"> <i class="icon-append fa fa-search"></i>
+	                  <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3"></label>
+	        </section>
+			</div>
+			<div class="col-sm-9">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="functional-title col-sm-6">
+							<p style="text-align: left; padding-top:5px">365 Test Scripts</p>
+						</div>
+						<div class="col-sm-6" style="padding-right: 0px;">
+								<button type="submit" class="btn new-project pull-right" style="margin-right: 0px; color: white;" data-toggle="modal" data-target="#createScript" ng-click="clickCreateScriptButton();">New Test Script</button>
+								<button type="submit" class="btn new-project pull-right" style="margin-right: 10px; color:white;" data-toggle="modal" data-target="#uploadScript" ng-click="clickUploadScriptButton();">Upload Script</button>
+								
+								<div data-smart-include="/app/fk/views/upload-script.tpl.html"></div>
+								<div data-smart-include="/app/fk/views/create-jmeter-script.tpl.html"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="row" style="margin-top: 10px;">
+			<div class="col-sm-12">
+				<div class="col-sm-3">
+					<div class="functional-project-overview">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6"><span class="project-name">#181</span></div>
+						</div>
+						<div class="col-sm-12 sumary">
+							<div class="col-sm-11">
+								<small><strong>EDB is Enterprise Database System. This test case is cover the front end area</strong></small>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+				<div class="col-sm-3" ng-repeat="j in [1, 2, 4,3,5,9,10,1] track by $index">
+					<div class="functional-project-overview-not-choose">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6"><span class="project-name">#181</span></div>
+						</div>
+						<div class="col-sm-12 sumary">
+							<div class="col-sm-11">
+								<small><strong>EDB is Enterprise Database System. This test case is cover the front end area</strong></small>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>

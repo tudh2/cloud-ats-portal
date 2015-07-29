@@ -130,7 +130,7 @@ define(['performance/module', 'notification'], function (module) {
 
 			var object = {'project_name': wizardData.project_name, 'users' : $users, 'ramup' : $ramup, 'loops' : $loops, 'duration' : $duration, 'samplers': $scope.samplers};
 			if ($scope.scriptId != undefined) {
-				$scope.scriptId = '2228c45e-6e27-4fd2-9aff-b7b5764cd9e8';
+				$scope.scriptId = '8ac6a426-7f7a-4949-a95c-ca63fc72523e';
 				object = {'script_id': $scope.scriptId,'project_name': wizardData.project_name, 'users' : $users, 'ramup' : $ramup, 'loops' : $loops, 'duration' : $duration, 'samplers': $scope.samplers};
 				performanceService.updatePerformanceTestWizard(object, function (data, status) {
 

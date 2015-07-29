@@ -1,0 +1,151 @@
+<div class="row">
+	<div class="col-sm-3 list_testSuite">
+		<p>1.CHOOSE TEST SUITE</p>
+		<div>
+			<section class="smart-form">
+              <label class="input"> <i class="icon-append fa fa-search"></i>
+                <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched"></label>
+      	</section>
+      </div>
+      <div class="row" style="margin-top: 20px;" ng-repeat="suite in project.suites track by $index">
+      	<div class="col-sm-12" style="padding-right: 8px;">
+      		<span class="pull-left">{{suite.suite_name}}</span>
+      		<div class="smart-form check-list">
+            <label class="checkbox pull-right suiteId">
+                <input type="checkbox" name="suite" style="background-color: white" value="{{suite._id}}" ng-click="check($event);">
+                <i style="background-color: white"></i></label>
+          </div>
+      	</div>
+      </div>
+	</div>
+	<div class="col-sm-3 choose-browser list_testSuite" style="height: 547px;">
+		<p>2.CHOOSE BROWSER</p>
+    <div class="row">
+      <div class="col-sm-12 browser">
+      <div class="col-sm-6" ng-click="selectChome();">
+        <div class="smart-form" style="margin-top: 20px;">
+          <label class="radio state-success">
+            <input name="browser" type="radio" checked=""><i class="choose_browse"></i><img ng-src="/styles/img/chrome.jpg" width="60px;" height="60px;">
+          </label>
+        </div>
+      </div>
+
+      <div class="col-sm-6 select-version" ng-if="versionSelected==1">
+          <p>Select Version</p>
+          <div class="form-group">
+            <select class="form-control">
+              <option>v1.0</option>
+            </select>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 browser">
+      <div class="col-sm-6" ng-click="selectFirefox();">
+        <div class="smart-form" style="margin-top: 20px;">
+          <label class="radio state-success">
+            <input name="browser" type="radio"><i class="choose_browse"></i><img ng-src="/styles/img/firefox.jpg" width="60px;" height="60px;">
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6 select-version" ng-if="versionSelected==2">
+          <p>Select Version</p>
+          <div class="form-group">
+            <select class="form-control">
+              <option>v1.0</option>
+            </select>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 browser">
+      <div class="col-sm-6" ng-click="selectIE();">
+        <div class="smart-form" style="margin-top: 20px;">
+          <label class="radio state-success">
+            <input name="browser" type="radio"><i class="choose_browse"></i><img ng-src="/styles/img/ie.jpg" width="60px;" height="60px;">
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6 select-version" ng-if="versionSelected==3">
+          <p>Select Version</p>
+          <div class="form-group">
+            <select class="form-control">
+              <option>v1.0</option>
+            </select>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 browser">
+      <div class="col-sm-6" ng-click="selectSafari();">
+        <div class="smart-form" style="margin-top: 20px;">
+          <label class="radio state-success">
+            <input name="browser" type="radio"><i class="choose_browse"></i><img ng-src="/styles/img/safari.png" width="60px;" height="60px;">
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6 select-version" ng-if="versionSelected==4">
+          <p>Select Version</p>
+          <div class="form-group">
+            <select class="form-control">
+              <option>v1.0</option>
+            </select>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 browser">
+      <div class="col-sm-6" ng-click="selectOpera();">
+        <div class="smart-form" style="margin-top: 20px;">
+          <label class="radio state-success">
+            <input name="browser" type="radio"><i class="choose_browse"></i><img ng-src="/styles/img/opera.png" width="60px;" height="60px;">
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6 select-version" ng-if="versionSelected==5">
+          <p>Select Version</p>
+          <div class="form-group">
+            <select class="form-control">
+              <option>v1.0</option>
+            </select>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3 select-os list_testSuite">
+    <p>3.SELECT OS</p>
+    <div class="row">
+      <div class="col-sm-12">
+      <div class="col-sm-6">
+        <div class="smart-form" style="margin-top: 20px;">
+          <label class="radio state-success">
+            <input name="os" type="radio"><i class="choose_browse"></i><img ng-src="/styles/img/ios.png" width="60px;" height="60px;">
+          </label>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+      <div class="col-sm-6">
+        <div class="smart-form" style="margin-top: 20px;">
+          <label class="radio state-success">
+            <input name="os" type="radio" checked=""><i class="choose_browse"></i><img ng-src="/styles/img/window.jpg" width="60px;" height="60px;">
+          </label>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3 run-test">
+    <div class="">
+      <a class="Run_Test" ng-click="runTestFunctional()">Run Test</a>
+
+    </div>
+  </div>
+</div>

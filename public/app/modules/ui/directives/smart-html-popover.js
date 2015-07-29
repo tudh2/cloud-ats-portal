@@ -11,6 +11,6 @@ define(['layout/module'], function(module) {
   });
 
   module.registerDirective('smartHtmlPopover',function ($tooltip) {
-      return $tooltip("smartHtmlPopover", "popover", "mouseenter");
+      return $tooltip("smartHtmlPopover", "popover", "hover");
   });
 });

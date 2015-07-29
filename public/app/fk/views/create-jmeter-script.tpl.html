@@ -1,0 +1,376 @@
+<div class="modal fade" id="createScript" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+				<div class="tab" style="margin-top: 20px;">
+				<ul class="nav nav-tabs" style="cursor: pointer;height: 40px;">
+					<li class="col-sm-5" >
+							<strong>TEST SCRIPTS </strong><span class="project-name"> #181</span>
+					</li>
+					<li class="active">
+						<a data-toggle="tab" href="#basic" id="basicId" ng-click="basic()"><strong>BASIC INFO</strong></a>
+					</li>
+					<li >
+						<a data-toggle="tab" href="#samplers" id="samplersId" ng-click="newSampler();"><strong>SAMPLER</strong></a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#configuration" id="configurationId" ng-click="configuration()"><strong>CONFIGURATION</strong></a>
+					</li>
+				</ul>
+			</div>
+			<div class="modal-body">
+			<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade active in" id="basic">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-9 information" style="padding-left: 0px;">
+							<span class="icon-equalizer" aria-hidden="true" style="display:inline-block; margin-right:5px;"></span>
+							<h4 class="title-sampler">Basic Information</h4>
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-12" style="padding-left: 0px;">
+									<div class="col-sm-4" style="padding-left: 0px;">
+										<p class="pull-left">Test Script Name</p>
+									</div>
+									<div class="col-sm-8">
+										<textarea cols="42" rows="4" class="area-script-name">
+											Test
+
+										</textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12" style="padding-right: 0px;">
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-12">
+								<div class="col-sm-4">
+									
+								</div>
+								<div class="col-sm-8" style="padding-left: 0px;padding-right: 0px;">
+									<a class="btn btn-deleteScript">Delete</a>
+									<a class="btn btn-uploadFile pull-right">Save</a>
+								</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="samplers">
+				<div class="row">
+					<div class="col-sm-12" style="padding-bottom: 13px;">
+						<div class="col-sm-7 sampler_names">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-7" style="margin-top:10px;">
+										<div class="form-group">
+											<input type="text" id="filter_sampler" class="form-control" placeholder="Filter by name or number" style="background-color: #ADC0C6;">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+								<div class="col-sm-4" ng-repeat="i in [1,2,3,2,23,3,2,3,4,3,3,2] track by $index">
+								<div class="sampler_name" remove-sampler-button>
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="col-sm-6 number" style="padding-left:0px;">
+													<span class ="project-name">#1</span>
+												</div>
+												
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<p><small>Sampler with long name</small></p>
+											</div>
+										</div>
+										</div>
+									</div>
+									<!-- <div class="col-sm-4" ng-repeat="i in [1,2,3,4,5,2,3,4,5,3,43,5] track by $index" remove-sampler-button>
+									<div  class="sampler_name">
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="col-sm-6 number" style="padding-left:0px;">
+													<span class="project-name">#{{i}}</span>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<p><small>Sampler with long name</small></p>
+											</div>
+										</div>
+										</div>
+									</div> -->
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-5 sampler_form">
+							<div class="row">
+								<div class="col-sm-12" style="padding-bottom: 20px;">
+									<div style="padding-left: 13px;">
+										<span data-js-prompt="&amp;#xe067;" data-icon="&#xe067;" aria-hidden="true" class="glyph-item mega" style="display:inline-block;"></span>
+										<h4 style="padding-top: 10px;" class="title-sampler"><strong>New Sampler</strong></h4>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-4">
+										<strong>Sampler name</strong>
+									</div>
+									<div class="col-sm-8">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Enter Name">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-4" style="padding-right: 0px;">
+										<strong>Sampler method</strong>
+									</div>
+									<div class="col-sm-8">
+										<div class="form-group">
+											<select class="form-control">
+							          <option value="GET">GET</option>
+							          <option value="POST">POST</option>
+							          <option value="PUT">PUT</option>
+							          <option value="DELETE">DELETE</option>
+							        </select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-4">
+										<strong>Sampler url</strong>
+									</div>
+									<div class="col-sm-8">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="e.g. http://www.abc.com">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-4">
+										<strong>Parameters</strong>
+									</div>
+									<div class="col-sm-8">
+										<div class="row"  ng-repeat="i in [1,2,3]">
+											<div class="col-sm-4" style="padding-right: 0px;">
+												<div class="form-group">
+													<input type="text" class="form-control">
+												</div>
+											</div>
+											<div class="col-sm-4" style="padding-right: 0px;">
+												<div class="form-group">
+													<input type="text" class="form-control">
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="col-sm-6">
+															<i class="fa fa-minus-circle icon"></i>
+														</div>
+														<div class="col-sm-6" ng-if="i == 3">
+															<i class="fa fa-plus-circle icon-add"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-4">
+										<strong>Assertion text</strong>
+									</div>
+									<div class="col-sm-8">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Enter">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-4" style="padding-right: 0px;">
+										<strong>Constant time(s)</strong>
+									</div>
+									<div class="col-sm-8">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="miliseconds">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-4">
+									</div>
+									<div class="col-sm-8">
+									<a class="btn btn-uploadFile">Save</a>
+									<a class="btn btn-reset pull-right">Reset</a>
+								</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+							<div class="tab-pane fade" id="configuration">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-10 information" style="padding-left: 0px;">
+							<span class="icon-equalizer" aria-hidden="true" style="display:inline-block; margin-right:5px;"></span>
+							<h4 class="title-sampler">Configuration</h4>
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-10">
+							<div class="row">
+								<div class="col-sm-12" style="padding-right: 0px;">
+									<div class="col-sm-5"></div>
+									<div class="col-sm-7" style="padding-right: 0px;padding-left: 0px;">
+										<span class="pull-left impress">1</span>
+										<span class="pull-right impress">1000</span>
+									</div>
+								</div>
+								
+							</div>
+							<div class="row">
+								<div class="col-sm-12" style="padding-left: 0px;padding-right: 0px;">
+									<div class="col-sm-5" style="padding-left: 0px;">
+										<p class="pull-left  impress">Concurrent Users
+											<span class="badge bg-color-greenLight" id="usersSliderVal"> 200</span>
+										</p>
+									</div>
+									<div class="col-sm-7" style="padding-right: 0px;">
+										<input data-smart-uislider type="text" class="slider slider-success" id="users" 
+			                data-slider-id="usersSlider"
+			                data-slider-min="100"
+			                data-slider-max="1000"
+			                data-slider-selection = "before"
+			                data-slider-tooltip="hide"
+			                data-slider-handle="round" ng-model="configuration.users">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" style="padding-right: 0px;">
+									<div class="col-sm-5"></div>
+									<div class="col-sm-7" style="padding-right: 0px;padding-left: 0px;">
+										<span class="pull-left impress">5s</span>
+										<span class="pull-right impress">100s</span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" style="padding-left: 0px;padding-right: 0px;">
+									<div class="col-sm-5" style="padding-left: 0px;">
+										<p class="pull-left impress">Ram up <span class="badge bg-color-greenLight" id="usersSliderVal"> 5</span></p>
+									</div>
+									<div class="col-sm-7" style="padding-right: 0px;">
+										<input data-smart-uislider type="text" class="slider slider-success" id="ramup"   
+	                     data-slider-id="ramupSlider"
+	                     data-slider-min="5"
+	                     data-slider-max="100"
+	                     data-slider-selection = "before"
+	                     data-slider-tooltip="hide"
+	                     data-slider-handle="round" ng-model="configuration.ramup">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" style="padding-right: 0px;">
+									<div class="col-sm-5"></div>
+									<div class="col-sm-7" style="padding-right: 0px;padding-left: 0px;">
+										<span class="pull-left impress">1</span>
+										<span class="pull-right impress">10</span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" style="padding-left: 0px;padding-right: 0px;">
+									<div class="col-sm-5" style="padding-left: 0px;">
+										<p class="pull-left impress">Loops <span class="badge bg-color-greenLight" id="usersSliderVal"> 4</span></p>
+									</div>
+									<div class="col-sm-7" style="padding-right: 0px;">
+										<input data-smart-uislider type="text" class="slider slider-success" id="loops" 
+                     data-slider-min="1"
+                     data-slider-max="10"
+                     data-slider-selection = "before"
+                     data-slider-tooltip="hide"
+                     data-slider-handle="round" ng-model="configuration.loops">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" style="padding-right: 0px;">
+									<div class="col-sm-5"></div>
+									<div class="col-sm-7" style="padding-right: 0px;padding-left: 0px;">
+										<span class="pull-left impress">0</span>
+										<span class="pull-right impress">10</span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" style="padding-left: 0px;padding-right: 0px;">
+									<div class="col-sm-5" style="padding-left: 0px;">
+										<p class="pull-left impress">Duration <span class="badge bg-color-greenLight" id="usersSliderVal"> 9</span></p>
+									</div>
+									<div class="col-sm-7" style="padding-right: 0px;">
+										<input data-smart-uislider type="text" class="slider slider-success" id="duration" 
+	                     data-slider-min="0"
+	                     data-slider-max="10"
+	                     data-slider-selection = "before"
+	                     data-slider-tooltip="hide"
+	                     data-slider-handle="round" ng-model="configuration.duration">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			</div>
+			<div class="modal-footer-customize">
+				<div class="row">
+					<div class="col-sm-12">
+					<div style="margin-right: 5px;">
+
+						<button type="button" class="btn btn-close pull-right" data-dismiss="modal">Close</button>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

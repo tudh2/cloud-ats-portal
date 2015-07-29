@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="customize-tree">
+      <div class="tree">
+      <ul class="smart-treeview-group">
+        <li ng-repeat="case in cases">
+          <span class="editinline color-keyword">
+          <a ng-click="toggleExpand($event)" class="fa fa-fw fa-folder-open txt-color-darken"></a>
+          
+          <a href-void data-type="text"
+            ng-if="customKeyword" 
+            smart-xeditable data-ng-model="cases[$index]" 
+            data-options="editableOptions" 
+            data-index="{{$index}}" 
+            data-success-callback="changeCaseName"
+            class="editable color-keyword name-keyword editable-click">{{case.name}}</a>
+          <span  ng-if="!customKeyword" class="editable color-keyword name-keyword editable-click">{{case.name}}</span>
+
+          <div style="padding-left: 25px;" class="btn-group dropup" data-dropdown>
+            <a href="#" class="dropdown-toggle txt-color-darken" data-dropdown-toggle>
+              <i class="fa fa-cog"></i>
+            </a>
+            <ul class="dropdown-menu no-padding">
+              <li class="li-popup">
+                  <a ng-click="newCase()" class="txt-color-blueDark"><i class="fa fa-plus"></i> Create new suite</a>
+              </li>
+              <li class="li-popup divider"></li>
+              <li class="li-popup" ng-if="cases.length > 1">
+                  <a ng-click="deleteCase($index)" class="txt-color-redLight"><i class="fa fa-minus"></i> Delete this suite</a>
+              </li>
+            </ul>
+          </div>
+
+          </span>
+
+          <!-- action steps -->
+          <div class="steps expand">
+          <list-steps data-list="case.steps"></list-steps>
+          </div>
+          <!-- end action steps -->
+
+        </li>
+      </ul>
+    </div>
+    </div>
+
+    <div class="add-keyword" ng-init="statusAdd=true;added=false;done=false;" ng-if="!customKeyword">
+    <form ng-submit="addCustomKeyword()" ng-if="showQuickCreateCustom">
+        <a  class="style-btn-keyword pull-right" ng-show="statusAdd && !added && !done" ng-click="added=true">Add to Keyword</a>
+        <div ng-show="statusAdd && added &&!done" class="pull-right">
+          <label style="padding-top:5px">Keyword Name</label>
+        <div class="editable-input" style="position: relative;">
+          <input type="text" ng-model="nameCustomKeyword" class="form-control input-sm" style="padding-right: 24px;">
+        </div>
+        <div class="editable-buttons" style="padding-top:5px">
+          <button type="submit" class="editable-submit" ng-click="added=false;statusAdd=false;done=true;editNameCase(nameCustomKeyword)"><i class="fa fa-check"></i></button>
+          <button type="button" class="editable-cancel" ng-click="added=false"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <span class="style-status-keyword pull-right" ng-show="!statusAdd && !added && done"><i class="fa fa-check"></i><label style="padding-top:5px;padding-left:5px">Added</label></span>
+    </form>
+  </div>
+
+  </div>
+  <div class="col-md-4 keywords-list">
+
+    <div class="panel-group smart-accordion-default animated fadeInDown" id="keyword-list" style="height:530px">
+
+      <div class="filter-keyword-div">
+        <span style="top:5px;color:#00B39E;" class="col-md-1" data-js-prompt="&amp;#xe02d;" data-icon="" aria-hidden="true" class="glyph-item mega"></span>
+        <label class="col-md-4" style="top:5px">Test Keyword</label>
+        <span class="col-md-7"><input class="form-control filter-keyword" style="background:#ADC0C6;color:#EEEFF4" type="text" placeholder="Filter"></span>
+      </div>
+      
+      <div ng-init="query[cat] = ''" class="panel panel-default" ng-repeat="cat in cats">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a ng-click="selectCat(cat)" data-toggle="collapse" data-parent="#keyword-list" href="#{{cat}}" 
+              ng-class="{collapsed: !$first}">
+              <i class="fa fa-chevron-circle-right"></i>
+              <i class="fa fa-chevron-circle-down"></i>
+              <strong>{{cat}}</strong>
+            </a>
+          </h4>
+        </div>
+        <div id="{{cat}}" class="panel-collapse collapse"  ng-class="{in: $first}">
+          <div class="panel-body">
+            
+            <ul class="list-unstyled" ng-init="keywords = getKeywordsByCat(cat)">
+            
+              <!-- <li>
+                <div class="input-group padding-bottom-10">
+                  <input ng-model="query[cat]" class="form-control" type="text" placeholder="Filter...">
+                </div>
+              </li> -->
+            
+              <li ng-repeat="keyword in keywords | filter:query[cat]" 
+                style="border-bottom: 1px solid #e5e5e5; min-height: 25px;"
+                data-drag="true"
+                class="li-keyword"
+                data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+                ng-model="keywords"
+                jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}">
+
+                <a href-void class="txt-color-blue"
+                  data-popover-placement="right"
+                  data-popover-title="<strong>{{buildActionDisplay(keyword)}}</strong>"
+                  data-smart-html-popover="<p>{{buildParamsPopover(cat, keyword)}}</p>" data-html="true"><i class="fa fa-bars txt-color-grey"></i>
+                  <strong class="txt-color-blue">{{buildKeywordFullyQualified(keyword)}}</strong>
+                </a>
+               <!--  <br>
+                <span ng-if="keyword.type.length > 10 && keyword.params"><strong>params:</strong> {{buildParamsDisplay(keyword.params)}}</span> -->
+
+              </li>
+
+            </ul>
+          </div>
+        </div>        
+      </div>
+    </div>
+    <div class="group-listbutton-keyword pull-left">
+      <a class="btn btn-save-testcase" ng-if="addCase" data-dismiss="modal" ng-click="createNewTestCase()">Save</a>
+      <a class="btn btn-save-customkey" ng-if="addCustom" ng-click="addCustomKeyword()" data-dismiss="modal">Save</a>
+      <a class="btn btn-save-customkey" ng-if="updateCustom" ng-click="updateCustomKeyword()" data-dismiss="modal">Save</a>
+      <a class="btn btn-save-customkey" ng-if="updateCase" ng-click="updateTestCase()" data-dismiss="modal">Save</a>
+      <a class="btn btn-close-customkey" data-dismiss="modal" ng-if="customKeyword">Close</a>
+  </div>
+  </div>
+</div>

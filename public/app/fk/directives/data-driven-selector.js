@@ -5,7 +5,8 @@ define(['fk/module', 'lodash'], function(module, _) {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'app/fk/directives/data-driven-selector.tpl.html',
+      //templateUrl: 'app/fk/directives/data-driven-selector.tpl.html',
+      templateUrl: 'app/fk/directives/new-datadriven.tpl.html',
       link: function(scope, element, attributes) {
 
         scope.showCreateForm = false;
