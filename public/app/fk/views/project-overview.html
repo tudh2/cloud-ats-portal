@@ -1,0 +1,116 @@
+<div>
+<div  ng-if="project_overview">
+	<div class="row">
+		<div class="col-sm-12 tab">
+			
+				<ul class="nav nav-tabs" style="cursor: pointer;height: 41px;">
+					<li class="active col-sm-3" >
+							<a data-toggle="tab" href="#projectOverview"><strong>PROJECT OVERVIEW</strong></a>
+					</li>
+				</ul>
+		</div>
+	</div>
+	<div class="tab-content">
+		<div class="tab-pane fade in active" id="projectOverview">
+			<div data-smart-include="/app/fk/views/project-overview.tpl.html"></div>
+		</div>
+	</div>
+</div>
+
+<div ng-if="!project_overview && !performance">
+	<!-- <div data-smart-include="/app/dashboard/script-list.html"></div> -->
+<div data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" id="nav-tab" class="jarviswidget jarviswidget-sortable" role="widget">
+  
+  <header class="header-navtabs">
+    <h2><b>{{title}}</b></h2>
+
+    <ul id="myTab" class="nav nav-tabs pull-right">
+      <li class="active">
+        <a href="#projectDetail" data-toggle="tab" ng-click="title='PROJECT DETAILS'" ng-init="title='PROJECT DETAILS'"><span class="hidden-mobile hidden-tablet">PROJECT DETAILS</span></a>
+      </li>
+      <li>
+        <a href="#testCases" data-toggle="tab" ng-click="title='TEST CASE'"><span class="hidden-mobile hidden-tablet">TEST CASE</span></a>
+      </li>
+      <li>
+        <a href="#dataDriven" data-toggle="tab" ng-click="title='DATA DRIVEN'"><span class="hidden-mobile hidden-tablet">DATA DRIVEN</span></a>
+      </li>
+      <li>
+        <a href="#testSuites" data-toggle="tab" ng-click="title='TEST SUITE'"><span class="hidden-mobile hidden-tablet">TEST SUITE</span></a>
+      </li>
+      <li>
+        <a href="#execution" data-toggle="tab" ng-click="title='EXECUTION'"><span class="hidden-mobile hidden-tablet">EXECUTION</span></a>
+      </li>
+    </ul>
+ </header>
+
+ <div class="no-padding">
+  <div class="widget-body">
+    <div id="myTabContent" class="tab-content">
+      <!-- tab s1 -->
+      <div class="tab-pane fade active in no-padding-bottom" id="projectDetail">
+        <div ng-if="performance">
+        	<div smart-include="app/fk/views/project-performance-detail.tpl.html"></div>
+        </div>
+        <div ng-if="!performance">
+        	<div smart-include="app/fk/views/project-functional-detail.tpl.html"></div>
+        </div>
+      </div>
+      <div class="tab-pane fade in no-padding-bottom" id="testCases">
+        <div smart-include="app/fk/views/testcases.tpl.html" class="testcase"></div>
+      </div>
+      <div class="tab-pane fade in no-padding-bottom" id="dataDriven">
+        <!-- <div smart-include="app/fk/views/new-datadriven.tpl.html" class="datadriven"></div> -->
+        <driven-selector></driven-selector>
+          
+      </div>
+      <div class="tab-pane fade in no-padding-bottom" id="testSuites">
+        <div smart-include="app/fk/views/test-suite.tpl.html" class="testsuite"></div>
+      </div>
+      <div class="tab-pane fade in no-padding-bottom" id="execution">
+        <div smart-include="app/fk/views/project-functional-execution.tpl.html" class="testsuite"></div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+</div>
+</div>
+<div ng-if="!project_overview && performance">
+  <div data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" id="nav-tab" class="jarviswidget jarviswidget-sortable" role="widget">
+  
+  <header class="header-navtabs">
+    <h2><b>{{title}}</b></h2>
+
+    <ul id="myTab" class="nav nav-tabs pull-right">
+      <li class="active">
+        <a href="#projectDetail" data-toggle="tab" ng-click="title='PROJECT DETAILS'" ng-init="title='PROJECT DETAILS'"><span class="hidden-mobile hidden-tablet">PROJECT DETAILS</span></a>
+      </li>
+      <li>
+        <a href="#testScripts" data-toggle="tab" ng-click="title='TEST SCRIPT'"><span class="hidden-mobile hidden-tablet">TEST SCRIPT</span></a>
+      </li>
+      <li>
+        <a href="#execution" data-toggle="tab" ng-click="title='EXECUTION'"><span class="hidden-mobile hidden-tablet">EXECUTION</span></a>
+      </li>
+    </ul>
+ </header>
+
+ <div class="no-padding">
+  <div class="widget-body">
+    <div id="myTabContent" class="tab-content">
+      <!-- tab s1 -->
+      <div class="tab-pane fade active in no-padding-bottom" id="projectDetail">
+          <div smart-include="app/fk/views/project-performance-detail.tpl.html"></div>
+      </div>
+      <div class="tab-pane fade in no-padding-bottom" id="testScripts">
+        <div smart-include="app/fk/views/script-list.html" class="testsuite"></div>
+      </div>
+      <div class="tab-pane fade in no-padding-bottom" id="execution">
+        <div smart-include="app/fk/views/project-performance-execution.tpl.html" class="testsuite"></div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+</div>
+</div>
+</div>

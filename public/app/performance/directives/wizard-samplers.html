@@ -25,6 +25,7 @@
 				<span class="input-group-addon" style="min-width:150px;text-align:left;">Sampler Name</span>
 				<input class="form-control" type="text" ng-model="selected.sampler_name" name="sampler_name">
 			</div>
+      <span ng-show="isEmptySamplerName" style="color: red;">Tell us sampler name</span>
 		</div>
 		<div class="form-group">
     	<div class="input-group">
@@ -42,8 +43,9 @@
         <span class="input-group-addon" style="min-width:150px;text-align:left;">Sampler Url</span>
         <input class="form-control" type="text" ng-model="selected.sampler_url" name="sampler_url">
       </div>
+      <span ng-show="isEmptySamplerUrl" style="color: red;">Tell us sampler url</span>
     </div>
-    <div class="form-group sampler-para">
+    <div class="form-group sampler-param">
       <div class="input-group">
          <a data-toggle="collapse" class="btn btn-default btn-xs" href="#collapseOne-1">	<i class="fa fa-fw fa-sort-down  txt-color-green"></i>Parameters </a>
 
@@ -52,7 +54,7 @@
 
             <div class="panel-body" style="text-align: center;">
 
-              <div class="param-block" ng-repeat="param in selected.params track by $index">
+              <div class="param-block" id="param-block" ng-repeat="param in selected.params track by $index">
 
 							  <a class="remove" href-void  ng-click="removeParamBlock($index)"><i class="fa fa-minus-circle"></i></a>
 
@@ -65,7 +67,7 @@
             </div>
           </div>
         </div>
-
+        <span ng-show="isEmptyParam" style="color: red;">Tell us param name and value</span>
         <!-- <a href-void="" class="btn btn-default btn-xs pull-right" href="#"><i class="fa fa-plus-circle"></i>Paremeters</a> -->
     </div>
     	
@@ -90,7 +92,7 @@
     </div>
     <div class="form-group" ng-show="create">
     	<div class="input-group">
-   			<button type="submit" class="btn btn-primary pull-right" ng-click='addSampler()'>Create</button>
+   			<button type="button" class="btn btn-primary pull-right" ng-click='addSampler()'>Create</button>
     	</div>
     </div>
     <div class="form-group" ng-show="!create">

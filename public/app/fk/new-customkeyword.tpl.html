@@ -1,0 +1,41 @@
+<div class="testcase-tab">
+        <div class="border-div row col-md-12">
+        	<form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="" style="top:15px;margin-left:10px;">
+				    <input id="search-fld" type="text" name="param" placeholder="Search Test Keyword" class="ui-autocomplete-input" autocomplete="off">
+				    <button type="submit">
+				      <i class="fa fa-search"></i>
+				    </button>
+			</form>
+			<span class="col-md-2 count-testcase"><label>{{listCustomKeywords.length}} Custom Keyword</label></span>
+			<span class="pull-right btn-customkeyword">
+				<a class="btn btn-backtolist" ng-click="customKey(customKeyword)">Back to Test Case List</a>
+				<a data-toggle="modal" data-target="#customKey" class="btn newtestcase" ng-click="editCustomKeyword=false">New Keyword</a>
+			</span>
+
+        </div>
+        <!-- list test case -->
+        <div class="list-testcase-customkeyword col-md-12">
+        	<div class="col-md-2 test-element-custom" ng-mouseenter="delete=true" ng-mouseleave="delete=false" ng-repeat="custom in listCustomKeywords" ng-init="delete=false" ng-click="editCustom(editCustomKeyword,custom) ">
+        		<div class="id-test">
+	        			<span># {{$index+1}}</span>	
+	        			<span ng-if="delete" ng-click="removeCustomKeyword(custom.name,$index)" class="pull-right icon"><i class="glyphicon icon-delete glyphicon-remove-circle"></i></span>        			
+	        	</div>
+	        	<div class="col-md-2 test-element-custom-child" data-toggle="modal" data-target="#customKey">
+	        		<div class="content-testcase">
+	        			{{custom.name}} --- {{$index}}
+	        		</div>
+	        	</div>
+        	</div>
+        </div>
+        <!-- Custom keyword Modal -->
+        <div class="modal fade" id="customKey" tabindex="-1" role="dialog" aria-labelledby="customModalLabel" aria-hidden="true">
+		    <div class="modal-dialog create-newtestcase">
+		        <div class="modal-content">
+		            <div class="modal-body new-testcase">
+		            	<keywords></keywords>
+		            </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+        <!-- List testcase modal -->
+</div>

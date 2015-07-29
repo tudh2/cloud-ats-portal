@@ -8,11 +8,19 @@ define(['performance/module'], function (module) {
 			templateUrl: 'app/performance/directives/new-performance-test-wizard.html',
 			link : function (scope, element, attribute) {
 
-				$('#users').bootstrapSlider('setValue', 200);
-				$('#ramup').bootstrapSlider('setValue', 5);
-				$('#loops').bootstrapSlider('setValue', 1);
-				$('#duration').bootstrapSlider('setValue', 0);
+				// set value for input slider
+				$('#users').bootstrapSlider('setValue', scope.configuration.users);
+				$('#ramup').bootstrapSlider('setValue', scope.configuration.ramup);
+				$('#loops').bootstrapSlider('setValue', scope.configuration.loops);
+				$('#duration').bootstrapSlider('setValue', scope.configuration.duration);
 
+				// show value slider in span tag
+				$("#usersSliderVal").text(scope.configuration.users);
+				$("#ramupSliderVal").text(scope.configuration.ramup);
+				$("#loopsSliderVal").text(scope.configuration.loops);
+				$("#durationSliderVal").text(scope.configuration.duration);
+
+				// handle if user interact with slider 
 				$("#users").on("slide", function(slideEvt) {
 			    $("#usersSliderVal").text(slideEvt.value);
 			  });

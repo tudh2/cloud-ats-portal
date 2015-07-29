@@ -18,7 +18,6 @@ define(['performance/module', 'lodash', 'jquery-validation'], function (module, 
 					scope.selected.params.push(param);
 
 					var $collapse = $('#collapseOne-1');
-
 					$collapse.collapse('show');
 				}
 
@@ -35,20 +34,26 @@ define(['performance/module', 'lodash', 'jquery-validation'], function (module, 
 							sampler_constantTime: '0',
 							params: []
 						};
-						var $form = element.find('.samplers .col-sm-8 .form-group');
+						/*var $form = element.find('.samplers .col-sm-8 .form-group');
 						$form.removeClass('has-error');
 						$form.removeClass('has-success');
-						$form.find('.project-error').remove();
+						$form.find('.project-error').remove();*/
+						scope.isEmptySamplerUrl = false;
+						scope.isEmptyParam = false;
+						scope.isEmptySamplerName = false;
 					};
 					
 				}
 
 				scope.select = function (sampler, index) {
-					scope.selected = sampler;
 
-					scope.selected.index = index;
-					scope.create = false;
-
+					if (scope.isEmptySamplerName == true || scope.isEmptySamplerUrl == true || scope.isEmptyParam == true) {
+						return false;
+					} else {
+						scope.selected = sampler;
+						scope.selected.index = index;
+						scope.create = false;
+					}
 				}
 
 				scope.deleteSampler = function (sampler) {
@@ -90,20 +95,14 @@ define(['performance/module', 'lodash', 'jquery-validation'], function (module, 
 					var sampler_url = sampler.sampler_url;
 					var params = sampler.params;
 
-					var error = "<span class='project-error' style='color: #b94a48;'>The field is required</span>";
 					var check = true;
 					if (sampler_name == undefined || sampler_url == undefined || sampler_name == '' || sampler_url == '') {
 						
-						var $sampler_name = element.find('.form-group.sampler-name');
-						var $sampler_url = element.find('.form-group.sampler-url');
-						if ((sampler_name == undefined || sampler_name == '') && !$sampler_name.hasClass('has-error')) {
-							$sampler_name.addClass('has-error');
-							$sampler_name.append(error);
+						if ((sampler_name == undefined || sampler_name == '')) {
+							scope.isEmptySamplerName = true;
 						}
-						if ((sampler_url == undefined || sampler_name == '') && !$sampler_url.hasClass('has-error')) {
-							
-							$sampler_url.addClass('has-error');
-							$sampler_url.append(error);
+						if ((sampler_url == undefined || sampler_url == '')) {
+							scope.isEmptySamplerUrl = true;
 						}
 					
 						check = false;
@@ -112,11 +111,33 @@ define(['performance/module', 'lodash', 'jquery-validation'], function (module, 
 						console.log(param);
 						if (param.name == '' || param.value == '') {
 							console.log('param is empty');
+							scope.isEmptyParam = true;
 							check = false;
+
 						}
 					});
 					return check
 				}
+
+				var $sampler_name = $('form .form-group .input-group').find('[name="sampler_name"]');
+
+				$sampler_name.on('keyup', function () {
+					if ($(this).val() == '') {
+						scope.isEmptySamplerName = true;
+					} else scope.isEmptySamplerName = false;
+				});
+
+				var $sampler_url = $('form .form-group .input-group').find('[name="sampler_url"]');
+				
+				$sampler_url.on('keyup', function () {
+					if ($(this).val() == '') {
+						scope.isEmptySamplerUrl = true;
+					} else scope.isEmptySamplerUrl = false;
+				});
+
+				var $sampler_param = $('form .form-group .input-group #collapseOne-1 .panel-body').children();
+				
+
 			}
 		}
 	}]);
