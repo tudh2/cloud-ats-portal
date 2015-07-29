@@ -26,6 +26,9 @@ define([
   //dashboard
   'dashboard/module',
 
+  //console
+  'console/module',
+
   //fk
   'fk/module',
 

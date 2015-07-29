@@ -32,7 +32,8 @@ define([
     'app.fk',
     'app.performance',
     'app.functional',
-    'app.virtual'
+    'app.virtual',
+    'app.console'
     ///'app.widgets',
     //'app.graphs',
     //'app.calendar',

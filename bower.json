@@ -15,7 +15,7 @@
     "angular-route": "~1.4.0-rc.2",
     "angular-ui-router": "~0.2.11",
     "angular-loading-bar": "0.6.0",
-	"angular-dragdrop": "~1.0.9",
+		"angular-dragdrop": "~1.0.9",
     
     "jquery": "~2.1.1",
     "jquery.easy-pie-chart": "~2.1.4",
@@ -62,7 +62,8 @@
     "markdown": "~0.5.0",
     "moment-timezone": "~0.2.3",
     "requirejs": "~2.1.15",
-    "angular-xeditable": "~0.1.8"
+    "angular-xeditable": "~0.1.8",
+		"morris.js": "~0.5.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
