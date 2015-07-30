@@ -1,12 +1,15 @@
 <div class="testcase-tab">
 	<div class="testList" ng-if="!customKeyword">
-		<div class="border-div row col-md-12">
-        	<form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="" style="top:15px;margin-left:20px;">
+		<div class="border-div">
+         <div class="row actionMenu">
+         	<div class="col-md-3">
+        	<form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="">
 				    <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" autocomplete="off">
 				    <button type="submit">
 				      <i class="fa fa-search"></i>
 				    </button>
 			</form>
+            </div>
 			<span ng-if="lists.length < 2" class="col-md-2 count-testcase"><label>{{lists.length}} Test Case</label></span>
 			<span ng-if="lists.length > 1" class="col-md-2 count-testcase"><label>{{lists.length}} Test Cases</label></span>
         	<div class="dropdown testcase-group col-md-3">
@@ -18,54 +21,56 @@
 			    <li><a href="">Register</a></li>
 			  </ul>
 			</div>
-			<span class="pull-right btn-newtestcase">
-				<a ng-click="customKey(customKeyword); getListCustomKeywords();resetCase('Custom Keyword');customKeywordStatus()" class="btn newtestcase">Custom Keyword</a>
-				<a data-toggle="modal" data-target="#editCase" class="btn newtestcase" ng-click="resetCase('Test Case 1'); newTestCaseStatus()">New Test Case</a>
+			<span class="col-md-4 pull-right btn-action-list">
+				<a ng-click="customKey(customKeyword); getListCustomKeywords();resetCase('Custom Keyword');customKeywordStatus()" class="btn btn-default">Custom Keyword</a>
+				<a data-toggle="modal" data-target="#editCase" class="btn btn-primary" ng-click="resetCase('Test Case 1'); newTestCaseStatus()">New Test Case</a>
 			</span>
-
+</div>
         </div>
         <!-- list test case -->
-        <div class="list-testcase col-md-12">
-        	<div class="col-md-3 test-element-div" ng-repeat="case in lists track by $index| orderBy:'case.create_date'" data-toggle="modal" data-target="#editCase" ng-click="editCustom(editCustomKeyword,case);editCaseStatus($index);" >
-        		<div class="id-test">
-        			<span># {{case._id.substring(0,8)}}</span>
-        			<span class="pull-right">Group Name</span>
-        		</div>
-        		<div>{{case.name}}</div>
-        		<div class="content-testcase">
-        			<span>{{case.info}}</span>
-        		</div>
+		<div class="list-testcase">
+        	<div  class="col-md-3" ng-repeat="case in lists track by $index| orderBy:'case.create_date'" data-toggle="modal" data-target="#editCase" ng-click="editCustom(editCustomKeyword,case);editCaseStatus($index);">
+            	<div class="tc-itemBlock"  data-toggle="modal" data-target="#myModal">
+                	<div class="row">
+                        <div class="tc-attributes col-md-12">
+                            <div class="tc-id"># {{case._id.substring(0,8)}}</div>
+                            <div class="tc-groupName">Group Name</div>
+                        </div>
+                        <div class="tc-name col-md-12">
+                           {{case.name}}
+                        </div>
+                    </div>
+                </div>
         	</div>
         </div>
-
         <!--  -->
         <div class="modal fade" id="editCase" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		    <div class="modal-dialog create-newtestcase">
+		    <div class="modal-dialog tc-new-tabs">
 		        <div class="modal-content">
 		            <div class="modal-header">
 		                  <header class="header-navtabs">
-						    <span>TEST CASE <label class="id-test"> #{{lists.length+1}}</label></span>
+						    <div class="header-title">TEST CASE <label class="id-test"> #{{lists.length+1}}</label></div>
 
 						    <ul id="myTab" class="nav nav-tabs pull-right">
-						      <li>
+						      <li class="active">
 						        <a href="#t1" data-toggle="tab"><span class="hidden-mobile hidden-tablet">BASIC INFO</span></a>
 						      </li>
-						      <li class="active">
+						      <li>
 						        <a href="#t2" data-toggle="tab"><span class="hidden-mobile hidden-tablet">TEST KEYWORD</span></a>
 						      </li>
 						    </ul>
 						 </header>
 		            </div>
-		            <div class="modal-body new-testcase tab-content">
-		            	<div class="tab-pane fade in no-padding-bottom" id="t1">
-					        <div smart-include="app/fk/views/new-basic-info.tpl.html" class="basic"></div>
+		            <div class="modal-body tc-new-tabContent tab-content">
+		            	<div class="tab-pane active fade in no-padding-bottom" id="t1">
+					        <div smart-include="app/fk/views/new-basic-info.tpl.html" ></div>
 					    </div>
-					    <div class="tab-pane active fade in no-padding-bottom" id="t2">
+					    <div class="tab-pane fade in no-padding-bottom tab-pane-full" id="t2">
 					        <keywords></keywords>
 					    </div>
 		            </div>
 		            <div class="modal-footer group-listbutton-keyword">
-		            	<a class="btn btn-save-testcase"  data-dismiss="modal">Close</a>
+		            	<a class="btn btn-primary"  data-dismiss="modal">Close</a>
 		            </div>
 		        </div><!-- /.modal-content -->
 		    </div><!-- /.modal-dialog -->

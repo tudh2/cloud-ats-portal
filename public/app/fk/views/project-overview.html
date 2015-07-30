@@ -1,15 +1,10 @@
 <div>
 <div  ng-if="project_overview">
-	<div class="row">
-		<div class="col-sm-12 tab">
-			
-				<ul class="nav nav-tabs" style="cursor: pointer;height: 41px;">
-					<li class="active col-sm-3" >
-							<a data-toggle="tab" href="#projectOverview"><strong>PROJECT OVERVIEW</strong></a>
-					</li>
-				</ul>
-		</div>
-	</div>
+	<div  class="jarviswidget jarviswidget-sortable" >
+         <header class="header-navtabs">
+       		 <h2>Project Overview</h2>
+        </header>
+        </div>
 	<div class="tab-content">
 		<div class="tab-pane fade in active" id="projectOverview">
 			<div data-smart-include="/app/fk/views/project-overview.tpl.html"></div>
@@ -22,7 +17,7 @@
 <div data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" id="nav-tab" class="jarviswidget jarviswidget-sortable" role="widget">
   
   <header class="header-navtabs">
-    <h2><b>{{title}}</b></h2>
+    <h2>{{title}}</h2>
 
     <ul id="myTab" class="nav nav-tabs pull-right">
       <li class="active">

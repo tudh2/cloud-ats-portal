@@ -2,7 +2,8 @@ define([
   'angular',
   'angular-couch-potato',
   'angular-ui-router',
-  'angular-resource'
+  'angular-resource',
+  'morris'
 ], function(ng, couchPotato) {
   "use strict";
 

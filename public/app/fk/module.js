@@ -3,7 +3,8 @@ define([
   'angular-couch-potato',
   'angular-ui-router',
   'angular-resource',
-  'angular-dragdrop'
+  'angular-dragdrop',
+  'morris'
 ], function(ng, couchPotato) {
   'use strict';
 
@@ -107,6 +108,21 @@ define([
         },
         data: {
           title: 'Project List',
+          requireLogin: true
+        }
+      }).state('app.report', {
+        url: '/report',
+        views: {
+          "content@app": {
+            templateUrl: 'app/fk/views/report.html',
+			resolve: {
+              deps: $couchPotatoProvider.resolveDependencies([
+                'fk/controllers/fk-controller'
+				])}
+          }
+        },
+        data: {
+          title: 'Keyworks Framework',
           requireLogin: true
         }
       });

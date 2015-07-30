@@ -1,9 +1,175 @@
-define(['fk/module', 'lodash', 'notification'], function(module, _) {
+define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
   
   'use strict';
+  
+  var bar_data= [{
+      x : 'Project 1',
+      P : 100,
+      F : 10,
+      S : 10
+  }, {
+      x : 'Project 2',
+      P : 100,
+      F : 0,
+      S : 0
+  }, {
+      x : 'Project 3',
+      P : 90,
+      F : 10,
+      S : 0
+  }, {
+      x : 'Project 4',
+      P : 90,
+      F : 0,
+      S : 10
+  }]
+  module.registerDirective('morrisStackedBarGraph', function(){
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '<div class="chart no-padding"></div>',
+            link: function(scope, element){
+                Morris.Bar({
+                    element : element,
+                    axes : true,
+                    grid : true,
+                    data : bar_data,
+                    xkey : 'x',
+                    ykeys : ['P', 'F', 'S'],
+                    labels : ['Pass', 'Fail', 'Skip'],
+                    barColors : ['#15ab9f','#ff4f51','#fbd601'],
+                    stacked : true
+                });
 
-  module.registerController('FKCtrl', ['$rootScope', '$scope', 'UserService', 'DataService', 'KeywordService',
-    function($rootScope, $scope, userService, dataService, keywordService) {
+            }
+        }
+    })  
+  var day_data = [{
+        "elapsed" : "I",
+        "value" : 34
+    }, {
+        "elapsed" : "II",
+        "value" : 24
+    }, {
+        "elapsed" : "III",
+        "value" : 3
+    }, {
+        "elapsed" : "IV",
+        "value" : 12
+    }, {
+        "elapsed" : "V",
+        "value" : 13
+    }, {
+        "elapsed" : "VI",
+        "value" : 22
+    }, {
+        "elapsed" : "VII",
+        "value" : 5
+    }, {
+        "elapsed" : "VIII",
+        "value" : 26
+    }, {
+        "elapsed" : "IX",
+        "value" : 12
+    }, {
+        "elapsed" : "X",
+        "value" : 19
+    }, {
+        "elapsed" : "II",
+        "value" : 24
+    }, {
+        "elapsed" : "III",
+        "value" : 3
+    }, {
+        "elapsed" : "IV",
+        "value" : 12
+    }, {
+        "elapsed" : "V",
+        "value" : 13
+    }, {
+        "elapsed" : "VI",
+        "value" : 22
+    }, {
+        "elapsed" : "VII",
+        "value" : 5
+    }, {
+        "elapsed" : "VIII",
+        "value" : 26
+    }, {
+        "elapsed" : "IX",
+        "value" : 12
+    }, {
+        "elapsed" : "X",
+        "value" : 19
+    }, {
+        "elapsed" : "II",
+        "value" : 24
+    }, {
+        "elapsed" : "III",
+        "value" : 3
+    }, {
+        "elapsed" : "IV",
+        "value" : 12
+    }, {
+        "elapsed" : "V",
+        "value" : 13
+    }, {
+        "elapsed" : "VI",
+        "value" : 22
+    }, {
+        "elapsed" : "VII",
+        "value" : 5
+    }, {
+        "elapsed" : "VIII",
+        "value" : 26
+    }, {
+        "elapsed" : "IX",
+        "value" : 12
+    }, {
+        "elapsed" : "X",
+        "value" : 19
+    }];
+
+  module.registerDirective('morrisStackedLineHitGraph', function(){
+  return {
+	  restrict: 'E',
+	  replace: true,
+	  template: '<div class="chart no-padding"></div>',
+	  link: function(scope, element){
+		  Morris.Line({
+			  element : element,
+			  data : day_data,
+			  xkey : 'elapsed',
+			  ykeys : ['value'],
+			  labels : ['value'],
+			  lineColors : ['#15ab9f'],
+			  parseTime : false
+		  });
+
+	  }
+  }
+})
+  module.registerDirective('morrisStackedLineTransactionGraph', function(){
+  return {
+	  restrict: 'E',
+	  replace: true,
+	  template: '<div class="chart no-padding"></div>',
+	  link: function(scope, element){
+		  Morris.Line({
+			  element : element,
+			  data : day_data,
+			  xkey : 'elapsed',
+			  ykeys : ['value'],
+			  labels : ['value'],
+			  lineColors : ['#ff4f51'],
+			  parseTime : false
+		  });
+
+	  }
+  }
+})
+  module.registerController('FKCtrl', ['$rootScope', '$scope', 'UserService', 'DataService', 'KeywordService','$state',
+    function($rootScope, $scope, userService, dataService, keywordService, $state) {
 
     $scope.project_overview = true;
 
@@ -63,10 +229,10 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         $(e).css('border', '2px solid #DBDBDB');
         $(e).css('pointer-events', 'initial');
       });
-    }
+    };
     $scope.closeDetailPage = function () {
       $scope.project_overview = true;
-    }
+    };
 
     $scope.customKey = function (status) {
         if(!status) {
@@ -75,8 +241,8 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
              $scope.customKeyword = false;
         }
         console.log($scope.customKeyword);
-    }
-
+    };
+	
     keywordService.getListFunctionalProject(function (response) {
       $scope.functionalPros = response;
 
@@ -91,7 +257,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         keywordService.getListTestCase(function(data) {
             $scope.lists = data;
         });
-    }
+    };
     getData();
     $scope.removeSuite = function (suite) {
       keywordService.removeTestSuite(suite._id, $scope.project.projectId, function(data){
@@ -114,12 +280,13 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         }
       });
 
-    }
+    };
 
     $scope.clickSaveProject = function () {
       $scope.project_overview = false;
       
       $('#createProject').modal('hide');
+	  $('body').removeClass('modal-open');
       $('.modal-backdrop').remove();
       var object = {'projectName': $scope.project.projectName};
 
@@ -131,21 +298,21 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
       } else {
 
       }
-    }
+    };
 
     $scope.chooseFunctionalType = function ($event) {
 
       var element = $event.currentTarget;
       $scope.project.projectType = $(element).val();
       $scope.performance = false;
-    }
+    };
 
     $scope.choosePerformanceType = function ($event) {
 
       var element = $event.currentTarget;
       $scope.project.projectType = $(element).val();
       $scope.performance = true;
-    }
+    };
 
     $scope.runTestFunctional = function () {
 
@@ -175,14 +342,14 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
           $scope.project_overview = true;
         }
       });
-    }
+    };
 
     $scope.new_project = function () {
       $scope.project = {
         'projectType': undefined,
         'suites': []
       };
-    }
+    };
 
     $scope.chooseTestSuite = function (suite, $event) {
       $scope.showAllCases = false;
@@ -197,7 +364,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         $(element).css('background-color', 'white');
       });
       $(div).css('background-color', '#EBF3F5');
-    }
+    };
     // get files after files were uploaded
     $scope.uploadFile = function (element) {
       $scope.file = element.files;
@@ -211,7 +378,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
       });
       $('input[name="listFile"]').val(fileNames);
 
-    }
+    };
 
     $scope.clickSaveTestSuiteChoosed = function () {
 
@@ -276,7 +443,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         });
 
       }
-    }
+    };
 
     $scope.editTestSuite = function (suite) {
       var testcases = suite;
@@ -288,7 +455,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
       toggleSaveAndCancelButton(1);
       toggleEditAndOrganizeButton(0);
       
-    }
+    };
 
     $scope.cancelActions = function () {
       $scope.showAllCases = true;
@@ -299,7 +466,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
       $scope.testSuiteSelected = {};
       var input_suite_name = $('.list_testSuite .create-new-suite .input-suite-name .input-text-name');
       input_suite_name.parent().hide();
-    }
+    };
 
     $scope.checkExist = function (caze1, cases) {
       var count = 0;
@@ -318,14 +485,14 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
       
       toggleSaveAndCancelButton(1);
       toggleEditAndOrganizeButton(0);
-    }
+    };
    
     $scope.chooseOrder = function (a) {
 
       $scope.testSuiteSelected.cases = insertValueByIndex($scope.testSuiteSelected.cases, $scope.oldOrder, a);
       console.log($scope.testSuiteSelected.cases);
      // $scope.testCasesSelected = $scope.testSuiteSelected.cases;
-    }
+    };
 
     $scope.focusCallback = function ($event) {
       var targetField = $event.target;
@@ -335,7 +502,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
       $scope.oldOrder = oldOrder;
 
       $scope.clickElement = $(element);
-    }
+    };
 
    
     $scope.addCaseToSuite = function ($event, testcase) {
@@ -357,7 +524,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         $(element).css("padding", "");
       }
 
-    }
+    };
     $scope.findFunctionalProject = function(event) {
       var element = event.currentTarget;
 
@@ -366,35 +533,35 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
 
       } else 
           icon.css('color','white');
-    }
+    };
 
 
     $scope.check = function ($event) {
       var element = $event.currentTarget;
 
       $(element).toggleClass('checked');
-    }
+    };
 
     $scope.selectChome = function () {
       $scope.versionSelected = 1;
-    }
+    };
     $scope.selectFirefox = function () {
       $scope.versionSelected = 2;
-    }
+    };
     $scope.selectIE = function () {
       $scope.versionSelected = 3;
-    }
+    };
     $scope.selectSafari = function () {
       $scope.versionSelected = 4;
-    }
+    };
     $scope.selectOpera = function () {
       $scope.versionSelected = 5;
-    }
+    };
 
     $scope.clickUploadScriptButton = function () {
       $('#createScript .modal-dialog .modal-content').css("width", '');
       $('#createScript .modal-dialog .modal-content').css("margin-left", '20px');
-    }
+    };
 
     $scope.clickCreateScriptButton = function () {
       var $id = $('#createScript').find('.nav.nav-tabs .active a').attr('id');
@@ -406,19 +573,19 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         resetModalSize();
       }
 
-    }
+    };
 
     $scope.newSampler = function () {
       changeModalSize();
-    }
+    };
 
     $scope.basic = function () {
       resetModalSize();
-    }
+    };
 
     $scope.configuration = function () {
       resetModalSize();
-    }
+    };
 
     $scope.fkWizardCompleteCallback = function(wizardData) {
         var projectName = wizardData.project_name;
@@ -449,7 +616,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         } else {
              $scope.customKeyword = false;
         }
-    }
+    };
 
     $scope.setInfo = function(infoBasic) {
         $scope.cases[0].name = $scope.newName;
@@ -466,7 +633,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         iconSmall: "fa fa-check bounce animated",
         timeout: 2000
       });
-    }
+    };
 
     /*----------*/
 
@@ -474,13 +641,13 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
       $('#createScript .modal-dialog .modal-content').css("width", '');
       $('#createScript .modal-dialog .modal-content').css("margin-left", '');
       $('#createScript .modal-dialog .modal-content .modal-body').css("padding", "");
-    }
+    };
 
     var changeModalSize = function () {
       $('#createScript .modal-dialog .modal-content').css("width", '980px');
       $('#createScript .modal-dialog .modal-content').css("margin-left", '-120px');
       $('#createScript .modal-dialog .modal-content .modal-body').css("padding", "0px");
-    }
+    };
 
     var toggleSaveAndCancelButton = function (a) {
       var $save = $('.action-testcase').find('.col-sm-12 .col-sm-8 .row .col-sm-3 .savetestcase');
@@ -494,7 +661,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
           $save.css('display', 'block');
           $cancel.css('display', 'block');
       }
-    }
+    };
     
     var toggleEditAndOrganizeButton = function (a) {
       var $save = $('.action-testcase').find('.col-sm-12 .col-sm-8 .row .col-sm-3 .edittestsuite');
@@ -509,7 +676,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
           $save.css('display', 'block');
           $cancel.css('display', 'block');
       }
-    }
+    };
 
     var insertValueByIndex = function (originArray, oldIndex, newIndex) {
       var value = originArray[oldIndex];
@@ -522,7 +689,7 @@ define(['fk/module', 'lodash', 'notification'], function(module, _) {
         return;
       } else newArray1.push(value);
       return newArray1.concat(newArray2);
-    }
+    };
 
     /*Nambv2*/
 
@@ -716,5 +883,8 @@ $scope.infoBasic = "";
     }
 
     /*end nambv2*/
+	$scope.redirectTo = function() {
+		 $state.go('app.report');
+	 };
   }]);
 })

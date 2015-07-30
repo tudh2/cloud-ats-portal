@@ -1,30 +1,24 @@
-<div class="row basic-info-color">
-	<div class="col-md-8">
-		<div class="customize-basic-info">
-			<div class="txt-basic-info">
-				<span class="icon-equalizer id-test" aria-hidden="true" style="display:inline-block; margin-right:5px;"></span>
-				<h4 style="display: inline-block;">Basic Information</h4>
-			</div>
-			<div class="input-basic-info row">
-				<span class="col-md-5">Test Case Name : 
-				<a href-void id="testname" 
-				data-type="text" 
-				data-placement="right"  
-				smart-xeditable
-				data-options="editableOptions" 
-				data-placeholder="Input Name" 
-				class="editable editable-click editable-empty"
-				data-success-callback="newCaseName"
-				data-ng-model="caseName"></a>{{caseName}}</span>
-
-				<div class="col-md-7">
-					<textarea class="form-control" rows="5" id="info-basic" placeholder="Input here" ng-model="infoBasic"></textarea>
-				</div>
-			</div>
-			<div class="btn-basic-info row col-md-7">
-				<a class="btn-deleteInfo pull-left" data-dismiss="modal" ng-click="removeCase()">Delete</a>
-				<a class="btn-saveInfo pull-right" ng-click="setInfo(infoBasic)">Save</a>
-			</div>
-		</div>
-	</div>
+<div class="basic-info">
+  <div class="col-md-offset-1 col-md-8">
+    <div class="form-basic-info">
+      <div class="form-title"> <span class="icon-equalizer id-test" aria-hidden="true"></span>
+        <h4>Basic Information</h4>
+      </div>
+      <div class="form-content">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-4">Test Case Name :</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" rows="5" id="info-basic" placeholder="Input here">{{caseName}}</textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8"> 
+            <button class="btn btn-danger pull-left" data-dismiss="modal" ng-click="removeCase()">Delete</button> 
+            <button class="btn btn-primary pull-right" ng-click="setInfo(infoBasic)">Save</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

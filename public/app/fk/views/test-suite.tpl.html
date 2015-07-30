@@ -1,13 +1,12 @@
 <div class="row">
 	<div class="col-sm-3 list_testSuite">
-		<div >
-			<section class="smart-form">
-              <label class="input"> <i class="icon-append fa fa-search"></i>
-                <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched"></label>
-      	</section>
-      </div>
+		 <section class="smart-form">
+      <label class="input"> <i class="icon-append fa fa-search"></i>
+        <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
+      </label>
+    </section>
       <div class="create-new-suite">
-        <a ng-click="clickNewTestSuiteButton($event)" class="new-test-suite"><i class="fa fa-plus-circle">New Test Suite</i></a>
+        <a ng-click="clickNewTestSuiteButton($event)" class="btn btn-primary col-sm-12 cleafix"><i class="fa fa-plus-circle">New Test Suite</i></a>
         <div class="form-group input-suite-name">
           <input type="text" class="form-control input-text-name" placeholder="Test Suite Name">
         </div>
@@ -23,7 +22,7 @@
 	</div>
 	<div class="col-sm-9 action-testcase">
 		<div class="row">
-      <div class="col-sm-12 header-action">
+      <div class="col-sm-12 ">
         <div class="col-sm-4">
           <section class="smart-form">
               <label class="input"> <i class="icon-append fa fa-search"></i>
@@ -40,16 +39,16 @@
               </div>
             </div>
             <div class="col-sm-3">
-              <a class="btn savetestcase" ng-click="clickSaveTestSuiteChoosed()">Save</a>
+              <a class="btn btn-primary savetestcase" ng-click="clickSaveTestSuiteChoosed()">Save</a>
             </div>
             <div class="col-sm-3">
-              <a class="btn cancelbutton" ng-click="cancelActions()">Cancel</a>
+              <a class="btn btn-default cancelbutton" ng-click="cancelActions()">Cancel</a>
             </div>
             <div class="col-sm-3">
-              <a class="btn edittestsuite" ng-click="editTestSuite(testSuiteSelected)"><span class="glyphicon glyphicon-edit"></span><span> Edit</span></a>
+              <a class="btn btn-primary edittestsuite" ng-click="editTestSuite(testSuiteSelected)"><span class="glyphicon glyphicon-edit"></span><span> Edit</span></a>
             </div>
             <div class="col-sm-3" style="padding-left: 0px;">
-              <a class="btn organizetestsuite" ng-click="clickOrganizeTestSuite()"><span class="glyphicon glyphicon-align-justify"></span><span> Organize</span></a>
+              <a class="btn btn-primary organizetestsuite" ng-click="clickOrganizeTestSuite()"><span class="glyphicon glyphicon-align-justify"></span><span> Organize</span></a>
             </div>
           </div>
         </div>

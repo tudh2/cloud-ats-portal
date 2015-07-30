@@ -1,48 +1,50 @@
 <div class="project-detail-tab">
-        <div class="border-div row" style="background-color:#F7F7F7">
-          <div class="row">
-           <span class="col-sm-6 pull-right btn-edit-close"> <a class="btn editproject">Edit</a> <a class="btn closeproject" ng-click="closeDetailPage();">Close</a> </span>
+        <div class="border-div">
+          <div class="actionMenu row btn-action-list">
+           <span class="col-sm-6 pull-right"> <a class="btn btn-primary">Edit</a> <a class="btn btn-default" ng-click="closeDetailPage();">Close</a> </span>
           </div>
-        <div class="row" style="margin-left: 50px">
-          <span class="id-test">{{project.projectId.substring(0,8)}}<span style="padding-left:10px" data-js-prompt="&amp;#xe05b;" data-icon="&#xe05b;" aria-hidden="true" class="glyph-item mega"></span></span> <span style="padding-right:10px">Functional Test</span> <span class="buttonStatus" disabled="disabled">READY</span>
+        <div class="row project-detail-header">
+        <div class="col-sm-12">
+          <span class="id-test">{{project.projectId.substring(0,8)}}<span  data-js-prompt="&amp;#xe05b;" data-icon="&#xe05b;" aria-hidden="true" class="glyph-item mega"></span></span> <span style="padding-right:10px">Functional Test</span> <span class="buttonStatus" disabled="disabled">READY</span>
+          </div>
         </div>
-        <div class="row" style="padding-top:20px;margin-left: 50px">
-          <article>
+        <div class="row project-detail-name">
+          <article class="col-sm-12"> 
             {{project.projectName}}
           </article>
         </div>
-        <div class="row " style="padding-top:20px;padding-left: 40px;">
+        <div class="row ">
           <div class="col-md-6">
-          <table class="table borderless">
+         <table class="table project-detail-statistic" cellpadding="0" cellspacing="0">
             <thead>
               <tr>
-                <td>TEST SUITES</td>
-                <td>TEST CASES</td>
-                <td>LAST RUNNING</td>
+                <td>Test Suites</td>
+                <td>Test Cases</td>
+                <td>Last Running</td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="info-details" ng-init="project.suiteNumber=0">{{project.suites.length}}</td>
-                <td class="info-details" ng-init="project.caseNumber=0">{{project.totalCases}}</td>
-                <td class="info-details">01/05/2015 22:30</td>
+                <td ng-init="project.suiteNumber=0">{{project.suites.length}}</td>
+                <td ng-init="project.caseNumber=0">{{project.totalCases}}</td>
+                <td>01/05/2015 22:30</td>
               </tr>
             </tbody>
           </table>
           </div>
           <div class="col-md-6">
-            <div style="padding-top:40px">
-            <a class="btn buttonDetails buttonViewLog">View Log</a>
-            <a class="btn buttonDetails buttonRun">Run</a>
+            <div class="execute-action-list">
+            <a class="btn btn-border-line btnViewLog">View Log</a>
+            <a class="btn btn-border-line btnRun">Run</a>
             </div>
           </div>
         </div>
         </div>
         <!-- Report -->
-        <div class="row padding-top details-div">
-          <div style="margin-left: 40px;">
-            <h3 style="padding-left:10px">Test Report</h3>
-          <table class="table borderless-testreport">
+        <div class="row details-div">
+          <div >
+            <h3>Test Report</h3>
+          <table class="table tbl-project-report">
             <thead>
               <tr>
               <th>#</th>
@@ -58,11 +60,21 @@
             <tbody>
               <tr ng-repeat="report in project.reports">
                 <td>6</td>
-                <td class="test-report">Test Execute Report</td>
+                <td class="test-report"><a ng-click="redirectTo()">Test Execute Report</a></td>
                 <td>145</td>
                 <td>145</td>
                 <td>0</td>
-                <td>Pass</td>
+                <td><span class="label label-success">Pass</span></td>
+                <td>01/05/2015 22:30</td>
+                <td>Cloud-ATS</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td class="test-report"><a ng-click="redirectTo()">Test Execute Report</a></td>
+                <td>145</td>
+                <td>145</td>
+                <td>0</td>
+                 <td><span class="label label-error">Fail</span></td>
                 <td>01/05/2015 22:30</td>
                 <td>Cloud-ATS</td>
               </tr>

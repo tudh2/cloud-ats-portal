@@ -2,33 +2,25 @@
   
   <div id="logo-group">
     <!-- LOGO -->
-    <span id="logo"><img src="styles/img/logo.png" alt="CloudATS Admin"></span>
+    <span id="logo"><img src="styles/img/Citus CLOUD ATS_logo.png" alt="CloudATS Admin"></span>
     <!-- END LOGO -->
-
+    
     <!-- Notification -->
     <span id="activity" class="activity-dropdown" activities-dropdown-toggle>
       <i class="fa fa-user"></i>
-      <b class="badge bg-color-red">21</b>      
+      <b class="badge">21</b>      
     </span>
     <div data-smart-include="app/components/activities/activities.html"></div>
   </div>
-
   <div class="hidden-xs tenant">
     <span class="label tenant">{{getWord('Tenant')}} {{context.tenant._id}}</span>
-  </div>
+  </div>  
 
   <list-space></list-space>
 
   <!-- pull right nav area-->
   <div class="pull-right">
-    
-  <!-- collape menu button -->
-  <div id="hide-menu" class="btn-header pull-right">
-    <span>
-      <a data-toggle-menu title="Collapse Menu"><i class="fa fa-reorder"></i></a>
-    </span>    
-  </div>
-  <!-- end collape menu -->
+   
 
   <!-- Top menu profile: this shows only when top menu is active-->
   <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
@@ -61,7 +53,13 @@
       </ul>
     </li>
   </ul>
-
+<!-- collape menu button -->
+  <div id="hide-menu" class="btn-header pull-right">
+    <span>
+      <a data-toggle-menu title="Collapse Menu"><i class="fa fa-reorder"></i></a>
+    </span>    
+  </div>
+  <!-- end collape menu -->
   <!-- Logout button -->
   <div id="logout" class="btn-header transparent pull-right" ng-controller="LogoutCtrl">
     <span>

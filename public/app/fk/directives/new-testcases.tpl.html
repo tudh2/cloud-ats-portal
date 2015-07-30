@@ -1,4 +1,4 @@
-<div class="row">
+<div class="tc-keyword-space">
   <div class="col-md-8">
     <div class="customize-tree">
       <div class="tree">
@@ -46,7 +46,7 @@
 
     <div class="add-keyword" ng-init="statusAdd=true;added=false;done=false;" ng-if="!customKeyword">
     <form ng-submit="addCustomKeyword()" ng-if="showQuickCreateCustom">
-        <a  class="style-btn-keyword pull-right" ng-show="statusAdd && !added && !done" ng-click="added=true">Add to Keyword</a>
+            <a  class="btn btn-border-line btn-keyword pull-right" ng-show="statusAdd && !added && !done" ng-click="added=true">Add to Keyword</a>
         <div ng-show="statusAdd && added &&!done" class="pull-right">
           <label style="padding-top:5px">Keyword Name</label>
         <div class="editable-input" style="position: relative;">
@@ -62,14 +62,14 @@
   </div>
 
   </div>
-  <div class="col-md-4 keywords-list">
+  <div class="col-md-4 keyword-list-container">
 
-    <div class="panel-group smart-accordion-default animated fadeInDown" id="keyword-list" style="height:530px">
+     <div class="panel-group smart-accordion-default keyword-list animated fadeInDown" id="keyword-list" >
 
       <div class="filter-keyword-div">
-        <span style="top:5px;color:#00B39E;" class="col-md-1" data-js-prompt="&amp;#xe02d;" data-icon="" aria-hidden="true" class="glyph-item mega"></span>
+        <span style="top:5px;color:#00B39E;" data-js-prompt="&amp;#xe02d;" data-icon="" aria-hidden="true" class="col-md-1 glyph-item mega"></span>
         <label class="col-md-4" style="top:5px">Test Keyword</label>
-        <span class="col-md-7"><input class="form-control filter-keyword" style="background:#ADC0C6;color:#EEEFF4" type="text" placeholder="Filter"></span>
+        <span class="col-md-7"><input class="form-control filter-keyword"  type="text" placeholder="Filter"></span>
       </div>
       
       <div ng-init="query[cat] = ''" class="panel panel-default" ng-repeat="cat in cats">
@@ -119,11 +119,11 @@
       </div>
     </div>
     <div class="group-listbutton-keyword pull-left">
-      <a class="btn btn-save-testcase" ng-if="addCase" data-dismiss="modal" ng-click="createNewTestCase()">Save</a>
-      <a class="btn btn-save-customkey" ng-if="addCustom" ng-click="addCustomKeyword()" data-dismiss="modal">Save</a>
-      <a class="btn btn-save-customkey" ng-if="updateCustom" ng-click="updateCustomKeyword()" data-dismiss="modal">Save</a>
-      <a class="btn btn-save-customkey" ng-if="updateCase" ng-click="updateTestCase()" data-dismiss="modal">Save</a>
-      <a class="btn btn-close-customkey" data-dismiss="modal" ng-if="customKeyword">Close</a>
+      <a class="btn btn-primary" ng-if="addCase" data-dismiss="modal" ng-click="createNewTestCase()">Save</a>
+      <a class="btn btn-primary" ng-if="addCustom" ng-click="addCustomKeyword()" data-dismiss="modal">Save</a>
+      <a class="btn btn-primary" ng-if="updateCustom" ng-click="updateCustomKeyword()" data-dismiss="modal">Save</a>
+      <a class="btn btn-primary" ng-if="updateCase" ng-click="updateTestCase()" data-dismiss="modal">Save</a>
+      <a class="btn btn-default" data-dismiss="modal" ng-if="customKeyword">Close</a>
   </div>
   </div>
 </div>
