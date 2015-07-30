@@ -90,7 +90,6 @@ define([
                 'fk/directives/cases',
                 'fk/directives/remove-sampler-button',
                 'fk/directives/data-driven-selector',
-                'fk/directives/choose-case-order',
                 'services/keyword-service',
                 'modules/ui/directives/smart-html-popover',
                 'modules/forms/common',

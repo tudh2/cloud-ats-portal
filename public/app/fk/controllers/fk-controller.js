@@ -180,7 +180,7 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
     
     $scope.testCasesSelected = [];
     $scope.testSuiteSelected = {};
-
+    $scope.testSuiteOrganize = {};
     $scope.testcases = $scope.cases;
 
     $scope.project = {
@@ -201,7 +201,7 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
     $scope.lists = [];
     $scope.performance = false;
     $scope.customKeyword = false;
-
+    $scope.not_change = true;
     $scope.openProject = function (project) {
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
@@ -292,7 +292,8 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
 
       if ($scope.performance == false) {
         keywordService.createKeywordProject(object, function (data) {
-          $scope.project.projectId = data;
+          $scope.project.projectId = data._id;
+          $scope.project.totalCases = data.totalTestCases;
           $scope.functionalPros.push($scope.project);
         });
       } else {
@@ -385,16 +386,13 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       toggleSaveAndCancelButton(0);
       
       if ($scope.testSuiteSelected._id != null) {
-        console.log('update');
         var testsuite = {
           'projectId': $scope.project.projectId,
           'suiteId': $scope.testSuiteSelected._id,
           'cases': $scope.testSuiteSelected.cases
         }
         var data = {'data': testsuite};
-        console.log($scope.testSuiteSelected.cases);
         $scope.showAllCases = false;
-        //$scope.testSuiteSelected.cases = $scope.testCasesSelected;
         keywordService.updateTestSuite(data, function (response) {
           $scope.project.totalCases = response.totalTestCases;
           if (response != null) {
@@ -409,7 +407,6 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
           }
         }); 
       } else {
-        console.log('create');
         var input_suite_name = $('.list_testSuite .create-new-suite .input-suite-name .input-text-name');
         var testsuite = {
           '_id': $scope.project.projectId,
@@ -434,7 +431,6 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
             input_suite_name.parent().hide();
             var groupTestcases = $('.group-test-case-enable');
             _.forEach(groupTestcases, function(e){
-              console.log('1');
               $(e).css('border', '2px solid #DBDBDB');
               $(e).css('pointer-events', 'none');
             });
@@ -482,23 +478,22 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
 
     $scope.clickOrganizeTestSuite = function () {
       $scope.organize = true;
-      
+
       toggleSaveAndCancelButton(1);
       toggleEditAndOrganizeButton(0);
     };
    
-    $scope.chooseOrder = function (a) {
+    $scope.chooseOrder = function (newOrder) {
 
-      $scope.testSuiteSelected.cases = insertValueByIndex($scope.testSuiteSelected.cases, $scope.oldOrder, a);
-      console.log($scope.testSuiteSelected.cases);
-     // $scope.testCasesSelected = $scope.testSuiteSelected.cases;
-    };
+      $scope.testSuiteSelected.cases = insertValueByIndex($scope.testSuiteSelected.cases, $scope.oldOrder - 1, newOrder -1);
+      $scope.not_change = !$scope.not_change;
+    }
 
     $scope.focusCallback = function ($event) {
       var targetField = $event.target;
       var element = targetField;
       var oldOrder = $(element).find(':selected').text();
-
+      $(element).children().first().remove();
       $scope.oldOrder = oldOrder;
 
       $scope.clickElement = $(element);
@@ -512,7 +507,6 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       var $div = $(element).find('.number').parent();
       var $next = $div.find('.remove-icon');
       
-      //$scope.testCasesSelected = $scope.testSuiteSelected.cases;
       if ($(element).css('border') == ("2px solid rgb(219, 219, 219)")){
         $scope.testCasesSelected.push(testcase);
         $(element).css("border", "2px solid #02B39F");

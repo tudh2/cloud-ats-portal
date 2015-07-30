@@ -137,7 +137,7 @@
         </div>
       </div>
     </div>
-    <div class="row" ng-if="organize">
+  <div class="row" ng-if="organize && not_change">
       <div class="col-sm-12">
         <div class="col-sm-4" ng-repeat="(fIndex, testcase) in testSuiteSelected.cases " style="padding-bottom: 13px;">
           <div class="group-test-case-organize">
@@ -157,12 +157,35 @@
             <div class="row">
               <div class="col-sm-12 choose-order" style="padding-right: 8px;">
                 <select  class="form-group selectOrder" ng-model="order" ng-change="chooseOrder(order)" ng-focus="focusCallback($event)">
-                  <option ng-repeat="j in testSuiteSelected.cases track by $index" ng-selected="{{fIndex == $index}}"  value="{{$index}}">{{$index}}</option>
+                  <option ng-repeat="j in testSuiteSelected.cases track by $index" ng-selected="{{fIndex == $index}}"  value="{{$index+1}}">{{$index+1}}</option>
                 </select>
-                 <select class="form-group selectOrder" choose-case-order>
-                  <option>
-                    {{$index + 1}}
-                  </option>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="organize && !not_change">
+      <div class="col-sm-12">
+        <div class="col-sm-4" ng-repeat="(fIndex, testcase) in testSuiteSelected.cases " style="padding-bottom: 13px;">
+          <div class="group-test-case-organize">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="col-sm-6 number" style="padding-left:0px;">
+                  <span class="project-name"># {{testcase._id.substring(0,8)}}</span>
+                </div>
+                
+              <div class="col-sm-6"><span class="pull-right group-name">Group name</span></div></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <p>{{testcase.name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 choose-order" style="padding-right: 8px;">
+                <select  class="form-group selectOrder" ng-model="order" ng-change="chooseOrder(order)" ng-focus="focusCallback($event)">
+                  <option ng-repeat="j in testSuiteSelected.cases track by $index" ng-selected="{{fIndex == $index}}"  value="{{$index+1}}">{{$index+1}}</option>
                 </select>
               </div>
             </div>
