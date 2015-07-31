@@ -11,7 +11,13 @@ define([
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
       .state('app.projects', {
-        url: '/projects',
+        url: '/projects/:type',
+        params: {
+          type: {
+            value: null,
+            squash: true
+          }
+        },
         views: {
           "content@app": {
             templateUrl: 'app/projects/views/project-list.html',

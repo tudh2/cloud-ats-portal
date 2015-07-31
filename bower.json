@@ -24,7 +24,7 @@
     "jquery-ui": "~1.11.1",
     "angular-easyfb": "~1.1.0",
     "angular-google-plus": "~0.1.2",
-    "lodash": "~2.4.1",
+    "lodash": "3.10.0",
     "datatables": "~1.10.2",
     "datatables-tabletools": "~2.2.3",
     "datatables-colvis": "~1.1.1",
