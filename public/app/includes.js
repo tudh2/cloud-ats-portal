@@ -5,8 +5,6 @@ define([
   'services/user-service',
   'services/authentication-service',
   'services/performance-service',
-  'services/virtual-service',
-  'services/functional-service',
 
   //layout
 
@@ -35,12 +33,12 @@ define([
   //forms
   // 'modules/forms/module',
 
-  'functional/module',
   'performance/module',
-  'virtual/module',
 
   //account
   'auth/module',
+
+  'projects/module',
 
   //virtual
 
