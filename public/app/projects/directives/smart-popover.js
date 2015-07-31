@@ -11,9 +11,10 @@ define(['projects/module', 'lodash'], function(module, _) {
         $templateRequest(attributes.popoverTemplate).then(function(template) {
 
           scope.projectId = attributes.projectId;
+          scope.projectName = attributes.projectName;
+          scope.projectType = attributes.projectType;
           scope.suites = attributes.projectSuites;
           scope.cases = attributes.projectCases;
-
 
           $(element).popover({
             'placement': function (context, source){

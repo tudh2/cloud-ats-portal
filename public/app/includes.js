@@ -4,7 +4,7 @@ define([
   'services/data-service',
   'services/user-service',
   'services/authentication-service',
-  'services/performance-service',
+  // 'services/performance-service',
 
   //layout
 
@@ -33,7 +33,7 @@ define([
   //forms
   // 'modules/forms/module',
 
-  'performance/module',
+  // 'performance/module',
 
   //account
   'auth/module',

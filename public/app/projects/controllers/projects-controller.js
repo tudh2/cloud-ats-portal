@@ -17,6 +17,18 @@ define(['projects/module', 'lodash'], function (module, _) {
           projectName: "Performance is Enterprise Database System. This test case is cover the front end area",
           status: "RUNNING",
           type: "performance",
+        },
+        {
+          projectId: "19",
+          projectName: "Performance is Enterprise Database System. This test case is cover the front end area",
+          status: "RUNNING",
+          type: "performance",
+        },
+        {
+          projectId: "20",
+          projectName: "Performance is Enterprise Database System. This test case is cover the front end area",
+          status: "RUNNING",
+          type: "performance",
         }
       )
     };

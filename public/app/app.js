@@ -30,7 +30,7 @@ define([
     'app.dashboard',
     'app.auth',
     'app.fk',
-    'app.performance',
+    // 'app.performance',
     'app.console',
 
 
