@@ -18,7 +18,9 @@ define([
             controller: 'ProjectsCtrl',
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
-                'projects/controllers/projects-controller'
+                'projects/controllers/projects-controller',
+                'projects/directives/smart-popover',
+                'services/keyword-service'
               ])
             }
           }
