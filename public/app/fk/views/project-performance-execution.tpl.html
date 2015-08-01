@@ -3,17 +3,18 @@
 		<p>CHOOSE TEST SUITE</p>
 		<div>
 			<section class="smart-form">
-              <label class="input"> <i class="icon-append fa fa-search"></i>
-                <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched"></label>
+        <label class="input"> <i class="icon-append fa fa-search"></i>
+          <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched"></label>
       	</section>
       </div>
-      <div class="row" style="margin-top: 20px;" ng-repeat="i in [1,2,3,4,54,5,6,5,34,23,3,34] track by $index">
+      <div class="row" style="margin-top: 20px;" ng-repeat="i in [1,2,3] track by $index">
       	<div class="col-sm-12" style="padding-right: 8px;">
       		<span class="pull-left">Test Suite Name</span>
       		<div class="smart-form check-list">
-                <label class="checkbox pull-right">
-                    <input type="checkbox" name="checkbox" style="background-color: white">
-                    <i style="background-color: white"></i></label>
+            <label class="checkbox pull-right">
+              <input type="checkbox" name="checkbox" style="background-color: white">
+              <i style="background-color: white"></i>
+            </label>
           </div>
       	</div>
       </div>

@@ -41,7 +41,7 @@ define([
   'projects/module',
   'keyword/module',
   'functional/module',
-
+  'performance/module',
   //virtual
 
   //components

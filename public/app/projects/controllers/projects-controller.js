@@ -3,8 +3,8 @@ define(['projects/module', 'lodash'], function (module, _) {
   'use strict';
 
   module.registerController('ProjectsCtrl', [
-    '$scope', '$state', '$stateParams','KeywordService', 
-    function($scope, $state, $stateParams, KeywordService) {
+    '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 
+    function($scope, $state, $stateParams, KeywordService, PerformanceService) {
       
     $scope.projects = [
       
@@ -16,6 +16,7 @@ define(['projects/module', 'lodash'], function (module, _) {
       });
       switch (projectType) {
         case 'performance':
+          $state.go('app.performance', {id: projectId});
           break;
         case 'keyword':
           $state.go('app.keyword', { id : projectId });
@@ -29,26 +30,10 @@ define(['projects/module', 'lodash'], function (module, _) {
     }
 
     var loadPerformanceProjects = function() {
-      $scope.projects.push(
-        {
-          _id: "18",
-          name: "Performance is Enterprise Database System. This test case is cover the front end area",
-          status: "RUNNING",
-          type: "performance",
-        },
-        {
-          _id: "19",
-          name: "Performance is Enterprise Database System. This test case is cover the front end area",
-          status: "RUNNING",
-          type: "performance",
-        },
-        {
-          _id: "20",
-          name: "Performance is Enterprise Database System. This test case is cover the front end area",
-          status: "RUNNING",
-          type: "performance",
-        }
-      )
+      PerformanceService.projects(function (response) {
+        $scope.projects.push(response);
+        $scope.projects = _.flatten($scope.projects, true);
+      });
     };
 
     var loadKeywordProjects = function() {

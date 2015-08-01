@@ -27,7 +27,7 @@
           <span>{{project.status}}</span>
         </div>
         <div class="col-sm-6">
-          <span class="project-info"
+          <span ng-if="project.type == 'keyword'" class="project-info"
             data-smart-popover 
             data-toggle="popover" 
             data-popover-template="app/projects/views/project-popover.tpl.html"
@@ -36,7 +36,14 @@
             data-project-type="{{project.type}}"
             data-project-suites="{{project.totalSuites}}"
             data-project-cases="{{project.totalCases}}">INFO</span>
-
+          <span ng-if="project.type == 'performance'" class="project-info"
+            data-smart-popover 
+            data-toggle="popover" 
+            data-popover-template="app/projects/views/performance-project-popover.tpl.html"
+            data-project-id="{{project._id}}"
+            data-project-name="{{project.name}}"
+            data-project-type="{{project.type}}"
+            data-project-scripts="{{project.totalScripts}}">INFO</span>
             <a ng-if="project.status == 'RUNNING'" href-void class="stop-project pull-right">STOP</a>
             <a ng-if="project.status == 'READY'" href-void class="run-project pull-right">RUN</a>
         </div>

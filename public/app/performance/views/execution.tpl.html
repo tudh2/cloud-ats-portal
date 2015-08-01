@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="col-sm-3 list_testSuite">
+		<p>CHOOSE TEST SCRIPT</p>
+		<div>
+			<section class="smart-form">
+        <label class="input"><i class="icon-append fa fa-search"></i>
+          <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
+        </label>
+      </section>
+    </div>
+    <div class="row list-script" ng-repeat="i in [1,2,3] track by $index">
+  		<span class="pull-left script-name">Test Script Name</span>
+  		<div class="smart-form check-list">
+        <label class="checkbox pull-right">
+          <input type="checkbox" name="checkbox" class="checkbox-script">
+          <i></i>
+        </label>
+      </div>
+    </div>
+	</div>
+	<div class="col-sm-9 run-test">
+		<div class="">
+			<a href="#" class="Run_Test">Run Test</a>
+		</div>
+	</div>
+</div>

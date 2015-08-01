@@ -33,7 +33,7 @@ define([
     // 'app.performance',
     'app.console',
 
-
+    'app.performance',
     'app.projects',
     'app.keyword',
     'app.functional'

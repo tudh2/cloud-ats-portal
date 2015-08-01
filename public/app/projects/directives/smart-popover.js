@@ -15,7 +15,7 @@ define(['projects/module', 'lodash'], function(module, _) {
           scope.projectType = attributes.projectType;
           scope.suites = attributes.projectSuites;
           scope.cases = attributes.projectCases;
-
+          scope.scriptS = attributes.projectScripts;
           $(element).popover({
             'placement': function (context, source){
               var $container = $(source).closest('.project');

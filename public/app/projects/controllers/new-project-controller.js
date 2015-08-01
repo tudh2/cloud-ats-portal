@@ -2,7 +2,7 @@ define(['projects/module'], function (module) {
   
   'use strict';
 
-  module.registerController('NewProjectCtrl', ['$scope','KeywordService', function($scope, KeywordService) {
+  module.registerController('NewProjectCtrl', ['$scope','KeywordService', 'PerformanceService', function($scope, KeywordService, PerformanceService) {
 
     $scope.type = 'functional';
 
@@ -29,6 +29,9 @@ define(['projects/module'], function (module) {
             });
             break;
           case 'performance' :
+            PerformanceService.create($scope.name, function (response) {
+              console.log(response);
+            });
             break;
           default:
             break;

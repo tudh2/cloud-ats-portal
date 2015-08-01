@@ -2368,3 +2368,40 @@ a:hover.viewLog, a:focus.viewLog {
 .run-test {
 	margin-left: 621px;
 }
+
+/*trinhtv3 script-list*/
+
+.script-list {
+	margin-top: 20px;
+}
+
+.create-script {
+	margin-right: 0px; 
+	color: white;
+}
+.upload-script {
+	margin-right: 10px;
+	color: white;
+}
+
+.header-customize {
+	margin: 20px;
+}
+.upload-icon {
+	 display:inline-block; 
+	 margin-right:5px;
+}
+.list-script {
+	 margin-top: 20px;
+	 padding-right: 10px;
+}
+.checkbox-script {
+	background-color: white;
+}
+.checkbox-script i {
+	background-color: white;
+}
+.script-name {
+	padding-left: 13px;
+}
+/*end script-list*/

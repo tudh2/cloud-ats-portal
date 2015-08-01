@@ -13,7 +13,8 @@
       </div>
       <div class="row test-suite" style="" ng-repeat="suite in project.suites track by $index" ng-click="chooseTestSuite(suite, $event)">
       	<div class="col-sm-12 ">
-      		<span class="pull-left"><i class="fa fa-circle-o hasnot-case"></i> {{suite.suite_name}}</span>
+          <span class="pull-left" ng-if="suite.cases.length == 0"><i class="fa fa-circle-o hasnot-case"></i> {{suite.suite_name}}</span>
+      		<span class="pull-left" ng-if="suite.cases.length > 0"><i class="fa fa-circle-o has-case"></i> {{suite.suite_name}}</span>
       		<div class="smart-form check-list" ng-if="suite==testSuiteSelected" ng-click="removeSuite(suite)">
             <span class="glyphicon glyphicon-remove-sign icon pull-right"></span>
           </div>
