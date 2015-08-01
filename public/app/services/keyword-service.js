@@ -3,6 +3,41 @@ define(['fk/module'], function(module) {
 
   module.registerFactory('KeywordService', ['$http', '$cookies', function($http, $cookies) {
     return {
+
+      projects: function(callback) {
+        var request = {
+          method: 'GET',
+          url: 'http://localhost:9000/api/v1/project/keywords',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data);
+        }).error(function(data, status) {
+
+        });
+      },
+
+      get: function(projectId, callback) {
+        var request = {
+          method: 'GET',
+          url: 'http://localhost:9000/api/v1/project/keyword/' + projectId,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data);
+        }).error(function(data, status) {
+
+        });
+      },
+
       getKeywords: function(callback) {
         $http.get('api/keywords.json').success(function(data) {
           if (typeof callback === 'function') {
@@ -28,7 +63,7 @@ define(['fk/module'], function(module) {
       getListFunctionalProject: function (callback) {
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/keyword/getListFuncProject',
+          url: 'http://localhost:9000/api/v1/keywords/getListFuncProject',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')

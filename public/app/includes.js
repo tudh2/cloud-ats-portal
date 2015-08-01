@@ -39,6 +39,8 @@ define([
   'auth/module',
 
   'projects/module',
+  'keyword/module',
+  'functional/module',
 
   //virtual
 

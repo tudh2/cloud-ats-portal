@@ -34,7 +34,9 @@ define([
     'app.console',
 
 
-    'app.projects'
+    'app.projects',
+    'app.keyword',
+    'app.functional'
     ///'app.widgets',
     //'app.graphs',
     //'app.calendar',

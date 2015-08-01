@@ -31,6 +31,7 @@ define([
                 'layout/directives/smart-menu',
                 'layout/directives/state-breadcrumbs',
                 'layout/directives/search-autocomplete',
+                'layout/directives/smart-projects-active',
 
                 'components/activities/activities-controller',
                 'components/activities/activities-service',
