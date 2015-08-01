@@ -38,6 +38,26 @@ define(['fk/module'], function(module) {
         });
       },
 
+      create: function(name, callback) {
+        var request = {
+          method: 'POST',
+          url: 'http://localhost:9000/api/v1/project/keyword',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: {
+            name: name
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data);
+        }).error(function(data, status) {
+
+        });
+      },
+
       getKeywords: function(callback) {
         $http.get('api/keywords.json').success(function(data) {
           if (typeof callback === 'function') {

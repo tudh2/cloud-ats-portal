@@ -25,6 +25,12 @@ header .tenant {
 header .tenant span.label {
 	text-transform: uppercase;
 }
+
+input.state-error {
+	background: #fff0f0;
+  border-color: #A90329;
+}
+
 .li-popup {
 	margin: 0 !important;
 	padding: 0 !important;

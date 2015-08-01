@@ -25,6 +25,7 @@ define([
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
                 'projects/controllers/projects-controller',
+                'projects/controllers/new-project-controller',
                 'projects/directives/smart-popover',
                 'services/keyword-service'
               ])

@@ -1,4 +1,4 @@
-<div class="modal fade" id="createProject" role="dialog">
+<div class="modal fade" id="createProject" role="dialog" ng-controller="NewProjectCtrl">
   <div class="modal-dialog">
     <div class="modal-content">
       
@@ -13,7 +13,7 @@
             <div class="col-sm-4">Project Name</div>
             <div class="col-sm-8">
               <div class="form-group">
-                <input class="form-control" type="text" ng-model="project.projectName">
+                <input class="form-control" name="name" type="text" ng-model="name">
               </div>
             </div>
         </div>
@@ -25,14 +25,14 @@
               <div class="col-sm-6">
                 <div class="smart-form" style="margin-top: 20px;">
                   <label class="radio state-success">
-                    <input type="radio" name="project_type" value="functional" checked="" ng-click="chooseFunctionalType($event)"><i></i>Functional
+                    <input type="radio" value="functional" ng-model="type"><i></i>Functional
                   </label>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="smart-form" style="margin-top: 20px;">
                   <label class="radio state-success">
-                    <input type="radio" name="project_type" value="performance" ng-click="choosePerformanceType($event)"><i></i>Performance
+                    <input type="radio" value="performance" ng-model="type"><i></i>Performance
                   </label>
                 </div>
               </div>
@@ -46,7 +46,7 @@
         <div class="row">
           <div class="col-sm-4"></div>
           <div class="col-sm-8">
-            <button type="button" class="btn btn-primary pull-left" ng-click="clickSaveProject();">Save</button>
+            <button type="button" class="btn btn-primary pull-left" ng-click="create();">Save</button>
             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
           </div>
         </div>
