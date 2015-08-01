@@ -38,7 +38,7 @@ define(['auth/module'], function(module) {
       $rootScope.context = mockContext;
       $state.go('app.dashboard');
 	  }*/
-	
+	}
     }
   }
 });

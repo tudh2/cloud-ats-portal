@@ -29,7 +29,7 @@
         </div>
         <!-- list test case -->
 		<div class="list-testcase">
-        	<div  class="col-md-3" ng-repeat="case in lists track by $index| orderBy:'case.create_date'" data-toggle="modal" data-target="#editCase" ng-click="editCustom(editCustomKeyword,case);editCaseStatus($index);">
+        	<div  class="col-md-3" ng-repeat="case in lists track by $index| orderBy:'case.created_date'" data-toggle="modal" data-target="#editCase" ng-click="editCustom(editCustomKeyword,case);editCaseStatus($index);">
             	<div class="tc-itemBlock"  data-toggle="modal" data-target="#myModal">
                 	<div class="row">
                         <div class="tc-attributes col-md-12">

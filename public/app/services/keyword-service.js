@@ -113,31 +113,8 @@ define(['fk/module'], function(module) {
           callback(data);
         }).error(function(){});
       },
-      addCustomKeyword : function(customKeyword,keywordProject, callback) {
-        console.log(customKeyword);
-        console.log(keywordProject);
-        var request = {
-          method: 'POST',
-          url: 'http://localhost:9000/api/v1/addCustomKeyword',
-          headers: {
-            'X-AUTH-TOKEN': $cookies.get('authToken')
-          },
-          data: {
-            'customKeyword': customKeyword,
-            'keywordProject': keywordProject
-          }
-        };
-
-        $http(request).success(function(data,status) {
-          callback(data,status);
-        }).error(function(status) {
-          callback(status);
-        })
-      },
-
       /*nambv2*/
-     newTestCase : function(cases,callback) {
-        console.log(cases);
+     newTestCase : function(projectId,cases,callback) {
         var request = {
           method: 'POST',
           url: 'http://localhost:9000/api/v1/testcase',
@@ -146,7 +123,8 @@ define(['fk/module'], function(module) {
             'X-SPACE': $cookies.get('space')
           },
           data: {
-            'cases': cases
+            'cases': cases,
+            'projectId':projectId
           }
         };
         $http(request).success(function (data,status) {
@@ -156,10 +134,10 @@ define(['fk/module'], function(module) {
         })
       },
 
-      getListTestCase : function(callback) {
+      getListTestCase : function(projectId,callback) {
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/getListTestCase',
+          url: 'http://localhost:9000/api/v1/getListTestCase/'+projectId,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken')
           }
@@ -190,11 +168,11 @@ define(['fk/module'], function(module) {
         })
       },
 
-      removeCase : function(caseId,callback) {
+      removeCase : function(projectId,caseId,callback) {
         console.log(caseId);
         var request = {
           method: 'DELETE',
-          url: 'http://localhost:9000/api/v1/removeCase/'+ caseId,
+          url: 'http://localhost:9000/api/v1/removeCase/'+ caseId+'/'+projectId,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken')
           }
@@ -251,7 +229,7 @@ define(['fk/module'], function(module) {
         console.log(customKeyword);
         var request = {
           method: 'PUT',
-          url: 'http://localhost:9000/api/v1/update',
+          url: 'http://localhost:9000/api/v1/updateCustomKeyword',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken')
           },
@@ -268,10 +246,10 @@ define(['fk/module'], function(module) {
         })
       },
 
-      removeCustomKeyword : function(projectID,customKeywordName,callback) {
+      removeCustomKeyword : function(projectID,customKeywordId,callback) {
         var request = {
           method: 'DELETE',
-          url: 'http://localhost:9000/api/v1/removeCustomKeyword/'+ projectID+'/'+ customKeywordName,
+          url: 'http://localhost:9000/api/v1/removeCustomKeyword/'+ projectID+'/'+ customKeywordId,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken')
           }

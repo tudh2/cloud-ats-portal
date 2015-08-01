@@ -18,13 +18,14 @@
             </div>
          <!-- list test case -->
         <div class="list-testcase-customkeyword col-md-12">
-        	<div cclass="col-md-2 custom-keyword-block " ng-mouseenter="delete=true" ng-mouseleave="delete=false" ng-repeat="custom in listCustomKeywords|orderBy:'custom.create_date'" ng-init="delete=false" ng-click="editCustom(editCustomKeyword,custom);editCustomKeyStatus() ">
+        	<div cclass="col-md-2 custom-keyword-block " ng-mouseenter="delete=true" ng-mouseleave="delete=false" ng-repeat="case in listCustomKeywords|orderBy:'case.created_date'" ng-init="delete=false" ng-click="editCustom(editCustomKeyword,case);editCustomKeyStatus() ">
         		<div class="id-test">
 	        			<span># {{$index+1}}</span>	
-	        			<span ng-if="delete" ng-click="removeCustomKeyword(custom.name,$index)" class="pull-right icon"><i class="glyphicon icon-delete glyphicon-remove-circle"></i></span>        			
+	        			<span ng-if="delete" ng-click="removeCustomKeyword(case._id,$index)" class="pull-right icon"><i class="glyphicon icon-delete glyphicon-remove-circle"></i></span>        			
 	        	</div>
                 <div class="content-testcase" data-toggle="modal" data-target="#customKey">
-                    {{custom.name}} --- {{$index}}
+                    {{case.name}} --- {{$index}}
+                    {{case.created_date}}
                 </div>
         	</div>
         </div>

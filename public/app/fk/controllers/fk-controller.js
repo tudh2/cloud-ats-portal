@@ -200,7 +200,6 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
     $scope.disable = false;
     $scope.lists = [];
     $scope.performance = false;
-    $scope.customKeyword = false;
     $scope.not_change = true;
     $scope.openProject = function (project) {
       $('[data-toggle="popover"]').each(function () {
@@ -209,6 +208,7 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       $scope.project_overview = false;
       $scope.project = project;
       $scope.performance = false;
+      getData();
     }
 
     $scope.clickNewTestSuiteButton = function ($event) {
@@ -233,15 +233,6 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
     $scope.closeDetailPage = function () {
       $scope.project_overview = true;
     };
-
-    $scope.customKey = function (status) {
-        if(!status) {
-            $scope.customKeyword = true;
-        } else {
-             $scope.customKeyword = false;
-        }
-        console.log($scope.customKeyword);
-    };
 	
     keywordService.getListFunctionalProject(function (response) {
       $scope.functionalPros = response;
@@ -254,11 +245,12 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
 
     });
     var getData = function() {
-        keywordService.getListTestCase(function(data) {
+      console.log($scope.project.projectId);
+      var projectId = $scope.project.projectId;
+        keywordService.getListTestCase(projectId,function(data) {
             $scope.lists = data;
         });
     };
-    getData();
     $scope.removeSuite = function (suite) {
       keywordService.removeTestSuite(suite._id, $scope.project.projectId, function(data){
         if (data != null) {
@@ -596,41 +588,6 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       });
     };
 
-    /*test case*/
-
-    $scope.infoBasic = "";
-    $scope.newName = "";
-    $scope.nameCustomKeyword = "input text";
-
-    $scope.customKeyword = false;
-    $scope.editCustomKeyword =false;
-    $scope.customKey = function (status) {
-        if(!status) {
-            $scope.customKeyword = true;
-        } else {
-             $scope.customKeyword = false;
-        }
-    };
-
-    $scope.setInfo = function(infoBasic) {
-        $scope.cases[0].name = $scope.newName;
-        $scope.cases[0].info = infoBasic;
-        /*keywordService.newTestCase($scope.cases,function(data,status) {
-            $rootScope.$watch('data', function(){
-                getData();
-            });
-        });*/
-        $.smallBox({
-        title: "Success",
-        content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-        color: "#5F895F",
-        iconSmall: "fa fa-check bounce animated",
-        timeout: 2000
-      });
-    };
-
-    /*----------*/
-
     var resetModalSize = function () {
       $('#createScript .modal-dialog .modal-content').css("width", '');
       $('#createScript .modal-dialog .modal-content').css("margin-left", '');
@@ -687,7 +644,6 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
 
     /*Nambv2*/
 
-$scope.infoBasic = "";
     $scope.editCaseName = "";
     $scope.nameCustomKeyword = "";
 
@@ -697,7 +653,6 @@ $scope.infoBasic = "";
     $scope.updateCase = false;
 
     $scope.customKeyword = false;
-    $scope.editCustomKeyword =false;
     $scope.showQuickCreateCustom = false;
 
     $scope.newTestCaseStatus = function() {
@@ -706,7 +661,6 @@ $scope.infoBasic = "";
       $scope.updateCustom = false;
       $scope.updateCase = false;
       $scope.caseName = "";
-      $scope.infoBasic = "";
       $scope.showQuickCreateCustom = true;
     }
 
@@ -734,7 +688,8 @@ $scope.infoBasic = "";
     }
 
     $scope.createNewTestCase = function() {
-        keywordService.newTestCase($scope.cases,function(data,status) {
+        var projectId = $scope.project.projectId;
+        keywordService.newTestCase(projectId,$scope.cases,function(data,status) {
             $rootScope.$watch('data', function(){
                 getData();
             });
@@ -788,7 +743,8 @@ $scope.infoBasic = "";
 
     $scope.removeCase = function() {
       var caseId = $scope.cases[0]._id;
-      keywordService.removeCase(caseId,function(data,status) {
+      var projectId = $scope.project.projectId;
+      keywordService.removeCase(projectId,caseId,function(data,status) {
         $scope.lists.splice($scope.indexCaseEdit, 1);
         $.smallBox({
           title: "Delete Test Case Success",
@@ -838,13 +794,13 @@ $scope.infoBasic = "";
             getCustomKeywords(tenant,space._id,$scope.project.projectId);
         });
     }
-    var removeCustomKey = function(projectID,customKeywordName,index) {
-        keywordService.removeCustomKeyword(projectID,customKeywordName,function(data,status) {
+    var removeCustomKey = function(projectID,customKeywordId,index) {
+        keywordService.removeCustomKeyword(projectID,customKeywordId,function(data,status) {
             $scope.listCustomKeywords.splice(index, 1); 
         });
     }
-    $scope.removeCustomKeyword = function(customKeywordName,index) {
-        removeCustomKey($scope.project.projectId,customKeywordName,index);
+    $scope.removeCustomKeyword = function(customKeywordId,index) {
+        removeCustomKey($scope.project.projectId,customKeywordId,index);
     }
 
     $scope.newCaseName = function(value, attributes) {
@@ -853,10 +809,14 @@ $scope.infoBasic = "";
         }
     }
 
-    $scope.setInfo = function(info) {
-        $scope.cases[0].info = info;
-        $scope.infoBasic = info;
-        console.log(info);
+    $scope.setInfo = function() {
+        var projectId = $scope.project.projectId;
+        $scope.showQuickCreateCustom = false;
+        keywordService.newTestCase(projectId,$scope.cases,function(data,status) {
+          $rootScope.$watch('data', function(){
+                getData();
+            });
+        });
         $.smallBox({
           title: "Set Name Test Case Success",
           content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",

@@ -2120,7 +2120,7 @@ a:hover.viewLog, a:focus.viewLog {
 }
 .keyword-list {
 	height: 530px;
-	overflow: auto;
+	/*overflow: auto;*/
 }
 /* ==== Custome keyword === */
 .custom-keyword-list {
