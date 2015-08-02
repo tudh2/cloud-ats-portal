@@ -15,7 +15,7 @@
           <div class="form-group">
             <div class="col-sm-offset-4 col-sm-8"> 
 	            <button class="btn btn-danger pull-left" data-dismiss="modal" ng-click="removeCase()" ng-if="!addCase">Delete</button> 
-	            <button class="btn btn-primary pull-right" ng-click="setInfo()">Save</button>
+	            <button class="btn btn-primary pull-right" ng-if="!updateCase" ng-click="setInfo()">Save</button>
             </div>
           </div>
         </form>

@@ -287,6 +287,7 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
           $scope.project.projectId = data._id;
           $scope.project.totalCases = data.totalTestCases;
           $scope.functionalPros.push($scope.project);
+          getData();
         });
       } else {
 
@@ -651,9 +652,7 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
     $scope.addCustom = false;
     $scope.updateCustom = false;
     $scope.updateCase = false;
-
     $scope.customKeyword = false;
-    $scope.showQuickCreateCustom = false;
 
     $scope.newTestCaseStatus = function() {
       $scope.addCase = true;
@@ -661,7 +660,14 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       $scope.updateCustom = false;
       $scope.updateCase = false;
       $scope.caseName = "";
-      $scope.showQuickCreateCustom = true;
+      $scope.statusAdd=true;$scope.added=false;$scope.done=false;
+    }
+
+    $scope.clickAddCustomQuick = function() {
+      $scope.added=true;
+    }
+    $scope.clickCancelAddCustom = function() {
+      $scope.added=false
     }
 
     $scope.customKeywordStatus = function() {
@@ -671,11 +677,12 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       $scope.updateCase = false;
     }
 
-    $scope.editCustomKeyStatus = function() {
+    $scope.editCustomKeyStatus = function(index) {
       $scope.addCase = false;
       $scope.addCustom = false;
       $scope.updateCustom = true;
       $scope.updateCase = false;
+      $scope.indexCustomEdit = index;
     }
 
     $scope.editCaseStatus = function(index) {
@@ -684,15 +691,24 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       $scope.updateCustom = false;
       $scope.updateCase = true;
       $scope.indexCaseEdit = index;
-      $scope.showQuickCreateCustom = false;
     }
 
     $scope.createNewTestCase = function() {
         var projectId = $scope.project.projectId;
-        keywordService.newTestCase(projectId,$scope.cases,function(data,status) {
-            $rootScope.$watch('data', function(){
-                getData();
-            });
+        var checkCaseExist = false;
+        keywordService.newTestCase(projectId,$scope.cases[0],function(data,status) {
+          _.forEach($scope.lists,function(item) {
+              if(_.isEqual(item.name.trim(),$scope.cases[0].name)) {
+                checkCaseExist = true;
+              }
+          });
+
+          if(!checkCaseExist) {
+            $scope.lists.push(data[0]);
+          } else {
+            $scope.lists.splice($scope.lists.length - 1 , 1);
+            $scope.lists.push(data[0]);
+          }
         });
     }
 
@@ -718,26 +734,22 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
 
     $scope.updateCustomKeyword = function() {
         var projectId = $scope.project.projectId;
-        keywordService.updateCustomKeyword($scope.cases,projectId,function(data,status) {
+        keywordService.updateCustomKeyword($scope.cases[0],projectId,function(data,status) {
             $rootScope.$watch('data', function() {
-                $rootScope.$watch('context', function(value){
-                        var tenant = $rootScope.context.tenant._id;
-                        var space = $rootScope.context.space;
-                        if (space === undefined) {
-                            space = {_id: null};
-                        }
-                        getCustomKeywords(tenant,space._id,$scope.project.projectId);
-                });
+                $scope.listCustomKeywords.splice($scope.indexCustomEdit, 1);
+                $scope.listCustomKeywords.push(data[0]);
             });
         });
     }
 
     $scope.updateTestCase = function() {
-      console.log($scope.cases);
-      keywordService.updateCase($scope.cases,function(data,status) {
+      keywordService.updateCase($scope.cases[0],function(data,status) {
         $rootScope.$watch('data', function() {
-          getData();
+          //getData();
+          $scope.lists.splice($scope.indexCaseEdit, 1);
+          $scope.lists.push(data[0]);
         });
+      $
       });
     }
 
@@ -757,25 +769,35 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
     }
 
     $scope.editNameCase = function(newName) {
-      $scope.cases[0].name = newName;
+      $scope.added=false;
+      $scope.statusAdd=false;
+      $scope.done=true;
+      $scope.customKeyClone = angular.copy($scope.cases[0]);
+      $scope.customKeyClone.name = newName;
     }
 
     $scope.addCustomKeyword = function() {
-        console.log("here");
         var projectId = $scope.project.projectId;
-        keywordService.addCustomKeyword($scope.cases,projectId,function(data,status) {
-            $rootScope.$watch('data', function() {
-                $rootScope.$watch('context', function(value){
-                        var tenant = $rootScope.context.tenant._id;
-                        var space = $rootScope.context.space;
-                        if (space === undefined) {
-                            space = {_id: null};
-                        }
-                        getCustomKeywords(tenant,space._id,$scope.project.projectId);
-                        //$scope.listCustomKeywords.push($scope.cases[0]);
-                });
-            });
-        });
+        var customKeywordValue = null;
+        if($scope.customKeyClone != null) {
+          customKeywordValue = $scope.customKeyClone;
+        } else {
+          customKeywordValue = $scope.cases[0];
+        }
+        keywordService.addCustomKeyword(customKeywordValue,projectId,function(data,status) {
+              if($scope.addCustom) {
+                $scope.listCustomKeywords.push(data[0]);
+              }
+              $.smallBox({
+                title: "Success",
+                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                color: "#5F895F",
+                iconSmall: "fa fa-check bounce animated",
+                timeout: 1000
+              });
+              $scope.customKeyClone = null;
+          });
+        
     }
 
     var getCustomKeywords = function(tenant,space,projectID) {
@@ -811,11 +833,12 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
 
     $scope.setInfo = function() {
         var projectId = $scope.project.projectId;
-        $scope.showQuickCreateCustom = false;
-        keywordService.newTestCase(projectId,$scope.cases,function(data,status) {
+        keywordService.newTestCase(projectId,$scope.cases[0],function(data,status) {
           $rootScope.$watch('data', function(){
-                getData();
-            });
+                //getData();
+                $scope.lists.push(data[0]);
+          });
+        
         });
         $.smallBox({
           title: "Set Name Test Case Success",

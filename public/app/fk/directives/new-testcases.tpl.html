@@ -44,17 +44,17 @@
     </div>
     </div>
 
-    <div class="add-keyword" ng-init="statusAdd=true;added=false;done=false;" ng-if="!customKeyword">
-    <form ng-submit="addCustomKeyword()" ng-if="showQuickCreateCustom">
-            <a  class="btn btn-border-line btn-keyword pull-right" ng-show="statusAdd && !added && !done" ng-click="added=true">Add to Keyword</a>
+    <div class="add-keyword"  ng-if="!customKeyword">
+    <form ng-submit="addCustomKeyword()">
+            <a  class="btn btn-border-line btn-keyword pull-right" ng-show="statusAdd && !added && !done" ng-click="clickAddCustomQuick()">Add to Keyword</a>
         <div ng-show="statusAdd && added &&!done" class="pull-right">
           <label style="padding-top:5px">Keyword Name</label>
         <div class="editable-input" style="position: relative;">
           <input type="text" ng-model="nameCustomKeyword" class="form-control input-sm" style="padding-right: 24px;">
         </div>
         <div class="editable-buttons" style="padding-top:5px">
-          <button type="submit" class="editable-submit" ng-click="added=false;statusAdd=false;done=true;editNameCase(nameCustomKeyword)"><i class="fa fa-check"></i></button>
-          <button type="button" class="editable-cancel" ng-click="added=false"><i class="fa fa-times"></i></button>
+          <button type="submit" class="editable-submit" ng-click="editNameCase(nameCustomKeyword)"><i class="fa fa-check"></i></button>
+          <button type="button" class="editable-cancel" ng-click="clickCancelAddCustom()"><i class="fa fa-times"></i></button>
         </div>
       </div>
       <span class="style-status-keyword pull-right" ng-show="!statusAdd && !added && done"><i class="fa fa-check"></i><label style="padding-top:5px;padding-left:5px">Added</label></span>
