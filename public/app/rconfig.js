@@ -112,7 +112,7 @@ var require = {
         'jquery-jvectormap-world-mill-en': '../plugin/vectormap/jquery-jvectormap-world-mill-en',
 
 
-        'lodash': '../plugin/lodash/dist/lodash.min',
+        'lodash': '../plugin/lodash/lodash',
 
 
         'magnific-popup': '../plugin/magnific-popup/dist/jquery.magnific-popup',

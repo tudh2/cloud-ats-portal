@@ -2,7 +2,7 @@ define(['projects/module'], function (module) {
   
   'use strict';
 
-  module.registerController('NewProjectCtrl', ['$scope','KeywordService', 'PerformanceService', function($scope, KeywordService, PerformanceService) {
+  module.registerController('NewProjectCtrl', ['$scope', '$state', 'KeywordService', 'PerformanceService', function($scope, $state, KeywordService, PerformanceService) {
 
     $scope.type = 'functional';
 
@@ -22,6 +22,8 @@ define(['projects/module'], function (module) {
         $input.removeClass('state-error');
 
         $('#createProject').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
         switch ($scope.type) {
           case 'functional' :
             KeywordService.create($scope.name, function(response) {
@@ -30,7 +32,7 @@ define(['projects/module'], function (module) {
             break;
           case 'performance' :
             PerformanceService.create($scope.name, function (response) {
-              console.log(response);
+              $state.go('app.performance', {id: response});
             });
             break;
           default:

@@ -33,16 +33,16 @@ define(['layout/module'], function (module) {
 
 				});
 			},
-			createPerformanceTestByUpload: function (files, project_name, callback) {
+			createPerformanceTestByUpload: function (files, script_name, project_id, callback) {
 				var formData = new FormData();
 				$.each(files, function (key, value) {
 
 					formData.append(key, value);
 				});
-
+				console.log(project_id);
 				var request = {
 					method: 'POST',
-					url: 'http://localhost:9000/api/v1/performance/uploadFile?project_name='+project_name,
+					url: 'http://localhost:9000/api/v1/performance/uploadFile?script_name='+script_name+'&project_id='+project_id,
 					headers: {
 						'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space'),
@@ -114,6 +114,26 @@ define(['layout/module'], function (module) {
           },
           data: {
             name: name
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data);
+        }).error(function(data, status) {
+
+        });
+      },
+      run: function (projectId, suiteIds, callback) {
+      	console.log(suiteIds);
+      	 var request = {
+          method: 'POST',
+          url: 'http://localhost:9000/api/v1/project/performance/run/'+projectId,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: {
+            suiteIds : suiteIds
           }
         };
 

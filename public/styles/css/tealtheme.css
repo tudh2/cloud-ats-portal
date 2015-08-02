@@ -374,11 +374,7 @@ textarea.area-script-name {
 	min-width: 268px !important;
 	max-width: 268px !important;
 }
-textarea.upload_name {
-	width: 318px !important;
-	min-width: 318px !important;
-	max-width: 318px !important;
-}
+
 .btn-uploadFile {
 	background-color: #01B49F;
 	-moz-border-radius: 5px;
@@ -2403,5 +2399,38 @@ a:hover.viewLog, a:focus.viewLog {
 }
 .script-name {
 	padding-left: 13px;
+}
+
+.upload-script-body {
+	 margin-left: 20px;
+	 margin-top: 20px;
+	 margin-right: 20px; 
+	 padding-bottom: 0px;
+	 padding-left: 0px;
+}
+textarea.upload_name {
+  width: 349px !important;
+  min-width: 349px !important;
+  max-width: 349px !important;
+}
+.save-script-upload {
+	margin-right: 20px;
+}
+.script-name-upload {
+	margin-top:20px;
+}
+.list_testScripts {
+	height: 100%;
+	width: 300px;
+	position: fixed;
+	width: 25%;
+	border-right: 1px solid #AFB3B2;
+	padding-top: 20px;
+	background-color: white;
+	height: 547px;
+	overflow: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 /*end script-list*/

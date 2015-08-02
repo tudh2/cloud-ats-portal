@@ -10,7 +10,7 @@
 		<div class="col-sm-9">
 			<div class="row">
 				<div class="functional-title col-sm-6">
-					<p style="text-align: left; padding-top:5px">365 Test Scripts</p>
+					<p style="text-align: left; padding-top:5px">{{project.totalScripts}} Test Scripts</p>
 				</div>
 				<div class="col-sm-6">
 					<button type="submit" class="btn btn-primary pull-right create-script" data-toggle="modal" data-target="#createScript">New Test Script</button>
@@ -22,37 +22,20 @@
 			</div>
 		</div>
 	</div>
-		<div class="row">
-			<div class="col-sm-3">
-				<div class="functional-project-overview-not-choose">
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="col-sm-6"><span class="project-name">#181</span></div>
-						</div>
-						<div class="col-sm-12 sumary">
-							<div class="col-sm-11">
-								<small><strong>EDB is Enterprise Database System. This test case is cover the front end area</strong></small>
-							</div>
+	<div class="row">
+		<div class="col-sm-3" ng-repeat="script in project.scripts track by $index">
+			<div class="functional-project-overview-not-choose">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-6"><span class="project-name">#{{script._id.substring(0,8)}}</span></div>
+					</div>
+					<div class="col-sm-12 sumary">
+						<div class="col-sm-11">
+							<small><strong>{{script.name}}</strong></small>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- mock scipts -->
-			<div class="col-sm-3" ng-repeat="j in [1, 2, 4,3,5,9,10,1] track by $index">
-				<div class="functional-project-overview-not-choose">
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="col-sm-6"><span class="project-name">#181</span></div>
-						</div>
-						<div class="col-sm-12 sumary">
-							<div class="col-sm-11">
-								<small><strong>EDB is Enterprise Database System. This test case is cover the front end area</strong></small>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end mock scripts -->
+		</div>
 	</div>
 </div>

@@ -359,20 +359,6 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       });
       $(div).css('background-color', '#EBF3F5');
     };
-    // get files after files were uploaded
-    $scope.uploadFile = function (element) {
-      $scope.file = element.files;
-
-      delete $scope.file.length;
-      
-      var fileNames = '';
-      _.forEach($scope.file, function (file) {
-        fileNames += file.name + ',';
-        
-      });
-      $('input[name="listFile"]').val(fileNames);
-
-    };
 
     $scope.clickSaveTestSuiteChoosed = function () {
 

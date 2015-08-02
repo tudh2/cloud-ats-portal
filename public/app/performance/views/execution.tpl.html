@@ -1,18 +1,18 @@
 <div class="row">
-	<div class="col-sm-3 list_testSuite">
+	<div class="col-sm-3 list_testScripts">
 		<p>CHOOSE TEST SCRIPT</p>
 		<div>
 			<section class="smart-form">
         <label class="input"><i class="icon-append fa fa-search"></i>
-          <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
+          <input type="text" name="Search" ng-model="Search" placeholder="Search Test Script" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
         </label>
       </section>
     </div>
-    <div class="row list-script" ng-repeat="i in [1,2,3] track by $index">
-  		<span class="pull-left script-name">Test Script Name</span>
+    <div class="row list-script" ng-repeat="script in project.scripts track by $index">
+  		<span class="pull-left script-name">{{script.name}}</span>
   		<div class="smart-form check-list">
-        <label class="checkbox pull-right">
-          <input type="checkbox" name="checkbox" class="checkbox-script">
+        <label class="checkbox scriptId pull-right">
+          <input type="checkbox" name="checkbox" class="checkbox-script" value="{{script._id}}" ng-click="check($event);">
           <i></i>
         </label>
       </div>
@@ -20,7 +20,7 @@
 	</div>
 	<div class="col-sm-9 run-test">
 		<div class="">
-			<a href="#" class="Run_Test">Run Test</a>
+			<a ng-click="runPerformanceTest()" class="Run_Test">Run Test</a>
 		</div>
 	</div>
 </div>

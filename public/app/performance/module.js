@@ -19,6 +19,7 @@ define([
 						resolve: {
 						deps: $couchPotatoProvider.resolveDependencies([
 							'performance/controllers/performance-detail-controller',
+							'performance/controllers/new-script-controller',
 							'modules/forms/directives/input/smart-uislider',
 							'services/performance-service'
 						])
