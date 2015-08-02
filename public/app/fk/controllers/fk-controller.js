@@ -660,7 +660,9 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       $scope.updateCustom = false;
       $scope.updateCase = false;
       $scope.caseName = "";
-      $scope.statusAdd=true;$scope.added=false;$scope.done=false;
+      $scope.statusAdd=true;
+      $scope.added=false;
+      $scope.done=false;
     }
 
     $scope.clickAddCustomQuick = function() {
@@ -690,6 +692,9 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
       $scope.addCustom = false;
       $scope.updateCustom = false;
       $scope.updateCase = true;
+      $scope.statusAdd=true;
+      $scope.added=false;
+      $scope.done=false;
       $scope.indexCaseEdit = index;
     }
 
@@ -784,7 +789,8 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
         } else {
           customKeywordValue = $scope.cases[0];
         }
-        keywordService.addCustomKeyword(customKeywordValue,projectId,function(data,status) {
+        if(customKeywordValue.steps.length != 0) {
+          keywordService.addCustomKeyword(customKeywordValue,projectId,function(data,status) {
               if($scope.addCustom) {
                 $scope.listCustomKeywords.push(data[0]);
               }
@@ -797,6 +803,10 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
               });
               $scope.customKeyClone = null;
           });
+        } else {
+          alert("Action NOT NULL");
+        }
+        
         
     }
 
