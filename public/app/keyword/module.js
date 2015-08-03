@@ -43,9 +43,7 @@ define([
               'services/case-service',
               'fk/directives/keywords',
               'fk/directives/keyword-params',
-              'fk/directives/steps',
-              'fk/directives/suites',
-              'fk/directives/cases'
+              'fk/directives/steps'
             ])
           }
         }

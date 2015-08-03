@@ -3,7 +3,7 @@
     <div class="customize-tree">
       <div class="tree">
       <ul class="smart-treeview-group">
-        <li ng-repeat="case in cases">
+        <li>
           <span class="editinline color-keyword">
           <a ng-click="toggleExpand($event)" class="fa fa-fw fa-folder-open txt-color-darken"></a>
           
@@ -15,21 +15,6 @@
             data-success-callback="changeCaseName"
             class="editable color-keyword name-keyword editable-click">{{case.name}}</a>
           <span  ng-if="!customKeyword" class="editable color-keyword name-keyword editable-click">{{case.name}}</span>
-
-          <!-- <div style="padding-left: 25px;" class="btn-group dropup" data-dropdown>
-            <a href="#" class="dropdown-toggle txt-color-darken" data-dropdown-toggle>
-              <i class="fa fa-cog"></i>
-            </a>
-            <ul class="dropdown-menu no-padding">
-              <li class="li-popup">
-                  <a ng-click="newCase()" class="txt-color-blueDark"><i class="fa fa-plus"></i> Create new suite</a>
-              </li>
-              <li class="li-popup divider"></li>
-              <li class="li-popup" ng-if="cases.length > 1">
-                  <a ng-click="deleteCase($index)" class="txt-color-redLight"><i class="fa fa-minus"></i> Delete this suite</a>
-              </li>
-            </ul>
-          </div> -->
 
           </span>
 
@@ -59,9 +44,10 @@
       </div>
       <span class="style-status-keyword pull-right" ng-show="!statusAdd && !added && done"><i class="fa fa-check"></i><label style="padding-top:5px;padding-left:5px">Added</label></span>
     </form>
-  </div>
+    </div>
 
   </div>
+  
   <div class="col-md-4 keyword-list-container">
 
      <div class="panel-group smart-accordion-default keyword-list animated fadeInDown" id="keyword-list" >

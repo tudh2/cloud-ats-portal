@@ -7,6 +7,9 @@ define(['fk/module', 'lodash'], function(module, _) {
       replace: true,
       //templateUrl: 'app/fk/directives/keywords.tpl.html',
       //templateUrl: 'app/fk/directives/new-keywords1.tpl.html',
+      scope: {
+        case: '='
+      },
       templateUrl: 'app/fk/directives/new-testcases.tpl.html',
       link: function($scope, element, attributes) {
 
@@ -16,34 +19,6 @@ define(['fk/module', 'lodash'], function(module, _) {
         $scope.editableOptions = {
           mode: 'inline',
           disabled: false
-        }
-
-        $scope.newCase = function() {
-          $scope.casecount++;
-          $scope.cases.push({
-            "name": "NewCase" + $scope.casecount,
-            "steps": []
-          })
-        }
-
-        $scope.deleteCase = function(index) {
-          $scope.cases.splice(index, 1); 
-        }
-
-        $scope.toggleExpand = function($event) {
-          var a = $event.currentTarget;
-          $(a).toggleClass('fa-folder-open');
-          $(a).toggleClass('fa-folder');
-
-          var li = $(a).closest('li');
-
-          var $div = li.find('div.steps.expand');
-          $div.slideToggle(200);
-        }
-
-        $scope.changeCaseName = function(value, attributes) {
-          var index = attributes.index;
-          $scope.cases[index].name = value;
         }
 
         $scope.selectCat = function(cat) {

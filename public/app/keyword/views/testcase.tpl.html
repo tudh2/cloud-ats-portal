@@ -25,7 +25,12 @@
 
         <span class="col-md-4 pull-right btn-action-list">
           <a class="btn btn-default">Custom Keyword</a>
-          <a data-toggle="modal" data-target="#editCase" class="btn btn-primary">New Test Case</a>
+          
+          <a class="btn btn-primary"
+            data-toggle="modal" 
+            data-target="#editCase" 
+            ng-click="newTestCase()">
+            New Test Case</a>
         </span>
 
       </div>
@@ -34,40 +39,7 @@
     <div class="list-testcase">
       
       <div class="modal fade" id="editCase">
-        <div class="modal-dialog tc-new-tabs">
-          <div class="modal-content">
-
-            <div class="modal-header">
-              <header class="header-navtabs">
-                <div class="header-title">TEST CASE</div>
-
-                <ul id="myTab" class="nav nav-tabs pull-right">
-                  <li class="active">
-                    <a href="#t1" data-toggle="tab"><span class="hidden-mobile hidden-tablet">BASIC INFO</span></a>
-                  </li>
-                  <li>
-                    <a href="#t2" data-toggle="tab"><span class="hidden-mobile hidden-tablet">TEST KEYWORD</span></a>
-                  </li>
-                </ul>
-             </header>
-            </div>
-
-            <div class="modal-body tc-new-tabContent tab-content">
-              <div class="tab-pane active fade in no-padding-bottom" id="t1">
-                  <div smart-include="app/fk/views/new-basic-info.tpl.html" ></div>
-              </div>
-              <div class="tab-pane fade in no-padding-bottom tab-pane-full" id="t2">
-                  <keywords></keywords>
-              </div>
-            </div>
-                
-            <div class="modal-footer group-listbutton-keyword">
-              <a class="btn btn-primary"  data-dismiss="modal">Close</a>
-            </div>
-
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
+      </div>
 
     </div>
   </div>
