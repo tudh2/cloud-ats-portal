@@ -36,18 +36,69 @@ define(['keyword/module'], function (module) {
       },
 
       $scope.save = function() {
-        CaseService.create($scope.projectId, $scope.current, function(data) {
-          $scope.cases.push(data);
-          $.smallBox({
-            title: 'Notification',
-            content: 'Your test case have created',
-            color: '#296191',
-            iconSmall: 'fa fa-check fadeInRight animated',
-            timeout: 3000
+        if ($scope.current.temp) {
+          CaseService.create($scope.projectId, $scope.current, function(data, status) {
+            
+            switch (status) {
+
+            case 201: 
+              $.smallBox({
+                title: 'Notification',
+                content: 'Your test case have created',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              $scope.cases.push(data);
+              break;
+
+            default:
+              $.smallBox({
+                title: 'Notification',
+                content: 'Can not create your test case',
+                color: '#c26565',
+                iconSmall: 'fa fa-ban bounce animated',
+                timeout: 3000
+              });
+
+            }
           });
 
-          $('#editCase').modal('hide');
-        });
+        } else {
+          CaseService.update($scope.projectId, $scope.current, function(data, status) {
+            switch (status) {
+              case 200:
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Your test case have updated',
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
+                break;
+              case 204:
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Your test case have nothing to update',
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
+                break;
+              default:
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Can not update your test case',
+                  color: '#c26565',
+                  iconSmall: 'fa fa-ban bounce animated',
+                  timeout: 3000
+                });
+            }
+          });
+        }
+
+
+        $('#editCase').modal('hide');
       },
 
       $scope.clickToCase = function(caze) {
