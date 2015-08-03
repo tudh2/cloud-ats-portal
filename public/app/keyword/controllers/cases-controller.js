@@ -10,27 +10,29 @@ define(['keyword/module'], function (module) {
 
       $scope.title = 'TEST CASES';
 
-      var $modal = $('#editCase');
-
       CaseService.list($scope.projectId, function(response) {
         $scope.cases = response;
       });
 
-
-      $scope.newTestCase = function() {
+      var loadModal = function() {
+        var $modal = $('#editCase');
 
         //clear modal content
         $modal.html('');
 
+        $templateRequest('app/keyword/views/testcase-modal-content.tpl.html').then(function(template) {
+          $modal.html($compile(template)($scope));
+        });
+      }
+
+      $scope.newTestCase = function() {
         $scope.current = {
           "name": "New Test Case",
           "steps": [],
           "temp": true
         };
 
-        $templateRequest('app/keyword/views/testcase-modal-content.tpl.html').then(function(template) {
-          $modal.html($compile(template)($scope));
-        });
+        loadModal();        
       },
 
       $scope.save = function() {
@@ -41,24 +43,16 @@ define(['keyword/module'], function (module) {
             content: 'Your test case have created',
             color: '#296191',
             iconSmall: 'fa fa-check fadeInRight animated',
-            timeout: 4000
+            timeout: 3000
           });
 
-          $modal.modal('hide');
+          $('#editCase').modal('hide');
         });
       },
 
       $scope.clickToCase = function(caze) {
         $scope.current = caze;
-
-        console.log($scope.current)
-
-        //clear modal content
-        $modal.html('');
-
-        $templateRequest('app/keyword/views/testcase-modal-content.tpl.html').then(function(template) {
-          $modal.html($compile(template)($scope));
-        });
+        loadModal();
       } 
 
   }]);
