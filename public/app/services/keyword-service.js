@@ -4,7 +4,7 @@ define(['fk/module'], function(module) {
   module.registerFactory('KeywordService', ['$http', '$cookies', function($http, $cookies) {
     return {
 
-      projects: function(callback) {
+      list: function(callback) {
         var request = {
           method: 'GET',
           url: 'http://localhost:9000/api/v1/project/keywords',

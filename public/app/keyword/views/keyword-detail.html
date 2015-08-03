@@ -8,19 +8,19 @@
 
         <ul id="myTab" class="nav nav-tabs pull-right">
           <li class="active">
-            <a href="#projectDetail" data-toggle="tab" ng-click="title='OVERVIEWS'" ng-init="title='OVERVIEWS'"><span class="hidden-mobile hidden-tablet">OVERVIEWS</span></a>
+            <a href="#overview" data-toggle="tab" ng-click="changeTab('overview')"><span class="hidden-mobile hidden-tablet">OVERVIEWS</span></a>
           </li>
           <li>
-            <a href="#testCases" data-toggle="tab" ng-click="title='TEST CASE'"><span class="hidden-mobile hidden-tablet">TEST CASE</span></a>
+            <a href="#cases" data-toggle="tab" ng-click="changeTab('cases')"><span class="hidden-mobile hidden-tablet">TEST CASE</span></a>
           </li>
           <li>
-            <a href="#dataDriven" data-toggle="tab" ng-click="title='DATA DRIVEN'"><span class="hidden-mobile hidden-tablet">DATA DRIVEN</span></a>
+            <a href="#driven" data-toggle="tab" ng-click="changeTab('driven')"><span class="hidden-mobile hidden-tablet">DATA DRIVEN</span></a>
           </li>
           <li>
-            <a href="#testSuites" data-toggle="tab" ng-click="title='TEST SUITE'"><span class="hidden-mobile hidden-tablet">TEST SUITE</span></a>
+            <a href="#suites" data-toggle="tab" ng-click="changeTab('suites')"><span class="hidden-mobile hidden-tablet">TEST SUITE</span></a>
           </li>
           <li>
-            <a href="#execution" data-toggle="tab" ng-click="title='EXECUTION'"><span class="hidden-mobile hidden-tablet">EXECUTION</span></a>
+            <a href="#execution" data-toggle="tab" ng-click="changeTab('execution')"><span class="hidden-mobile hidden-tablet">EXECUTION</span></a>
           </li>
         </ul>
      </header>
@@ -29,9 +29,15 @@
     <div class="no-padding">
       <div class="widget-body">
         <div id="myTabContent" class="tab-content">
-          <div class="tab-pane fade active in no-padding-bottom" id="projectDetail">
+          
+          <div class="tab-pane fade active in no-padding-bottom" id="overview">
             <div smart-include="app/keyword/views/overview.tpl.html"></div>
           </div>
+
+          <div class="tab-pane fade no-padding-bottom" id="cases">
+            <div smart-include="app/keyword/views/testcase.tpl.html"></div>
+          </div>
+
         </div>
       </div>
     </div>

@@ -11,7 +11,10 @@ define([
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
       .state('app.keyword', {
-        url: '/project/keyword/:id',
+        url: '/project/keyword/:id/:tab',
+        params: {
+          tab: 'overview'
+        },
         views: {
           "content@app": {
             templateUrl: 'app/keyword/views/keyword-detail.html',
@@ -19,7 +22,13 @@ define([
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
                 'keyword/controllers/keyword-detail-controller',
-                'services/keyword-service'
+                'services/keyword-service',
+                'services/case-service',
+                'fk/directives/keywords',
+                'fk/directives/keyword-params',
+                'fk/directives/steps',
+                'fk/directives/suites',
+                'fk/directives/cases'
               ])
             }
           }

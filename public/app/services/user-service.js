@@ -52,9 +52,13 @@ define(['app'], function(app) {
 
           var spaceId = context.space !== undefined ? context.space._id : null;
 
-          $cookies.put('space', spaceId, {
-            expires: expires
-          });
+          if (spaceId != null) {
+            $cookies.put('space', spaceId, {
+              expires: expires
+            });
+          } else {
+            $cookies.remove('space');
+          }
           
           if (typeof callback === 'function') {
             callback(context);

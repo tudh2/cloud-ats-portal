@@ -24,10 +24,11 @@ define(['projects/module'], function (module) {
         $('#createProject').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
+
         switch ($scope.type) {
           case 'functional' :
-            KeywordService.create($scope.name, function(response) {
-              console.log(response);
+            KeywordService.create($scope.name, function(projectId) {
+              $state.go('app.keyword', { id : projectId });
             });
             break;
           case 'performance' :

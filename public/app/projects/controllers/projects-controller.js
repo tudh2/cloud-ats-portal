@@ -37,7 +37,7 @@ define(['projects/module', 'lodash'], function (module, _) {
     };
 
     var loadKeywordProjects = function() {
-      KeywordService.projects(function (response) {
+      KeywordService.list(function (response) {
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
       });

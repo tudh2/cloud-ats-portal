@@ -2,7 +2,10 @@
   <div class="border-div">
 
     <div class="actionMenu row btn-action-list">
-      <span class="col-sm-6 pull-right"> <a class="btn btn-primary">Edit</a>
+      <span class="col-sm-6 pull-right"> 
+        <a class="btn btn-primary">Edit</a>
+        <a data-ui-sref="app.projects" class="btn btn-default">Close</a>
+      </span>
     </div>
 
     <div class="row project-detail-header">
@@ -31,9 +34,9 @@
         </thead>
         <tbody>
           <tr>
-            <td class="info-details" ng-init="">{{project.totalSuites}}</td>
-            <td class="info-details" ng-init="">{{project.totalCases}}</td>
-            <td>01/05/2015 22:30</td>
+            <td class="info-details">{{project.totalSuites}}</td>
+            <td class="info-details">{{project.totalCases}}</td>
+            <td class="info-details">{{project.lastRunning === undefine ? 'N/A' : project.lastRunning}}</td>
           </tr>
         </tbody>
       </table>

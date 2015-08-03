@@ -11,13 +11,7 @@ define([
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
       .state('app.projects', {
-        url: '/projects/:type',
-        params: {
-          type: {
-            value: null,
-            squash: true
-          }
-        },
+        url: '/projects',
         views: {
           "content@app": {
             templateUrl: 'app/projects/views/project-list.html',
@@ -36,6 +30,21 @@ define([
         data: {
           title: 'Project List',
           requireLogin: true
+        }
+      })
+      .state('app.projects.type', {
+        url: '/:type',
+        params: {
+          type: {
+            value: null,
+            squash: true
+          }
+        },
+        views: {
+          "content@app": {
+            templateUrl: 'app/projects/views/project-list.html',
+            controller: 'ProjectsCtrl'
+          }
         }
       })
   });

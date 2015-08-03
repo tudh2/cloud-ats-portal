@@ -1,0 +1,74 @@
+<div class="testcase-tab">
+  <div class="testList">
+    <div class="border-div">
+      <div class="row actionMenu">
+        
+        <div class="col-md-3">
+          <form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="">
+            <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" autocomplete="off">
+            <button type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <span class="col-md-2 count-testcase"><label>{{cases.length}} Test Case{{cases.length > 2 ? 's' : ''}}</label></span>
+
+        <div class="dropdown testcase-group col-md-3">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose a Test Case Group
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="">Login</a></li>
+            <li><a href="">Logout</a></li>
+            <li><a href="">Register</a></li>
+          </ul>
+        </div>
+
+        <span class="col-md-4 pull-right btn-action-list">
+          <a class="btn btn-default">Custom Keyword</a>
+          <a data-toggle="modal" data-target="#editCase" class="btn btn-primary">New Test Case</a>
+        </span>
+
+      </div>
+    </div>
+
+    <div class="list-testcase">
+      
+      <div class="modal fade" id="editCase">
+        <div class="modal-dialog tc-new-tabs">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <header class="header-navtabs">
+                <div class="header-title">TEST CASE</div>
+
+                <ul id="myTab" class="nav nav-tabs pull-right">
+                  <li class="active">
+                    <a href="#t1" data-toggle="tab"><span class="hidden-mobile hidden-tablet">BASIC INFO</span></a>
+                  </li>
+                  <li>
+                    <a href="#t2" data-toggle="tab"><span class="hidden-mobile hidden-tablet">TEST KEYWORD</span></a>
+                  </li>
+                </ul>
+             </header>
+            </div>
+
+            <div class="modal-body tc-new-tabContent tab-content">
+              <div class="tab-pane active fade in no-padding-bottom" id="t1">
+                  <div smart-include="app/fk/views/new-basic-info.tpl.html" ></div>
+              </div>
+              <div class="tab-pane fade in no-padding-bottom tab-pane-full" id="t2">
+                  <keywords></keywords>
+              </div>
+            </div>
+                
+            <div class="modal-footer group-listbutton-keyword">
+              <a class="btn btn-primary"  data-dismiss="modal">Close</a>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+    </div>
+  </div>
+</div>
