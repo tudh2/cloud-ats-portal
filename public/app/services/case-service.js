@@ -6,7 +6,7 @@ define(['keyword/module'], function (module) {
       list: function(projectId, callback) {
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/project/keyword/' + projectId + '/cases' ,
+          url: appConfig.RestEntry + '/api/v1/project/keyword/' + projectId + '/cases' ,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -18,6 +18,24 @@ define(['keyword/module'], function (module) {
         }).error(function(data, status) {
 
         });
+      },
+
+      create: function(projectId, cases, callback) {
+        var request = {
+          method: 'POST',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/' + projectId + '/case' ,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: cases
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data);
+        }).error(function(data, status) {
+
+        });        
       }
     }
   }]);

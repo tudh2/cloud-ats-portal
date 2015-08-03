@@ -5,7 +5,7 @@ define(['fk/module', 'lodash'], function(module, _) {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'app/fk/directives/steps.tpl.html',
+      templateUrl: 'app/keyword/directives/steps.tpl.html',
       scope: {
         list: '='
       },

@@ -10,7 +10,7 @@ define(['keyword/module'], function (module) {
 
       $scope.title = 'TEST CASES';
 
-      $scope.modalReload = false;
+      var $modal = $('#editCase');
 
       CaseService.list($scope.projectId, function(response) {
         $scope.cases = response;
@@ -18,7 +18,6 @@ define(['keyword/module'], function (module) {
 
 
       $scope.newTestCase = function() {
-        var $modal = $('#editCase');
 
         //clear modal content
         $modal.html('');
@@ -35,8 +34,32 @@ define(['keyword/module'], function (module) {
       },
 
       $scope.save = function() {
-        console.log($scope.current);
-      }
+        CaseService.create($scope.projectId, $scope.current, function(data) {
+          $scope.cases.push(data);
+          $.smallBox({
+            title: 'Notification',
+            content: 'Your test case have created',
+            color: '#296191',
+            iconSmall: 'fa fa-check fadeInRight animated',
+            timeout: 4000
+          });
+
+          $modal.modal('hide');
+        });
+      },
+
+      $scope.clickToCase = function(caze) {
+        $scope.current = caze;
+
+        console.log($scope.current)
+
+        //clear modal content
+        $modal.html('');
+
+        $templateRequest('app/keyword/views/testcase-modal-content.tpl.html').then(function(template) {
+          $modal.html($compile(template)($scope));
+        });
+      } 
 
   }]);
 

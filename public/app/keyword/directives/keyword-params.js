@@ -6,7 +6,7 @@ define(['fk/module', 'lodash'], function(module, _) {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'app/fk/directives/keyword-params.tpl.html',
+      templateUrl: 'app/keyword/directives/keyword-params.tpl.html',
       scope: {
         list: '=',
         listIndex: '=',

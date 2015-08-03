@@ -5,12 +5,10 @@ define(['fk/module', 'lodash'], function(module, _) {
     return {
       restrict: 'E',
       replace: true,
-      //templateUrl: 'app/fk/directives/keywords.tpl.html',
-      //templateUrl: 'app/fk/directives/new-keywords1.tpl.html',
       scope: {
         case: '='
       },
-      templateUrl: 'app/fk/directives/new-testcases.tpl.html',
+      templateUrl: 'app/keyword/directives/keywords.tpl.html',
       link: function($scope, element, attributes) {
 
         $scope.casecount = 0;

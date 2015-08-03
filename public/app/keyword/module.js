@@ -40,10 +40,11 @@ define([
             deps: $couchPotatoProvider.resolveDependencies([
               'keyword/controllers/cases-controller',
               'keyword/directives/tabs-header',
-              'services/case-service',
-              'fk/directives/keywords',
-              'fk/directives/keyword-params',
-              'fk/directives/steps'
+              'keyword/directives/keywords',
+              'keyword/directives/keyword-params',
+              'keyword/directives/steps',
+              'modules/forms/directives/input/smart-xeditable',
+              'services/case-service'
             ])
           }
         }

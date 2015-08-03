@@ -10,7 +10,7 @@ define(['app'], function(app) {
     function login(email, password, callback) {
       var request = {
         method: 'POST',
-        url: 'http://localhost:9000/api/v1/user/login',
+        url: appConfig.RestEntry + '/api/v1/user/login',
         data: {
           email: email,
           password: password
@@ -35,7 +35,7 @@ define(['app'], function(app) {
     function logout(callback) {
       var request = {
         method: 'GET',
-        url: 'http://localhost:9000/api/v1/user/logout',
+        url: appConfig.RestEntry + '/api/v1/user/logout',
         headers: {
           'X-AUTH-TOKEN': $cookies.get('authToken')
         }
@@ -53,7 +53,7 @@ define(['app'], function(app) {
     function register(email, password, firstname, lastname, tenant, space, callback) {
       var request = {
         method: 'POST',
-        url: 'http://localhost:9000/api/v1/user/register',
+        url: appConfig.RestEntry + '/api/v1/user/register',
         data: {
           email: email,
           password: password,
@@ -83,7 +83,7 @@ define(['app'], function(app) {
     function getTenants(callback) {
       var request = {
         method: 'GET',
-        url: 'http://localhost:9000/api/v1/user/tenants'
+        url: appConfig.RestEntry + '/api/v1/user/tenants'
       }
 
       $http(request).success(function(data){
@@ -96,7 +96,7 @@ define(['app'], function(app) {
 
       var request = {
         method: 'GET',
-        url: 'http://localhost:9000/api/v1/context',
+        url: appConfig.RestEntry + '/api/v1/context',
         headers: {
           'X-AUTH-TOKEN': $cookies.get('authToken')
         }
@@ -114,7 +114,7 @@ define(['app'], function(app) {
     function checkAccount(email, callback) {
       var request = {
         method: 'GET',
-        url: 'http://localhost:9000/api/v1/user/checkAccount?email='+email
+        url: appConfig.RestEntry + '/api/v1/user/checkAccount?email='+email
         
       }
 

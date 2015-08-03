@@ -37,6 +37,26 @@
     </div>
 
     <div class="list-testcase">
+
+      <!-- Test case list -->
+      <div class="col-md-3"data-target="#editCase" data-toggle="modal"
+        ng-repeat="case in cases track by $index | orderBy:'case.created_date'"  
+        ng-click="clickToCase(case)">
+
+        <div class="tc-itemBlock">
+          <div class="row">
+            <div class="tc-attributes col-md-12">
+                <div class="tc-id"># {{case._id.substring(0,8)}}</div>
+                <div class="tc-groupName">Group Name</div>
+            </div>
+            <div class="tc-name col-md-12">
+               {{case.name}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- End test case list -->
       
       <div class="modal fade" id="editCase">
       </div>

@@ -2,6 +2,8 @@
 
 var appConfig = {};
 
+appConfig.RestEntry = "http://localhost:9000";
+
 appConfig.smartSkin = "smart-style-2";
 
 appConfig.skins = [

@@ -17,16 +17,39 @@
       </div>
 
       <div class="modal-body tc-new-tabContent tab-content">
+        
         <div class="tab-pane active fade in no-padding-bottom" id="t1">
-            <div smart-include="app/keyword/directives/new-basic-info.tpl.html" ></div>
+        
+          <div class="basic-info">
+            <div class="col-md-offset-1 col-md-8">
+              <div class="form-basic-info">
+                <div class="form-title"> <span class="icon-equalizer id-test" aria-hidden="true"></span>
+                  <h4>Basic Information</h4>
+                </div>
+                <div class="form-content">
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <label class="col-sm-4">Test Case Name:</label>
+                      <div class="col-sm-8">
+                        <textarea class="form-control" rows="5" id="info-basic" placeholder="current.name" ng-model="current.name"></textarea>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
         <div class="tab-pane fade in no-padding-bottom tab-pane-full" id="t2">
             <keywords data-case="current"></keywords>
         </div>
       </div>
           
-      <div class="modal-footer group-listbutton-keyword">
-        <a class="btn btn-primary"  data-dismiss="modal">Close</a>
+      <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal" ng-click="removeCase()" ng-if="!current.temp">Delete</button> 
+        <button ng-disabled="current.steps.length == 0" class="btn btn-primary pull-right" ng-click="save()">Save</button>
       </div>
 
     </div><!-- /.modal-content -->

@@ -9,7 +9,7 @@ define(['app'], function(app) {
 
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/user/spaces',
+          url: appConfig.RestEntry + '/api/v1/user/spaces',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken')
           }
@@ -37,7 +37,7 @@ define(['app'], function(app) {
       go: function(space, callback) {
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/user/go/' + space._id,
+          url: appConfig.RestEntry + '/api/v1/user/go/' + space._id,
           headers: {
            'X-AUTH-TOKEN': $cookies.get('authToken') 
           } 
