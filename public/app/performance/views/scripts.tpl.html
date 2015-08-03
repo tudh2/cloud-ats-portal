@@ -10,11 +10,11 @@
 		<div class="col-sm-9">
 			<div class="row">
 				<div class="functional-title col-sm-6">
-					<p style="text-align: left; padding-top:5px">{{project.totalScripts}} Test Scripts</p>
+					<p style="text-align: left; padding-top:5px">{{totalScripts}} Test Scripts</p>
 				</div>
 				<div class="col-sm-6">
-					<button type="submit" class="btn btn-primary pull-right create-script" data-toggle="modal" data-target="#createScript">New Test Script</button>
-					<button type="submit" class="btn btn-primary pull-right upload-script" data-toggle="modal" data-target="#uploadScript">Upload Script</button>
+					<button type="submit" class="btn btn-primary pull-right create-script" data-toggle="modal" data-target="#createScript" ng-click="clickCreateScriptButton()">New Test Script</button>
+					<button type="submit" class="btn btn-primary pull-right upload-script" data-toggle="modal" data-target="#uploadScript" ng-click="clickUploadScriptButton()">Upload Script</button>
 						
 						<div data-smart-include="/app/performance/views/upload-script.tpl.html"></div>
 						<div data-smart-include="/app/performance/views/create-jmeter-script.tpl.html"></div>
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-3" ng-repeat="script in project.scripts track by $index">
+		<div class="col-sm-3" ng-repeat="script in scripts track by $index">
 			<div class="functional-project-overview-not-choose">
 				<div class="row">
 					<div class="col-sm-12">

@@ -2,7 +2,7 @@ define(['performance/module', 'notification'], function (module) {
   
   'use strict';
 
-  module.registerController('NewScriptCtrl', ['$scope', '$stateParams', 'PerformanceService', function($scope, $stateParams, PerformanceService) {
+  module.registerController('UploadScriptCtrl', ['$scope', '$stateParams', 'ScriptService', function($scope, $stateParams, ScriptService) {
 
       $scope.file = undefined;
       // get files after files were uploaded
@@ -58,7 +58,7 @@ define(['performance/module', 'notification'], function (module) {
           $('body').removeClass('modal-open');
           $('.modal-backdrop').remove();
 
-          PerformanceService.createPerformanceTestByUpload($scope.file, $upload_name.val(), $stateParams.id , function (data,status) {
+          ScriptService.createScriptTestByUpload($scope.file, $upload_name.val(), $stateParams.id , function (data,status) {
             console.log(data);
             if (data != null) {
               $.smallBox({
@@ -70,8 +70,8 @@ define(['performance/module', 'notification'], function (module) {
               });
 
               _.forEach(data, function (script) {
-                $scope.project.scripts.push(script);
-                $scope.project.totalScripts += data.length;
+                $scope.scripts.push(script);
+                $scope.totalScripts += data.length;
               });
             }
           });

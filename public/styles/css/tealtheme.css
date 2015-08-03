@@ -489,6 +489,7 @@ textarea.area-script-name {
 }
 .sampler_names {
 	background-color: #E0E5E8;
+  padding-top: 13px;
 }
 .sampler_name {
 	background-color: white;
@@ -2411,6 +2412,7 @@ a:hover.viewLog, a:focus.viewLog {
 }
 .script-name {
 	padding-left: 13px;
+	margin-bottom: 13px;
 }
 
 .upload-script-body {
@@ -2433,17 +2435,47 @@ textarea.upload_name {
 }
 .list_testScripts {
 	height: 100%;
-	width: 300px;
-	position: fixed;
-	width: 25%;
 	border-right: 1px solid #AFB3B2;
 	padding-top: 20px;
 	background-color: white;
 	height: 547px;
 	overflow: auto;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+}
+.basic-info, .configuration {
+	 display:inline-block; margin-right:5px;
+ }
+
+ .tab-content.samplers {
+ 	padding: 20px !important;
+ }
+.sampler-name {
+	padding-left: 10px;
+}
+.sampler-title {
+	padding-left: 13px;
+}
+
+.nav-tabs.samplers {
+	margin-top: 13px;
+}
+.text-area-script {
+	width: 100%;
+	max-width: 100%;
+	min-width: 100%;
+}
+.script-name {
+
+}
+.performance-run {
+  margin-top: 200px !important;
+  padding-left: 300px !important;
+}
+
+.sampler_name_selected {
+	background-color: white;
+  border: 1px solid #02B39F;
+  margin-bottom: 10px;
+  padding : 5px;
 }
 
 .create-new-suite {

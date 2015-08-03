@@ -124,7 +124,6 @@ define(['layout/module'], function (module) {
         });
       },
       run: function (projectId, suiteIds, callback) {
-      	console.log(suiteIds);
       	 var request = {
           method: 'POST',
           url: 'http://localhost:9000/api/v1/project/performance/run/'+projectId,

@@ -1,4 +1,4 @@
-define(['dashboard/module', 'lodash'], function(module, _) {
+define(['performance/module', 'lodash'], function(module, _) {
   
   'use strict';
 
@@ -10,9 +10,9 @@ define(['dashboard/module', 'lodash'], function(module, _) {
         $(element).on('click', function () {
 
           var $grand = $(element).parent().parent().find('.remove-icon');
-          console.log($grand);
           _.forEach($grand, function (element) {
-            var $parent = $(element).parent().parent().parent();
+            var $parent = $(element).parent().parent();
+            console.log($parent);
             $($parent).css("border", "");
             $($parent).css("margin-bottom", "");
             $($parent).css("padding", "");

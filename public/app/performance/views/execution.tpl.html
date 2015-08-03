@@ -8,7 +8,7 @@
         </label>
       </section>
     </div>
-    <div class="row list-script" ng-repeat="script in project.scripts track by $index">
+    <div class="row list-script" ng-repeat="script in scripts track by $index">
   		<span class="pull-left script-name">{{script.name}}</span>
   		<div class="smart-form check-list">
         <label class="checkbox scriptId pull-right">
@@ -18,9 +18,7 @@
       </div>
     </div>
 	</div>
-	<div class="col-sm-9 run-test">
-		<div class="">
+	<div class="col-sm-9 performance-run">
 			<a ng-click="runPerformanceTest()" class="Run_Test">Run Test</a>
-		</div>
 	</div>
 </div>
