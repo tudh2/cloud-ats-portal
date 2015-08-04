@@ -49,6 +49,22 @@ define([
           }
         }
       }
+    })
+    .state('app.keyword.driven', {
+      url: '/driven',
+      views: {
+        'content@app': {
+          templateUrl: 'app/keyword/views/datadriven.html',
+          controller: 'DrivenCtrl',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'keyword/controllers/driven-controller',
+              'keyword/directives/tabs-header',
+              'services/case-service'
+            ])
+          }
+        }
+      }
     });
   });
 

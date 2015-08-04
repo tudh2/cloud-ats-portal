@@ -1,7 +1,6 @@
 <div class="testcase-tab">
   <div class="border-div">
     <div class="row actionMenu">
-      
       <div class="col-md-3">
         <form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="">
           <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" autocomplete="off">
@@ -10,11 +9,13 @@
           </button>
         </form>
       </div>
-      <span class="col-md-2 count-testcase"><label>{{cases.length}} Test Case{{cases.length > 2 ? 's' : ''}}</label></span>
 
-      <div class="dropdown testcase-group col-md-3">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose a Test Case Group
-        <span class="caret"></span></button>
+      <div class="col-md-2">
+        <label>{{cases.length}} Test Case{{cases.length > 1 ? 's' : ''}}</label>
+      </div>
+
+      <div class="dropdown col-md-3">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose a Test Case Group <span class="caret"></span></button>
         <ul class="dropdown-menu">
           <li><a href="">Login</a></li>
           <li><a href="">Logout</a></li>
@@ -22,23 +23,12 @@
         </ul>
       </div>
 
-      <span class="col-md-4 pull-right btn-action-list">
-        <a class="btn btn-default">Custom Keyword</a>
-        
-        <a class="btn btn-primary"
-          data-toggle="modal" 
-          data-target="#editCase" 
-          ng-click="newTestCase()">
-          New Test Case</a>
-      </span>
-
     </div>
   </div>
 
   <div class="list-testcase">
-
     <!-- Test case list -->
-    <div class="col-md-3"data-target="#editCase" data-toggle="modal"
+    <div class="col-md-3"data-target="#add-datadriven" data-toggle="modal"
       ng-repeat="case in cases track by $index | orderBy:'case.created_date'"  
       ng-click="clickToCase(case)">
 
@@ -56,8 +46,8 @@
 
     </div>
     <!-- End test case list -->
-    
-    <div class="modal fade" id="editCase">
+
+    <div class="modal fade" id="add-datadriven">
     </div>
 
   </div>

@@ -17,7 +17,7 @@ define(['keyword/module'], function (module) {
               $state.go('app.keyword.cases', { id : scope.projectId });
               break;
             case 'driven':
-              $scope.title = 'DATA DRIVEN';
+              $state.go('app.keyword.driven', { id : scope.projectId });
               break;
             case 'suites':
               $scope.title = 'EXECUTION';
