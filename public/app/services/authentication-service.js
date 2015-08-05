@@ -44,6 +44,9 @@ define(['app'], function(app) {
       $http(request)
       .success(function() {
         $cookies.remove('authToken');
+        if ($cookies.get('space') === undefined || $cookies.get('space') == 'null') {
+          $cookies.remove('space')
+        } 
         $window.sessionStorage.removeItem('context');
         $rootScope.context = null;
         callback();

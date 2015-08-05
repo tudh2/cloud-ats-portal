@@ -44,7 +44,7 @@ define(['keyword/module'], function (module) {
             case 201: 
               $.smallBox({
                 title: 'Notification',
-                content: 'Your test case have created',
+                content: 'Your test case has created',
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -70,7 +70,7 @@ define(['keyword/module'], function (module) {
               case 200:
                 $.smallBox({
                   title: 'Notification',
-                  content: 'Your test case have updated',
+                  content: 'Your test case has updated',
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -79,7 +79,7 @@ define(['keyword/module'], function (module) {
               case 204:
                 $.smallBox({
                   title: 'Notification',
-                  content: 'Your test case have nothing to update',
+                  content: 'Your test case has nothing to update',
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000

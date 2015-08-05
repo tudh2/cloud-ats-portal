@@ -33,7 +33,8 @@
           }">
           </i> {{suite.name}}
         </span>
-        <div class="smart-form check-list" ng-if="suite._id == current._id" ng-click="removeSuite(suite)">
+        <div class="smart-form check-list" 
+          ng-if="suite._id == current._id" ng-click="deleteTestSuite(suite)">
           <span class="glyphicon glyphicon-remove-sign icon pull-right"></span>
         </div>
       </div>

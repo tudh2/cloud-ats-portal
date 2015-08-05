@@ -29,19 +29,19 @@ define(['keyword/module', 'lodash'], function (module, _) {
         });
       }
 
-      $scope.checkExistingCase = function(caze) {
-        var result = _.find($scope.current.cases, function(sel) {
-          return sel._id === caze._id;
-        });
-        return result !== undefined;
-      }
-
       var getCaseName = function(caze) {
         var result = _.find($scope.cases, function(sel) {
           return sel._id == caze._id;
         });
 
         return result.name;
+      }
+
+      $scope.checkExistingCase = function(caze) {
+        var result = _.find($scope.current.cases, function(sel) {
+          return sel._id === caze._id;
+        });
+        return result !== undefined;
       }
 
       $scope.selectSuite = function(suite) {
@@ -67,9 +67,37 @@ define(['keyword/module', 'lodash'], function (module, _) {
         loadTemplate();
       }
 
-      $scope.editSuite = function() {
-        $scope.editMode = true;
-        console.log($scope.current);
+      $scope.deleteTestSuite = function(suite) {
+
+        SuiteService.delete($scope.projectId, suite._id, function(data, status) {
+
+            switch (status) {
+
+              case 200: 
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Your test suite has deleted',
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
+                _.remove($scope.suites, function(sel) {
+                  return sel._id === suite._id;
+                });
+                if ($scope.suites.length > 0) $scope.selectSuite($scope.suites[0]);
+                else $scope.current = [];
+                break;
+
+              default:
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Can not delete your test suite',
+                  color: '#c26565',
+                  iconSmall: 'fa fa-ban bounce animated',
+                  timeout: 3000
+                });
+            }
+          });
       }
 
       $scope.saveEditTestSuite = function() {
@@ -82,19 +110,19 @@ define(['keyword/module', 'lodash'], function (module, _) {
             case 201: 
               $.smallBox({
                 title: 'Notification',
-                content: 'Your test case have created',
+                content: 'Your test suite has created',
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
               $scope.suites.push(data);
-              $scope.cancelEditTestSuite();
+              $scope.selectSuite(data);
               break;
 
             default:
               $.smallBox({
                 title: 'Notification',
-                content: 'Can not create your test case',
+                content: 'Can not create your test suite',
                 color: '#c26565',
                 iconSmall: 'fa fa-ban bounce animated',
                 timeout: 3000
@@ -103,7 +131,43 @@ define(['keyword/module', 'lodash'], function (module, _) {
         });
 
         else {
-          console.log($scope.current);
+
+          SuiteService.update($scope.projectId, $scope.current, function(data, status) {
+
+            switch (status) {
+
+              case 200: 
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Your test suite has updated',
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
+                $scope.editMode = false;
+                break;
+
+              case 204: 
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Your test suite has nothing to date',
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
+                $scope.editMode = false;
+                break;
+
+              default:
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Can not update your test suite',
+                  color: '#c26565',
+                  iconSmall: 'fa fa-ban bounce animated',
+                  timeout: 3000
+                });
+            }
+          });
         }
       }
 
@@ -164,7 +228,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.clickNewTestSuiteButton = function () {
         
-        if ($scope.current !== undefined && $scope.current.temp) return;
+        if ($scope.current !== undefined && $scope.current.temp || $scope.editMode) return;
 
         $scope.current = {
           "name": undefined,

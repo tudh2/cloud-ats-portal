@@ -34,8 +34,8 @@ define(['layout/module'], function(module) {
                     return;
                   } else {
                     var spaceId = $cookies.get('space');
-                    if (spaceId === undefined) spaceId = null;
-                    UserService.go({_id: spaceId});
+                    if (spaceId !== undefined && spaceId !== 'null')
+                      UserService.go({_id: spaceId});
                   }
                 });
               } else {
