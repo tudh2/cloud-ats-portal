@@ -13,9 +13,9 @@ define(['performance/module'], function (module) {
           }
         };
 
-        $http(request).success(function(data, status) {
+        $http(request).success(function (data, status) {
           callback(data);
-        }).error(function(data, status) {
+        }).error(function (data, status) {
 
         });
       },
@@ -25,7 +25,6 @@ define(['performance/module'], function (module) {
 
           formData.append(key, value);
         });
-        console.log(project_id);
         var request = {
           method: 'POST',
           url: 'http://localhost:9000/api/v1/project/performance/' + project_id + '/createScriptByFile',
@@ -42,7 +41,8 @@ define(['performance/module'], function (module) {
           callback(data, status);
         }).error(function() {});
       },
-      initScript: function (scriptName, projectId, callback) {
+      createScript: function (script, projectId, callback) {
+        console.log(script);
         var request = {
           method: 'POST',
           url: 'http://localhost:9000/api/v1/project/performance/'+ projectId + '/script',
@@ -50,15 +50,62 @@ define(['performance/module'], function (module) {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
           },
-          data: {
-            scriptName : scriptName
-          }
+          data: script
         }
-        $http(request).success(function(data, status) {
+        $http(request).success(function (data, status) {
           callback(data);
-        }).error(function(data, status) {
+        }).error(function (data, status) {
 
         });
+      },
+      get: function (id, callback) {
+
+         var request = {
+          method: 'GET',
+          url: 'http://localhost:9000/api/v1/project/performance/script/'+id,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        }
+
+        $http(request).success(function (data, status) {
+          callback (data, status);
+        }).error(function (status, data) {
+
+        });
+      },
+      delete: function (id, callback) {
+        var request = {
+          method: 'DELETE',
+          url: 'http://localhost:9000/api/v1/project/performance/script/'+id,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        }
+
+        $http(request).success(function (data, status) {
+          callback(data, status);
+        }).error(function (data, status) {
+
+        });
+      },
+      update: function (script, callback) {
+        console.log(script);
+        var request = {
+          method: 'PUT',
+          url: 'http://localhost:9000/api/v1/project/performance/script',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: script
+        }
+
+        $http(request).success(function (data, status) {
+          callback(data, status);
+        }).error(function (data, status) {});
       }
     }
   }]);

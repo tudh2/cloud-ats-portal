@@ -1,0 +1,206 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="tab">
+			<ul class="nav nav-tabs samplers">
+				<li class="col-sm-5" >
+						<strong>TEST SCRIPTS </strong><span class="project-name"> #{{script._id.substring(0,8)}}</span>
+				</li>
+				<li class="active">
+					<a data-toggle="tab" href="#basic" id="basicId" ng-click="basic()"><strong>BASIC INFO</strong></a>
+				</li>
+				<li >
+					<a data-toggle="tab" href="#samplers" id="samplersId" ng-click="newSampler();"><strong>SAMPLER</strong></a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#configuration" id="configurationId" ng-click="configuration()"><strong>CONFIGURATION</strong></a>
+				</li>
+			</ul>
+		</div>
+		<div class="modal-body tab-content samplers">
+			<div class="tab-pane fade in active" id="basic">
+				<div class="row">
+					<div class="col-sm-9 information">
+						<div>
+							<span class="icon-equalizer basic-info" aria-hidden="true"></span>
+							<h4 class="title-sampler">Basic Information</h4>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-9 script-name">
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="pull-left">Test Script Name</p>
+							</div>
+							<div class="col-sm-8">
+								<textarea  rows="4" class="text-area-script" ng-model="script.name"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="row">
+							<div class="col-sm-4">
+							</div>
+							<div class="col-sm-8">
+								<a class="btn btn-deleteScript" ng-if="script._id != null" ng-click="deleteScript(script)" data-dismiss="modal">Delete</a>
+								<a class="btn btn-persitScript pull-right" ng-if="script.samplers.length && script._id == null" ng-click="clickSaveScript()" data-dismiss="modal">Save</a>
+								<a class="btn btn-persitScript pull-right" ng-if="script._id != null" ng-click="clickUpdateScript()" data-dismiss="modal">Update</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade in" id="samplers">
+				<div class="row">
+					<div class="col-sm-7 sampler_names">
+						<div class="row">
+							<div class="col-sm-7">
+								<div class="form-group">
+									<input type="text" id="filter_sampler" class="form-control" placeholder="Filter by name or number" style="background-color: #ADC0C6;">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4" ng-repeat="i in script.samplers track by $index" ng-click="chooseSampler(i, $index)">
+							<div class="sampler_name_selected" ng-if="selected.index == $index">
+								<div class="row">
+									<div class="col-sm-6 number">
+										<span class ="project-name">#{{$index +1}}</span>
+									</div>
+									<div class="col-sm-6 remove-icon" ng-if="selected.index == $index">
+										<span class="pull-right icon">
+											<i class="fa icon-delete fa-minus-circle" ng-click="deleteSampler($index)"></i>
+										</span>
+									</div>
+								</div>
+								<div class="row">
+									<span class="sampler-name"><small>{{i.name}}</small></span>
+								</div>
+							</div>
+							<div class="sampler_name" ng-if="selected.index != $index">
+								<div class="row">
+									<div class="col-sm-6 number">
+										<span class ="project-name">#{{$index + 1}}</span>
+									</div>
+								</div>
+								<div class="row">
+									<span class="sampler-name"><small>{{i.name}}</small></span>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-5 sampler_form">
+						<div class="row sampler-title">
+							<span data-js-prompt="&amp;#xe067;" data-icon="&#xe067;" aria-hidden="true" class="glyph-item mega" style="display:inline-block;"></span>
+							<h4 style="padding-top: 10px;" class="title-sampler"><strong>New Sampler</strong></h4>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<strong>Sampler name</strong>
+							</div>
+							<div class="col-sm-8">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Enter Name" ng-model="selected.name">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<strong>Sampler method</strong>
+							</div>
+							<div class="col-sm-8">
+								<div class="form-group">
+									<select class="form-control" ng-model="selected.method">
+					          <option value="GET">GET</option>
+					          <option value="POST">POST</option>
+					          <option value="PUT">PUT</option>
+					          <option value="DELETE">DELETE</option>
+					        </select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<strong>Sampler url</strong>
+							</div>
+							<div class="col-sm-8">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="e.g. http://www.abc.com" ng-model="selected.url">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<strong>Parameters</strong>
+							</div>
+							<div class="col-sm-8">
+								<div class="row"  ng-repeat="i in selected.arguments track by $index">
+									<div class="col-sm-4">
+										<div class="form-group">
+											<input type="text" class="form-control" ng-model="i.paramName">
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<input type="text" class="form-control" ng-model="i.paramValue">
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="row">
+											<div class="col-sm-6">
+												<i class="fa fa-minus-circle icon" ng-if="selected.arguments.length > 1" ng-click="removeArgument($index)"></i>
+											</div>
+											<div class="col-sm-6" ng-if="$index == selected.arguments.length -1">
+												<i class="fa fa-plus-circle icon-add" ng-click="addArgument($index)"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<strong>Assertion text</strong>
+							</div>
+							<div class="col-sm-8">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Enter" ng-model="selected.assertion_text">
+								</div>
+							</div>	
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<strong>Constant time(s)</strong>
+							</div>
+							<div class="col-sm-8">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="miliseconds" ng-model="selected.constant_time">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+							</div>
+							<div class="col-sm-8">
+								<a class="btn btn-uploadFile" ng-click="createSampler(selected, $event)">Save</a>
+								<a class="btn btn-reset pull-right" ng-click="resetSamplerForm()">Reset</a>
+							</div>
+						</div>
+					</div>
+						
+				</div>
+			</div>
+			<div class="tab-pane fade in" id="configuration">
+				<configuration-script></configuration-script>
+			</div>
+		</div>
+		<div class="modal-footer-customize">
+			<div class="row">
+				<button type="button" class="btn btn-close pull-right" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

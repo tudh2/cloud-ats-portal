@@ -59,7 +59,6 @@ define(['performance/module', 'notification'], function (module) {
           $('.modal-backdrop').remove();
 
           ScriptService.createScriptTestByUpload($scope.file, $upload_name.val(), $stateParams.id , function (data,status) {
-            console.log(data);
             if (data != null) {
               $.smallBox({
                 title: "The script has created",

@@ -1,4 +1,4 @@
-<div class="script-list">
+<div class="script-list" ng-controller="CreateScriptCtrl">
 	<div class="row">
 		<div class="col-sm-3">
       <section class="smart-form">
@@ -10,21 +10,22 @@
 		<div class="col-sm-9">
 			<div class="row">
 				<div class="functional-title col-sm-6">
-					<p style="text-align: left; padding-top:5px">{{totalScripts}} Test Scripts</p>
+					<p style="text-align: left; padding-top:5px">{{scripts.length}} Test Scripts</p>
 				</div>
 				<div class="col-sm-6">
 					<button type="submit" class="btn btn-primary pull-right create-script" data-toggle="modal" data-target="#createScript" ng-click="clickCreateScriptButton()">New Test Script</button>
 					<button type="submit" class="btn btn-primary pull-right upload-script" data-toggle="modal" data-target="#uploadScript" ng-click="clickUploadScriptButton()">Upload Script</button>
 						
 						<div data-smart-include="/app/performance/views/upload-script.tpl.html"></div>
-						<div data-smart-include="/app/performance/views/create-jmeter-script.tpl.html"></div>
+						<div class="modal fade" id="createScript" role="dialog">
+						</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-3" ng-repeat="script in scripts track by $index">
-			<div class="functional-project-overview-not-choose">
+			<div class="functional-project-overview-not-choose" ng-click="editScript(script._id)" data-toggle="modal" data-target="#createScript">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="col-sm-6"><span class="project-name">#{{script._id.substring(0,8)}}</span></div>

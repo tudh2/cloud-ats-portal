@@ -1,74 +1,206 @@
-define(['performance/module', 'notification'], function (module) {
+define(['performance/module', 'lodash', 'notification'], function (module, _) {
   
   'use strict';
 
-  module.registerController('CreateScriptCtrl', ['$scope', '$stateParams', 'PerformanceService', 'ScriptService', function($scope, $stateParams, PerformanceService, ScriptService) {
+  module.registerController('CreateScriptCtrl', ['$scope', '$stateParams', '$templateRequest', '$compile', 'PerformanceService', 'ScriptService', function($scope, $stateParams, $templateRequest, $compile, PerformanceService, ScriptService) {
 
-    $scope.samplers = [
-
-    ];
+    
+    $scope.script = {
+      ram_up: 5,
+      number_threads: 1,
+      duration: 0,
+      loops: 1,
+      samplers: [
+      ]
+    };
 
     $scope.selected = {
-      method: 'get',
-      constantTime: '0',
-      params: [{
-
+      method: 'GET',
+      constant_time: 0,
+      arguments: [{
+        "paramName": "",
+        "paramValue": ""
       }]
     };
 
+    // create script with scrip name, list samplers, project id, configurationn information
     $scope.clickSaveScript = function () {
-      ScriptService.initScript($scope.script.name,$stateParams.id,  function (response) {
+      console.log($scope.script);
+      ScriptService.createScript($scope.script, $stateParams.id, function (response) {
         if (response != null) {
           $scope.script._id = response._id;
           $.smallBox({
             title: "The script has created",
             content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-            color: "#5F895F",
+            color: "#296191",
             iconSmall: "fa fa-check bounce animated",
             timeout: 4000
           });
 
           $scope.scripts.push(response);
+
         }
       });
     }
 
-    $scope.createSampler = function (sampler) {
+    $scope.deleteScript = function (script) {
+      ScriptService.delete(script._id, function (data, status) {
+        console.log(data, status);
+        if (status == 202) {
+          $.smallBox({
+            title: "The script has created",
+            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+            color: "#296191",
+            iconSmall: "fa fa-check bounce animated",
+            timeout: 4000
+          });
 
-      $scope.samplers.push(sampler);
-      console.log($scope.samplers);
+          _.remove($scope.scripts, function (data) {
+            return data._id === script._id;
+          });
+        }
+      });
+
     }
 
-    $scope.resetSamplerForm = function () {
+    $scope.clickUpdateScript = function () {
+      console.log('update');
+      ScriptService.update($scope.script, function (data, status) {
+        if (status == 202) {
+          $.smallBox({
+            title: "The script has updated",
+            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+            color: "#296191",
+            iconSmall: "fa fa-check bounce animated",
+            timeout: 4000
+          });
+        }
+      });
+    }
+
+    $scope.createSampler = function (sampler, $event) {
+     _.remove(sampler.arguments, function (argument) {
+        return (argument.paramName == '' || argument.paramValue == '');
+      });
+
+      $scope.script.samplers.push(sampler);
+     /* var $saveButton = $('.btn-uploadFile');
+      $saveButton.hide();*/
 
       $scope.selected = {
-        method: 'get',
-        constantTime: '0',
-        params: [{
-
-          }]
+        method: 'GET',
+        constant_time: 0,
+        arguments: [{
+          "paramName": "",
+          "paramValue": ""
+        }]
       };
     }
 
-    $scope.chooseSampler = function (i, index) {
+    $scope.deleteSampler = function (index) {
+      $scope.script.samplers.splice(index, 1);
+      $scope.selected = {
+        method: 'GET',
+        constant_time: 0,
+        arguments: [{
+          "paramName": "",
+          "paramValue": ""
+        }]
+      };
+    }
 
+    $scope.resetSamplerForm = function () {
+      $scope.selected = {
+        method: 'GET',
+        constant_time: 0,
+        arguments: [{
+          "paramName": "",
+          "paramValue": ""
+        }]
+      };
+      var $saveButton = $('.btn-uploadFile');
+      $saveButton.show();
+    }
+
+    $scope.chooseSampler = function (i, index) {
+      _.remove(i.arguments, function (argument) {
+        return (argument.paramName == '' || argument.paramValue == '');
+      });
+
+      if (i.arguments.length == 0) {
+        i.arguments.push({
+          "paramName": "",
+          "paramValue": ""
+        });
+      }
       $scope.selected = i;
       $scope.selected.index = index;
+
+      var $saveButton = $('.btn-uploadFile');
+      $saveButton.hide();
     }
+
     $scope.clickUploadScriptButton = function () {
       $('#createScript .modal-dialog .modal-content').css("width", '');
       $('#createScript .modal-dialog .modal-content').css("margin-left", '20px');
     };
 
     $scope.clickCreateScriptButton = function () {
-      var $id = $('#createScript').find('.nav.nav-tabs .active a').attr('id');
-      if ($id === 'samplersId') {
-        changeModalSize();
-      } else if ($id === 'basicId' || $id === 'configurationId') {
-        resetModalSize();
-      }
+      var $modal = $('#createScript');
 
+      //clear modal content
+      $modal.html('');
+
+       $scope.selected = {
+        method: 'GET',
+        constant_time: 0,
+        arguments: [{
+          "paramName": "",
+          "paramValue": ""
+        }]
+      };
+
+      $scope.script = {
+        ram_up: 5,
+        number_threads: 1,
+        duration: 0,
+        loops: 1,
+        samplers: [
+        ]
+      };
+      $templateRequest('app/performance/views/script-modal-content.tpl.html').then(function (template) {
+
+        $modal.html($compile(template)($scope));
+      });
     };
+
+    $scope.editScript = function (id) {
+       $scope.selected = {
+        method: 'GET',
+        constant_time: 0,
+        arguments: [{
+          "paramName": "",
+          "paramValue": ""
+        }]
+      };
+      var $modal = $('#createScript');
+      $templateRequest('app/performance/views/script-modal-content.tpl.html').then(function (template) {
+        $modal.html($compile(template)($scope));
+      });
+
+      ScriptService.get(id, function (data, status) {
+        $scope.script = data;
+      });
+    }
+
+    $scope.removeArgument = function (index) {
+      $scope.selected.arguments.splice(index, 1);
+    }
+
+    $scope.addArgument = function () {
+      var param = {'paramName' : '', 'paramValue' : ''};
+      $scope.selected.arguments.push(param);
+    }
 
     $scope.newSampler = function () {
       changeModalSize();
@@ -80,6 +212,7 @@ define(['performance/module', 'notification'], function (module) {
 
     $scope.configuration = function () {
       resetModalSize();
+      setConfigurationInfo($scope.script);
     };
 
     var resetModalSize = function () {
@@ -93,6 +226,21 @@ define(['performance/module', 'notification'], function (module) {
       $('#createScript .modal-dialog .modal-content').css("margin-left", '-120px');
       $('#createScript .modal-dialog .modal-content .modal-body').css("padding", "0px");
     };
+
+    var setConfigurationInfo = function (data) {
+      // set value for input slider
+      $('#users').bootstrapSlider('setValue', data.number_threads);
+      $('#ramup').bootstrapSlider('setValue', data.ram_up);
+      $('#loops').bootstrapSlider('setValue', data.loops);
+      $('#duration').bootstrapSlider('setValue', data.duration);
+
+      // show value slider in span tag
+      $("#usersSliderVal").text(data.number_threads);
+      $("#ramupSliderVal").text(data.ram_up);
+      $("#loopsSliderVal").text(data.loops);
+      $("#durationSliderVal").text(data.duration);
+    }
+
   }]);
 
 });
