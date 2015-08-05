@@ -65,6 +65,23 @@ define([
           }
         }
       }
+    })
+    .state('app.keyword.suites', {
+      url: '/suites',
+      views: {
+        'content@app': {
+          templateUrl: 'app/keyword/views/testsuite.html',
+          controller: 'SuitesCtrl',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'keyword/controllers/suites-controller',
+              'keyword/directives/tabs-header',
+              'services/case-service',
+              'services/suite-service'
+            ])
+          }
+        }
+      }
     });
   });
 

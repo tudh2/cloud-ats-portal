@@ -39,7 +39,7 @@
 
     <!-- Test case list -->
     <div class="col-md-3"data-target="#editCase" data-toggle="modal"
-      ng-repeat="case in cases track by $index | orderBy:'case.created_date'"  
+      ng-repeat="case in cases track by $index"  
       ng-click="clickToCase(case)">
 
       <div class="tc-itemBlock">

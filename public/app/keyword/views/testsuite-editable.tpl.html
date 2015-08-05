@@ -1,0 +1,149 @@
+<!-- <div>  Wrapper div -->
+
+<div class="row">
+<div class="col-sm-12">
+        
+  <div class="col-sm-4">
+    <section class="smart-form">
+      <label class="input"> 
+        <i class="icon-append fa fa-search"></i>
+        <input type="text" placeholder="Search Test Case" minlength="3">
+      </label>
+    </section>
+  </div>
+
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <select class="form-control">
+            <option selected="">Choose a test case group</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-3" ng-if="current.temp || editMode">
+        <a class="btn btn-primary" ng-click="saveEditTestSuite()">Save</a>
+      </div>
+      <div class="col-sm-3" ng-if="current.temp || editMode">
+        <a class="btn btn-default" ng-click="cancelEditTestSuite()">Cancel</a>
+      </div>
+      <div class="col-sm-3" ng-if="!current.temp && !editMode" >
+        <a class="btn btn-primary" ng-click="editSuite()">Edit</a>
+      </div>
+      <!-- <div class="col-sm-3" ng-if="!current.temp && !editMode">
+        <a class="btn btn-primary" ng-click="clickOrganizeTestSuite()">Organize</a>
+      </div> -->
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    
+    <!-- Test case list for add new -->
+    <div class="col-sm-4 test-case-item"
+      ng-if="current.temp"
+      ng-repeat="case in current.cases track by $index">
+      <div class="test-case test-case-selected" ng-click="clickSelectTestCase($event, case)">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-6 number">
+              <span class="project-name">#{{case._id.substring(0,8)}}</span>
+            </div>
+            
+          <div class="col-sm-6"><span class="pull-right group-name">Group name</span></div></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <p>{{case.name}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-sm-4 test-case-item"
+      ng-if="current.temp"
+      ng-repeat="case in current.caseOutline track by $index">
+      <div class="test-case" ng-click="clickSelectTestCase($event, case)">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-6 number">
+              <span class="project-name">#{{case._id.substring(0,8)}}</span>
+            </div>
+            
+          <div class="col-sm-6"><span class="pull-right group-name">Group name</span></div></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <p>{{case.name}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End test case list for add new -->
+
+    <!-- Test case list for edit -->
+    <div class="col-sm-4 test-case-item"
+      ng-if="!current.temp"
+      ng-repeat="case in current.cases track by $index">
+      
+
+      <div class="test-case"
+        ng-class="{'test-case-selected':editMode}"
+        ng-click="clickSelectTestCase($event, case)">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-6 number">
+              <span class="project-name">#{{case._id.substring(0,8)}}</span>
+            </div>
+            
+          <div class="col-sm-6"><span class="pull-right group-name">Group name</span></div></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <p>{{case.name}}</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-sm-4 test-case-item"
+      ng-if="!current.temp && editMode"
+      ng-repeat="case in current.caseOutline track by $index">
+      
+      <div class="test-case" ng-click="clickSelectTestCase($event, case)">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-6 number">
+              <span class="project-name">#{{case._id.substring(0,8)}}</span>
+            </div>
+            
+          <div class="col-sm-6"><span class="pull-right group-name">Group name</span></div></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <p>{{case.name}}</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- End test case for edit -->
+
+  </div>
+</div>
+
+<!-- </div>  End wrapper -->

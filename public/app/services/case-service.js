@@ -20,7 +20,24 @@ define(['keyword/module'], function (module) {
         });
       },
 
-      create: function(projectId, cases, callback) {
+      references: function(projectId, callback) {
+        var request = {
+          method: 'GET',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/' + projectId + '/reference/cases' ,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data);
+        }).error(function(data, status) {
+
+        });
+      },
+
+      create: function(projectId, caze, callback) {
         var request = {
           method: 'POST',
           url: appConfig.RestEntry + '/api/v1/project/keyword/' + projectId + '/case' ,
@@ -28,7 +45,7 @@ define(['keyword/module'], function (module) {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
           },
-          data: cases
+          data: caze
         };
 
         $http(request).success(function(data, status) {

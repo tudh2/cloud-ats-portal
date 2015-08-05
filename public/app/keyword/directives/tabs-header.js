@@ -20,7 +20,7 @@ define(['keyword/module'], function (module) {
               $state.go('app.keyword.driven', { id : scope.projectId });
               break;
             case 'suites':
-              $scope.title = 'EXECUTION';
+              $state.go('app.keyword.suites', { id : scope.projectId });
               break;
             case 'execution':
               break;
