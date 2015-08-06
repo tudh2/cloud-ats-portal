@@ -16,7 +16,7 @@ define(['keyword/module'], function(module) {
         };
 
         $http(request).success(function(data, status) {
-          callback(data);
+          callback(data, status);
         }).error(function(data, status) {
 
         });
@@ -33,7 +33,7 @@ define(['keyword/module'], function(module) {
         };
 
         $http(request).success(function(data, status) {
-          callback(data);
+          callback(data, status);
         }).error(function(data, status) {
 
         });
@@ -50,7 +50,7 @@ define(['keyword/module'], function(module) {
         };
 
         $http(request).success(function(data, status) {
-          callback(data);
+          callback(data, status);
         }).error(function(data, status) {
 
         });
@@ -70,7 +70,7 @@ define(['keyword/module'], function(module) {
         };
 
         $http(request).success(function(data, status) {
-          callback(data);
+          callback(data, status);
         }).error(function(data, status) {
 
         });
