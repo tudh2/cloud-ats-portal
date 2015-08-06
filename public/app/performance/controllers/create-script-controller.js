@@ -25,7 +25,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
     // create script with scrip name, list samplers, project id, configurationn information
     $scope.clickSaveScript = function () {
-      console.log($scope.script);
       ScriptService.createScript($scope.script, $stateParams.id, function (response) {
         if (response != null) {
           $scope.script._id = response._id;
@@ -45,7 +44,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
     $scope.deleteScript = function (script) {
       ScriptService.delete(script._id, function (data, status) {
-        console.log(data, status);
         if (status == 202) {
           $.smallBox({
             title: "The script has deleted",
@@ -105,9 +103,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       });
 
       $scope.script.samplers.push(sampler);
-     /* var $saveButton = $('.btn-uploadFile');
-      $saveButton.hide();*/
-
       $scope.selected = {
         method: 'GET',
         constant_time: 0,

@@ -12,13 +12,13 @@
   		<span class="pull-left script-name">{{script.name}}</span>
   		<div class="smart-form check-list">
         <label class="checkbox scriptId pull-right">
-          <input type="checkbox" name="checkbox" class="checkbox-script" value="{{script._id}}" ng-click="check($event);">
+          <input type="checkbox" name="checkbox" class="checkbox-script" value="{{script._id}}" ng-click="selectScript(script._id);">
           <i></i>
         </label>
       </div>
     </div>
 	</div>
-	<div class="col-sm-9 performance-run">
-			<a ng-click="runPerformanceTest()" class="Run_Test">Run Test</a>
+	<div class="col-sm-9 performance-run-test">
+			<a ng-click="runPerformanceTest()" class="btn btn-primary btn-performance-run disabled">Run Test</a>
 	</div>
 </div>

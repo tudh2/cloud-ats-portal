@@ -19,7 +19,7 @@ define(['layout/module'], function (module) {
 			createPerformanceTestWizard : function (data, callback) {
 				var request = {
 					method: 'POST',
-					url: 'http://localhost:9000/api/v1/performance/createWizard',
+					url: appConfig.RestEntry + '/api/v1/performance/createWizard',
 					headers: {
 						'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -42,7 +42,7 @@ define(['layout/module'], function (module) {
 				console.log(project_id);
 				var request = {
 					method: 'POST',
-					url: 'http://localhost:9000/api/v1/performance/uploadFile?script_name='+script_name+'&project_id='+project_id,
+					url: appConfig.RestEntry + '/api/v1/performance/uploadFile?script_name='+script_name+'&project_id='+project_id,
 					headers: {
 						'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space'),
@@ -60,7 +60,7 @@ define(['layout/module'], function (module) {
 
 				var request = {
 					method: "PUT",
-					url: 'http://localhost:9000/api/v1/performance/updateScript',
+					url: appConfig.RestEntry + '/api/v1/performance/updateScript',
 					headers: {
 						'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -75,7 +75,7 @@ define(['layout/module'], function (module) {
 			projects: function(callback) {
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/project/performances',
+          url: appConfig.RestEntry + '/api/v1/project/performances',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -91,7 +91,7 @@ define(['layout/module'], function (module) {
 			get: function (projectId, callback) {
 				var request = {
 					method: "GET",
-					url: 'http://localhost:9000/api/v1/project/performance/getProjectById/'+projectId,
+					url: appConfig.RestEntry + '/api/v1/project/performance/getProjectById/'+projectId,
 					headers: {
 						'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -107,7 +107,7 @@ define(['layout/module'], function (module) {
 			create: function(name, callback) {
         var request = {
           method: 'POST',
-          url: 'http://localhost:9000/api/v1/project/performance',
+          url: appConfig.RestEntry + '/api/v1/project/performance',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -126,14 +126,12 @@ define(['layout/module'], function (module) {
       run: function (projectId, suiteIds, callback) {
       	 var request = {
           method: 'POST',
-          url: 'http://localhost:9000/api/v1/project/performance/run/'+projectId,
+          url: appConfig.RestEntry + '/api/v1/project/performance/run/'+projectId,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
           },
-          data: {
-            suiteIds : suiteIds
-          }
+          data: suiteIds 
         };
 
         $http(request).success(function(data, status) {

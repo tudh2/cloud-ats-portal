@@ -5,33 +5,32 @@ define(['performance/module', 'notification'], function (module) {
   module.registerController('PerformanceExeCtrl', ['$scope', '$stateParams', 'ScriptService', 'PerformanceService', function($scope, $stateParams, ScriptService, PerformanceService) {
  
  		$scope.projectId = $stateParams.id;
-
+    var selected = [];
  		$scope.title = "EXECUTION";
+
     ScriptService.list($scope.projectId, function(response) {
       $scope.scripts = response;
       $scope.totalScripts = response.totalScripts;
     });
 
-    // add 'check' class when script is checked
-    $scope.check = function ($event) {
-      var element = $event.currentTarget;
+    // handle when user selects scripts
+    $scope.selectScript = function (scriptId) {
+      var $btnRun = $('.btn.btn-primary.btn-performance-run');
+      if (_.indexOf(selected, scriptId) != -1) {
+          _.remove(selected, function(sel) {
+            return sel == scriptId;
+          });
+        } else {
+          selected.push(scriptId);
+        }
 
-      $(element).toggleClass('checked');
-    };
+      if (selected.length > 0) $btnRun.removeClass('disabled');
+      else $btnRun.addClass('disabled');
+    }
 
     //run project with projectid and list scripts
     $scope.runPerformanceTest = function () {
-
-      var $listCheckedScript = $('.scriptId').find('.checked');
-
-      var scriptIds = [];
-      _.forEach($listCheckedScript, function (item) {
-        var idObject = {};
-        idObject._id = $(item).val();
-        scriptIds.push(idObject);
-      });
-
-      PerformanceService.run($stateParams.id, scriptIds, function(data, status) {
+      PerformanceService.run($stateParams.id, selected, function(data, status) {
         if (data != null) {
           $.smallBox({
             title: "The test is running",

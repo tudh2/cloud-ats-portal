@@ -6,7 +6,7 @@ define(['performance/module'], function (module) {
       list: function(projectId, callback) {
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/project/performance/' + projectId + '/scripts' ,
+          url: appConfig.RestEntry + '/api/v1/project/performance/' + projectId + '/scripts' ,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -27,7 +27,7 @@ define(['performance/module'], function (module) {
         });
         var request = {
           method: 'POST',
-          url: 'http://localhost:9000/api/v1/project/performance/' + project_id + '/createScriptByFile',
+          url: appConfig.RestEntry + '/api/v1/project/performance/' + project_id + '/createScriptByFile',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space'),
@@ -45,7 +45,7 @@ define(['performance/module'], function (module) {
         console.log(script);
         var request = {
           method: 'POST',
-          url: 'http://localhost:9000/api/v1/project/performance/'+ projectId + '/script',
+          url: appConfig.RestEntry + '/api/v1/project/performance/'+ projectId + '/script',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -62,7 +62,7 @@ define(['performance/module'], function (module) {
 
          var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/project/performance/script/'+id,
+          url: appConfig.RestEntry + '/api/v1/project/performance/script/'+id,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -78,7 +78,7 @@ define(['performance/module'], function (module) {
       delete: function (id, callback) {
         var request = {
           method: 'DELETE',
-          url: 'http://localhost:9000/api/v1/project/performance/script/'+id,
+          url: appConfig.RestEntry + '/api/v1/project/performance/script/'+id,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -92,10 +92,9 @@ define(['performance/module'], function (module) {
         });
       },
       update: function (script, callback) {
-        console.log(script);
         var request = {
           method: 'PUT',
-          url: 'http://localhost:9000/api/v1/project/performance/script',
+          url: appConfig.RestEntry + '/api/v1/project/performance/script',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
