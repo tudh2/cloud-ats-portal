@@ -29,20 +29,33 @@
     </div>
     </div>
 
-    <div class="add-keyword"  ng-if="!customKeyword">
-    <form ng-submit="addCustomKeyword()">
-            <a  class="btn btn-border-line btn-keyword pull-right" ng-show="statusAdd && !added && !done" ng-click="clickAddCustomQuick()">Add to Keyword</a>
-        <div ng-show="statusAdd && added &&!done" class="pull-right">
-          <label style="padding-top:5px">Keyword Name</label>
+    <div class="add-keyword">
+    <form>
+      <a class="btn btn-border-line btn-keyword pull-right"
+        ng-show="(!$parent.customMode && !$parent.customAdded) && case.steps.length > 0 "
+        ng-click="$parent.customMode = true;">
+        Add to Keyword
+      </a>
+
+      <div ng-show="$parent.customMode" class="pull-right">
+        <label style="padding-top:5px">Keyword Name</label>
         <div class="editable-input" style="position: relative;">
-          <input type="text" ng-model="nameCustomKeyword" class="form-control input-sm" style="padding-right: 24px;">
+          <input name="customKeywordName" type="text" class="form-control input-sm" style="padding-right: 24px;" placeholder="Custom Keyword Name"
+            ng-model="customKeywordName" >
         </div>
         <div class="editable-buttons" style="padding-top:5px">
-          <button type="submit" class="editable-submit" ng-click="editNameCase(nameCustomKeyword)"><i class="fa fa-check"></i></button>
-          <button type="button" class="editable-cancel" ng-click="clickCancelAddCustom()"><i class="fa fa-times"></i></button>
+          <a class="btn btn-primary btn-xs" ng-click="$parent.addCustomKeyword(customKeywordName, case)">
+            <i class="fa fa-check"></i>
+          </a>
+          <a class="btn btn-default btn-xs" ng-click="$parent.customMode = false;">
+            <i class="fa fa-times"></i>
+          </a>
         </div>
       </div>
-      <span class="style-status-keyword pull-right" ng-show="!statusAdd && !added && done"><i class="fa fa-check"></i><label style="padding-top:5px;padding-left:5px">Added</label></span>
+
+      <span class="style-status-keyword pull-right" ng-show="$parent.customAdded">
+        <i class="fa fa-check"></i><label style="padding-top:5px;padding-left:5px">Added</label>
+      </span>
     </form>
     </div>
 

@@ -1,0 +1,53 @@
+<div class="testcase-tab">
+  <div class="border-div">
+    <div class="row actionMenu">
+      
+      <div class="col-md-3">
+        <form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="">
+          <input id="search-fld" type="text" name="param" placeholder="Search Keyword" class="ui-autocomplete-input" autocomplete="off">
+          <button type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+      </div>
+      <span class="col-md-2 count-testcase"><label>{{customs.length}} Keyword{{customs.length > 2 ? 's' : ''}}</label></span>
+
+      <span class="col-md-4 pull-right btn-action-list">
+        <a class="btn btn-default" ng-click="backToCaseList()">Back To Test Case List</a>
+        
+        <a class="btn btn-primary"
+          data-toggle="modal" 
+          data-target="#editCase" 
+          ng-click="newTestCase()">
+          New Keyword</a>
+      </span>
+
+    </div>
+  </div>
+
+  <div class="list-testcase">
+
+    <!-- Test case list -->
+    <div class="col-md-3"data-target="#editKeyword" data-toggle="modal"
+      ng-repeat="keyword in customs track by $index"  
+      ng-click="clickToCase(case)">
+
+      <div class="tc-itemBlock">
+        <div class="row">
+          <div class="tc-attributes col-md-12">
+              <div class="tc-id"># {{keyword._id.substring(0,8)}}</div>
+          </div>
+          <div class="tc-name col-md-12">
+             {{keyword.name}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- End test case list -->
+    
+    <div class="modal fade" id="editKeyword">
+    </div>
+
+  </div>
+</div>

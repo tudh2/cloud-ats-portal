@@ -13,6 +13,7 @@ define(['layout/module'], function (module) {
           case 'app.keyword.driven':
           case 'app.keyword.suites':
           case 'app.keyword.execution':
+          case 'app.keyword.custom':
           case 'app.projects':
             $(element).addClass('active');
             break;
@@ -27,6 +28,7 @@ define(['layout/module'], function (module) {
           case 'app.keyword.driven':
           case 'app.keyword.suites':
           case 'app.keyword.execution':
+          case 'app.keyword.custom':
           case 'app.projects':
             $(element).addClass('active');
             break;

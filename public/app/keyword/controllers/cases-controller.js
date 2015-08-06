@@ -3,12 +3,16 @@ define(['keyword/module', 'lodash'], function (module, _) {
   'use strict';
 
   module.registerController('CasesCtrl', [
-    '$scope', '$stateParams', '$templateRequest', '$compile', 'CaseService', 
-    function($scope, $stateParams, $templateRequest, $compile, CaseService) {
+    '$scope', '$state','$stateParams', '$templateRequest', '$compile', 'CaseService', 'CustomKeywordService', 
+    function($scope, $state, $stateParams, $templateRequest, $compile, CaseService, CustomKeywordService) {
 
       $scope.projectId = $stateParams.id;
 
       $scope.title = 'TEST CASES';
+
+      $scope.customMode = false;
+
+      $scope.customAdded = false;
 
       CaseService.list($scope.projectId, function(response) {
         $scope.cases = response;
@@ -23,6 +27,25 @@ define(['keyword/module', 'lodash'], function (module, _) {
         $templateRequest('app/keyword/views/testcase-modal-content.tpl.html').then(function(template) {
           $modal.html($compile(template)($scope));
         });
+      }
+
+      $scope.addCustomKeyword = function (customKeywordName, caze) {
+        var $input = $('input[name="customKeywordName"]');
+        if (customKeywordName === undefined || customKeywordName === null || customKeywordName === '') {
+          $input.focus();
+          $input.addClass('state-error');
+        } else {
+          $input.removeClass('state-error');
+          var customKeyword = { name : customKeywordName, steps : _.cloneDeep(caze.steps)};
+          CustomKeywordService.create($scope.projectId, customKeyword, function(data, status) {
+            console.log(data, status);
+          });
+        }
+      }
+
+
+      $scope.toCustomKeywordList = function() {
+        $state.go('app.keyword.custom', { id : $scope.projectId });
       }
 
       $scope.newTestCase = function() {

@@ -11,6 +11,7 @@ define(['fk/module', 'lodash'], function(module, _) {
       templateUrl: 'app/keyword/directives/keywords.tpl.html',
       link: function($scope, element, attributes) {
 
+        $scope.customKeywordName;
         $scope.casecount = 0;
         $scope.query = {}
         $scope.keywords = {}

@@ -6,7 +6,7 @@
       <li ng-class="title == 'OVERVIEWS' ? 'active' : ''">
         <a href="#overview" data-toggle="tab" ng-click="changeTab('overview')"><span class="hidden-mobile hidden-tablet">OVERVIEWS</span></a>
       </li>
-      <li ng-class="title == 'TEST CASES' ? 'active' : ''">
+      <li ng-class="title == 'TEST CASES' || title == 'CUSTOM KEYWORDS' ? 'active' : ''">
         <a href="#cases" data-toggle="tab" ng-click="changeTab('cases')"><span class="hidden-mobile hidden-tablet">TEST CASES</span></a>
       </li>
       <li ng-class="title == 'DATA DRIVEN' ? 'active' : ''">

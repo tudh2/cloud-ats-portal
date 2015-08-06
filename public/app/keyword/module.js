@@ -44,7 +44,8 @@ define([
               'keyword/directives/keyword-params',
               'keyword/directives/steps',
               'modules/forms/directives/input/smart-xeditable',
-              'services/case-service'
+              'services/case-service',
+              'services/custom-keyword-service'
             ])
           }
         }
@@ -95,6 +96,21 @@ define([
               'keyword/directives/tabs-header',
               'services/suite-service',
               'services/keyword-service'
+            ])
+          }
+        }
+      }
+    })
+    .state('app.keyword.custom', {
+      url: '/custom',
+      views: {
+        'content@app': {
+          templateUrl: 'app/keyword/views/custom.html',
+          controller: 'CustomCtrl',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'keyword/controllers/custom-controller',
+              'keyword/directives/tabs-header'
             ])
           }
         }
