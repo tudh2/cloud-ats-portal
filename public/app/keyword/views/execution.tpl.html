@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-sm-3 list-test-suite">
+    <p>1.CHOOSE TEST SUITE</p>
+    <section class="smart-form">
+      <label class="input"> <i class="icon-append fa fa-search"></i>
+        <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
+      </label>
+    </section>
+
+    <div class="row" style="margin-top: 20px;" ng-repeat="suite in suites track by $index">
+      <div class="col-sm-12" style="padding-right: 8px;">
+        <span class="pull-left">{{suite.name}}</span>
+        <div class="smart-form check-list">
+          <label class="checkbox pull-right suiteId">
+            <input type="checkbox" name="suite" style="background-color: white" ng-click="selectSuite(suite._id);">
+            <i style="background-color: white"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-9 list-browser">
+    <div class="row">
+      <div class="col-sm-4 choose-browser">
+        <p>2.CHOOSE BROWSER</p>
+        
+        <div class="row">
+          <div class="col-sm-12 browser">
+          <div class="col-sm-6">
+            <div class="smart-form" style="margin-top: 20px;">
+              <label class="radio state-success">
+                <input name="browser" type="radio" checked="">
+                <i class="choose_browse"></i><img ng-src="/styles/img/firefox.jpg" width="60px;" height="60px;">
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-6 select-version">
+            <p>Select Version</p>
+            <div class="form-group">
+              <select class="form-control">
+                <option>v1.0</option>
+              </select>
+            </div>
+          </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-4 select-os">
+        <p>3.SELECT OS</p>
+        <div class="row">
+          <div class="col-sm-12">
+          <div class="col-sm-6">
+            <div class="smart-form" style="margin-top: 20px;">
+              <label class="radio state-success">
+                <input name="os" type="radio" checked="">
+                <i class="choose_browse"></i>
+                <img ng-src="/styles/img/ios.png" width="60px;" height="60px;">
+              </label>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4 run-test">
+      <a class="btn btn-primary btn-keyword-run disabled" ng-click="run()">Run Test</a>
+      </div>
+
+    </div>
+  </div>
+</div>

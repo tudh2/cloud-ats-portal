@@ -71,6 +71,23 @@ define(['keyword/module'], function (module) {
         }).error(function(data, status) {
           callback(data, status);
         });   
+      },
+
+      delete: function(projectId, caseId, callback) {
+        var request = {
+          method: 'DELETE',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/' + projectId + '/case/' + caseId ,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data, status);
+        }).error(function(data, status) {
+          callback(data, status)
+        });        
       }
     }
   }]);

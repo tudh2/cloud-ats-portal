@@ -23,6 +23,7 @@ define(['keyword/module'], function (module) {
               $state.go('app.keyword.suites', { id : scope.projectId });
               break;
             case 'execution':
+              $state.go('app.keyword.execution', { id : scope.projectId });
               break;
             default:
               break;

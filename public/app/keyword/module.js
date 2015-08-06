@@ -82,6 +82,23 @@ define([
           }
         }
       }
+    })
+    .state('app.keyword.execution', {
+      url: '/execution',
+      views: {
+        'content@app': {
+          templateUrl: 'app/keyword/views/execution.html',
+          controller: 'ExecutionCtrl',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'keyword/controllers/execution-controller',
+              'keyword/directives/tabs-header',
+              'services/suite-service',
+              'services/keyword-service'
+            ])
+          }
+        }
+      }
     });
   });
 

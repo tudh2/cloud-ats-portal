@@ -4,6 +4,24 @@ define(['keyword/module'], function(module) {
   module.registerFactory('KeywordService', ['$http', '$cookies', function($http, $cookies) {
     return {
 
+      run: function(projectId, listSuite, callback) {
+        var request = {
+          method: 'POST',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/' + projectId + '/run',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: listSuite
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data);
+        }).error(function(data, status) {
+
+        });
+      },
+
       list: function(callback) {
         var request = {
           method: 'GET',
