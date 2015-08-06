@@ -2454,6 +2454,7 @@ textarea.upload_name {
 }
 .sampler-title {
 	padding-left: 13px;
+	margin-bottom: 10px;
 }
 
 .nav-tabs.samplers {
@@ -2502,5 +2503,44 @@ textarea.upload_name {
 	padding: 5px 23px;
 	text-decoration: none;
 	text-shadow: 0px 1px 0px #2f6627;
+}
+.sampler_names {
+	margin-top: 13px !important;
+}
+
+.param-name, .param-value {
+	padding-right: 0px;
+}
+.add-remove-param-icon {
+	padding-left: 8px;
+}
+.add-param-icon {
+	padding-left: 5px;
+}
+
+.nav-tabs.samplers li.active > a {
+	color: #01B49F;
+	background-color: #FFF;
+	border-bottom-color: #01B49F;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	cursor: none;
+	box-shadow: 0 -2px #01B49F inset;
+	-webkit-box-shadow: 0 -2px #01B49F inset;
+	-moz-box-shadow: 0 -2px #01B49F inset;
+	font-weight: normal;
+}
+.nav-tabs.samplers li > a:hover {
+    background-color: #FFF;
+    border: none !important;
+    cursor: pointer;
+    box-shadow: 0 -2px #01B49F inset;
+    -webkit-box-shadow: 0 -2px #01B49F inset;
+    -moz-box-shadow: 0 -2px #01B49F inset;
+    font-weight: normal;
+}
+.nav-tabs.samplers {
+  height: 37px;
 }
 /*end script-list*/

@@ -48,7 +48,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         console.log(data, status);
         if (status == 202) {
           $.smallBox({
-            title: "The script has created",
+            title: "The script has deleted",
             content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
             color: "#296191",
             iconSmall: "fa fa-check bounce animated",
@@ -64,16 +64,37 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
     }
 
     $scope.clickUpdateScript = function () {
-      console.log('update');
       ScriptService.update($scope.script, function (data, status) {
-        if (status == 202) {
-          $.smallBox({
-            title: "The script has updated",
-            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-            color: "#296191",
-            iconSmall: "fa fa-check bounce animated",
-            timeout: 4000
-          });
+        switch (status) {
+          case 202 : 
+            $.smallBox({
+              title: "The script has updated",
+              content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+              color: "#296191",
+              iconSmall: "fa fa-check bounce animated",
+              timeout: 4000
+            });
+            break;
+          case 204 :
+            $.smallBox({
+              title: "The script has no modification",
+              content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+              color: "#296191",
+              iconSmall: "fa fa-check bounce animated",
+              timeout: 4000
+            });
+            break;
+          case 400 :
+            $.smallBox({
+              title: "The script is not exist",
+              content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+              color: "#296191",
+              iconSmall: "fa fa-check bounce animated",
+              timeout: 4000
+            });
+            break;
+          default:
+            break;
         }
       });
     }
