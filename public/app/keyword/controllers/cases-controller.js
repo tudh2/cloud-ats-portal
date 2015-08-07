@@ -38,6 +38,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.addCustomKeyword = function (customKeywordName, caze) {
         var $input = $('input[name="customKeywordName"]');
+        $scope.customAdded =true;
+        $scope.customMode = false;
         if (customKeywordName === undefined || customKeywordName === null || customKeywordName === '') {
           $input.focus();
           $input.addClass('state-error');
@@ -48,6 +50,13 @@ define(['keyword/module', 'lodash'], function (module, _) {
             caze.customMode = false;
             caze.customAdded = true;
             $scope.customs.push(data);
+            $.smallBox({
+                title: 'Notification',
+                content: 'Your test case has created',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+            });
           });
         }
       }
@@ -55,9 +64,12 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.toCustomKeywordList = function() {
         $state.go('app.keyword.custom', { id : $scope.projectId });
+        $scope.customAdded = true;
+        $scope.customMode = true;
       }
 
       $scope.newTestCase = function() {
+        console.log($scope);
         $scope.current = {
           "name": "New Test Case",
           "steps": [],
