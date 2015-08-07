@@ -60,6 +60,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.newTestCase = function() {
         console.log($scope);
+        $scope.current = {
           "name": "New Test Case",
           "steps": [],
           "temp": true

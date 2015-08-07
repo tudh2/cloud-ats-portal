@@ -31,7 +31,7 @@
     <div class="add-keyword">
     <form>
       <a class="btn btn-border-line btn-keyword pull-right"
-        ng-show="(!$parent.customMode && !$parent.customAdded) "
+        ng-show="(!$parent.customMode && !$parent.customAdded && case.steps.length > 0) "
         ng-click="$parent.customMode = true;">
         Add to Keyword
       </a>
