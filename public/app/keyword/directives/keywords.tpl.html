@@ -32,7 +32,7 @@
     <form>
       <a class="btn btn-border-line btn-keyword pull-right"
         ng-show="(!case.customMode && !case.customAdded) && case.steps.length > 0 "
-        ng-click="case.customMode = true;">
+        ng-click="case.customMode = true;">Add to Keyword
       </a>
 
       <div ng-show="case.customMode" class="pull-right">
@@ -154,12 +154,5 @@
         </div>        
       </div>
     </div>
-    <div class="group-listbutton-keyword pull-left">
-      <a class="btn btn-primary" ng-if="addCase" data-dismiss="modal" ng-click="createNewTestCase()">Save</a>
-      <a class="btn btn-primary" ng-if="addCustom" ng-click="addCustomKeyword()" data-dismiss="modal">Save</a>
-      <a class="btn btn-primary" ng-if="updateCustom" ng-click="updateCustomKeyword()" data-dismiss="modal">Save</a>
-      <a class="btn btn-primary" ng-if="updateCase" ng-click="updateTestCase()" data-dismiss="modal">Save</a>
-      <a class="btn btn-default" data-dismiss="modal" ng-if="customKeyword">Close</a>
-  </div>
   </div>
 </div>

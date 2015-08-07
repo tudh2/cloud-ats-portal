@@ -39,7 +39,7 @@ define(['keyword/module'], function (module) {
       }
 
       $scope.removeDivAddCustom = function() {
-        $('.add-keyword').empty();
+        $('div.add-keyword').hide();
       }
 
       $scope.clicktoCustom = function (customKeyword) {
