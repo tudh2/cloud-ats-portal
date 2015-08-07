@@ -7,7 +7,7 @@ define(['app'], function(app) {
         create: function(name, dataset, callback) {
           var request = {
             method: 'POST',
-            url: 'http://localhost:9000/api/v1/data',
+            url: appConfig.RestEntry + '/api/v1/data',
             headers: {
               'X-AUTH-TOKEN': $cookies.get('authToken'),
               'X-SPACE': $cookies.get('space'),
@@ -30,7 +30,7 @@ define(['app'], function(app) {
 
           var request = {
             method: 'GET',
-            url: 'http://localhost:9000/api/v1/data/list/' + tenant + '/' + space,
+            url: appConfig.RestEntry + '/api/v1/data/list/' + tenant + '/' + space,
             headers: {
               'X-AUTH-TOKEN': $cookies.get('authToken')
             }
@@ -61,7 +61,7 @@ define(['app'], function(app) {
 
           var request = {
             method: 'GET',
-            url: 'http://localhost:9000/api/v1/data/dataSet/' + id,
+            url: appConfig.RestEntry + '/api/v1/data/dataSet/' + id,
 
             headers: {
               'X-AUTH-TOKEN': $cookies.get('authToken')
@@ -89,7 +89,7 @@ define(['app'], function(app) {
         deleteDataSetById: function (id, callback) {
           var request = {
             method: 'DELETE',
-            url: 'http://localhost:9000/api/v1/data/delete/' + id,
+            url: appConfig.RestEntry + '/api/v1/data/delete/' + id,
 
             headers: {
               'X-AUTH-TOKEN' : $cookies.get('authToken')
@@ -113,7 +113,7 @@ define(['app'], function(app) {
         update: function (id, name, dataset, callback) {
           var request = {
             method: 'PUT',
-            url: 'http://localhost:9000/api/v1/data/update',
+            url: appConfig.RestEntry + '/api/v1/data/update',
             headers: {
               'X-AUTH-TOKEN': $cookies.get('authToken')
             },
