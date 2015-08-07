@@ -7,7 +7,7 @@ define(['auth/module'], function(module) {
       templateUrl: 'app/auth/directives/login-info.tpl.html',
       link: function($scope, $element) {
         var context = $rootScope.context;
-        $scope.currentUser = context.user;
+        if(context !== undefined) $scope.currentUser = context.user;
       }
     };
   }]);

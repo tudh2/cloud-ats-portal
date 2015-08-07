@@ -8,7 +8,7 @@ define(['layout/module'], function(module) {
       templateUrl: 'app/layout/directives/list-space.tpl.html',
       link: function(scope, element) {
         
-        if ($rootScope.context.space !== undefined) {
+        if ($rootScope.context !== undefined && $rootScope.context.space !== undefined) {
           scope.space = $rootScope.context.space.name;
         } else {
           scope.space = 'Public';
