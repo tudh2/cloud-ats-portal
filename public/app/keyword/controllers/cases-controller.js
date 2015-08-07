@@ -10,10 +10,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.title = 'TEST CASES';
 
-      $scope.customMode = false;
-
-      $scope.customAdded = false;
-
       CaseService.list($scope.projectId, function(response) {
         $scope.cases = response;
       });
@@ -27,6 +23,12 @@ define(['keyword/module', 'lodash'], function (module, _) {
         $templateRequest('app/keyword/views/testcase-modal-content.tpl.html').then(function(template) {
           $modal.html($compile(template)($scope));
         });
+
+        $modal.on('hidden.bs.modal', function() {
+          if (!$scope.current.saved) {
+            $scope.current.steps = _.cloneDeep($scope.current.originSteps);
+          }
+        });
       }
 
       $scope.addCustomKeyword = function (customKeywordName, caze) {
@@ -38,7 +40,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
           $input.removeClass('state-error');
           var customKeyword = { name : customKeywordName, steps : _.cloneDeep(caze.steps)};
           CustomKeywordService.create($scope.projectId, customKeyword, function(data, status) {
-            console.log(data, status);
+            caze.customMode = false;
+            caze.customAdded = true;
           });
         }
       }
@@ -59,6 +62,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
       },
 
       $scope.save = function() {
+
+        $scope.current.saved = true;
+
         if ($scope.current.temp) {
           CaseService.create($scope.projectId, $scope.current, function(data, status) {
             
@@ -157,6 +163,11 @@ define(['keyword/module', 'lodash'], function (module, _) {
       }
 
       $scope.clickToCase = function(caze) {
+        caze.customMode = false;
+        caze.customAdded = false;
+        caze.saved = false;
+        caze.originSteps = _.cloneDeep(caze.steps);
+
         $scope.current = caze;
         loadModal();
       } 

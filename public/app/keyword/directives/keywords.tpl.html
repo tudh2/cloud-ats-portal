@@ -32,12 +32,12 @@
     <div class="add-keyword">
     <form>
       <a class="btn btn-border-line btn-keyword pull-right"
-        ng-show="(!$parent.customMode && !$parent.customAdded) && case.steps.length > 0 "
-        ng-click="$parent.customMode = true;">
+        ng-show="(!case.customMode && !case.customAdded) && case.steps.length > 0 "
+        ng-click="case.customMode = true;">
         Add to Keyword
       </a>
 
-      <div ng-show="$parent.customMode" class="pull-right">
+      <div ng-show="case.customMode" class="pull-right">
         <label style="padding-top:5px">Keyword Name</label>
         <div class="editable-input" style="position: relative;">
           <input name="customKeywordName" type="text" class="form-control input-sm" style="padding-right: 24px;" placeholder="Custom Keyword Name"
@@ -47,13 +47,13 @@
           <a class="btn btn-primary btn-xs" ng-click="$parent.addCustomKeyword(customKeywordName, case)">
             <i class="fa fa-check"></i>
           </a>
-          <a class="btn btn-default btn-xs" ng-click="$parent.customMode = false;">
+          <a class="btn btn-default btn-xs" ng-click="case.customMode = false;">
             <i class="fa fa-times"></i>
           </a>
         </div>
       </div>
 
-      <span class="style-status-keyword pull-right" ng-show="$parent.customAdded">
+      <span class="style-status-keyword pull-right" ng-show="case.customAdded">
         <i class="fa fa-check"></i><label style="padding-top:5px;padding-left:5px">Added</label>
       </span>
     </form>
