@@ -26,6 +26,13 @@ define(['keyword/module'], function (module) {
         $templateRequest('app/keyword/views/customkeyword-modal-content.tpl.html').then(function(template) {
           $modal.html($compile(template)($scope));
         });
+
+        $modal.on('hidden.bs.modal', function() {
+          if (!$scope.currentCustomKeyword.saved) {
+            $scope.currentCustomKeyword.steps = _.cloneDeep($scope.currentCustomKeyword.originSteps);
+            $scope.currentCustomKeyword.name = $scope.currentCustomKeyword.originName;
+          }
+        });
       }
 
       $scope.newCustomKeyword = function() {
@@ -43,6 +50,8 @@ define(['keyword/module'], function (module) {
       }
 
       $scope.clicktoCustom = function (customKeyword) {
+        customKeyword.originSteps = _.cloneDeep(customKeyword.steps);
+        customKeyword.originName = customKeyword.name;
         $scope.currentCustomKeyword = customKeyword;
         loadModal();
       }
@@ -80,6 +89,8 @@ define(['keyword/module'], function (module) {
       }
 
       $scope.save = function (customKeywordName, customKeyword) {
+
+        $scope.currentCustomKeyword.saved = true;
 
         if ($scope.currentCustomKeyword.temp) {
           var $input = $('input[name="customKeywordName"]');

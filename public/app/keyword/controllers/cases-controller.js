@@ -32,6 +32,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
         $modal.on('hidden.bs.modal', function() {
           if (!$scope.current.saved) {
             $scope.current.steps = _.cloneDeep($scope.current.originSteps);
+            $scope.current.name = $scope.current.originName;
           }
         });
       }
@@ -185,6 +186,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
         caze.customAdded = false;
         caze.saved = false;
         caze.originSteps = _.cloneDeep(caze.steps);
+        caze.originName = caze.name;
 
         $scope.current = caze;
         loadModal();
