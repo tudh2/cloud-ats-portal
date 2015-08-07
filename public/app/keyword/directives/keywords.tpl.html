@@ -70,19 +70,58 @@
         <label class="col-md-4" style="top:5px">Test Keyword</label>
         <span class="col-md-7"><input class="form-control filter-keyword"  type="text" placeholder="Filter"></span>
       </div>
+
+      <!-- Custom keyword -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#customkeyword" data-parent="#keyword-list">
+              <i class="fa fa-chevron-circle-right"></i>
+              <i class="fa fa-chevron-circle-down"></i>
+              <strong>Custom keywords</strong>
+            </a>
+          </h4>
+        </div>
+        <div id="customkeyword" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <ul class="list-unstyled">
+              <li class="li-keyword" style="border-bottom: 1px solid #e5e5e5; min-height: 25px;"
+                ng-repeat="custom in customs"
+                data-drag="true"
+                data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+                ng-model="custom"
+                jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}"
+                >
+
+                <a href-void class="txt-color-blue">
+                  <i class="fa fa-bars txt-color-grey"></i>
+                  <strong class="txt-color-blue">{{custom.name}}</strong>
+                </a>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End custom keyword -->
       
       <div ng-init="query[cat] = ''" class="panel panel-default" ng-repeat="cat in cats">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a ng-click="selectCat(cat)" data-toggle="collapse" data-parent="#keyword-list" href="#{{cat}}" 
-              ng-class="{collapsed: !$first}">
+            
+            <a data-toggle="collapse" 
+              data-parent="#keyword-list" 
+              href="#{{cat}}" 
+              class="collapsed" 
+              ng-click="selectCat(cat)">
+
               <i class="fa fa-chevron-circle-right"></i>
               <i class="fa fa-chevron-circle-down"></i>
               <strong>{{cat}}</strong>
             </a>
           </h4>
         </div>
-        <div id="{{cat}}" class="panel-collapse collapse"  ng-class="{in: $first}">
+        <div id="{{cat}}" class="panel-collapse collapse">
           <div class="panel-body">
             
             <ul class="list-unstyled" ng-init="keywords = getKeywordsByCat(cat)">

@@ -6,7 +6,8 @@ define(['fk/module', 'lodash'], function(module, _) {
       restrict: 'E',
       replace: true,
       scope: {
-        case: '='
+        case: '=',
+        customs: '=',
       },
       templateUrl: 'app/keyword/directives/keywords.tpl.html',
       link: function($scope, element, attributes) {

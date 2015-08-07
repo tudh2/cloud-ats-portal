@@ -14,6 +14,11 @@ define(['keyword/module', 'lodash'], function (module, _) {
         $scope.cases = response;
       });
 
+
+      CustomKeywordService.list($scope.projectId, function(response) {
+        $scope.customs = response;
+      });
+
       var loadModal = function() {
         var $modal = $('#editCase');
 
@@ -42,6 +47,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
           CustomKeywordService.create($scope.projectId, customKeyword, function(data, status) {
             caze.customMode = false;
             caze.customAdded = true;
+            $scope.customs.push(data);
           });
         }
       }

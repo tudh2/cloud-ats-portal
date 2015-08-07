@@ -10,7 +10,7 @@ define(['fk/module', 'lodash'], function(module, _) {
         list: '='
       },
       link: function($scope, element, attributes) {
-
+        
         $scope.update = false;
         $scope.showMe = function() {
           if($scope.list == null) {
@@ -59,19 +59,35 @@ define(['fk/module', 'lodash'], function(module, _) {
         };
 
         $scope.buildActionDisplay = function(data) {
-          var keyword = data.type;
-          var params = data.params;
-          keyword += " (";
-          _.forEach(params, function(param) {
-            keyword += param;
-            keyword += ", ";
-          });
-          var lastComma = keyword.lastIndexOf(',');
-          if (lastComma != -1) {
-            keyword = keyword.substring(0, lastComma);
-          }
+          if (data._id !== undefined) {
+            var customKeyword = _.remove($scope.list, function(sel) {
+              return sel._id !== undefined;
+            });
 
-          return keyword += ")";
+            _.forEach(customKeyword, function(sel) {
+              _.forEach(sel.steps, function(step) {
+                $scope.list.push(step);
+              });
+            });
+
+            return;
+          } else {
+
+            var keyword = data.type;
+            var params = data.params;
+            keyword += " (";
+            _.forEach(params, function(param) {
+              keyword += param;
+              keyword += ", ";
+            });
+            var lastComma = keyword.lastIndexOf(',');
+            if (lastComma != -1) {
+              keyword = keyword.substring(0, lastComma);
+            }
+
+            return keyword += ")";
+
+          }
         };
 
       }

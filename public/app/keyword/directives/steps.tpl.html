@@ -3,8 +3,9 @@
   ng-model="list" 
   jqyoui-droppable="{multiple:true}">
 
-  <li ng-init="listIndex = $index" ng-repeat="keyword in list track by $index">
-
+  <li 
+    ng-init="listIndex = $index;"
+    ng-repeat="keyword in list track by $index">
     <span>
       <div class="pull-left margin-right-5">
         <a ng-if="!$first" ng-click="moveUpAction(keyword)" data-tooltip-placement="left" data-tooltip="Move Up" class="txt-color-orange">
@@ -32,8 +33,8 @@
       data-list-index="listIndex"
       data-keyword="keyword">
     </keyword-params>
-
   </li>
+
   <li class="placeholder" ng-if="showMe()"> 
     <span class="label label-success">Drop action here</span>
   </li>
