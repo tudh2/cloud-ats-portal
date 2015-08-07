@@ -17,7 +17,6 @@
           <span  ng-if="!customKeyword" class="editable color-keyword name-keyword editable-click">{{case.name}}</span>
 
           </span>
-
           <!-- action steps -->
           <div class="steps expand">
           <list-steps data-list="case.steps"></list-steps>
@@ -32,7 +31,7 @@
     <div class="add-keyword">
     <form>
       <a class="btn btn-border-line btn-keyword pull-right"
-        ng-show="(!$parent.customMode && !$parent.customAdded) && case.steps.length > 0 "
+        ng-show="(!$parent.customMode && !$parent.customAdded) "
         ng-click="$parent.customMode = true;">
         Add to Keyword
       </a>

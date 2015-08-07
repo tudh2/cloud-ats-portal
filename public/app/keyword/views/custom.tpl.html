@@ -17,8 +17,8 @@
         
         <a class="btn btn-primary"
           data-toggle="modal" 
-          data-target="#editCase" 
-          ng-click="newTestCase()">
+          data-target="#editKeyword" 
+          ng-click="newCustomKeyword()">
           New Keyword</a>
       </span>
 
@@ -30,7 +30,7 @@
     <!-- Test case list -->
     <div class="col-md-3"data-target="#editKeyword" data-toggle="modal"
       ng-repeat="keyword in customs track by $index"  
-      ng-click="clickToCase(case)">
+      ng-click="clicktoCustom(keyword)">
 
       <div class="tc-itemBlock">
         <div class="row">

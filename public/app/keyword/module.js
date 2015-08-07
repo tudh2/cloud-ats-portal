@@ -110,7 +110,11 @@ define([
           resolve: {
             deps: $couchPotatoProvider.resolveDependencies([
               'keyword/controllers/custom-controller',
-              'keyword/directives/tabs-header'
+              'keyword/directives/tabs-header',
+              'services/custom-keyword-service',
+              'keyword/directives/keywords',
+              'keyword/directives/keyword-params',
+              'keyword/directives/steps'
             ])
           }
         }
