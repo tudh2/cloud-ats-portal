@@ -23,8 +23,27 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       }]
     };
 
+    $('body').on('keypress', '.name-script textarea[name="text-area-script"]', function () {
+
+      $(this).parent().removeClass('has-error');
+    });
     // create script with scrip name, list samplers, project id, configurationn information
     $scope.clickSaveScript = function () {
+
+      _.forEach($scope.script.samplers, function (sampler) {
+        _.remove(sampler.arguments, function (argument) {
+          return (argument.paramName == '' || argument.paramValue == '');
+        });
+      });
+
+      var $modal = $('#createScript');
+      var $script_name = $('.script-name').find('.text-area-script');
+      if (!$scope.script.name) {
+        console.log($script_name);
+        $script_name.parent().addClass('has-error');
+        return;
+      }
+
       ScriptService.createScript($scope.script, $stateParams.id, function (response) {
         if (response != null) {
           $scope.script._id = response._id;
@@ -37,7 +56,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
           });
 
           $scope.scripts.push(response);
-
+          $modal.modal('hide');
         }
       });
     }
@@ -58,7 +77,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
           });
         }
       });
-
     }
 
     $scope.clickUpdateScript = function () {
@@ -72,6 +90,12 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
               iconSmall: "fa fa-check bounce animated",
               timeout: 4000
             });
+
+            _.remove($scope.scripts, function (data) {
+              return data._id == $scope.script._id;
+            });
+
+            $scope.scripts.push($scope.script);
             break;
           case 204 :
             $.smallBox({
@@ -97,11 +121,50 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       });
     }
 
+    // get element to validate sampler form
+    var $sampler_name = $('.name-sampler input[name="name"');
+    var $sampler_url = $('.sampler-url input[name="url"');
+
+    $('body').on('keypress', '.name-sampler input[name="name"]', function () {
+      $(this).parent().removeClass('has-error');
+    });
+
+    $('body').on('keypress', '.sampler-url input[name="url"]', function () {
+      $(this).parent().removeClass('has-error');
+    });
+
     $scope.createSampler = function (sampler, $event) {
-     _.remove(sampler.arguments, function (argument) {
+
+      // remove invalid params pair
+      _.remove(sampler.arguments, function (argument) {
         return (argument.paramName == '' || argument.paramValue == '');
       });
 
+      if (sampler.arguments.length == 0) {
+        sampler.arguments.push({
+          "paramName": "",
+          "paramValue": ""
+        });
+      }
+      // validation for create sampler
+      var $sampler_name = $('.sampler-form').find('.name-sampler');
+      var $sampler_url = $('.sampler-form').find('.sampler-url');
+      if (!$scope.selected.name && !$scope.selected.url) {
+        $sampler_name.addClass('has-error');
+        $sampler_name.focus();
+        $sampler_url.addClass('has-error');
+        return;
+      } else if (!$scope.selected.name) {
+        $sampler_name.addClass('has-error');
+        $sampler_name.focus();
+        return;
+      } else if (!$scope.selected.url) {
+        $sampler_url.addClass('has-error');
+        $sampler_url.focus();
+        return;
+      }
+
+      // add sampler into sampler list
       $scope.script.samplers.push(sampler);
       $scope.selected = {
         method: 'GET',
@@ -206,6 +269,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
       ScriptService.get(id, function (data, status) {
         $scope.script = data;
+        console.log($scope.script);
       });
     }
 
