@@ -20,7 +20,8 @@ define([
             deps: $couchPotatoProvider.resolveDependencies([
               'keyword/controllers/overview-controller',
               'keyword/directives/tabs-header',
-              'services/keyword-service'
+              'services/keyword-service',
+              'services/event-service'
             ])
           }
         }

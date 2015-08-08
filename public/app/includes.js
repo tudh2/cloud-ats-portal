@@ -4,6 +4,7 @@ define([
   'services/data-service',
   'services/user-service',
   'services/authentication-service',
+  'services/event-service',
   // 'services/performance-service',
 
   //layout
