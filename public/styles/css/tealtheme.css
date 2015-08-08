@@ -2545,4 +2545,29 @@ textarea.upload_name {
 .btn-performance-run {
 
 }
+.hit-label {
+ 
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
+  -ms-transform: rotate(-90deg); 
+  -o-transform: rotate(-90deg); 
+  transform: rotate(-90deg);
+  color: #000;
+  font-size: 22px;                
+  height: 200px;
+  width: 15px;
+  float: right;
+  vertical-align:top;
+  
+}
+.assertion-text {
+	display: none;
+}
+.title.subject {
+	font-weight: bold;
+}
+.label-report {
+	color: #01B49F;
+	cursor: pointer;
+}
 /*end script-list*/

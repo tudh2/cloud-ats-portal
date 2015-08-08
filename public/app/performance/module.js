@@ -74,7 +74,64 @@ define([
 				title: 'Performance Project Detail',
 				requireLogin: true
 			}
-		});
+		})
+		.state('app.report', {
+        url: '/report',
+        views: {
+          "content@app": {
+            templateUrl: 'app/fk/views/report.html',
+			resolve: {
+              deps: $couchPotatoProvider.resolveDependencies([
+                'fk/controllers/fk-controller'
+				])}
+          }
+        },
+        data: {
+          title: 'Keyworks Framework',
+          requireLogin: true
+        }
+      })
+      .state('app.report.performance', {
+        url: '/performance/:projectId/:jobId/:scriptId',
+        views: {
+          "content@app": {
+            controller: 'PerformanceReportCtrl',
+            templateUrl: 'app/performance/views/performance-report.html',
+            resolve: {
+              deps: $couchPotatoProvider.resolveDependencies([
+                'performance/controllers/performance-report-controller',
+                'services/performance-service',
+                'services/script-service',
+                'services/report-service'
+        	])}
+          }
+        },
+        data: {
+          title: 'Keyworks Framework',
+          requireLogin: true
+        }
+      })
+      .state('app.report.performance.sampler', {
+        url: '/sampler/:reportId',
+        params: {
+        	index: '1'
+        },
+        views: {
+          "content@app": {
+            controller: 'PerformanceReportDetailCtrl',
+            templateUrl: 'app/performance/views/performance-sampler-report.html',
+            resolve: {
+              deps: $couchPotatoProvider.resolveDependencies([
+                'performance/controllers/performance-report-detail-controller',
+                'services/report-service'
+        	])}
+          }
+        },
+        data: {
+          title: 'Keyworks Framework',
+          requireLogin: true
+        }
+      });
 	});
 	couchPotato.configureApp(module);
 

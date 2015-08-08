@@ -63,7 +63,7 @@ define(['performance/module', 'notification'], function (module) {
               $.smallBox({
                 title: "The script has created",
                 content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                color: "#5F895F",
+                color: "#296191",
                 iconSmall: "fa fa-check bounce animated",
                 timeout: 4000
               });
