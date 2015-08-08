@@ -40,7 +40,7 @@ define([
 
   'projects/module',
   'keyword/module',
-  'functional/module',
+  // 'functional/module',
   'performance/module',
   //virtual
 

@@ -1,4 +1,4 @@
-define(['functional/module'], function (module) {
+define(['keyword/module'], function (module) {
   'use strict';
 
   module.registerController('OverviewCtrl', 

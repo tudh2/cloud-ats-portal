@@ -36,7 +36,7 @@ define([
     'app.performance',
     'app.projects',
     'app.keyword',
-    'app.functional'
+    // 'app.functional'
     ///'app.widgets',
     //'app.graphs',
     //'app.calendar',
