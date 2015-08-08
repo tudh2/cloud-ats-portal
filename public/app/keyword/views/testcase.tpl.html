@@ -3,12 +3,10 @@
     <div class="row actionMenu">
       
       <div class="col-md-3">
-        <form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="">
-          <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" autocomplete="off">
-          <button type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </form>
+          <section class="smart-form">
+            <label class="input"> <i class="icon-append fa fa-search"></i>
+              <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" autocomplete="off">                           </label>
+	        </section>
       </div>
       <span class="col-md-2 count-testcase"><label>{{cases.length}} Test Case{{cases.length > 2 ? 's' : ''}}</label></span>
 
@@ -22,9 +20,8 @@
         </ul>
       </div>
 
-      <span class="col-md-4 pull-right btn-action-list">
+      <span class="col-md-4 text-right">
         <a class="btn btn-default" ng-click="toCustomKeywordList()">Custom Keyword</a>
-        
         <a class="btn btn-primary"
           data-toggle="modal" 
           data-target="#editCase" 
@@ -38,7 +35,7 @@
   <div class="list-testcase">
 
     <!-- Test case list -->
-    <div class="col-md-3"data-target="#editCase" data-toggle="modal"
+    <div class="col-md-3 col-sm-4 col-xs-6" data-target="#editCase" data-toggle="modal"
       ng-repeat="case in cases track by $index"  
       ng-click="clickToCase(case)">
 

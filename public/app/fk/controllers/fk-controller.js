@@ -501,7 +501,7 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
     $scope.findFunctionalProject = function(event) {
       var element = event.currentTarget;
 
-      var icon = $(element).find('.functional');
+      var icon = $(element).find('.active');
       if (icon.css('color') == 'white') {
 
       } else 
