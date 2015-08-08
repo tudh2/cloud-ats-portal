@@ -5,7 +5,6 @@ define([
   'services/user-service',
   'services/authentication-service',
   'services/event-service',
-  // 'services/performance-service',
 
   //layout
 
@@ -24,37 +23,10 @@ define([
 
   //dashboard
   'dashboard/module',
-
-  //console
-  'console/module',
-
-  //fk
-  'fk/module',
-
-  //forms
-  // 'modules/forms/module',
-
-  // 'performance/module',
-
-  //account
   'auth/module',
-
   'projects/module',
   'keyword/module',
-  // 'functional/module',
   'performance/module',
-  //virtual
-
-  //components
-
-  //activities
-
-  //language
-
-  //todo
-  // 'components/todo/todo-container',
-  // 'components/todo/models/todo',
-  // 'components/todo/directives/todo-list',
 
 ], function() {
   'use strict';

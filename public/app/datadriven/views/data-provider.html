@@ -5,7 +5,7 @@
       <article class="col-sm-12">
 
         <div id="fk-wizard-widget"
-          data-widget-color="blueDark"
+
           data-widget-colorbutton="false"
           data-widget-editbutton="false"
           data-widget-togglebutton="false"
@@ -15,25 +15,19 @@
           data-widget-sortable="false"
           data-jarvis-widget>
 
-          <header>
-            <span class="widget-icon"> <i class="fa fa-magic"></i> </span>
-            <h2>Keywords Project Quick Start</h2>
-          </header>
-
-          <div>
+             <header class="header-navtabs">
+                 <h2>Project Overview</h2>
+            </header>
             
             <!-- Widget content -->
-            <div class="widget-body">
-              <div class="row">
-                <div data-smart-include="/app/fk/views/fk-wizard.tpl.html"></div>
-              </div>
-            </div>
+           
             <!-- End widget content -->
-
-          </div>
 
 
         </div>
+           <div class="tab-content">
+                <div smart-include="/app/fk/views/data-provider-list.tpl.html"></div>
+            </div>
       </article>
     </div>
   </section>  

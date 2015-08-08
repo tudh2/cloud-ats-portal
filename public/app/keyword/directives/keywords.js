@@ -1,4 +1,4 @@
-define(['fk/module', 'lodash'], function(module, _) {
+define(['keyword/module', 'lodash'], function(module, _) {
   'use strict';
 
   module.registerDirective("keywords", ['$filter', 'KeywordService', function($filter, keywordService) {
