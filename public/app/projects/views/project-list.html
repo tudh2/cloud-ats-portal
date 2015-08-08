@@ -12,53 +12,52 @@
           <div class="tab-content">
             <div class="row actionMenu">
               <div class="col-sm-12">
-                <div class="col-sm-3">
-                  <section class="smart-form">
-                    <label class="input"> <i class="icon-append fa fa-search"></i>
-                      <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3">
-                    </label>
-                  </section>
-                </div>
-
-                <div class="col-sm-9">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div class="functional-title col-sm-3">
-                        <span data-icon="&#xe05b;" class="glyph-item mega functional"></span>
-                        <strong>Functional Test</strong>
-                      </div>
-
-                      <div class="functional-title col-sm-3">
-                        <span data-icon="&#xe007;" class="glyph-item mega"></span>
-                        <strong>Performance Test</strong>
-                      </div>
-
-                      <div class="col-sm-2">
-                        <div class="widget-toolbar">
-                          <div class="smart-form">
-                            <label class="checkbox">
-                            <input type="checkbox" name="checkbox" style="background-color:#01B49F" checked=""><i style="background-color: #01B49F"></i>Ready
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-sm-2">
-                        <div class="widget-toolbar hidden-phone">
-                          <div class="smart-form">
-                            <label class="checkbox">
-                              <input type="checkbox" name="checkbox" style="background-color:#FE7831" checked=""><i style="background-color: #FE7831"></i>Running
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <button type="submit" class="btn btn-primary pull-right" style="color: white;" data-container="body" data-html="true" data-toggle="modal" data-target="#createProject">New Project</button>
-
-                      <div data-smart-include="app/projects/views/new-project-modal.tpl.html"></div>
-
+                <div class="row">
+                    <div class="col-sm-3">
+                      <section class="smart-form">
+                        <label class="input"> <i class="icon-append fa fa-search"></i>
+                          <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3">
+                        </label>
+                      </section>
                     </div>
-                  </div>
+
+                    <div class="col-sm-9">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-5 col-xs-6">
+                            <div class="row">
+                                  <div class="check-icon-group col-md-6" >
+                                        <span data-js-promp;t="&amp;#xe05b;" data-icon="&#xe05b;" aria-hidden="true" class="check-icon active"></span> 
+                                        Functional Test
+                                    </div>
+                                  <div class="check-icon-group col-md-6">
+                                    <span data-js-prompt="&amp;#xe007;" data-icon="&#xe007;" aria-hidden="true" class="check-icon"></span> 
+                                    Performance Test
+                                  </div>
+                            </div>
+                        </div>
+                            
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="row">
+                                  <div class="col-md-6 smart-form">
+                                        <label class="checkbox teal-color">
+                                            <input type="checkbox" name="checkbox" checked="">
+                                            <i ></i>Ready</label>
+                                    </div> 
+                                  <div class="col-md-6 smart-form">
+                                        <label class="checkbox amber-color">
+                                            <input type="checkbox" name="checkbox" checked="">
+                                            <i></i>Running</label>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                          <button type="submit" class="btn btn-primary pull-right" data-container="body" data-html="true" data-toggle="modal" data-target="#createProject">New Project</button>
+                        </div>
+                          <div data-smart-include="app/projects/views/new-project-modal.tpl.html"></div>
+
+                        
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>

@@ -10,49 +10,51 @@
 
     <div class="row project-detail-header">
       <div class="col-sm-12">
-        <span class="id-test">#{{project._id.substring(0,8)}} <span data-icon="&#xe05b;" aria-hidden="true" class="glyph-item mega"></span></span>
-        <span style="padding-right:10px; text-transform: capitalize;">{{project.type}} Test</span> 
-        <span class="buttonStatus" disabled="disabled">{{project.status}}</span>
+        <span class="proj-id">#{{project._id.substring(0,8)}} </span>
+        <span data-icon="&#xe05b;" aria-hidden="true" class="proj-type"></span>
+        <span class="text-capitalize">{{project.type}} test </span> 
+        <span ng-class="{
+          'label label-running': project.status === 'RUNNING',
+          'label label-success': project.status === 'READY'
+        }"  disabled="disabled">{{project.status}}</span>
       </div>
     </div>
 
-    <div class="row project-detail-name">
+    <div class="row proj-name">
       <article class="col-sm-12"> 
         {{project.name}}
       </article>
     </div>
 
     <div class="row ">
-      <div class="col-md-6">
-     <table class="table project-detail-statistic" cellpadding="0" cellspacing="0">
-        <thead>
-          <tr>
-            <td>Test Suites</td>
-            <td>Test Cases</td>
-            <td>Last Running</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="info-details">{{project.totalSuites}}</td>
-            <td class="info-details">{{project.totalCases}}</td>
-            <td class="info-details">{{project.lastRunning === undefine ? 'N/A' : project.lastRunning}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="col-md-6 project-properties">
+            <div class='row'>
+                <div class='col-sm-3'>
+                    <div class='blur-name'>Test Suites</div>
+                    <div class='statistic-number'>{{project.totalSuites}}</div>
+                </div>
+                <div class='col-sm-3'>
+                    <div class='blur-name'>Test Cases</div>
+                    <div class='statistic-number'>{{project.totalCases}}</div>
+                </div>
+                <div class='col-sm-6'>
+                    <div class='blur-name'>Test Cases</div>
+                    <div class='statistic-number'>{{project.lastRunning === undefine ? 'N/A' : project.lastRunning}}</div>
+                </div>
+           </div>
       </div>
       <div class="col-md-6">
-        <div class="execute-action-list">
-        <a class="btn btn-border-line btnViewLog">View Log</a>
-        <a class="btn btn-border-line btnRun">Run</a>
-        </div>
-      </div>
+            <div class="execute-action-list">
+            <a class="btn-border-line btnViewLog">View Log</a>
+            <a class="btn-border-line btnRun">Run</a>
+            </div>
+       </div>
     </div>
-
-    <!-- Report -->
-    <div class="row details-div">
-      <div >
-        <h3>Test Report</h3>
+  </div>
+  <!-- Report -->
+     <div class="row table-container">
+          <div class="col-md-12">
+            <h3>Test Report</h3>
       <table class="table tbl-project-report">
         <thead>
           <tr>
@@ -92,6 +94,4 @@
       </div>
     </div>
     <!-- End Report -->
-
-  </div>
 </div>
