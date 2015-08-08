@@ -1,9 +1,10 @@
-define(['performance/module', 'notification'], function (module) {
+define(['performance/module', 'lodash', 'morris', 'notification'], function (module, _) {
   
   'use strict';
-
-  module.registerController('PerformanceExeCtrl', ['$scope', '$stateParams', 'ScriptService', 'PerformanceService', function($scope, $stateParams, ScriptService, PerformanceService) {
- 
+   
+  module.registerController('PerformanceExeCtrl', ['$scope', '$state', '$stateParams', '$compile', '$templateRequest', 'ScriptService', 'PerformanceService', function($scope, $state, $stateParams, $compile, $templateRequest, ScriptService, PerformanceService) {
+    
+    $scope.samplerReport = true; 
  		$scope.projectId = $stateParams.id;
     var selected = [];
  		$scope.title = "EXECUTION";
@@ -31,16 +32,17 @@ define(['performance/module', 'notification'], function (module) {
     //run project with projectid and list scripts
     $scope.runPerformanceTest = function () {
       PerformanceService.run($stateParams.id, selected, function(data, status) {
-        if (data != null) {
+        if (status == 200) {
           $.smallBox({
             title: "The test is running",
             content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-            color: "#5F895F",
+            color: "#296191",
             iconSmall: "fa fa-check bounce animated",
             timeout: 4000
           });
         }
       });
     }
+
   }]);
 });

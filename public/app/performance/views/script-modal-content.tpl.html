@@ -32,8 +32,8 @@
 							<div class="col-sm-4">
 								<p class="pull-left">Test Script Name</p>
 							</div>
-							<div class="col-sm-8">
-								<textarea  rows="4" class="text-area-script" ng-model="script.name"></textarea>
+							<div class="col-sm-8 form-group name-script">
+								<textarea  rows="4" class="form-control text-area-script" ng-model="script.name" name="text-area-script"></textarea>
 							</div>
 						</div>
 					</div>
@@ -45,7 +45,7 @@
 							</div>
 							<div class="col-sm-8">
 								<a class="btn btn-deleteScript" ng-if="script._id != null" ng-click="deleteScript(script)" data-dismiss="modal">Delete</a>
-								<a class="btn btn-persitScript pull-right" ng-if="script.samplers.length && script._id == null" ng-click="clickSaveScript()" data-dismiss="modal">Save</a>
+								<a class="btn btn-persitScript pull-right" ng-if="script.samplers.length && script._id == null" ng-click="clickSaveScript()">Save</a>
 								<a class="btn btn-persitScript pull-right" ng-if="script._id != null" ng-click="clickUpdateScript()" data-dismiss="modal">Update</a>
 							</div>
 						</div>
@@ -83,7 +83,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 sampler_form">
+					<div class="col-sm-6 sampler-form">
 						<div class="row sampler-title">
 							<span data-js-prompt="&amp;#xe067;" data-icon="&#xe067;" aria-hidden="true" class="glyph-item mega" style="display:inline-block;"></span>
 							<h4 style="padding-top: 10px;" class="title-sampler"><strong>New Sampler</strong></h4>
@@ -93,8 +93,8 @@
 								<strong>Sampler name</strong>
 							</div>
 							<div class="col-sm-8">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Enter Name" ng-model="selected.name">
+								<div class="form-group name-sampler">
+									<input type="text" class="form-control" placeholder="Enter Name" ng-model="selected.name" name="name">
 								</div>
 							</div>
 						</div>
@@ -118,8 +118,8 @@
 								<strong>Sampler url</strong>
 							</div>
 							<div class="col-sm-8">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="e.g. http://www.abc.com" ng-model="selected.url">
+								<div class="form-group sampler-url">
+									<input type="text" class="form-control" placeholder="e.g. http://www.abc.com" ng-model="selected.url" name="url">
 								</div>
 							</div>
 						</div>
@@ -152,7 +152,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row  assertion-text">
 							<div class="col-sm-4">
 								<strong>Assertion text</strong>
 							</div>

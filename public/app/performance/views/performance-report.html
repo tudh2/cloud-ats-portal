@@ -1,0 +1,97 @@
+<div class="report-page">
+	<div class="col-sm-12 clearfix t-control-bar">
+		<div class="col-sm-5 ">
+	        <section class="col-sm-6 smart-form t-reset-padding">
+	            <label class="input"> 
+	            	<i class="icon-append fa fa-search"></i>
+	                <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3">
+	            </label>
+	        </section>
+	        <div class="col-sm-6">
+              <div class="form-group">
+                <select class="form-control">
+                  <option selected="">Choose a test case group</option>
+                </select>
+              </div>
+            </div>
+		</div>
+		<div class="col-sm-7 ">
+			<p class="functional-title col-sm-6 t-export-bar">
+				Export to:
+				<i class="fa fa-file-word-o"></i>
+				<span>word</span>
+				<i class="fa fa-file-excel-o"></i>
+				<span>Excel</span>
+				<i class="fa fa-file-pdf-o"></i>
+				<span>pdf</span>
+			</p>
+			
+			<button type="submit" class="btn new-project pull-right" ng-click="backToProjectOverview();" style="color: white;">Back to project detail</button>
+		</div>
+	</div>
+
+	<div class="col-sm-12 clearfix" id="all-chart">
+		<div class="col-sm-6">
+			<div class="chart no-padding hit-per-second">
+				
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="chart node-padding tran-per-second"></div>
+		</div>
+		<div class="t-chart-label">
+			<p > 
+				<span class="t-blue"></span>Pass 
+				<span class="t-red"></span>
+				Fail 
+				<span class="t-yellow"></span>
+				Skip 
+			</p> 
+		</div>
+	</div>
+	<div class="clearfix t-table ">
+		<div class="col-sm-12">
+			<table class="col-sm-12">
+				<tr class="t-table-header">
+					<td class="t-left title subject">Label </td>
+					<td class="t-left title subject">#Sampler</td>
+					<td class="t-right title subject">Average</td>
+					<td class="t-right title subject">Min</td>
+					<td class="t-right title subject">Max</td>
+					<td class="t-right title subject">Std.Dev</td>
+					<td class="t-center title subject">Error %</td>
+					<td class="t-center title subject">Throughput</td>
+					<td class="t-center title subject">KB/sec</td>
+					<td class="t-center title subject">Avg. Bytes</td>
+					
+				</tr>
+				<tr>
+					<td class="t-left label-report" ng-click="openReportEachSampler(summaryReport, $index)">{{summaryReport.label}}</td>
+					<td class="t-left">{{summaryReport.summary.samples}}</td>
+					<td class="t-right">{{summaryReport.summary.average}}</td>
+					<td class="t-right">{{summaryReport.summary.min_time}}</td>
+					<td class="t-right">{{summaryReport.summary.max_time}}</td>
+					<td class="t-right">{{summaryReport.summary.standard_deviation}}</td>
+					<td class="t-center">{{summaryReport.summary.error_percent}}</span></td>
+					<td class="t-center">{{summaryReport.summary.throughtput}}</span></td>
+					<td class="t-center">{{summaryReport.summary.kb_per_second}}</span></td>
+					<td class="t-center">{{summaryReport.summary.average_bytes}}</span></td>
+				</tr>
+				<tr ng-repeat="report in reports track by $index">
+					<td class="t-left label-report" ng-click="openReportEachSampler(report, $index)">{{report.label}}</td>
+					<td class="t-left">{{report.summary.samples}}</td>
+					<td class="t-right">{{report.summary.average}}</td>
+					<td class="t-right">{{report.summary.min_time}}</td>
+					<td class="t-right">{{report.summary.max_time}}</td>
+					<td class="t-right">{{report.summary.standard_deviation}}</td>
+					<td class="t-center">{{report.summary.error_percent}}</span></td>
+					<td class="t-center">{{report.summary.throughtput}}</span></td>
+					<td class="t-center">{{report.summary.kb_per_second}}</span></td>
+					<td class="t-center">{{report.summary.average_bytes}}</span></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+

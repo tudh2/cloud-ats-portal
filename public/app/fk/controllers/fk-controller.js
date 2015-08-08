@@ -2,6 +2,7 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
   
   'use strict';
   
+  
   var bar_data= [{
       x : 'Project 1',
       P : 100,
@@ -46,128 +47,87 @@ define(['fk/module', 'lodash', 'morris', 'notification'], function(module, _) {
     })  
   var day_data = [{
         "elapsed" : "I",
-        "value" : 34
+        "value" : 34,
+        "value1": 55
     }, {
         "elapsed" : "II",
-        "value" : 24
+        "value" : 24,
+        "value1": 45
     }, {
         "elapsed" : "III",
-        "value" : 3
+        "value" : 3,
+        "value1": 62
     }, {
         "elapsed" : "IV",
-        "value" : 12
+        "value" : 12,
+        "value1": 55
     }, {
         "elapsed" : "V",
-        "value" : 13
+        "value" : 13,
+        "value1": 55
     }, {
         "elapsed" : "VI",
-        "value" : 22
+        "value" : 22,
+        "value1": 34
     }, {
         "elapsed" : "VII",
-        "value" : 5
+        "value" : 5,
+        "value1": 43
     }, {
         "elapsed" : "VIII",
-        "value" : 26
+        "value" : 26,
+        "value1": 54
     }, {
         "elapsed" : "IX",
-        "value" : 12
+        "value" : 12,
+        "value1": 34
     }, {
         "elapsed" : "X",
-        "value" : 19
+        "value" : 19,
+        "value1": 56
     }, {
         "elapsed" : "II",
-        "value" : 24
+        "value" : 24,
+        "value1": 4
     }, {
         "elapsed" : "III",
-        "value" : 3
+        "value" : 3,
+        "value1": 86
     }, {
         "elapsed" : "IV",
-        "value" : 12
+        "value" : 12,
+        "value1": 67
     }, {
         "elapsed" : "V",
-        "value" : 13
+        "value" : 13,
+        "value1": 64
     }, {
         "elapsed" : "VI",
-        "value" : 22
+        "value" : 22,
+        "value1": 43
     }, {
         "elapsed" : "VII",
-        "value" : 5
+        "value" : 5,
+        "value1": 23
     }, {
         "elapsed" : "VIII",
-        "value" : 26
+        "value" : 26,
+        "value1": 76
     }, {
         "elapsed" : "IX",
-        "value" : 12
+        "value" : 12,
+        "value1": 45
     }, {
         "elapsed" : "X",
-        "value" : 19
+        "value" : 19,
+        "value1": 66
     }, {
         "elapsed" : "II",
-        "value" : 24
-    }, {
-        "elapsed" : "III",
-        "value" : 3
-    }, {
-        "elapsed" : "IV",
-        "value" : 12
-    }, {
-        "elapsed" : "V",
-        "value" : 13
-    }, {
-        "elapsed" : "VI",
-        "value" : 22
-    }, {
-        "elapsed" : "VII",
-        "value" : 5
-    }, {
-        "elapsed" : "VIII",
-        "value" : 26
-    }, {
-        "elapsed" : "IX",
-        "value" : 12
-    }, {
-        "elapsed" : "X",
-        "value" : 19
+        "value" : 24,
+        "value1": 30
     }];
+ 
 
-  module.registerDirective('morrisStackedLineHitGraph', function(){
-  return {
-	  restrict: 'E',
-	  replace: true,
-	  template: '<div class="chart no-padding"></div>',
-	  link: function(scope, element){
-		  Morris.Line({
-			  element : element,
-			  data : day_data,
-			  xkey : 'elapsed',
-			  ykeys : ['value'],
-			  labels : ['value'],
-			  lineColors : ['#15ab9f'],
-			  parseTime : false
-		  });
-
-	  }
-  }
-})
-  module.registerDirective('morrisStackedLineTransactionGraph', function(){
-  return {
-	  restrict: 'E',
-	  replace: true,
-	  template: '<div class="chart no-padding"></div>',
-	  link: function(scope, element){
-		  Morris.Line({
-			  element : element,
-			  data : day_data,
-			  xkey : 'elapsed',
-			  ykeys : ['value'],
-			  labels : ['value'],
-			  lineColors : ['#ff4f51'],
-			  parseTime : false
-		  });
-
-	  }
-  }
-})
   module.registerController('FKCtrl', ['$rootScope', '$scope', 'UserService', 'DataService', 'KeywordService','$state',
     function($rootScope, $scope, userService, dataService, keywordService, $state) {
 
