@@ -83,10 +83,10 @@ define(['keyword/module'], function(module) {
           }
         });
       },
-      getReport : function(projectId,callback) {
+      getReport : function(projectId,job_id,callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/project/keyword/'+projectId+'/report',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/'+ job_id +'/report',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -99,6 +99,7 @@ define(['keyword/module'], function(module) {
 
         });
       }
+
     }
   }]);
 });

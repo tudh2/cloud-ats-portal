@@ -30,7 +30,8 @@ define(['projects/module', 'lodash'], function (module, _) {
       }
     }
 
-    $scope.reports = function(projectId,projectType) {
+    $scope.reports = function(projectId,projectType,jobId) {
+  
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
@@ -40,17 +41,22 @@ define(['projects/module', 'lodash'], function (module, _) {
           $state.go('app.performance', {id: projectId});
           break;
         case 'keyword':
-          $state.go('app.keyword.report', { id : projectId });
+          $state.go('app.keyword.report', { id : projectId, jobId: jobId});
           break;
         default:
           break;
       }
     }
 
+    $scope.checkLastestRun = function(project) {
+      $scope.jobId = project.job_id;
+    }
+
     var loadPerformanceProjects = function() {
       PerformanceService.projects(function (response) {
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
+        console.log($scope.projects);
       });
     };
 
@@ -58,6 +64,7 @@ define(['projects/module', 'lodash'], function (module, _) {
       KeywordService.list(function (response) {
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
+        console.log($scope.projects);
       });
     };
 

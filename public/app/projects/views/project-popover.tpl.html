@@ -36,8 +36,8 @@
       <strong class='blur-name'>TEST CASES</strong><br>
       <span class='time'>{{cases}}</span>
     </div>
-    <div class='col-sm-6'>
-      <a href='' class='viewLog' ng-click='reports(projectId,projectType)'>Reports</a>
+    <div class='col-sm-6'> 
+      <a href='' class='viewLog' ng-if="jobId" ng-click='reports(projectId,projectType,jobId)'>Reports</a>
     </div>
   </div>
   <div class='col-sm-12 report run'>

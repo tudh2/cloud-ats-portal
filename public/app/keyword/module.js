@@ -103,7 +103,7 @@ define([
       }
     })
     .state('app.keyword.report', {
-        url: '/report',
+        url: '/:jobId/report',
         views: {
           "content@app": {
             templateUrl: 'app/keyword/views/report.tpl.html',
