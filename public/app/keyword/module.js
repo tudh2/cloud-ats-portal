@@ -1,12 +1,13 @@
 define([
   'angular',
   'angular-couch-potato',
-  'angular-ui-router'
+  'angular-ui-router',
+  'angular-dragdrop'
 ], function(ng, couchPotato) {
 
   'use strict';
 
-  var module = ng.module('app.keyword', ['ui.router']);
+  var module = ng.module('app.keyword', ['ui.router', 'ngDragDrop']);
 
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
