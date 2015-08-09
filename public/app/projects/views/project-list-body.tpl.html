@@ -36,7 +36,8 @@
             data-project-type="{{project.type}}"
             data-project-suites="{{project.totalSuites}}"
             data-project-cases="{{project.totalCases}}"
-            data-last-running="{{project.lastRunning === undefine ? 'N/A' : project.lastRunning}}">INFO</span>
+            data-last-running="{{project.lastRunning === undefine ? 'N/A' : project.lastRunning}}"
+            ng-click="checkLastestRun(project)">INFO</span>
           <span ng-if="project.type == 'performance'" class="project-info"
             data-smart-popover 
             data-toggle="popover" 

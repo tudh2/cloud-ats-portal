@@ -104,6 +104,25 @@ define([
         }
       }
     })
+    .state('app.keyword.report', {
+        url: '/:jobId/report',
+        views: {
+          "content@app": {
+            templateUrl: 'app/keyword/views/report.tpl.html',
+            controller: 'OverviewCtrl',
+            resolve: {
+              deps: $couchPotatoProvider.resolveDependencies([
+                'keyword/controllers/overview-controller',
+                'keyword/directives/tabs-header',
+                'services/keyword-service'
+              ])}
+          }
+        },
+        data: {
+          title: 'Keyword Report',
+          requireLogin: true
+        }
+      })
     .state('app.keyword.custom', {
       url: '/custom',
       views: {
