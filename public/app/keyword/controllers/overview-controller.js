@@ -32,6 +32,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.runLastSuites = function() {
 
         $scope.project.status = "RUNNING";
+        $scope.project.log = undefined;
+        $scope.project.watchUrl = undefined
 
         var selected = [];
         _.forEach($scope.project.lastSuites, function(sel) {
