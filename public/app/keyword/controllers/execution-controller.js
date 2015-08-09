@@ -6,6 +6,8 @@ define(['keyword/module'], function (module) {
     '$scope', '$state', '$stateParams', 'SuiteService', 'KeywordService',
     function($scope, $state, $stateParams, SuiteService, KeywordService) {
 
+    '$scope', '$stateParams', 'SuiteService', 'KeywordService',
+    function($scope, $stateParams, SuiteService, KeywordService) {
       $scope.projectId = $stateParams.id;
 
       $scope.title = 'EXECUTION';

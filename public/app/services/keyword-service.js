@@ -83,6 +83,7 @@ define(['keyword/module'], function(module) {
           }
         });
       },
+
       getReport : function(projectId,job_id,callback) {
         var request = {
           method: 'GET',

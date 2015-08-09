@@ -3,9 +3,13 @@ define(['projects/module', 'lodash'], function (module, _) {
   'use strict';
 
   module.registerController('ProjectsCtrl', [
+<<<<<<< HEAD
     '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 'ReportService', 
     function($scope, $state, $stateParams, KeywordService, PerformanceService, ReportService) {
       
+    '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 
+    function($scope, $state, $stateParams, KeywordService, PerformanceService) {
+    
     $scope.projects = [
       
     ];
@@ -30,15 +34,26 @@ define(['projects/module', 'lodash'], function (module, _) {
       }
     }
 
-    $scope.openReport = function (projectId) {
+    $scope.checkLastestRun = function(project) {
+      $scope.jobId = project.job_id;
+    }
+
+    $scope.reports = function(projectId,projectType,jobId) {
+  
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
-      ReportService.getLastestRunning(projectId, function (data, status) {
-
-        $scope.reports = data.total;
-        $state.go('app.performance.report', {id : projectId, jobId : data.jobId});
-      });
+      console.log($scope);
+      switch (projectType) {
+        case 'performance':
+          $state.go('app.performance', {id: projectId});
+          break;
+        case 'keyword':
+          $state.go('app.keyword.report', { id : projectId, jobId: jobId});
+          break;
+        default:
+          break;
+      }
     }
 
     $scope.reports = function(projectId,projectType,jobId) {
