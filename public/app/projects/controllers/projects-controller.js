@@ -3,12 +3,9 @@ define(['projects/module', 'lodash'], function (module, _) {
   'use strict';
 
   module.registerController('ProjectsCtrl', [
-<<<<<<< HEAD
+
     '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 'ReportService', 
     function($scope, $state, $stateParams, KeywordService, PerformanceService, ReportService) {
-      
-    '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 
-    function($scope, $state, $stateParams, KeywordService, PerformanceService) {
     
     $scope.projects = [
       
@@ -28,28 +25,6 @@ define(['projects/module', 'lodash'], function (module, _) {
           break;
         case 'functional':
           $state.go('app.functional', { id : projectId });
-          break;
-        default:
-          break;
-      }
-    }
-
-    $scope.checkLastestRun = function(project) {
-      $scope.jobId = project.job_id;
-    }
-
-    $scope.reports = function(projectId,projectType,jobId) {
-  
-      $('[data-toggle="popover"]').each(function () {
-        $(this).popover('hide');
-      });
-      console.log($scope);
-      switch (projectType) {
-        case 'performance':
-          $state.go('app.performance', {id: projectId});
-          break;
-        case 'keyword':
-          $state.go('app.keyword.report', { id : projectId, jobId: jobId});
           break;
         default:
           break;
@@ -82,7 +57,6 @@ define(['projects/module', 'lodash'], function (module, _) {
       PerformanceService.projects(function (response) {
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
-        console.log($scope.projects);
       });
     };
 
@@ -90,7 +64,6 @@ define(['projects/module', 'lodash'], function (module, _) {
       KeywordService.list(function (response) {
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
-        console.log($scope.projects);
       });
     };
 

@@ -1,7 +1,5 @@
 define(['keyword/module', 'lodash'], function (module, _) {
   'use strict';
-
-
   module.registerController('OverviewCtrl', 
     ['$scope', '$rootScope', '$state', '$stateParams', '$templateRequest', '$compile', '$cookies', 'KeywordService', 'EventService',
     function($scope, $rootScope, $state, $stateParams, $templateRequest, $compile, $cookies, KeywordService, EventService) {
@@ -9,6 +7,10 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.projectId = $stateParams.id;
 
       $scope.title = 'OVERVIEWS';
+      
+      $scope.suiteReports = [];
+
+      $scope.dataReports = [];
 
       KeywordService.get($scope.projectId, function(response) {
         $scope.project = response;
