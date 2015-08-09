@@ -1051,17 +1051,25 @@ a:hover.viewLog, a:focus.viewLog {
 	background-color: white;
 	height: 100%;
     position:fixed;
-    margin-top: -20px;
+    top:0px;
     min-width:280px;
-    padding:20px 13px;
+    padding-top:140px;
+    padding-bottom:90px;
 }
 #testcase-container
 {
     margin-left:280px;
 }
+.list-test-suite .search-container
+{
+    padding-left:13px;
+    padding-right:13px;
+}
 .create-new-suite
 {
     margin-top:15px;
+    padding-left:13px;
+    padding-right:13px;
 }
 .create-new-suite .btn-create-new
 {
@@ -1098,6 +1106,12 @@ a:hover.viewLog, a:focus.viewLog {
 .test-suite-items
 {
     margin-top:10px;
+    width:100%;
+    height:100%;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding-left:13px;
+    padding-right:13px;
 }
 .fa-plus-circle:before {
 	content: "\f055";
@@ -1238,6 +1252,44 @@ a:hover.viewLog, a:focus.viewLog {
 .report-page {
 
 }
+/* ==== Test Suite ===*/
+/* ==== End =====*/
+
+
+/* ==== Execution ===*/
+/* ==== Start =====*/
+
+.execution
+{
+    background-color:white;
+    height:100%;
+    position:fixed;
+    top:0;
+    padding-top:120px;
+    width:80vw;
+}
+.test-suite-pool, .browser-pool, .os-pool
+{
+    border-right:1px solid #EBF3F5;
+    overflow-x:hidden;
+    overflow-y:auto; 
+    height:100%;
+    
+}
+.test-suite-pool >p, .browser-pool >p, .os-pool >p
+{
+    margin-top:20px;
+}
+.execution-area
+{
+    background-color:#f7f7f7;
+    height:100vh;
+    padding-top: 30vh;
+    text-align: center;
+}
+
+/* ==== Execution ===*/
+/* ==== End =====*/
 /*
 header .tenant {
 	margin-top: 16px;
