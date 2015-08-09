@@ -43,8 +43,14 @@
       </div>
       <div class="col-md-6">
         <div class="execute-action-list">
-        <a class="btn btn-border-line btnViewLog">View Log</a>
-        <a class="btn btn-border-line btnRun">Run</a>
+        <a ng-if="project.log" ng-click="viewLog()"
+          class="btn btn-border-line btnViewLog">View Log</a>
+        <a ng-if="project.watchUrl" 
+          class="btn btn-border-line btnViewLog" target="blank" href="{{project.watchUrl}}">
+          Watch
+        </a>
+        <a ng-if="project.lastSuites && project.status === 'READY'" ng-click="runLastSuites()" class="btn btn-border-line btnRun">Run</a>
+        <a ng-if="project.status === 'RUNNING'" class="btn btn-border-line btnViewLog">Stop</a>
         </div>
       </div>
     </div>
@@ -67,16 +73,6 @@
         </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="report in project.reports">
-            <td>6</td>
-            <td class="test-report"><a ng-click="redirectTo()">Test Execute Report</a></td>
-            <td>145</td>
-            <td>145</td>
-            <td>0</td>
-            <td><span class="label label-success">Pass</span></td>
-            <td>01/05/2015 22:30</td>
-            <td>Cloud-ATS</td>
-          </tr>
           <tr>
             <td>6</td>
             <td class="test-report"><a ng-click="redirectTo()">Test Execute Report</a></td>
@@ -92,6 +88,9 @@
       </div>
     </div>
     <!-- End Report -->
+
+    <div class="modal fade" id="project-log">
+    </div>
 
   </div>
 </div>
