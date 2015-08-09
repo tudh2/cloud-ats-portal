@@ -497,7 +497,6 @@ textarea.area-script-name {
 	border: 1px solid white;
 	margin-bottom: 10px;
 	padding: 5px;
-	cursor: pointer;
 }
 .sampler_name_chosen {
 	background-color: white;
@@ -2569,5 +2568,38 @@ textarea.upload_name {
 .label-report {
 	color: #01B49F;
 	cursor: pointer;
+}
+.label-performance {
+	display: inline-block;
+}
+.label-container {
+	text-align: center;
+	margin-bottom: 10px;
+}
+.click-sampler {
+	cursor: pointer;
+}
+.hit-per-second {
+}
+.hit-label-title {
+	text-align: center;
+}
+.tran-label-title {
+	text-align: center;
+}
+.t-hits-label {
+	width: 20px;
+	height: 10px;
+	display: inline-block;
+	margin: 0 10px;
+	background-color: #15ac9f;
+}
+
+.t-trans-label {
+	width: 20px;
+	height: 10px;
+	display: inline-block;
+	margin: 0 10px;
+	background-color: #9855d4;
 }
 /*end script-list*/

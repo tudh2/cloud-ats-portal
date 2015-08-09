@@ -4,7 +4,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
   module.registerController('CreateScriptCtrl', ['$scope', '$stateParams', '$templateRequest', '$compile', 'PerformanceService', 'ScriptService', function($scope, $stateParams, $templateRequest, $compile, PerformanceService, ScriptService) {
 
-    
     $scope.script = {
       ram_up: 5,
       number_threads: 1,
@@ -39,7 +38,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       var $modal = $('#createScript');
       var $script_name = $('.script-name').find('.text-area-script');
       if (!$scope.script.name) {
-        console.log($script_name);
         $script_name.parent().addClass('has-error');
         return;
       }
@@ -186,6 +184,9 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
           "paramValue": ""
         }]
       };
+
+      var $saveButton = $('.btn-uploadFile');
+      $saveButton.show();
     }
 
     $scope.resetSamplerForm = function () {
@@ -269,7 +270,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
       ScriptService.get(id, function (data, status) {
         $scope.script = data;
-        console.log($scope.script);
       });
     }
 

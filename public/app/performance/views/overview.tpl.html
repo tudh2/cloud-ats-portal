@@ -63,7 +63,7 @@
         <tbody>
           <tr ng-repeat="i in project.jobs track by $index">
             <td>{{$index+1}}</td>
-            <td class="project-name" ng-click="openJobReport(i._id, i.scripts[0]._id)">{{i._id}}</td>
+            <td class="label-report" ng-click="openJobReport(i._id)">{{i._id}}</td>
             <td>{{i.scripts.length}}</td>
             <td><span class="buttonStatus">{{i.status}}</span></td>
             <td>{{i.created_date}}</td>

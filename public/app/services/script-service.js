@@ -42,7 +42,6 @@ define(['performance/module'], function (module) {
         }).error(function() {});
       },
       createScript: function (script, projectId, callback) {
-        console.log(script);
         var request = {
           method: 'POST',
           url: appConfig.RestEntry + '/api/v1/project/performance/'+ projectId + '/script',

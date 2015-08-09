@@ -22,7 +22,8 @@ define([
                 'projects/controllers/new-project-controller',
                 'projects/directives/smart-popover',
                 'services/keyword-service',
-                'services/performance-service'
+                'services/performance-service',
+                'services/report-service'
               ])
             }
           }
