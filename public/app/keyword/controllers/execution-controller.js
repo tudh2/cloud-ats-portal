@@ -5,7 +5,6 @@ define(['keyword/module'], function (module) {
   module.registerController('ExecutionCtrl', [
     '$scope', '$stateParams', 'SuiteService', 'KeywordService',
     function($scope, $stateParams, SuiteService, KeywordService) {
-
       $scope.projectId = $stateParams.id;
 
       $scope.title = 'EXECUTION';

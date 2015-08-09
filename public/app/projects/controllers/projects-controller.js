@@ -5,7 +5,7 @@ define(['projects/module', 'lodash'], function (module, _) {
   module.registerController('ProjectsCtrl', [
     '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 
     function($scope, $state, $stateParams, KeywordService, PerformanceService) {
-      
+    
     $scope.projects = [
       
     ];
@@ -14,6 +14,7 @@ define(['projects/module', 'lodash'], function (module, _) {
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
+
       switch (projectType) {
         case 'performance':
           $state.go('app.performance', {id: projectId});
@@ -23,6 +24,23 @@ define(['projects/module', 'lodash'], function (module, _) {
           break;
         case 'functional':
           $state.go('app.functional', { id : projectId });
+          break;
+        default:
+          break;
+      }
+    }
+
+    $scope.reports = function(projectId,projectType) {
+      $('[data-toggle="popover"]').each(function () {
+        $(this).popover('hide');
+      });
+      console.log($scope);
+      switch (projectType) {
+        case 'performance':
+          $state.go('app.performance', {id: projectId});
+          break;
+        case 'keyword':
+          $state.go('app.keyword.report', { id : projectId });
           break;
         default:
           break;
