@@ -17,10 +17,10 @@ define(['performance/module'], function(module) {
           callback(data, status);
         });
       },
-      report: function (projectId, jobId, scriptId, callback) {
+      report: function (projectId, jobId, callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/project/performance/report/'+projectId+'/'+jobId+'/'+scriptId,
+          url: appConfig.RestEntry + '/api/v1/project/performance/report/'+projectId+'/'+jobId,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -32,7 +32,22 @@ define(['performance/module'], function(module) {
         }).error(function(data, status) {
 
         });
+      },
+      getLastestRunning: function (projectId, callback) {
+        var request = {
+          method: 'GET',
+          url: 'http://localhost:9000/api/v1/performance/report/lastjob/'+projectId,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data, status);
+        });
       }
+
     }
   }]);
 })

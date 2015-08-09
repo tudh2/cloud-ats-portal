@@ -10,14 +10,15 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       PerformanceService.get($scope.projectId, function(response) {
         $scope.project = response;
 
-        var jobs = JSON.parse(response.jobs);
-        $scope.project.jobs = jobs;
-        console.log($scope.project);
+        if (response.jobs != null) {
+          var jobs = JSON.parse(response.jobs);
+          $scope.project.jobs = jobs;
+        }
       });
-      $scope.openJobReport = function (jobId, scriptId) {
 
-        var obj = {projectId: $scope.projectId, jobId: jobId, scriptId: scriptId };
-        $state.go('app.report.performance', obj);
+      $scope.openJobReport = function (jobId) {
+        $state.go('app.performance.report', {jobId : jobId});
       }
+      
   	}]);
 });

@@ -91,8 +91,8 @@ define([
           requireLogin: true
         }
       })
-      .state('app.report.performance', {
-        url: '/performance/:projectId/:jobId/:scriptId',
+      .state('app.performance.report', {
+        url: '/job/:jobId',
         views: {
           "content@app": {
             controller: 'PerformanceReportCtrl',
@@ -100,6 +100,7 @@ define([
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
                 'performance/controllers/performance-report-controller',
+                'performance/directives/performance-report',
                 'services/performance-service',
                 'services/script-service',
                 'services/report-service'
@@ -111,11 +112,8 @@ define([
           requireLogin: true
         }
       })
-      .state('app.report.performance.sampler', {
+      .state('app.performance.report.sampler', {
         url: '/sampler/:reportId',
-        params: {
-        	index: '1'
-        },
         views: {
           "content@app": {
             controller: 'PerformanceReportDetailCtrl',
@@ -123,7 +121,8 @@ define([
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
                 'performance/controllers/performance-report-detail-controller',
-                'services/report-service'
+                'services/report-service',
+                'performance/directives/performance-report'
         	])}
           }
         },

@@ -3,8 +3,8 @@ define(['projects/module', 'lodash'], function (module, _) {
   'use strict';
 
   module.registerController('ProjectsCtrl', [
-    '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 
-    function($scope, $state, $stateParams, KeywordService, PerformanceService) {
+    '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 'ReportService', 
+    function($scope, $state, $stateParams, KeywordService, PerformanceService, ReportService) {
       
     $scope.projects = [
       
@@ -27,6 +27,17 @@ define(['projects/module', 'lodash'], function (module, _) {
         default:
           break;
       }
+    }
+
+    $scope.openReport = function (projectId) {
+      $('[data-toggle="popover"]').each(function () {
+        $(this).popover('hide');
+      });
+      ReportService.getLastestRunning(projectId, function (data, status) {
+
+        $scope.reports = data.total;
+        $state.go('app.performance.report', {id : projectId, jobId : data.jobId});
+      });
     }
 
     var loadPerformanceProjects = function() {

@@ -63,23 +63,23 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-4" ng-repeat="i in script.samplers track by $index" ng-click="chooseSampler(i, $index)">
-							<div ng-class="{'sampler_name_selected' : selected.index === $index,
-												'sampler_name' : selected.index != $index }">
-								<div class="row">
-									<div class="col-sm-6 number">
-										<span class ="project-name">#{{$index +1}}</span>
+							<div class="col-sm-4" ng-repeat="i in script.samplers track by $index">
+								<div ng-class="{'sampler_name_selected' : selected.index == $index,
+													'sampler_name' : selected.index != $index }">
+									<div class="row">
+										<div class="col-sm-6 number">
+											<span class ="project-name">#{{$index +1}}</span>
+										</div>
+										<div class="col-sm-6 remove-icon" ng-if="selected.index == $index">
+											<span class="pull-right icon">
+												<i class="fa icon-delete fa-minus-circle" ng-click="deleteSampler($index)"></i>
+											</span>
+										</div>
 									</div>
-									<div class="col-sm-6 remove-icon" ng-if="selected.index == $index">
-										<span class="pull-right icon">
-											<i class="fa icon-delete fa-minus-circle" ng-click="deleteSampler($index)"></i>
-										</span>
+									<div class="row click-sampler" ng-click="chooseSampler(i, $index)">
+										<span class="sampler-name"><small>{{i.name}}</small></span>
 									</div>
 								</div>
-								<div class="row">
-									<span class="sampler-name"><small>{{i.name}}</small></span>
-								</div>
-							</div>
 							</div>
 						</div>
 					</div>
