@@ -113,7 +113,10 @@ define([
         }
       })
       .state('app.performance.report.sampler', {
-        url: '/sampler/:reportId',
+        url: '/sampler/:reportId/:index',
+        params: {
+        	index: '0'
+        },
         views: {
           "content@app": {
             controller: 'PerformanceReportDetailCtrl',

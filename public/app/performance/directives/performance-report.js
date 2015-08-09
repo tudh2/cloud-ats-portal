@@ -12,7 +12,7 @@ define(['performance/module'], function (module) {
 			link: function($scope, element, attributes) {
 
 				$scope.openReportEachSampler = function (report, indexNumber) {
-		      $state.go('app.performance.report.sampler', {reportId : report._id});
+		      $state.go('app.performance.report.sampler', {reportId : report._id, index: indexNumber});
 		    }
 
 				var tmpArrayReports= [];    

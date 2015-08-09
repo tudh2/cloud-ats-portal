@@ -5,6 +5,7 @@ define(['performance/module', 'morris'], function (module) {
 	module.registerController('PerformanceReportDetailCtrl',['$scope', '$state', '$stateParams', 'ReportService', function ($scope, $state, $stateParams, ReportService) {
 
 		var reportId = $stateParams.reportId;
+    var index = $stateParams.index;
 		ReportService.get(reportId, function (report, status) {
 
       report.summary.throughtput = _.round(report.summary.throughtput, 2);
@@ -23,6 +24,7 @@ define(['performance/module', 'morris'], function (module) {
         i ++;
       });
 
+      var colorsSample = ["#008571","#ffce32","#af6ee8","#7cc7ff","#15ac9f","#ffaa2a","#3a5ea4","#2dacd1","#3bc1ac","#fd6d42","#4178be","#a4aeb6","#b4e051","#db2780","#5596e6","#8996a0","#9cbe3e","#9855d4","#5aaafa","#3a4a58"];
       var $hits_per_second = $('.sampler-report-hits');
       Morris.Line({
         element : $hits_per_second,
@@ -30,7 +32,7 @@ define(['performance/module', 'morris'], function (module) {
         xkey : 'timestamp',
         ykeys : ['value'],
         labels : ['value'],
-        lineColors: ['#15ac9f'],
+        lineColors: [colorsSample[index]],
         parseTime : false,
         lineWidth: 2,
         pointSize: 3
@@ -54,14 +56,12 @@ define(['performance/module', 'morris'], function (module) {
         xkey : 'timestamp',
         ykeys : ['value'],
         labels : ['value'],
-        lineColors: ['#9855d4'],
+        lineColors: [colorsSample[index]],
         parseTime : false,
         lineWidth: 2,
         pointSize: 3
       });
 
-      console.log(tmpHitsArray);
-      console.log(tmpTransArray);
 		});
 
     $scope.backToOverviewReport = function () {
