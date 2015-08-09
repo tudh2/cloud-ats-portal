@@ -1,18 +1,15 @@
 <div class="testcase-tab">
   <div class="border-div">
     <div class="row actionMenu">
-      
       <div class="col-md-3">
-        <form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="">
-          <input id="search-fld" type="text" name="param" placeholder="Search Keyword" class="ui-autocomplete-input" autocomplete="off">
-          <button type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </form>
+          <section class="smart-form">
+            <label class="input"> <i class="icon-append fa fa-search"></i>
+              <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" autocomplete="off">                           </label>
+	        </section>
       </div>
-      <span class="col-md-2 count-testcase"><label>{{customs.length}} Keyword{{customs.length > 2 ? 's' : ''}}</label></span>
+      <span class="col-md-3 count-testcase"><label>{{customs.length}} Keyword{{customs.length > 2 ? 's' : ''}}</label></span>
 
-      <span class="col-md-4 pull-right btn-action-list">
+      <span class="col-md-6 pull-right btn-action-list">
         <a class="btn btn-default" ng-click="backToCaseList()">Back To Test Case List</a>
         
         <a class="btn btn-primary"
@@ -28,7 +25,7 @@
   <div class="list-testcase">
 
     <!-- Test case list -->
-    <div class="col-md-3"data-target="#editKeyword" data-toggle="modal"
+    <div class="col-md-3 col-sm-4 col-xs-6"data-target="#editKeyword" data-toggle="modal"
       ng-repeat="keyword in customs track by $index"  
       ng-click="clicktoCustom(keyword)">
 
