@@ -486,6 +486,15 @@ header .nav-tabs>li.active > a, header .nav-tabs>li.active>a:focus, header .nav-
 {
     top:7px;
 }
+
+.text-teal-color 
+{
+    color:#00b4a0;
+}
+.text-amber-color 
+{
+    color:#ff7832;
+}
 .actionMenu .smart-form .checkbox.teal-color i
 {
     background-color:#00b4a0;
@@ -824,7 +833,7 @@ a:hover.viewLog, a:focus.viewLog {
 	padding-top: 10px;
 }
 
-.tc-new-tabs .modal-header {
+.tc-new-tabs .modal-header,.ts-newScript .modal-header {
 	padding: 0px 15px 13px 15px;
 }
 .modal-dialog .header-navtabs {
@@ -1268,7 +1277,7 @@ a:hover.viewLog, a:focus.viewLog {
     padding-top:120px;
     width:80vw;
 }
-.test-suite-pool, .browser-pool, .os-pool
+.test-suite-pool, .browser-pool, .os-pool, .test-script-pool
 {
     border-right:1px solid #EBF3F5;
     overflow-x:hidden;
@@ -1276,7 +1285,7 @@ a:hover.viewLog, a:focus.viewLog {
     height:100%;
     
 }
-.test-suite-pool >p, .browser-pool >p, .os-pool >p
+.test-suite-pool >p, .browser-pool >p, .os-pool >p,.test-script-pool >p
 {
     margin-top:20px;
 }
@@ -1290,6 +1299,44 @@ a:hover.viewLog, a:focus.viewLog {
 
 /* ==== Execution ===*/
 /* ==== End =====*/
+.ts-newScript
+{
+    min-width: 750px;
+}
+.sampler-space
+{
+    background-color:#e0e6e7;
+    display:table;
+    width:100%;
+}
+.sampler-form
+{
+    background-color:white;
+    min-height: 400px;
+}
+.sampler-list
+{
+    padding-top:10px;
+    /*base on margin collumn of bootstrap*/
+	height: 400px;
+	overflow: auto;
+}
+.sampler-form .form-title {
+    margin-top:10px;
+	margin-bottom: 20px;
+}
+.sampler-form .form-title h4,.configuration-form .form-title h4  {
+	display: inline-block;
+}
+.configuration-form .form-title {
+	border-bottom: 1px solid #adc0c6;
+	margin-bottom: 20px;
+}
+/*overwrite*/
+.slider-success+.slider-track>.slider-selection 
+{
+    background-color:#01B49F;
+}
 /*
 header .tenant {
 	margin-top: 16px;
