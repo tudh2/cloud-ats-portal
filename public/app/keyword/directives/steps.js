@@ -21,7 +21,11 @@ define(['keyword/module', 'lodash'], function(module, _) {
         }
 
         $scope.removeAction = function(index) {
+          $scope.update = true;
           $scope.list.splice(index, 1);
+          $timeout(function() {
+            $scope.update = false;
+          }, 1000);
         }
 
         $scope.moveUpAction = function(keyword) {

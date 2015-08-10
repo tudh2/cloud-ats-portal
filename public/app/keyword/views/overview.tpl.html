@@ -75,15 +75,16 @@
         </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>6</td>
-            <td class="test-report"><a ng-click="redirectTo()">Test Execute Report</a></td>
-            <td>145</td>
-            <td>145</td>
-            <td>0</td>
-             <td><span class="label label-error">Fail</span></td>
-            <td>01/05/2015 22:30</td>
-            <td>Cloud-ATS</td>
+          <tr ng-repeat="rep in listReports track by $index">
+            <td>{{$index+1}}</td>
+            <td class="test-report"><a ng-click="redirectTo(project._id,rep.job_id)">Test Execute Report_{{rep.report_id.substring(0,8)}}</a></td>
+            <td>{{rep.total_test_case}}</td>
+            <td>{{rep.total_pass}}</td>
+            <td>{{rep.total_fail}}</td>
+            <td><span ng-class="{'label label-error': rep.test_result === 'Fail',
+            'label label-success': rep.test_result === 'Pass'}">{{rep.test_result}}</span></td>
+            <td>{{rep.running_time}}</td>
+            <td>{{rep.create_by}}</td>
           </tr>
         </tbody>
       </table>

@@ -109,10 +109,10 @@ define([
         views: {
           "content@app": {
             templateUrl: 'app/keyword/views/report.tpl.html',
-            controller: 'OverviewCtrl',
+            controller: 'KeywordReportCtrl',
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
-                'keyword/controllers/overview-controller',
+                'keyword/controllers/keyword-report-controller',
                 'keyword/directives/tabs-header',
                 'services/keyword-service'
               ])}
