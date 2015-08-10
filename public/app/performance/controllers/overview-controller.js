@@ -2,8 +2,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
   'use strict';
 
   module.registerController('OverviewPerformanceCtrl', 
-    ['$scope', '$stateParams', '$state', 'PerformanceService', 
-    function($scope, $stateParams, $state, PerformanceService) {
+    ['$scope', '$stateParams', '$state', '$templateRequest', '$compile', 'PerformanceService', 
+    function($scope, $stateParams, $state, $templateRequest, $compile, PerformanceService) {
 
     	$scope.projectId = $stateParams.id;
       $scope.title = 'OVERVIEWS'
@@ -20,5 +20,21 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         $state.go('app.performance.report', {jobId : jobId});
       }
       
+      var loadModal = function() {
+        var $modal = $('#project-log');
+
+        //clear modal content
+        $modal.html('');
+
+        $templateRequest('app/performance/views/overview-modal-content.tpl.html').then(function(template) {
+          $modal.html($compile(template)($scope));
+          $modal.modal('show');
+        });
+      };
+
+      $scope.viewLog = function() {
+        loadModal();
+      }
+
   	}]);
 });
