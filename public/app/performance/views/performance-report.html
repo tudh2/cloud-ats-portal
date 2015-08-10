@@ -1,38 +1,43 @@
-<div class="report-page">
-	<div class="col-sm-12 clearfix t-control-bar">
-		<div class="col-sm-5 ">
-      <section class="col-sm-6 smart-form t-reset-padding">
-        <label class="input"> 
-        	<i class="icon-append fa fa-search"></i>
-            <input type="text" name="Search" ng-model="Search" placeholder="Search Script" id="Search" minlength="3">
-        </label>
-      </section>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <select class="form-control">
-            <option selected="">Filter by</option>
-          </select>
+<div id="content">
+  <div class="row">
+    <div class="report-page">
+      <div class="col-sm-12 clearfix t-control-bar">
+        <div class="col-sm-5 ">
+          <section class="col-sm-6 smart-form t-reset-padding">
+            <label class="input"> 
+              <i class="icon-append fa fa-search"></i>
+                <input type="text" name="Search" ng-model="Search" placeholder="Search Script" id="Search" minlength="3">
+            </label>
+          </section>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <select class="form-control">
+                <option selected="">Filter by</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7 ">
+          <p class="functional-title col-sm-6 t-export-bar">
+            Export to:
+            <i class="fa fa-file-word-o"></i>
+            <span>word</span>
+            <i class="fa fa-file-excel-o"></i>
+            <span>Excel</span>
+            <i class="fa fa-file-pdf-o"></i>
+            <span>pdf</span>
+          </p>
+          
+          <button type="submit" class="btn new-project pull-right" ng-click="backToOverviewPage();" style="color: white;">Back to project detail</button>
         </div>
       </div>
-		</div>
-		<div class="col-sm-7 ">
-			<p class="functional-title col-sm-6 t-export-bar">
-				Export to:
-				<i class="fa fa-file-word-o"></i>
-				<span>word</span>
-				<i class="fa fa-file-excel-o"></i>
-				<span>Excel</span>
-				<i class="fa fa-file-pdf-o"></i>
-				<span>pdf</span>
-			</p>
-			
-			<button type="submit" class="btn new-project pull-right" ng-click="backToOverviewPage();" style="color: white;">Back to project detail</button>
-		</div>
-	</div>
 
-	<div class="col-sm-12 clearfix" id="all-chart" ng-repeat="report in reports">
-		<performance-report data-reports="report"></performance-report>
-	</div>
+      <div class="col-sm-12 clearfix" id="all-chart" ng-repeat="report in reports">
+        <performance-report data-reports="report"></performance-report>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 

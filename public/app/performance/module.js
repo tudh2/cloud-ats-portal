@@ -75,65 +75,49 @@ define([
 				requireLogin: true
 			}
 		})
-		.state('app.report', {
-        url: '/report',
-        views: {
-          "content@app": {
-            templateUrl: 'app/fk/views/report.html',
-			resolve: {
-              deps: $couchPotatoProvider.resolveDependencies([
-                'fk/controllers/fk-controller'
-				])}
-          }
-        },
-        data: {
-          title: 'Keyworks Framework',
-          requireLogin: true
+    .state('app.performance.report', {
+      url: '/job/:jobId',
+      views: {
+        "content@app": {
+          controller: 'PerformanceReportCtrl',
+          templateUrl: 'app/performance/views/performance-report.html',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'performance/controllers/performance-report-controller',
+              'performance/directives/performance-report',
+              'services/performance-service',
+              'services/script-service',
+              'services/report-service'
+      	])}
         }
-      })
-      .state('app.performance.report', {
-        url: '/job/:jobId',
-        views: {
-          "content@app": {
-            controller: 'PerformanceReportCtrl',
-            templateUrl: 'app/performance/views/performance-report.html',
-            resolve: {
-              deps: $couchPotatoProvider.resolveDependencies([
-                'performance/controllers/performance-report-controller',
-                'performance/directives/performance-report',
-                'services/performance-service',
-                'services/script-service',
-                'services/report-service'
-        	])}
-          }
-        },
-        data: {
-          title: 'Keyworks Framework',
-          requireLogin: true
+      },
+      data: {
+        title: 'Keyworks Framework',
+        requireLogin: true
+      }
+    })
+    .state('app.performance.report.sampler', {
+      url: '/sampler/:reportId/:index',
+      params: {
+      	index: '0'
+      },
+      views: {
+        "content@app": {
+          controller: 'PerformanceReportDetailCtrl',
+          templateUrl: 'app/performance/views/performance-sampler-report.html',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'performance/controllers/performance-report-detail-controller',
+              'services/report-service',
+              'performance/directives/performance-report'
+      	])}
         }
-      })
-      .state('app.performance.report.sampler', {
-        url: '/sampler/:reportId/:index',
-        params: {
-        	index: '0'
-        },
-        views: {
-          "content@app": {
-            controller: 'PerformanceReportDetailCtrl',
-            templateUrl: 'app/performance/views/performance-sampler-report.html',
-            resolve: {
-              deps: $couchPotatoProvider.resolveDependencies([
-                'performance/controllers/performance-report-detail-controller',
-                'services/report-service',
-                'performance/directives/performance-report'
-        	])}
-          }
-        },
-        data: {
-          title: 'Keyworks Framework',
-          requireLogin: true
-        }
-      });
+      },
+      data: {
+        title: 'Keyworks Framework',
+        requireLogin: true
+      }
+    });
 	});
 	couchPotato.configureApp(module);
 
