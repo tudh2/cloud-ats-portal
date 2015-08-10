@@ -39,6 +39,7 @@ define(['projects/module', 'lodash'], function (module, _) {
         $scope.reports = data.total;
         $state.go('app.performance.report', {id : projectId, jobId : data.jobId});
       });
+    }
 
     $scope.reports = function(projectId,projectType,jobId) {
   
