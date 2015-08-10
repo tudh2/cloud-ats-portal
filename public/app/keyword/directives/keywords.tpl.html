@@ -40,18 +40,18 @@
 
     <div class="add-keyword">
     <form>
-      <a class="btn btn-border-line btn-keyword pull-right"
+      <a class="btn btn-border-line btn-keyword "
         ng-show="(!case.customMode && !case.customAdded) && case.steps.length > 0 "
         ng-click="case.customMode = true;">Add to Keyword
       </a>
 
-      <div ng-show="case.customMode" class="pull-right">
-        <label style="padding-top:5px">Keyword Name</label>
-        <div class="editable-input" style="position: relative;">
-          <input name="customKeywordName" type="text" class="form-control input-sm" style="padding-right: 24px;" placeholder="Custom Keyword Name"
+      <div ng-show="case.customMode" class="add-keyword-form">
+        <label >Keyword Name </label>
+        <div class="editable-input" >
+          <input name="customKeywordName" type="text" class="form-control input-sm" placeholder="Custom Keyword Name"
             ng-model="customKeywordName" >
         </div>
-        <div class="editable-buttons" style="padding-top:5px">
+        <div class="editable-buttons" >
           <a class="btn btn-primary btn-xs" ng-click="$parent.addCustomKeyword(customKeywordName, case)">
             <i class="fa fa-check"></i>
           </a>
@@ -61,22 +61,22 @@
         </div>
       </div>
 
-      <span class="style-status-keyword pull-right" ng-show="case.customAdded">
-        <i class="fa fa-check"></i><label style="padding-top:5px;padding-left:5px">Added</label>
+      <span class="style-status-keyword" ng-show="case.customAdded">
+        <i class="fa fa-check"></i><label>Added</label>
       </span>
     </form>
     </div>
 
   </div>
   
-  <div class="col-md-4 keyword-list-container" style="height: 400px; overflow: auto;">
+  <div class="col-md-4 keyword-list-container" >
 
      <div class="panel-group smart-accordion-default keyword-list animated fadeInDown" id="keyword-list" >
 
       <div class="filter-keyword-div">
-        <span style="top:5px;color:#00B39E;" data-js-prompt="&amp;#xe02d;" data-icon="" aria-hidden="true" class="col-md-1 glyph-item mega"></span>
-        <label class="col-md-4" style="top:5px">Test Keyword</label>
-        <span class="col-md-7"><input class="form-control filter-keyword"  type="text" placeholder="Filter"></span>
+        <div class="col-md-4"><i class="fa fa-puzzle-piece"></i>
+        <label>Keyword</label></div>
+        <div class="col-md-8"><input class="form-control filter-keyword"  type="text" placeholder="Filter"></div>
       </div>
 
       <!-- Custom keyword -->
@@ -96,7 +96,7 @@
           <div class="panel-body">
         
             <ul class="list-unstyled">
-              <li class="li-keyword" style="border-bottom: 1px solid #e5e5e5; min-height: 25px;"
+              <li class="li-keyword" 
                 ng-repeat="custom in customs"
                 data-drag="true"
                 data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
@@ -148,7 +148,6 @@
               </li> -->
             
               <li ng-repeat="keyword in keywords | filter:query[cat]" 
-                style="border-bottom: 1px solid #e5e5e5; min-height: 25px;"
                 data-drag="true"
                 class="li-keyword"
                 data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"

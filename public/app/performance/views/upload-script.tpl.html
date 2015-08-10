@@ -1,38 +1,48 @@
 <div class="modal fade" id="uploadScript" role="dialog" ng-controller="UploadScriptCtrl">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="header-customize">
-				<span class="icon-equalizer upload-icon" aria-hidden="true"></span>
-					<h4  class="title-sampler">Upload Script</h4>
-			</div>
+             <div class="modal-header">
+                   <header class="header-navtabs">
+                <div class="header-title">
+                    <span class="fa-cloud-upload fa" aria-hidden="true"></span>
+                        Upload Script
+                </div>
+                   </header>
+            </div>
 			<div class="modal-body upload-script-body">
-				<div class="row">
-					<div class="col-sm-4">
-						<span >Upload script</span>
-					</div>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<input type="text" class="form-control"  name="listFile" disabled="">
-              <span class="input-group-btn">
-                  <span class="btn btn-browse btn-file">
-                      Browse… <input type="file" multiple="" onchange="angular.element(this).scope().uploadFile(this)">
-                  </span>
-              </span>
-          	</div>
-        	</div>
-				</div>
-				<div class="row script-name-upload">
-					<div class="col-sm-4">
-						<span >Test Script Name</span>
-					</div>
-					<div class="col-sm-8 form-group">
-						<textarea rows="4" class="form-control upload_name"></textarea>
-					</div>
-				</div>
+                
+                <div class="basic-infot row">
+                    <div class="col-md-offset-1 col-md-8">
+                      <div class="form-basic-info">
+                        <div class="form-content">
+                          <form class="form-horizontal">
+                            <div class="form-group">
+                              <label class="col-sm-4">Upload script</label>
+                              <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  name="listFile" disabled="">
+                                    <input type="file" multiple="" onchange="angular.element(this).scope().uploadFile(this)">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="col-sm-4">Test Script Name</label>
+                              <div class="col-sm-8">
+                                    <textarea rows="4" class="form-control upload_name"></textarea>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
 			</div>
 			<div class="modal-footer">
 				<div class="row save-script-upload">
-					<a ng-click="saveUploadedScripts()" class="btn-uploadFile" data-dismiss="true">Save</a>
+					<a ng-click="saveUploadedScripts()" class="btn btn-primary" data-dismiss="true">Save</a>
+                    
+                    <a class="btn btn-default"  data-dismiss="modal">Close</a>
 				</div>
 			</div>
 		</div>

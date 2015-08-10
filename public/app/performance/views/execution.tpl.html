@@ -1,24 +1,27 @@
-<div class="row">
-	<div class="col-sm-3 list_testScripts">
+<div class="row execution">
+	<div class="col-sm-3 test-script-pool">
 		<p>CHOOSE TEST SCRIPT</p>
 		<div>
-			<section class="smart-form">
-        <label class="input"><i class="icon-append fa fa-search"></i>
-          <input type="text" name="Search" ng-model="Search" placeholder="Search Test Script" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
-        </label>
-      </section>
-    </div>
-    <div class="row list-script" ng-repeat="script in scripts track by $index">
-  		<span class="pull-left script-name">{{script.name}}</span>
-  		<div class="smart-form check-list">
-        <label class="checkbox scriptId pull-right">
-          <input type="checkbox" name="checkbox" class="checkbox-script" value="{{script._id}}" ng-click="selectScript(script._id);">
-          <i></i>
-        </label>
-      </div>
-    </div>
+            <section class="smart-form">
+            <label class="input"><i class="icon-append fa fa-search"></i>
+              <input type="text" name="Search" ng-model="Search" placeholder="Search Test Script" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
+            </label>
+          </section>
+        </div>
+     
+        <div class="row list-script" style="margin-top: 10px;" ng-repeat="script in scripts track by $index">
+            <div class="col-md-12">
+                <span class="pull-left script-name">{{script.name}}</span>
+                <div class="smart-form check-list">
+                    <label class="checkbox scriptId pull-right">
+                      <input type="checkbox" name="checkbox" class="checkbox-script" value="{{script._id}}" ng-click="selectScript(script._id);">
+                      <i></i>
+                    </label>
+                </div>
+            </div>
+        </div>
 	</div>
-	<div class="col-sm-9 performance-run-test">
+	<div class="col-sm-9 execution-area">
 			<a ng-click="runPerformanceTest()" class="btn btn-primary btn-performance-run disabled">Run Test</a>
 	</div>
 </div>

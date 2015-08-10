@@ -1,14 +1,13 @@
-<div class="row">
-  <div class="col-sm-3 list-test-suite">
-    <section class="smart-form">
+<div class="test-suite-container row">
+  <div class="list-test-suite">
+    <section class="smart-form search-container">
       <label class="input"> <i class="icon-append fa fa-search"></i>
         <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
       </label>
     </section>
 
     <div class="create-new-suite">
-      <a class="btn btn-primary col-sm-12 cleafix"
-        ng-click="clickNewTestSuiteButton()" >
+      <a class="btn btn-primary btn-create-new" ng-click="clickNewTestSuiteButton()" >
         <i class="fa fa-plus-circle">New Test Suite</i>
       </a>
       <div class="form-group input-suite-name" ng-if="current.temp">
@@ -18,7 +17,7 @@
           ng-keypress="inputNewSuiteNameKeypress($event)">
       </div>
     </div>
-
+    <div class="test-suite-items">
     <div class="row test-suite" 
       ng-repeat="suite in suites track by $index"
       ng-class="{'test-suite-selected':suite._id == current._id}"
@@ -39,10 +38,10 @@
         </div>
       </div>
     </div>
-
+   </div>
   </div>
 
-  <div id="testcase-container" class="col-sm-9 action-testcase">
+  <div id="testcase-container" class="action-testcase">
     
   </div>
 

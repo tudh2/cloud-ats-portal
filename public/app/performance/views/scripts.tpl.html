@@ -1,41 +1,38 @@
 <div class="script-list" ng-controller="CreateScriptCtrl">
-	<div class="row">
+    <div class="border-div">
+	<div class="row actionMenu">
 		<div class="col-sm-3">
-      <section class="smart-form">
-        <label class="input"> <i class="icon-append fa fa-search"></i>
-          <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3">
-        </label>
-      </section>
+          <section class="smart-form">
+            <label class="input"> <i class="icon-append fa fa-search"></i>
+              <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3">
+            </label>
+          </section>
 		</div>
-		<div class="col-sm-9">
-			<div class="row">
-				<div class="functional-title col-sm-6">
-					<p style="text-align: left; padding-top:5px">{{scripts.length}} Test Scripts</p>
-				</div>
-				<div class="col-sm-6">
-					<button type="submit" class="btn btn-primary pull-right create-script" data-toggle="modal" data-target="#createScript" ng-click="clickCreateScriptButton()">New Test Script</button>
-					<button type="submit" class="btn btn-primary pull-right upload-script" data-toggle="modal" data-target="#uploadScript" ng-click="clickUploadScriptButton()">Upload Script</button>
-						
-						<div data-smart-include="/app/performance/views/upload-script.tpl.html"></div>
-						<div class="modal fade" id="createScript" role="dialog">
-						</div>
-				</div>
-			</div>
+        <span class="col-md-3 count-testcase"><label>{{scripts.length}} Test Scripts</label></span>
+        <span class="col-md-6 text-right">
+        <button type="submit" class="btn btn-default upload-script" data-toggle="modal" data-target="#uploadScript" ng-click="clickUploadScriptButton()">Upload Script</button>
+        <button type="submit" class="btn btn-primary create-script" data-toggle="modal" data-target="#createScript" ng-click="clickCreateScriptButton()">New Test Script</button> 
+        </span>
+		
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-sm-3" ng-repeat="script in scripts track by $index">
-			<div class="functional-project-overview-not-choose" ng-click="editScript(script._id)" data-toggle="modal" data-target="#createScript">
+    
+    <!-- Dialog -->
+    <div data-smart-include="/app/performance/views/upload-script.tpl.html"></div>
+    <div class="modal fade" id="createScript" role="dialog"></div>
+    <!-- Dialog -->
+        
+	<div class="list-testcase">
+		<div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="script in scripts track by $index">
+			<div class="tc-itemBlock" ng-click="editScript(script._id)" data-toggle="modal" data-target="#createScript">
 				<div class="row">
-					<div class="col-sm-12">
-						<div class="col-sm-6"><span class="project-name">#{{script._id.substring(0,8)}}</span></div>
-					</div>
-					<div class="col-sm-12 sumary">
-						<div class="col-sm-11">
-							<small><strong>{{script.name}}</strong></small>
-						</div>
-					</div>
-				</div>
+                  <div class="tc-attributes col-md-12">
+                      <div class="tc-id">#{{script._id.substring(0,8)}}</div>
+                  </div>
+                  <div class="tc-name col-md-12">
+                     {{script.name}}
+                  </div>
+                </div>
 			</div>
 		</div>
 	</div>

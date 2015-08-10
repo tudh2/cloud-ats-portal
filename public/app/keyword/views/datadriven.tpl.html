@@ -2,33 +2,27 @@
   <div class="border-div">
     <div class="row actionMenu">
       <div class="col-md-3">
-        <form class="header-search pull-left ng-pristine ng-valid" search-autocomplete="">
-          <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" autocomplete="off">
-          <button type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </form>
+         <section class="smart-form">
+            <label class="input"> <i class="icon-append fa fa-search"></i>
+              <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" autocomplete="off">                           </label>
+	        </section>
       </div>
-
-      <div class="col-md-2">
-        <label>{{cases.length}} Test Case{{cases.length > 1 ? 's' : ''}}</label>
-      </div>
-
-      <div class="dropdown col-md-3">
+       <span class="col-md-3 count-testcase"><label>{{cases.length}} Test Case{{cases.length > 1 ? 's' : ''}}</label></span>
+      <div class="dropdown col-md-6">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose a Test Case Group <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li><a href="">Login</a></li>
-          <li><a href="">Logout</a></li>
-          <li><a href="">Register</a></li>
+          <li><a href="">Test Group 1</a></li>
+          <li><a href="">Test Group 2</a></li>
+          <li><a href="">Test Group 3</a></li>
         </ul>
       </div>
-
     </div>
   </div>
 
   <div class="list-testcase">
-    <!-- Test case list -->
-    <div class="col-md-3"data-target="#add-datadriven" data-toggle="modal"
+
+     <!-- Test case list -->
+    <div class="col-md-3 col-sm-4 col-xs-6" data-target="#add-datadriven" data-toggle="modal"
       ng-repeat="case in cases track by $index | orderBy:'case.created_date'"  
       ng-click="clickToCase(case)">
 
@@ -45,6 +39,7 @@
       </div>
 
     </div>
+
     <!-- End test case list -->
 
     <div class="modal fade" id="add-datadriven">

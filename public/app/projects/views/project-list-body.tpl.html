@@ -1,57 +1,59 @@
-<div class="row" style="margin-top: 10px;">
-
-  <div class="col-sm-3 project" ng-repeat="project in projects track by $index">
-
-  <div 
-    ng-class="{
-      'project-running': project.status === 'RUNNING',
-      'project-ready': project.status === 'READY'
-    }">
+<div class="row project-lists">
+   <div class="col-sm-12">
     <div class="row">
-      <div class="col-sm-12">
-        <div class="col-sm-6"><span class="project-name">#{{project._id.substring(0,8)}}</span></div>
-        <div class="col-sm-6">
-          <span ng-if="project.type == 'keyword'" data-icon="&#xe05b;" aria-hidden="true" class="glyph-item mega pull-right"></span>
-          <span ng-if="project.type == 'performance'" data-icon="&#xe007;" aria-hidden="true" class="glyph-item mega pull-right"></span>
-        </div>
-      </div>
-      <div class="col-sm-12 sumary">
-        <div class="col-sm-11">
-          <small><strong style="word-break: break-all;">{{project.name}}</strong></small>
-        </div>
-      </div>
+      <div class="col-md-3 col-sm-4 project" ng-repeat="project in projects track by $index">
+      <div 
+        ng-class="{
+          'running-card card-item': project.status === 'RUNNING',
+          'ready-card card-item': project.status === 'READY'
+        }">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-xs-9"><span class="proj-id">#{{project._id.substring(0,8)}}</span></div>
+            <div class="col-xs-3">
+              <span ng-if="project.type == 'keyword'" data-icon="&#xe05b;" aria-hidden="true" class="proj-type pull-right"></span>
+              <span ng-if="project.type == 'performance'" data-icon="&#xe007;" aria-hidden="true" class="proj-type pull-right"></span>
+            </div>
+          </div>
+          <div class="col-sm-12 proj-name">
+              <div class="col-sm-12">
+                {{project.name}}
+              </div>
+          </div>
 
-      <div class="col-sm-12">
-        <div style="border-top: 1px solid #E9E9E9; margin-top:5px; margin-bottom: 5px;"></div>
-        <div class="col-sm-6">
-          <span>{{project.status}}</span>
-        </div>
-        <div class="col-sm-6">
-          <span ng-if="project.type == 'keyword'" class="project-info"
-            data-smart-popover 
-            data-toggle="popover" 
-            data-popover-template="app/projects/views/project-popover.tpl.html"
-            data-project-id="{{project._id}}"
-            data-project-name="{{project.name}}"
-            data-project-type="{{project.type}}"
-            data-project-suites="{{project.totalSuites}}"
-            data-project-cases="{{project.totalCases}}"
-            data-last-running="{{project.lastRunning === undefine ? 'N/A' : project.lastRunning}}"
-            ng-click="checkLastestRun(project)">INFO</span>
-          <span ng-if="project.type == 'performance'" class="project-info"
-            data-smart-popover 
-            data-toggle="popover" 
-            data-popover-template="app/projects/views/performance-project-popover.tpl.html"
-            data-project-id="{{project._id}}"
-            data-project-name="{{project.name}}"
-            data-project-type="{{project.type}}"
-            data-project-scripts="{{project.totalScripts}}">INFO</span>
-            <a ng-if="project.status == 'RUNNING'" href-void class="stop-project pull-right">STOP</a>
-            <a ng-if="project.status == 'READY'" href-void class="run-project pull-right">RUN</a>
+          <div class="col-sm-12">
+            <div class="top-line card-actions">
+            <div class="col-xs-6">
+              <span class="proj-status">{{project.status}}</span>
+            </div>
+            <div class="col-xs-6">
+              <span ng-if="project.type == 'keyword'" class="info-project"
+                data-smart-popover 
+                data-toggle="popover" 
+                data-popover-template="app/projects/views/functional-project-popover.tpl.html"
+                data-project-id="{{project._id}}"
+                data-project-name="{{project.name}}"
+                data-project-type="{{project.type}}"
+                data-project-suites="{{project.totalSuites}}"
+                data-project-cases="{{project.totalCases}}"
+                data-last-running="{{project.lastRunning === undefined ? 'N/A' : project.lastRunning}}"
+                ng-click="checkLastestRun(project)">INFO</span>
+              <span ng-if="project.type == 'performance'" class="info-project"
+                data-smart-popover 
+                data-toggle="popover" 
+                data-popover-template="app/projects/views/performance-project-popover.tpl.html"
+                data-project-id="{{project._id}}"
+                data-project-name="{{project.name}}"
+                data-project-type="{{project.type}}"
+                data-project-scripts="{{project.totalScripts}}"
+                data-last-running="{{project.lastRunning === undefined ? 'N/A' : project.lastRunning}}">INFO</span>
+                <a ng-if="project.status == 'RUNNING'" href-void class="stop-project pull-right">STOP</a>
+                <a ng-if="project.status == 'READY'" href-void class="run-project pull-right">RUN</a>
+            </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     </div>
-  </div>
-
 </div>
