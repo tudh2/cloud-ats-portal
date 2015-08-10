@@ -9,7 +9,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       $scope.title = 'OVERVIEWS'
       PerformanceService.get($scope.projectId, function(response) {
         $scope.project = response;
-
+        
         if (response.jobs != null) {
           var jobs = JSON.parse(response.jobs);
           $scope.project.jobs = jobs;

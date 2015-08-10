@@ -38,7 +38,6 @@
                               <div class="form-group">
                                   <div class="col-sm-offset-4 col-sm-8">
                                   <a class="btn btn-danger btn-deleteScript" ng-if="script._id != null" ng-click="deleteScript(script)" data-dismiss="modal">Delete</a>
-								<a class="btn btn-default btn-persitScript pull-right" ng-if="script._id != null" ng-click="clickUpdateScript()" data-dismiss="modal">Update</a>
                                   </div>
                               </div>
                           </form>
@@ -165,7 +164,8 @@
 		</div>
 		<div class="modal-footer">
 			<div class="row text-right">
-        <button class="btn btn-primary" ng-disabled="script.samplers.length == 0 || script.name == null" ng-click="clickSaveScript()" data-dismiss="modal">Save</button> 
+        <button class="btn btn-primary" ng-disabled="script.samplers.length == 0 || script.name == null" ng-if="script._id == null" ng-click="clickSaveScript()" data-dismiss="modal">Save</button> 
+        <button class="btn btn-primary" ng-if="script._id != null" ng-click="clickUpdateScript()" data-dismiss="modal">Update</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>

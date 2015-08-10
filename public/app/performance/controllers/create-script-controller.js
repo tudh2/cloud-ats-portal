@@ -97,7 +97,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
             break;
           case 204 :
             $.smallBox({
-              title: "The script has no modification",
+              title: "The script has nothing to update",
               content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
               color: "#296191",
               iconSmall: "fa fa-check bounce animated",
