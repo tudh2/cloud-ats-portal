@@ -45,7 +45,7 @@
         <div class="execute-action-list">
         <a ng-if="project.log" ng-click="viewLog()"
           class="btn btn-border-line btnViewLog">View Log</a>
-        <a ng-if="project.watchUrl" 
+        <a ng-if="project.watchUrl && project.status === 'RUNNING'" 
           class="btn btn-border-line btnViewLog" target="blank" href="{{project.watchUrl}}">
           Watch
         </a>
