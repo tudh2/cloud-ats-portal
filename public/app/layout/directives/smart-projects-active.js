@@ -14,6 +14,11 @@ define(['layout/module'], function (module) {
           case 'app.keyword.suites':
           case 'app.keyword.execution':
           case 'app.keyword.custom':
+          case 'app.performance':
+          case 'app.performance.scripts':
+          case 'app.performance.execution':
+          case 'app.performance.report':
+          case 'app.performance.report.sampler':
           case 'app.projects':
             $(element).addClass('active');
             break;
@@ -29,6 +34,11 @@ define(['layout/module'], function (module) {
           case 'app.keyword.suites':
           case 'app.keyword.execution':
           case 'app.keyword.custom':
+          case 'app.performance':
+          case 'app.performance.scripts':
+          case 'app.performance.execution':
+          case 'app.performance.report':
+          case 'app.performance.report.sampler':
           case 'app.projects':
             $(element).addClass('active');
             break;
