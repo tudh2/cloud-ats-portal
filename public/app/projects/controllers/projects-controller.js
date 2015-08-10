@@ -3,7 +3,6 @@ define(['projects/module', 'lodash'], function (module, _) {
   'use strict';
 
   module.registerController('ProjectsCtrl', [
-<<<<<<< HEAD
 
     '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 'ReportService', 
     function($scope, $state, $stateParams, KeywordService, PerformanceService, ReportService) {
@@ -37,16 +36,8 @@ define(['projects/module', 'lodash'], function (module, _) {
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
-      switch (projectType) {
-        case 'performance':
-          //$state.go('app.performance', {id: projectId});
-          break;
-        case 'keyword':
-          $state.go('app.keyword.report', { id : projectId, jobId: jobId});
-          break;
-        default:
-          break;
-      }
+
+      $state.go('app.keyword.report', { id : projectId, jobId: jobId});
     }
 
     $scope.checkLastestRun = function(project) {

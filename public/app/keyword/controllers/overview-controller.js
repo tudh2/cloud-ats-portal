@@ -13,7 +13,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.dataReports = [];
 
       $scope.project = null;
-
+      
       KeywordService.get($scope.projectId, function(response) {
 
         $scope.project = response;

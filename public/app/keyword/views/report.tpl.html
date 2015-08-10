@@ -1,70 +1,74 @@
-<div class="report-page">
-	<div class="col-sm-12 clearfix t-control-bar">
-		<div class="col-sm-6 ">
-	        <section class="col-sm-6 smart-form t-reset-padding">
-	            <label class="input"> 
-	            	<i class="icon-append fa fa-search"></i>
-	                <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3">
-	            </label>
-	        </section>
-	        <div class="col-sm-6">
-              <div class="form-group">
-                <select class="form-control">
-                  <option selected="">Choose a test case group</option>
-                </select>
-              </div>
-            </div>
-		</div>
-		<div class="col-sm-6 ">
-			<p class="functional-title col-sm-6 t-export-bar">
-				Export to:
-				<i class="fa fa-file-word-o"></i>
-				<span>word</span>
-				<i class="fa fa-file-excel-o"></i>
-				<span>Excel</span>
-				<i class="fa fa-file-pdf-o"></i>
-				<span>pdf</span>
-			</p>
-			
-			<button type="submit" class="btn new-project pull-right" ng-click="redirectTo();" style="color: white;">Back to project detail</button>
-		</div>
-	</div>
+<div id="content">
+	<div class="row">
+		<div class="report-page">
+			<div class="col-sm-12 clearfix t-control-bar">
+				<div class="col-sm-6 ">
+			        <section class="col-sm-6 smart-form t-reset-padding">
+			            <label class="input"> 
+			            	<i class="icon-append fa fa-search"></i>
+			                <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3">
+			            </label>
+			        </section>
+			        <div class="col-sm-6">
+		              <div class="form-group">
+		                <select class="form-control">
+		                  <option selected="">Choose a test case group</option>
+		                </select>
+		              </div>
+		            </div>
+				</div>
+				<div class="col-sm-6 ">
+					<p class="functional-title col-sm-6 t-export-bar">
+						Export to:
+						<i class="fa fa-file-word-o"></i>
+						<span>word</span>
+						<i class="fa fa-file-excel-o"></i>
+						<span>Excel</span>
+						<i class="fa fa-file-pdf-o"></i>
+						<span>pdf</span>
+					</p>
+					
+					<button type="submit" class="btn new-project pull-right" ng-click="redirectTo();" style="color: white;">Back to project detail</button>
+				</div>
+			</div>
 
-	<div class="col-sm-12 clearfix">
-		<div class="functional-report"></div>
-		<!-- <morris-stacked-bar-graph></morris-stacked-bar-graph> -->
-		<div class="t-chart-label">
-			<p > 
-				<span class="t-blue"></span>Pass 
-				<span class="t-red"></span>
-				Fail 
-				<span class="t-yellow"></span>
-				Skip 
-			</p> 
-		</div>
-	</div>
-	<div class="clearfix t-table ">
-		<div class="col-sm-12">
-			<table class="col-sm-12">
-				<tr class="t-table-header">
-					<td class="t-left">Running </td>
-					<td class="t-left">Test Suite</td>
-					<td class="t-right">Test Case</td>
-					<td class="t-right">Pass</td>
-					<td class="t-right">Fail</td>
-					<td class="t-right">Skip</td>
-					<td class="t-center">Test Result</td>
-				</tr>
-				<tr ng-repeat="suiteData in suiteReports">
-					<td class="t-left">{{suiteData.running_time}}</td>
-					<td class="t-left">{{suiteData.name}}</td>
-					<td class="t-right">{{suiteData.total_test_case}}</td>
-					<td class="t-right">{{suiteData.total_pass}}</td>
-					<td class="t-right">{{suiteData.total_fail}}</td>
-					<td class="t-right">{{suiteData.total_skip}}</td>
-					<td class="t-center"><span class="buttonStatus">{{suiteData.test_result}}</span></td>
-				</tr>
-			</table>
+			<div class="col-sm-12 clearfix">
+				<div class="functional-report"></div>
+				<!-- <morris-stacked-bar-graph></morris-stacked-bar-graph> -->
+				<div class="t-chart-label">
+					<p > 
+						<span class="t-blue"></span>Pass 
+						<span class="t-red"></span>
+						Fail 
+						<span class="t-yellow"></span>
+						Skip 
+					</p> 
+				</div>
+			</div>
+			<div class="clearfix t-table ">
+				<div class="col-sm-12">
+					<table class="col-sm-12">
+						<tr class="t-table-header">
+							<td class="t-left">Running </td>
+							<td class="t-left">Test Suite</td>
+							<td class="t-right">Test Case</td>
+							<td class="t-right">Pass</td>
+							<td class="t-right">Fail</td>
+							<td class="t-right">Skip</td>
+							<td class="t-center">Test Result</td>
+						</tr>
+						<tr ng-repeat="suiteData in suiteReports">
+							<td class="t-left">{{suiteData.running_time}}</td>
+							<td class="t-left">{{suiteData.name}}</td>
+							<td class="t-right">{{suiteData.total_test_case}}</td>
+							<td class="t-right">{{suiteData.total_pass}}</td>
+							<td class="t-right">{{suiteData.total_fail}}</td>
+							<td class="t-right">{{suiteData.total_skip}}</td>
+							<td class="t-center"><span class="buttonStatus">{{suiteData.test_result}}</span></td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

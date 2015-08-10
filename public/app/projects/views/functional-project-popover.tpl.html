@@ -38,7 +38,7 @@
             <div class='statistic-number'>{{cases}}</div>
         </div>
         <div class='col-sm-6'>
-            <a href='#' class='btn-border-line'>Report</a>
+            <a href='' class='btn-border-line' ng-if="jobId" ng-click='reports(projectId,projectType,jobId)'>Report</a>
         </div>
        </div>
     </div>
