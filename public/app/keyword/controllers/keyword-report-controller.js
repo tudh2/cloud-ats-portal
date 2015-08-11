@@ -35,8 +35,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
               } else {
                 obj.test_result = 'Fail'
               }
-              console.log(obj);
-              console.log("---");
+
               $scope.suiteReports.push(obj);
           })
 
