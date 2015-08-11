@@ -1337,6 +1337,10 @@ a:hover.viewLog, a:focus.viewLog {
 {
     background-color:#01B49F;
 }
+.label-info {
+	background-color: #00B4A1!important;
+	font-size: 13px;
+}
 /*
 header .tenant {
 	margin-top: 16px;
