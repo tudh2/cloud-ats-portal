@@ -4,6 +4,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
   module.registerController('CreateScriptCtrl', ['$scope', '$stateParams', '$templateRequest', '$compile', 'PerformanceService', 'ScriptService', function($scope, $stateParams, $templateRequest, $compile, PerformanceService, ScriptService) {
 
+    $scope.projectId = $stateParams.id;
     $scope.script = {
       ram_up: 5,
       number_threads: 1,
@@ -60,7 +61,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
     }
 
     $scope.deleteScript = function (script) {
-      ScriptService.delete(script._id, function (data, status) {
+      ScriptService.delete($scope.projectId, script._id, function (data, status) {
         if (status == 202) {
           $.smallBox({
             title: "The script has deleted",
@@ -78,7 +79,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
     }
 
     $scope.clickUpdateScript = function () {
-      ScriptService.update($scope.script, function (data, status) {
+      ScriptService.update($scope.projectId, $scope.script, function (data, status) {
         switch (status) {
           case 202 : 
             $.smallBox({
@@ -268,7 +269,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         $modal.html($compile(template)($scope));
       });
 
-      ScriptService.get(id, function (data, status) {
+      ScriptService.get($scope.projectId, id, function (data, status) {
         $scope.script = data;
       });
     }

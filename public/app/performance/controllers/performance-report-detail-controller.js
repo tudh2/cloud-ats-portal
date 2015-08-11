@@ -4,9 +4,10 @@ define(['performance/module', 'morris'], function (module) {
 
 	module.registerController('PerformanceReportDetailCtrl',['$scope', '$state', '$stateParams', 'ReportService', function ($scope, $state, $stateParams, ReportService) {
 
-		var reportId = $stateParams.reportId;
-    var index = $stateParams.index;
-		ReportService.get(reportId, function (report, status) {
+		$scope.reportId = $stateParams.reportId;
+    $scope.index = $stateParams.index;
+    $scope.jobId = $stateParams.jobId;
+		ReportService.get($scope.reportId, function (report, status) {
 
       report.summary.throughtput = _.round(report.summary.throughtput, 2);
       report.summary.kb_per_second = _.round(report.summary.kb_per_second, 2);
@@ -32,7 +33,7 @@ define(['performance/module', 'morris'], function (module) {
         xkey : 'timestamp',
         ykeys : ['value'],
         labels : ['value'],
-        lineColors: [colorsSample[index]],
+        lineColors: [colorsSample[$scope.index]],
         parseTime : false,
         lineWidth: 2,
         pointSize: 3
@@ -56,7 +57,7 @@ define(['performance/module', 'morris'], function (module) {
         xkey : 'timestamp',
         ykeys : ['value'],
         labels : ['value'],
-        lineColors: [colorsSample[index]],
+        lineColors: [colorsSample[$scope.index]],
         parseTime : false,
         lineWidth: 2,
         pointSize: 3
@@ -65,7 +66,7 @@ define(['performance/module', 'morris'], function (module) {
 		});
 
     $scope.backToOverviewReport = function () {
-      $state.go('app.performance.report', {jobId : $stateParams.jobId});
+      $state.go('app.performance.report', {jobId : $scope.jobId});
     }
 
 	}]);

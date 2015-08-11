@@ -57,11 +57,11 @@ define(['performance/module'], function (module) {
 
         });
       },
-      get: function (id, callback) {
+      get: function (projectId, id, callback) {
 
          var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/project/performance/script/'+id,
+          url: appConfig.RestEntry + '/api/v1/project/performance/'+ projectId +'/script/'+id,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -74,10 +74,10 @@ define(['performance/module'], function (module) {
 
         });
       },
-      delete: function (id, callback) {
+      delete: function (projectId, id, callback) {
         var request = {
           method: 'DELETE',
-          url: appConfig.RestEntry + '/api/v1/project/performance/script/'+id,
+          url: appConfig.RestEntry + '/api/v1/project/performance/'+ projectId+ '/script/'+id,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -90,10 +90,10 @@ define(['performance/module'], function (module) {
 
         });
       },
-      update: function (script, callback) {
+      update: function (projectId, script, callback) {
         var request = {
           method: 'PUT',
-          url: appConfig.RestEntry + '/api/v1/project/performance/script',
+          url: appConfig.RestEntry + '/api/v1/project/performance/'+ projectId +'/script',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
