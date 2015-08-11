@@ -84,6 +84,22 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
           if (job.project_id === $scope.projectId) {
             $scope.project.status = job.project_status;
             $scope.project.log = job.log;
+            switch (job.status) {
+              case 'Running': 
+                var currentJob = _.find($scope.project.jobs, function (obj) {
+                  return job._id === obj._id;
+                });
+                currentJob.status = 'Running';
+                break;
+              case 'Completed':
+                var currentJob = _.find($scope.project.jobs, function (obj) {
+                  return job._id === obj._id;
+                });
+                currentJob.status = 'Completed';
+                break;
+              default:
+                break;
+            }
 
             if ($scope.project.status === 'READY') {
               $.smallBox({

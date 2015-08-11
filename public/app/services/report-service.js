@@ -6,7 +6,7 @@ define(['performance/module'], function(module) {
       get: function(id, callback) {
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/report/performance/sampler/'+id,
+          url: appConfig.RestEntry + '/api/v1/project/performance/report/sampler/'+id,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -20,7 +20,7 @@ define(['performance/module'], function(module) {
       report: function (projectId, jobId, callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/project/performance/report/'+projectId+'/'+jobId,
+          url: appConfig.RestEntry + '/api/v1/project/performance/reports/'+projectId+'/'+jobId,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -36,7 +36,7 @@ define(['performance/module'], function(module) {
       getLastestRunning: function (projectId, callback) {
         var request = {
           method: 'GET',
-          url: 'http://localhost:9000/api/v1/performance/report/lastjob/'+projectId,
+          url: appConfig.RestEntry + '/api/v1/performance/reports/lastjob/'+projectId,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')

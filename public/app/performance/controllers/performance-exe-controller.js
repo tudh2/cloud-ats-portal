@@ -10,7 +10,6 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
  		$scope.title = "EXECUTION";
 
     ScriptService.list($scope.projectId, function(response) {
-      console.log(response);
       $scope.scripts = response;
       $scope.totalScripts = response.totalScripts;
     });

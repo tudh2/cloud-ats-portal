@@ -27,7 +27,7 @@ define(['performance/module'], function (module) {
         });
         var request = {
           method: 'POST',
-          url: appConfig.RestEntry + '/api/v1/project/performance/' + project_id + '/createScriptByFile',
+          url: appConfig.RestEntry + '/api/v1/project/performance/' + project_id + '/upload',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space'),
