@@ -77,7 +77,7 @@ define([
     });
 
     //Add the interceptor to $httpProvider.
-    $httpProvider.interceptors.push('ErrorHttpInterceptor');
+    //$httpProvider.interceptors.push('ErrorHttpInterceptor');
 
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];

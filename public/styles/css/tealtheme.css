@@ -724,6 +724,16 @@ a:hover.btn-border-line, a:focus.btn-border-line {
 	background-color: #01B49F;
 	color: white;
 }
+
+a.btn-border-line.btn-danger {
+  border: 1px solid #ff7832;
+  color: #ff7832;
+}
+a:hover.btn-border-line.btn-danger {
+  background-color: #ff7832;
+  color: white; 
+}
+
 div.table-container {
 	background-color: white;
     margin-top:20px;

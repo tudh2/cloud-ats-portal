@@ -84,6 +84,56 @@ define(['projects/module', 'lodash'], function (module, _) {
       $scope.jobId = project.job_id;
     }
 
+    $scope.runLastest = function (project) {
+      switch (project.type) {
+        case 'keyword':
+          runLastSuites(project);
+          break;
+        case 'performance':
+          break;
+        default:
+      }
+    }
+
+    var runLastSuites = function(project) {
+      var selected = [];
+      _.forEach(project.lastSuites, function(sel) {
+        selected.push(sel._id);
+      });
+
+      KeywordService.run(project._id, selected, function (data, status) {
+        switch (status) {
+          case 201:
+            $.smallBox({
+              title: 'Notification',
+              content: 'You have submitted project job',
+              color: '#296191',
+              iconSmall: 'fa fa-check bounce animated',
+              timeout: 3000
+            });
+            break;
+          case 204:
+            $.smallBox({
+              title: 'Notification',
+              content: 'Your project has been already running',
+              color: '#296191',
+              iconSmall: 'fa fa-check bounce animated',
+              timeout: 3000
+            });
+            break;
+          default:
+            $.smallBox({
+              title: 'Notification',
+              content: 'Can not submmit your project job',
+              color: '#c26565',
+              iconSmall: 'fa fa-ban bounce animated',
+              timeout: 3000
+            });
+
+        }
+      });
+    }
+
     var loadPerformanceProjects = function() {
       PerformanceService.projects(function (response) {
         if ($scope.projects === undefined) $scope.projects = [];
