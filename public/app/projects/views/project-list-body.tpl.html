@@ -1,7 +1,7 @@
 <div class="row project-lists">
    <div class="col-sm-12">
     <div class="row">
-      <div class="col-md-3 col-sm-4 project" ng-repeat="project in projects track by $index">
+      <div class="col-md-3 col-sm-4 project" ng-repeat="project in projects | search: searchTerms | filter:projectFilter">
       <div 
         ng-class="{
           'running-card card-item': project.status === 'RUNNING',
