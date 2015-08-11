@@ -102,35 +102,42 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.saveEditTestSuite = function() {
 
-        if ($scope.current.temp)
+        if ($scope.current.temp) {
 
-        SuiteService.create($scope.projectId, $scope.current, function(data, status) {
-          switch (status) {
-
-            case 201: 
-              $.smallBox({
-                title: 'Notification',
-                content: 'Your test suite has created',
-                color: '#296191',
-                iconSmall: 'fa fa-check bounce animated',
-                timeout: 3000
-              });
-              $scope.suites.push(data);
-              $scope.selectSuite(data);
-              break;
-
-            default:
-              $.smallBox({
-                title: 'Notification',
-                content: 'Can not create your test suite',
-                color: '#c26565',
-                iconSmall: 'fa fa-ban bounce animated',
-                timeout: 3000
-              });
+          var $inputSuiteName = $('#input-new-testsuite-name');
+          if ($scope.current.name === undefined || $scope.current.name === '' || $scope.current.name === null) {
+            $inputSuiteName.focus();
+            $inputSuiteName.addClass('state-error');
+            return false;
           }
-        });
 
-        else {
+          SuiteService.create($scope.projectId, $scope.current, function(data, status) {
+            switch (status) {
+
+              case 201: 
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Your test suite has created',
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
+                $scope.suites.push(data);
+                $scope.selectSuite(data);
+                break;
+
+              default:
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Can not create your test suite',
+                  color: '#c26565',
+                  iconSmall: 'fa fa-ban bounce animated',
+                  timeout: 3000
+                });
+            }
+          });
+
+        } else {
 
           SuiteService.update($scope.projectId, $scope.current, function(data, status) {
 
@@ -179,6 +186,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
           $scope.current.cases = _.cloneDeep($scope.current.originCases);
           $scope.current.caseOutline = _.cloneDeep($scope.current.originCaseOutline);
         } else {
+          $scope.current = undefined;
           if ($scope.suites.length > 0) $scope.selectSuite($scope.suites[0]);
         }
       }
