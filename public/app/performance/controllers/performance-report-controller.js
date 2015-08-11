@@ -4,15 +4,15 @@ define(['performance/module', 'morris'], function (module) {
 
 	module.registerController('PerformanceReportCtrl',['$scope','$state', '$stateParams', 'ReportService', function ($scope, $state, $stateParams, ReportService) {
 
-    var projectId = $stateParams.id;
-    var jobId = $stateParams.jobId;
+    $scope.projectId = $stateParams.id;
+    $scope.jobId = $stateParams.jobId;
     
-    ReportService.report(projectId, jobId, function (data, status) {
+    ReportService.report($scope.projectId, $scope.jobId, function (data, status) {
       $scope.reports = data;
     });
 
     $scope.backToOverviewPage = function () {
-      $state.go('app.performance', {id : $stateParams.id});
+      $state.go('app.performance', {id : $scope.projectId});
     }
 	}]);
 });

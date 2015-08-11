@@ -36,8 +36,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 obj.test_result = 'Fail'
               }
 
-              obj.running_time = obj.running_time.$date;
-
               $scope.suiteReports.push(obj);
           })
 
