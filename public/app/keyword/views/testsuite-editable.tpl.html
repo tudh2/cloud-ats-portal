@@ -27,7 +27,7 @@
         <div class="col-sm-3" ng-if="current.temp || editMode">
           <a class="btn btn-default" ng-click="cancelEditTestSuite()">Cancel</a>
         </div>
-        <div class="col-sm-3" ng-if="!current.temp && !editMode" >
+        <div class="col-sm-3" ng-if="(!current.temp && !editMode && current)" >
           <a class="btn btn-primary" ng-click="$parent.editMode = true">Edit</a>
         </div>
         <!-- <div class="col-sm-3" ng-if="!current.temp && !editMode">
