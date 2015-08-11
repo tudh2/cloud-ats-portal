@@ -99,7 +99,7 @@
               <li class="li-keyword" 
                 ng-repeat="custom in customs"
                 data-drag="true"
-                data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+                data-jqyoui-options="{revert: 'invalid'}"
                 ng-model="custom"
                 jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}"
                 droppable
@@ -150,7 +150,7 @@
               <li ng-repeat="keyword in keywords | filter:query[cat]" 
                 data-drag="true"
                 class="li-keyword"
-                data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+                data-jqyoui-options="{revert: 'invalid'}"
                 ng-model="keywords"
                 jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}"
                 droppable
