@@ -748,6 +748,12 @@ table.tbl-project-report > thead > tr > th, table.tbl-project-report > thead > t
 	vertical-align: baseline;
 	border-radius: 10px;
 }
+.label-info {
+  background-color: #00b4a0 !important;
+  font-size: 11px;
+  text-transform: lowercase;
+  color: white;
+}
 .label-success {
 	background-color: #00b4a0 !important;
 	font-size: 11px;

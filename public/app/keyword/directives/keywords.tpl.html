@@ -15,16 +15,9 @@
       <ul class="smart-treeview-group">
         <li>
           <span class="editinline color-keyword">
-          <a ng-click="toggleExpand($event)" class="fa fa-fw fa-folder-open txt-color-darken"></a>
+          <a class="fa fa-fw fa-folder-open txt-color-darken"></a>
           
-          <a href-void data-type="text"
-            ng-if="customKeyword" 
-            smart-xeditable data-ng-model="cases[$index]" 
-            data-options="editableOptions" 
-            data-index="{{$index}}" 
-            data-success-callback="changeCaseName"
-            class="editable color-keyword name-keyword editable-click">{{case.name}}</a>
-          <span  ng-if="!customKeyword" class="editable color-keyword name-keyword editable-click">{{case.name}}</span>
+          <span style="border: none;">{{case.name}}</span>
 
           </span>
           <!-- action steps -->
