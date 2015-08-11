@@ -3,11 +3,11 @@
     <p>1.CHOOSE TEST SUITE</p>
     <section class="smart-form">
       <label class="input"> <i class="icon-append fa fa-search"></i>
-        <input type="text" name="Search" ng-model="Search" placeholder="Search Test Suite" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
+        <input type="text" name="Search" ng-model="searchTerms" placeholder="Search Test Suite">
       </label>
     </section>
 
-    <div class="row" style="margin-top: 20px;" ng-repeat="suite in suites track by $index">
+    <div class="row" style="margin-top: 20px;" ng-repeat="suite in suites | search: searchTerms">
       <div class="col-sm-12" style="padding-right: 8px;">
         <span class="pull-left">{{suite.name}}</span>
         <div class="smart-form check-list">
