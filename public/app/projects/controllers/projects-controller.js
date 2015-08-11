@@ -7,9 +7,49 @@ define(['projects/module', 'lodash'], function (module, _) {
     '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 'ReportService', 
     function($scope, $state, $stateParams, KeywordService, PerformanceService, ReportService) {
 
-    $scope.projects = [
-      
-    ];
+    $scope.searchTerms = '';
+
+    $scope.options = {
+      ready: true,
+      running: true,
+      keyword: true,
+      performance: true
+    }
+
+    $scope.toggleReady = function() {
+      $scope.options.ready = $scope.options.ready === true ? false : true;
+    }
+
+    $scope.toggleRunning = function() {
+      $scope.options.running = $scope.options.running === true ? false : true;
+    }
+
+    $scope.toggleKeyword = function(event) {
+      var $element = $(event.currentTarget);
+      $element.toggleClass('active');
+      $scope.options.keyword = $scope.options.keyword === true ? false : true;
+    }
+
+    $scope.togglePerformance = function() {
+      var $element = $(event.currentTarget);
+      $element.toggleClass('active');
+      $scope.options.performance = $scope.options.performance === true ? false : true;
+    }
+
+    $scope.projectFilter = function (project) {
+      var projectStatus = {
+        ready: project.status === 'READY',
+        running: project.status === 'RUNNING',
+        keyword : project.type === 'keyword',
+        performance: project.type === 'performance'
+      }
+      var result = ($scope.options.ready && projectStatus.ready 
+              || $scope.options.running && projectStatus.running )
+        && ($scope.options.keyword && projectStatus.keyword
+                || $scope.options.performance && projectStatus.performance)
+
+      return result;
+    }
 
     $scope.openProject = function(projectId, projectType) {
       $('[data-toggle="popover"]').each(function () {
@@ -46,6 +86,7 @@ define(['projects/module', 'lodash'], function (module, _) {
 
     var loadPerformanceProjects = function() {
       PerformanceService.projects(function (response) {
+        if ($scope.projects === undefined) $scope.projects = [];
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
       });
@@ -53,6 +94,7 @@ define(['projects/module', 'lodash'], function (module, _) {
 
     var loadKeywordProjects = function() {
       KeywordService.list(function (response) {
+        if ($scope.projects === undefined) $scope.projects = [];
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
       });
