@@ -39,8 +39,9 @@
       </div>
       <div class="col-md-6">
             <div class="execute-action-list">
-            <a class="btn-border-line btnViewLog" ng-click="viewLog()">View Log</a>
-            <a class="btn-border-line btnRun">Run</a>
+            <a class="btn-border-line btnViewLog" ng-if="project.status === 'RUNNING'" ng-click="viewLog()">View Log</a>
+            <a class="btn-border-line btnRun" ng-click="runLastScripts()" ng-if="project.status != 'RUNNING'">Run</a>
+            <a class="btn-border-line btnRun" ng-if="project.status === 'RUNNING'">Stop</a>
             </div>
        </div>
     </div>
