@@ -4,8 +4,8 @@ define(['projects/module', 'lodash'], function (module, _) {
 
   module.registerController('ProjectsCtrl', [
 
-    '$scope', '$state', '$stateParams','KeywordService', 'PerformanceService', 'ReportService', 
-    function($scope, $state, $stateParams, KeywordService, PerformanceService, ReportService) {
+    '$scope', '$state', '$stateParams', '$templateRequest', '$compile','KeywordService', 'PerformanceService', 'ReportService', 
+    function($scope, $state, $stateParams, $templateRequest, $compile, KeywordService, PerformanceService, ReportService) {
 
     $scope.searchTerms = '';
 
@@ -30,7 +30,7 @@ define(['projects/module', 'lodash'], function (module, _) {
       $scope.options.keyword = $scope.options.keyword === true ? false : true;
     }
 
-    $scope.togglePerformance = function() {
+    $scope.togglePerformance = function(event) {
       var $element = $(event.currentTarget);
       $element.toggleClass('active');
       $scope.options.performance = $scope.options.performance === true ? false : true;
@@ -71,17 +71,35 @@ define(['projects/module', 'lodash'], function (module, _) {
       }
     }
 
-    $scope.reports = function(projectId,projectType,jobId) {
-  
+    var loadModal = function() {
+      var $modal = $('#project-log');
+
+      //clear modal content
+      $modal.html('');
+
+      $templateRequest('app/projects/views/log-modal-content.tpl.html').then(function(template) {
+        $modal.html($compile(template)($scope));
+        $modal.modal('show');
+      });
+    };
+
+    $scope.openLastLog = function (log) {
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
-
-      $state.go('app.keyword.report', { id : projectId, jobId: jobId});
+      $scope.log = log;
+      loadModal();
     }
 
-    $scope.checkLastestRun = function(project) {
-      $scope.jobId = project.job_id;
+    $scope.openLastReport = function(project) {
+      switch (project.type) {
+        case 'keyword':
+          $state.go('app.keyword.report', {id: project._id, jobId: project.job_id });
+          break;
+        case 'performance':
+          break;
+        default:
+      }
     }
 
     $scope.runLastest = function (project) {

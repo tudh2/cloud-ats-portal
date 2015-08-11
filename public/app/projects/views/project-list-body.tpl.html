@@ -36,8 +36,8 @@
                 data-project-type="{{project.type}}"
                 data-project-suites="{{project.totalSuites}}"
                 data-project-cases="{{project.totalCases}}"
-                data-last-running="{{project.lastRunning === undefined ? 'N/A' : project.lastRunning}}"
-                ng-click="checkLastestRun(project)">
+                data-project-log="{{project.log}}"
+                data-last-running="{{project.lastRunning === undefined ? 'N/A' : project.lastRunning}}">
                 INFO
               </span>
               <span ng-if="project.type == 'performance'" class="info-project"
@@ -62,4 +62,6 @@
       </div>
     </div>
     </div>
+
+    <div class="modal fade" id="project-log"></div>
 </div>

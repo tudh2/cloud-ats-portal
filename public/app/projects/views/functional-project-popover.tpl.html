@@ -26,7 +26,7 @@
         </div>
         <div class='col-sm-6'>
             <div class='blur-name'>LAST RUNNING</div>
-            <div class='statistic-number'>01/05/2015 22:30</div>
+            <div class='statistic-number'>{{running}}</div>
         </div>
        </div>
     </div>
@@ -48,10 +48,14 @@
             <a class='run-project' ng-click='openProject(projectId, projectType)'>Open</a>
         </div>
         <div class='col-sm-3'>
-            <a href='#' class='run-project'>View Log</a>
+            <a class='run-project' ng-click="openLastLog(log)">View Log</a>
         </div>
         <div class='col-sm-3'>
-            <a href='#' class='run-project'>Watch</a>
+            <a class='run-project'
+              ng-if="watch"
+              target="_blank"
+              href="watch" 
+              >Watch</a>
         </div>
         <div class='col-sm-4'>
             <a href='#' class='pull-right run-project'>Run</a>
