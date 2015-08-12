@@ -51,7 +51,11 @@ define(['projects/module', 'lodash'], function (module, _) {
       return result;
     }
 
-    $scope.openProject = function(projectId, projectType) {
+    $scope.openProject = function(project) {
+
+      var projectId = project._id;
+      var projectType = project.type;
+
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
@@ -83,11 +87,11 @@ define(['projects/module', 'lodash'], function (module, _) {
       });
     };
 
-    $scope.openLastLog = function (log) {
+    $scope.openLastLog = function (project) {
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
-      $scope.log = log;
+      $scope.project = project;
       loadModal();
     }
 
@@ -209,6 +213,7 @@ define(['projects/module', 'lodash'], function (module, _) {
 
     var loadKeywordProjects = function() {
       KeywordService.list(function (response) {
+        console.log(response);
         if ($scope.projects === undefined) $scope.projects = [];
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
@@ -235,15 +240,16 @@ define(['projects/module', 'lodash'], function (module, _) {
           if (project._id === job.project_id) {
             project.status = job.project_status;
             project.log = job.log;
-
             if (project.status === 'READY') {
                $.smallBox({
                 title: 'Notification',
-                content: 'Job '+ job._id+' has finished',
+                content: 'The job '+ job._id+' has finished',
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
+            } else if (project.status === "RUNNING") {
+              project.watchUrl = job.watch_url;
             }
           }
         }) 

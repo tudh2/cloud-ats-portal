@@ -31,15 +31,21 @@
                 data-smart-popover 
                 data-toggle="popover" 
                 data-popover-template="app/projects/views/functional-project-popover.tpl.html"
-                data-project="{{project}}"
+                data-project="project"
+                data-log="openLastLog(project)"
+                data-open="openProject(project)"
+                data-report="openLastReport(project)"
                 >
                 INFO
               </span>
               <span ng-if="project.type == 'performance'" class="info-project"
-                data-smart-popover 
                 data-toggle="popover" 
+                data-smart-popover
                 data-popover-template="app/projects/views/performance-project-popover.tpl.html"
-               data-project="{{project}}">INFO
+                data-project="project"
+                data-log="openLastLog(project)"
+                data-open="openProject(project)"
+                data-report="openLastReport(project)">INFO
               </span>
               <a ng-if="project.status == 'RUNNING'" href-void class="stop-project pull-right">STOP</a>
 
