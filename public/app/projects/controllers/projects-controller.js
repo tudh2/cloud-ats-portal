@@ -4,8 +4,8 @@ define(['projects/module', 'lodash'], function (module, _) {
 
   module.registerController('ProjectsCtrl', [
 
-    '$scope', '$state', '$stateParams', '$templateRequest', '$compile','KeywordService', 'PerformanceService', 'ReportService', 
-    function($scope, $state, $stateParams, $templateRequest, $compile, KeywordService, PerformanceService, ReportService) {
+    '$rootScope', '$scope', '$state', '$stateParams', '$templateRequest', '$compile','KeywordService', 'PerformanceService', 'ReportService', 'EventService',
+    function ($rootScope, $scope, $state, $stateParams, $templateRequest, $compile, KeywordService, PerformanceService, ReportService, EventService) {
 
     $scope.searchTerms = '';
 
@@ -96,7 +96,6 @@ define(['projects/module', 'lodash'], function (module, _) {
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
-      console.log(project);
       switch (project.type) {
         case 'keyword':
           $state.go('app.keyword.report', {id: project._id, jobId: project.lastJobId });
@@ -112,10 +111,11 @@ define(['projects/module', 'lodash'], function (module, _) {
       switch (project.type) {
         case 'keyword':
           runLastSuites(project);
+          $state.go('app.keyword', {id: project._id});
           break;
         case 'performance':
           runLastScripts(project);
-          $state.go('app.performance');
+          $state.go('app.performance', {id : project._id});
           break;
         default:
       }
@@ -128,7 +128,7 @@ define(['projects/module', 'lodash'], function (module, _) {
           selected.push(sel._id);
         });
 
-        PerformanceService.run($scope.projectId, selected, function (data, status) {
+        PerformanceService.run(project._id, selected, function (data, status) {
           switch (status) {
             case 200:
               $.smallBox({
@@ -157,7 +157,6 @@ define(['projects/module', 'lodash'], function (module, _) {
                 timeout: 3000
               });
           }
-          $scope.project.jobs.unshift(data);
         });
     }
 
@@ -210,7 +209,6 @@ define(['projects/module', 'lodash'], function (module, _) {
 
     var loadKeywordProjects = function() {
       KeywordService.list(function (response) {
-        console.log(response);
         if ($scope.projects === undefined) $scope.projects = [];
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
@@ -229,6 +227,34 @@ define(['projects/module', 'lodash'], function (module, _) {
         loadKeywordProjects();
     }
     
+    var updateStatus = function(msg) {
+      $scope.$apply(function() {
+
+        var job = JSON.parse(msg.data);
+        _.forEach ($scope.projects, function (project) {
+          if (project._id === job.project_id) {
+            project.status = job.project_status;
+            project.log = job.log;
+
+            if (project.status === 'READY') {
+               $.smallBox({
+                title: 'Notification',
+                content: 'Job '+ job._id+' has finished',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+            }
+          }
+        }) 
+      })
+    }
+
+    EventService.feed(updateStatus);
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      EventService.close();
+    });
   }]);
 
 });

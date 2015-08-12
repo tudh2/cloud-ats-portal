@@ -17,7 +17,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
       KeywordService.get($scope.projectId, function(response) {
 
         $scope.project = response;
-
+        console.log(response);
         if($scope.project.lastJobId) {
           getListReport($scope.project._id);
         }

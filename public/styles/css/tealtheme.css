@@ -715,8 +715,8 @@ a.btn-border-line {
 	border: 1px solid #01B49F;
 	display: inline-block;
 	color: #01B49F;
-	font-size: 13px;
-	text-decoration: none;
+/*	font-size: 13px;
+*/text-decoration: none;
 	padding: 2px 15px;
     cursor:pointer;
 }
