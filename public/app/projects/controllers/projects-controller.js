@@ -92,11 +92,17 @@ define(['projects/module', 'lodash'], function (module, _) {
     }
 
     $scope.openLastReport = function(project) {
+
+      $('[data-toggle="popover"]').each(function () {
+        $(this).popover('hide');
+      });
+      console.log(project);
       switch (project.type) {
         case 'keyword':
-          $state.go('app.keyword.report', {id: project._id, jobId: project.job_id });
+          $state.go('app.keyword.report', {id: project._id, jobId: project.lastJobId });
           break;
         case 'performance':
+          $state.go('app.performance.report', {id: project._id, jobId: project.lastJobId});
           break;
         default:
       }
@@ -108,9 +114,51 @@ define(['projects/module', 'lodash'], function (module, _) {
           runLastSuites(project);
           break;
         case 'performance':
+          runLastScripts(project);
+          $state.go('app.performance');
           break;
         default:
       }
+    }
+
+    var runLastScripts = function (project) {
+
+        var selected = [];
+        _.forEach(project.lastScripts, function(sel) {
+          selected.push(sel._id);
+        });
+
+        PerformanceService.run($scope.projectId, selected, function (data, status) {
+          switch (status) {
+            case 200:
+              $.smallBox({
+                title: 'Notification',
+                content: 'You have submitted project job',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              break;
+            case 204:
+              $.smallBox({
+                title: 'Notification',
+                content: 'Your project has been already running',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              break;
+            default:
+              $.smallBox({
+                title: 'Notification',
+                content: 'Can not submmit your project job',
+                color: '#c26565',
+                iconSmall: 'fa fa-ban bounce animated',
+                timeout: 3000
+              });
+          }
+          $scope.project.jobs.unshift(data);
+        });
     }
 
     var runLastSuites = function(project) {
@@ -162,6 +210,7 @@ define(['projects/module', 'lodash'], function (module, _) {
 
     var loadKeywordProjects = function() {
       KeywordService.list(function (response) {
+        console.log(response);
         if ($scope.projects === undefined) $scope.projects = [];
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);

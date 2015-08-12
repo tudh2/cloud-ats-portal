@@ -18,7 +18,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
         $scope.project = response;
 
-        if($scope.project.job_id) {
+        if($scope.project.lastJobId) {
           getListReport($scope.project._id);
         }
       });
