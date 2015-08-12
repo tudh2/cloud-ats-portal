@@ -104,7 +104,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
             if ($scope.project.status === 'READY') {
               $.smallBox({
                 title: 'Notification',
-                content: 'Job done',
+                content: 'The job ' + job._id + ' has completed.',
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
