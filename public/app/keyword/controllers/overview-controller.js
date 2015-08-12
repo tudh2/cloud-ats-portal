@@ -15,54 +15,43 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.project = null;
       
       KeywordService.get($scope.projectId, function(response) {
-
         $scope.project = response;
-        console.log(response);
         if($scope.project.lastJobId) {
           getListReport($scope.project._id);
         }
       });
 
       var getListReport = function(projectId) {
+
         KeywordService.getListReport(projectId,function(data,status) {
           $scope.listReports = [];
-          for(var i = 0; i < data.report.length; i++) {
-              var obj;
-              var totalTestCase = 0;
-              var totalPass = 0;
-              var totalFail = 0;
-              var totalSkip = 0;
-              var finalResult;
+          _.forEach(data, function(job) {
+            var report = { 
+              created_date : job.created_date,  
+              job_id: job.report.functional_job_id,
+              total_test_case : 0,
+              total_pass : 0,
+              total_fail : 0 
+            };
+            _.forEach(job.report.suite_reports, function(suite) {
+              report.total_test_case += suite.total_test_case;
+              report.total_pass += suite.total_pass;
+              report.total_fail += suite.total_fail;
+            });
 
-               _.forEach(data.report[i].suite_reports,function(n,key) {
-                    obj = n;
-                    obj.running_time = obj.running_time.$date;
-                    obj.report_id = data.report[i]._id;
-                    obj.create_by =  $scope.project.creator._id;
+            if(report.total_fail == 0) {
+              report.test_result = 'Pass';
+            } else {
+              report.test_result = 'Fail';
+            }
 
-                    totalTestCase = totalTestCase + obj.total_test_case;
-                    totalPass = totalPass + obj.total_pass;
-                    totalFail = totalFail + obj.total_fail;
-                })
-
-               if(obj.total_fail == 0) {
-                  obj.test_result = 'Pass';
-                } else {
-                  obj.test_result = 'Fail';
-                }
-                
-               obj.job_id = data.report[i].functional_job_id;
-               obj.total_test_case = totalTestCase;
-               obj.total_pass = totalPass;
-               obj.total_fail = totalFail;
-               obj.created_date = data.created_date;
-               $scope.listReports.push(obj);
-          }
+            $scope.listReports.push(report);
+          });
         });
       }
 
-      $scope.redirectTo = function(projectId,jobId) {
-        $state.go('app.keyword.report', {id: projectId, jobId: jobId });
+      $scope.redirectTo = function(jobId) {
+        $state.go('app.keyword.report', {id: $scope.projectId, jobId: jobId });
       }
 
       var loadModal = function() {

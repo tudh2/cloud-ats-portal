@@ -4,7 +4,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
     ['$scope', '$rootScope', '$state', '$stateParams', '$templateRequest', '$compile', '$cookies', 'KeywordService',
     function($scope, $rootScope, $state, $stateParams, $templateRequest, $compile, $cookies, KeywordService) {
 
-      $scope.existed_projectId = $stateParams.id;
+      $scope.projectId = $stateParams.id;
 
       $scope.jobId = $stateParams.jobId;
 
@@ -64,7 +64,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
       });
 
       $scope.redirectTo = function() {
-        $state.go('app.keyword',{id: $scope.existed_projectId});
+        $state.go('app.keyword',{id: $scope.projectId});
       }
 
 

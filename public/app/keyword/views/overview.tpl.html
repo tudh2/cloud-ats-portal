@@ -77,14 +77,14 @@
         <tbody>
           <tr ng-repeat="rep in listReports track by $index">
             <td>{{$index+1}}</td>
-            <td class="test-report"><a ng-click="redirectTo(project._id,rep.job_id)">Test Execute Report_{{rep.report_id.substring(0,8)}}</a></td>
+            <td class="test-report"><a ng-click="redirectTo(rep.job_id)">Report-{{rep.job_id}}</a></td>
             <td>{{rep.total_test_case}}</td>
             <td>{{rep.total_pass}}</td>
             <td>{{rep.total_fail}}</td>
             <td><span ng-class="{'label label-error': rep.test_result === 'Fail',
             'label label-success': rep.test_result === 'Pass'}">{{rep.test_result}}</span></td>
             <td>{{rep.created_date}}</td>
-            <td>{{rep.create_by}}</td>
+            <td>Cloud ATS</td>
           </tr>
         </tbody>
       </table>

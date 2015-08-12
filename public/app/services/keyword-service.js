@@ -87,7 +87,7 @@ define(['keyword/module'], function(module) {
       getReport : function(projectId,job_id,callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/'+ job_id +'/report',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/report/'+ job_id,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -104,7 +104,7 @@ define(['keyword/module'], function(module) {
       getListReport : function(projectId,callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/listReport',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/reports',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
