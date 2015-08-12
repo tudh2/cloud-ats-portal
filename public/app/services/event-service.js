@@ -1,7 +1,8 @@
 define(['app'], function (app) {
   'use strict';
 
-  app.factory('EventService', ['$http', '$cookies', '$window', function($http, $cookies, $window){
+  app.factory('EventService', ['$http', '$cookies', '$rootScope', '$window', 
+    function($http, $cookies, $rootScope, $window){
 
     var close = function() {
         
@@ -25,6 +26,9 @@ define(['app'], function (app) {
         $window.onbeforeunload = function (e) {
           close();
         }
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+          close();
+        });
       }
     }
   }])
