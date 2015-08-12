@@ -1,38 +1,54 @@
-<div class="report-page">
-	<div class="col-sm-12 clearfix t-control-bar">
-		<div class="col-sm-5 ">
-		</div>
-		<div class="col-sm-7 ">
-			<p class="functional-title col-sm-6 t-export-bar">
-				Export to:
-				<i class="fa fa-file-word-o"></i>
-				<span>word</span>
-				<i class="fa fa-file-excel-o"></i>
-				<span>Excel</span>
-				<i class="fa fa-file-pdf-o"></i>
-				<span>pdf</span>
-			</p>
-			
-			<button type="submit" class="btn new-project pull-right" ng-click="backToOverviewReport();" style="color: white;">Back to report page</button>
-		</div>
-	</div>
-
-	<div class="col-sm-12 clearfix" id="sampler-chart">
-		<div class="col-sm-12">
-			<span class="">Number of hits / second</span>
-			<div class="chart no-padding sampler-report-hits">
-			</div>
-		</div>
-		<div class="col-sm-12">
-			<span class="">Number of transactions / second </span>
-			<div class="chart no-padding sampler-report-trans">
-			</div>
-		</div>
-	</div>
-	<div class="clearfix t-table ">
-		<div class="col-sm-12">
-		</div>
-	</div>
+<div id="content">
+    <div class="report-page">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-6 ">
+                    <p class="functional-title export-bar">
+                        Export to:
+                        <i class="fa fa-file-word-o"></i>
+                        <span>word</span>
+                        <i class="fa fa-file-excel-o"></i>
+                        <span>Excel</span>
+                        <i class="fa fa-file-pdf-o"></i>
+                        <span>pdf</span>
+                    </p>
+                    
+                </div>
+                 <div class="col-sm-6 ">
+                     <button type="submit" class="btn btn-default pull-right" ng-click="backToOverviewReport();">Back to report page</button>
+                     </div>
+            </div>
+        </div>
+<br>
+        <div class="col-sm-12" id="sampler-chart">
+            <div class="row">
+                <div class="col-sm-12 ds-box">
+                    <div class="ds-text-rotate ds-text-project">Number of hits / second</div>
+                    <div class="chart no-padding sampler-report-hits">
+                    </div>
+                </div>
+                <div class="col-sm-12 ds-box">
+                    <div class="ds-text-rotate ds-text-project ">Number of transactions / second </div>
+                    <div class="chart no-padding sampler-report-trans">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="clearfix table-container">
+            <div class="col-sm-12">
+               <table class="table tbl-project-report">
+                    <thead>
+                    <tr>
+                        <th >Label </th>
+                        <th >#Sampler</th>
+                        </tr>
+                        </thead>
+                   <tr>
+                        <td></td>
+                       <td class="text-right"></td>
+                   </tr>
+            </div>
+        </div>-->
+    </div>
 </div>
-
 

@@ -1,62 +1,62 @@
 <div class="row">
 	<div class="col-sm-6">
-		<p class="hit-label-title">Hits per second</p>
+		<p class="ds-text-rotate ds-text-project hit-label-title">Hits per second</p>
 		<div class="chart no-padding hit-per-second">
 			
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<p class="tran-label-title">Transactions per second</p>
+		<p class="ds-text-rotate ds-text-project tran-label-title">Transactions per second</p>
 		<div class="chart node-padding tran-per-second"></div>
 	</div>
 
-	<div class="col-sm-12 label-container">
+	<div class="chart-legend">
 		<div ng-repeat="color in colors" class="label-performance">
-			<span style="width: 20px;height: 10px;margin: 0 10px;display: inline-block;background-color: {{color.color}};">
-			</span>
-			<span>{{color.label}}</span>
+			<div style="background-color: {{color.color}};"></div> {{color.label}}
 		</div>
 	</div>
 
-	<div class="clearfix t-table ">
+	<div class="clearfix table-container">
 		<div class="col-sm-12">
-			<table class="col-sm-12">
-				<tr class="t-table-header">
-					<td class="t-left title subject">Label </td>
-					<td class="t-left title subject">#Sampler</td>
-					<td class="t-right title subject">Average</td>
-					<td class="t-right title subject">Min</td>
-					<td class="t-right title subject">Max</td>
-					<td class="t-right title subject">Std.Dev</td>
-					<td class="t-center title subject">Error %</td>
-					<td class="t-center title subject">Throughput</td>
-					<td class="t-center title subject">KB/sec</td>
-					<td class="t-center title subject">Avg. Bytes</td>
-					
+            <h3>Test Report</h3>
+			<table class="table tbl-project-report">
+				<thead>
+                <tr>
+					<th >Label </th>
+					<th >#Sampler</th>
+					<th class="text-right">Average</th>
+					<th class="text-right">Min</th>
+					<th class="text-right">Max</th>
+					<th class="text-right">Std.Dev</th>
+					<th class="text-center">Error %</th>
+					<th class="text-center">Throughput</th>
+					<th class="text-center">KB/sec</th>
+					<th class="text-center">Avg. Bytes</th>
 				</tr>
+                    </thead>
 				<tr>
-					<td class="t-left label-report" ng-click="openReportEachSampler(summaryReport, $index)">{{summaryReport.label}}</td>
-					<td class="t-left">{{summaryReport.summary.samples}}</td>
-					<td class="t-right">{{summaryReport.summary.average}}</td>
-					<td class="t-right">{{summaryReport.summary.min_time}}</td>
-					<td class="t-right">{{summaryReport.summary.max_time}}</td>
-					<td class="t-right">{{summaryReport.summary.standard_deviation}}</td>
-					<td class="t-center">{{summaryReport.summary.error_percent}}</td>
-					<td class="t-center">{{summaryReport.summary.throughtput}}</td>
-					<td class="t-center">{{summaryReport.summary.kb_per_second}}</td>
-					<td class="t-center">{{summaryReport.summary.average_bytes}}</td>
+					<td class="label-report" ng-click="openReportEachSampler(summaryReport, $index)">{{summaryReport.label}}</td>
+					<td>{{summaryReport.summary.samples}}</td>
+					<td class="text-right">{{summaryReport.summary.average}}</td>
+					<td class="text-right">{{summaryReport.summary.min_time}}</td>
+					<td class="text-right">{{summaryReport.summary.max_time}}</td>
+					<td class="text-right">{{summaryReport.summary.standard_deviation}}</td>
+					<td class="text-center">{{summaryReport.summary.error_percent}}</td>
+					<td class="text-center">{{summaryReport.summary.throughtput}}</td>
+					<td class="text-center">{{summaryReport.summary.kb_per_second}}</td>
+					<td class="text-center">{{summaryReport.summary.average_bytes}}</td>
 				</tr>
 				<tr ng-repeat="report in reports track by $index">
-					<td class="t-left label-report" ng-click="openReportEachSampler(report, $index)">{{report.label}}</td>
-					<td class="t-left">{{report.summary.samples}}</td>
-					<td class="t-right">{{report.summary.average}}</td>
-					<td class="t-right">{{report.summary.min_time}}</td>
-					<td class="t-right">{{report.summary.max_time}}</td>
-					<td class="t-right">{{report.summary.standard_deviation}}</td>
-					<td class="t-center">{{report.summary.error_percent}}</td>
-					<td class="t-center">{{report.summary.throughtput}}</td>
-					<td class="t-center">{{report.summary.kb_per_second}}</td>
-					<td class="t-center">{{report.summary.average_bytes}}</td>
+					<td  ng-click="openReportEachSampler(report, $index)">{{report.label}}</td>
+					<td>{{report.summary.samples}}</td>
+					<td class="text-right">{{report.summary.average}}</td>
+					<td class="text-right">{{report.summary.min_time}}</td>
+					<td class="text-right">{{report.summary.max_time}}</td>
+					<td class="text-right">{{report.summary.standard_deviation}}</td>
+					<td class="text-center">{{report.summary.error_percent}}</td>
+					<td class="text-center">{{report.summary.throughtput}}</td>
+					<td class="text-center">{{report.summary.kb_per_second}}</td>
+					<td class="text-center">{{report.summary.average_bytes}}</td>
 				</tr>
 			</table>
 		</div>

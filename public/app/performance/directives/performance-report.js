@@ -60,7 +60,7 @@ define(['performance/module'], function (module) {
 	      // size of array and random color for each sampler
 	      var size = []; 
 	      var colors = [];
-	      var colorsSample = ["#008571","#ffce32","#af6ee8","#7cc7ff","#15ac9f","#ffaa2a","#3a5ea4","#2dacd1","#3bc1ac","#fd6d42","#4178be","#a4aeb6","#b4e051","#db2780","#5596e6","#8996a0","#9cbe3e","#9855d4","#5aaafa","#3a4a58"];
+	      var colorsSample = ["#00B4A1","#ffaa2a","#ff5050","#ff7832","#9cbe3e","#ffce32","#9855d4","#af6ee8","#3a5ea4","#4178be","#5596e6","#7cc7ff","#7cc7ff","#2dacd1","008571","#a4aeb6","#8996a0","#3a4a58","#9cbe3e","#9855d4","#5aaafa","#3a4a58"];
       
 	      for(var i =0; i < maxLength; i++){
 	        var tmpObj = {};      
