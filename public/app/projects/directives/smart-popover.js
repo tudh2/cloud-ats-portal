@@ -6,11 +6,15 @@ define(['projects/module', 'lodash'], function(module, _) {
     return {
       restrict: 'A',
       replace: true,
+      scope: {
+        project: '=',
+        log: '&',
+        open: '&',
+        report: '&'
+      },
       link: function(scope, element, attributes) {
 
         $templateRequest(attributes.popoverTemplate).then(function(template) {
-
-          scope.project = JSON.parse(attributes.project);
 
           $(element).popover({
             'placement': function (context, source){

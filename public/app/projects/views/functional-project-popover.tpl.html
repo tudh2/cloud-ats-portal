@@ -38,23 +38,22 @@
             <div class='statistic-number'>{{project.totalCases}}</div>
         </div>
         <div class='col-sm-6'>
-            <a class='btn-border-line' ng-if="project.lastJobId" ng-click='openLastReport(project)'>Report</a>
+            <a class='btn-border-line' ng-if="project.lastJobId" ng-click='report()'>Report</a>
         </div>
        </div>
     </div>
     <div class='col-sm-12 card-actions top-line'>
      <div class='row'>
         <div class='col-sm-2'>
-            <a class='run-project' ng-click='openProject(project._id, project.type)'>Open</a>
+            <a class='run-project' ng-click='open()'>Open</a>
         </div>
         <div class='col-sm-3'>
-            <a class='run-project' ng-if="project.lastJobId" ng-click="openLastLog(project.log)">View Log</a>
+            <a class='run-project' ng-if="project.lastJobId" ng-click="log()">View Log</a>
         </div>
         <div class='col-sm-3'>
             <a class='run-project'
-              ng-if="watch"
-              target="_blank"
-              href="watch" 
+              ng-if="project.watchUrl && project.status === 'RUNNING'"target="_blank"
+              href="{{project.watchUrl}}" 
               >Watch</a>
         </div>
       </div>
