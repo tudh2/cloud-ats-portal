@@ -10,15 +10,8 @@ define(['projects/module', 'lodash'], function(module, _) {
 
         $templateRequest(attributes.popoverTemplate).then(function(template) {
 
-          scope.projectId = attributes.projectId;
-          scope.projectName = attributes.projectName;
-          scope.projectType = attributes.projectType;
-          scope.suites = attributes.projectSuites;
-          scope.cases = attributes.projectCases;
-          scope.scriptS = attributes.projectScripts;
-          scope.running = attributes.lastRunning;
-          scope.log = attributes.projectLog;
-          
+          scope.project = JSON.parse(attributes.project);
+
           $(element).popover({
             'placement': function (context, source){
               var $container = $(source).closest('.project');

@@ -1366,6 +1366,11 @@ a:hover.viewLog, a:focus.viewLog {
 	color: red;
 	pointer-events: none;
 }
+.tran-per-second {
+	style="position: relative;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	margin-left: 30px;
+}
 /*
 header .tenant {
 	margin-top: 16px;

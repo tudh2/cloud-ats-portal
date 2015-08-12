@@ -2,12 +2,12 @@
   <div class='col-sm-12 name-popover'>
       <div class="row">
         <div class='col-xs-6'>
-          <span class='proj-id'>#{{projectId.substring(0,8)}}</span>
+          <span class='proj-id'>#{{project._id.substring(0,8)}}</span>
         </div>
         <div class='col-xs-6 text-right text-capitalize'>
           <span ng-if="projectType == 'keyword'" data-icon="&#xe05b;" aria-hidden="true" class="proj-type"></span>
           <span ng-if="projectType == 'performance'" data-icon="&#xe007;" aria-hidden="true" class="proj-type"></span>
-          {{projectType}}
+          {{project.type}} test
         </div>
       </div>
   </div>
@@ -15,11 +15,11 @@
         <div class='row'>
         <div class='col-sm-6'>
             <div class='blur-name'>TEST SCRIPTS</div>
-            <div class='statistic-number'>{{scriptS}}</div>
+            <div class='statistic-number'>{{project.totalScripts}}</div>
         </div>
         <div class='col-sm-6'>
             <div class='blur-name'>LAST RUNNING</div>
-            <div class='statistic-number'>01/05/2015 22:30</div>
+            <div class='statistic-number'>{{project.lastRunning === undefined ? 'N/A' : project.lastRunning}}</div>
         </div>
        </div>
     </div>
@@ -29,20 +29,17 @@
 
         </div>
         <div class='col-sm-6'>
-            <a href='#' class='btn-border-line'>Report</a>
+          <a class='btn-border-line' ng-if="project.lastJobId" ng-click="openLastReport(project)">Report</a>
         </div>
        </div>
     </div>
 <div class='col-sm-12 card-actions top-line'>
      <div class='row'>
         <div class='col-sm-2'>
-            <a class='run-project' ng-click='openProject(projectId, projectType)'>Open</a>
+            <a class='run-project' ng-click='openProject(project._id, project.type)'>Open</a>
         </div>
         <div class='col-sm-3'>
-            <a href='#' class='run-project'>View Log</a>
-        </div>
-        <div class='col-sm-3'>
-            <a href='#' class='run-project'>Watch</a>
+            <a class='run-project' ng-if="project.lastJobId"  ng-click="openLastLog(project.log)">View Log</a>
         </div>
         <div class='col-sm-4'>
             <a href='#' class='pull-right run-project'>Run</a>
