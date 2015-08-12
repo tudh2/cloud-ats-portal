@@ -41,7 +41,7 @@
             <div class="execute-action-list">
             <a class="btn-border-line btnViewLog" ng-click="viewLog()">View Log</a>
             <a class="btn-border-line btnRun" ng-click="runLastScripts()" ng-if="project.status != 'RUNNING'">Run</a>
-            <a class="btn-border-line btnRun" ng-if="project.status === 'RUNNING'">Stop</a>
+            <a ng-if="project.status === 'RUNNING'" class="btn-border-line btn-danger btnViewLog ng-scope">Stop</a>
             </div>
        </div>
     </div>

@@ -1,51 +1,49 @@
 <div class="modal-dialog ts-newScript">
 	<div class="modal-content">
         
-        <div class="modal-header">
-        <header class="header-navtabs">
-          <div class="header-title">TEST SCRIPTS <span class="proj-id">#{{script._id.substring(0,8)}}</span></div>
+    <div class="modal-header">
+      <header class="header-navtabs">
+        <div class="header-title">TEST SCRIPTS <span class="proj-id">#{{script._id.substring(0,8)}}</span></div>
 
-          <ul id="myTab" class="nav nav-tabs pull-right">
-            <li class="active">
-              <a data-toggle="tab" href="#basic" id="basicId" ng-click="basic()"><span class="hidden-mobile">BASIC INFO</span></a>
-            </li>
-            <li>
-              <a data-toggle="tab" href="#samplers" id="samplersId" ng-click="newSampler();"><span class="hidden-mobile">SAMPLER</span></a>
-            </li>
-            <li>
-              <a data-toggle="tab" href="#configuration" id="configurationId" ng-click="configuration()"><span class="hidden-mobile">CONFIGURATION</span></a>
-            </li>
-          </ul>
-       </header>
-      </div>
-		
+        <ul id="myTab" class="nav nav-tabs pull-right">
+          <li class="active">
+            <a data-toggle="tab" href="#basic" id="basicId" ng-click="basic()"><span class="hidden-mobile">BASIC INFO</span></a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#samplers" id="samplersId" ng-click="newSampler();"><span class="hidden-mobile">SAMPLER</span></a>
+          </li>
+          <li>
+            <a data-toggle="tab" href="#configuration" id="configurationId" ng-click="configuration()"><span class="hidden-mobile">CONFIGURATION</span></a>
+          </li>
+        </ul>
+     </header>
+    </div>
 		<div class="modal-body tab-content samplers">
 			<div class="tab-pane fade in active" id="basic">
-                <div class="basic-info row">
-                    <div class="col-md-offset-1 col-md-8">
-                      <div class="form-basic-info">
-                        <div class="form-title"> <span class="icon-equalizer id-test" aria-hidden="true"></span>
-                          <h4>Basic Information</h4>
-                        </div>
-                        <div class="form-content">
-                          <form class="form-horizontal">
-                            <div class="form-group">
-                              <label class="col-sm-4">Test Script Name:</label>
-                              <div class="col-sm-8">
-                                <textarea  rows="4" class="form-control text-area-script" ng-model="script.name" name="text-area-script"></textarea>
-                              </div>
-                            </div>
-                              <div class="form-group">
-                                  <div class="col-sm-offset-4 col-sm-8">
-                                  <a class="btn btn-danger btn-deleteScript" ng-if="script._id != null" ng-click="deleteScript(script)" data-dismiss="modal">Delete</a>
-                                  </div>
-                              </div>
-                          </form>
-                        </div>
+        <div class="basic-info row">
+            <div class="col-md-offset-1 col-md-8">
+              <div class="form-basic-info">
+                <div class="form-title"> <span class="icon-equalizer id-test" aria-hidden="true"></span>
+                  <h4>Basic Information</h4>
+                </div>
+                <div class="form-content">
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <label class="col-sm-4">Test Script Name:</label>
+                      <div class="col-sm-8">
+                        <textarea  rows="4" class="form-control text-area-script" ng-model="script.name" name="text-area-script"></textarea>
                       </div>
                     </div>
-                  </div>
-                
+                      <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                          <a class="btn btn-danger btn-deleteScript" ng-if="script._id != null" ng-click="deleteScript(script)" data-dismiss="modal">Delete</a>
+                        </div>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 			</div>
 			<div class="tab-pane fade in" id="samplers">
 				<div class="sampler-space">
@@ -60,9 +58,7 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-4  click-sampler" ng-repeat="i in script.samplers track by $index"  ng-click="chooseSampler(i, $index)">
-								<div ng-class="{'sampler_name_selected tc-itemBlock' : selected.index == $index,
-													'sampler_name tc-itemBlock' : selected.index != $index }">
-                                    
+								<div ng-class="{'sampler_name_selected tc-itemBlock' : selected.index == $index, 'sampler_name tc-itemBlock' : selected.index != $index }">
 									<div class="row">
 										<div class="col-sm-8 tc-attributes">
 											<div class ="tc-id">#{{$index +1}}</div>
@@ -70,83 +66,79 @@
 										<div class="col-sm-4 tc-attributes remove-icon text-right" ng-if="selected.index == $index">
 												<i class="fa icon-delete fa-minus-circle text-amber-color" ng-click="deleteSampler($index)"></i>
 										</div>
-
-                                        <div class="col-md-12 tc-name">
-                                            {{i.name}}
-                                        </div>
-                                    </div>
+                      <div class="col-md-12 tc-name">
+                          {{i.name}}
+                      </div>
+                    </div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-sm-6 sampler-form">
-                         <div class="row "> 
-                             <div class="col-sm-12 form-title">
-                                <span data-js-prompt="&amp;#xe067;" data-icon="&#xe067;" aria-hidden="true" class="glyph-item mega"></span>                                                 <h4>Add Sampler</h4>
-                            </div>
-                        </div>
+             <div class="row "> 
+               <div class="col-sm-12 form-title">
+                <span data-js-prompt="&amp;#xe067;" data-icon="&#xe067;" aria-hidden="true" class="glyph-item mega"></span>
+                <h4>Add Sampler</h4>
+              </div>
+            </div>
 						<form class="form-horizontal">
 							<div class="form-group">
-                                <label class="col-sm-4">Sampler name</label>
-                                <div class="col-sm-8 name-sampler">
-                                        <input type="text" class="form-control" placeholder="Enter Name" ng-model="selected.name" name="name">
-                                </div>
+                <label class="col-sm-4">Sampler name</label>
+                <div class="col-sm-8 name-sampler">
+                  <input type="text" class="form-control" placeholder="Enter Name" ng-model="selected.name" name="name">
+                </div>
 							</div>
-					
-                            <div class="form-group">
-							<label class="col-sm-4">Sampler method</label>
-							<div class="col-sm-8">
-								<select class="form-control" ng-model="selected.method">
-                                  <option value="GET">GET</option>
-                                  <option value="POST">POST</option>
-                                  <option value="PUT">PUT</option>
-                                  <option value="DELETE">DELETE</option>
-                                </select>
+              <div class="form-group">
+  							<label class="col-sm-4">Sampler method</label>
+  							<div class="col-sm-8">
+  								<select class="form-control" ng-model="selected.method">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="DELETE">DELETE</option>
+                  </select>
 								</div>
 							</div>
-						
-                            <div class="form-group">
-							<label class="col-sm-4">Sampler URL</label>
-							<div class="col-sm-8 sampler-url">
-									<input type="text" class="form-control" placeholder="e.g. http://www.abc.com" ng-model="selected.url" name="url">
-							</div>
-                             </div>
-					
-                             <div class="form-group">
-							<label class="col-sm-4">Parameters</label>
-							<div class="col-sm-8">
-								    <div  ng-repeat="i in selected.arguments track by $index">
-                                        <div class="col-sm-5 param-name">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" ng-model="i.paramName" placeholder="Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5 param-value">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" ng-model="i.paramValue" placeholder="Value">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2 add-remove-param-icon">
-                                            <i class="fa fa-minus-circle icon text-amber-color " ng-if="selected.arguments.length > 1" ng-click="removeArgument($index)"></i>	
-                                            <i class="fa fa-plus-circle icon-add text-teal-color " ng-if="$index == selected.arguments.length -1" ng-click="addArgument($index)"></i>
-                                        </div>
-									</div>
+              <div class="form-group">
+  							<label class="col-sm-4">Sampler URL</label>
+  							<div class="col-sm-8 sampler-url">
+  									<input type="text" class="form-control" placeholder="e.g. http://www.abc.com" ng-model="selected.url" name="url">
+  							</div>
+              </div>
+              <div class="form-group">
+  							<label class="col-sm-4">Parameters</label>
+  							<div class="col-sm-8">
+								  <div  ng-repeat="i in selected.arguments track by $index">
+                    <div class="col-sm-5 param-name">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="i.paramName" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="col-sm-5 param-value">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="i.paramValue" placeholder="Value">
+                      </div>
+                    </div>
+                      <div class="col-sm-2 add-remove-param-icon">
+                          <i class="fa fa-minus-circle icon text-amber-color " ng-if="selected.arguments.length > 1" ng-click="removeArgument($index)"></i>	
+                          <i class="fa fa-plus-circle icon-add text-teal-color " ng-if="$index == selected.arguments.length -1" ng-click="addArgument($index)"></i>
+                      </div>
+								   </div>
 								</div>
 							</div>
+              <div class="form-group assertion-text" ng-hide="true">
+  							<label class="col-sm-4">Assertion text</label>
+  							<div class="col-sm-8">
+  									<input type="text" class="form-control" placeholder="Enter" ng-model="selected.assertion_text">
+  							</div>	
+              </div>
 
-                             <div class="form-group assertion-text">
-							<label class="col-sm-4">Assertion text</label>
-							<div class="col-sm-8">
-									<input type="text" class="form-control" placeholder="Enter" ng-model="selected.assertion_text">
-							</div>	
-                            </div>
-
-                            <div class="form-group">
-							<label class="col-sm-4">Constant time(s)</label>
-							<div class="col-sm-8">
-									<input type="text" class="form-control" placeholder="miliseconds" ng-model="selected.constant_time">
-							</div>
-                             </div>
+              <div class="form-group">
+  							<label class="col-sm-4">Constant time(s)</label>
+  							<div class="col-sm-8">
+  									<input type="text" class="form-control" placeholder="miliseconds" ng-model="selected.constant_time">
+  							</div>
+              </div>
 
 						<div class="form-group">
 							<div class="col-sm-offset-4 col-sm-8">
@@ -154,7 +146,7 @@
 								<a class="btn btn-danger btn-reset pull-right" ng-click="resetSamplerForm()">Reset</a>
 							</div>
 						</div>
-                            </form>
+          </form>
 					</div>	
 				</div>
 			</div>
