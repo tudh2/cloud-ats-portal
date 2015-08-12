@@ -1,9 +1,11 @@
 <div id="content">
   <div class="row">
     <div class="report-page">
-      <div class="col-sm-12 clearfix t-control-bar">
+      <div class="col-sm-12 clearfix">
+          <div class="row">
         <div class="col-sm-5 ">
-          <section class="col-sm-6 smart-form t-reset-padding">
+            <div class="row">
+          <section class="col-sm-6 smart-form">
             <label class="input"> 
               <i class="icon-append fa fa-search"></i>
                 <input type="text" name="Search" ng-model="Search" placeholder="Search Script" id="Search" minlength="3">
@@ -16,9 +18,10 @@
               </select>
             </div>
           </div>
+                </div>
         </div>
-        <div class="col-sm-7 ">
-          <p class="functional-title col-sm-6 t-export-bar">
+        <div class="col-sm-7">
+          <p class="functional-title col-sm-6 export-bar">
             Export to:
             <i class="fa fa-file-word-o"></i>
             <span>word</span>
@@ -28,11 +31,11 @@
             <span>pdf</span>
           </p>
           
-          <button type="submit" class="btn new-project pull-right" ng-click="backToOverviewPage();" style="color: white;">Back to project detail</button>
+          <button type="submit" class="btn btn-default pull-right" ng-click="backToOverviewPage();" >Back to project detail</button>
         </div>
+              </div>
       </div>
-
-      <div class="col-sm-12 clearfix" id="all-chart" ng-repeat="report in reports">
+      <div class="col-sm-12 clearfix " id="all-chart" ng-repeat="report in reports">
         <performance-report data-reports="report"></performance-report>
       </div>
     </div>

@@ -54,7 +54,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
                     xkey : 'x',
                     ykeys : ['P', 'F', 'S'],
                     labels : ['Pass', 'Fail', 'Skip'],
-                    barColors : ['#15ab9f','#ff4f51','#fbd601'],
+                    barColors : ['#00B4A1','#ff5050','#ffaa2a'],
                     stacked : true
         });
       };
