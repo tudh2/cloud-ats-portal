@@ -116,9 +116,5 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
       EventService.feed(updateStatus);
 
-      $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        EventService.close();
-      });
-
   	}]);
 });

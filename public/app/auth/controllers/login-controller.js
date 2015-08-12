@@ -1,8 +1,8 @@
 define(['auth/module'], function(module) {
   'use strict';
 
-  return module.registerController('LoginCtrl', ['$scope', '$cookies', '$state', '$window', '$rootScope', 'AuthenticationService', LoginCtrl]);
-
+  return module.registerController('LoginCtrl', 
+  ['$scope', '$cookies', '$state', '$window', '$rootScope', 'AuthenticationService',
   function LoginCtrl($scope, $cookies, $state, $window, $rootScope, AuthenticationService) {
     $scope.email = '';
     $scope.password = '';
@@ -30,15 +30,7 @@ define(['auth/module'], function(module) {
           }
         });
       }
-	   /*var mockContext = {"user":{"_id":"haint@cloud-ats.net","first_name":"Hai","last_name":"Nguyen","created_date":{"$date"
-:"2015-06-30T06:22:08.588Z"},"active":true,"password":"12345","tenant":{"_id":"Fsoft"},"spaces":[{"_id"
-:"eed54048-db71-4193-8278-48847666de58"}],"roles":null},"tenant":{"_id":"Fsoft","created_date":{"$date"
-:"2015-06-30T06:22:08.558Z"},"active":true,"features":null}};
-		$window.sessionStorage.setItem('context', JSON.stringify(mockContext));
-      $rootScope.context = mockContext;
-      $state.go('app.dashboard');
-<<<<<<< HEAD
-	  */
     }
-  }
+  }]);
+  
 });

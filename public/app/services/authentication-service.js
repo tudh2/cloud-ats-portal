@@ -4,8 +4,8 @@ define(['app'], function(app) {
 
   return app.factory('AuthenticationService', 
 
-    ['$http', '$q', '$log', '$cookies', '$window', '$rootScope', '$state', '$stateParams',
-    function($http, $q, $log, $cookies, $window, $rootScope, $state, $stateParams) {
+    ['$http', '$q', '$log', '$cookies', '$window', '$rootScope', '$state', '$stateParams', 'EventService',
+    function($http, $q, $log, $cookies, $window, $rootScope, $state, $stateParams, EventService) {
     
     function login(email, password, callback) {
       var request = {
@@ -43,6 +43,7 @@ define(['app'], function(app) {
 
       $http(request)
       .success(function() {
+
         $cookies.remove('authToken');
         if ($cookies.get('space') === undefined || $cookies.get('space') == 'null') {
           $cookies.remove('space')
