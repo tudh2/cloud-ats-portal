@@ -3,7 +3,9 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
   'use strict';
    
   module.registerController('PerformanceExeCtrl', ['$scope', '$state', '$stateParams', '$compile', '$templateRequest', 'ScriptService', 'PerformanceService', function($scope, $state, $stateParams, $compile, $templateRequest, ScriptService, PerformanceService) {
-    
+   
+    $scope.searchTerms = '';
+
     $scope.samplerReport = true; 
  		$scope.projectId = $stateParams.id;
     var selected = [];

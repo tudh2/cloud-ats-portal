@@ -3,7 +3,7 @@
 
     <div class="actionMenu row btn-action-list">
       <span class="col-sm-6 pull-right"> 
-          <a class="btn btn-primary">Edit</a>
+          <a class="btn btn-primary" ng-click="edit()">Edit</a>
           <a data-ui-sref="app.projects" class="btn btn-default">Close</a>
       </span>
     </div>
@@ -71,7 +71,7 @@
             <td>{{i.scripts.length}}</td>
             <td><span class="label label-success">{{i.status}}</span></td>
             <td>{{i.created_date}}</td>
-            <td>Cloud-ATS</td>
+            <td>{{i.creator}}</td>
           </tr>
         </tbody>
       </table>
@@ -82,5 +82,7 @@
   <!-- Project Log -->
 
   <div class="modal fade" id="project-log">
+  </div>
+  <div class="modal fade" id="project-edittion">
   </div>
 </div>

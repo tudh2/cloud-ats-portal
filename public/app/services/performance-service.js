@@ -24,7 +24,7 @@ define(['layout/module'], function (module) {
 			get: function (projectId, callback) {
 				var request = {
 					method: "GET",
-					url: appConfig.RestEntry + '/api/v1/project/performance/get/'+projectId,
+					url: appConfig.RestEntry + '/api/v1/project/performance/'+projectId,
 					headers: {
 						'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -54,6 +54,43 @@ define(['layout/module'], function (module) {
           callback(data);
         }).error(function(data, status) {
 
+        });
+      },
+      update: function (id, name, callback) {
+        var request = {
+          method: 'PUT',
+          url: appConfig.RestEntry + '/api/v1/project/performance',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: {
+            name: name,
+            id: id
+          }
+        };
+
+        $http(request).success(function (data, status) {
+          callback(data, status);
+        }).error(function (data, status) {
+          callback(data, status);
+        });
+      },
+      delete: function (id, callback) {
+        var request = {
+          method: 'DELETE',
+          url: appConfig.RestEntry + '/api/v1/project/performance',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: id
+        };
+
+        $http(request).success(function (data, status) {
+          callback(data, status);
+        }).error(function (data, status) {
+          callback(data, status);
         });
       },
       run: function (projectId, suiteIds, callback) {

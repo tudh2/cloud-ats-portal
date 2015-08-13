@@ -36,6 +36,80 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         loadModal();
       }
 
+      var loadEditModal = function () {
+        var $modal = $('#project-edittion');
+
+        $modal.html('');
+        $templateRequest('app/performance/views/project-edittion-modal-content.tpl.html').then(function (template) {
+
+          $modal.html($compile(template)($scope));
+          $modal.modal('show');
+        });
+      }
+
+      $scope.edit = function () {
+        loadEditModal();
+        $scope.newName = angular.copy($scope.project.name);
+      }
+
+      $scope.update = function (name) {
+        
+        PerformanceService.update($scope.projectId, name, function (data, status) {
+
+          switch (status) {
+            case 304:
+              $.smallBox({
+                title: 'Notification',
+                content: 'Your project name does not change',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              break;
+            case 202:
+              $.smallBox({
+                title: 'Notification',
+                content: 'Your project has been updated',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              $scope.project.name = name;
+              break;
+            default:
+              break;
+          }
+        });
+      }
+
+      $scope.delete = function () {
+        $.SmartMessageBox({
+            title: "Delete project",
+            content: "Are you sure to delete the project",
+            buttons: '[No][Yes]'
+          }, function (ButtonPressed) {
+            if (ButtonPressed === "Yes") {
+
+              PerformanceService.delete($scope.projectId, function (data, status) {
+                if (status === 200) {
+                  $.smallBox({
+                    title: "Notification",
+                    content: "<i class='fa fa-clock-o'></i> <i>The project has already deleted</i>",
+                    color: "#296191",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 4000
+                  });
+
+                  $state.go('app.projects');
+                }
+              });
+            }
+            if (ButtonPressed === "No") {
+               return;
+            }
+        });
+      }
+
       $scope.runLastScripts = function () {
         $scope.project.status = "RUNNING";
         $scope.project.log = undefined;
@@ -90,6 +164,13 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                   return job._id === obj._id;
                 });
                 currentJob.status = 'Running';
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'The job ' + currentJob._id + " is running",
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
                 break;
               case 'Completed':
                 var currentJob = _.find($scope.project.jobs, function (obj) {

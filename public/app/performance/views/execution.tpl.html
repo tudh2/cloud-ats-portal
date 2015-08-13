@@ -4,12 +4,12 @@
 		<div>
             <section class="smart-form">
             <label class="input"><i class="icon-append fa fa-search"></i>
-              <input type="text" name="Search" ng-model="Search" placeholder="Search Test Script" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
+              <input type="text" name="Search" ng-model="searchTerms" placeholder="Search Test Script" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
             </label>
           </section>
         </div>
      
-        <div class="row list-script" style="margin-top: 10px;" ng-repeat="script in scripts track by $index">
+        <div class="row list-script" style="margin-top: 10px;" ng-repeat="script in scripts | search: searchTerms track by $index">
             <div class="col-md-12">
                 <span class="pull-left script-name">{{script.name}}</span>
                 <div class="smart-form check-list">
