@@ -64,7 +64,9 @@ define([
             deps: $couchPotatoProvider.resolveDependencies([
               'keyword/controllers/driven-controller',
               'keyword/directives/tabs-header',
-              'services/case-service'
+              'modules/forms/directives/input/smart-xeditable',
+              'services/case-service',
+              'services/data-service'
             ])
           }
         }
