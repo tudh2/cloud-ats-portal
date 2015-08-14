@@ -18,17 +18,25 @@ define(['app'], function (app) {
       });
     };
 
-    return{
+    var register = function() {
+      var token = $cookies.get('authToken');
+      var feed = $rootScope.feed === undefined ? new EventSource(appConfig.RestEntry + '/api/v1/event/feed/' + token) : $rootScope.feed;
+      $rootScope.feed = feed;
+
+      $window.onbeforeunload = function (e) {
+        close();
+      }
+      // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      //   close();
+      // });
+      
+      return feed;
+    }
+
+    return {
       feed: function(callback) {
-        var token = $cookies.get('authToken');
-        var feed = new EventSource(appConfig.RestEntry + '/api/v1/event/feed/' + token);
-        feed.addEventListener("message", callback, false);
-        $window.onbeforeunload = function (e) {
-          close();
-        }
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-          close();
-        });
+        var feed = register();
+        feed.addEventListener("message", callback, false);  
       }
     }
   }])
