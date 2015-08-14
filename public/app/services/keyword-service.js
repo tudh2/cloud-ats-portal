@@ -75,7 +75,43 @@ define(['keyword/module'], function(module) {
 
         });
       },
+      update: function (id, name, callback) {
+        var request = {
+          method: 'PUT',
+          url: appConfig.RestEntry + '/api/v1/project/keyword',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: {
+            name: name,
+            id: id
+          }
+        };
 
+        $http(request).success(function (data, status) {
+          callback(data, status);
+        }).error(function (data, status) {
+          callback(data, status);
+        });
+      },
+      delete: function (id, callback) {
+        var request = {
+          method: 'DELETE',
+          url: appConfig.RestEntry + '/api/v1/project/keyword',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          },
+          data: id
+        };
+
+        $http(request).success(function (data, status) {
+          callback(data, status);
+        }).error(function (data, status) {
+          callback(data, status);
+        });
+      },
       getKeywords: function(callback) {
         $http.get('api/keywords.json').success(function(data) {
           if (typeof callback === 'function') {

@@ -115,6 +115,90 @@ define(['keyword/module', 'lodash'], function (module, _) {
         });
       }
 
+      var loadEditModal = function () {
+        var $modal = $('#project-edittion');
+
+        $modal.html('');
+        $templateRequest('app/keyword/views/project-edittion-modal-content.tpl.html').then(function (template) {
+
+          $modal.html($compile(template)($scope));
+          $modal.modal('show');
+        });
+      }
+
+      $scope.edit = function () {
+        loadEditModal();
+        $scope.newName = angular.copy($scope.project.name);
+      }
+
+
+      $scope.update = function (name) {
+        
+        var $modal = $('#project-edittion');
+        if (!$scope.newName) {
+
+          $modal.find('.form-group').addClass('has-error');
+          $modal.find('.form-group').children().first().focus();
+          return;
+        }
+
+        KeywordService.update($scope.projectId, name, function (data, status) {
+
+          switch (status) {
+            case 304:
+              $.smallBox({
+                title: 'Notification',
+                content: 'Your project name does not change',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              break;
+            case 202:
+              $.smallBox({
+                title: 'Notification',
+                content: 'Your project has been updated',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              $scope.project.name = name;
+              break;
+            default:
+              break;
+          }
+          $modal.modal('hide');
+        });
+      }
+
+       $scope.delete = function () {
+        $.SmartMessageBox({
+            title: "Delete project",
+            content: "Are you sure to delete the project",
+            buttons: '[No][Yes]'
+          }, function (ButtonPressed) {
+            if (ButtonPressed === "Yes") {
+
+              KeywordService.delete($scope.projectId, function (data, status) {
+                if (status === 200) {
+                  $.smallBox({
+                    title: "Notification",
+                    content: "<i class='fa fa-clock-o'></i> <i>The project has already deleted</i>",
+                    color: "#296191",
+                    iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                    timeout: 4000
+                  });
+
+                  $state.go('app.projects');
+                }
+              });
+            }
+            if (ButtonPressed === "No") {
+               return;
+            }
+        });
+      }
+
       var updateStatus = function(msg) {
         $scope.$apply(function() {
           var job = JSON.parse(msg.data);
