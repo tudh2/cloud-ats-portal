@@ -2,9 +2,9 @@
   <div class="modal-content add-datadriven">
     <div class="modal-header header-data-driven">
       <div class="row">
-      <span class="col-md-4"><i class="fa fa-table id-test"></i> Data Driven of Test Case 3</span>
+      <span class="col-md-4"><i class="fa fa-table id-test"></i> Data Driven of {{current.name}}</span>
       <span class="col-md-8 group-btn-datadriven">
-        <a class="btn-border-line btn-add-newdata"><i class=" id-test fa fa-plus"></i>Add new Data</a>
+        <a class="btn-border-line btn-add-newdata" ng-click="addNewRow()"><i class=" id-test fa fa-plus"></i>Add new Data</a>
         <a class="btn-border-line btn-search-data" ng-click="chooseDataDriven()"><i style="margin-right:10px" class="fa fa-search"></i>Select from existing data</a> 
       </span>
           </div>
@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label class="col-md-2">Data Driven Name</label>
                 <div class="col-md-4">
-                    <input class="form-control input-text-dialog-datadriven" placeholder="Data Driven Name" type="text">
+                    <input class="form-control input-text-dialog-datadriven" placeholder="Data Driven Name"  name = "driven-name" type="text" ng-model="driven_name">
                  </div>
             </div>
           </div>
@@ -25,34 +25,22 @@
               <table class="table table-datadriven">
               <thead>
                 <tr>
-                  <th>url</th>
-                  <th>id</th>
-                  <th>source_locator</th>
-                  <th>desc_locator</th>
-                  <th>asc_locator</th>
+                  <th ng-repeat="(key, value) in dataset[0]">{{key}}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="tr-table-datadriven">
-                  <td>www.google.com</td>
-                  <td>search_field</td>
-                  <td>source value</td>
-                  <td>desc value</td>
-                  <td>asc value</td>
-                </tr>
-                <tr class="tr-table-datadriven">
-                  <td>www.google.com</td>
-                  <td>search_field</td>
-                  <td>source value</td>
-                  <td>desc value</td>
-                  <td>asc value</td>
-                </tr>
-                <tr class="tr-table-datadriven" ng-repeat="i in [1,2,3,4,5,6]">
-                  <td>www.google.com</td>
-                  <td>search_field</td>
-                  <td>source value</td>
-                  <td>desc value</td>
-                  <td>asc value</td>
+                <tr class="tr-table-datadriven" ng-repeat="(key_param, value_param) in dataset">
+                  <td ng-repeat="(key, value) in value_param" class="td-table-datadriven-value">
+                    <a  href-void 
+                        data-type="text" 
+                        smart-xeditable 
+                        data-index-dataset = "{{key_param}}"
+                        data-name-param = "{{key}}"
+                        data-ng-model="value"
+                        data-options="editableOptions" class="editable editable-click"
+                        data-success-callback="changeParamValue"
+                    >{{value}}</a>
+                  </td>
                 </tr>
               </tbody>
               </table>
@@ -62,8 +50,8 @@
     </div>
 
     <div class="modal-footer modal-footer-datadriven">
-      <a class="btn btn-default pull-left">Reset</a> 
-      <a class="btn btn-primary">Save</a> 
+      <a class="btn btn-default pull-left" ng-click="resetData(dataset)">Reset</a> 
+      <a class="btn btn-primary" ng-click="createNewData(dataset)">Save</a> 
       <a class="btn btn-default" data-dismiss="modal">Close</a> 
     </div>
   </div>

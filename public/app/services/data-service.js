@@ -4,7 +4,7 @@ define(['app'], function(app) {
   app.factory('DataService', ['$http', '$q', '$cookies', '$rootScope', '$window', '$state',
     function($http, $q, $cookies, $rootScope, $window, $state){
       return {
-        create: function(name, dataset, callback) {
+        create: function(name, dataset, caseId, callback) {
           var request = {
             method: 'POST',
             url: appConfig.RestEntry + '/api/v1/data',
@@ -14,7 +14,8 @@ define(['app'], function(app) {
             },
             data: {
               name: name,
-              dataset: dataset
+              dataset: dataset,
+              caseId: caseId
             }
           };
 
@@ -111,6 +112,7 @@ define(['app'], function(app) {
         }, 
 
         update: function (id, name, dataset, callback) {
+          console.log(dataset);
           var request = {
             method: 'PUT',
             url: appConfig.RestEntry + '/api/v1/data/update',
