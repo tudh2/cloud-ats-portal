@@ -30,7 +30,7 @@ define(['performance/module'], function(module) {
         $http(request).success(function(data, status) {
           callback(data, status);
         }).error(function(data, status) {
-
+          callback(data, status);
         });
       },
       getLastestRunning: function (projectId, callback) {

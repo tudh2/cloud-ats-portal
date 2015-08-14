@@ -213,7 +213,6 @@ define(['projects/module', 'lodash'], function (module, _) {
 
     var loadKeywordProjects = function() {
       KeywordService.list(function (response) {
-        console.log(response);
         if ($scope.projects === undefined) $scope.projects = [];
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);
