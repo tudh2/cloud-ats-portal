@@ -15,32 +15,30 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.dataReports = [];
 
       var getDataReport = function(data) {
-        for(var i = 0; i < data.length; i++) {
-          var obj;
-          var nameSuite;
-          var suiteReport = data[i].suite_reports;
+        var obj;
+        var nameSuite;
+        var suiteReport = JSON.parse(data.suite_reports);
 
-          _.forEach(suiteReport,function(n,key) {
-              obj = n;
-              nameSuite = key;
-              var dataReport = {
-                x : nameSuite,
-                P : obj.total_pass,
-                F : obj.total_fail,
-                S : obj.total_skip
-              }
-              $scope.dataReports.push(dataReport);
-              if(obj.test_result) {
-                obj.test_result = 'Pass'
-              } else {
-                obj.test_result = 'Fail'
-              }
+        _.forEach(suiteReport,function(n,key) {
+            obj = n;
+            nameSuite = key;
+            var dataReport = {
+              x : nameSuite,
+              P : obj.total_pass,
+              F : obj.total_fail,
+              S : obj.total_skip
+            }
+            $scope.dataReports.push(dataReport);
+            if(obj.test_result) {
+              obj.test_result = 'Pass'
+            } else {
+              obj.test_result = 'Fail'
+            }
 
-              $scope.suiteReports.push(obj);
-          })
+            $scope.suiteReports.push(obj);
+        })
 
-          draw($scope.dataReports);
-        }
+        draw($scope.dataReports);
       };
 
       var draw = function(dataReports) {
