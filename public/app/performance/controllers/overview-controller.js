@@ -52,8 +52,27 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         $scope.newName = angular.copy($scope.project.name);
       }
 
+      var $project_name = $('#project-edittion').find('input');
+
+      $('body').on('keypress', $project_name, function () {
+
+      	var $element = $('#project-edittion').find('input');
+      	if ($scope.newName != '' || $scope.newName != undefined) {
+
+      		$element.parent().removeClass('has-error');
+      	}
+      });
+
       $scope.update = function (name) {
         
+        var $modal = $('#project-edittion');
+        if (!$scope.newName) {
+
+        	$modal.find('.form-group').addClass('has-error');
+        	$modal.find('.form-group').children().first().focus();
+        	return;
+        }
+
         PerformanceService.update($scope.projectId, name, function (data, status) {
 
           switch (status) {
@@ -79,6 +98,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
             default:
               break;
           }
+          $modal.modal('hide');
         });
       }
 

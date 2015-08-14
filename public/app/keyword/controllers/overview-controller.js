@@ -25,6 +25,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
         KeywordService.getListReport(projectId,function(data,status) {
           $scope.listReports = [];
+          console.log(data);
           _.forEach(data, function(job) {
             var report = { 
               created_date : job.created_date,  
@@ -121,6 +122,12 @@ define(['keyword/module', 'lodash'], function (module, _) {
             $scope.project.status = job.project_status;
             $scope.project.watchUrl = job.watch_url;
             $scope.project.log = job.log;
+
+            if (job.project_status === 'READY') {
+            	KeywordService.afterRun($scope.projectId, job._id, function (data, status) {
+	            	console.log(data);
+	            });
+            }
           }
         })
       }
