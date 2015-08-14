@@ -25,7 +25,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
         KeywordService.getListReport(projectId,function(data,status) {
           $scope.listReports = [];
-          console.log(data);
           _.forEach(data, function(job) {
             var report = { 
               created_date : job.created_date,  
@@ -48,6 +47,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
             $scope.listReports.push(report);
           });
+
         });
       }
 
@@ -124,9 +124,31 @@ define(['keyword/module', 'lodash'], function (module, _) {
             $scope.project.log = job.log;
 
             if (job.project_status === 'READY') {
-            	KeywordService.afterRun($scope.projectId, job._id, function (data, status) {
-	            	console.log(data);
-	            });
+
+              var report = { 
+                  created_date : undefined,  
+                  job_id: undefined,
+                  total_test_case : 0,
+                  total_pass : 0,
+                  total_fail : 0 
+              };
+            	KeywordService.getReport($scope.projectId, job._id, function (data, status) {
+
+                report.created_date = data.created_date;
+                report.job_id = data.functional_job_id;
+                var suite_reports = JSON.parse(data.suite_reports);
+                _.forEach(suite_reports, function (suite) {
+                  report.total_test_case += suite.total_test_case;
+                  report.total_pass += suite.total_pass;
+                  report.total_fail += suite.total_fail;
+                });
+
+                if (report.total_fail === 0) {
+                  report.test_result = 'Pass';
+                } else report.test_result = 'Fail';
+  	          });
+
+              $scope.listReports.unshift(report);
             }
           }
         })

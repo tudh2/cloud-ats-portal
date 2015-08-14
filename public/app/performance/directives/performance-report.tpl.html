@@ -34,7 +34,7 @@
 				</tr>
                     </thead>
 				<tr>
-					<td class="label-report" ng-click="openReportEachSampler(summaryReport, $index)">{{summaryReport.label}}</td>
+					<td class="label-report"><a ng-click="openReportEachSampler(summaryReport, $index)">{{summaryReport.label}}</a></td>
 					<td>{{summaryReport.summary.samples}}</td>
 					<td class="text-right">{{summaryReport.summary.average}}</td>
 					<td class="text-right">{{summaryReport.summary.min_time}}</td>
@@ -46,7 +46,7 @@
 					<td class="text-center">{{summaryReport.summary.average_bytes}}</td>
 				</tr>
 				<tr ng-repeat="report in reports track by $index">
-					<td  ng-click="openReportEachSampler(report, $index)">{{report.label}}</td>
+					<td class="label-report"><a ng-click="openReportEachSampler(report, $index)">{{report.label}}</a></td>
 					<td>{{report.summary.samples}}</td>
 					<td class="text-right">{{report.summary.average}}</td>
 					<td class="text-right">{{report.summary.min_time}}</td>
