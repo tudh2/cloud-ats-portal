@@ -64,8 +64,19 @@ define(['keyword/module'], function (module) {
 
       $scope.clickToCase = function(caze) {
         $scope.current = caze;
-        $scope.driven_name = "";
-        buildDataset($scope.current);
+
+        if (caze.data_driven == null) {
+          $scope.driven_name = "";
+          buildDataset($scope.current);
+        } else {
+          $scope.dataset = [];
+          DataService.dataSet(caze.data_driven._id).then(function (response) {
+
+            $scope.dataset = JSON.parse(response.data.data_source);
+            $scope.driven_name = response.data.name;
+          });
+        }
+       
         loadModal();
       };
 
@@ -145,16 +156,50 @@ define(['keyword/module'], function (module) {
           return false;
 
         } else {
-          DataService.create($scope.driven_name.trim(), $scope.dataset, $scope.current._id, function(data, status) {
-            $.smallBox({
-                title: 'Notification',
-                content: 'Dataset has created',
-                color: '#296191',
-                iconSmall: 'fa fa-check bounce animated',
-                timeout: 3000
+
+          if($scope.current.data_driven === null) {
+            DataService.create($scope.driven_name.trim(), $scope.dataset, $scope.current._id, function(data, status) {
+              $.smallBox({
+                  title: 'Notification',
+                  content: 'Dataset has created',
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+              });
+              var obj = {_id : data._id};
+              $scope.current.data_driven = obj;
+              $('#add-datadriven').modal('hide');
             });
-            $('#add-datadriven').modal('hide');
-          });
+          } else {
+            DataService.update($scope.driven_name.trim(), $scope.dataset, $scope.current.data_driven._id, function (data, status) {
+              
+              switch (status) {
+                case 304: 
+                  $.smallBox({
+                    title: 'Notification',
+                    content: 'Dataset has nothing to update',
+                    color: '#296191',
+                    iconSmall: 'fa fa-check bounce animated',
+                    timeout: 3000
+                  });
+                  break;
+                case 200:
+                  $.smallBox({
+                    title: 'Notification',
+                    content: 'Dataset has updated',
+                    color: '#296191',
+                    iconSmall: 'fa fa-check bounce animated',
+                    timeout: 3000
+                  });
+                  break;
+                default:
+                  break;
+              }
+              
+              $('#add-datadriven').modal('hide');
+            });
+          }
+          
         }
       };
 

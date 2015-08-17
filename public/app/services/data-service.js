@@ -25,7 +25,27 @@ define(['app'], function(app) {
             callback(data, status);
           })
         },
+        update: function(name, dataset, id, callback) {
+          var request = {
+            method: 'PUT',
+            url: appConfig.RestEntry + '/api/v1/data',
+            headers: {
+              'X-AUTH-TOKEN': $cookies.get('authToken'),
+              'X-SPACE': $cookies.get('space'),
+            },
+            data: {
+              name: name,
+              dataset: dataset,
+              id: id
+            }
+          };
 
+          $http(request).success(function(data, status) {
+            callback(data, status);
+          }). error(function(data, status) {
+            callback(data, status);
+          })
+        },
         list: function(tenant, space) {
           var dfd = $q.defer();
 
@@ -109,7 +129,7 @@ define(['app'], function(app) {
                 break;
             }
           });
-        }, 
+        }/*, 
 
         update: function (id, name, dataset, callback) {
           console.log(dataset);
@@ -138,7 +158,7 @@ define(['app'], function(app) {
                 break;
             }
           });
-        }
+        }*/
       }
   }]);
 })
