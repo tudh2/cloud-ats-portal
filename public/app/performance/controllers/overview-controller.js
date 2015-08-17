@@ -184,13 +184,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                   return job._id === obj._id;
                 });
                 currentJob.status = 'Running';
-                $.smallBox({
-                  title: 'Notification',
-                  content: 'The job ' + currentJob._id + " is running",
-                  color: '#296191',
-                  iconSmall: 'fa fa-check bounce animated',
-                  timeout: 3000
-                });
                 break;
               case 'Completed':
                 var currentJob = _.find($scope.project.jobs, function (obj) {
