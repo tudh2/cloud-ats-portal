@@ -21,6 +21,19 @@ define(['keyword/module', 'lodash'], function(module, _) {
           disabled: false
         }
 
+        $scope.dropped = function(dragEl, dropEl) {
+          var drop = $("#" + dropEl);
+          var drag = $("#" + dragEl);
+          var keyword = JSON.parse(drag.attr('data-keyword'));
+          if (keyword._id && keyword.steps) {
+            _.forEach(keyword.steps, function(sel) {
+              $scope.case.steps.push(sel);
+            })
+          } else if (keyword.type) {
+            $scope.case.steps.push(keyword);
+          }
+        }
+
         $scope.selectCat = function(cat) {
           $scope.cat = cat;
         }

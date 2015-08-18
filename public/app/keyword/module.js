@@ -45,7 +45,7 @@ define([
               'keyword/directives/keywords',
               'keyword/directives/keyword-params',
               'keyword/directives/steps',
-              'keyword/directives/ng-draggable',
+              'keyword/directives/smart-draggable',
               'modules/forms/directives/input/smart-xeditable',
               'services/case-service',
               'services/custom-keyword-service'

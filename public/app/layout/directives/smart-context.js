@@ -14,6 +14,7 @@ define(['layout/module'], function(module) {
 
             var requireLogin = toState.data !== undefined && toState.data.requireLogin;
 
+
             if (requireLogin) {
 
               if ($cookies.get('authToken') === undefined) {

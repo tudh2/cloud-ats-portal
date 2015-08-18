@@ -1,28 +1,18 @@
 <div class="tc-keyword-space">
-  <div class="col-md-8">
+  <div class="col-md-8" data-smart-drop-target="true"  data-on-drop="dropped(dragEl, dropEl)">
     <div class="customize-tree">
       <div class="tree">
-
-      <div ng-drag-clone="">
-        <div class="li-keyword">
-          <a href-void class="txt-color-blue">
-            <i class="fa fa-bars txt-color-grey"></i>
-            <strong class="txt-color-blue">{{clonedData._id !== undefined ? clonedData.name : buildActionDisplay(clonedData)}}</strong>
-          </a>
-        </div>
-      </div>
 
       <ul class="smart-treeview-group">
         <li>
           <span class="editinline color-keyword">
-          <a class="fa fa-fw fa-folder-open txt-color-darken"></a>
-          
-          <span style="border: none;">{{case.name}}</span>
-
+            <a class="fa fa-fw fa-folder-open txt-color-darken"></a>
+            <span style="border: none;">{{case.name}}</span>
           </span>
+
           <!-- action steps -->
           <div class="steps expand">
-          <list-steps data-list="case.steps"></list-steps>
+            <list-steps data-list="case.steps"></list-steps>
           </div>
           <!-- end action steps -->
 
@@ -32,7 +22,7 @@
     </div>
 
     <div class="add-keyword">
-    <form>
+    <form class="custom-keyword-form">
       <a class="btn btn-border-line btn-keyword "
         ng-show="(!case.customMode && !case.customAdded) && case.steps.length > 0 "
         ng-click="case.customMode = true;">Add to Keyword
@@ -55,7 +45,7 @@
       </div>
 
       <span class="style-status-keyword" ng-show="case.customAdded">
-        <i class="fa fa-check"></i><label>Added</label>
+        <i class="fa fa-check"></i> Added
       </span>
     </form>
     </div>
@@ -89,21 +79,14 @@
           <div class="panel-body">
         
             <ul class="list-unstyled">
-              <li class="li-keyword" 
-                ng-repeat="custom in customs"
-                data-drag="true"
-                data-jqyoui-options="{revert: 'invalid'}"
-                ng-model="custom"
-                jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}"
-                droppable
-                ng-drag="true" 
-                ng-drag-data="custom"
-                >
+              <li class="li-keyword" ng-repeat="custom in customs"
+                data-smart-draggable="true"
+                data-keyword="{{custom}}">
 
-                <a href-void class="txt-color-blue">
+                <span class="txt-color-blue">
                   <i class="fa fa-bars txt-color-grey"></i>
                   <strong class="txt-color-blue">{{custom.name}}</strong>
-                </a>
+                </span>
 
               </li>
             </ul>
@@ -134,31 +117,14 @@
             
             <ul class="list-unstyled" ng-init="keywords = getKeywordsByCat(cat)">
             
-              <!-- <li>
-                <div class="input-group padding-bottom-10">
-                  <input ng-model="query[cat]" class="form-control" type="text" placeholder="Filter...">
-                </div>
-              </li> -->
-            
-              <li ng-repeat="keyword in keywords | filter:query[cat]" 
-                data-drag="true"
-                class="li-keyword"
-                data-jqyoui-options="{revert: 'invalid'}"
-                ng-model="keywords"
-                jqyoui-draggable="{index: {{$index}}, applyFilter: 'filterIt', placeholder: 'keep'}"
-                droppable
-                ng-drag="true" 
-                ng-drag-data="keyword"
-                >
+              <li class="li-keyword" ng-repeat="keyword in keywords | filter:query[cat]" 
+                data-smart-draggable="true"
+                data-keyword="{{keyword}}">
 
-                <a href-void class="txt-color-blue"
-                  data-popover-placement="right"
-                  data-popover-title="<strong>{{buildActionDisplay(keyword)}}</strong>"
-                  data-smart-html-popover="<p>{{buildParamsPopover(cat, keyword)}}</p>" data-html="true"><i class="fa fa-bars txt-color-grey"></i>
+                <span class="txt-color-blue">
+                  <i class="fa fa-bars txt-color-grey"></i>
                   <strong class="txt-color-blue">{{buildKeywordFullyQualified(keyword)}}</strong>
-                </a>
-               <!--  <br>
-                <span ng-if="keyword.type.length > 10 && keyword.params"><strong>params:</strong> {{buildParamsDisplay(keyword.params)}}</span> -->
+                </span>
 
               </li>
 

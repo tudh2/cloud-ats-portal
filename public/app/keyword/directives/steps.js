@@ -10,7 +10,7 @@ define(['keyword/module', 'lodash'], function(module, _) {
         list: '='
       },
       link: function($scope, element, attributes) {
-        
+
         $scope.update = false;
         $scope.showMe = function() {
           if($scope.list == null) {
