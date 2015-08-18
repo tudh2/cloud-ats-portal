@@ -29,17 +29,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="tr-table-datadriven" ng-repeat="(key_param, value_param) in dataset">
-                  <td ng-repeat="(key, value) in value_param" class="td-table-datadriven-value">
-                    <a  href-void 
-                        data-type="text" 
-                        smart-xeditable 
-                        data-index-dataset = "{{key_param}}"
-                        data-name-param = "{{key}}"
-                        data-ng-model="value"
-                        data-options="editableOptions" class="editable editable-click"
-                        data-success-callback="changeParamValue"
-                    >{{value}}</a>
+                <tr class="tr-table-datadriven" ng-repeat="data in dataset">
+                  <td ng-repeat="(dataKey, dataValue) in data" class="td-table-datadriven-value">
+                    <a href-void editable-text="data[dataKey]">{{data[dataKey]}}</a>
                   </td>
                 </tr>
               </tbody>
