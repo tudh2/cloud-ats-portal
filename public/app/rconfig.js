@@ -12,7 +12,6 @@ var require = {
         'angular-sanitize': '../plugin/angular-sanitize/angular-sanitize',
         'angular-animate': '../plugin/angular-animate/angular-animate',
         'angular-loading-bar': '../plugin/angular-loading-bar/build/loading-bar',
-        'angular-dragdrop': '../plugin/angular-dragdrop/src/angular-dragdrop',
 
         'domReady': '../plugin/requirejs-domready/domReady',
 
@@ -92,8 +91,7 @@ var require = {
         'jquery-knob': '../plugin/jquery-knob/dist/jquery.knob.min',
         'bootstrap-slider': '../plugin/seiyria-bootstrap-slider/dist/bootstrap-slider.min',
         'bootstrap-tagsinput': '../plugin/bootstrap-tagsinput/dist/bootstrap-tagsinput.min',
-        'x-editable': '../plugin/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min',
-        // 'angular-x-editable': '../plugin/angular-xeditable/dist/js/xeditable.min',
+        'angular-x-editable': '../plugin/angular-xeditable/dist/js/xeditable.min',
 
         'fuelux-wizard': '../plugin/fuelux/js/wizard',
 
@@ -135,8 +133,8 @@ var require = {
         'angular-bootstrap': { deps: ['angular'] },
         'angular-ui-router': { deps: ['angular'] },
         'angular-google-maps': { deps: ['angular'] },
-        'angular-loading-bar': {deps: ['angular']},
-        'angular-dragdrop': {deps: ['angular', 'jquery-ui']},
+        'angular-loading-bar': { deps: ['angular'] },
+				'angular-x-editable' : { deps: ['angular'] },
 
         'angular-couch-potato': { deps: ['angular'] },
 
@@ -198,7 +196,6 @@ var require = {
         'jquery-knob':{deps: ['jquery']},
         'bootstrap-slider':{deps: ['jquery']},
         'bootstrap-tagsinput':{deps: ['jquery']},
-        'x-editable':{deps: ['jquery']},
 
         'fuelux-wizard':{deps: ['jquery']},
         'bootstrap':{deps: ['jquery']},

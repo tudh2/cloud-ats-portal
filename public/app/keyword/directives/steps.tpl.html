@@ -2,7 +2,7 @@
 
   <li 
     ng-init="listIndex = $index;"
-    ng-repeat="keyword in list track by $index">
+    ng-repeat="keyword in list">
     <span>
       <div class="pull-left margin-right-5">
         <a ng-if="!$first" ng-click="moveUpAction(keyword)" data-tooltip-placement="left" data-tooltip="Move Up" class="txt-color-orange">
@@ -18,21 +18,42 @@
 
       <div class="pull-right" style="padding-left: 25px;">
         
-        <a ng-click="removeAction(listIndex)" data-tooltip-placement="right" data-tooltip="Remove" class="txt-color-red">
+        <a ng-click="removeAction(keyword)" data-tooltip-placement="right" data-tooltip="Remove" class="txt-color-red">
           <i class="fa fa-times-circle"></i>
         </a>
       </div>
       
     </span>
 
-    <keyword-params ng-if="keyword.params.length > 0 && !update"
-      data-list="list"
-      data-list-index="listIndex"
-      data-keyword="keyword">
-    </keyword-params>
+    <ul class="smart-treeview-group">
+      <li class="editinline" ng-repeat="param in keyword.params">
+        <span class="label label-success">{{param}}</span>
+        
+        <a ng-if="param !== 'locator' && param !== 'targetLocator'" href-void 
+          editable-text="keyword[param]">{{keyword[param] || 'empty' }}</a>
+
+        <a ng-if="param === 'locator' || param === 'targetLocator'" href-void
+          editable-select="keyword[param]['type']" 
+          e-ng-options="s.value as s.text for s in types">
+          {{keyword[param]['type']}}
+        </a>
+
+        <span ng-if="param === 'locator' || param === 'targetLocator'" class="label label-info">
+          value
+        </span>
+
+        <a ng-if="param === 'locator' || param === 'targetLocator'" href-void
+          editable-text="keyword[param]['value']">
+          {{keyword[param]['value'] || 'empty' }}          
+        </a>
+      </li>
+    </ul>
+
+
+
   </li>
 
-  <li class="placeholder" ng-if="showMe()"> 
+  <li class="placeholder" ng-if="list.length == 0"> 
     <span class="label label-success">Drop action here</span>
   </li>
 </ul>

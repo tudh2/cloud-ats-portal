@@ -11,25 +11,20 @@ define(['keyword/module', 'lodash'], function(module, _) {
       },
       link: function($scope, element, attributes) {
 
-        $scope.update = false;
-        $scope.showMe = function() {
-          if($scope.list == null) {
-            $scope.list = [];
-            $scope.list.length == 0;
-          }
-          return $scope.list.length == 0;
-        }
+        $scope.types = [
+          {value: 'id', text: 'id'},
+          {value: 'name', text: 'name'},
+          {value: 'link text', text: 'link text'},
+          {value: 'css selector', text: 'css selector'},
+          {value: 'xpath', text: 'xpath'}
+        ]; 
 
-        $scope.removeAction = function(index) {
-          $scope.update = true;
+        $scope.removeAction = function(keyword) {
+          var index = _.indexOf($scope.list, keyword);
           $scope.list.splice(index, 1);
-          $timeout(function() {
-            $scope.update = false;
-          }, 1000);
         }
 
         $scope.moveUpAction = function(keyword) {
-          $scope.update = true;
           var index = _.indexOf($scope.list, keyword);
           var upAction = {};
           angular.copy($scope.list[index - 1], upAction);
@@ -40,13 +35,9 @@ define(['keyword/module', 'lodash'], function(module, _) {
 
           $scope.list[index] = upAction;
           $scope.list[index - 1] = keywordCopy;
-          $timeout(function() {
-            $scope.update = false;
-          }, 1000);
         }
 
         $scope.moveDownAction = function(keyword) {
-          $scope.update = true;
           var index = _.indexOf($scope.list, keyword);
           var downAction = {};
           angular.copy($scope.list[index + 1], downAction);
@@ -57,9 +48,6 @@ define(['keyword/module', 'lodash'], function(module, _) {
 
           $scope.list[index] = downAction;
           $scope.list[index + 1] = keywordCopy;
-          $timeout(function() {
-            $scope.update = false;
-          }, 1000);
         };
 
         $scope.buildActionDisplay = function(data) {

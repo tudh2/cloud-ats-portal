@@ -2,12 +2,12 @@ define([
   'angular',
   'angular-couch-potato',
   'angular-ui-router',
-  'angular-dragdrop'
+  'angular-x-editable'
 ], function(ng, couchPotato) {
 
   'use strict';
 
-  var module = ng.module('app.keyword', ['ui.router', 'ngDragDrop']);
+  var module = ng.module('app.keyword', ['ui.router', 'xeditable']);
 
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
@@ -43,10 +43,8 @@ define([
               'keyword/controllers/cases-controller',
               'keyword/directives/tabs-header',
               'keyword/directives/keywords',
-              'keyword/directives/keyword-params',
               'keyword/directives/steps',
               'keyword/directives/smart-draggable',
-              'modules/forms/directives/input/smart-xeditable',
               'services/case-service',
               'services/custom-keyword-service'
             ])
@@ -64,7 +62,6 @@ define([
             deps: $couchPotatoProvider.resolveDependencies([
               'keyword/controllers/driven-controller',
               'keyword/directives/tabs-header',
-              'modules/forms/directives/input/smart-xeditable',
               'services/case-service',
               'services/data-service'
             ])
@@ -137,7 +134,6 @@ define([
               'keyword/directives/tabs-header',
               'services/custom-keyword-service',
               'keyword/directives/keywords',
-              'keyword/directives/keyword-params',
               'keyword/directives/steps'
             ])
           }
@@ -148,7 +144,7 @@ define([
 
   couchPotato.configureApp(module);
 
-  module.run(function($couchPotato) {
+  module.run(function($couchPotato, editableOptions, editableThemes) {
     module.lazy = $couchPotato;
   });
 

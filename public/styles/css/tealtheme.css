@@ -982,15 +982,12 @@ a:hover.viewLog, a:focus.viewLog {
 }
 .add-keyword {
 	position:absolute;
-    text-align: right;
-    width:100%;
-    bottom:0;
-    left:0;
+  text-align: right;
+  top:30px;
+  right:20px;
 }
 .add-keyword .add-keyword-form{
-    padding:8px 30px;
-    background-color: rgba(204, 212, 213, 0.9);
-    border-top: solid 1px rgb(193, 207, 209);
+  line-height:35px;
 }
 .btn-keyword {
 	border: 1px solid #89969F !important;
@@ -1002,10 +999,6 @@ a:hover.viewLog, a:focus.viewLog {
 	background-color: #01B49F !important;
 	border: 1px solid #01B49F !important;
 	color: white!important;
-}
-.add-keyword-form
-{
-    line-height:28px;
 }
 
 .keyword-list-container {
@@ -1466,7 +1459,12 @@ block-darksky-color
   padding: 5px 20px;
   margin-right: 25px;
 }
-
 .custom-keyword-form {
   margin-bottom: 13px;
+}
+.editable-buttons {
+  border: none !important;
+}
+.editable-input {
+  margin-top: 3px;
 }
