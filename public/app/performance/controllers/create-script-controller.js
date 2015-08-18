@@ -4,8 +4,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
   module.registerController('CreateScriptCtrl', ['$scope', '$stateParams', '$templateRequest', '$compile', 'PerformanceService', 'ScriptService', function($scope, $stateParams, $templateRequest, $compile, PerformanceService, ScriptService) {
 
-    $scope.searchTerms = '';
-    
     $scope.projectId = $stateParams.id;
     $scope.script = {
       ram_up: 5,
@@ -177,7 +175,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       };
     }
 
-    $scope.deleteSampler = function (index) {
+    $scope.deleteSampler = function ($event, index) {
+      $event.stopPropagation();
       $scope.script.samplers.splice(index, 1);
       $scope.selected = {
         method: 'GET',

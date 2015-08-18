@@ -42,7 +42,6 @@ define([
 						'performance/controllers/upload-script-controller',
 						'performance/controllers/create-script-controller',
 						'performance/directives/tabs-header-performance',
-						'performance/directives/remove-sampler-button',
 						'performance/directives/script-configuration',
 						'services/script-service',
 						'modules/forms/directives/input/smart-uislider'

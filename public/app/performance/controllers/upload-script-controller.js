@@ -14,10 +14,13 @@ define(['performance/module', 'notification'], function (module) {
         var fileNames = '';
         _.forEach($scope.file, function (file) {
           fileNames += file.name + ',';
-          
         });
 
         $('input[name="listFile"]').val(fileNames);
+
+        if ($('input[name="listFile"]').val(fileNames) != '') {
+          $('input[name="listFile"]').parent().removeClass('has-error');
+        }
 
       };
 
@@ -31,13 +34,6 @@ define(['performance/module', 'notification'], function (module) {
         }
       });
 
-      // validation for script name
-      $fileNames.on('keypress', function () {
-        if ($(this).val().trim() != '') {
-          $(this).removeClass('state-error');
-        }
-      });
-
       // click save after upload file
       $scope.saveUploadedScripts = function () {
 
@@ -45,9 +41,9 @@ define(['performance/module', 'notification'], function (module) {
         if ($upload_name.val().trim() == '' || $fileNames.val() =='' ) {
           if ($upload_name.val().trim() == '' && $fileNames.val() =='' ) {
             $upload_name.parent().addClass('has-error');
-            $fileNames.addClass('state-error');
+            $fileNames.parent().addClass('has-error');
           } else if ($fileNames.val() =='') {
-            $fileNames.addClass('state-error');
+            $fileNames.addClass('has-error');
             $fileNames.focus();
           } else {
             $upload_name.parent().addClass('has-error');

@@ -9,17 +9,17 @@ define(['projects/module'], function (module) {
     var $input =  $('div#createProject input[name="name"]');
 
     $input.on('keypress', function () {
-      $(this).removeClass('state-error');
+      $(this).parent().removeClass('has-error');
     });
 
     $scope.create = function () {
 
       if (!$scope.name) {
         
-        $input.addClass('state-error');
+        $input.parent().addClass('has-error');
         $input.focus();
       } else {
-        $input.removeClass('state-error');
+        $input.parent().removeClass('has-error');
 
         $('#createProject').modal('hide');
         $('body').removeClass('modal-open');

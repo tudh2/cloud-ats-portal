@@ -51,25 +51,25 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<input type="text" id="filter_sampler" class="form-control" placeholder="Filter by name or number">
-                                </div>
+									<input type="text" id="filter_sampler" class="form-control" placeholder="Filter by name or number" ng-model="find_text">
+                </div>
 							</div>
-                            <div class="col-sm-6 hidden-xs"></div>
+              <div class="col-sm-6 hidden-xs"></div>
 						</div>
 						<div class="row">
-							<div class="col-sm-4  click-sampler" ng-repeat="i in script.samplers track by $index"  ng-click="chooseSampler(i, $index)">
+							<div class="col-sm-4  click-sampler" ng-repeat="i in script.samplers | search : find_text track by $index"  ng-click="chooseSampler(i, $index)">
 								<div ng-class="{'sampler_name_selected tc-itemBlock' : selected.index == $index, 'sampler_name tc-itemBlock' : selected.index != $index }">
 									<div class="row">
 										<div class="col-sm-8 tc-attributes">
 											<div class ="tc-id">#{{$index +1}}</div>
 										</div>
 										<div class="col-sm-4 tc-attributes remove-icon text-right" ng-if="selected.index == $index">
-												<i class="fa icon-delete fa-minus-circle text-amber-color" ng-click="deleteSampler($index)"></i>
+											<i class="fa icon-delete fa-minus-circle text-amber-color" ng-click="deleteSampler($event,$index)"></i>
 										</div>
-                      <div class="col-md-12 tc-name">
-                          {{i.name}}
-                      </div>
+                    <div class="col-md-12 tc-name">
+                        {{i.name}}
                     </div>
+                  </div>
 								</div>
 							</div>
 						</div>
@@ -102,7 +102,7 @@
               <div class="form-group">
   							<label class="col-sm-4">Sampler URL</label>
   							<div class="col-sm-8 sampler-url">
-  									<input type="text" class="form-control" placeholder="e.g. http://www.abc.com" ng-model="selected.url" name="url">
+  								<input type="text" class="form-control" placeholder="e.g. http://www.abc.com" ng-model="selected.url" name="url">
   							</div>
               </div>
               <div class="form-group">
@@ -111,17 +111,17 @@
 								  <div  ng-repeat="i in selected.arguments track by $index">
                     <div class="col-sm-5 param-name">
                         <div class="form-group">
-                            <input type="text" class="form-control" ng-model="i.paramName" placeholder="Name">
+                          <input type="text" class="form-control" ng-model="i.paramName" placeholder="Name">
                         </div>
                     </div>
                     <div class="col-sm-5 param-value">
                         <div class="form-group">
-                            <input type="text" class="form-control" ng-model="i.paramValue" placeholder="Value">
+                          <input type="text" class="form-control" ng-model="i.paramValue" placeholder="Value">
                       </div>
                     </div>
                       <div class="col-sm-2 add-remove-param-icon">
-                          <i class="fa fa-minus-circle icon text-amber-color " ng-if="selected.arguments.length > 1" ng-click="removeArgument($index)"></i>	
-                          <i class="fa fa-plus-circle icon-add text-teal-color " ng-if="$index == selected.arguments.length -1" ng-click="addArgument($index)"></i>
+                        <i class="fa fa-minus-circle icon text-amber-color " ng-if="selected.arguments.length > 1" ng-click="removeArgument($index)"></i>	
+                        <i class="fa fa-plus-circle icon-add text-teal-color " ng-if="$index == selected.arguments.length -1" ng-click="addArgument($index)"></i>
                       </div>
 								   </div>
 								</div>
@@ -129,14 +129,14 @@
               <div class="form-group assertion-text">
   							<label class="col-sm-4">Assertion text</label>
   							<div class="col-sm-8">
-  									<input type="text" class="form-control" placeholder="Enter" ng-model="selected.assertion_text">
+  								<input type="text" class="form-control" placeholder="Enter" ng-model="selected.assertion_text">
   							</div>	
               </div>
 
               <div class="form-group">
   							<label class="col-sm-4">Constant time(s)</label>
   							<div class="col-sm-8">
-  									<input type="text" class="form-control" placeholder="miliseconds" ng-model="selected.constant_time">
+  								<input type="text" class="form-control" placeholder="miliseconds" ng-model="selected.constant_time">
   							</div>
               </div>
 
