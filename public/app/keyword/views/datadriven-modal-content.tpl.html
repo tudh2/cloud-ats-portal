@@ -4,8 +4,8 @@
       <div class="row">
       <span class="col-md-4"><i class="fa fa-table id-test"></i> Data Driven of {{current.name}}</span>
       <span class="col-md-8 group-btn-datadriven">
-        <a class="btn-border-line btn-add-newdata" ng-click="addNewRow()"><i class=" id-test fa fa-plus"></i>Add new Data</a>
-        <a class="btn-border-line btn-search-data" ng-click="chooseDataDriven()"><i style="margin-right:10px" class="fa fa-search"></i>Select from existing data</a> 
+        <a class="btn-border-line btn-add-newdata" ng-click="addNewRow()"><i class=" id-test fa fa-plus"></i> Add new Data</a>
+        <a class="btn-border-line btn-search-data" ng-click="chooseDataDriven()"><i class="fa fa-search"></i> Select from existing data</a> 
       </span>
           </div>
     </div>
@@ -25,13 +25,13 @@
               <table class="table table-datadriven">
               <thead>
                 <tr>
-                  <th ng-repeat="(key, value) in dataset[0]">{{key}}</th>
+                  <th ng-repeat="param in params">{{param}}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="tr-table-datadriven" ng-repeat="data in dataset">
-                  <td ng-repeat="(dataKey, dataValue) in data" class="td-table-datadriven-value">
-                    <a href-void editable-text="data[dataKey]">{{data[dataKey]}}</a>
+                  <td ng-repeat="param in params" class="td-table-datadriven-value">
+                    <a href-void editable-text="data[param]">{{data[param] || 'empty' }}</a>
                   </td>
                 </tr>
               </tbody>
@@ -43,7 +43,7 @@
 
     <div class="modal-footer modal-footer-datadriven">
       <a class="btn btn-default pull-left" ng-click="resetData(dataset)">Reset</a> 
-      <a class="btn btn-primary" ng-click="createNewData(dataset)">Save</a> 
+      <a class="btn btn-primary" ng-click="createNewData()">Save</a> 
       <a class="btn btn-default" data-dismiss="modal">Close</a> 
     </div>
   </div>

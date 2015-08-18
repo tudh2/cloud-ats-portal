@@ -12,17 +12,15 @@ define(['keyword/module'], function (module) {
       $scope.driven_name = "";
 
       CaseService.list($scope.projectId, function(response) {
-        $scope.cases = response;
+        $scope.cases = [];
+        _.forEach(response, function(caze) {
+          var params = buildParamList(caze);
+          if (params.length > 0) $scope.cases.push(caze);
+        })
       });
 
-      $scope.editableOptions = {
-          mode: 'inline',
-          disabled: false
-      }
-
-      var buildDataset = function(caze) {
-        $scope.dataset = [];
-        $scope.params = [];
+      var buildParamList = function(caze) {
+        var params = [];
         _.forEach(caze.steps, function(step) {
           _.forEach(step.params, function(param) {
             var val = step[param];
@@ -34,20 +32,25 @@ define(['keyword/module'], function (module) {
             var endIndex = val.lastIndexOf('}');
             if (startIndex == 0 && endIndex == (val.length - 1)) {
               var variable = val.substring(startIndex + 2, endIndex);
-              $scope.params.push(variable);
+              params.push(variable);
             }
           });
         });
+        return params;
+      };
 
+      var newRow = function(params) {
         var obj = {};
-        _.forEach($scope.params, function(param) {
+        _.forEach(params, function(param) {
           obj[param] = param + '_value';
         });
+        return obj;
+      };
 
-        $scope.copyDatasetInit = angular.copy(obj);
-
-        $scope.dataset.push(obj);
-
+      var buildDataset = function(caze) {
+        $scope.dataset = [];
+        var params = buildParamList(caze);
+        $scope.dataset.push(newRow(params));
       };
 
 
@@ -64,16 +67,17 @@ define(['keyword/module'], function (module) {
 
       $scope.clickToCase = function(caze) {
         $scope.current = caze;
+        $scope.params = buildParamList(caze);
 
         if (caze.data_driven == null) {
           $scope.driven_name = "";
           buildDataset($scope.current);
         } else {
           $scope.dataset = [];
-          DataService.dataSet(caze.data_driven._id).then(function (response) {
-
+          DataService.get(caze.data_driven._id).then(function (response) {
             $scope.dataset = JSON.parse(response.data.data_source);
             $scope.driven_name = response.data.name;
+
           });
         }
        
@@ -81,8 +85,8 @@ define(['keyword/module'], function (module) {
       };
 
       $scope.addNewRow = function() {
-        var newObj = angular.copy($scope.copyDatasetInit);
-        $scope.dataset.push(newObj);
+        var params = buildParamList($scope.current);
+        $scope.dataset.push(newRow(params));
       }
 
       $scope.resetData = function() {
@@ -107,99 +111,57 @@ define(['keyword/module'], function (module) {
         ele.removeClass('hasnot-case');
       };
 
-      $scope.createNewData = function(data) {
+      $scope.createNewData = function() {
         var $input = $('input[name="driven-name"]');
-        var parent_input = $input.parent();
-        var grand_input = parent_input.parent();
 
-        $scope.checkSaveData = true;
-        $scope.dataset = data; 
         var val = $input.val();
 
         if (!val) {
           $input.focus();
-          parent_input.addClass('has-error');
-          var parent
-          grand_input.append('<span class="invalid-name-datadriven hasnot-case">Name is required</span>');
-          return false;
-        }
-        parent_input.removeClass('has-error');
-        grand_input.find('.invalid-name-datadriven').remove();
-        var $trdata = $('.tr-table-datadriven');
-        $scope.listDataSet = [];
-
-        for(var attr in $scope.copyDatasetInit) {
-          $scope.listDataSet.push($scope.copyDatasetInit[attr]);
+          return;
         }
 
-         $trdata.each(function() {
-            var cell = 0;
-            $scope.dataValid = true;
-            $.each(this.cells, function(){
-                if(_.isEqual($(this).text().trim(), $scope.listDataSet[cell])) {
-                  //console.log($(this).text());
-                  $(this).children().addClass('hasnot-case');
-                  $scope.dataValid = false;
-                }
-                cell ++;
+        if($scope.current.data_driven === null) {
+          DataService.create($scope.driven_name.trim(), $scope.dataset, $scope.current._id, function(data, status) {
+            $.smallBox({
+                title: 'Notification',
+                content: 'Dataset has created',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
             });
-        });
-
-        if(!$scope.dataValid) {
-          $.smallBox({
-              title: 'Notification',
-              content: 'Data is invalid',
-              color: '#FF0000',
-              iconSmall: 'fa fa-check bounce animated',
-              timeout: 2000
+            var obj = {_id : data._id};
+            $scope.current.data_driven = obj;
+            $('#add-datadriven').modal('hide');
           });
-          return false;
-
         } else {
-
-          if($scope.current.data_driven === null) {
-            DataService.create($scope.driven_name.trim(), $scope.dataset, $scope.current._id, function(data, status) {
-              $.smallBox({
+          DataService.update($scope.driven_name.trim(), $scope.dataset, $scope.current.data_driven._id, function (data, status) {
+            
+            switch (status) {
+              case 304: 
+                $.smallBox({
                   title: 'Notification',
-                  content: 'Dataset has created',
+                  content: 'Dataset has nothing to update',
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
-              });
-              var obj = {_id : data._id};
-              $scope.current.data_driven = obj;
-              $('#add-datadriven').modal('hide');
-            });
-          } else {
-            DataService.update($scope.driven_name.trim(), $scope.dataset, $scope.current.data_driven._id, function (data, status) {
-              
-              switch (status) {
-                case 304: 
-                  $.smallBox({
-                    title: 'Notification',
-                    content: 'Dataset has nothing to update',
-                    color: '#296191',
-                    iconSmall: 'fa fa-check bounce animated',
-                    timeout: 3000
-                  });
-                  break;
-                case 200:
-                  $.smallBox({
-                    title: 'Notification',
-                    content: 'Dataset has updated',
-                    color: '#296191',
-                    iconSmall: 'fa fa-check bounce animated',
-                    timeout: 3000
-                  });
-                  break;
-                default:
-                  break;
-              }
-              
-              $('#add-datadriven').modal('hide');
-            });
-          }
-          
+                });
+                break;
+              case 200:
+                $.smallBox({
+                  title: 'Notification',
+                  content: 'Dataset has updated',
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
+                break;
+              default:
+                break;
+            }
+            
+            $('#add-datadriven').modal('hide');
+          });
         }
       };
 
