@@ -233,6 +233,13 @@ define(['keyword/module', 'lodash'], function (module, _) {
   	          });
 
               $scope.listReports.unshift(report);
+               $.smallBox({
+                title: 'Notification',
+                content: 'The job ' + job._id + ' has completed.',
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
             }
           }
         })
