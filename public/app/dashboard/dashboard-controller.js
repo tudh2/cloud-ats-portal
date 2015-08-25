@@ -2,45 +2,39 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 
   'use strict';
 
-  var bar_data= [{
-      x : 'Project 1',
-      P : 100,
-      F : 10,
-      S : 10
-  }, {
-      x : 'Project 2',
-      P : 100,
-      F : 0,
-      S : 0
-  }, {
-      x : 'Project 3',
-      P : 90,
-      F : 10,
-      S : 0
-  }, {
-      x : 'Project 4',
-      P : 90,
-      F : 0,
-      S : 10
-  }]
+  
   module.registerDirective('morrisStackedBarGraph', function(){
         return {
             restrict: 'E',
             replace: true,
+            scope: {
+              data: '='
+            },
             template: '<div class="chart no-padding"></div>',
             link: function(scope, element){
-                Morris.Bar({
-                    element : element,
-                    axes : true,
-                    grid : true,
-                    data : bar_data,
-                    xkey : 'x',
-                    ykeys : ['P', 'F', 'S'],
-                    labels : ['Pass', 'Fail', 'Skip'],
-                    barColors : ['#15ab9f','#ff4f51','#fbd601'],
-                    stacked : true
-                });
+              var hoverStatus = 'always';
+              
+              if(scope.data.length)
+                hoverStatus = true;
+              
+              var graph = Morris.Bar({
+                              element : element,
+                              axes : true,
+                              grid : true,
+                              data : scope.data,
+                              xkey : 'x',
+                              ykeys : ['P', 'F', 'S'],
+                              labels : ['Pass', 'Fail', 'Skip'],
+                              barColors : ['#15ab9f','#ff4f51','#fbd601'],
+                              hideHover: hoverStatus,
+                              stacked : true
+                          });
 
+              scope.$watch('data', function(value) {
+                if(value) {
+                  graph.setData(value);
+                }
+              }, true);
             }
         }
     })
@@ -170,7 +164,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       }
   })
 
-  module.registerController('DashboardCtrl', ['$scope', function($scope) {
+  module.registerController('DashboardCtrl', ['$scope','KeywordService', function($scope,KeywordService) {
 
     $scope.project_overview = true;
 
@@ -188,9 +182,143 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       [28, 48, 40, 19, 86, 27, 90]
     ];
 
-    $scope.$watch("barchart", function () {//I change here
+    $scope.recent_finished_projects = [];
+    $scope.top_passed_projects = [];
+    $scope.top_failed_projects = [];
+    $scope.biggest_projects = [];
 
+  var totalProject = function(percent,type) {
+    var top = [];
+    var project = {
+        name : data[i].x,
+        percent : percent
+      }
+
+    top.push(project);
+    var array = _.map(_.sortByOrder(top, ['percent'], ['desc']), _.values);
+    
+    _.forEach(array, function(item,key){
+        project = {
+          name : item[0],
+          percent : item[1]
+        }
+        if(_.isEqual('pass', type)) {
+          $scope.top_passed_projects.push(project);
+          if($scope.top_passed_projects.length > 5) {
+            var temp = $scope.top_passed_projects;
+            var size = temp.length - 5;
+            $scope.top_passed_projects.splice(5,size);
+          }
+        } else if(_.isEqual('fail', type)) {
+          $scope.top_failed_projects.push(project);
+          if($scope.top_failed_projects.length > 5) {
+            var temp = $scope.top_failed_projects;
+            var size = temp.length - 5;
+            $scope.top_failed_projects.splice(5,size);
+          }
+        }
+        
+    });
+
+  }
+
+  var getInfoProjects = function(data) {
+    //get list top fail projects
+    var topPass = [];
+    for(var i = 0; i < data.length; i ++) {
+      var item = data[i];
+      var totalCases = item.P+item.S+item.F;
+      var percent = _.round((item.P/totalCases)*100,2);
+      var project = {
+        name : data[i].x,
+        percent : percent
+      }
+
+      topPass.push(project);
+    }
+    var arrayPass = _.map(_.sortByOrder(topPass, ['percent'], ['desc']), _.values);
+    
+    _.forEach(arrayPass, function(item,key){
+        project = {
+          name : item[0],
+          percent : item[1]
+        }
+        $scope.top_passed_projects.push(project);
+    });
+
+    if($scope.top_passed_projects.length > 5) {
+      var temp = $scope.top_passed_projects;
+      var size = temp.length - 5;
+      $scope.top_passed_projects.splice(5,size);
+    }
+    
+  }
+
+  var loadDataReport = function(data,projectName,numberOfJobId) {
+      var totalPass = 0;
+      var totalFail = 0;
+      var totalSkip = 0;
+      var totalCases = 0;
+      var dataObject = JSON.parse(data.suite_reports);
+      for(var i = 0; i < dataObject.length; i++) {
+        var item = dataObject[i];
+        totalPass += item.total_pass;
+        totalFail += item.total_fail;
+        totalSkip += item.total_skip;
+      }
+      var projectReport = {
+        x : projectName,
+        P : totalPass,
+        F : totalFail,
+        S : totalSkip
+      };
+      $scope.recent_finished_projects.push(projectReport);
+
+      if($scope.recent_finished_projects.length == numberOfJobId) {
+        getInfoProjects($scope.recent_finished_projects);
+
+        if($scope.recent_finished_projects.length > 10) {
+          var temp = $scope.recent_finished_projects;
+          var size = temp.length - 10;
+          $scope.recent_finished_projects.splice(10,size);
+        }
+      }
       
+  }
+
+  var loadData = function() {
+      var listProjects = [];
+      var projectInfo = {};
+
+      KeywordService.list(function(data,status) {
+        listProjects = data;
+        var countJobId = 0;
+        _.forEach(listProjects, function(item,key) {
+          var lastJobId = item.lastJobId;
+          if(lastJobId === undefined) {
+            countJobId ++;
+          }
+        })
+
+        _.forEach(listProjects, function(item,key) {
+          var lastJobId = item.lastJobId;
+          var numberOfJobId = listProjects.length - countJobId;
+          if(lastJobId) {
+            var projectId = item._id;
+            var projectName = item.name;
+
+            KeywordService.getReport(projectId,lastJobId,function(dataReport,statusReport) {
+              loadDataReport(dataReport,projectName,numberOfJobId);
+            });
+          }
+        })
+
+      });
+      
+    }
+
+    loadData();
+    $scope.$watch('barchart', function () {//I change here
     });
 
     $scope.selectChome = function () {

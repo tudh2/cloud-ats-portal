@@ -27,7 +27,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
               P : obj.total_pass,
               F : obj.total_fail,
               S : obj.total_skip
-            }
+            };
             $scope.dataReports.push(dataReport);
             if(obj.test_result) {
               obj.test_result = 'Pass'

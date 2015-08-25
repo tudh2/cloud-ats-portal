@@ -21,6 +21,7 @@ define([
               deps: $couchPotatoProvider.resolveDependencies([
                 'dashboard/dashboard-controller',
                 'components/todo/todo-container',
+                'services/keyword-service',
                 'components/todo/models/todo',
                 'components/todo/directives/todo-list',
                 'modules/widgets/directives/widget-grid',

@@ -1,10 +1,10 @@
-<div >
+<div>
 	<h1> Functional Test<small class="ds-collapse"> Collapse all</small></h1> 
 	<div class="functional-project-overview ds-box">
 		<h1 class="text-center ds-text-blue"> Recent Finished Projects</h1>
 		<p class="ds-text-rotate ds-text-project">Number of classes/project
 			</p>
-		<morris-stacked-bar-graph></morris-stacked-bar-graph>
+		<morris-stacked-bar-graph data-data="recent_finished_projects"></morris-stacked-bar-graph>
 		<div class="ds-chart-label">
 			<p > 
 				<span class="ds-blue"></span>Pass 
@@ -25,25 +25,9 @@
 				</div>
 				<div class="col-sm-12 ds-box-table">
 					<table class="col-sm-12">
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
-						</tr>
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
-						</tr>
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
-						</tr>
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
-						</tr>
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
+						<tr ng-repeat="project in top_passed_projects">
+							<td>{{project.name}}</td>
+							<td class="pull-right">{{project.percent}}%</td>
 						</tr>
 					</table>
 				</div>
@@ -57,25 +41,9 @@
 				</div>
 				<div class="col-sm-12 ds-box-table">
 					<table class="col-sm-12">
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
-						</tr>
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-down glyph-item mega "></i>90%</td>
-						</tr>
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
-						</tr>
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
-						</tr>
-						<tr>
-							<td>Project name</td>
-							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>90%</td>
+						<tr ng-repeat="project in top_failed_projects">
+							<td>{{project.name}}</td>
+							<td class="pull-right"><i class="fa fa-arrow-up glyph-item mega "></i>{{project.percent}}%</td>
 						</tr>
 					</table>
 				</div>
