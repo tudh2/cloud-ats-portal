@@ -28,12 +28,10 @@ define(['performance/module'], function (module) {
 	        report.summary.standard_deviation = _.round(report.summary.standard_deviation, 2);
 	        report.summary.average_bytes = _.round(report.summary.average_bytes, 2);
 	      });
-
 	      // get data of summary report
 	      $scope.summaryReport = _.find($scope.reports, function (report) {
 	        return report.label == "*SummaryReport*";
 	      });
-
 	      // get data of all samplers
 	      _.remove($scope.reports, function (report) {
 	        return report.label == $scope.summaryReport.label;

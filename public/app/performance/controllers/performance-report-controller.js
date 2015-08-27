@@ -10,6 +10,7 @@ define(['performance/module', 'morris', 'notification'], function (module) {
     ReportService.report($scope.projectId, $scope.jobId, function (data, status) {
       
       if (status === 200) {
+        console.log(data);
         $scope.reports = data;
       } else { 
         $.smallBox({
