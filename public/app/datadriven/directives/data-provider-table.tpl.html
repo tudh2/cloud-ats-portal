@@ -13,7 +13,7 @@
         <a ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)" class="btn btn-danger btn-xs">
           <i class="fa fa-minus"></i>
         </a>
-        <a ng-if="editable" href-void data-type="text" smart-xeditable data-ng-model="fieldName" data-options="editableOptions" class="editable editable-click">{{field}}</a>
+        <a ng-if="editable" href-void data-type="text" editable-text="field" data-ng-model="fieldName" data-options="editableOptions" class="editable editable-click">{{field}}</a>
         <span ng-if="!editable" class="text-info">{{field}}</span>
       </th>
     </tr>
@@ -36,7 +36,7 @@
       </td>
 
       <td class="cell" ng-repeat="cell in row track by $index">
-        <a ng-if="editable" href-void data-type="text" smart-xeditable data-ng-model="cell" data-options="editableOptions" class="editable editable-click">{{cell}}</a>
+        <a ng-if="editable" href-void data-type="text" editable-text="cell" data-ng-model="cell" data-options="editableOptions" class="editable editable-click">{{cell}}</a>
         <span ng-if="!editable" class="text-success">{{cell}}</span>
       </td>
     </tr>

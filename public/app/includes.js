@@ -27,7 +27,8 @@ define([
   'projects/module',
   'keyword/module',
   'performance/module',
-
+  'datadriven/module',
+  
 ], function() {
   'use strict';
 });

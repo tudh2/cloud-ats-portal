@@ -1,11 +1,11 @@
-define(['fk/module', 'lodash'], function(module, _) {
+define(['datadriven/module', 'lodash'], function(module, _) {
   'use strict';
 
   return module.registerDirective('providerTable', [function() {
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'app/fk/directives/data-provider-table.tpl.html',
+      templateUrl: 'app/datadriven/directives/data-provider-table.tpl.html',
       scope: {
         dataset: "=",
         editable: "=",

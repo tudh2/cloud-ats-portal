@@ -1468,3 +1468,42 @@ block-darksky-color
 .editable-input {
   margin-top: 3px;
 }
+.cancel-edit {
+	margin-right: 13px;
+	margin-left: 13px;
+}
+.btn-create-new-data {
+	margin-bottom: 13px;
+	width: 100%;
+}
+.data-list-name {
+	background-color: white;
+	height: 100%;
+  padding-bottom:90px;
+}
+.data {
+	cursor: pointer;
+	padding: 10px 0px 10px 0px;
+	border-left: 3px solid white;
+	clear: both;
+}
+.data-selected {
+	background-color: #EBF3F5;
+	border-left: 5px solid #FF4F52;
+}
+.data-items
+{
+    margin-top:10px;
+    width:100%;
+    height:100%;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding-left:13px;
+    padding-right:13px;
+}
+.create-new-data
+{
+    margin-top:15px;
+    padding-left:13px;
+    padding-right:13px;
+} 
