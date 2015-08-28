@@ -25,6 +25,7 @@ define([
                 'services/performance-service',
                 'services/report-service',
                 'services/script-service',
+                'dashboard/keyword-report-overview',
                 'components/todo/models/todo',
                 'components/todo/directives/todo-list',
                 'modules/widgets/directives/widget-grid',

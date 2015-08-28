@@ -2,37 +2,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 
   'use strict';
 
-  module.registerDirective('morrisStackedBarGraph', function(){
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-              data: '='
-            },
-            template: '<div class="chart no-padding"></div>',
-            link: function(scope, element){
-              var graph = Morris.Bar({
-                              element : element,
-                              axes : true,
-                              grid : true,
-                              data : scope.data,
-                              xkey : 'x',
-                              ykeys : ['P', 'F', 'S'],
-                              labels : ['Pass', 'Fail', 'Skip'],
-                              barColors : ['#15ab9f','#ff4f51','#fbd601'],
-                              hideHover : true,
-                              stacked : true
-                          });
-
-              scope.$watch('data', function(value) {
-                if(value) {
-                  graph.setData(value);
-                }
-              }, true);
-            }
-        }
-    })
-    
   module.registerController('DashboardCtrl', ['$scope','$state','KeywordService','PerformanceService','ReportService','ScriptService', 
     function($scope,$state,KeywordService,PerformanceService,ReportService,ScriptService) {
 
@@ -177,51 +146,56 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
             var duration = 0;
             var performanceProjects = [];
             var perf_projectInfo = {};
+            var count = 0;
+
             _.forEach(scriptsId, function (scriptId) {
               ScriptService.get(projectId,scriptId._id,function (data,status) {
+                count ++;
                 users += data.number_threads;
                 ram_up += data.ram_up;
                 loops += data.loops;
                 duration += data.duration;
+                if(count === scriptsId.length) {
+                  ReportService.report(projectId,lastJobId,function (data,status) {
+                    $scope.reports = data;
+
+                    _.forEach($scope.reports, function (reports) {
+                      
+                      _.forEach(reports, function (report) {
+                        report.summary.throughtput = _.round(report.summary.throughtput, 2);
+                        report.summary.kb_per_second = _.round(report.summary.kb_per_second, 2);
+                        report.summary.average = _.round(report.summary.average, 2);
+                        report.summary.standard_deviation = _.round(report.summary.standard_deviation, 2);
+                        report.summary.average_bytes = _.round(report.summary.average_bytes, 2);
+                        report.summary.error_percent = _.round(report.summary.error_percent,2);
+                      });
+
+                      // get data of summary report
+                    $scope.summaryReport = _.find(reports, function (report) {
+                      return report.label == "*SummaryReport*";
+                    });
+
+                    perf_projectInfo = {
+                      _id : projectId,
+                      projectName : projectName,
+                      users : users,
+                      ram_up : ram_up,
+                      loops : loops,
+                      duration : duration,
+                      samples : $scope.summaryReport.summary.samples,
+                      error_percent : $scope.summaryReport.summary.error_percent
+                    };
+
+                    if(perf_projectInfo.error_percent != 0 ) {
+                      $scope.performance_projects.push(perf_projectInfo);
+                    }
+
+                    });
+                  });
+                }
               });
             })
 
-            ReportService.report(projectId,lastJobId,function (data,status) {
-              $scope.reports = data;
-
-              _.forEach($scope.reports, function (reports) {
-                
-                _.forEach(reports, function (report) {
-                  report.summary.throughtput = _.round(report.summary.throughtput, 2);
-                  report.summary.kb_per_second = _.round(report.summary.kb_per_second, 2);
-                  report.summary.average = _.round(report.summary.average, 2);
-                  report.summary.standard_deviation = _.round(report.summary.standard_deviation, 2);
-                  report.summary.average_bytes = _.round(report.summary.average_bytes, 2);
-                  report.summary.error_percent = _.round(report.summary.error_percent,2);
-                });
-
-                // get data of summary report
-              $scope.summaryReport = _.find(reports, function (report) {
-                return report.label == "*SummaryReport*";
-              });
-
-              perf_projectInfo = {
-                _id : projectId,
-                projectName : projectName,
-                users : users,
-                ram_up : ram_up,
-                loops : loops,
-                duration : duration,
-                samples : $scope.summaryReport.summary.samples,
-                error_percent : $scope.summaryReport.summary.error_percent
-              };
-
-              if(perf_projectInfo.error_percent != 0 ) {
-                $scope.performance_projects.push(perf_projectInfo);
-              }
-
-              });
-            });
           }
         })
       });
