@@ -25,32 +25,31 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
     var topPass = [];
     var topFail = [];
     var topBigProject = [];
+    var topProject = [];
+
     for(var i = 0; i < data.length; i ++) {
       var item = data[i];
       var totalCases = item.P+item.S+item.F;
       var percentPass = _.round((item.P/totalCases)*100,2);
       var percentFail = _.round((item.F/totalCases)*100,2);
 
-      var totalProject = {
+      var infoProject = {
         _id : data[i]._id,
         name : data[i].x,
+        percentPass : percentPass,
+        percentFail : percentFail,
         totalCases : totalCases
       };
-      var projectPass = {
-        _id : data[i]._id,
-        name : data[i].x,
-        percent : percentPass
-      };
-      var projectFail = {
-        _id : data[i]._id,
-        name : data[i].x,
-        percent : percentFail
-      };
 
-      topPass.push(projectPass);
-      topFail.push(projectFail);
-      topBigProject.push(totalProject);
+      topProject.push(infoProject);
+
+      topBigProject.push(infoProject);
+      topPass.push(infoProject);
+      topFail.push(infoProject);
+
     }
+
+    $scope.top_projects = topProjects(topProject);
 
     $scope.top_passed_projects = topProjects(topPass);
     $scope.top_failed_projects = topProjects(topFail);
@@ -134,7 +133,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 
         _.forEach(listProjects, function (item,key) {
           var lastJobId = item.lastJobId;
-          var numberOfJobId = listProjects.length - countJobId;
           if(lastJobId) {
             var projectId = item._id;
             var projectName = item.name;
