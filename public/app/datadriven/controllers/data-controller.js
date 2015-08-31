@@ -36,12 +36,6 @@ define(['datadriven/module', 'notification'], function(module) {
       }
 
       $scope.clickNewDataDrivenButton = function ($event) {
-       /* $('.data-provider').show();
-        $('.data-provider').find('.driven-name').show();
-        $scope.dataset = [];
-        $scope.current = undefined;
-        $scope.editable = true;
-        $scope.create = true;*/
         var $element = $('#data-table');
         $element.html('');
 
@@ -61,7 +55,7 @@ define(['datadriven/module', 'notification'], function(module) {
 
       $scope.cancelEdit = function () {
         $scope.editable = false;
-        if ($scope.current === undefined) {
+        if ($scope.current._id === undefined) {
           if ($scope.datas.length > 0) {
             $scope.current = $scope.datas[0];
             $scope.dataset = JSON.parse($scope.current.data_source);
@@ -79,7 +73,14 @@ define(['datadriven/module', 'notification'], function(module) {
       }
 
       $scope.updateDataDriven = function () {
-        if ($scope.current.name === undefined || $scope.current.name === '') return;
+        var $data_name = $('.data-provider div .driven-name').find('input');
+        if ($data_name.val() === undefined || $data_name.val() === '') { 
+
+          $data_name.parent().addClass("has-error");
+          $data_name.focus();
+          return;
+        };
+        
         var fieldNames = [];
         $('.data-provider table thead th.filedName').each(function(index, obj) {
           var fieldName = $(obj).text().trim();
@@ -133,10 +134,21 @@ define(['datadriven/module', 'notification'], function(module) {
         });
       }
 
+      $('body').on('keypress', '.data-provider div .driven-name input', function () {
+        if ($(this).val() != "") {
+          $(this).parent().removeClass('has-error');
+        }
+      });
+
       $scope.createDataDriven = function () {
 
-        if ($scope.current.name === undefined || $scope.current.name === '') return;
+        var $data_name = $('.data-provider div .driven-name').find('input');
+        if ($data_name.val() === undefined || $data_name.val() === '') { 
 
+          $data_name.parent().addClass("has-error");
+          $data_name.focus();
+          return;
+        };
         var fieldNames = [];
         $('.data-provider table thead th.filedName').each(function(index, obj) {
           var fieldName = $(obj).text().trim();
