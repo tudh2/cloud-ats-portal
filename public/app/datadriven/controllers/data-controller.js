@@ -55,7 +55,7 @@ define(['datadriven/module', 'notification'], function(module) {
 
       $scope.cancelEdit = function () {
         $scope.editable = false;
-        if ($scope.current._id === undefined) {
+        if ($scope.current === undefined || $scope.current._id === undefined) {
           if ($scope.datas.length > 0) {
             $scope.current = $scope.datas[0];
             $scope.dataset = JSON.parse($scope.current.data_source);
