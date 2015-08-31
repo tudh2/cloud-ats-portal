@@ -58,7 +58,7 @@
 							<table class="col-sm-12">
 								<tr ng-repeat="project in biggest_projects| orderBy:'-totalCases'|limitTo:5 track by $index">
 									<td ng-click="redirectKeyword(project._id)"><a>{{project.name}}</a></td>
-									<td class="pull-right">{{project.totalCases}} test cases</td>
+									<td class="pull-right fix-size-biggest-project">{{project.totalCases}} test cases</td>
 								</tr>
 							</table>
 						</div>

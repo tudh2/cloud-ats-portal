@@ -1469,3 +1469,6 @@ block-darksky-color
 .editable-input {
   margin-top: 3px;
 }
+.fix-size-biggest-project {
+	width: 100px;
+}
