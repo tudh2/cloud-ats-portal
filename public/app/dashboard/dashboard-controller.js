@@ -43,17 +43,9 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 
       topProject.push(infoProject);
 
-      topBigProject.push(infoProject);
-      topPass.push(infoProject);
-      topFail.push(infoProject);
-
     }
 
     $scope.top_projects = topProjects(topProject);
-
-    $scope.top_passed_projects = topProjects(topPass);
-    $scope.top_failed_projects = topProjects(topFail);
-    $scope.biggest_projects = topProjects(topBigProject);
   }
 
   var loadDataReport = function(data,projectName,numberOfJobId,projectId) {
