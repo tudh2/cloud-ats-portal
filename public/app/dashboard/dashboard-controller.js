@@ -10,6 +10,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
     $scope.top_failed_projects = [];
     $scope.biggest_projects = [];
     $scope.performance_projects = [];
+    $scope.recent_projects = [];
 
   var topProjects = function(topProject) { 
     
@@ -68,9 +69,9 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         _id : projectId
       };
 
-      $scope.recent_finished_projects.push(projectReport);
-
-      if($scope.recent_finished_projects.length == numberOfJobId) {
+      $scope.recent_projects.push(projectReport);
+      if($scope.recent_projects.length == numberOfJobId) {
+        $scope.recent_finished_projects = $scope.recent_projects;
         getInfoProjects($scope.recent_finished_projects);
 
         if($scope.recent_finished_projects.length > 10) {
@@ -152,11 +153,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
                     _.forEach($scope.reports, function (reports) {
                       
                       _.forEach(reports, function (report) {
-                        report.summary.throughtput = _.round(report.summary.throughtput, 2);
-                        report.summary.kb_per_second = _.round(report.summary.kb_per_second, 2);
-                        report.summary.average = _.round(report.summary.average, 2);
-                        report.summary.standard_deviation = _.round(report.summary.standard_deviation, 2);
-                        report.summary.average_bytes = _.round(report.summary.average_bytes, 2);
                         report.summary.error_percent = _.round(report.summary.error_percent,2);
                       });
 
