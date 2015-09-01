@@ -33,7 +33,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       var totalCases = item.P+item.S+item.F;
       var percentPass = _.round((item.P/totalCases)*100,2);
       var percentFail = _.round((item.F/totalCases)*100,2);
-
       var infoProject = {
         _id : data[i]._id,
         name : data[i].x,
@@ -115,6 +114,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
             KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
               if(item.lastJobId == dataReport.functional_job_id) {
                 dataReport.sort = item.sort;
+                dataReport.projectName = projectName;
                 listReports.push(dataReport);
               }
 
@@ -122,7 +122,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
               if(numberOfJobId == listReports.length) {
                 var sortListReports = sortJSON(listReports, 'sort');
                 _.forEach(sortListReports, function (report) {
-                  loadDataReport(report,projectName,numberOfJobId,projectId);
+                  loadDataReport(report,report.projectName,numberOfJobId,projectId);
                 })
               }
             });
