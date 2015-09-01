@@ -82,6 +82,14 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       }
   }
 
+  var sortJSON = function(data, key) {
+      return data.sort(function (a, b) {
+          var x = a[key];
+          var y = b[key];
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      });
+  }
+
   var loadData = function() {
       var listProjects = [];
       var projectInfo = {};
@@ -96,15 +104,27 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
           }
         })
 
+        var listReports = [];
         _.forEach(listProjects, function (item,key) {
           var lastJobId = item.lastJobId;
           var numberOfJobId = listProjects.length - countJobId;
           if(lastJobId) {
             var projectId = item._id;
             var projectName = item.name;
-
+            item.sort = key;
             KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
-              loadDataReport(dataReport,projectName,numberOfJobId,projectId);
+              if(item.lastJobId == dataReport.functional_job_id) {
+                dataReport.sort = item.sort;
+                listReports.push(dataReport);
+              }
+
+              //sort list report
+              if(numberOfJobId == listReports.length) {
+                var sortListReports = sortJSON(listReports, 'sort');
+                _.forEach(sortListReports, function (report) {
+                  loadDataReport(report,projectName,numberOfJobId,projectId);
+                })
+              }
             });
           }
         })
