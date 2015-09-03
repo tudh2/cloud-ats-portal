@@ -27,11 +27,20 @@ define([
                 'layout/actions/full-screen',
                 'layout/actions/reset-widgets',
 
+                'layout/directives/list-space',
                 'layout/directives/smart-menu',
                 'layout/directives/state-breadcrumbs',
                 'layout/directives/search-autocomplete',
                 'layout/directives/smart-projects-active',
-                'layout/directives/list-space'
+
+                'components/activities/activities-controller',
+                'components/activities/activities-service',
+                'components/activities/activities-dropdown-toggle-directive',
+                'components/shortcut/toggle-shortcut',
+
+                'components/language/Language',
+                'components/language/language-selector',
+                'components/language/language-controller',
               ])
             }
           }

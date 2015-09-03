@@ -1,1 +1,0 @@
-define(["fk/module","select2"],function(a){"use strict";a.registerDirective("smartSelect2",function(){return{restrict:"A",link:function(a,b,c){b.removeAttr("smart-select2 data-smart-select2"),b.select2()}}})});

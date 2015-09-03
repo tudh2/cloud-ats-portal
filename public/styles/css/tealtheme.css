@@ -391,13 +391,15 @@ nav ul li a {
          display:none;
      }
 }
-@media (max-width: 767px){
+@media (max-width: 767px)
+{
     .fixed-header .jarviswidget > header {
-		left: 0;
-	}
+    left: 0;
+}
     .hidden-menu.fixed-header .jarviswidget > header{
-		left: 220px;
-	}  
+    left: 220px;
+}
+     
 }
 
 .jarviswidget>header.header-navtabs, .jarviswidget>header H2 {
@@ -1370,7 +1372,7 @@ a:hover.viewLog, a:focus.viewLog {
 	pointer-events: none;
 }
 .tran-per-second {
-	position: relative;
+	style="position: relative;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	margin-left: 30px;
 }

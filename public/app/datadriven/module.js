@@ -11,7 +11,7 @@ define([
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
       .state('app.datadriven', {
-        url: '/datadriven',
+        url: '/datas',
         views: {
           "content@app": {
             controller: 'DataCtrl',
