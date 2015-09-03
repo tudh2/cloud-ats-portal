@@ -6,60 +6,44 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
     function($scope,$state,KeywordService,PerformanceService,ReportService,ScriptService) {
 
     $scope.recent_finished_projects = [];
-    $scope.top_passed_projects = [];
-    $scope.top_failed_projects = [];
-    $scope.biggest_projects = [];
     $scope.performance_projects = [];
     $scope.recent_projects = [];
 
-  var topProjects = function(topProject) { 
-    
-    if(topProject.length > 5) {
-      var temp = topProject;
-      var size = temp.length - 5;
-      topProject.splice(5,size);
-    }
-    return topProject;
-  }
-
   var getInfoProjects = function(data) {
-    var topPass = [];
-    var topFail = [];
-    var topBigProject = [];
     var topProject = [];
 
-    for(var i = 0; i < data.length; i ++) {
-      var item = data[i];
+    _.forEach(data, function (item) {
       var totalCases = item.P+item.S+item.F;
       var percentPass = _.round((item.P/totalCases)*100,2);
       var percentFail = _.round((item.F/totalCases)*100,2);
       var infoProject = {
-        _id : data[i]._id,
-        name : data[i].x,
+        _id : item._id,
+        name : item.x,
         percentPass : percentPass,
         percentFail : percentFail,
         totalCases : totalCases
       };
 
       topProject.push(infoProject);
-
-    }
-
-    $scope.top_projects = topProjects(topProject);
+    })
+    
+    $scope.top_projects = topProject;
   }
 
-  var loadDataReport = function(data,projectName,numberOfJobId,projectId) {
+  var loadDataReport = function(data,numberOfJobId) {
       var totalPass = 0;
       var totalFail = 0;
       var totalSkip = 0;
       var totalCases = 0;
+      var projectName = data.projectName;
+      var projectId = data.projectId;
       var dataObject = JSON.parse(data.suite_reports);
-      for(var i = 0; i < dataObject.length; i++) {
-        var item = dataObject[i];
-        totalPass += item.total_pass;
-        totalFail += item.total_fail;
-        totalSkip += item.total_skip;
-      }
+      _.forEach(dataObject, function (obj) {
+        totalPass += obj.total_pass;
+        totalFail += obj.total_fail;
+        totalSkip += obj.total_skip;
+      });
+
       var projectReport = {
         x : projectName,
         P : totalPass,
@@ -115,6 +99,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
               if(item.lastJobId == dataReport.functional_job_id) {
                 dataReport.sort = item.sort;
                 dataReport.projectName = projectName;
+                dataReport.projectId = projectId;
                 listReports.push(dataReport);
               }
 
@@ -122,7 +107,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
               if(numberOfJobId == listReports.length) {
                 var sortListReports = sortJSON(listReports, 'sort');
                 _.forEach(sortListReports, function (report) {
-                  loadDataReport(report,report.projectName,numberOfJobId,projectId);
+                  loadDataReport(report,numberOfJobId);
                 })
               }
             });
@@ -134,7 +119,9 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       //Load data for Performance project
       PerformanceService.projects(function (data) {
         var countJobId = 0;
+        //listProjects is emptied
         listProjects = [];
+
         listProjects = data;
 
         _.forEach(listProjects, function (item,key) {
@@ -169,9 +156,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
                 if(count === scriptsId.length) {
                   ReportService.report(projectId,lastJobId,function (data,status) {
                     $scope.reports = data;
-
                     _.forEach($scope.reports, function (reports) {
-                      
                       _.forEach(reports, function (report) {
                         report.summary.error_percent = _.round(report.summary.error_percent,2);
                       });
