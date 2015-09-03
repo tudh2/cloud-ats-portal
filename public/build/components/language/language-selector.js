@@ -1,0 +1,1 @@
+define(["layout/module"],function(a){"use strict";a.directive("languageSelector",["Language",function(a){return{restrict:"EA",replace:!0,templateUrl:"build/components/language/language-selector.tpl.html",scope:!0}}])});

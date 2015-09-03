@@ -1509,3 +1509,35 @@ block-darksky-color
 .fix-size-biggest-project {
 	width: 100px;
 }
+
+.button-table-add {
+	background-color: #009A88;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 100px;
+  border: 1px solid #009A88;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  /* font-size: 17px; */
+  padding: 1px 6px;
+  text-decoration: none;
+}
+.button-table-remove {
+	background-color: #FF1C1C;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 100px;
+  border: 1px solid #FF1C1C;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  /* font-size: 17px; */
+  padding: 1px 6px;
+  text-decoration: none;
+}
+.add-remove-button {
+	min-width: 80px;
+}

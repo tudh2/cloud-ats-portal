@@ -33,14 +33,7 @@ define([
                 'layout/directives/search-autocomplete',
                 'layout/directives/smart-projects-active',
 
-                'components/activities/activities-controller',
-                'components/activities/activities-service',
-                'components/activities/activities-dropdown-toggle-directive',
-                'components/shortcut/toggle-shortcut',
 
-                'components/language/Language',
-                'components/language/language-selector',
-                'components/language/language-controller',
               ])
             }
           }

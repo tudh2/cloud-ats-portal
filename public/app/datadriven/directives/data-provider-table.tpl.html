@@ -2,15 +2,15 @@
   <thead>
     <tr>
       <th ng-if="editable">
-        <a ng-click="newField()" class="btn btn-primary btn-xs">
-          <i class="fa fa-plus"></i> New Field
+        <a ng-click="newField()" class="button-table-add btn-primary btn-xs">
+          <i class="fa fa-plus"></i> 
         </a>
-        <a ng-if="rows.length == 0" ng-click="newRow()" class="btn btn-primary btn-xs">
-          <i class="fa fa-plus"></i> New Row
+        <a ng-if="rows.length == 0" ng-click="newRow()" class="button-table-add btn-primary btn-xs">
+          <i class="fa fa-plus"></i> 
         </a>
       </th>
       <th ng-repeat="field in fieldNames track by $index" class="filedName">
-        <a ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)" class="btn btn-danger btn-xs">
+        <a ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)" class="button-table-remove btn-danger btn-xs">
           <i class="fa fa-minus"></i>
         </a>
         <a ng-if="editable" href-void data-type="text" editable-text="field" data-ng-model="fieldName" data-options="editableOptions" class="editable editable-click">{{field}}</a>
@@ -21,17 +21,17 @@
   <tbody>
     <tr ng-repeat="row in rows track by $index" class="fieldValues">
       <td ng-if="!$last && editable">
-        <a ng-click="removeRow($index)" class="btn btn-danger btn-xs">
-          <i class="fa fa-minus"></i> This Row
+        <a ng-click="removeRow($index)" class="button-table-remove btn-danger btn-xs">
+          <i class="fa fa-minus"></i> 
         </a>
       </td>
 
-      <td ng-if="$last && editable">
-        <a ng-click="removeRow($index)" class="btn btn-danger btn-xs">
-          <i class="fa fa-minus"></i> This Row
+      <td ng-if="$last && editable" class="add-remove-button">
+        <a ng-click="removeRow($index)" class="button-table-remove btn-danger btn-xs">
+          <i class="fa fa-minus"></i> 
         </a>
-        <a ng-click="newRow()" class="btn btn-primary btn-xs">
-          <i class="fa fa-plus"></i> New Row
+        <a ng-click="newRow()" class="button-table-add btn-primary btn-xs">
+          <i class="fa fa-plus"></i> 
         </a>
       </td>
 
