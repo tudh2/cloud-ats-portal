@@ -156,7 +156,18 @@ module.exports = function (grunt) {
                     }
                 }
             }
-        }
+        },
+		cssmin: {
+		  target: {
+			files: [{
+			  expand: true,
+			  cwd: pub + 'styles/css',
+			  src: ['tealtheme.css'],
+			  dest: pub + 'styles/css',
+			  ext: '.min.css'
+			}]
+		  }
+		}
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -170,6 +181,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     grunt.loadNpmTasks('grunt-html2js');
+	
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     grunt.loadTasks('tasks');
 
@@ -182,6 +195,7 @@ module.exports = function (grunt) {
         'turnOnPotatoDeclaration',
         'adjustTemplateUrls',
         'html2js',
+		'cssmin',
         'addIncludes',
         'uglify',
         'requirejs',

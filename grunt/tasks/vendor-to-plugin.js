@@ -4,8 +4,8 @@ var _ = require('lodash');
 
 var pkg = require('../package.json');
 
-var pluginDir = __dirname + '/../' + pkg.smartadmin.plugin;
-var vendorDir = __dirname + '/../' + pkg.smartadmin.vendor;
+var pluginDir = __dirname + '/../' + pkg.cloudats.plugin;
+var vendorDir = __dirname + '/../' + pkg.cloudats.vendor;
 
 var dependencies = require('./vendor-to-plugin-files.json');
 
