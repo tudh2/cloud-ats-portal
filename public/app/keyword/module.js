@@ -113,7 +113,8 @@ define([
               deps: $couchPotatoProvider.resolveDependencies([
                 'keyword/controllers/keyword-report-controller',
                 'keyword/directives/tabs-header',
-                'services/keyword-service'
+                'services/keyword-service',
+                'keyword/directives/functional-report'
               ])}
           }
         },

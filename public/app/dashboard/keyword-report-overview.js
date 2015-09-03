@@ -1,7 +1,6 @@
-define(['keyword/module', 'lodash'], function(module, _) {
-  'use strict';
-
-	module.registerDirective('morrisStackedBarGraph', function(){
+define(['dashboard/module', 'lodash'], function(module, _) {
+	'use strict';
+	 module.registerDirective('morrisStackedBarGraph', function(){
         return {
             restrict: 'E',
             replace: true,
@@ -10,6 +9,7 @@ define(['keyword/module', 'lodash'], function(module, _) {
             },
             template: '<div class="chart no-padding"></div>',
             link: function(scope, element){
+              
               var draw = function (size,value,hideHover) {
                 var graph = Morris.Bar({
                               element : element,
@@ -49,5 +49,5 @@ define(['keyword/module', 'lodash'], function(module, _) {
               }, true);
             }
         }
-  	});
-});
+    })
+})

@@ -288,6 +288,7 @@ nav ul li a {
 	font-size: 12px;
 	color: #15ab9f;
 	padding-left: 10px;
+	cursor: pointer;
 }
 .ds-red {
 	background-color: #ff4f51;
@@ -1507,3 +1508,6 @@ block-darksky-color
     padding-left:13px;
     padding-right:13px;
 } 
+.fix-size-biggest-project {
+	width: 100px;
+}

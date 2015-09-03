@@ -2,310 +2,206 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 
   'use strict';
 
-  var bar_data= [{
-      x : 'Project 1',
-      P : 100,
-      F : 10,
-      S : 10
-  }, {
-      x : 'Project 2',
-      P : 100,
-      F : 0,
-      S : 0
-  }, {
-      x : 'Project 3',
-      P : 90,
-      F : 10,
-      S : 0
-  }, {
-      x : 'Project 4',
-      P : 90,
-      F : 0,
-      S : 10
-  }]
-  module.registerDirective('morrisStackedBarGraph', function(){
-        return {
-            restrict: 'E',
-            replace: true,
-            template: '<div class="chart no-padding"></div>',
-            link: function(scope, element){
-                Morris.Bar({
-                    element : element,
-                    axes : true,
-                    grid : true,
-                    data : bar_data,
-                    xkey : 'x',
-                    ykeys : ['P', 'F', 'S'],
-                    labels : ['Pass', 'Fail', 'Skip'],
-                    barColors : ['#15ab9f','#ff4f51','#fbd601'],
-                    stacked : true
-                });
+  module.registerController('DashboardCtrl', ['$scope','$state','KeywordService','PerformanceService','ReportService','ScriptService', 
+    function($scope,$state,KeywordService,PerformanceService,ReportService,ScriptService) {
 
-            }
-        }
+    $scope.recent_finished_projects = [];
+    $scope.performance_projects = [];
+    $scope.recent_projects = [];
+
+  var getInfoProjects = function(data) {
+    var topProject = [];
+
+    _.forEach(data, function (item) {
+      var totalCases = item.P+item.S+item.F;
+      var percentPass = _.round((item.P/totalCases)*100,2);
+      var percentFail = _.round((item.F/totalCases)*100,2);
+      var infoProject = {
+        _id : item._id,
+        name : item.x,
+        percentPass : percentPass,
+        percentFail : percentFail,
+        totalCases : totalCases
+      };
+
+      topProject.push(infoProject);
     })
     
-    var day_data = [{
-        "elapsed" : "I",
-        "value" : 34
-    }, {
-        "elapsed" : "II",
-        "value" : 24
-    }, {
-        "elapsed" : "III",
-        "value" : 3
-    }, {
-        "elapsed" : "IV",
-        "value" : 12
-    }, {
-        "elapsed" : "V",
-        "value" : 13
-    }, {
-        "elapsed" : "VI",
-        "value" : 22
-    }, {
-        "elapsed" : "VII",
-        "value" : 5
-    }, {
-        "elapsed" : "VIII",
-        "value" : 26
-    }, {
-        "elapsed" : "IX",
-        "value" : 12
-    }, {
-        "elapsed" : "X",
-        "value" : 19
-    }, {
-        "elapsed" : "II",
-        "value" : 24
-    }, {
-        "elapsed" : "III",
-        "value" : 3
-    }, {
-        "elapsed" : "IV",
-        "value" : 12
-    }, {
-        "elapsed" : "V",
-        "value" : 13
-    }, {
-        "elapsed" : "VI",
-        "value" : 22
-    }, {
-        "elapsed" : "VII",
-        "value" : 5
-    }, {
-        "elapsed" : "VIII",
-        "value" : 26
-    }, {
-        "elapsed" : "IX",
-        "value" : 12
-    }, {
-        "elapsed" : "X",
-        "value" : 19
-    }, {
-        "elapsed" : "II",
-        "value" : 24
-    }, {
-        "elapsed" : "III",
-        "value" : 3
-    }, {
-        "elapsed" : "IV",
-        "value" : 12
-    }, {
-        "elapsed" : "V",
-        "value" : 13
-    }, {
-        "elapsed" : "VI",
-        "value" : 22
-    }, {
-        "elapsed" : "VII",
-        "value" : 5
-    }, {
-        "elapsed" : "VIII",
-        "value" : 26
-    }, {
-        "elapsed" : "IX",
-        "value" : 12
-    }, {
-        "elapsed" : "X",
-        "value" : 19
-    }];
-
-    module.registerDirective('morrisStackedLineHitGraph', function(){
-      return {
-          restrict: 'E',
-          replace: true,
-          template: '<div class="chart no-padding"></div>',
-          link: function(scope, element){
-              Morris.Line({
-                  element : element,
-                  data : day_data,
-                  xkey : 'elapsed',
-                  ykeys : ['value'],
-                  labels : ['value'],
-                  lineColors : ['#15ab9f'],
-                  parseTime : false
-              });
-
-          }
-      }
-  })
-    module.registerDirective('morrisStackedLineTransactionGraph', function(){
-      return {
-          restrict: 'E',
-          replace: true,
-          template: '<div class="chart no-padding"></div>',
-          link: function(scope, element){
-              Morris.Line({
-                  element : element,
-                  data : day_data,
-                  xkey : 'elapsed',
-                  ykeys : ['value'],
-                  labels : ['value'],
-                  lineColors : ['#ff4f51'],
-                  parseTime : false
-              });
-
-          }
-      }
-  })
-
-  module.registerController('DashboardCtrl', ['$scope', function($scope) {
-
-    $scope.project_overview = true;
-
-    $scope.versionSelected = '1';
-
-    $scope.chooseTestCase = true;
-
-    $scope.organize = false;
-
-    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    $scope.series = ['Series A', 'Series B'];
-
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40],
-      [28, 48, 40, 19, 86, 27, 90]
-    ];
-
-    $scope.$watch("barchart", function () {//I change here
-
-      
-    });
-
-    $scope.selectChome = function () {
-      $scope.versionSelected = 1;
-    }
-    $scope.selectFirefox = function () {
-      $scope.versionSelected = 2;
-    }
-    $scope.selectIE = function () {
-      $scope.versionSelected = 3;
-    }
-    $scope.selectSafari = function () {
-      $scope.versionSelected = 4;
-    }
-    $scope.selectOpera = function () {
-      $scope.versionSelected = 5;
-    }
-    $scope.new_project = function () {
-      $scope.project_overview = false;
-      $('[data-toggle="popover"]').each(function () {
-        $(this).popover('hide');
-      });
-    }
-    
-    $scope.chooseTestSuite = function (suiteNumber, $event) {
-      $scope.testSuiteSelected = suiteNumber;
-
-      var $div = $event.currentTarget;
-      var $parent = $($div).parent().find(".test-suite");
-      _.forEach($parent, function (element) {
-        $(element).css('background-color', 'white');
-
-        $(element).css('border-left', '3px solid white');
-      });
-      $($div).css('background-color', '#EBF3F5');
-      $($div).css('border-left', '3px solid #ff4f51');
-    }
-    // get files after files were uploaded
-    $scope.uploadFile = function (element) {
-      $scope.file = element.files;
-
-      delete $scope.file.length;
-      
-      var fileNames = '';
-      _.forEach($scope.file, function (file) {
-        fileNames += file.name + ',';
-        
-      });
-      $('input[name="listFile"]').val(fileNames);
-
-    }
-
-    $scope.chooseOrder = function (a) {
-      console.log(a);
-
-    }
-    $scope.clickSaveTestCasesChoosed = function () {
-      $scope.chooseTestCase = false;
-    }
-
-    $scope.clickOrganizeTestSuite = function () {
-      $scope.organize = true;
-      $scope.chooseTestCase = true;
-    }
-    $scope.newSampler = function () {
-      changeModalSize();
-    }
-
-    $scope.basic = function () {
-      resetModalSize();
-    }
-
-    $scope.configuration = function () {
-      resetModalSize();
-    }
-
-    $scope.clickUploadScriptButton = function () {
-      $('#createScript .modal-dialog .modal-content').css("width", '');
-      $('#createScript .modal-dialog .modal-content').css("margin-left", '20px');
-    }
-
-    $scope.clickCreateScriptButton = function () {
-      var $id = $('#createScript').find('.nav.nav-tabs .active a').attr('id');
-      if ($id === 'samplersId') {
-        changeModalSize();
-      } else if ($id === 'basicId' || $id === 'configurationId') {
-        resetModalSize();
-      }
-
-    }
-
-    $scope.addBorder = function ($event) {
-
-      var $this = $event.currentTarget;
-      
-      var $div = $($this).find('.number').parent();
-      var $next = $($div).find('.remove-icon');
-      if ($($this).hasClass("t-border")){
-        $($this).removeClass("t-border");
-      } else {
-        $($this).addClass("t-border");
-      }
-    }
-
-    var resetModalSize = function () {
-      $('#createScript .modal-dialog .modal-content').css("width", '');
-      $('#createScript .modal-dialog .modal-content').css("margin-left", '');
-      $('#createScript .modal-dialog .modal-content .modal-body').css("padding", "");
-    }
-
-    var changeModalSize = function () {
-      $('#createScript .modal-dialog .modal-content').css("width", '980px');
-      $('#createScript .modal-dialog .modal-content').css("margin-left", '-120px');
-      $('#createScript .modal-dialog .modal-content .modal-body').css("padding", "0px");
-    }
+    $scope.top_projects = topProject;
   }
+
+  var loadDataReport = function(data,numberOfJobId) {
+      var totalPass = 0;
+      var totalFail = 0;
+      var totalSkip = 0;
+      var totalCases = 0;
+      var projectName = data.projectName;
+      var projectId = data.projectId;
+      var dataObject = JSON.parse(data.suite_reports);
+      _.forEach(dataObject, function (obj) {
+        totalPass += obj.total_pass;
+        totalFail += obj.total_fail;
+        totalSkip += obj.total_skip;
+      });
+
+      var projectReport = {
+        x : projectName,
+        P : totalPass,
+        F : totalFail,
+        S : totalSkip,
+        _id : projectId
+      };
+
+      $scope.recent_projects.push(projectReport);
+      if($scope.recent_projects.length == numberOfJobId) {
+        $scope.recent_finished_projects = $scope.recent_projects;
+        getInfoProjects($scope.recent_finished_projects);
+
+        if($scope.recent_finished_projects.length > 10) {
+          var temp = $scope.recent_finished_projects;
+          var size = temp.length - 10;
+          $scope.recent_finished_projects.splice(10,size);
+        }
+      }
+  }
+
+  var sortJSON = function(data, key) {
+      return data.sort(function (a, b) {
+          var x = a[key];
+          var y = b[key];
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      });
+  }
+
+  var loadData = function() {
+      var listProjects = [];
+      var projectInfo = {};
+
+      KeywordService.list(function (data,status) {
+        listProjects = data;
+        var countJobId = 0;
+        _.forEach(listProjects, function (item,key) {
+          var lastJobId = item.lastJobId;
+          if(lastJobId === undefined) {
+            countJobId ++;
+          }
+        })
+
+        var listReports = [];
+        _.forEach(listProjects, function (item,key) {
+          var lastJobId = item.lastJobId;
+          var numberOfJobId = listProjects.length - countJobId;
+          if(lastJobId) {
+            var projectId = item._id;
+            var projectName = item.name;
+            item.sort = key;
+            KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
+              if(item.lastJobId == dataReport.functional_job_id) {
+                dataReport.sort = item.sort;
+                dataReport.projectName = projectName;
+                dataReport.projectId = projectId;
+                listReports.push(dataReport);
+              }
+
+              //sort list report
+              if(numberOfJobId == listReports.length) {
+                var sortListReports = sortJSON(listReports, 'sort');
+                _.forEach(sortListReports, function (report) {
+                  loadDataReport(report,numberOfJobId);
+                })
+              }
+            });
+          }
+        })
+
+      });
+
+      //Load data for Performance project
+      PerformanceService.projects(function (data) {
+        var countJobId = 0;
+        //listProjects is emptied
+        listProjects = [];
+
+        listProjects = data;
+
+        _.forEach(listProjects, function (item,key) {
+          var lastJobId = item.lastJobId;
+          if(lastJobId === undefined) {
+            countJobId ++;
+          }
+        })
+
+        _.forEach(listProjects, function (item,key) {
+          var lastJobId = item.lastJobId;
+          if(lastJobId) {
+            var projectId = item._id;
+            var projectName = item.name;
+            var scriptsId = item.lastScripts;
+            var scripts = [];
+            var users = 0;
+            var ram_up = 0;
+            var loops = 0;
+            var duration = 0;
+            var performanceProjects = [];
+            var perf_projectInfo = {};
+            var count = 0;
+
+            _.forEach(scriptsId, function (scriptId) {
+              ScriptService.get(projectId,scriptId._id,function (data,status) {
+                count ++;
+                users += data.number_threads;
+                ram_up += data.ram_up;
+                loops += data.loops;
+                duration += data.duration;
+                if(count === scriptsId.length) {
+                  ReportService.report(projectId,lastJobId,function (data,status) {
+                    $scope.reports = data;
+                    _.forEach($scope.reports, function (reports) {
+                      _.forEach(reports, function (report) {
+                        report.summary.error_percent = _.round(report.summary.error_percent,2);
+                      });
+
+                      // get data of summary report
+                    $scope.summaryReport = _.find(reports, function (report) {
+                      return report.label == "*SummaryReport*";
+                    });
+
+                    perf_projectInfo = {
+                      _id : projectId,
+                      projectName : projectName,
+                      users : users,
+                      ram_up : ram_up,
+                      loops : loops,
+                      duration : duration,
+                      samples : $scope.summaryReport.summary.samples,
+                      error_percent : $scope.summaryReport.summary.error_percent
+                    };
+
+                    if(perf_projectInfo.error_percent != 0 ) {
+                      $scope.performance_projects.push(perf_projectInfo);
+                    }
+
+                    });
+                  });
+                }
+              });
+            })
+
+          }
+        })
+      });
+    }
+
+    loadData();
+
+    $scope.redirectPerformance = function (projectId) {
+      $state.go('app.performance', {id: projectId});
+    }
+
+    $scope.redirectKeyword = function (projectId) {
+      $state.go('app.keyword', { id : projectId });
+    }
+
+    }
   ]);
 });

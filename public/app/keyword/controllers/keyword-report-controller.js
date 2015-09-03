@@ -12,22 +12,20 @@ define(['keyword/module', 'lodash'], function (module, _) {
       
       $scope.suiteReports = [];
 
+      $scope.listSuiteReports = [];
+
       $scope.dataReports = [];
 
       var getDataReport = function(data) {
-        var obj;
-        var nameSuite;
         var suiteReport = JSON.parse(data.suite_reports);
 
-        _.forEach(suiteReport,function(n,key) {
-            obj = n;
-            nameSuite = key;
+        _.forEach(suiteReport,function(obj,key) {
             var dataReport = {
-              x : nameSuite,
+              x : obj.name,
               P : obj.total_pass,
               F : obj.total_fail,
               S : obj.total_skip
-            }
+            };
             $scope.dataReports.push(dataReport);
             if(obj.test_result) {
               obj.test_result = 'Pass'
@@ -37,24 +35,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
             $scope.suiteReports.push(obj);
         })
-
-        draw($scope.dataReports);
-      };
-
-      var draw = function(dataReports) {
-        var eleReport = $(".functional-report");
-        if($('div').find('.functional-report').length > 0)
-        Morris.Bar({
-                    element : eleReport,
-                    axes : true,
-                    grid : true,
-                    data : dataReports,
-                    xkey : 'x',
-                    ykeys : ['P', 'F', 'S'],
-                    labels : ['Pass', 'Fail', 'Skip'],
-                    barColors : ['#00B4A1','#ff5050','#ffaa2a'],
-                    stacked : true
-        });
+        $scope.listSuiteReports = $scope.dataReports;
       };
 
       KeywordService.getReport($scope.projectId, $scope.jobId, function(data,status) {
@@ -64,7 +45,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.redirectTo = function() {
         $state.go('app.keyword',{id: $scope.projectId});
       }
-
 
   }]);
 });
