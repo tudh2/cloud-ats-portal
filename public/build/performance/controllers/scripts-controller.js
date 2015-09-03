@@ -1,1 +1,0 @@
-define(["performance/module","notification"],function(a){"use strict";a.registerController("ScriptsCtrl",["$scope","$stateParams","ScriptService",function(a,b,c){a.projectId=b.id,a.title="TEST SCRIPTS",c.list(a.projectId,function(b){a.scripts=b,a.totalScripts=b.length})}])});

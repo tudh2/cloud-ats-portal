@@ -20,11 +20,14 @@ define([
             resolve: {
               deps: $couchPotatoProvider.resolveDependencies([
                 'dashboard/dashboard-controller',
+                'components/todo/todo-container',
                 'services/keyword-service',
                 'services/performance-service',
                 'services/report-service',
                 'services/script-service',
                 'keyword/directives/functional-report',
+                'components/todo/models/todo',
+                'components/todo/directives/todo-list',
                 'modules/widgets/directives/widget-grid',
                 'modules/widgets/directives/jarvis-widget'
               ])

@@ -1,1 +1,0 @@
-define(["auth/module"],function(a){"use strict";return a.registerDirective("loginInfo",["$rootScope",function(a){return{restrict:"A",templateUrl:"build/auth/directives/login-info.tpl.html",link:function(b,c){var d=a.context;void 0!==d&&(b.currentUser=d.user)}}}])});
