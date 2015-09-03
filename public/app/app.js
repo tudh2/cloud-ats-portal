@@ -33,6 +33,7 @@ define([
     'app.performance',
     'app.projects',
     'app.keyword',
+    'app.datadriven',
   ]);
 
   couchPotato.configureApp(app);

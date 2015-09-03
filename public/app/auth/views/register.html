@@ -1,11 +1,13 @@
 <header id="header"  class="animated fadeInDown" >
 
   <div id="logo-group">
-    <span id="logo"> <img src="styles/img/logo.png" alt="SmartAdmin"> </span>
+    <!-- LOGO -->
+    <span id="logo"><img src="styles/img/Citus CLOUD ATS_logo.png" alt="CloudATS Admin"></span>
   </div>
 
+
   <span id="extr-page-header-space">
-  <span class="hidden-mobile hiddex-xs">Already registered?</span> <a ui-sref="login" class="btn btn-danger">Sign In</a> </span>
+  <span class="hidden-mobile hiddex-xs">Already registered?</span> <a ui-sref="login" class="btn btn-primary">Sign In</a> </span>
 
 </header>
 <div id="main" role="main"  class="animated fadeInDown" >
@@ -15,22 +17,22 @@
 
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 hidden-xs hidden-sm">
-        <h1 class="txt-color-red login-header-big">SmartAdmin</h1>
+        <h1 class="txt-color-red login-header-big">CloudATS</h1>
         <div class="hero">
 
           <div class="pull-left login-desc-box-l">
-            <h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of SmartAdmin, everywhere you go!</h4>
-            <div class="login-app-icons">
+            <h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of CloudATS, everywhere you go!</h4>
+            <!-- <div class="login-app-icons">
               <a href-void class="btn btn-danger btn-sm">Frontend Template</a>
               <a href-void class="btn btn-danger btn-sm">Find out more</a>
-            </div>
+            </div> -->
           </div>
 
-          <img src="styles/img/demo/iphoneview.png" alt="" class="pull-right display-image" style="width:210px">
-
+          <!-- <img src="styles/img/demo/iphoneview.png" alt="" class="pull-right display-image" style="width:210px">
+ -->
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
               <p>
@@ -43,7 +45,7 @@
               Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
             </p>
           </div>
-        </div>
+        </div> -->
 
       </div>
       <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
@@ -51,7 +53,7 @@
 
           <form id="smart-form-register" class="smart-form client-form" ng-submit="submit()" ng-controller="RegisterCtrl" form-validate>
             <header>
-                Registration is FREE*
+                Registration Form
             </header>
 
             <fieldset>
@@ -61,8 +63,8 @@
                   <input  type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
                   <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> 
                 </label>
-                <em ng-show="checkEmailPattern" style="color: red;">{{notify}}</em>
-                <em ng-show="checkEmail" style="color: red;">{{message}}</em>
+                <em ng-if="checkEmailPattern" style="color: #D56161;">{{notify}}</em>
+                <em ng-if="checkEmail" style="color: #D56161;">{{message}}</em>
               </section>
 
               <section>
@@ -122,7 +124,7 @@
                 </section>
               </div>
 
-              <section>
+              <!-- <section>
                 <label class="checkbox">
                   <input type="checkbox" name="subscription" id="subscription">
                   <i></i>I want to receive news and special offers</label>
@@ -130,7 +132,7 @@
                   <input type="checkbox" name="terms" id="terms">
                   <i></i>I agree with the <a href="#" data-toggle="modal" data-target="#myModal"> Terms and Conditions </a>
                 </label>
-              </section>
+              </section> -->
               
             </fieldset>
               <footer>
@@ -147,7 +149,7 @@
             </form>
 
           </div>
-          <p class="note text-center">*FREE Registration ends on October 2015.</p>
+          <!-- <p class="note text-center">*FREE Registration ends on October 2015.</p>
           <h5 class="text-center">- Or sign in using -</h5>
           <ul class="list-inline text-center">
             <li>
@@ -159,7 +161,7 @@
             <li>
               <a href-void class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
             </li>
-          </ul>
+          </ul> -->
       </div>
     </div>
   </div>

@@ -172,7 +172,8 @@ define(['keyword/module'], function (module) {
             space = {_id: null};
           }
           var options = "";
-          DataService.list(tenant, space._id).then(function (data){
+
+          DataService.list(function (data, status) {
             _.forEach(data, function(sel) {
               options += "[ name = ";
               options += sel.name;
@@ -193,7 +194,6 @@ define(['keyword/module'], function (module) {
               }
             });
           });
-          
         };
 
         var updateDataforCase = function(value,data) {

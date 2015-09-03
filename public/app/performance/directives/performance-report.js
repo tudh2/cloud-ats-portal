@@ -22,6 +22,7 @@ define(['performance/module'], function (module) {
 				   // round information
 	      _.forEach($scope.reports, function (report) {
 
+	      	report.summary.error_percent = _.round(report.summary.error_percent, 2);
 	        report.summary.throughtput = _.round(report.summary.throughtput, 2);
 	        report.summary.kb_per_second = _.round(report.summary.kb_per_second, 2);
 	        report.summary.average = _.round(report.summary.average, 2);
@@ -61,7 +62,6 @@ define(['performance/module'], function (module) {
 	      var size = []; 
 	      var colors = [];
 	      var colorsSample = ["#00B4A1","#ffaa2a","#ff5050","#ff7832","#9cbe3e","#ffce32","#9855d4","#af6ee8","#3a5ea4","#4178be","#5596e6","#7cc7ff","#7cc7ff","#2dacd1","008571","#a4aeb6","#8996a0","#3a4a58","#9cbe3e","#9855d4","#5aaafa","#3a4a58"];
-      
 	      for(var i =0; i < maxLength; i++){
 	        var tmpObj = {};      
 	             
@@ -72,9 +72,10 @@ define(['performance/module'], function (module) {
 	            size.push(key);         
 	          }                    
 	          
-	          if(colors.length < counterSample ){   
-	            colors.push(colorsSample[j]);         
-	          }
+	          if(colors.length < counterSample){   
+	            colors.push(colorsSample[j]);    
+
+	          } 
 
 	          if(tmpArrayReports[j][i] != null){
 	            tmpObj[key] = tmpArrayReports[j][i].value;
@@ -84,7 +85,6 @@ define(['performance/module'], function (module) {
 	        hits_per_second.push(tmpObj);
 
 	      }
-
 	      // fill data to chart using morris libray
 	      var $hits_per_second = $(element).find('.hit-per-second');
 	      Morris.Line({

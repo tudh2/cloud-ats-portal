@@ -4,6 +4,22 @@ define(['app'], function(app) {
   app.factory('DataService', ['$http', '$q', '$cookies', '$rootScope', '$window', '$state',
     function($http, $q, $cookies, $rootScope, $window, $state){
       return {
+        list: function (callback) {
+          var request = {
+            method: 'GET',
+            url: appConfig.RestEntry + '/api/v1/datas',
+            headers: {
+              'X-AUTH-TOKEN': $cookies.get('authToken'),
+              'X-SPACE': $cookies.get('space'),
+            }
+          };
+
+          $http(request).success(function(data, status) {
+            callback(data, status);
+          }). error(function(data, status) {
+            callback(data, status);
+          })
+        },
         create: function(name, dataset, caseId, callback) {
           var request = {
             method: 'POST',
@@ -83,16 +99,17 @@ define(['app'], function(app) {
         delete: function (id, callback) {
           var request = {
             method: 'DELETE',
-            url: appConfig.RestEntry + '/api/v1/data/delete/' + id,
+            url: appConfig.RestEntry + '/api/v1/data',
 
             headers: {
               'X-AUTH-TOKEN' : $cookies.get('authToken'),
               'X-SPACE': $cookies.get('space')
-            }
+            },
+            data: id
           };
 
-          $http(request).success(function (response) {
-            callback(response);
+          $http(request).success(function (data, status) {
+            callback(data, status);
           }).error(function (data, status) {
             switch (status) {
               case 403:

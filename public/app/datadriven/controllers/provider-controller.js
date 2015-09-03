@@ -1,4 +1,4 @@
-define(['fk/module', 'notification'], function(module) {
+define(['datadriven/module', 'notification'], function(module) {
   
   'use strict';
   module.registerController('ProviderCtrl',['$rootScope', '$scope', 'UserService', 'DataService', 
