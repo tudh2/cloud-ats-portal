@@ -489,6 +489,7 @@ header .nav-tabs>li.active > a, header .nav-tabs>li.active>a:focus, header .nav-
 .text-teal-color 
 {
     color:#00b4a0;
+    cursor: pointer;
 }
 .text-red-color 
 {
@@ -497,6 +498,7 @@ header .nav-tabs>li.active > a, header .nav-tabs>li.active>a:focus, header .nav-
 .text-amber-color 
 {
     color:#ff7832;
+    cursor: pointer;
 }
 .actionMenu .smart-form .checkbox.teal-color i
 {
@@ -1539,5 +1541,5 @@ block-darksky-color
   text-decoration: none;
 }
 .add-remove-button {
-	min-width: 80px;
+	min-width: 60px;
 }
