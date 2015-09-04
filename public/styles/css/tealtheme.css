@@ -1543,3 +1543,6 @@ block-darksky-color
 .add-remove-button {
 	min-width: 60px;
 }
+.not-allow-click {
+	pointer-events: none;
+}

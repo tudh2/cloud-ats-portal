@@ -13,7 +13,7 @@
     </div>
     <div class="data-items" style="height: 500px; overflow-y: auto;">
     <div class="row data" 
-      ng-repeat="data in datas | search: searchTerms track by $index" ng-class="{'data-selected':data._id == current._id}"
+      ng-repeat="data in datas | search: searchTerms track by $index" ng-class="{'data-selected':data._id == current._id , 'not-allow-click': editable}"
        ng-click="chooseData(data)"
       >
       <div class="col-sm-12">
