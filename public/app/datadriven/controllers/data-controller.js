@@ -32,7 +32,7 @@ define(['datadriven/module', 'notification'], function(module) {
         $scope.create = false;
         $scope.current = data;
         $scope.dataset = JSON.parse(data.data_source);
-        $scope.datasetname = data.name;
+        $scope.current.name = data.name;
       }
 
       $scope.clickNewDataDrivenButton = function ($event) {
@@ -50,6 +50,7 @@ define(['datadriven/module', 'notification'], function(module) {
 
       $scope.editDataset = function () {
         $scope.currentDataset = angular.copy($scope.dataset);
+        $scope.currentName = angular.copy($scope.current.name);
         $scope.editable = true;
       }
 
@@ -68,8 +69,12 @@ define(['datadriven/module', 'notification'], function(module) {
           }
         } else {
           $scope.dataset = $scope.currentDataset;
+          $scope.current.name = $scope.currentName;
           $scope.editable = false;
         }
+
+        var $input = $('.data-provider div .driven-name');
+        $input.removeClass('has-error');
       }
 
       $scope.updateDataDriven = function () {
