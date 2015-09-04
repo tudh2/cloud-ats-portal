@@ -2,17 +2,11 @@
   <thead>
     <tr>
       <th ng-if="editable">
-        <a ng-click="newField()" class="btn btn-primary btn-xs">
-          <i class="fa fa-plus"></i> New Field
-        </a>
-        <a ng-if="rows.length == 0" ng-click="newRow()" class="btn btn-primary btn-xs">
-          <i class="fa fa-plus"></i> New Row
-        </a>
+        <i class="fa fa-plus-circle text-teal-color" ng-click="newField()"></i>
+        <i ng-if="rows.length == 0" ng-click="newRow()" class="fa fa-plus-circle text-teal-color"></i> 
       </th>
       <th ng-repeat="field in fieldNames track by $index" class="filedName">
-        <a ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)" class="btn btn-danger btn-xs">
-          <i class="fa fa-minus"></i>
-        </a>
+         <i class="fa fa-minus-circle text-amber-color" ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)"></i>
         <a ng-if="editable" href-void data-type="text" editable-text="field" data-ng-model="fieldName" data-options="editableOptions" class="editable editable-click">{{field}}</a>
         <span ng-if="!editable" class="text-info">{{field}}</span>
       </th>
@@ -21,18 +15,12 @@
   <tbody>
     <tr ng-repeat="row in rows track by $index" class="fieldValues">
       <td ng-if="!$last && editable">
-        <a ng-click="removeRow($index)" class="btn btn-danger btn-xs">
-          <i class="fa fa-minus"></i> This Row
-        </a>
+        <i ng-click="removeRow($index)" class="fa fa-minus-circle text-amber-color"></i>
       </td>
 
-      <td ng-if="$last && editable">
-        <a ng-click="removeRow($index)" class="btn btn-danger btn-xs">
-          <i class="fa fa-minus"></i> This Row
-        </a>
-        <a ng-click="newRow()" class="btn btn-primary btn-xs">
-          <i class="fa fa-plus"></i> New Row
-        </a>
+      <td ng-if="$last && editable" class="add-remove-button">
+         <i ng-click="removeRow($index)" class="fa fa-minus-circle text-amber-color"></i>
+        <i  ng-click="newRow()" class="fa fa-plus-circle text-teal-color"></i> 
       </td>
 
       <td class="cell" ng-repeat="cell in row track by $index">

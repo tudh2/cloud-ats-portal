@@ -20,14 +20,17 @@ define([
   'layout/directives/smart-fit-app-view',
   'layout/directives/href-void',
   'layout/directives/smart-context',
-
+  'components/language/Language',
+  'components/language/language-selector',
+  'components/language/language-controller',
+  
   //dashboard
   'dashboard/module',
   'auth/module',
   'projects/module',
   'keyword/module',
   'performance/module',
-  'datadriven/module',
+  'datadriven/module'
   
 ], function() {
   'use strict';

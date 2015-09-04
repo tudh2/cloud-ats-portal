@@ -391,15 +391,13 @@ nav ul li a {
          display:none;
      }
 }
-@media (max-width: 767px)
-{
+@media (max-width: 767px){
     .fixed-header .jarviswidget > header {
-    left: 0;
-}
+		left: 0;
+	}
     .hidden-menu.fixed-header .jarviswidget > header{
-    left: 220px;
-}
-     
+		left: 220px;
+	}  
 }
 
 .jarviswidget>header.header-navtabs, .jarviswidget>header H2 {
@@ -491,6 +489,7 @@ header .nav-tabs>li.active > a, header .nav-tabs>li.active>a:focus, header .nav-
 .text-teal-color 
 {
     color:#00b4a0;
+    cursor: pointer;
 }
 .text-red-color 
 {
@@ -499,6 +498,7 @@ header .nav-tabs>li.active > a, header .nav-tabs>li.active>a:focus, header .nav-
 .text-amber-color 
 {
     color:#ff7832;
+    cursor: pointer;
 }
 .actionMenu .smart-form .checkbox.teal-color i
 {
@@ -1372,7 +1372,7 @@ a:hover.viewLog, a:focus.viewLog {
 	pointer-events: none;
 }
 .tran-per-second {
-	style="position: relative;
+	position: relative;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	margin-left: 30px;
 }
@@ -1510,4 +1510,36 @@ block-darksky-color
 } 
 .fix-size-biggest-project {
 	width: 100px;
+}
+
+.button-table-add {
+	background-color: #009A88;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 100px;
+  border: 1px solid #009A88;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  /* font-size: 17px; */
+  padding: 1px 6px;
+  text-decoration: none;
+}
+.button-table-remove {
+	background-color: #FF1C1C;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 100px;
+  border: 1px solid #FF1C1C;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  /* font-size: 17px; */
+  padding: 1px 6px;
+  text-decoration: none;
+}
+.add-remove-button {
+	min-width: 60px;
 }
