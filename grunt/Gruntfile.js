@@ -168,18 +168,26 @@ module.exports = function (grunt) {
 			}]
 		  }
 		},
-		'string-replace': {
+		'string-replace':  {
 		  dist: {
-			files: {
-			  'dest/': pub + 'index.html'
-			  
-			},
 			options: {
-			  replacements: [{
-				pattern: 'app',
-				replacement: 'build'
-			  }]
-			}
+			  replacements: [
+				{
+				  pattern: '<script src="app/rconfig.min.js"></script>',
+				  replacement: '<script src="build/rconfig.min.js"></script>'
+				}, {
+				  pattern: '<script src="plugin/requirejs/require.js" data-main="app/main.js"></script>',
+				  replacement: '<script src="plugin/requirejs/require.js" data-main="build/main.js"></script>'
+				},
+				{
+					pattern: 'tealtheme.css',
+					replacement: 'tealtheme.min.css'
+				}
+			  ]
+			},
+			files: [
+			  {expand: true, flatten: true, src: [pub + 'index.html'], dest: pub}
+			]
 		  }
 		}
     });
