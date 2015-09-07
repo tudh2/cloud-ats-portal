@@ -167,9 +167,24 @@ module.exports = function (grunt) {
 			  ext: '.min.css'
 			}]
 		  }
+		},
+		'string-replace': {
+		  dist: {
+			files: {
+			  'dest/': pub + 'index.html'
+			  
+			},
+			options: {
+			  replacements: [{
+				pattern: 'app',
+				replacement: 'build'
+			  }]
+			}
+		  }
 		}
     });
-
+	
+	
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -183,6 +198,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-html2js');
 	
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	
+	grunt.loadNpmTasks('grunt-string-replace');
 
     grunt.loadTasks('tasks');
 
@@ -196,6 +213,7 @@ module.exports = function (grunt) {
         'adjustTemplateUrls',
         'html2js',
 		'cssmin',
+		'string-replace',
         'addIncludes',
         'uglify',
         'requirejs',
