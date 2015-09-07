@@ -2,11 +2,11 @@
   <thead>
     <tr>
       <th ng-if="editable">
-        <i class="fa fa-plus-circle text-teal-color" ng-click="newField()"></i>
-        <i ng-if="rows.length == 0" ng-click="newRow()" class="fa fa-plus-circle text-teal-color"></i> 
+        <i class="fa fa-plus-circle text-teal-color-add" ng-click="newField()"></i>
+        <i ng-if="rows.length == 0" ng-click="newRow()" class="fa fa-plus-circle text-teal-color-add"></i> 
       </th>
       <th ng-repeat="field in fieldNames track by $index" class="filedName">
-         <i class="fa fa-minus-circle text-amber-color" ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)"></i>
+         <i class="fa fa-minus-circle text-amber-color-remove" ng-if="fieldNames.length > 1 && editable" ng-click="removeField($index)"></i>
         <a ng-if="editable" href-void data-type="text" editable-text="field" data-ng-model="fieldName" data-options="editableOptions" class="editable editable-click">{{field}}</a>
         <span ng-if="!editable" class="text-info">{{field}}</span>
       </th>
@@ -15,12 +15,12 @@
   <tbody>
     <tr ng-repeat="row in rows track by $index" class="fieldValues">
       <td ng-if="!$last && editable">
-        <i ng-click="removeRow($index)" class="fa fa-minus-circle text-amber-color"></i>
+        <i ng-click="removeRow($index)" class="fa fa-minus-circle text-amber-color-remove"></i>
       </td>
 
       <td ng-if="$last && editable" class="add-remove-button">
-         <i ng-click="removeRow($index)" class="fa fa-minus-circle text-amber-color"></i>
-        <i  ng-click="newRow()" class="fa fa-plus-circle text-teal-color"></i> 
+         <i ng-click="removeRow($index)" class="fa fa-minus-circle text-amber-color-remove"></i>
+        <i  ng-click="newRow()" class="fa fa-plus-circle text-teal-color-add"></i> 
       </td>
 
       <td class="cell" ng-repeat="cell in row track by $index">
