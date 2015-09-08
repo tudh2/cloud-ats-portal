@@ -5,7 +5,7 @@
           
         <div class="jarviswidget jarviswidget-sortable" >
           <header class="header-navtabs">
-            <h2>Project Overview</h2>
+            <h2>{{getWord('Project Overview')}}</h2>
           </header>
         </div>
 
@@ -16,7 +16,7 @@
                 <div class="col-sm-3">
                   <section class="smart-form">
                     <label class="input"> <i class="icon-append fa fa-search"></i>
-                      <input type="text" name="Search" ng-model="searchTerms" placeholder="Search" id="Search" minlength="3">
+                      <input type="text" name="Search" ng-model="searchTerms" placeholder="{{getWord('Search')}}" id="Search" minlength="3">
                     </label>
                   </section>
                 </div>
@@ -27,12 +27,12 @@
                       <div class="row">
                         <div class="check-icon-group col-md-6" >
                           <span data-js-promp;t="&amp;#xe05b;" data-icon="&#xe05b;" aria-hidden="true" class="check-icon active" ng-click="toggleKeyword($event)"></span> 
-                          Functional Test
+                          {{getWord('Functional Test')}}
                         </div>
                         <div class="check-icon-group col-md-6">
                           <span data-js-prompt="&amp;#xe007;" data-icon="&#xe007;" aria-hidden="true" 
                           class="check-icon active" ng-click="togglePerformance($event)"></span> 
-                          Performance Test
+                          {{getWord('Performance Test')}}
                         </div>
                       </div>
                     </div>
@@ -41,19 +41,19 @@
                       <div class="row">
                         <div class="col-md-6 smart-form">
                           <label class="checkbox teal-color">
-                            <input ng-click="toggleReady()" type="checkbox" name="checkbox" checked=""><i></i>Ready
+                            <input ng-click="toggleReady()" type="checkbox" name="checkbox" checked=""><i></i>{{getWord('Ready')}}
                           </label>
                         </div> 
                         <div class="col-md-6 smart-form">
                           <label class="checkbox amber-color">
-                            <input ng-click="toggleRunning()" type="checkbox" name="checkbox" checked=""><i></i>Running
+                            <input ng-click="toggleRunning()" type="checkbox" name="checkbox" checked=""><i></i>{{getWord('Running')}}
                           </label>
                         </div>
                       </div>
                     </div>
 
                     <div class="col-md-3 col-sm-4 col-xs-12">
-                      <button type="submit" class="btn btn-primary pull-right" data-container="body" data-html="true" data-toggle="modal" data-target="#createProject">New Project</button>
+                      <button type="submit" class="btn btn-primary pull-right" data-container="body" data-html="true" data-toggle="modal" data-target="#createProject">{{getWord('New Project')}}</button>
                     </div>
 
                     <div data-smart-include="app/projects/views/new-project-modal.tpl.html"></div>

@@ -4,13 +4,13 @@
       
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Create Project</h4>
+        <h4 class="modal-title">{{getWord('Create Project')}}</h4>
       </div>
 
       <!-- Start modal body -->
       <div class="modal-body">
         <div class="row">
-            <div class="col-sm-4">Project Name</div>
+            <div class="col-sm-4">{{getWord('Project Name')}}</div>
             <div class="col-sm-8">
               <div class="form-group">
                 <input class="form-control" name="name" type="text" ng-model="name">
@@ -18,21 +18,21 @@
             </div>
         </div>
         <div class="row">
-          <div class="col-sm-4">Project Type</div>
+          <div class="col-sm-4">{{getWord('Project Type')}}</div>
 
           <div class="col-sm-8">
             <div class="row">
               <div class="col-sm-6">
                 <div class="smart-form" >
                   <label class="radio state-success">
-                    <input type="radio" value="functional" ng-model="type"><i></i>Functional
+                    <input type="radio" value="functional" ng-model="type"><i></i>{{getWord('Functional')}}
                   </label>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="smart-form" >
                   <label class="radio state-success">
-                    <input type="radio" value="performance" ng-model="type"><i></i>Performance
+                    <input type="radio" value="performance" ng-model="type"><i></i>{{getWord('Performance')}}
                   </label>
                 </div>
               </div>
@@ -46,8 +46,8 @@
         <div class="row">
           <div class="col-sm-4"></div>
           <div class="col-sm-8">
-            <button type="button" class="btn btn-primary pull-left" ng-click="create();">Save</button>
-            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary pull-left" ng-click="create();">{{getWord('Save')}}</button>
+            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">{{getWord('Close')}}</button>
           </div>
         </div>
       </div>

@@ -7,25 +7,18 @@
         <div class='col-xs-6 text-right text-capitalize'>
           <span ng-if="projectType == 'keyword'" data-icon="&#xe05b;" aria-hidden="true" class="proj-type"></span>
           <span ng-if="projectType == 'performance'" data-icon="&#xe007;" aria-hidden="true" class="proj-type"></span>
-          {{project.type}} test
+          {{getWord(project.type)}} {{getWord('test')}}
         </div>
-      </div>
-  </div>
-  <div class='col-sm-12 '>
-      <div class="row">
-            <div class='col-sm-12 proj-name'>
-              {{project.name}}
-            </div>
       </div>
   </div>
     <div class='col-sm-12 project-properties'>
         <div class='row'>
         <div class='col-sm-6'>
-            <div class='blur-name'>TEST SUITES</div>
+            <div class='blur-name'>{{getWord('TEST SUITES')}}</div>
             <div class='statistic-number'>{{project.totalSuites}}</div>
         </div>
         <div class='col-sm-6'>
-            <div class='blur-name'>LAST RUNNING</div>
+            <div class='blur-name'>{{getWord('LAST RUNNING')}}</div>
             <div class='statistic-number'>{{project.lastRunning === undefined ? 'N/A' : project.lastRunning}}</div>
         </div>
        </div>
@@ -34,27 +27,27 @@
         <div class='row'>
         <div class='col-sm-6'>
 
-            <div class='blur-name'>TEST CASES</div>
+            <div class='blur-name'>{{getWord('TEST CASES')}}</div>
             <div class='statistic-number'>{{project.totalCases}}</div>
         </div>
         <div class='col-sm-6'>
-            <a class='btn-border-line' ng-if="project.lastJobId" ng-click='report()'>Report</a>
+            <a class='btn-border-line' ng-if="project.lastJobId" ng-click='report()'>{{getWord('Report')}}</a>
         </div>
        </div>
     </div>
     <div class='col-sm-12 card-actions top-line'>
      <div class='row'>
         <div class='col-sm-2'>
-            <a class='run-project' ng-click='open()'>Open</a>
+            <a class='run-project' ng-click='open()'>{{getWord('Open')}}</a>
         </div>
         <div class='col-sm-3'>
-            <a class='run-project' ng-if="project.lastJobId" ng-click="log()">View Log</a>
+            <a class='run-project' ng-if="project.lastJobId" ng-click="log()">{{getWord('View Log')}}</a>
         </div>
         <div class='col-sm-3'>
             <a class='run-project'
               ng-if="project.watchUrl && project.status === 'RUNNING'"target="_blank"
               href="{{project.watchUrl}}" 
-              >Watch</a>
+              >{{getWord('Watch')}}</a>
         </div>
       </div>
     </div>
