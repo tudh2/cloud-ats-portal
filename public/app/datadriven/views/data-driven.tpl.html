@@ -1,5 +1,5 @@
 <div class="data-container row">
-  <div class="col-sm-3 data-list-name">
+  <div class="data-list-name">
     <section class="smart-form search-container">
       <label class="input"> <i class="icon-append fa fa-search"></i>
         <input type="text" name="Search" ng-model="searchTerms" placeholder="Search Test Case" id="Search" minlength="3">
@@ -29,18 +29,20 @@
    </div>
   </div>
 
-  <div class="col-sm-9 data-provider" ng-hide="current == undefined && dataset==[] ">
-    <div class="row">
-      <div class="col-sm-5 form-group driven-name">
-        <input class="form-control" ng-model="current.name" placeholder="Data driven name" ng-disabled="!editable">
+  <div class="data-provider" id="data-container" ng-hide="current == undefined && dataset==[] ">
+    <div class="col-sm-12" style="overflow-y: auto;">
+      <div class="row">
+        <div class="col-sm-5 form-group driven-name">
+          <input class="form-control" ng-model="current.name" placeholder="Data driven name" ng-disabled="!editable">
+        </div>
       </div>
-    </div>
-    <provider-table data-dataset="dataset" data-editable="editable"></provider-table>
+      <provider-table data-dataset="dataset" data-editable="editable"></provider-table>
 
-    <button ng-if="!editable && !create"  ng-click="editDataset()" class="btn btn-primary pull-right edit-button"><i class="fa fa-edit"></i> Edit</button>
-    <button ng-if="editable && !create" class="btn btn-primary pull-right" ng-click="updateDataDriven()"><i class="fa fa-save"></i> Update</button>
-    <button ng-if="editable" ng-click="cancelEdit()" class="btn btn-warning pull-right cancel-edit"><i class="fa fa-undo"></i> Cancel</button>
-    <button ng-if="editable && create" ng-click="createDataDriven()" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Save</button>
+      <button ng-if="!editable && !create"  ng-click="editDataset()" class="btn btn-primary pull-right edit-button"><i class="fa fa-edit"></i> Edit</button>
+      <button ng-if="editable && !create" class="btn btn-primary pull-right" ng-click="updateDataDriven()"><i class="fa fa-save"></i> Update</button>
+      <button ng-if="editable" ng-click="cancelEdit()" class="btn btn-warning pull-right cancel-edit"><i class="fa fa-undo"></i> Cancel</button>
+      <button ng-if="editable && create" ng-click="createDataDriven()" class="btn btn-primary pull-right"><i class="fa fa-save"></i> Save</button>
+    </div>
   </div>
 
 </div>

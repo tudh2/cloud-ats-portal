@@ -1478,8 +1478,13 @@ block-darksky-color
 	width: 100%;
 }
 .data-list-name {
+	border-right: 1px solid #AFB3B2;
 	background-color: white;
 	height: 100%;
+  position:fixed;
+  top:0px;
+  min-width:280px;
+  padding-top:140px;
   padding-bottom:90px;
 }
 .data {
@@ -1558,4 +1563,12 @@ block-darksky-color
     color:#ff7832;
     cursor: pointer;
     font-size: larger;
+}
+#data-container {
+	margin-left: 280px;
+}
+.data-list-name .search-container
+{
+    padding-left:13px;
+    padding-right:13px;
 }
