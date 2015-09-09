@@ -46,6 +46,7 @@ define(['datadriven/module', 'notification'], function(module) {
         $scope.current = undefined;
         $scope.editable = true;
         $scope.create = true;
+
       }
 
       $scope.editDataset = function () {
@@ -117,7 +118,7 @@ define(['datadriven/module', 'notification'], function(module) {
             $scope.editable = false;
             $.smallBox({
               title: "Data Driven",
-              content: "<i class='fa fa-clock-o'></i> <i>Your data driven has updated.</i>",
+              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has updated.")+"</i>",
               color: "#659265",
               iconSmall: "fa fa-check fa-2x fadeInRight animated",
               timeout: 2000
@@ -130,7 +131,7 @@ define(['datadriven/module', 'notification'], function(module) {
             $scope.editable = false;
             $.smallBox({
               title: "Data Driven",
-              content: "<i class='fa fa-clock-o'></i> <i>Your data driven has nothing to update.</i>",
+              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has nothing to update.")+"</i>",
               color: "#659265",
               iconSmall: "fa fa-check fa-2x fadeInRight animated",
               timeout: 2000
@@ -184,7 +185,7 @@ define(['datadriven/module', 'notification'], function(module) {
             $scope.editable = false;
             $.smallBox({
               title: "Data Driven",
-              content: "<i class='fa fa-clock-o'></i> <i>Your data driven has created.</i>",
+              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has created.")+"</i>",
               color: "#659265",
               iconSmall: "fa fa-check fa-2x fadeInRight animated",
               timeout: 2000
@@ -208,7 +209,7 @@ define(['datadriven/module', 'notification'], function(module) {
                 if (status === 200) {
                   $.smallBox({
                     title: "Data Driven",
-                    content: "<i class='fa fa-clock-o'></i> <i>Your data driven has deleted</i>",
+                    content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has deleted")+"</i>",
                     color: "#659265",
                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                     timeout: 2000
@@ -231,5 +232,27 @@ define(['datadriven/module', 'notification'], function(module) {
             }
         });
       }
+
+
+      $scope.$watch('editable', function (value) {
+        if (value === true) {
+          disableChooseLang();
+        } else {
+          unableChooseLang();
+         }
+      });
+
+      var disableChooseLang = function () {
+        var $header = $('#header');
+        var $langOptions = $header.find('.pull-right .header-dropdown-list .dropdown .dropdown-toggle');
+        $langOptions.css('pointer-events', 'none');
+      }
+
+      var unableChooseLang = function () {
+        var $header = $('#header');
+        var $langOptions = $header.find('.pull-right .header-dropdown-list .dropdown .dropdown-toggle');
+        $langOptions.css('pointer-events', 'initial');
+      }
+
     }]);
 })
