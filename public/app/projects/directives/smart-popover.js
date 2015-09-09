@@ -2,7 +2,7 @@ define(['projects/module', 'lodash'], function(module, _) {
 
   'use strict';
 
-  module.registerDirective("smartPopover", ['$compile', '$templateRequest',function($compile, $templateRequest) {
+  module.registerDirective("smartPopover", ['$compile', '$rootScope', '$templateRequest',function($compile, $rootScope, $templateRequest) {
     return {
       restrict: 'A',
       replace: true,
@@ -31,6 +31,7 @@ define(['projects/module', 'lodash'], function(module, _) {
             'trigger': 'click'
           }).click(function(ev) {
             $compile($('.popover.in').contents())(scope);
+            scope.getWord = $rootScope.getWord;
           });
         });
 
@@ -42,7 +43,7 @@ define(['projects/module', 'lodash'], function(module, _) {
           });
         });
 
-      } 
+      }
     }
   }]);
 });

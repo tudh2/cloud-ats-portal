@@ -24,7 +24,7 @@
           <div class="col-sm-12">
             <div class="top-line card-actions">
             <div class="col-xs-6">
-              <span class="proj-status">{{project.status}}</span>
+              <span class="proj-status">{{getWord(project.status)}}</span>
             </div>
             <div class="col-xs-6">
               <span ng-if="project.type == 'keyword'" class="info-project"
@@ -36,7 +36,7 @@
                 data-open="openProject(project)"
                 data-report="openLastReport(project)"
                 >
-                INFO
+                {{getWord('INFO')}}
               </span>
               <span ng-if="project.type == 'performance'" class="info-project"
                 data-toggle="popover" 
@@ -45,13 +45,13 @@
                 data-project="project"
                 data-log="openLastLog(project)"
                 data-open="openProject(project)"
-                data-report="openLastReport(project)">INFO
+                data-report="openLastReport(project)">{{getWord('INFO')}}
               </span>
-              <a ng-if="project.status == 'RUNNING'" href-void class="stop-project pull-right">STOP</a>
+              <a ng-if="project.status == 'RUNNING'" href-void class="stop-project pull-right">{{getWord('STOP')}}</a>
 
               <a href-void class="run-project pull-right"
                 ng-if="project.status == 'READY'" 
-                ng-click="runLastest(project)">RUN</a>
+                ng-click="runLastest(project)">{{getWord('RUN')}}</a>
             </div>
             </div>
         </div>
