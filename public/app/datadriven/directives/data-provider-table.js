@@ -1,7 +1,7 @@
 define(['datadriven/module', 'lodash'], function(module, _) {
   'use strict';
 
-  return module.registerDirective('providerTable', [function() {
+  return module.registerDirective('providerTable', ['$rootScope', function($rootScope) {
     return {
       restrict: 'E',
       replace: true,
@@ -25,10 +25,12 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         });
 
         var init = function(dataset) {
-
+          
           if (dataset.length == 0 && scope.editable) {
-            scope.fieldNames = ['New_Field'];
-            scope.rows = [['New_Value']];
+            var new_field = $rootScope.getWord('New_Field');
+            scope.fieldNames = [new_field];
+            var new_val = $rootScope.getWord('New_Value');
+            scope.rows = [[new_val]];
             return;
           } else if (dataset.length > 0) {
             var filedNames = [];
@@ -71,19 +73,23 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         }
 
         scope.newField = function() {
-          scope.fieldNames.push("New_Field_" + (scope.count));
+
+          var new_field_ = $rootScope.getWord('New_Field_');
+          scope.fieldNames.push(new_field_ + (scope.count));
 
           var length = scope.fieldNames.length;
+          var new_val_ = $rootScope.getWord("New_Value_");
           _.forEach(scope.rows, function(row) {
-            row[length - 1] = "New_Value_" + (scope.count);
+            row[length - 1] = new_val_ + (scope.count);
           });
           scope.count++; 
         }
 
         scope.newRow = function() {
           var row = [];
+          var new_val_ = $rootScope.getWord("New_Value_");
           for (var i = 0; i < scope.fieldNames.length; i++) {
-            row[i] = "New_Value_" + i + "." + scope.count;
+            row[i] = new_val_ + i + "." + scope.count;
           }
           scope.rows.push(row);
         }
