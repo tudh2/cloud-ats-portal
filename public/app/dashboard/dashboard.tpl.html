@@ -1,17 +1,17 @@
 <div>
-	<h1> Functional Test<small class="ds-collapse" data-toggle="collapse" data-target="#functional-project-overview"> Collapse all</small></h1> 
+	<h1> {{getWord('Functional Test')}}<small class="ds-collapse" data-toggle="collapse" data-target="#functional-project-overview"> {{getWord('Collapse all')}}</small></h1> 
 	<div id="functional-project-overview" class="collapse in">
 		<div class="functional-project-overview ds-box">
-			<h1 class="text-center ds-text-blue"> Recent Finished Projects</h1>
-			<p class="ds-text-rotate ds-text-project">Number of classes/project
+			<h1 class="text-center ds-text-blue"> {{getWord('Recent Finished Projects')}}</h1>
+			<p class="ds-text-rotate ds-text-project">{{getWord('Number of classes/project')}}
 				</p>
-			<morris-stacked-bar-graph data-data="recent_finished_projects"></morris-stacked-bar-graph>
+			<morris-stacked-bar-graph data-data="recent_finished_projects" data-lang="lang"></morris-stacked-bar-graph>
 			<div class="ds-chart-label">
 				<p > 
-					<span class="ds-blue"></span>Pass 
-					<span class="ds-red"></span>Fail 
+					<span class="ds-blue"></span>{{getWord('Pass')}} 
+					<span class="ds-red"></span>{{getWord('Fail')}} 
 					<span class="ds-yellow"></span>
-					Skip 
+					{{getWord('Skip')}} 
 				</p> 
 			</div>
 		</div>
@@ -20,7 +20,7 @@
 				<div class="col-sm-4 ds-reset-padding">
 					<div class="ds-box ds-box-blue clearfix">
 						<div class="col-sm-12 ds-box-header">
-							<P class="project-name">Top passed Projects </P>
+							<P class="project-name">{{getWord('Top passed Projects')}} </P>
 						</div>
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12">
@@ -36,7 +36,7 @@
 				<div class="col-sm-4">
 					<div class="ds-box ds-box-red clearfix">
 						<div class="col-sm-12 ds-box-header">
-							<P class="project-name">Top Failed projects </P>
+							<P class="project-name">{{getWord('Top Failed projects')}} </P>
 						</div>
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12">
@@ -52,13 +52,13 @@
 				<div class="col-sm-4 ds-reset-padding">
 					<div class="ds-box clearfix ds-box-white">
 						<div class="col-sm-12 ds-box-header">
-							<P class="project-name">5 Biggest Projects </P>
+							<P class="project-name">{{getWord('5 Biggest Projects')}} </P>
 						</div>
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12">
 								<tr ng-repeat="project in top_projects| orderBy:'-totalCases'|limitTo:5 track by $index">
 									<td ng-click="redirectKeyword(project._id)"><a>{{project.name}}</a></td>
-									<td class="pull-right fix-size-biggest-project">{{project.totalCases}} test cases</td>
+									<td class="pull-right fix-size-biggest-project">{{project.totalCases}} {{getWord('test cases')}}</td>
 								</tr>
 							</table>
 						</div>
@@ -68,22 +68,22 @@
 		</div>
 	</div>
 
-	<h1 class="clearfix"> Performance Test<small class="ds-collapse" data-toggle="collapse" data-target="#performance-project-overview"> Collapse all</small></h1> 
+	<h1 class="clearfix"> {{getWord('Performance Test')}}<small class="ds-collapse" data-toggle="collapse" data-target="#performance-project-overview"> {{getWord('Collapse all')}}</small></h1> 
 	<div class="ds-box clearfix ds-box-white collapse in" id="performance-project-overview">
 		<div class="col-sm-12 ds-box-header">
-			<P class="project-name">Top Error Projects</P>
+			<P class="project-name">{{getWord('Top Error Projects')}}</P>
 		</div>
 		<div class="col-sm-12 ds-box-table">
 			<table class="col-sm-12">
 				<tr>
-					<td class="ds-left">No.</td>
-					<td class="ds-left">Project Name</td>
-					<td class="ds-right">Samplers</td>
-					<td class="ds-right">Users</td>
-					<td class="ds-right">Ram up</td>
-					<td class="ds-right">Loops</td>
-					<td class="ds-right">Duration</td>
-					<td class="ds-right">Error Rate </td>
+					<td class="ds-left">{{getWord('No')}}.</td>
+					<td class="ds-left">{{getWord('Project Name')}}</td>
+					<td class="ds-right">{{getWord('Samplers')}}</td>
+					<td class="ds-right">{{getWord('Users')}}</td>
+					<td class="ds-right">{{getWord('Ram up')}}</td>
+					<td class="ds-right">{{getWord('Loops')}}</td>
+					<td class="ds-right">{{getWord('Duration')}}</td>
+					<td class="ds-right">{{getWord('Error Rate')}} </td>
 				</tr>
 				<tr ng-repeat="project in performance_projects | orderBy:'-error_percent'|limitTo:10 track by $index">
 					<td class="ds-left">{{$index+1}}</td>

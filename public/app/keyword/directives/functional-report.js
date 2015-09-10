@@ -1,53 +1,74 @@
 define(['keyword/module', 'lodash'], function(module, _) {
   'use strict';
 
-	module.registerDirective('morrisStackedBarGraph', function(){
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-              data: '='
-            },
-            template: '<div class="chart no-padding"></div>',
-            link: function(scope, element){
-              var draw = function (size,value,hideHover) {
-                var graph = Morris.Bar({
-                              element : element,
-                              axes : true,
-                              grid : true,
-                              data : scope.data,
-                              xkey : 'x',
-                              ykeys : ['P', 'F', 'S'],
-                              labels : ['Pass', 'Fail', 'Skip'],
-                              barColors : ['#15ab9f','#ff4f51','#fbd601'],
-                              hideHover : hideHover,
-                              barSizeRatio : size,
-                              stacked : true
-                          });
-                graph.setData(value);
-              };
+	module.registerDirective('morrisStackedBarGraph', ['$rootScope',function($rootScope){
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                data: '=',
+                lang: "="
+              },
+              template: '<div class="chart no-padding"></div>',
+              link: function(scope, element){
 
-              scope.$watch('data', function(value) {
-                if(value) {
-                  switch(value.length) {
-                    case 0 :
-                    draw(0.4,value,'always');
-                    break;
-                    case 1 : 
-                    draw(0.2,value,'auto');
-                    break;
+                var pass = "Pass";
+                var fail = "Fail";
+                var skip = "Skip";
 
-                    case 2 :
-                    draw(0.40,value,'auto');
-                    break;
+                var draw = function (size,value,hideHover,pass,fail,skip) {
+                  var graph = Morris.Bar({
+                                element : element,
+                                axes : true,
+                                grid : true,
+                                data : scope.data,
+                                xkey : 'x',
+                                ykeys : ['P', 'F', 'S'],
+                                labels : [pass, fail, skip],
+                                barColors : ['#15ab9f','#ff4f51','#fbd601'],
+                                hideHover : hideHover,
+                                barSizeRatio : size,
+                                stacked : true
+                            });
+                  graph.setData(value);
+                };
 
-                    default:
-                    draw(0.75,value,'auto');
-                    break;
+                var optionsDraw = function(value) {
+                  if(value) {
+                    switch(value.length) {
+                      case 0 :
+                      draw(0.4,value,'always',pass,fail,skip);
+                      break;
+                      case 1 : 
+                      draw(0.2,value,'auto',pass,fail,skip);
+                      break;
+  
+                      case 2 :
+                      draw(0.40,value,'auto',pass,fail,skip);
+                      break;
+  
+                      default:
+                      draw(0.75,value,'auto',pass,fail,skip);
+                      break;
+                    }
                   }
-                }
-              }, true);
-            }
-        }
-  	});
+                };
+
+                scope.$watch('data', function(value) {
+                  optionsDraw(value);
+                }, true);
+
+                scope.$watch("lang", function(value) {
+                  if($rootScope.getWord !== undefined) {
+                    pass = $rootScope.getWord("Pass");
+                    fail = $rootScope.getWord("Fail");
+                    skip = $rootScope.getWord("Skip");
+
+                    optionsDraw(scope.data);
+                  }
+                }, true);
+
+              }
+          }
+      }]);
 });
