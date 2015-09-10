@@ -2,7 +2,7 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
   
   'use strict';
    
-  module.registerController('PerformanceExeCtrl', ['$scope', '$state', '$stateParams', '$compile', '$templateRequest', 'ScriptService', 'PerformanceService', function($scope, $state, $stateParams, $compile, $templateRequest, ScriptService, PerformanceService) {
+  module.registerController('PerformanceExeCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$compile', '$templateRequest', 'ScriptService', 'PerformanceService', function($scope, $rootScope, $state, $stateParams, $compile, $templateRequest, ScriptService, PerformanceService) {
    
     $scope.searchTerms = '';
 
@@ -24,11 +24,11 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
     var checkProjectStatus = function() {
         if ($scope.project.status == 'RUNNING') {
           $.SmartMessageBox({
-            title: "Project Execution Alert!",
-            content: "Your project has been already running. Please back to overivew tab to track project progress",
-            buttons: '[Go to overview]'
+            title: $rootScope.getWord("Project Execution Alert!"),
+            content: $rootScope.getWord("Your project has been already running. Please back to overivew tab to track project progress"),
+            buttons: $rootScope.getWord('[Go to overview]')
           }, function (ButtonPressed) {
-            if (ButtonPressed === "Go to overview") {
+            if (ButtonPressed === "Go to overview" || ButtonPressed === "概要に戻ります") {
               $state.go('app.performance', {id: $scope.projectId});
             }
           });
@@ -60,8 +60,8 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
         switch (status) {
           case 200:
               $.smallBox({
-                title: 'Notification',
-                content: 'You have submitted project job',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('You have submitted project job'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -69,8 +69,8 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
               break;
             case 204:
               $.smallBox({
-                title: 'Notification',
-                content: 'Your project has been already running',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your project has been already running'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -78,8 +78,8 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
               break;
             default:
               $.smallBox({
-                title: 'Notification',
-                content: 'Can not submmit your project job',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Can not submit your project job'),
                 color: '#c26565',
                 iconSmall: 'fa fa-ban bounce animated',
                 timeout: 3000

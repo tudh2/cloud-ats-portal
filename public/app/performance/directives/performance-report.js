@@ -1,12 +1,13 @@
 define(['performance/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('performanceReport', ['$state', function ($state) {
+	module.registerDirective('performanceReport', ['$state', '$rootScope', '$timeout', function ($state, $rootScope, $timeout) {
 		return {
 			restrict: 'E',
 			replace: true,
 			scope: {
-				reports : '='
+				reports : '=',
+				init: '&'
 			},
 			templateUrl: 'app/performance/directives/performance-report.tpl.html',
 			link: function($scope, element, attributes) {
@@ -18,7 +19,10 @@ define(['performance/module'], function (module) {
 				var tmpArrayReports= [];    
     		var hits_per_second = [];
     		var trans_per_second = [];
-
+    		
+    		$timeout(function () {
+    			$scope.getWord = $rootScope.getWord;
+    		}, 1000);
 				   // round information
 	      _.forEach($scope.reports, function (report) {
 
@@ -162,6 +166,7 @@ define(['performance/module'], function (module) {
 	      });
 
       	$scope.colors = colors_labels;
+
 			}
 		}
 	}]);

@@ -1,16 +1,16 @@
 <div class="jarviswidget">
   <header class="header-navtabs">
-    <h2>{{title}}</h2>
+    <h2>{{getWord(title)}}</h2>
 
     <ul id="myTab" class="nav nav-tabs pull-right">
       <li ng-class="title == 'OVERVIEWS' ? 'active' : ''">
-        <a href="#overview" data-toggle="tab" ng-click="changeTab('overview')"><span class="hidden-mobile">OVERVIEWS</span></a>
+        <a href="#overview" data-toggle="tab" ng-click="changeTab('overview')"><span class="hidden-mobile">{{getWord('OVERVIEWS')}}</span></a>
       </li>
       <li ng-class="title == 'TEST SCRIPTS' ? 'active' : ''">
-        <a href="#cases" data-toggle="tab" ng-click="changeTab('scripts')"><span class="hidden-mobile">TEST SCRIPTS</span></a>
+        <a href="#cases" data-toggle="tab" ng-click="changeTab('scripts')"><span class="hidden-mobile">{{getWord('TEST SCRIPTS')}}</span></a>
       </li>
       <li ng-class="title == 'EXECUTION' ? 'active' : ''">
-        <a href="#execution" data-toggle="tab" ng-click="changeTab('execution')"><span class="hidden-mobile">EXECUTION</span></a>
+        <a href="#execution" data-toggle="tab" ng-click="changeTab('execution')"><span class="hidden-mobile">{{getWord('EXECUTION')}}</span></a>
       </li>
     </ul>
  </header>

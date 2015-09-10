@@ -8,13 +8,13 @@
                 <section class="col-sm-6 smart-form">
                   <label class="input"> 
                     <i class="icon-append fa fa-search"></i>
-                      <input type="text" name="Search" ng-model="Search" placeholder="Search Script" id="Search" minlength="3">
+                      <input type="text" name="Search" ng-model="Search" placeholder="{{getWord('Search Script')}}" id="Search" minlength="3">
                   </label>
                 </section>
               <div class="col-sm-6">
                 <div class="form-group">
                   <select class="form-control">
-                    <option selected="">Filter by</option>
+                    <option selected="">{{getWord('Filter by')}}</option>
                   </select>
                 </div>
               </div>
@@ -22,7 +22,7 @@
           </div>
           <div class="col-sm-7">
             <p class="functional-title col-sm-6 export-bar">
-              Export to:
+              {{getWord('Export to')}}:
               <i class="fa fa-file-word-o"></i>
               <span>word</span>
               <i class="fa fa-file-excel-o"></i>
@@ -31,7 +31,7 @@
               <span>pdf</span>
             </p>
             
-            <button type="submit" class="btn btn-default pull-right" ng-click="backToOverviewPage();" >Back to project detail</button>
+            <button type="submit" class="btn btn-default pull-right" ng-click="backToOverviewPage();" >{{getWord('Back to project detail')}}</button>
           </div>
         </div>
       </div>
