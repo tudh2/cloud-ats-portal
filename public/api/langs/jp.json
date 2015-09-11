@@ -155,5 +155,26 @@
     "Performance Project Detail":"パフォーマンスプロジェクトの詳細",
     "Performance Test Report":"パフォーマンステストレポート",
     "Sampler Report":"サンプラーレポート",
-    "Keyword Report":"キーワードレポート"
+    "Keyword Report":"キーワードレポート",
+    "Functional Test": "機能 試験",
+    "Collapse all": "崩壊 全て",
+    "Number of classes/project": "多数 の クラス/プロジェクト",
+    "Pass": "峠",
+    "Fail": "失敗",
+    "Skip": "スキップ",
+    "Recent Finished Projects": "近頃の 終えた プロジェクト",
+    "Top passed Projects": "トップ 峠 プロジェクト",
+    "Top Failed projects": "トップ 失敗 プロジェクト",
+    "5 Biggest Projects": "5 最大 プロジェクト",
+    "Performance Test":"業績 試験",
+    "No":"多数",
+    "Samplers":"サンプラー",
+    "Users":"ユーザーズ",
+    "Ram up":"牡羊 アップ",
+    "Loops":"ループ",
+    "Duration":"デュレーション",
+    "Error Rate":"エラー レート",
+    "Top Error Projects":"トップ エラー プロジェクト",
+    "test cases": "テストケース"
+
 }
