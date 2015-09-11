@@ -2,7 +2,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
   
   'use strict';
 
-  module.registerController('CreateScriptCtrl', ['$scope', '$stateParams', '$templateRequest', '$compile', 'PerformanceService', 'ScriptService', function($scope, $stateParams, $templateRequest, $compile, PerformanceService, ScriptService) {
+  module.registerController('CreateScriptCtrl', ['$scope', '$rootScope', '$stateParams', '$templateRequest', '$compile', 'PerformanceService', 'ScriptService', function($scope, $rootScope, $stateParams, $templateRequest, $compile, PerformanceService, ScriptService) {
 
     $scope.projectId = $stateParams.id;
     $scope.script = {
@@ -47,8 +47,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         if (response != null) {
           $scope.script._id = response._id;
           $.smallBox({
-            title: "The script has created",
-            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+            title: $rootScope.getWord("The script has created"),
+            content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
             color: "#296191",
             iconSmall: "fa fa-check bounce animated",
             timeout: 4000
@@ -64,8 +64,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       ScriptService.delete($scope.projectId, script._id, function (data, status) {
         if (status == 202) {
           $.smallBox({
-            title: "The script has deleted",
-            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+            title: $rootScope.getWord("The script has deleted"),
+            content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
             color: "#296191",
             iconSmall: "fa fa-check bounce animated",
             timeout: 4000
@@ -83,8 +83,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         switch (status) {
           case 202 : 
             $.smallBox({
-              title: "The script has updated",
-              content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+              title: $rootScope.getWord("The script has updated"),
+              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
               color: "#296191",
               iconSmall: "fa fa-check bounce animated",
               timeout: 4000
@@ -98,8 +98,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
             break;
           case 204 :
             $.smallBox({
-              title: "The script has nothing to update",
-              content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+              title: $rootScope.getWord("The script has nothing to update"),
+              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
               color: "#296191",
               iconSmall: "fa fa-check bounce animated",
               timeout: 4000
@@ -107,8 +107,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
             break;
           case 400 :
             $.smallBox({
-              title: "The script is not exist",
-              content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+              title: $rootScope.getWord("The script is not exist"),
+              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
               color: "#296191",
               iconSmall: "fa fa-check bounce animated",
               timeout: 4000

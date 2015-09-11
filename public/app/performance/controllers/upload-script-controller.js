@@ -2,7 +2,7 @@ define(['performance/module', 'notification'], function (module) {
   
   'use strict';
 
-  module.registerController('UploadScriptCtrl', ['$scope', '$stateParams', 'ScriptService', function($scope, $stateParams, ScriptService) {
+  module.registerController('UploadScriptCtrl', ['$scope', '$rootScope', '$stateParams', 'ScriptService', function($scope, $rootScope, $stateParams, ScriptService) {
 
       $scope.file = undefined;
       // get files after files were uploaded
@@ -57,8 +57,8 @@ define(['performance/module', 'notification'], function (module) {
           ScriptService.createScriptTestByUpload($scope.file, $upload_name.val(), $stateParams.id , function (data,status) {
             if (data != null) {
               $.smallBox({
-                title: "The script has created",
-                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                title: $rootScope.getWord("The script has created"),
+                content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
                 color: "#296191",
                 iconSmall: "fa fa-check bounce animated",
                 timeout: 4000

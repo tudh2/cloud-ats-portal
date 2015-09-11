@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="col-sm-6">
-		<p class="ds-text-rotate ds-text-project hit-label-title">Number of hits/second</p>
+		<p class="ds-text-rotate ds-text-project hit-label-title">{{getWord('Number of hits/second')}}</p>
 		<div class="chart no-padding hit-per-second">
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<p class="ds-text-rotate ds-text-project tran-label-title">Number of transactions/second</p>
+		<p class="ds-text-rotate ds-text-project tran-label-title">{{getWord('Number of transactions/second')}}</p>
 		<div class="chart node-padding tran-per-second"></div>
 	</div>
 
@@ -17,20 +17,20 @@
 
 	<div class="clearfix table-container">
 		<div class="col-sm-12">
-            <h3>Test Report</h3>
+            <h3>{{getWord('Test Report')}}</h3>
 			<table class="table tbl-project-report">
 				<thead>
                 <tr>
-					<th >Label </th>
-					<th >#Sampler</th>
-					<th class="text-right">Average</th>
-					<th class="text-right">Min</th>
-					<th class="text-right">Max</th>
-					<th class="text-right">Std.Dev</th>
-					<th class="text-center">Error %</th>
-					<th class="text-center">Throughput</th>
-					<th class="text-center">KB/sec</th>
-					<th class="text-center">Avg. Bytes</th>
+					<th >{{getWord('Label')}} </th>
+					<th >#{{getWord('Sampler')}}</th>
+					<th class="text-right">{{getWord('Average')}}</th>
+					<th class="text-right">{{getWord('Min')}}</th>
+					<th class="text-right">{{getWord('Max')}}</th>
+					<th class="text-right">{{getWord('Std.Dev')}}</th>
+					<th class="text-center">{{getWord('Error %')}}</th>
+					<th class="text-center">{{getWord('Throughput')}}</th>
+					<th class="text-center">{{getWord('KB/sec')}}</th>
+					<th class="text-center">{{getWord('Avg. Bytes')}}</th>
 				</tr>
                     </thead>
 				<tr>

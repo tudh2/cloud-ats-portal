@@ -2,8 +2,8 @@ define(['performance/module', 'morris'], function (module) {
 
 	'use strict';
 
-	module.registerController('PerformanceReportDetailCtrl',['$scope', '$state', '$stateParams', 'ReportService', function ($scope, $state, $stateParams, ReportService) {
-
+	module.registerController('PerformanceReportDetailCtrl',['$scope', '$rootScope', '$state', '$stateParams', 'ReportService', function ($scope, $rootScope, $state, $stateParams, ReportService) {
+    console.log();
 		$scope.reportId = $stateParams.reportId;
     $scope.index = $stateParams.index;
     $scope.jobId = $stateParams.jobId;

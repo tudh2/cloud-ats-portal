@@ -1,10 +1,10 @@
 <div class="row execution">
 	<div class="col-sm-3 test-script-pool">
-		<p>CHOOSE TEST SCRIPT</p>
+		<p>{{getWord('CHOOSE TEST SCRIPT')}}</p>
 		<div>
       <section class="smart-form">
         <label class="input"><i class="icon-append fa fa-search"></i>
-          <input type="text" name="Search" ng-model="searchTerms" placeholder="Search Test Script" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
+          <input type="text" name="Search" ng-model="searchTerms" placeholder="{{getWord('Search Test Script')}}" id="Search" minlength="3" class="ng-pristine ng-valid ng-valid-minlength ng-touched">
         </label>
       </section>
     </div>
@@ -22,6 +22,6 @@
     </div>
 	</div>
 	<div class="col-sm-9 execution-area">
-		<a ng-click="runPerformanceTest()" class="btn btn-primary btn-performance-run disabled">Run Test</a>
+		<a ng-click="runPerformanceTest()" class="btn btn-primary btn-performance-run disabled">{{getWord('Run Test')}}</a>
 	</div>
 </div>
