@@ -2,18 +2,19 @@ define(['layout/module'], function (module) {
 
   'use strict';
                                                  
-  module.registerDirective('stateBreadcrumbs', ['$rootScope', '$state', function($rootScope, $state) {
+  module.registerDirective('stateBreadcrumbs', ['$rootScope', '$compile', '$state', function($rootScope, $compile, $state) {
     return {
       restrict: 'E',
       replace: true,
       template: '<ol class="breadcrumb"><li>Home</li></ol>',
       link: function(scope, element) {
         function setBreadcrumbs(breadcrumbs) {
-          var html = '<li>Home</li>';
+          var html = '<li>{{getWord("Home")}}</li>';
           angular.forEach(breadcrumbs, function(crumb) {
-            html += '<li>' + crumb + '</li>';
+            html += '<li>{{getWord("'+crumb+'")}}</li>';
           });
-          element.html(html);
+
+          element.html($compile(html)(scope));  
         }
 
         function fetchBreadcrumbs(stateName, breadcrumbs) {

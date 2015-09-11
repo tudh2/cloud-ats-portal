@@ -148,6 +148,12 @@
     "Back":"バック",
     "Export to":"へのエクスポート",
     "Search Script":"検索スクリプト",
-    "Filter by":"によるフィルタ"
-
+    "Filter by":"によるフィルタ",
+    "Project List":"プロジェクト一覧",
+    "Data Driven List":"データドリブン一覧",
+    "Keyword Project Details":"キーワードプロジェクトの詳細",
+    "Performance Project Detail":"パフォーマンスプロジェクトの詳細",
+    "Performance Test Report":"パフォーマンステストレポート",
+    "Sampler Report":"サンプラーレポート",
+    "Keyword Report":"キーワードレポート"
 }
