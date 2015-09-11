@@ -91,7 +91,7 @@ define([
         }
       },
       data: {
-        title: 'Keyworks Framework',
+        title: 'Performance Test Report',
         requireLogin: true
       }
     })
@@ -113,7 +113,7 @@ define([
         }
       },
       data: {
-        title: 'Keyworks Framework',
+        title: 'Sampler Report',
         requireLogin: true
       }
     });
