@@ -1,1 +1,0 @@
-define(["auth/module"],function(a){"use strict";return a.registerController("LogoutCtrl",["$scope","$cookies","$state","AuthenticationService",function(a,b,c,d){a.logout=function(){d.logout(function(a){c.go("login")})}}])});
