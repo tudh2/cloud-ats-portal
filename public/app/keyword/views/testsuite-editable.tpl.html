@@ -7,7 +7,7 @@
       <section class="smart-form">
         <label class="input"> 
           <i class="icon-append fa fa-search"></i>
-          <input type="text" placeholder="Search Test Case" minlength="3" ng-model="caseTerms">
+          <input type="text" placeholder="{{getWord('Search Test Case')}}" minlength="3" ng-model="caseTerms">
         </label>
       </section>
     </div>
@@ -17,18 +17,18 @@
         <div class="col-sm-6">
           <div class="form-group">
             <select class="form-control">
-              <option selected="">Choose a test case group</option>
+              <option selected="">{{getWord('Choose a Test Case Group')}}</option>
             </select>
           </div>
         </div>
         <div class="col-sm-3" ng-if="current.temp || editMode">
-          <a class="btn btn-primary" ng-click="saveEditTestSuite()">Save</a>
+          <a class="btn btn-primary" ng-click="saveEditTestSuite()">{{getWord('Save')}}</a>
         </div>
         <div class="col-sm-3" ng-if="current.temp || editMode">
-          <a class="btn btn-default" ng-click="cancelEditTestSuite()">Cancel</a>
+          <a class="btn btn-default" ng-click="cancelEditTestSuite()">{{getWord('Cancel')}}</a>
         </div>
         <div class="col-sm-3" ng-if="(!current.temp && !editMode && current)" >
-          <a class="btn btn-primary" ng-click="$parent.editMode = true">Edit</a>
+          <a class="btn btn-primary" ng-click="$parent.editMode = true">{{getWord('Edit')}}</a>
         </div>
         <!-- <div class="col-sm-3" ng-if="!current.temp && !editMode">
           <a class="btn btn-primary" ng-click="clickOrganizeTestSuite()">Organize</a>
@@ -50,7 +50,7 @@
         <div class="row">
           <div class="tc-attributes col-md-12">
               <div class="tc-id">#{{case._id.substring(0,8)}}</div>
-              <div class="tc-groupName">Group Name</div>
+              <div class="tc-groupName">{{getWord('Group Name')}}</div>
           </div>
           <div class="tc-name col-md-12">
              {{case.name}}
@@ -66,7 +66,7 @@
         <div class="row">
           <div class="tc-attributes col-md-12">
               <div class="tc-id">#{{case._id.substring(0,8)}}</div>
-              <div class="tc-groupName">Group Name</div>
+              <div class="tc-groupName">{{getWord('Group Name')}}</div>
           </div>
           <div class="tc-name col-md-12">
              {{case.name}}
@@ -88,7 +88,7 @@
          <div class="row">
           <div class="tc-attributes col-md-12">
               <div class="tc-id">#{{case._id.substring(0,8)}}</div>
-              <div class="tc-groupName">Group Name</div>
+              <div class="tc-groupName">{{getWord('Group Name')}}</div>
           </div>
           <div class="tc-name col-md-12">
              {{case.name}}
@@ -106,7 +106,7 @@
          <div class="row">
           <div class="tc-attributes col-md-12">
               <div class="tc-id">#{{case._id.substring(0,8)}}</div>
-              <div class="tc-groupName">Group Name</div>
+              <div class="tc-groupName">{{getWord('Group Name')}}</div>
           </div>
           <div class="tc-name col-md-12">
              {{case.name}}

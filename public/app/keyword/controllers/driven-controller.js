@@ -124,8 +124,8 @@ define(['keyword/module'], function (module) {
         if($scope.current.data_driven === null) {
           DataService.create($scope.driven_name.trim(), $scope.dataset, $scope.current._id, function(data, status) {
             $.smallBox({
-                title: 'Notification',
-                content: 'Dataset has created',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Dataset has created'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -140,8 +140,8 @@ define(['keyword/module'], function (module) {
             switch (status) {
               case 304: 
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Dataset has nothing to update',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Dataset has nothing to update'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -149,8 +149,8 @@ define(['keyword/module'], function (module) {
                 break;
               case 200:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Dataset has updated',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Dataset has updated'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -175,17 +175,17 @@ define(['keyword/module'], function (module) {
 
           DataService.list(function (data, status) {
             _.forEach(data, function(sel) {
-              options += "[ name = ";
+              options += "[ "+$rootScope.getWord('name')+" = ";
               options += sel.name;
-              options += " | id = "
+              options += " | "+$rootScope.getWord('id')+" = "
               options += sel._id;
               options += "]";
             });
 
             $.SmartMessageBox({
-              title: "Data Driven: Select",
-              content: "Choose your data existed",
-              buttons: "[Done][Cancel]",
+              title: $rootScope.getWord('Data Driven: Select'),
+              content: $rootScope.getWord('Choose your data existed'),
+              buttons: "["+$rootScope.getWord('Done')+"]["+$rootScope.getWord('Cancel')+"]",
               input: "select",
               options: options
             }, function (ButtonPress, Value) {

@@ -3,20 +3,19 @@
 
     <div class="actionMenu row btn-action-list">
       <span class="col-sm-6 pull-right"> 
-        <a class="btn btn-primary" ng-click="edit()">Edit</a>
-        <a data-ui-sref="app.projects" class="btn btn-default">Close</a>
+        <a class="btn btn-primary" ng-click="edit()">{{getWord('Edit')}}</a>
+        <a data-ui-sref="app.projects" class="btn btn-default">{{getWord('Close')}}</a>
       </span>
     </div>
-
     <div class="row project-detail-header">
       <div class="col-sm-12">
         <span class="proj-id">#{{project._id.substring(0,8)}} </span>
         <span data-icon="&#xe05b;" aria-hidden="true" class="proj-type"></span>
-        <span class="text-capitalize">{{project.type}} test </span> 
+        <span class="text-capitalize">{{getWord(project.type)}} {{getWord('test')}} </span> 
         <span ng-class="{
           'label label-running': project.status === 'RUNNING',
           'label label-success': project.status === 'READY'
-        }"  disabled="disabled">{{project.status}}</span>
+        }"  disabled="disabled">{{getWord(project.status)}}</span>
       </div>
     </div>
 
@@ -30,15 +29,15 @@
       <div class="col-md-6 project-properties">
             <div class='row'>
                 <div class='col-sm-3'>
-                    <div class='blur-name'>Test Suites</div>
+                    <div class='blur-name'>{{getWord('Test Suites')}}</div>
                     <div class='statistic-number'>{{project.totalSuites}}</div>
                 </div>
                 <div class='col-sm-3'>
-                    <div class='blur-name'>Test Cases</div>
+                    <div class='blur-name'>{{getWord('Test Cases')}}</div>
                     <div class='statistic-number'>{{project.totalCases}}</div>
                 </div>
                 <div class='col-sm-6'>
-                    <div class='blur-name'>Last Running</div>
+                    <div class='blur-name'>{{getWord('Last Running')}}</div>
                     <div class='statistic-number'>{{project.lastRunning === undefine ? 'N/A' : project.lastRunning}}</div>
                 </div>
            </div>
@@ -46,13 +45,13 @@
       <div class="col-md-6">
         <div class="execute-action-list">
         <a ng-if="project.log" ng-click="viewLog()"
-          class="btn-border-line btnViewLog">View Log</a>
+          class="btn-border-line btnViewLog">{{getWord('View Log')}}</a>
         <a ng-if="project.watchUrl && project.status === 'RUNNING'" 
           class="btn-border-line btnViewLog" target="blank" href="{{project.watchUrl}}">
           Watch
         </a>
-        <a ng-if="project.lastSuites && project.status === 'READY'" ng-click="runLastSuites()" class="btn-border-line btnRun">Run</a>
-        <a ng-if="project.status === 'RUNNING'" class="btn-border-line btn-danger btnViewLog">Stop</a>
+        <a ng-if="project.lastSuites && project.status === 'READY'" ng-click="runLastSuites()" class="btn-border-line btnRun">{{getWord('Run')}}</a>
+        <a ng-if="project.status === 'RUNNING'" class="btn-border-line btn-danger btnViewLog">{{getWord('Stop')}}</a>
         </div>
       </div>
     </div>
@@ -60,18 +59,18 @@
   <!-- Report -->
      <div class="row table-container">
           <div class="col-md-12">
-            <h3>Test Report</h3>
+            <h3>{{getWord('Test Report')}}</h3>
       <table class="table tbl-project-report">
         <thead>
           <tr>
           <th>#</th>
-          <th>Report Tile</th>
-          <th>Total Case</th>
-          <th>Case Pass</th>
-          <th>Case Fail</th>
-          <th>Project Result</th>
-          <th>Created Date</th>
-          <th>Create By</th>
+          <th>{{getWord('Report Tile')}}</th>
+          <th>{{getWord('Total Case')}}</th>
+          <th>{{getWord('Case Pass')}}</th>
+          <th>{{getWord('Case Fail')}}</th>
+          <th>{{getWord('Project Result')}}</th>
+          <th>{{getWord('Created Date')}}</th>
+          <th>{{getWord('Create By')}}</th>
         </tr>
         </thead>
         <tbody>
@@ -82,9 +81,9 @@
             <td>{{rep.total_pass}}</td>
             <td>{{rep.total_fail}}</td>
             <td><span ng-class="{'label label-error': rep.test_result === 'Fail',
-            'label label-success': rep.test_result === 'Pass'}">{{rep.test_result}}</span></td>
+            'label label-success': rep.test_result === 'Pass'}">{{getWord(rep.test_result)}}</span></td>
             <td>{{rep.created_date}}</td>
-            <td>Cloud ATS</td>
+            <td>{{project.creator._id}}</td>
           </tr>
         </tbody>
       </table>

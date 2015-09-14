@@ -1,7 +1,7 @@
 define(['keyword/module', 'lodash'], function(module, _) {
   'use strict';
 
-  module.registerDirective("keywords", ['$filter', 'KeywordService', function($filter, keywordService) {
+  module.registerDirective("keywords", ['$rootScope','$filter', 'KeywordService', function($rootScope,$filter, keywordService) {
     return {
       restrict: 'E',
       replace: true,
@@ -19,6 +19,10 @@ define(['keyword/module', 'lodash'], function(module, _) {
         $scope.editableOptions = {
           mode: 'inline',
           disabled: false
+        }
+
+        $scope.getWord = function(key) {
+          return $rootScope.getWord(key);
         }
 
         $scope.dropped = function(dragEl, dropEl) {

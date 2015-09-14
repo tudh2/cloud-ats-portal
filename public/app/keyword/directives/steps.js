@@ -1,7 +1,7 @@
 define(['keyword/module', 'lodash'], function(module, _) {
   'use strict';
 
-  module.registerDirective('listSteps', ['$timeout', function($timeout) {
+  module.registerDirective('listSteps', ['$rootScope','$timeout', function($rootScope,$timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -18,6 +18,10 @@ define(['keyword/module', 'lodash'], function(module, _) {
           {value: 'css selector', text: 'css selector'},
           {value: 'xpath', text: 'xpath'}
         ]; 
+
+        $scope.getWord = function(key) {
+          return $rootScope.getWord(key);
+        }
 
         $scope.removeAction = function(keyword) {
           var index = _.indexOf($scope.list, keyword);

@@ -18,7 +18,7 @@
 
       <div class="pull-right" style="padding-left: 25px;">
         
-        <a ng-click="removeAction(keyword)" data-tooltip-placement="right" data-tooltip="Remove" class="txt-color-red">
+        <a ng-click="removeAction(keyword)" data-tooltip-placement="right" data-tooltip="{{getWord('Remove')}}" class="txt-color-red">
           <i class="fa fa-times-circle"></i>
         </a>
       </div>
@@ -30,7 +30,7 @@
         <span class="label label-success">{{param}}</span>
         
         <a ng-if="param !== 'locator' && param !== 'targetLocator'" href-void 
-          editable-text="keyword[param]">{{keyword[param] || 'empty' }}</a>
+          editable-text="keyword[param]">{{keyword[param] || getWord('empty') }}</a>
 
         <a ng-if="param === 'locator' || param === 'targetLocator'" href-void
           editable-select="keyword[param]['type']" 
@@ -44,7 +44,7 @@
 
         <a ng-if="param === 'locator' || param === 'targetLocator'" href-void
           editable-text="keyword[param]['value']">
-          {{keyword[param]['value'] || 'empty' }}          
+          {{keyword[param]['value'] || getWord('empty') }}          
         </a>
       </li>
     </ul>
@@ -54,6 +54,6 @@
   </li>
 
   <li class="placeholder" ng-if="list.length == 0"> 
-    <span class="label label-success">Drop action here</span>
+    <span class="label label-success">{{getWord('Drop action here')}}</span>
   </li>
 </ul>

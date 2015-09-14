@@ -3,8 +3,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
   'use strict';
 
   module.registerController('CasesCtrl', [
-    '$scope', '$state','$stateParams', '$templateRequest', '$compile', 'CaseService', 'CustomKeywordService', 
-    function($scope, $state, $stateParams, $templateRequest, $compile, CaseService, CustomKeywordService) {
+    '$rootScope','$scope', '$state','$stateParams', '$templateRequest', '$compile', 'CaseService', 'CustomKeywordService', 
+    function($rootScope,$scope, $state, $stateParams, $templateRequest, $compile, CaseService, CustomKeywordService) {
 
       $scope.projectId = $stateParams.id;
 
@@ -52,8 +52,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
             caze.customAdded = true;
             $scope.customs.push(data);
             $.smallBox({
-                title: 'Notification',
-                content: 'Your test case has created',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your test case has created'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -90,8 +90,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
             case 201: 
               $.smallBox({
-                title: 'Notification',
-                content: 'Your test case has created',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your test case has created'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -101,8 +101,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
             default:
               $.smallBox({
-                title: 'Notification',
-                content: 'Can not create your test case',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Can not create your test case'),
                 color: '#c26565',
                 iconSmall: 'fa fa-ban bounce animated',
                 timeout: 3000
@@ -116,8 +116,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
             switch (status) {
               case 200:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your test case has updated',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your test case has updated'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -125,8 +125,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 break;
               case 204:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your test case has nothing to update',
+                  title: $rootScopegetWord('Notification'),
+                  content: $rootScope.getWord('Your test case has nothing to update'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -134,8 +134,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 break;
               default:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Can not update your test case',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Can not update your test case'),
                   color: '#c26565',
                   iconSmall: 'fa fa-ban bounce animated',
                   timeout: 3000
@@ -155,8 +155,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
             case 200: 
               $.smallBox({
-                title: 'Notification',
-                content: 'Your test case has deleted',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your test case has deleted'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -168,8 +168,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
             default:
               $.smallBox({
-                title: 'Notification',
-                content: 'Can not delete your test case',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Can not delete your test case'),
                 color: '#c26565',
                 iconSmall: 'fa fa-ban bounce animated',
                 timeout: 3000

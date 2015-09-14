@@ -1,13 +1,20 @@
 define(['keyword/module'], function (module) {
   'use strict';
 
-  module.registerDirective('tabsHeader', ['$state', function($state) {
+  module.registerDirective('tabsHeader', ['$rootScope','$state', function($rootScope,$state) {
     return {
       restrict: 'E',
       replace: true,
       templateUrl: 'app/keyword/directives/tabs-header.tpl.html',
       link: function(scope, element, attributes) {
-
+        var lang = $rootScope.lang;
+        scope.$watch('lang', function(value) {
+          if($rootScope.getWord){
+            scope.getWord = function(key) {
+              return $rootScope.getWord(key);
+            }
+          }
+        }, true);
         scope.changeTab = function(tab) {
           switch(tab) {
             case 'overview':

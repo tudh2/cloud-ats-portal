@@ -3,8 +3,8 @@ define(['keyword/module'], function (module) {
   'use strict';
 
   module.registerController('ExecutionCtrl', [
-    '$scope', '$state', '$stateParams', 'SuiteService', 'KeywordService',
-    function($scope, $state, $stateParams, SuiteService, KeywordService) {
+    '$rootScope','$scope', '$state', '$stateParams', 'SuiteService', 'KeywordService',
+    function($rootScope,$scope, $state, $stateParams, SuiteService, KeywordService) {
 
       $scope.projectId = $stateParams.id;
 
@@ -15,11 +15,11 @@ define(['keyword/module'], function (module) {
       var checkProjectStatus = function() {
         if ($scope.project.status == 'RUNNING') {
           $.SmartMessageBox({
-            title: "Project Execution Alert!",
-            content: "Your project has been already running. Please back to overivew tab to track project progress",
-            buttons: '[Go to overview]'
+            title: $rootScope.getWord('Project Execution Alert') +'!',
+            content: $rootScope.getWord('Your project has been already running. Please back to overview tab to track project progress'),
+            buttons: '['+$rootScope.getWord('Go to overview')+']'
           }, function (ButtonPressed) {
-            if (ButtonPressed === "Go to overview") {
+            if (ButtonPressed === $rootScope.getWord('Go to overview')) {
               $state.go('app.keyword', {id: $scope.projectId});
             }
           });
@@ -61,8 +61,8 @@ define(['keyword/module'], function (module) {
           switch (status) {
             case 201:
               $.smallBox({
-                title: 'Notification',
-                content: 'You have submitted project job',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('You have submitted project job'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -70,8 +70,8 @@ define(['keyword/module'], function (module) {
               break;
             case 204:
               $.smallBox({
-                title: 'Notification',
-                content: 'Your project has been already running',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your project has been already running'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -79,8 +79,8 @@ define(['keyword/module'], function (module) {
               break;
             default:
               $.smallBox({
-                title: 'Notification',
-                content: 'Can not submmit your project job',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Can not submmit your project job'),
                 color: '#c26565',
                 iconSmall: 'fa fa-ban bounce animated',
                 timeout: 3000

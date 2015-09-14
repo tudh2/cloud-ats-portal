@@ -2,10 +2,10 @@
   <div class="modal-content add-datadriven">
     <div class="modal-header header-data-driven">
       <div class="row">
-      <span class="col-md-4"><i class="fa fa-table id-test"></i> Data Driven of {{current.name}}</span>
+      <span class="col-md-4"><i class="fa fa-table id-test"></i> {{getWord('Data Driven of')}} {{current.name}}</span>
       <span class="col-md-8 group-btn-datadriven">
-        <a class="btn-border-line btn-add-newdata" ng-click="addNewRow()"><i class=" id-test fa fa-plus"></i> Add new Data</a>
-        <a class="btn-border-line btn-search-data" ng-click="chooseDataDriven()"><i class="fa fa-search"></i> Select from existing data</a> 
+        <a class="btn-border-line btn-add-newdata" ng-click="addNewRow()"><i class=" id-test fa fa-plus"></i> {{getWord('Add new Data')}}</a>
+        <a class="btn-border-line btn-search-data" ng-click="chooseDataDriven()"><i class="fa fa-search"></i> {{getWord('Select from existing data')}}</a> 
       </span>
           </div>
     </div>
@@ -14,9 +14,9 @@
       <div class="content-datadriven">
           <div class="row">
             <div class="form-group">
-                <label class="col-md-2">Data Driven Name</label>
+                <label class="col-md-2">{{getWord('Data Driven Name')}}</label>
                 <div class="col-md-4">
-                    <input class="form-control input-text-dialog-datadriven" placeholder="Data Driven Name"  name = "driven-name" type="text" ng-model="driven_name">
+                    <input class="form-control input-text-dialog-datadriven" placeholder="{{getWord('Data Driven Name')}}"  name = "driven-name" type="text" ng-model="driven_name">
                  </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
               <tbody>
                 <tr class="tr-table-datadriven" ng-repeat="data in dataset">
                   <td ng-repeat="param in params" class="td-table-datadriven-value">
-                    <a href-void editable-text="data[param]">{{data[param] || 'empty' }}</a>
+                    <a href-void editable-text="data[param]">{{data[param] || getWord('empty') }}</a>
                   </td>
                 </tr>
               </tbody>
@@ -42,9 +42,9 @@
     </div>
 
     <div class="modal-footer modal-footer-datadriven">
-      <a class="btn btn-default pull-left" ng-click="resetData(dataset)">Reset</a> 
-      <a class="btn btn-primary" ng-click="createNewData()">Save</a> 
-      <a class="btn btn-default" data-dismiss="modal">Close</a> 
+      <a class="btn btn-default pull-left" ng-click="resetData(dataset)">{{getWord('Reset')}}</a> 
+      <a class="btn btn-primary" ng-click="createNewData()">{{getWord('Save')}}</a> 
+      <a class="btn btn-default" data-dismiss="modal">{{getWord('Close')}}</a> 
     </div>
   </div>
 </div>
