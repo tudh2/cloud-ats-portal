@@ -3,14 +3,14 @@
 
       <div class="modal-header">
         <header class="header-navtabs">
-          <div class="header-title">CUSTOM KEYWORD</div>
+          <div class="header-title uppercase-text">{{getWord('Custom Keyword')}}</div>
 
           <ul id="myTab" class="nav nav-tabs pull-right">
             <li class="active">
-              <a href="#t1" data-toggle="tab"><span class="hidden-mobile hidden-tablet">BASIC INFO</span></a>
+              <a href="#t1" data-toggle="tab"><span class="hidden-mobile hidden-tablet uppercase-text">{{getWord('Basic Info')}}</span></a>
             </li>
             <li ng-click="removeDivAddCustom()">
-              <a href="#t2" data-toggle="tab"><span class="hidden-mobile hidden-tablet">TEST KEYWORD</span></a>
+              <a href="#t2" data-toggle="tab"><span class="hidden-mobile hidden-tablet uppercase-text">{{getWord('Test Keyword')}}</span></a>
             </li>
           </ul>
        </header>
@@ -23,12 +23,12 @@
             <div class="col-md-offset-1 col-md-8">
               <div class="form-basic-info">
                 <div class="form-title"> <span class="icon-equalizer id-test" aria-hidden="true"></span>
-                  <h4>Basic Information</h4>
+                  <h4>{{getWord('Basic Information')}}</h4>
                 </div>
                 <div class="form-content">
                   <form class="form-horizontal">
                     <div class="form-group">
-                      <label class="col-sm-4">Custom Keyword Name:</label>
+                      <label class="col-sm-4">{{getWord('Custom Keyword Name')}}:</label>
                       <div class="col-sm-8">
                         <textarea class="form-control" rows="5" id="info-basic" placeholder="currentCustomKeyword.name" ng-model="currentCustomKeyword.name"></textarea>
                       </div>
@@ -46,8 +46,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" data-dismiss="modal" ng-click="removeCustom()" ng-if="!currentCustomKeyword.temp">Delete</button> 
-        <button ng-disabled="currentCustomKeyword.steps.length == 0" class="btn btn-primary pull-right" ng-click="save(currentCustomKeyword.name,currentCustomKeyword)" data-dismiss="modal">Save</button>
+        <button class="btn btn-danger" data-dismiss="modal" ng-click="removeCustom()" ng-if="!currentCustomKeyword.temp">{{getWord('Delete')}}</button> 
+        <button ng-disabled="currentCustomKeyword.steps.length == 0" class="btn btn-primary pull-right" ng-click="save(currentCustomKeyword.name,currentCustomKeyword)" data-dismiss="modal">{{getWord('Save')}}</button>
       </div>
 
     </div><!-- /.modal-content -->

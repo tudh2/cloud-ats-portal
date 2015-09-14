@@ -4,19 +4,20 @@
       <div class="col-md-3">
           <section class="smart-form">
             <label class="input"> <i class="icon-append fa fa-search"></i>
-              <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" ng-model="searchTerms">                           </label>
-	        </section>
+              <input id="search-fld" type="text" name="param" placeholder="{{getWord('Search Test Case')}}" class="ui-autocomplete-input" ng-model="searchTerms">                           </label>
+          </section>
       </div>
-      <span class="col-md-3 count-testcase"><label>{{customs.length}} Keyword{{customs.length > 2 ? 's' : ''}}</label></span>
+      <span class="col-md-3 count-testcase" ng-if="(customs.length < 2) == true"><label>{{customs.length}} {{getWord('Keyword')}}</label></span>
+      <span class="col-md-3 count-testcase" ng-if="(customs.length < 2) == false"><label>{{customs.length}} {{getWord('Keywords')}}</label></span>
 
       <span class="col-md-6 pull-right btn-action-list">
-        <a class="btn btn-default" ng-click="backToCaseList()">Back To Test Case List</a>
+        <a class="btn btn-default" ng-click="backToCaseList()">{{getWord('Back To Test Case List')}}</a>
         
         <a class="btn btn-primary"
           data-toggle="modal" 
           data-target="#editKeyword" 
           ng-click="newCustomKeyword()">
-          New Keyword</a>
+          {{getWord('New Keyword')}}</a>
       </span>
 
     </div>

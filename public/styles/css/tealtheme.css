@@ -1572,3 +1572,10 @@ block-darksky-color
     padding-left:13px;
     padding-right:13px;
 }
+.uppercase-text {
+	text-transform: uppercase;
+}
+.label-filter {
+	padding-left: 0px;
+	padding-right: 0px;
+}

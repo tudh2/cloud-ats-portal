@@ -2,16 +2,16 @@
   <div class="list-test-suite">
     <section class="smart-form search-container">
       <label class="input"> <i class="icon-append fa fa-search"></i>
-        <input type="text" name="Search" ng-model="searchTerms" placeholder="Search Test Suite" id="Search" minlength="3">
+        <input type="text" name="Search" ng-model="searchTerms" placeholder="{{getWord('Search Test Suite')}}" id="Search" minlength="3">
       </label>
     </section>
 
     <div class="create-new-suite">
       <a class="btn btn-primary btn-create-new" ng-click="clickNewTestSuiteButton()" >
-        <i class="fa fa-plus-circle">New Test Suite</i>
+        <i class="fa fa-plus-circle">{{getWord('New Test Suite')}}</i>
       </a>
       <div class="form-group input-suite-name" ng-if="current.temp">
-        <input id="input-new-testsuite-name" type="text" class="form-control" placeholder="Enter Your Test Suite Name"
+        <input id="input-new-testsuite-name" type="text" class="form-control" placeholder="{{getWord('Enter Your Test Suite Name')}}"
           ng-model="current.name" 
           ng-blur="inputNewSuiteNameBlur($event)"
           ng-keypress="inputNewSuiteNameKeypress($event)">

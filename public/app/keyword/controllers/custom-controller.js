@@ -3,8 +3,8 @@ define(['keyword/module'], function (module) {
   'use strict';
 
   module.registerController('CustomCtrl', [
-    '$scope', '$state', '$stateParams', '$templateRequest', '$compile','CustomKeywordService', 
-    function($scope, $state, $stateParams, $templateRequest, $compile,CustomKeywordService) {
+    '$rootScope','$scope', '$state', '$stateParams', '$templateRequest', '$compile','CustomKeywordService', 
+    function($rootScope,$scope, $state, $stateParams, $templateRequest, $compile,CustomKeywordService) {
 
       $scope.projectId = $stateParams.id;
 
@@ -63,8 +63,8 @@ define(['keyword/module'], function (module) {
 
             case 200: 
               $.smallBox({
-                title: 'Notification',
-                content: 'Your test case has deleted',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your test case has deleted'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -76,8 +76,8 @@ define(['keyword/module'], function (module) {
 
             default:
               $.smallBox({
-                title: 'Notification',
-                content: 'Can not delete your test case',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Can not delete your test case'),
                 color: '#c26565',
                 iconSmall: 'fa fa-ban bounce animated',
                 timeout: 3000
@@ -106,8 +106,8 @@ define(['keyword/module'], function (module) {
 
               case 201: 
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your custom keyword has created',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your custom keyword has created'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -117,8 +117,8 @@ define(['keyword/module'], function (module) {
 
               default:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Can not create your custom keyword',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Can not create your custom keyword'),
                   color: '#c26565',
                   iconSmall: 'fa fa-ban bounce animated',
                   timeout: 3000
@@ -133,8 +133,8 @@ define(['keyword/module'], function (module) {
             switch (status) {
               case 200:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your custom keyword has updated',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your custom keyword has updated'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -142,8 +142,8 @@ define(['keyword/module'], function (module) {
                 break;
               case 204:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your custom keyword has nothing to update',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your custom keyword has nothing to update'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -151,8 +151,8 @@ define(['keyword/module'], function (module) {
                 break;
               default:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Can not update your test case',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Can not update your test case'),
                   color: '#c26565',
                   iconSmall: 'fa fa-ban bounce animated',
                   timeout: 3000

@@ -25,12 +25,12 @@
     <form class="custom-keyword-form">
       <a class="btn btn-border-line btn-keyword "
         ng-show="(!case.customMode && !case.customAdded) && case.steps.length > 0 "
-        ng-click="case.customMode = true;">Add to Keyword
+        ng-click="case.customMode = true;">{{getWord('Add to Keyword')}}
       </a>
 
       <div ng-show="case.customMode" class="add-keyword-form">
         <div class="editable-input" >
-          <input name="customKeywordName" type="text" class="form-control input-sm" placeholder="Custom Keyword Name"
+          <input name="customKeywordName" type="text" class="form-control input-sm" placeholder="{{getWord('Custom Keyword Name')}}"
             ng-model="customKeywordName" >
         </div>
         <div class="editable-buttons" >
@@ -44,7 +44,7 @@
       </div>
 
       <span class="style-status-keyword" ng-show="case.customAdded">
-        <i class="fa fa-check"></i> Custom Keyword Added
+        <i class="fa fa-check"></i> {{getWord('Custom Keyword Added')}}
       </span>
     </form>
     </div>
@@ -56,9 +56,9 @@
      <div class="panel-group smart-accordion-default keyword-list animated fadeInDown" id="keyword-list" >
 
       <div class="filter-keyword-div">
-        <div class="col-md-4"><i class="fa fa-puzzle-piece"></i>
-        <label>Keyword</label></div>
-        <div class="col-md-8"><input class="form-control filter-keyword"  type="text" placeholder="Filter"></div>
+        <div class="col-md-4 label-filter"><i class="fa fa-puzzle-piece"></i>
+        <label>{{getWord('Keyword')}}</label></div>
+        <div class="col-md-8"><input class="form-control filter-keyword"  type="text" placeholder="{{getWord('Filter')}}"></div>
       </div>
 
       <!-- Custom keyword -->
@@ -69,7 +69,7 @@
             <a data-toggle="collapse" href="#customkeyword" data-parent="#keyword-list">
               <i class="fa fa-chevron-circle-right"></i>
               <i class="fa fa-chevron-circle-down"></i>
-              <strong>Custom keywords</strong>
+              <strong>{{getWord('Custom Keywords')}}</strong>
             </a>
           </h4>
         </div>
@@ -107,7 +107,7 @@
 
               <i class="fa fa-chevron-circle-right"></i>
               <i class="fa fa-chevron-circle-down"></i>
-              <strong>{{cat}}</strong>
+              <strong>{{getWord(cat)}}</strong>
             </a>
           </h4>
         </div>

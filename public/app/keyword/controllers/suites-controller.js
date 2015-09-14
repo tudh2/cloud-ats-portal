@@ -2,8 +2,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
   'use strict';
 
   module.registerController('SuitesCtrl', [
-    '$scope', '$stateParams', '$templateRequest', '$compile', 'CaseService', 'SuiteService',
-    function($scope, $stateParams, $templateRequest, $compile, CaseService, SuiteService) {
+    '$rootScope','$scope', '$stateParams', '$templateRequest', '$compile', 'CaseService', 'SuiteService',
+    function($rootScope,$scope, $stateParams, $templateRequest, $compile, CaseService, SuiteService) {
 
       $scope.projectId = $stateParams.id;
 
@@ -75,8 +75,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
               case 200: 
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your test suite has deleted',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your test suite has deleted'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -90,8 +90,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
               default:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Can not delete your test suite',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Can not delete your test suite'),
                   color: '#c26565',
                   iconSmall: 'fa fa-ban bounce animated',
                   timeout: 3000
@@ -116,8 +116,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
               case 201: 
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your test suite has created',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your test suite has created'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -128,8 +128,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
               default:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Can not create your test suite',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Can not create your test suite'),
                   color: '#c26565',
                   iconSmall: 'fa fa-ban bounce animated',
                   timeout: 3000
@@ -145,8 +145,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
               case 200: 
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your test suite has updated',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your test suite has updated'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -157,8 +157,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
               case 204: 
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Your test suite has nothing to date',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your test suite has nothing to date'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -169,8 +169,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
               default:
                 $.smallBox({
-                  title: 'Notification',
-                  content: 'Can not update your test suite',
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Can not update your test suite'),
                   color: '#c26565',
                   iconSmall: 'fa fa-ban bounce animated',
                   timeout: 3000

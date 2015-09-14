@@ -1,9 +1,9 @@
 <div class="row execution">
   <div class="col-sm-3 test-suite-pool">
-    <p>1.CHOOSE TEST SUITE</p>
+    <p>1.{{getWord('CHOOSE TEST SUITE')}}</p>
     <section class="smart-form">
       <label class="input"> <i class="icon-append fa fa-search"></i>
-        <input type="text" name="Search" ng-model="searchTerms" placeholder="Search Test Suite">
+        <input type="text" name="Search" ng-model="searchTerms" placeholder="{{getWord('Search Test Suite')}}">
       </label>
     </section>
 
@@ -20,7 +20,7 @@
     </div>
   </div>
     <div class="col-sm-3 browser-pool choose-browser">
-        <p>2.CHOOSE BROWSER</p>
+        <p>2.{{getWord('CHOOSE BROWSER')}}</p>
         <div class="row">
           <div class="col-sm-12 browser">
           <div class="col-sm-6">
@@ -33,7 +33,7 @@
           </div>
 
           <div class="col-sm-6 select-version">
-            <p>Select Version</p>
+            <p>{{getWord('Select Version')}}</p>
             <div class="form-group">
               <select class="form-control">
                 <option>v1.0</option>
@@ -45,7 +45,7 @@
 
       </div>
      <div class="col-sm-3 os-pool">
-        <p>3.SELECT OS</p>
+        <p>3.{{getWord('SELECT OS')}}</p>
         <div class="row">
           <div class="col-sm-12">
           <div class="col-sm-6">
@@ -61,7 +61,7 @@
         </div>
       </div>
     <div class="col-sm-3 execution-area">
-      <a class="btn btn-primary btn-keyword-run disabled" ng-click="run()">Run Test</a>
+      <a class="btn btn-primary btn-keyword-run disabled" ng-click="run()">{{getWord('Run Test')}}</a>
       </div>
   
 </div>

@@ -5,14 +5,15 @@
       <div class="col-md-3">
           <section class="smart-form">
             <label class="input"> <i class="icon-append fa fa-search"></i>
-              <input id="search-fld" type="text" name="param" placeholder="Search Test Case" class="ui-autocomplete-input" ng-model="searchTerms">                           
+              <input id="search-fld" type="text" name="param" placeholder="{{getWord('Search Test Case')}}" class="ui-autocomplete-input" ng-model="searchTerms">                           
             </label>
-	        </section>
+          </section>
       </div>
-      <span class="col-md-2 count-testcase"><label>{{cases.length}} Test Case{{cases.length > 2 ? 's' : ''}}</label></span>
+      <span class="col-md-2 count-testcase" ng-if="(cases.length < 2) == true"><label>{{cases.length}} {{getWord('Test Case')}}</label></span>
+      <span class="col-md-2 count-testcase" ng-if="(cases.length < 2) == false"><label>{{cases.length}} {{getWord('Test Cases')}}</label></span>
 
       <div class="dropdown testcase-group col-md-3">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose a Test Case Group
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{getWord('Choose a Test Case Group')}}
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
           <li><a href="">Test Group 1</a></li>
@@ -22,12 +23,12 @@
       </div>
 
       <span class="col-md-4 text-right">
-        <a class="btn btn-default" ng-click="toCustomKeywordList()">Custom Keyword</a>
+        <a class="btn btn-default" ng-click="toCustomKeywordList()">{{getWord('Custom Keyword')}}</a>
         <a class="btn btn-primary"
           data-toggle="modal" 
           data-target="#editCase" 
           ng-click="newTestCase()">
-          New Test Case</a>
+          {{getWord('New Test Case')}}</a>
       </span>
 
     </div>
@@ -44,7 +45,7 @@
         <div class="row">
           <div class="tc-attributes col-md-12">
               <div class="tc-id"># {{case._id.substring(0,8)}}</div>
-              <div class="tc-groupName">Group Name</div>
+              <div class="tc-groupName">{{getWord('Group Name')}}</div>
           </div>
           <div class="tc-name col-md-12">
              {{case.name}}

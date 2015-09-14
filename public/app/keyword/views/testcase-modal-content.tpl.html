@@ -3,14 +3,14 @@
 
       <div class="modal-header">
         <header class="header-navtabs">
-          <div class="header-title">TEST CASE</div>
+          <div class="header-title uppercase-text">{{getWord('Test Case')}}</div>
 
           <ul id="myTab" class="nav nav-tabs pull-right">
             <li class="active">
-              <a href="#t1" data-toggle="tab"><span class="hidden-mobile">BASIC INFO</span></a>
+              <a href="#t1" data-toggle="tab"><span class="hidden-mobile uppercase-text">{{getWord('Basic Info')}}</span></a>
             </li>
             <li>
-              <a href="#t2" data-toggle="tab"><span class="hidden-mobile">TEST KEYWORD</span></a>
+              <a href="#t2" data-toggle="tab"><span class="hidden-mobile uppercase-text">{{getWord('Test Keyword')}}</span></a>
             </li>
           </ul>
        </header>
@@ -24,12 +24,12 @@
             <div class="col-md-offset-1 col-md-8">
               <div class="form-basic-info">
                 <div class="form-title"> <span class="icon-equalizer id-test" aria-hidden="true"></span>
-                  <h4>Basic Information</h4>
+                  <h4>{{getWord('Basic Information')}}</h4>
                 </div>
                 <div class="form-content">
                   <form class="form-horizontal">
                     <div class="form-group">
-                      <label class="col-sm-4">Test Case Name:</label>
+                      <label class="col-sm-4">{{getWord('Test Case Name')}}:</label>
                       <div class="col-sm-8">
                         <textarea class="form-control" rows="5" id="info-basic" placeholder="current.name" ng-model="current.name"></textarea>
                       </div>
@@ -48,8 +48,8 @@
       </div>
           
       <div class="modal-footer">
-        <button class="btn btn-danger" data-dismiss="modal" ng-click="removeCase()" ng-if="!current.temp">Delete</button> 
-        <button ng-disabled="current.steps.length == 0" class="btn btn-primary pull-right" ng-click="save()">Save</button>
+        <button class="btn btn-danger" data-dismiss="modal" ng-click="removeCase()" ng-if="!current.temp">{{getWord('Delete')}}</button> 
+        <button ng-disabled="current.steps.length == 0" class="btn btn-primary pull-right" ng-click="save()">{{getWord('Save')}}</button>
       </div>
 
     </div><!-- /.modal-content -->
