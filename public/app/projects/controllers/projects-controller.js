@@ -17,20 +17,32 @@ define(['projects/module', 'lodash'], function (module, _) {
     }
 
     $scope.toggleReady = function() {
+      $('[data-toggle="popover"]').each(function () {
+        $(this).popover('hide');
+      });
       $scope.options.ready = $scope.options.ready === true ? false : true;
     }
 
     $scope.toggleRunning = function() {
+      $('[data-toggle="popover"]').each(function () {
+        $(this).popover('hide');
+      });
       $scope.options.running = $scope.options.running === true ? false : true;
     }
 
     $scope.toggleKeyword = function(event) {
+      $('[data-toggle="popover"]').each(function () {
+        $(this).popover('hide');
+      });
       var $element = $(event.currentTarget);
       $element.toggleClass('active');
       $scope.options.keyword = $scope.options.keyword === true ? false : true;
     }
 
     $scope.togglePerformance = function(event) {
+      $('[data-toggle="popover"]').each(function () {
+        $(this).popover('hide');
+      });
       var $element = $(event.currentTarget);
       $element.toggleClass('active');
       $scope.options.performance = $scope.options.performance === true ? false : true;

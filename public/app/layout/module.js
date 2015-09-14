@@ -32,7 +32,7 @@ define([
                 'layout/directives/state-breadcrumbs',
                 'layout/directives/search-autocomplete',
                 'layout/directives/smart-projects-active',
-
+                'layout/directives/smart-datadriven-active'
 
               ])
             }
