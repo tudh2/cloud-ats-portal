@@ -86,8 +86,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
           switch (status) {
             case 201:
               $.smallBox({
-                title: 'Notification',
-                content: 'You have submitted project job',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('You have submitted project job'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -95,8 +95,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
               break;
             case 204:
               $.smallBox({
-                title: 'Notification',
-                content: 'Your project has been already running',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your project has been already running'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -104,8 +104,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
               break;
             default:
               $.smallBox({
-                title: 'Notification',
-                content: 'Can not submmit your project job',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Can not submmit your project job'),
                 color: '#c26565',
                 iconSmall: 'fa fa-ban bounce animated',
                 timeout: 3000
@@ -147,8 +147,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
           switch (status) {
             case 304:
               $.smallBox({
-                title: 'Notification',
-                content: 'Your project name does not change',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your project name does not change'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -156,8 +156,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
               break;
             case 202:
               $.smallBox({
-                title: 'Notification',
-                content: 'Your project has been updated',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your project has been updated'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -173,17 +173,17 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
        $scope.delete = function () {
         $.SmartMessageBox({
-            title: "Delete project",
-            content: "Are you sure to delete the project",
-            buttons: '[No][Yes]'
+            title: $rootScope.getWord('Delete project'),
+            content: $rootScope.getWord('Are you sure to delete the project'),
+            buttons: "["+$rootScope.getWord('No')+"]["+$rootScope.getWord('Yes')+"]"
           }, function (ButtonPressed) {
-            if (ButtonPressed === "Yes") {
+            if (ButtonPressed === $rootScope.getWord('Yes')) {
 
               KeywordService.delete($scope.projectId, function (data, status) {
                 if (status === 200) {
                   $.smallBox({
-                    title: "Notification",
-                    content: "<i class='fa fa-clock-o'></i> <i>The project has already deleted</i>",
+                    title: $rootScope.getWord('Delete project'),
+                    content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord('The project has already deleted')+"</i>",
                     color: "#296191",
                     iconSmall: "fa fa-check fa-2x fadeInRight animated",
                     timeout: 4000
@@ -193,7 +193,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 }
               });
             }
-            if (ButtonPressed === "No") {
+            if (ButtonPressed === $rootScope.getWord('No')) {
                return;
             }
         });
@@ -234,8 +234,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
               $scope.listReports.unshift(report);
                $.smallBox({
-                title: 'Notification',
-                content: 'The job ' + job._id + ' has completed.',
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('The job ') + job._id + $rootScope.getWord(' has completed.'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000

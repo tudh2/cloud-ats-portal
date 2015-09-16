@@ -13,23 +13,23 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             <select class="form-control">
-                              <option selected="">Choose a test case group</option>
+                              <option selected="">{{getWord('Choose a Test Case Group')}}</option>
                             </select>
                           </div>
                         </div>
                     </div>
                     <div class="col-sm-6 ">
                         <p class="functional-title col-sm-6 export-bar">
-                            Export to:
+                            {{getWord('Export to')}}:
                             <i class="fa fa-file-word-o"></i>
-                            <span>word</span>
+                            <span>{{getWord('Word')}}</span>
                             <i class="fa fa-file-excel-o"></i>
-                            <span>Excel</span>
+                            <span>{{getWord('Excel')}}</span>
                             <i class="fa fa-file-pdf-o"></i>
-                            <span>pdf</span>
+                            <span>{{getWord('PDF')}}</span>
                         </p>
 
-                        <button type="submit" class="btn btn-default pull-right" ng-click="redirectTo();" >Back to project detail</button>
+                        <button type="submit" class="btn btn-default pull-right" ng-click="redirectTo();" >{{getWord('Back to project detail')}}</button>
                     </div>
                 </div>
 			</div>
@@ -38,26 +38,26 @@
 				<!-- <div class="functional-report"></div> -->
 				<morris-stacked-bar-graph data-data="listSuiteReports" data-lang="lang"></morris-stacked-bar-graph>
 				<div class="chart-legend">
-						<div><div class="block-teal-color"></div> Pass</div>
-						<div><div class="block-red-color"></div> Fail</div>
-						<div><div class="block-orange-color"></div> Skip</div> 
+						<div><div class="block-teal-color"></div> {{getWord('Pass')}}</div>
+						<div><div class="block-red-color"></div> {{getWord('Fail')}}</div>
+						<div><div class="block-orange-color"></div> {{getWord('Skip')}}</div> 
 				</div>
 			</div>
            </div>
             
 			<div class="row table-container">
 				<div class="col-sm-12">
-                    <h3>Test Report</h3>
+                    <h3>{{getWord('Test Report')}}</h3>
 					<table class="table tbl-project-report">
 						<thead >
                             <tr>
-							<th >Running </th>
-							<th >Test Suite</th>
-							<th class="text-right">Test Case</th>
-							<th class="text-right">Pass</th>
-							<th class="text-right">Fail</th>
-							<th class="text-right">Skip</th>
-							<th class="text-center">Test Result</th>
+							<th >{{getWord('Running')}} </th>
+							<th >{{getWord('Test Suite')}}</th>
+							<th class="text-right">{{getWord('Test Case')}}</th>
+							<th class="text-right">{{getWord('Pass')}}</th>
+							<th class="text-right">{{getWord('Fail')}}</th>
+							<th class="text-right">{{getWord('Skip')}}</th>
+							<th class="text-center">{{getWord('Test Result')}}</th>
                                 </tr>
 						</thead>
 						<tr ng-repeat="suiteData in suiteReports">
@@ -67,8 +67,8 @@
 							<td class="text-right">{{suiteData.total_pass}}</td>
 							<td class="text-right">{{suiteData.total_fail}}</td>
 							<td class="text-right">{{suiteData.total_skip}}</td>
-							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail',
-            'label label-success': suiteData.test_result === 'Pass'}">{{suiteData.test_result}}</span></td>
+							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === Fail,
+            'label label-success': suiteData.test_result === Pass}">{{getWord(suiteData.test_result)}}</span></td>
 						</tr>
 					</table>
 				</div>

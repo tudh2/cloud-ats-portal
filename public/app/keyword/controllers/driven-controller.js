@@ -189,7 +189,7 @@ define(['keyword/module'], function (module) {
               input: "select",
               options: options
             }, function (ButtonPress, Value) {
-              if (ButtonPress === "Done") {
+              if (ButtonPress === $rootScope.getWord('Done')) {
                 updateDataforCase(Value,data);
               }
             });
@@ -197,7 +197,7 @@ define(['keyword/module'], function (module) {
         };
 
         var updateDataforCase = function(value,data) {
-          var startIndex = value.indexOf(' | id = ') + ' | id = '.length;
+          var startIndex = value.indexOf(" | "+$rootScope.getWord('id')+" = ") + (" | "+$rootScope.getWord('id')+" = ").length;
           var id = value.substring(startIndex);
           var dataset = _.find(data, function(sel) {
             return sel._id === id;
