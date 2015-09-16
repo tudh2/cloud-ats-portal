@@ -53,6 +53,7 @@
     "Test Case":"テストケース",
     "TEST SUITES": "テストスイート",
     "Test Suites": "テストスイート",
+    "Test Suite": "テストスイート",
     "Create Project":"プロジェクトを作成します。",
     "Project Name": "プロジェクト名",
     "Project Type": "プロジェクトの種類",
@@ -183,6 +184,7 @@
     "5 Biggest Projects": "5 最大 プロジェクト",
     "Performance Test":"業績 試験",
     "No":"多数",
+    "Yes":"はい",
     "Samplers":"サンプラー",
     "Users":"ユーザーズ",
     "Ram up":"牡羊 アップ",
@@ -271,5 +273,7 @@
     "Overviews":"概要",
     "OVERVIEWS":"概要",
     "Execution":"実行",
-    "EXECUTION":"実行"
+    "EXECUTION":"実行",
+    "Excel":"秀でます",
+    "Word":"単語"
 }   
