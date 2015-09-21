@@ -14,6 +14,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       ]
     };
 
+    $scope.createNewButton = true;
     $scope.selected = {
       method: 'GET',
       constant_time: 0,
@@ -189,6 +190,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
       var $saveButton = $('.btn-uploadFile');
       $saveButton.show();
+      $scope.createNewButton = true;
     }
 
     $scope.resetSamplerForm = function () {
@@ -202,6 +204,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       };
       var $saveButton = $('.btn-uploadFile');
       $saveButton.show();
+      $scope.createNewButton = true;
     }
 
     $scope.chooseSampler = function (i, index) {
@@ -220,6 +223,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
       var $saveButton = $('.btn-uploadFile');
       $saveButton.hide();
+
+      $scope.createNewButton = false;
     }
 
     $scope.clickUploadScriptButton = function () {

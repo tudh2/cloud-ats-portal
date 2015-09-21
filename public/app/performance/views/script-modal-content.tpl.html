@@ -143,7 +143,7 @@
 						<div class="form-group">
 							<div class="col-sm-offset-4 col-sm-8">
 								<a class="btn btn-primary btn-uploadFile" ng-click="createSampler(selected, $event)">{{getWord('Save')}}</a>
-								<a class="btn btn-danger btn-reset pull-right" ng-click="resetSamplerForm()">{{getWord('Reset')}}</a>
+								<a class="btn btn-danger btn-reset pull-right" ng-hide="createNewButton" ng-click="resetSamplerForm()">{{getWord('New Sampler')}}</a>
 							</div>
 						</div>
           </form>
