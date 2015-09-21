@@ -23,38 +23,20 @@ define(['performance/module', 'notification'], function (module) {
         }
 
       };
-
-      var $upload_name = $('.upload_name');
-      var $fileNames = $('input[name="listFile"]');
-
-      //validation for file name
-      $upload_name.on('keypress', function () {
-        if ($(this).val().trim() != '') {
-          $(this).parent().removeClass('has-error');
-        }
-      });
-
+      
       // click save after upload file
       $scope.saveUploadedScripts = function () {
-
+        var $fileNames = $('input[name="listFile"]');
         // check fields are not null
-        if ($upload_name.val().trim() == '' || $fileNames.val() =='' ) {
-          if ($upload_name.val().trim() == '' && $fileNames.val() =='' ) {
-            $upload_name.parent().addClass('has-error');
-            $fileNames.parent().addClass('has-error');
-          } else if ($fileNames.val() =='') {
-            $fileNames.addClass('has-error');
-            $fileNames.focus();
-          } else {
-            $upload_name.parent().addClass('has-error');
-            $upload_name.focus();
-          } 
+        if ($fileNames.val() =='' ) {
+          $fileNames.parent().addClass('has-error');
+          $fileNames.focus();
         } else { // all fields are filled 
           $('#uploadScript').modal('hide');
           $('body').removeClass('modal-open');
           $('.modal-backdrop').remove();
 
-          ScriptService.createScriptTestByUpload($scope.file, $upload_name.val(), $stateParams.id , function (data,status) {
+          ScriptService.createScriptTestByUpload($scope.file, $stateParams.id , function (data,status) {
             if (data != null) {
               $.smallBox({
                 title: $rootScope.getWord("The script has created"),

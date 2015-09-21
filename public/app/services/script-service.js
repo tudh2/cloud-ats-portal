@@ -19,7 +19,7 @@ define(['performance/module'], function (module) {
 
         });
       },
-      createScriptTestByUpload: function (files, script_name, project_id, callback) {
+      createScriptTestByUpload: function (files, project_id, callback) {
         var formData = new FormData();
         $.each(files, function (key, value) {
 
