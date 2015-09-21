@@ -131,8 +131,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       }
 
       $scope.runLastScripts = function () {
-        $scope.project.status = "RUNNING";
-        $scope.project.log = undefined;
 
         var selected = [];
         _.forEach($scope.project.lastScripts, function(sel) {
@@ -142,6 +140,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         PerformanceService.run($scope.projectId, selected, function (data, status) {
           switch (status) {
             case 200:
+              $scope.project.status = "RUNNING";
+              $scope.project.log = undefined;
               $.smallBox({
                 title: $rootScope.getWord('Notification'),
                 content: $rootScope.getWord('You have submitted project job'),
@@ -149,6 +149,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
+              $scope.project.jobs.unshift(data);
               break;
             case 204:
               $.smallBox({
@@ -168,7 +169,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                 timeout: 3000
               });
           }
-          $scope.project.jobs.unshift(data);
+          
         });
       }
 

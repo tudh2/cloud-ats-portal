@@ -73,10 +73,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.runLastSuites = function() {
 
-        $scope.project.status = "RUNNING";
-        $scope.project.log = undefined;
-        $scope.project.watchUrl = undefined
-
         var selected = [];
         _.forEach($scope.project.lastSuites, function(sel) {
           selected.push(sel._id);
@@ -92,6 +88,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
+              $scope.project.status = "RUNNING";
+              $scope.project.log = undefined;
+              $scope.project.watchUrl = undefined
               break;
             case 204:
               $.smallBox({

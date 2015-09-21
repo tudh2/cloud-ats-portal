@@ -39,8 +39,8 @@
       </div>
       <div class="col-md-6">
         <div class="execute-action-list">
-          <a class="btn-border-line btnViewLog" ng-click="viewLog()">{{getWord('View Log')}}</a>
-          <a class="btn-border-line btnRun" ng-click="runLastScripts()" ng-if="project.status != 'RUNNING'">{{getWord('Run')}}</a>
+          <a class="btn-border-line btnViewLog" ng-if="project.log" ng-click="viewLog()">{{getWord('View Log')}}</a>
+          <a class="btn-border-line btnRun" ng-click="runLastScripts()" ng-if="project.lastScripts && project.status === 'READY' && project.totalScripts != 0">{{getWord('Run')}}</a>
           <a ng-if="project.status === 'RUNNING'" class="btn-border-line btn-danger btnViewLog ng-scope">{{getWord('Stop')}}</a>
         </div>
        </div>

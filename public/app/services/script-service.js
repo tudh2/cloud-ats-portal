@@ -71,7 +71,7 @@ define(['performance/module'], function (module) {
         $http(request).success(function (data, status) {
           callback (data, status);
         }).error(function (status, data) {
-
+          callback(data, status);
         });
       },
       delete: function (projectId, id, callback) {
