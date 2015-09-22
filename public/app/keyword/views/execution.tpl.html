@@ -8,7 +8,7 @@
     </section>
 
     <div class="row" style="margin-top: 20px;" ng-repeat="suite in suites | search: searchTerms">
-      <div class="col-sm-12" style="padding-right: 8px;">
+      <div class="col-sm-12" style="padding-right: 8px;" ng-if="suite.cases.length > 0">
         <span class="pull-left">{{suite.name}}</span>
         <div class="smart-form check-list">
           <label class="checkbox pull-right suiteId">
