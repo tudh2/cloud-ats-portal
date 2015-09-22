@@ -68,7 +68,7 @@
                 'report-enable': i.status === 'Completed',
                 'report-disable': i.status != 'Completed'
               }" href-void  ng-click="openJobReport(i._id)">{{i._id}}</a></td>
-            <td>{{i.scripts.length}}</td>
+            <td>{{i.scripts}}</td>
             <td><span class="label label-success">{{getWord(i.status)}}</span></td>
             <td>{{i.created_date}}</td>
             <td>Cloud ATS</td>
