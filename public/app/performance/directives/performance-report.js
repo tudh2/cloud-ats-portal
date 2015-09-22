@@ -23,6 +23,7 @@ define(['performance/module'], function (module) {
     		$timeout(function () {
     			$scope.getWord = $rootScope.getWord;
     		}, 1000);
+
 				   // round information
 	      _.forEach($scope.reports, function (report) {
 
@@ -37,6 +38,7 @@ define(['performance/module'], function (module) {
 	      $scope.summaryReport = _.find($scope.reports, function (report) {
 	        return report.label == "*SummaryReport*";
 	      });
+	      $scope.summaryReport.script_name = $scope.reports[0].script_name;
 	      // get data of all samplers
 	      _.remove($scope.reports, function (report) {
 	        return report.label == $scope.summaryReport.label;
