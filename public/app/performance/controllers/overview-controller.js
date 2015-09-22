@@ -8,17 +8,15 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
     	$scope.projectId = $stateParams.id;
       $scope.title = 'OVERVIEWS'
       PerformanceService.get($scope.projectId, function(response) {
+
         $scope.project = response;
         if (response.lastScripts) {
-          getListJob($scope.project._id);
+          var jobs = JSON.parse(response.jobs);
+          $scope.project.jobs = jobs;
         }
+        
       });
-      var getListJob = function(projectId) {
-
-        PerformanceService.getListJob(projectId,function(data,status) {
-         $scope.project.jobs = data;
-        });
-      }
+      
       $scope.openJobReport = function (jobId) {
         $state.go('app.performance.report', {jobId : jobId});
       }

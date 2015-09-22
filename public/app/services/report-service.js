@@ -32,22 +32,7 @@ define(['performance/module'], function(module) {
         }).error(function(data, status) {
           callback(data, status);
         });
-      },
-      getLastestRunning: function (projectId, callback) {
-        var request = {
-          method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/performance/reports/lastjob/'+projectId,
-          headers: {
-            'X-AUTH-TOKEN': $cookies.get('authToken'),
-            'X-SPACE': $cookies.get('space')
-          }
-        };
-
-        $http(request).success(function(data, status) {
-          callback(data, status);
-        });
       }
-
     }
   }]);
 })
