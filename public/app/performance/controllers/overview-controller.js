@@ -150,6 +150,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
+              data.scripts = data.scripts.length;
               $scope.project.jobs.unshift(data);
               break;
             case 204:
