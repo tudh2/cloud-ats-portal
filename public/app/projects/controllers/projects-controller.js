@@ -126,12 +126,12 @@ define(['projects/module', 'lodash'], function (module, _) {
     $scope.runLastest = function (project) {
       switch (project.type) {
         case 'keyword':
-          runLastSuites(project);
-          $state.go('app.keyword', {id: project._id});
+          //runLastSuites(project);
+          $state.go('app.keyword.execution', {id: project._id});
           break;
         case 'performance':
-          runLastScripts(project);
-          $state.go('app.performance', {id : project._id});
+          //runLastScripts(project);
+          $state.go('app.performance.execution', {id : project._id});
           break;
         default:
       }
