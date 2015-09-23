@@ -51,7 +51,7 @@
           Watch
         </a>
         <a ng-if="project.lastSuites && project.status === 'READY'" ng-click="runLastSuites()" class="btn-border-line btnRun">{{getWord('Run')}}</a>
-        <a ng-if="project.status === 'RUNNING'" class="btn-border-line btn-danger btnViewLog">{{getWord('Stop')}}</a>
+        <a ng-if="project.status === 'RUNNING' && project.log" class="btn-border-line btn-danger btnViewLog" ng-click="stopProject(project._id)">{{getWord('Stop')}}</a>
         </div>
       </div>
     </div>
