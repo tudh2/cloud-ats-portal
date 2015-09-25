@@ -255,5 +255,6 @@
     "Execution": "実行",
     "Excel": "エクセル",
     "Word": "ワード、",
-    "Your project has been already stopped": "プロジェクトが停止されました。"
+    "Your project has been already stopped": "プロジェクトが停止されました。",
+    "summary":"サマリー"
 }
