@@ -54,7 +54,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
         //Inject case outline
         var caseOutline = [];
         _.forEach($scope.cases, function(outCase) {
-          var inCase = _.find(suite.cases, outCase);
+          var inCase = _.find(suite.cases, function (caze) {
+            return outCase._id === caze._id;
+          });
           if (inCase === undefined) caseOutline.push(outCase);
         })
         suite.caseOutline = caseOutline;

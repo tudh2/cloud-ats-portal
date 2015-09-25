@@ -20,7 +20,7 @@
     <div class="test-suite-items">
     <div class="row test-suite" 
       ng-repeat="suite in suites | search: searchTerms"
-      ng-class="{'test-suite-selected':suite._id == current._id}"
+      ng-class="{'test-suite-selected':suite._id == current._id, 'not-allow-click': editMode}"
       ng-click="selectSuite(suite)">
 
       <div class="col-sm-12">
