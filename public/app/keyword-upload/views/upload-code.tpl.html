@@ -1,0 +1,41 @@
+<div class="modal fade" id="uploadCode" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+     <div class="modal-header">
+      <header class="header-navtabs">
+        <div class="header-title">
+            <span class="fa-cloud-upload fa" aria-hidden="true"></span>
+                Upload Code
+        </div>
+      </header>
+    </div>
+			<div class="modal-body upload-script-body">
+        <div class="basic-infot row">
+            <div class="col-md-offset-1 col-md-8">
+              <div class="form-basic-info">
+                <div class="form-content">
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <label class="col-sm-4">Upload Code</label>
+                      <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control"  name="listFile" disabled="">
+                            <input type="file" multiple="" onchange="angular.element(this).scope().uploadFile(this)" name="chooseFile">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+			</div>
+			<div class="modal-footer">
+				<div class="row save-script-upload">
+					<a ng-click="upload(project._id)" class="btn btn-primary">Save</a>
+          <a class="btn btn-default"  data-dismiss="modal">Close</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,13 @@
+<div class="jarviswidget">
+  <header class="header-navtabs">
+    <h2>{{getWord(title)}}</h2>
+    <ul id="myTab" class="nav nav-tabs pull-right">
+      <li ng-class="title == 'OVERVIEWS' ? 'active' : ''">
+        <a href-void data-toggle="tab" ng-click="changeTab('overview')"><span class="hidden-mobile uppercase-text">{{getWord('Overviews')}}</span></a>
+      </li>
+      <li ng-class="title == 'EXECUTION' ? 'active' : ''" >
+        <a href-void data-toggle="tab" ng-click="changeTab('execution')"><span class="hidden-mobile uppercase-text">{{getWord('Execution')}}</span></a>
+      </li>
+    </ul>
+ </header>
+</div>
