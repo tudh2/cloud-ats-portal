@@ -2,9 +2,11 @@ define(['projects/module'], function (module) {
   
   'use strict';
 
-  module.registerController('NewProjectCtrl', ['$scope', '$state', 'KeywordService', 'PerformanceService', function($scope, $state, KeywordService, PerformanceService) {
+  module.registerController('NewProjectCtrl', ['$scope', '$state', 'KeywordService','KeywordUploadService', 'PerformanceService', function($scope, $state, KeywordService, KeywordUploadService, PerformanceService) {
 
     $scope.type = 'functional';
+
+    $scope.functionalType = 'new';
 
     var $input =  $('div#createProject input[name="name"]');
 
@@ -27,9 +29,16 @@ define(['projects/module'], function (module) {
 
         switch ($scope.type) {
           case 'functional' :
-            KeywordService.create($scope.name, function(projectId) {
-              $state.go('app.keyword', { id : projectId });
-            });
+            if($scope.functionalType === "new") {
+              KeywordService.create($scope.name, function(projectId) {
+                $state.go('app.keyword', { id : projectId });
+              });
+            } else if($scope.functionalType === "upload"){
+              KeywordUploadService.create($scope.name, function(projectId) {
+                $state.go('app.keyword-upload', { id : projectId });
+              });
+            }
+            
             break;
           case 'performance' :
             PerformanceService.create($scope.name, function (response) {

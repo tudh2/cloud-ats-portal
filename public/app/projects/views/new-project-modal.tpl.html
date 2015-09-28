@@ -24,9 +24,19 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="smart-form" >
-                  <label class="radio state-success">
-                    <input type="radio" value="functional" ng-model="type"><i></i>{{getWord('Functional')}}
-                  </label>
+                  <div>
+                    <label class="radio state-success">
+                      <input type="radio" value="functional" ng-model="type"><i></i>{{getWord('Functional')}}
+                    </label>
+                  </div>
+                  <div class="functional-treeview" ng-show="type=='functional'">
+                    <label class="radio state-success">
+                      <input type="radio" value="new" ng-model="functionalType"><i></i>New Project
+                    </label>
+                    <label class="radio state-success">
+                    <input type="radio" value="upload" ng-model="functionalType"><i></i>Upload Project Code
+                    </label>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-6">

@@ -4,8 +4,8 @@ define(['projects/module', 'lodash'], function (module, _) {
 
   module.registerController('ProjectsCtrl', [
 
-    '$rootScope', '$scope', '$state', '$stateParams', '$templateRequest', '$compile','KeywordService', 'PerformanceService', 'ReportService', 'EventService',
-    function ($rootScope, $scope, $state, $stateParams, $templateRequest, $compile, KeywordService, PerformanceService, ReportService, EventService) {
+    '$rootScope', '$scope', '$state', '$stateParams', '$templateRequest', '$compile','KeywordService', 'KeywordUploadService','PerformanceService', 'ReportService', 'EventService',
+    function ($rootScope, $scope, $state, $stateParams, $templateRequest, $compile, KeywordService, KeywordUploadService,PerformanceService, ReportService, EventService) {
 
     $scope.searchTerms = '';
 
@@ -64,9 +64,9 @@ define(['projects/module', 'lodash'], function (module, _) {
     }
 
     $scope.openProject = function(project) {
-
       var projectId = project._id;
       var projectType = project.type;
+      var uploadProject = project.upload_project === undefined ? false : true;
 
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
@@ -77,7 +77,11 @@ define(['projects/module', 'lodash'], function (module, _) {
           $state.go('app.performance', {id: projectId});
           break;
         case 'keyword':
-          $state.go('app.keyword', { id : projectId });
+          if(uploadProject) {
+            $state.go('app.keyword-upload', { id : projectId });
+          } else if(!uploadProject) {
+            $state.go('app.keyword', { id : projectId });
+          }
           break;
         case 'functional':
           $state.go('app.functional', { id : projectId });
@@ -108,13 +112,18 @@ define(['projects/module', 'lodash'], function (module, _) {
     }
 
     $scope.openLastReport = function(project) {
-
+      var uploadProject = project.upload_project === undefined ? false : true;
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
       switch (project.type) {
         case 'keyword':
-          $state.go('app.keyword.report', {id: project._id, jobId: project.lastJobId });
+          if(uploadProject) {
+            $state.go('app.keyword-upload.report', {id: project._id, jobId: project.lastJobId });  
+          } else if(!uploadProject) {
+            $state.go('app.keyword.report', {id: project._id, jobId: project.lastJobId });
+          }
+          
           break;
         case 'performance':
           $state.go('app.performance.report', {id: project._id, jobId: project.lastJobId});
@@ -124,10 +133,20 @@ define(['projects/module', 'lodash'], function (module, _) {
     }
 
     $scope.runLastest = function (project) {
+      var uploadProject = project.upload_project === undefined ? false : true;
       switch (project.type) {
         case 'keyword':
           //runLastSuites(project);
           $state.go('app.keyword.execution', {id: project._id});
+          if(uploadProject) {
+            runLastUploadProject();
+            $state.go('app.keyword-upload', {id: project._id});
+          } else if(!uploadProject) {
+            runLastSuites(project);
+            $state.go('app.keyword', {id: project._id});
+          }
+          runLastSuites(project);
+          $state.go('app.keyword', {id: project._id});
           break;
         case 'performance':
           //runLastScripts(project);
@@ -175,6 +194,42 @@ define(['projects/module', 'lodash'], function (module, _) {
           }
         });
     }
+
+    var runLastUploadProject = function(project) {
+
+        KeywordUploadService.run(project._id, function (data, status) {
+          switch (status) {
+            case 201:
+              $.smallBox({
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('You have submitted project job'),
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              break;
+            case 204:
+              $.smallBox({
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Your project has been already running'),
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+              break;
+            default:
+              $.smallBox({
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('Can not submmit your project job'),
+                color: '#c26565',
+                iconSmall: 'fa fa-ban bounce animated',
+                timeout: 3000
+              });
+
+          }
+          $state.go('app.keyword-upload', {id:$scope.projectId});
+        });
+      }
 
     var runLastSuites = function(project) {
       var selected = [];
@@ -231,16 +286,26 @@ define(['projects/module', 'lodash'], function (module, _) {
       });
     };
 
+    var loadKeywordUploadProjects = function() {
+      KeywordUploadService.list(function (response) {
+        if ($scope.projects === undefined) $scope.projects = [];
+        $scope.projects.push(response);
+        $scope.projects = _.flatten($scope.projects, true);
+      });
+    };
+
     switch($stateParams.type) {
       case 'performance':
         loadPerformanceProjects();
         break;
       case 'keyword':
         loadKeywordProjects();
+        loadKeywordUploadProjects();
         break;
       default:
         loadPerformanceProjects();
         loadKeywordProjects();
+        loadKeywordUploadProjects();
     }
     
     var updateStatus = function(msg) {
