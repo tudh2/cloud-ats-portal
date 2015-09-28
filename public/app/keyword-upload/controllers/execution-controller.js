@@ -3,8 +3,8 @@ define(['keyword-upload/module'], function (module) {
   'use strict';
 
   module.registerController('ExecutionUploadCtrl', [
-    '$rootScope','$scope', '$state', '$stateParams', 'SuiteService', 'KeywordUploadService',
-    function($rootScope,$scope, $state, $stateParams, SuiteService, KeywordUploadService) {
+    '$rootScope','$scope', '$state', '$stateParams', 'KeywordUploadService',
+    function($rootScope,$scope, $state, $stateParams, KeywordUploadService) {
 
       $scope.projectId = $stateParams.id;
 

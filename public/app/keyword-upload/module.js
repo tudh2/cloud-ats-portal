@@ -21,7 +21,6 @@ define([
             deps: $couchPotatoProvider.resolveDependencies([
               'keyword-upload/controllers/overview-upload-controller',
               'keyword-upload/directives/tabs-header',
-              'services/keyword-upload-service',
               'services/event-service'
             ])
           }
@@ -41,7 +40,6 @@ define([
             deps: $couchPotatoProvider.resolveDependencies([
               'keyword-upload/controllers/execution-controller',
               'keyword-upload/directives/tabs-header',
-              'services/suite-service',
               'services/keyword-upload-service'
             ])
           }
