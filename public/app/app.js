@@ -33,7 +33,8 @@ define([
     'app.performance',
     'app.projects',
     'app.keyword',
-    'app.datadriven'
+    'app.datadriven',
+    'app.keyword-upload'
   ]);
 
   couchPotato.configureApp(app);

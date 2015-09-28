@@ -1583,3 +1583,6 @@ block-darksky-color
 	box-shadow: 0 5px 5px -5px #888888;
 	margin-bottom: 5px;
 }
+.functional-treeview {
+	padding-left: 25px;
+}

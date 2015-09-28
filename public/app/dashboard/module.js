@@ -21,6 +21,7 @@ define([
               deps: $couchPotatoProvider.resolveDependencies([
                 'dashboard/dashboard-controller',
                 'services/keyword-service',
+                'services/keyword-upload-service',
                 'services/performance-service',
                 'services/report-service',
                 'services/script-service',

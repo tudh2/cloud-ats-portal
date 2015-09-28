@@ -30,7 +30,8 @@ define([
   'projects/module',
   'keyword/module',
   'performance/module',
-  'datadriven/module'
+  'datadriven/module',
+  'keyword-upload/module'
   
 ], function() {
   'use strict';

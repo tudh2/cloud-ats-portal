@@ -2,8 +2,8 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 
   'use strict';
 
-  module.registerController('DashboardCtrl', ['$scope','$state','KeywordService','PerformanceService','ReportService','ScriptService', 
-    function($scope,$state,KeywordService,PerformanceService,ReportService,ScriptService) {
+  module.registerController('DashboardCtrl', ['$scope','$state','KeywordService','KeywordUploadService','PerformanceService','ReportService','ScriptService', 
+    function($scope,$state,KeywordService,KeywordUploadService,PerformanceService,ReportService,ScriptService) {
 
     $scope.recent_finished_projects = [];
     $scope.performance_projects = [];
@@ -21,7 +21,8 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         name : item.x,
         percentPass : percentPass,
         percentFail : percentFail,
-        totalCases : totalCases
+        totalCases : totalCases,
+        upload_project : item.upload_project
       };
 
       topProject.push(infoProject);
@@ -37,6 +38,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       var totalCases = 0;
       var projectName = data.projectName;
       var projectId = data.projectId;
+      var upload_project = data.upload_project;
       var dataObject = JSON.parse(data.suite_reports);
       _.forEach(dataObject, function (obj) {
         totalPass += obj.total_pass;
@@ -49,7 +51,8 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         P : totalPass,
         F : totalFail,
         S : totalSkip,
-        _id : projectId
+        _id : projectId,
+        upload_project:upload_project
       };
 
       $scope.recent_projects.push(projectReport);
@@ -76,44 +79,65 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
   var loadData = function() {
       var listProjects = [];
       var projectInfo = {};
-
+      //load data for keyword
       KeywordService.list(function (data,status) {
-        listProjects = data;
-        var countJobId = 0;
-        _.forEach(listProjects, function (item,key) {
-          var lastJobId = item.lastJobId;
-          if(lastJobId === undefined) {
-            countJobId ++;
-          }
-        })
+        KeywordUploadService.list(function (dataUpload,status) {
+        	listProjects = data;
+        	listProjects.push(dataUpload);
+        	listProjects = _.flatten(listProjects, true);
+        	var countJobId = 0;
+	        _.forEach(listProjects, function (item,key) {
+	          var lastJobId = item.lastJobId;
+	          if(lastJobId === undefined) {
+	            countJobId ++;
+	          }
+	        })
+	        var listReports = [];
+	        _.forEach(listProjects, function (item,key) {
+	          var lastJobId = item.lastJobId;
+	          var numberOfJobId = listProjects.length - countJobId;
+	          if(lastJobId) {
+	            var projectId = item._id;
+	            var projectName = item.name;
+	            item.sort = key;
+	            if(item.upload_project === undefined) {
+	            	KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
+		              if(item.lastJobId == dataReport.functional_job_id) {
+		                dataReport.sort = item.sort;
+		                dataReport.projectName = projectName;
+		                dataReport.projectId = projectId;
+		                listReports.push(dataReport);
+		              }
 
-        var listReports = [];
-        _.forEach(listProjects, function (item,key) {
-          var lastJobId = item.lastJobId;
-          var numberOfJobId = listProjects.length - countJobId;
-          if(lastJobId) {
-            var projectId = item._id;
-            var projectName = item.name;
-            item.sort = key;
-            KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
-              if(item.lastJobId == dataReport.functional_job_id) {
-                dataReport.sort = item.sort;
-                dataReport.projectName = projectName;
-                dataReport.projectId = projectId;
-                listReports.push(dataReport);
-              }
+		              if(numberOfJobId == listReports.length) {
+			              var sortListReports = sortJSON(listReports, 'sort');
+			              _.forEach(sortListReports, function (report) {
+			                loadDataReport(report,numberOfJobId);
+			              })
+			            }
 
-              //sort list report
-              if(numberOfJobId == listReports.length) {
-                var sortListReports = sortJSON(listReports, 'sort');
-                _.forEach(sortListReports, function (report) {
-                  loadDataReport(report,numberOfJobId);
-                })
-              }
-            });
-          }
-        })
-
+		            });
+	            } else {
+	            	KeywordUploadService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
+	            	 if(item.lastJobId == dataReport.functional_job_id) {
+		                dataReport.sort = item.sort;
+		                dataReport.projectName = projectName;
+		                dataReport.projectId = projectId;
+		                dataReport.upload_project = item.upload_project;
+		                listReports.push(dataReport);
+		              }
+		              //sort list report
+		            if(numberOfJobId == listReports.length) {
+		              var sortListReports = sortJSON(listReports, 'sort');
+		              _.forEach(sortListReports, function (report) {
+		                loadDataReport(report,numberOfJobId);
+		              })
+		            }
+	            	});
+	            }
+	          }
+	        })
+        });
       });
 
       //Load data for Performance project
@@ -198,8 +222,12 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       $state.go('app.performance', {id: projectId});
     }
 
-    $scope.redirectKeyword = function (projectId) {
-      $state.go('app.keyword', { id : projectId });
+    $scope.redirectKeyword = function (projectId,upload_project) {
+      if(upload_project) {
+      	$state.go('app.keyword-upload', { id : projectId });
+      } else {
+      	$state.go('app.keyword', { id : projectId });
+      }
     }
 
     }
