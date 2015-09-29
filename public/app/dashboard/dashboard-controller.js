@@ -21,7 +21,8 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         name : item.x,
         percentPass : percentPass,
         percentFail : percentFail,
-        totalCases : totalCases
+        totalCases : totalCases,
+        upload_project : item.upload_project
       };
 
       topProject.push(infoProject);
@@ -37,6 +38,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       var totalCases = 0;
       var projectName = data.projectName;
       var projectId = data.projectId;
+      var upload_project = data.upload_project;
       var dataObject = JSON.parse(data.suite_reports);
       _.forEach(dataObject, function (obj) {
         totalPass += obj.total_pass;
@@ -49,7 +51,8 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         P : totalPass,
         F : totalFail,
         S : totalSkip,
-        _id : projectId
+        _id : projectId,
+        upload_project:upload_project
       };
 
       $scope.recent_projects.push(projectReport);
@@ -60,7 +63,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         if($scope.recent_finished_projects.length > 10) {
           var temp = $scope.recent_finished_projects;
           var size = temp.length - 10;
-          $scope.recent_finished_projects.splice(10,size);
+          $scope.recent_finished_projects.splice(0,size);
         }
       }
   }
@@ -98,21 +101,19 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 	          if(lastJobId) {
 	            var projectId = item._id;
 	            var projectName = item.name;
-	            item.sort = key;
 
 	            KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
 	              if(dataReport === null) {
 	              	countJobId = countJobId - 1;
 	              } else {
 	              	if(item.lastJobId == dataReport.functional_job_id) {
-		                dataReport.sort = item.sort;
 		                dataReport.projectName = projectName;
 		                dataReport.projectId = projectId;
 		                listReports.push(dataReport);
 		              }
 		              //sort list report
 		              if(countJobId == listReports.length) {
-		                var sortListReports = sortJSON(listReports, 'sort');
+		                var sortListReports = sortJSON(listReports, 'created_date');
 		                _.forEach(sortListReports, function (report) {
 		                  loadDataReport(report,countJobId);
 		                })
@@ -129,7 +130,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 	          if(lastJobId) {
 	            var projectId = item._id;
 	            var projectName = item.name;
-	            item.sort = key;
 	            KeywordUploadService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
 	              if(dataReport.functional_job_id === undefined) {
 	              	countJobId = countJobId - 1;
@@ -137,14 +137,14 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 
 	              if(dataReport.functional_job_id) {
 	              	if(item.lastJobId == dataReport.functional_job_id) {
-	                dataReport.sort = item.sort;
 	                dataReport.projectName = projectName;
 	                dataReport.projectId = projectId;
+	                dataReport.upload_project = item.upload_project;
 	                listReports.push(dataReport);
 	              }
 	              //sort list report
 	              if(countJobId == listReports.length) {
-	                var sortListReports = sortJSON(listReports, 'sort');
+	                var sortListReports = sortJSON(listReports, 'created_date');
 	                _.forEach(sortListReports, function (report) {
 	                  loadDataReport(report,countJobId);
 	                })
