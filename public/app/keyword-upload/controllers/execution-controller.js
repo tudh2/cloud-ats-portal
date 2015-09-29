@@ -29,6 +29,12 @@ define(['keyword-upload/module'], function (module) {
 
       KeywordUploadService.get($scope.projectId, function(project) {
         $scope.project = project;
+        var btnRun = $('.btn-keyword-run');
+        if(project.raw_exist) {
+          btnRun.removeClass('disabled');
+        } else {
+          btnRun.addClass('disabled');
+        }
         checkProjectStatus();
       });
 

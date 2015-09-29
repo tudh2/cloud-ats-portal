@@ -256,18 +256,24 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
           $fileNames.parent().addClass("has-error");
         } else if($scope.file){
           $fileNames.parent().removeClass("has-error");
-          KeywordUploadService.upload(projectId,$scope.file,function(data){
-            if (data.error) {
-              var message = data.message;
+          KeywordUploadService.upload(projectId,$scope.file,function(data,status){
+            if(status === 201) {
               $.smallBox({
                 title: $rootScope.getWord('Notification'),
-                content: $rootScope.getWord(message),
+                content: $rootScope.getWord('Upload success !'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
-            } else {
               $("#uploadCode").modal('hide');
+            } else {
+              $.smallBox({
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord('File is not correct format !'),
+                color: '#C00000 ',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
             }
           });
         }

@@ -21,8 +21,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         name : item.x,
         percentPass : percentPass,
         percentFail : percentFail,
-        totalCases : totalCases,
-        upload_project : item.upload_project
+        totalCases : totalCases
       };
 
       topProject.push(infoProject);
@@ -38,7 +37,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       var totalCases = 0;
       var projectName = data.projectName;
       var projectId = data.projectId;
-      var upload_project = data.upload_project;
       var dataObject = JSON.parse(data.suite_reports);
       _.forEach(dataObject, function (obj) {
         totalPass += obj.total_pass;
@@ -51,8 +49,7 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         P : totalPass,
         F : totalFail,
         S : totalSkip,
-        _id : projectId,
-        upload_project:upload_project
+        _id : projectId
       };
 
       $scope.recent_projects.push(projectReport);
@@ -79,66 +76,86 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
   var loadData = function() {
       var listProjects = [];
       var projectInfo = {};
-      //load data for keyword
-      KeywordService.list(function (data,status) {
-        KeywordUploadService.list(function (dataUpload,status) {
-        	listProjects = data;
-        	listProjects.push(dataUpload);
-        	listProjects = _.flatten(listProjects, true);
-        	var countJobId = 0;
-	        _.forEach(listProjects, function (item,key) {
-	          var lastJobId = item.lastJobId;
-	          if(lastJobId === undefined) {
+      var listReports = [];
+	  KeywordService.list(function (data,status) {
+
+	  	KeywordUploadService.list(function (dataUpload,statusUpload) {
+	  		listProjects = data;
+	  		listProjects.push(dataUpload);
+	  		listProjects = _.flatten(listProjects, true);
+	  		var countJobId = 0;
+
+	  		_.forEach(listProjects, function (item,key) {
+	          var lastJobIdAll = item.lastJobId;
+	          if(lastJobIdAll) {
 	            countJobId ++;
 	          }
-	        })
-	        var listReports = [];
-	        _.forEach(listProjects, function (item,key) {
+	        });
+
+	        //Load data report for keyword project
+	        _.forEach(data, function (item,key) {
 	          var lastJobId = item.lastJobId;
-	          var numberOfJobId = listProjects.length - countJobId;
 	          if(lastJobId) {
 	            var projectId = item._id;
 	            var projectName = item.name;
 	            item.sort = key;
-	            if(item.upload_project === undefined) {
-	            	KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
-		              if(item.lastJobId == dataReport.functional_job_id) {
+
+	            KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
+	              if(dataReport === null) {
+	              	countJobId = countJobId - 1;
+	              } else {
+	              	if(item.lastJobId == dataReport.functional_job_id) {
 		                dataReport.sort = item.sort;
 		                dataReport.projectName = projectName;
 		                dataReport.projectId = projectId;
-		                listReports.push(dataReport);
-		              }
-
-		              if(numberOfJobId == listReports.length) {
-			              var sortListReports = sortJSON(listReports, 'sort');
-			              _.forEach(sortListReports, function (report) {
-			                loadDataReport(report,numberOfJobId);
-			              })
-			            }
-
-		            });
-	            } else {
-	            	KeywordUploadService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
-	            	 if(item.lastJobId == dataReport.functional_job_id) {
-		                dataReport.sort = item.sort;
-		                dataReport.projectName = projectName;
-		                dataReport.projectId = projectId;
-		                dataReport.upload_project = item.upload_project;
 		                listReports.push(dataReport);
 		              }
 		              //sort list report
-		            if(numberOfJobId == listReports.length) {
-		              var sortListReports = sortJSON(listReports, 'sort');
-		              _.forEach(sortListReports, function (report) {
-		                loadDataReport(report,numberOfJobId);
-		              })
-		            }
-	            	});
-	            }
+		              if(countJobId == listReports.length) {
+		                var sortListReports = sortJSON(listReports, 'sort');
+		                _.forEach(sortListReports, function (report) {
+		                  loadDataReport(report,countJobId);
+		                })
+		              }
+	              }
+
+	            });
 	          }
-	        })
-        });
-      });
+	        });
+			
+			//Load data report for keyword upload project
+			_.forEach(dataUpload, function (item,key) {
+	          var lastJobId = item.lastJobId;
+	          if(lastJobId) {
+	            var projectId = item._id;
+	            var projectName = item.name;
+	            item.sort = key;
+	            KeywordUploadService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
+	              if(dataReport.functional_job_id === undefined) {
+	              	countJobId = countJobId - 1;
+	              }
+
+	              if(dataReport.functional_job_id) {
+	              	if(item.lastJobId == dataReport.functional_job_id) {
+	                dataReport.sort = item.sort;
+	                dataReport.projectName = projectName;
+	                dataReport.projectId = projectId;
+	                listReports.push(dataReport);
+	              }
+	              //sort list report
+	              if(countJobId == listReports.length) {
+	                var sortListReports = sortJSON(listReports, 'sort');
+	                _.forEach(sortListReports, function (report) {
+	                  loadDataReport(report,countJobId);
+	                })
+	              }
+	              }
+	            });
+	          }
+	        });
+			
+	  	});
+	  });
 
       //Load data for Performance project
       PerformanceService.projects(function (data) {
@@ -223,11 +240,11 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
     }
 
     $scope.redirectKeyword = function (projectId,upload_project) {
-      if(upload_project) {
-      	$state.go('app.keyword-upload', { id : projectId });
-      } else {
-      	$state.go('app.keyword', { id : projectId });
-      }
+    	if(upload_project) {
+    		$state.go('app.keyword-upload', { id : projectId });
+    	} else {
+    		$state.go('app.keyword', { id : projectId });
+    	}
     }
 
     }

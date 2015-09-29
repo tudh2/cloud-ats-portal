@@ -106,7 +106,7 @@ define(['keyword-upload/module'], function(module) {
         $http(request).success(function(data, status) {
           callback(data, status);
         }).error(function(data, status) {
-
+          callback(data,status);
         });
       },
       
@@ -142,16 +142,10 @@ define(['keyword-upload/module'], function(module) {
 
           $http(request)
           .success(function (data,status) {
-            callback(data);
+            callback(data,status);
           })
           .error(function(data,status) {
-            if(status === 404) {
-              var data = {
-                error: true,
-                message : 'File is not correct fomart. Please upload again!'
-              }
-              callback(data);
-            }
+            callback(data,status);
           });
       },
       update: function (id, name, callback) {
@@ -173,7 +167,7 @@ define(['keyword-upload/module'], function(module) {
         }).error(function (data, status) {
           callback(data, status);
         });
-      },
+      }
 
     }
   }]);

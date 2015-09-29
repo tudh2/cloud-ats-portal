@@ -39,7 +39,17 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
       };
 
       KeywordUploadService.getReport($scope.projectId, $scope.jobId, function(data,status) {
-          getDataReport(data);
+          if(data === null) {
+            $.smallBox({
+                title: $rootScope.getWord('Notification'),
+                content: $rootScope.getWord("Report not found"),
+                color: '#296191',
+                iconSmall: 'fa fa-check bounce animated',
+                timeout: 3000
+              });
+          } else {
+            getDataReport(data);
+          }
       });
 
       $scope.redirectTo = function() {

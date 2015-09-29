@@ -67,8 +67,8 @@
 							<td class="text-right">{{suiteData.total_pass}}</td>
 							<td class="text-right">{{suiteData.total_fail}}</td>
 							<td class="text-right">{{suiteData.total_skip}}</td>
-							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === Fail,
-            'label label-success': suiteData.test_result === Pass}">{{getWord(suiteData.test_result)}}</span></td>
+							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail',
+            'label label-success': suiteData.test_result === 'Pass'}">{{getWord(suiteData.test_result)}}</span></td>
 						</tr>
 					</table>
 				</div>
