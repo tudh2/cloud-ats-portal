@@ -159,33 +159,36 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
                 duration += data.duration;
                 if(count === scriptsId.length) {
                   ReportService.report(projectId,lastJobId,function (data,status) {
-                    $scope.reports = data;
-                    _.forEach($scope.reports, function (reports) {
-                      _.forEach(reports, function (report) {
-                        report.summary.error_percent = _.round(report.summary.error_percent,2);
+                    if (status != 404) {
+                      $scope.reports = data;
+                      _.forEach($scope.reports, function (reports) {
+                        _.forEach(reports, function (report) {
+                          report.summary.error_percent = _.round(report.summary.error_percent,2);
+                        });
+
+                        // get data of summary report
+                        $scope.summaryReport = _.find(reports, function (report) {
+                          return report.label == "*SummaryReport*";
+                        });
+
+                        perf_projectInfo = {
+                          _id : projectId,
+                          projectName : projectName,
+                          users : users,
+                          ram_up : ram_up,
+                          loops : loops,
+                          duration : duration,
+                          samples : $scope.summaryReport.summary.samples,
+                          error_percent : $scope.summaryReport.summary.error_percent
+                        };
+
+                        if(perf_projectInfo.error_percent != 0 ) {
+                          $scope.performance_projects.push(perf_projectInfo);
+                        }
+
                       });
-
-                      // get data of summary report
-                    $scope.summaryReport = _.find(reports, function (report) {
-                      return report.label == "*SummaryReport*";
-                    });
-
-                    perf_projectInfo = {
-                      _id : projectId,
-                      projectName : projectName,
-                      users : users,
-                      ram_up : ram_up,
-                      loops : loops,
-                      duration : duration,
-                      samples : $scope.summaryReport.summary.samples,
-                      error_percent : $scope.summaryReport.summary.error_percent
-                    };
-
-                    if(perf_projectInfo.error_percent != 0 ) {
-                      $scope.performance_projects.push(perf_projectInfo);
                     }
-
-                    });
+                    
                   });
                 }
               });
