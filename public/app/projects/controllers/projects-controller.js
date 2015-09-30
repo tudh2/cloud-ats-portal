@@ -91,6 +91,49 @@ define(['projects/module', 'lodash'], function (module, _) {
       }
     }
 
+    $scope.stopProject = function (project) {
+      switch (project.type) {
+        case 'performance': 
+          PerformanceService.stop(project._id, function (data, status) {
+            switch (status) {
+              case 200: 
+                project.status = 'READY'; 
+                $.smallBox({
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your project has been already stopped'),
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });         
+                break;
+              default: 
+                break;
+            }
+          });
+          break;
+        case 'keyword':
+          KeywordService.stop(project._id, function (data, status) {
+            switch (status) {
+              case 200: 
+                project.status = 'READY';
+                    $.smallBox({
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('Your project has been already stopped'),
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });          
+                break;
+              default: 
+                break;
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    }
+
     var loadModal = function() {
       var $modal = $('#project-log');
 
@@ -308,6 +351,7 @@ define(['projects/module', 'lodash'], function (module, _) {
           if (project._id === job.project_id) {
             project.status = job.project_status;
             project.log = job.log;
+            project.isBuilding = job.isBuilding;
             if (project.status === 'READY') {
                $.smallBox({
                 title: 'Notification',

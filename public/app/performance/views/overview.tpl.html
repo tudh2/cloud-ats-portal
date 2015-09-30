@@ -41,7 +41,7 @@
         <div class="execute-action-list">
           <a class="btn-border-line btnViewLog" ng-if="project.log" ng-click="viewLog()">{{getWord('View Log')}}</a>
           <a class="btn-border-line btnRun" ng-click="runLastScripts()" ng-if="project.lastScripts && project.status === 'READY' && project.totalScripts != 0">{{getWord('Run')}}</a>
-          <a ng-if="project.status === 'RUNNING'" class="btn-border-line btn-danger btnViewLog ng-scope">{{getWord('Stop')}}</a>
+          <a ng-if="project.status === 'RUNNING' && project.isBuilding" class="btn-border-line btn-danger btnViewLog ng-scope" ng-click="stopProject(project._id)">{{getWord('Stop')}}</a>
         </div>
        </div>
     </div>
@@ -66,7 +66,7 @@
             <td>{{$index+1}}</td>
             <td><a ng-class="{
                 'report-enable': i.status === 'Completed',
-                'report-disable': i.status != 'Completed'
+                'report-disable': i.status === 'Running' || i.status === 'Queued'
               }" href-void  ng-click="openJobReport(i._id)">{{i._id}}</a></td>
             <td>{{i.scripts}}</td>
             <td><span class="label label-success">{{getWord(i.status)}}</span></td>

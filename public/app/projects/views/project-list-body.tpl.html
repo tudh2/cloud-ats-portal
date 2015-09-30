@@ -47,7 +47,7 @@
                 data-open="openProject(project)"
                 data-report="openLastReport(project)">{{getWord('INFO')}}
               </span>
-              <a ng-if="project.status == 'RUNNING'" href-void class="stop-project pull-right">{{getWord('STOP')}}</a>
+              <a ng-if="project.status == 'RUNNING' && project.isBuilding" href-void class="stop-project pull-right" ng-click="stopProject(project)">{{getWord('STOP')}}</a>
 
               <a href-void class="run-project pull-right"
                 ng-if="project.status == 'READY'" 

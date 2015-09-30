@@ -14,7 +14,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
           var jobs = JSON.parse(response.jobs);
           $scope.project.jobs = jobs;
         }
-        
       });
       
       $scope.openJobReport = function (jobId) {
@@ -174,6 +173,25 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
           
         });
       }
+      $scope.stopProject = function (projectId) {
+        PerformanceService.stop(projectId, function (data, status) {
+          if (status == 200) {
+            $.smallBox({
+              title: $rootScope.getWord('Notification'),
+              content: $rootScope.getWord('Your project has been already stopped'),
+              color: '#296191',
+              iconSmall: 'fa fa-check bounce animated',
+              timeout: 3000
+            });
+            $scope.project.status = 'READY';
+            var job = data;
+            var currentJob = _.find($scope.project.jobs, function (obj) {
+                  return job._id === obj._id;
+            });
+            currentJob.status = 'Completed';
+          }
+        });
+      }
 
       var updateStatus = function(msg) {
         $scope.$apply(function() {
@@ -181,12 +199,15 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
           if (job.project_id === $scope.projectId) {
             $scope.project.status = job.project_status;
             $scope.project.log = job.log;
+            $scope.project.isBuilding = job.isBuilding;
             switch (job.status) {
               case 'Running': 
                 var currentJob = _.find($scope.project.jobs, function (obj) {
                   return job._id === obj._id;
                 });
-                currentJob.status = 'Running';
+                if (job.isBuilding) {
+                  currentJob.status = 'Running';
+                } else currentJob.status = 'Completed';
                 break;
               case 'Completed':
                 var currentJob = _.find($scope.project.jobs, function (obj) {

@@ -118,13 +118,15 @@ define(['keyword/module', 'lodash'], function (module, _) {
         KeywordService.stop(projectId, function (data, status) {
           if (status == 200) {
             $.smallBox({
-                title: $rootScope.getWord('Notification'),
-                content: $rootScope.getWord('You have stopped project job'),
-                color: '#296191',
-                iconSmall: 'fa fa-check bounce animated',
-                timeout: 3000
-              });
+              title: $rootScope.getWord('Notification'),
+              content: $rootScope.getWord('Your project has been already stopped'),
+              color: '#296191',
+              iconSmall: 'fa fa-check bounce animated',
+              timeout: 3000
+            });
+            $scope.project.status = 'READY';
           }
+
         });
       }
 
@@ -219,7 +221,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
             $scope.project.status = job.project_status;
             $scope.project.watchUrl = job.watch_url;
             $scope.project.log = job.log;
-
+            $scope.project.isBuilding = job.isBuilding;
             if (job.project_status === 'READY') {
 
               var report = { 
