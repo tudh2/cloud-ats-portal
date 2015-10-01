@@ -34,6 +34,8 @@ define(['layout/module'], function(module) {
                     event.preventDefault();
                     return;
                   } else {
+                    $window.sessionStorage.setItem('context', JSON.stringify(context));
+                    $rootScope.context = context;
                     var spaceId = $cookies.get('space');
                     if (spaceId !== undefined && spaceId !== 'null')
                       UserService.go({_id: spaceId});

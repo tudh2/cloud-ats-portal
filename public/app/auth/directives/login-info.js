@@ -6,8 +6,10 @@ define(['auth/module'], function(module) {
       restrict: 'A',
       templateUrl: 'app/auth/directives/login-info.tpl.html',
       link: function($scope, $element) {
-        var context = $rootScope.context;
-        if(context !== undefined) $scope.currentUser = context.user;
+        $rootScope.$watch('context', function(newValue, oldValue) {
+          var context = newValue;
+          if(context !== undefined) $scope.currentUser = context.user;
+        });
       }
     };
   }]);
