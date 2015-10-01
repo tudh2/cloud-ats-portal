@@ -51,7 +51,7 @@
           class="btn-border-line btnViewLog" target="blank" href="{{project.watchUrl}}">
           Watch
         </a>
-        <a ng-if="project.lastSuites && project.status === 'READY'" ng-click="runLastSuites()" class="btn-border-line btnRun">{{getWord('Run')}}</a>
+        <a ng-if="project.status === 'READY' && project.raw_exist == true" ng-click="run()" class="btn-border-line btnRun">{{getWord('Run')}}</a>
         <a ng-if="project.status === 'RUNNING'" class="btn-border-line btn-danger btnViewLog">{{getWord('Stop')}}</a>
         </div>
       </div>
@@ -66,24 +66,18 @@
           <tr>
           <th>#</th>
           <th>{{getWord('Report Tile')}}</th>
-          <th>{{getWord('Total Case')}}</th>
-          <th>{{getWord('Case Pass')}}</th>
-          <th>{{getWord('Case Fail')}}</th>
           <th>{{getWord('Project Result')}}</th>
           <th>{{getWord('Created Date')}}</th>
           <th>{{getWord('Create By')}}</th>
         </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="rep in listReports track by $index">
+          <tr ng-repeat="log in listLogs track by $index">
             <td>{{$index+1}}</td>
-            <td class="test-report"><a ng-click="redirectTo(rep.job_id)">Report-{{rep.job_id}}</a></td>
-            <td>{{rep.total_test_case}}</td>
-            <td>{{rep.total_pass}}</td>
-            <td>{{rep.total_fail}}</td>
-            <td><span ng-class="{'label label-error': rep.test_result === 'Fail',
-            'label label-success': rep.test_result === 'Pass'}">{{getWord(rep.test_result)}}</span></td>
-            <td>{{rep.created_date}}</td>
+            <td class="test-report"><a class = "btn-download" ng-click="download(log.jobId)">Report-{{log.jobId}}</a></td>
+            <td><span ng-class="{'label label-error': log.result === 'Fail',
+            'label label-success': log.result === 'Pass'}">{{getWord(log.result)}}</span></td>
+            <td>{{log.created_date}}</td>
             <td>{{project.creator._id}}</td>
           </tr>
         </tbody>

@@ -119,7 +119,12 @@ define(['projects/module', 'lodash'], function (module, _) {
       switch (project.type) {
         case 'keyword':
           if(uploadProject) {
-            $state.go('app.keyword-upload.report', {id: project._id, jobId: project.lastJobId });  
+
+            KeywordUploadService.download(project._id, project.lastJobId,function (data,status) {
+              var file = new Blob([data], {type: 'application/zip'});
+              var url = (window.URL || window.webkitURL).createObjectURL(file);
+              window.open(url);
+            });
           } else if(!uploadProject) {
             $state.go('app.keyword.report', {id: project._id, jobId: project.lastJobId });
           }
@@ -137,16 +142,13 @@ define(['projects/module', 'lodash'], function (module, _) {
       switch (project.type) {
         case 'keyword':
           //runLastSuites(project);
-          $state.go('app.keyword.execution', {id: project._id});
           if(uploadProject) {
-            runLastUploadProject();
-            $state.go('app.keyword-upload', {id: project._id});
+            //runLastUploadProject();
+            $state.go('app.keyword-upload.execution', {id: project._id});
           } else if(!uploadProject) {
-            runLastSuites(project);
-            $state.go('app.keyword', {id: project._id});
+            //runLastSuites(project);
+            $state.go('app.keyword.execution', {id: project._id});
           }
-          runLastSuites(project);
-          $state.go('app.keyword', {id: project._id});
           break;
         case 'performance':
           //runLastScripts(project);

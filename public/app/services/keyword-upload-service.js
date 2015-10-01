@@ -14,7 +14,7 @@ define(['keyword-upload/module'], function(module) {
           }
         };
 
-        $http(request).success(function(data, status) {
+        $http(request).success(function (data, status) {
           callback(data, status);
         }).error(function(data, status) {
 
@@ -109,7 +109,25 @@ define(['keyword-upload/module'], function(module) {
           callback(data,status);
         });
       },
-      
+
+      download : function(projectId,job_id,callback) {
+        var request = {
+          method: 'GET',
+          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword/'+ projectId +'/download/'+ job_id,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space'),
+          },
+          responseType: 'blob'
+        };
+
+        $http(request).success(function(data, status, headers) {
+          callback(data, status);
+        }).error(function(data, status) {
+          callback(data,status);
+        });
+      },
+
       getListReport : function(projectId,callback) {
         var request = {
           method: 'GET',
@@ -126,7 +144,7 @@ define(['keyword-upload/module'], function(module) {
 
         });
       },
-
+      
       upload : function(projectId,file,callback) {
           var formData = new FormData();
           formData.append('file',file);

@@ -22,7 +22,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         percentPass : percentPass,
         percentFail : percentFail,
         totalCases : totalCases,
-        upload_project : item.upload_project
       };
 
       topProject.push(infoProject);
@@ -38,7 +37,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       var totalCases = 0;
       var projectName = data.projectName;
       var projectId = data.projectId;
-      var upload_project = data.upload_project;
       var dataObject = JSON.parse(data.suite_reports);
       _.forEach(dataObject, function (obj) {
         totalPass += obj.total_pass;
@@ -52,7 +50,6 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         F : totalFail,
         S : totalSkip,
         _id : projectId,
-        upload_project:upload_project
       };
 
       $scope.recent_projects.push(projectReport);
@@ -82,64 +79,30 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       var listReports = [];
 	  KeywordService.list(function (data,status) {
 
-	  	KeywordUploadService.list(function (dataUpload,statusUpload) {
-	  		listProjects = data;
-	  		listProjects.push(dataUpload);
-	  		listProjects = _.flatten(listProjects, true);
-	  		var countJobId = 0;
+  		listProjects = data;
+  		var countJobId = 0;
 
-	  		_.forEach(listProjects, function (item,key) {
-	          var lastJobIdAll = item.lastJobId;
-	          if(lastJobIdAll) {
-	            countJobId ++;
-	          }
-	        });
+  		_.forEach(listProjects, function (item,key) {
+          var lastJobIdAll = item.lastJobId;
+          if(lastJobIdAll) {
+            countJobId ++;
+          }
+        });
 
-	        //Load data report for keyword project
-	        _.forEach(data, function (item,key) {
-	          var lastJobId = item.lastJobId;
-	          if(lastJobId) {
-	            var projectId = item._id;
-	            var projectName = item.name;
+        //Load data report for keyword project
+        _.forEach(data, function (item,key) {
+          var lastJobId = item.lastJobId;
+          if(lastJobId) {
+            var projectId = item._id;
+            var projectName = item.name;
 
-	            KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
-	              if(dataReport === null) {
-	              	countJobId = countJobId - 1;
-	              } else {
-	              	if(item.lastJobId == dataReport.functional_job_id) {
-		                dataReport.projectName = projectName;
-		                dataReport.projectId = projectId;
-		                listReports.push(dataReport);
-		              }
-		              //sort list report
-		              if(countJobId == listReports.length) {
-		                var sortListReports = sortJSON(listReports, 'created_date');
-		                _.forEach(sortListReports, function (report) {
-		                  loadDataReport(report,countJobId);
-		                })
-		              }
-	              }
-
-	            });
-	          }
-	        });
-			
-			//Load data report for keyword upload project
-			_.forEach(dataUpload, function (item,key) {
-	          var lastJobId = item.lastJobId;
-	          if(lastJobId) {
-	            var projectId = item._id;
-	            var projectName = item.name;
-	            KeywordUploadService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
-	              if(dataReport.functional_job_id === undefined) {
-	              	countJobId = countJobId - 1;
-	              }
-
-	              if(dataReport.functional_job_id) {
-	              	if(item.lastJobId == dataReport.functional_job_id) {
+            KeywordService.getReport(projectId,lastJobId,function (dataReport,statusReport) {
+              if(dataReport === null) {
+              	countJobId = countJobId - 1;
+              } else {
+              	if(item.lastJobId == dataReport.functional_job_id) {
 	                dataReport.projectName = projectName;
 	                dataReport.projectId = projectId;
-	                dataReport.upload_project = item.upload_project;
 	                listReports.push(dataReport);
 	              }
 	              //sort list report
@@ -149,12 +112,12 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
 	                  loadDataReport(report,countJobId);
 	                })
 	              }
-	              }
-	            });
-	          }
-	        });
+              }
+
+            });
+          }
+        });
 			
-	  	});
 	  });
 
       //Load data for Performance project
@@ -239,12 +202,8 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       $state.go('app.performance', {id: projectId});
     }
 
-    $scope.redirectKeyword = function (projectId,upload_project) {
-    	if(upload_project) {
-    		$state.go('app.keyword-upload', { id : projectId });
-    	} else {
-    		$state.go('app.keyword', { id : projectId });
-    	}
+    $scope.redirectKeyword = function (projectId) {
+    	$state.go('app.keyword', { id : projectId });
     }
 
     }

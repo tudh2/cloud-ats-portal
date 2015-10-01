@@ -21,32 +21,8 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
       });
 
       var getListReport = function(projectId) {
-
-        KeywordUploadService.getListReport(projectId,function(data,status) {
-          $scope.listReports = [];
-          _.forEach(data, function(job) {
-            var report = { 
-              created_date : job.created_date,  
-              job_id: job.report.functional_job_id,
-              total_test_case : 0,
-              total_pass : 0,
-              total_fail : 0 
-            };
-            _.forEach(job.report.suite_reports, function(suite) {
-              report.total_test_case += suite.total_test_case;
-              report.total_pass += suite.total_pass;
-              report.total_fail += suite.total_fail;
-            });
-
-            if(report.total_fail == 0) {
-              report.test_result = 'Pass';
-            } else {
-              report.test_result = 'Fail';
-            }
-
-            $scope.listReports.push(report);
-          });
-
+        KeywordUploadService.getListReport(projectId,function (data,status) {
+          $scope.listLogs = data;
         });
       }
 
@@ -70,18 +46,21 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
         loadModal();
       }
 
-      $scope.runLastSuites = function() {
+      $scope.download = function(jobId) {
+        KeywordUploadService.download($scope.projectId, jobId,function (data,status) {
+          var file = new Blob([data], {type: 'application/zip'});
+          var url = (window.URL || window.webkitURL).createObjectURL(file);
+          window.open(url);
+        });
+      }
+
+      $scope.run = function() {
 
         $scope.project.status = "RUNNING";
         $scope.project.log = undefined;
         $scope.project.watchUrl = undefined
 
-        var selected = [];
-        _.forEach($scope.project.lastSuites, function(sel) {
-          selected.push(sel._id);
-        });
-
-        KeywordUploadService.run($scope.projectId, selected, function (data, status) {
+        KeywordUploadService.run($scope.projectId, function (data, status) {
           switch (status) {
             case 201:
               $.smallBox({
@@ -109,7 +88,6 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
                 iconSmall: 'fa fa-ban bounce animated',
                 timeout: 3000
               });
-
           }
         });
       }
@@ -206,38 +184,27 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
             $scope.project.watchUrl = job.watch_url;
             $scope.project.log = job.log;
 
-            if (job.project_status === 'READY') {
-
-              var report = { 
-                  created_date : undefined,  
-                  job_id: undefined,
-                  total_test_case : 0,
-                  total_pass : 0,
-                  total_fail : 0 
+            if(job.project_status === 'READY') {
+              var log = {
+                created_date : undefined,  
+                jobId: undefined,
+                log: undefined,
+                result: undefined
               };
+
               KeywordUploadService.getReport($scope.projectId, job._id, function (data, status) {
-
-                report.created_date = data.created_date;
-                report.job_id = data.functional_job_id;
-                var suite_reports = JSON.parse(data.suite_reports);
-                _.forEach(suite_reports, function (suite) {
-                  report.total_test_case += suite.total_test_case;
-                  report.total_pass += suite.total_pass;
-                  report.total_fail += suite.total_fail;
+                log.created_date = data.created_date;
+                log.jobId = data.jobId;
+                log.log = data.log;
+                log.result = data.result;
+                $scope.listLogs.unshift(log);
+                $.smallBox({
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('The job ') + job._id + $rootScope.getWord(' has completed.'),
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
                 });
-
-                if (report.total_fail === 0) {
-                  report.test_result = 'Pass';
-                } else report.test_result = 'Fail';
-              });
-
-              $scope.listReports.unshift(report);
-               $.smallBox({
-                title: $rootScope.getWord('Notification'),
-                content: $rootScope.getWord('The job ') + job._id + $rootScope.getWord(' has completed.'),
-                color: '#296191',
-                iconSmall: 'fa fa-check bounce animated',
-                timeout: 3000
               });
             }
           }

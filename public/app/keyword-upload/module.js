@@ -46,26 +46,7 @@ define([
           }
         }
       }
-    }).state('app.keyword-upload.report', {
-        url: '/report/:jobId',
-        views: {
-          "content@app": {
-            templateUrl: 'app/keyword-upload/views/report.tpl.html',
-            controller: 'KeywordUploadReportCtrl',
-            resolve: {
-              deps: $couchPotatoProvider.resolveDependencies([
-                'keyword-upload/controllers/keyword-upload-report-controller',
-                'keyword-upload/directives/tabs-header',
-                'services/keyword-upload-service',
-                'keyword/directives/functional-report'
-              ])}
-          }
-        },
-        data: {
-          title: 'Keyword Report',
-          requireLogin: true
-        }
-      });
+    });
     
   });
 
