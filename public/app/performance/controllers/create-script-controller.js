@@ -122,8 +122,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
     }
 
     // get element to validate sampler form
-    var $sampler_name = $('.name-sampler input[name="name"');
-    var $sampler_url = $('.sampler-url input[name="url"');
+    var $sampler_name = $('.name-sampler input[name="name"]');
+    var $sampler_url = $('.sampler-url input[name="url"]');
 
     $('body').on('keypress', '.name-sampler input[name="name"]', function () {
       $(this).parent().removeClass('has-error');
