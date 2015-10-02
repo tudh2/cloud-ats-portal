@@ -167,7 +167,7 @@ var require = {
         'flot-time': { deps: ['flot']},
         'flot-tooltip': { deps: ['flot']},
 
-        'morris': {deps: ['raphael']},
+        'morris': {deps: ['jquery', 'raphael']},
 
         'datatables':{deps: ['jquery']},
         'datatables-colvis':{deps: ['datatables']},
