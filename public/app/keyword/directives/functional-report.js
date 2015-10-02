@@ -28,7 +28,7 @@ define(['keyword/module', 'lodash'], function(module, _) {
                                 barColors : ['#15ab9f','#ff4f51','#fbd601'],
                                 hideHover : hideHover,
                                 barSizeRatio : size,
-                                stacked : true
+                                stacked : false
                             });
                   graph.setData(value);
                 };
