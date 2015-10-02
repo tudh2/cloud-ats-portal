@@ -33,6 +33,12 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       };
 
       $scope.viewLog = function() {
+
+        PerformanceService.log($scope.project._id, function (data, status) {
+          if (status == 200) {
+            $scope.project.log = data;
+          }
+        });
         loadModal();
       }
 

@@ -141,6 +141,22 @@ define(['layout/module'], function (module) {
         }).error(function(data, status) {
 
         });
+      },
+      log: function (projectId, callback) {
+        var request = {
+          method: 'GET',
+          url: appConfig.RestEntry + '/api/v1/project/performance/logs/'+projectId,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data, status);
+        }).error(function(data, status) {
+          callback(data, status);
+        });
       }
 		}
 	}]);

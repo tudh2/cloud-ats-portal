@@ -147,10 +147,29 @@ define(['projects/module', 'lodash'], function (module, _) {
     };
 
     $scope.openLastLog = function (project) {
+
       $('[data-toggle="popover"]').each(function () {
         $(this).popover('hide');
       });
-      $scope.project = project;
+      switch (project.type) {
+        case 'keyword':
+          KeywordService.log(project._id, function (data, status) {
+            if (status == 200) {
+              $scope.log = data;
+            } else $scope.log = '';
+          });
+          break;
+        case 'performance':
+          PerformanceService.log(project._id, function (data, status) {
+            if (status == 200) {
+              $scope.log = data;  
+            } else $scope.log = '';
+          });
+          break;
+        default:
+          break;
+      }
+      
       loadModal();
     }
 

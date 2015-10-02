@@ -68,6 +68,12 @@ define(['keyword/module', 'lodash'], function (module, _) {
       };
 
       $scope.viewLog = function() {
+
+        KeywordService.log($scope.project._id, function (data, status) {
+          if (status == 200) {
+            $scope.project.log = data;
+          }
+        });
         loadModal();
       }
 
