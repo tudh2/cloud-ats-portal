@@ -157,6 +157,7 @@ define(['projects/module', 'lodash'], function (module, _) {
             if (status == 200) {
               $scope.log = data;
             } else $scope.log = '';
+            loadModal();
           });
           break;
         case 'performance':
@@ -164,13 +165,12 @@ define(['projects/module', 'lodash'], function (module, _) {
             if (status == 200) {
               $scope.log = data;  
             } else $scope.log = '';
+            loadModal();
           });
           break;
         default:
           break;
       }
-      
-      loadModal();
     }
 
     $scope.openLastReport = function(project) {

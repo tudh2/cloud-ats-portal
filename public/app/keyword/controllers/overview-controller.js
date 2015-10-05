@@ -73,8 +73,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
           if (status == 200) {
             $scope.project.log = data;
           }
+          loadModal();
         });
-        loadModal();
       }
 
       $scope.runLastSuites = function() {

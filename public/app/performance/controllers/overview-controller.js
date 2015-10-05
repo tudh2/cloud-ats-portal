@@ -38,8 +38,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
           if (status == 200) {
             $scope.project.log = data;
           }
+          loadModal();
         });
-        loadModal();
       }
 
       var loadEditModal = function () {
