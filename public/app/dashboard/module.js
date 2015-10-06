@@ -23,6 +23,7 @@ define([
                 'services/keyword-service',
                 'services/keyword-upload-service',
                 'services/performance-service',
+                'services/dashboard-service',
                 'services/report-service',
                 'services/script-service',
                 'keyword/directives/functional-report',
