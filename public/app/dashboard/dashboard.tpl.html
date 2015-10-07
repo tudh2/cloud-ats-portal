@@ -24,7 +24,7 @@
 						</div>
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12">
-								<tr class="project-name" ng-repeat="project in top_projects | orderBy:'-percentPass' |limitTo:5 track by $index">
+								<tr class="project-name" ng-repeat="project in top_keyword_projects_pass | orderBy:'-percentPass' track by $index">
 									<td ng-click="redirectKeyword(project._id)"><a>{{project.name}}</a></td>
 									<td class="pull-right">{{project.percentPass}}%</td>
 								</tr>
@@ -40,7 +40,7 @@
 						</div>
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12">
-								<tr ng-repeat="project in top_projects | orderBy:'-percentFail' |limitTo:5 track by $index">
+								<tr ng-repeat="project in top_keyword_projects_fail | orderBy:'-percentFail' track by $index">
 									<td ng-click="redirectKeyword(project._id)"><a>{{project.name}}</a></td>
 									<td class="pull-right">{{project.percentFail}}%</td>
 								</tr>
@@ -56,7 +56,7 @@
 						</div>
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12">
-								<tr ng-repeat="project in top_projects| orderBy:'-totalCases'|limitTo:5 track by $index">
+								<tr ng-repeat="project in top_biggest_project track by $index">
 									<td ng-click="redirectKeyword(project._id)"><a>{{project.name}}</a></td>
 									<td class="pull-right fix-size-biggest-project">{{project.totalCases}} {{getWord('test cases')}}</td>
 								</tr>

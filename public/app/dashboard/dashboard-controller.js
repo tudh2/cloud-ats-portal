@@ -14,13 +14,25 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         // recent finished projects
         $scope.recent_finished_projects = JSON.parse(data.recentProjects);
 
-        // top projects
-        var top_projects = JSON.parse(data.percentsProjects);
-        _.forEach(top_projects, function (project) {
+        // get top project passed
+        var top_keyword_projects_pass = JSON.parse(data.topKeywordPass);
+        _.forEach(top_keyword_projects_pass, function (project) {
           project.percentPass = _.round(project.percentPass, 2);
           project.percentFail = _.round(project.percentFail, 2);
         });
-        $scope.top_projects = top_projects;
+        $scope.top_keyword_projects_pass = top_keyword_projects_pass;
+
+        // get top project failed
+        var top_keyword_projects_fail = JSON.parse(data.topKeywordFail);
+        _.forEach(top_keyword_projects_fail, function (project) {
+          project.percentPass = _.round(project.percentPass, 2);
+          project.percentFail = _.round(project.percentFail, 2);
+        });
+        $scope.top_keyword_projects_fail = top_keyword_projects_fail;
+
+        // get top biggest project
+        var top_biggest_project = JSON.parse(data.topBiggestProject);
+        $scope.top_biggest_project = top_biggest_project;
 
         // top error performance project
         var performance_projects = JSON.parse(data.persProjects);
