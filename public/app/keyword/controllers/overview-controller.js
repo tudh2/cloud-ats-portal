@@ -218,6 +218,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
             	KeywordService.getReport($scope.projectId, job._id, function (data, status) {
 
                 if(status === 404) return;
+                $scope.project.lastRunning = data.created_date;
                 report.created_date = data.created_date;
                 report.job_id = data.functional_job_id;
                 var suite_reports = JSON.parse(data.suite_reports);

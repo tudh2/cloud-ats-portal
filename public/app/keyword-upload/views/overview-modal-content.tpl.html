@@ -5,8 +5,11 @@
     </div>
 
     <div class="modal-body" style="height: 500px; overflow-y: auto;">
-      <pre>
+      <pre ng-if="!flagViewLog">
         {{project.log}}        
+      </pre>
+      <pre ng-if="flagViewLog">
+        {{logWithJob}}        
       </pre>
     </div>
 

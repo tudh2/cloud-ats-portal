@@ -12,7 +12,10 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
 
       $scope.dataReports = [];
 
+      $scope.listLogs = [];
+
       $scope.project = null;
+
       KeywordUploadService.get($scope.projectId, function (data,status) {
         if(status === 404)
           $state.go('app.projects');
@@ -45,13 +48,15 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
       };
 
       $scope.viewLog = function() {
+        $scope.flagViewLog = false;
         loadModal();
       }
 
       $scope.viewLogWithJobId = function(jobId) {
+        $scope.flagViewLog = true;
         KeywordUploadService.getReport($scope.projectId, jobId, function (data,status) {
           if(data.log) {
-            $scope.project.log = data.log;
+            $scope.logWithJob = data.log;
             loadModal();
           }
         });
@@ -187,7 +192,6 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
             $scope.project.status = job.project_status;
             $scope.project.watchUrl = job.watch_url;
             $scope.project.log = job.log;
-
             if(job.project_status === 'READY') {
               var log = {
                 created_date : undefined,  
@@ -197,6 +201,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
               };
               KeywordUploadService.getReport($scope.projectId, job._id, function (data, status) {
                 if(status === 404) return;
+                $scope.project.lastRunning = data.created_date;
                 log.created_date = data.created_date;
                 log.jobId = data.jobId;
                 log.log = data.log;
