@@ -3,7 +3,7 @@
 
     <div class="actionMenu row btn-action-list">
       <span class="col-sm-6 pull-right">
-        <a class="btn btn-primary" data-toggle="modal" data-target="#uploadCode">{{getWord('Upload')}}</a> 
+        <a class="btn btn-primary" ng-disabled="project.status === 'RUNNING'" data-toggle="modal" data-target="#uploadCode">{{getWord('Upload')}}</a> 
         <a class="btn btn-primary" ng-click="edit()">{{getWord('Edit')}}</a>
         <a data-ui-sref="app.projects" class="btn btn-default">{{getWord('Close')}}</a>
       </span>
@@ -31,11 +31,11 @@
             <div class='row'>
                 <div class='col-sm-3'>
                     <div class='blur-name'>{{getWord('Test Suites')}}</div>
-                    <div class='statistic-number'>{{project.totalSuites}}</div>
+                    <div class='statistic-number'>N/A</div>
                 </div>
                 <div class='col-sm-3'>
                     <div class='blur-name'>{{getWord('Test Cases')}}</div>
-                    <div class='statistic-number'>{{project.totalCases}}</div>
+                    <div class='statistic-number'>N/A</div>
                 </div>
                 <div class='col-sm-6'>
                     <div class='blur-name'>{{getWord('Last Running')}}</div>
@@ -51,7 +51,7 @@
           class="btn-border-line btnViewLog" target="blank" href="{{project.watchUrl}}">
           Watch
         </a>
-        <a ng-if="project.status === 'READY' && project.raw_exist == true" ng-click="run()" class="btn-border-line btnRun">{{getWord('Run')}}</a>
+        <a ng-if="project.status === 'READY' && project.raw_exist === true" ng-click="run()" class="btn-border-line btnRun">{{getWord('Run')}}</a>
         <a ng-if="project.status === 'RUNNING'" class="btn-border-line btn-danger btnViewLog">{{getWord('Stop')}}</a>
         </div>
       </div>
@@ -60,25 +60,27 @@
   <!-- Report -->
      <div class="row table-container">
           <div class="col-md-12">
-            <h3>{{getWord('Test Report')}}</h3>
+            <h3>{{getWord('Test Result')}}</h3>
       <table class="table tbl-project-report">
         <thead>
           <tr>
           <th>#</th>
-          <th>{{getWord('Report Tile')}}</th>
+          <th>{{getWord('Tile Log')}}</th>
           <th>{{getWord('Project Result')}}</th>
           <th>{{getWord('Created Date')}}</th>
           <th>{{getWord('Create By')}}</th>
+          <th>{{getWord('Download Result')}}</th>
         </tr>
         </thead>
         <tbody>
           <tr ng-repeat="log in listLogs track by $index">
             <td>{{$index+1}}</td>
-            <td class="test-report"><a class = "btn-download" ng-click="download(log.jobId)">Report-{{log.jobId}}</a></td>
+            <td class="test-report"><a class = "btn-download" ng-click="viewLogWithJobId(log.jobId)">Log-{{log.jobId}}</a></td>
             <td><span ng-class="{'label label-error': log.result === 'Fail',
             'label label-success': log.result === 'Pass'}">{{getWord(log.result)}}</span></td>
             <td>{{log.created_date}}</td>
             <td>{{project.creator._id}}</td>
+            <td><a class = 'btn-border-line btnViewLog btn-download' download='final-result' download-report job-id='log.jobId' project-id = "project._id">{{getWord('Click Here')}}</a></td>
           </tr>
         </tbody>
       </table>

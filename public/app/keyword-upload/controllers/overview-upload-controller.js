@@ -13,8 +13,10 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
       $scope.dataReports = [];
 
       $scope.project = null;
-      KeywordUploadService.get($scope.projectId, function(response) {
-        $scope.project = response;
+      KeywordUploadService.get($scope.projectId, function (data,status) {
+        if(status === 404)
+          $state.go('app.projects');
+        $scope.project = data;
         if($scope.project.lastJobId) {
           getListReport($scope.project._id);
         }
@@ -46,12 +48,14 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
         loadModal();
       }
 
-      $scope.download = function(jobId) {
-        KeywordUploadService.download($scope.projectId, jobId,function (data,status) {
-          var file = new Blob([data], {type: 'application/zip'});
-          var url = (window.URL || window.webkitURL).createObjectURL(file);
-          window.open(url);
+      $scope.viewLogWithJobId = function(jobId) {
+        KeywordUploadService.getReport($scope.projectId, jobId, function (data,status) {
+          if(data.log) {
+            $scope.project.log = data.log;
+            loadModal();
+          }
         });
+        
       }
 
       $scope.run = function() {
@@ -191,8 +195,8 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
                 log: undefined,
                 result: undefined
               };
-
               KeywordUploadService.getReport($scope.projectId, job._id, function (data, status) {
+                if(status === 404) return;
                 log.created_date = data.created_date;
                 log.jobId = data.jobId;
                 log.log = data.log;
@@ -223,6 +227,23 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
           $fileNames.parent().addClass("has-error");
         } else if($scope.file){
           $fileNames.parent().removeClass("has-error");
+
+          var fileName = $scope.file.name;
+          var lastIndex = _.lastIndexOf(fileName, ".");
+          var extension = fileName.substring(lastIndex + 1);
+          if(extension !== "zip") {
+            $.smallBox({
+              title: $rootScope.getWord('Notification'),
+              content: $rootScope.getWord('File is not correct format !'),
+              color: '#C00000 ',
+              iconSmall: 'fa fa-check bounce animated',
+              timeout: 3000
+            });
+            $('#uploadFile').val('');
+            $scope.file = undefined;
+            return;
+          }
+
           KeywordUploadService.upload(projectId,$scope.file,function(data,status){
             if(status === 201) {
               $.smallBox({
@@ -241,6 +262,8 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
+              $('#uploadFile').val('');
+              $scope.file = undefined;
             }
           });
         }

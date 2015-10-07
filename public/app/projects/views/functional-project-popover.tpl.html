@@ -31,7 +31,8 @@
             <div class='statistic-number'>{{project.totalCases}}</div>
         </div>
         <div class='col-sm-6'>
-            <a class='btn-border-line' ng-if="project.lastJobId" ng-click='report()'>{{getWord('Report')}}</a>
+            <a class='btn-border-line' ng-if="project.lastJobId && !project.upload_project" ng-click='report()'>{{getWord('Report')}}</a>
+            <a class='btn-border-line' ng-if="project.lastJobId && project.upload_project" download='final-result' download-report job-id='project.lastJobId' project-id = "project._id">{{getWord('Report')}}</a>
         </div>
        </div>
     </div>

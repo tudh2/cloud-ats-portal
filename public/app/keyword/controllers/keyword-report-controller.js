@@ -39,7 +39,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
       };
 
       KeywordService.getReport($scope.projectId, $scope.jobId, function(data,status) {
-          if(data === null) {
+          if(status === 404) {
             $.smallBox({
                 title: $rootScope.getWord('Notification'),
                 content: $rootScope.getWord("Report not found"),

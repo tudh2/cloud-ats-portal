@@ -89,7 +89,7 @@ define(['keyword-upload/module'], function(module) {
         $http(request).success(function(data, status) {
           callback(data, status);
         }).error(function(data, status) {
-
+          callback(data,status);
         });
       },
 

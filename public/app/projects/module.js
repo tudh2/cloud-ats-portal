@@ -23,6 +23,7 @@ define([
                 'projects/directives/smart-popover',
                 'services/keyword-service',
                 'services/keyword-upload-service',
+                'keyword-upload/directives/download-report',
                 'services/performance-service',
                 'services/report-service'
               ])

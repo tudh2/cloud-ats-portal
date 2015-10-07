@@ -118,17 +118,7 @@ define(['projects/module', 'lodash'], function (module, _) {
       });
       switch (project.type) {
         case 'keyword':
-          if(uploadProject) {
-
-            KeywordUploadService.download(project._id, project.lastJobId,function (data,status) {
-              var file = new Blob([data], {type: 'application/zip'});
-              var url = (window.URL || window.webkitURL).createObjectURL(file);
-              window.open(url);
-            });
-          } else if(!uploadProject) {
-            $state.go('app.keyword.report', {id: project._id, jobId: project.lastJobId });
-          }
-          
+          $state.go('app.keyword.report', {id: project._id, jobId: project.lastJobId });
           break;
         case 'performance':
           $state.go('app.performance.report', {id: project._id, jobId: project.lastJobId});

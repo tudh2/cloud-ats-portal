@@ -22,6 +22,7 @@ define([
               'keyword-upload/controllers/overview-upload-controller',
               'keyword-upload/directives/tabs-header',
               'services/keyword-upload-service',
+              'keyword-upload/directives/download-report',
               'services/event-service'
             ])
           }
