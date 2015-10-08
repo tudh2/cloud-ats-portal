@@ -153,7 +153,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
                 });
-                $scope.suites.push(data);
                 $scope.editMode = false;
                 break;
 
@@ -165,7 +164,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
                 });
-                $scope.suites.push(data);
                 $scope.editMode = false;
                 break;
 
