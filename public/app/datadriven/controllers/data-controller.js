@@ -80,7 +80,7 @@ define(['datadriven/module', 'notification'], function(module) {
 
       $scope.updateDataDriven = function () {
         var $data_name = $('.data-provider div .driven-name').find('input');
-        if ($data_name.val() === undefined || $data_name.val() === '') { 
+        if ($data_name.val().trim() === undefined || $data_name.val().trim() === '') { 
 
           $data_name.parent().addClass("has-error");
           $data_name.focus();
@@ -140,8 +140,9 @@ define(['datadriven/module', 'notification'], function(module) {
         });
       }
 
-      $('body').on('keypress', '.data-provider div .driven-name input', function () {
-        if ($(this).val() != "") {
+      $('body').on('keyup', '.data-provider div .driven-name input', function () {
+
+        if ($(this).val().trim() != "") {
           $(this).parent().removeClass('has-error');
         }
       });
@@ -149,7 +150,7 @@ define(['datadriven/module', 'notification'], function(module) {
       $scope.createDataDriven = function () {
 
         var $data_name = $('.data-provider div .driven-name').find('input');
-        if ($data_name.val() === undefined || $data_name.val() === '') { 
+        if ($data_name.val().trim() === undefined || $data_name.val().trim() === '') { 
 
           $data_name.parent().addClass("has-error");
           $data_name.focus();

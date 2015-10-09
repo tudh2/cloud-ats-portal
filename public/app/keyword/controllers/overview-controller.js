@@ -265,8 +265,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
                     iconSmall: 'fa fa-check bounce animated',
                     timeout: 3000
                   });
-                }
-                
   	          });
 
             }
