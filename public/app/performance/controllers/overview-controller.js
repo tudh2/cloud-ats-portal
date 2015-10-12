@@ -156,7 +156,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                 timeout: 3000
               });
               data.scripts = data.scripts.length;
-              $scope.project.jobs.unshift(data);
               break;
             case 204:
               $.smallBox({
@@ -189,12 +188,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
               iconSmall: 'fa fa-check bounce animated',
               timeout: 3000
             });
-            $scope.project.status = 'READY';
-            var job = data;
-            var currentJob = _.find($scope.project.jobs, function (obj) {
-                  return job._id === obj._id;
-            });
-            currentJob.status = 'Completed';
+            $scope.project.isBuilding =false;
           }
         });
       }
@@ -202,29 +196,12 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       var updateStatus = function(msg) {
         $scope.$apply(function() {
           var job = JSON.parse(msg.data);
+          job.scripts = job.scripts.length;
+          job.created_date = job.runningTime;
           if (job.project_id === $scope.projectId) {
             $scope.project.status = job.project_status;
             $scope.project.log = job.log;
             $scope.project.isBuilding = job.isBuilding;
-            switch (job.status) {
-              case 'Running': 
-                var currentJob = _.find($scope.project.jobs, function (obj) {
-                  return job._id === obj._id;
-                });
-                if (job.isBuilding) {
-                  currentJob.status = 'Running';
-                } else currentJob.status = 'Completed';
-                break;
-              case 'Completed':
-                var currentJob = _.find($scope.project.jobs, function (obj) {
-                  return job._id === obj._id;
-                });
-                currentJob.status = 'Completed';
-                break;
-              default:
-                break;
-            }
-
             if ($scope.project.status === 'READY') {
               $.smallBox({
                 title: $rootScope.getWord('Notification'),
@@ -233,6 +210,9 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
+
+              $scope.project.jobs.unshift(job);
+              $scope.project.last_running = job.runningTime;
             }
           }
         })
