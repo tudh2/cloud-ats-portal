@@ -5,9 +5,8 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
   module.registerController('DashboardCtrl', ['$scope','$state','KeywordService','PerformanceService', 'DashboardService','ReportService','ScriptService', 
     function($scope,$state,KeywordService,PerformanceService, DashboardService,ReportService,ScriptService) {
 
-      $scope.recent_finished_projects = [];
-      $scope.performance_projects = [];
-      $scope.recent_projects = [];
+      $scope.collapse_performance_projects = false;
+      $scope.collapse_functional_projects = false;
 
       DashboardService.summary(function (data, status) {
 
@@ -51,6 +50,13 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
         $state.go('app.keyword', { id : projectId });
       }
 
+      $scope.open_close_pers = function (collapse) {
+        $scope.collapse_performance_projects = !collapse;
+      }
+
+      $scope.open_close_funcs = function (collapse) {
+        $scope.collapse_functional_projects = !collapse;
+      }
     }
   ]);
 });

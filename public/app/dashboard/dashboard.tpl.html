@@ -1,5 +1,10 @@
 <div>
-	<h1> {{getWord('Functional Test')}}<small class="ds-collapse" data-toggle="collapse" data-target="#functional-project-overview"> {{getWord('Collapse all')}}</small></h1> 
+	<h1> {{getWord('Functional Test')}}
+		<small ng-if="!collapse_functional_projects" class="ds-collapse" data-toggle="collapse" data-target="#functional-project-overview" ng-click="open_close_funcs(collapse_functional_projects)"> {{getWord('Collapse all')}}
+		</small>
+		<small ng-if="collapse_functional_projects" class="ds-collapse" data-toggle="collapse" data-target="#functional-project-overview" ng-click="open_close_funcs(collapse_functional_projects)"> {{getWord('Expand all')}}
+		</small>
+	</h1> 
 	<div id="functional-project-overview" class="collapse in">
 		<div class="functional-project-overview ds-box">
 			<h1 class="text-center ds-text-blue"> {{getWord('Recent Finished Projects')}}</h1>
@@ -68,7 +73,10 @@
 		</div>
 	</div>
 
-	<h1 class="clearfix"> {{getWord('Performance Test')}}<small class="ds-collapse" data-toggle="collapse" data-target="#performance-project-overview"> {{getWord('Collapse all')}}</small></h1> 
+	<h1 class="clearfix"> {{getWord('Performance Test')}}
+		<small ng-if="!collapse_performance_projects" class="ds-collapse" data-toggle="collapse" data-target="#performance-project-overview" ng-click="open_close_pers(collapse_performance_projects)"> {{getWord('Collapse all')}}</small>
+		<small ng-if="collapse_performance_projects" class="ds-collapse" data-toggle="collapse" data-target="#performance-project-overview" ng-click="open_close_pers(collapse_performance_projects)"> {{getWord('Expand all')}}</small>
+	</h1> 
 	<div class="ds-box clearfix ds-box-white collapse in" id="performance-project-overview">
 		<div class="col-sm-12 ds-box-header">
 			<P class="project-name">{{getWord('Top Error Projects')}}</P>
