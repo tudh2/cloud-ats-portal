@@ -12,7 +12,7 @@ define(['auth/module'], function(module) {
 
       var expires = new Date();
       expires.setDate(expires.getDate() + 365);
-      if ($scope.email != '' && $scope.password != '') {
+      if ($scope.email.trim() != '' && $scope.password.trim() != '') {
 
         AuthenticationService.login($scope.email, $scope.password, function(data) {
           if (data.error) {
