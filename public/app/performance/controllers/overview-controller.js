@@ -10,10 +10,10 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       PerformanceService.get($scope.projectId, function(response) {
 
         $scope.project = response;
-        if (response.lastScripts) {
+        if (response.totalJob > 0) {
           var jobs = JSON.parse(response.jobs);
           $scope.project.jobs = jobs;
-        }
+        } else $scope.project.jobs = [];
       });
       
       $scope.openJobReport = function (jobId) {
@@ -210,7 +210,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
-
               $scope.project.jobs.unshift(job);
               $scope.project.last_running = job.runningTime;
             }

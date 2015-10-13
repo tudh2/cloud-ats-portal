@@ -8,25 +8,19 @@
       <div class="form-group">
         <label class="label">E-mail</label>
           <label class="input"> <i class="icon-append fa fa-user"></i>
-            <input class="form-control" type="text" name="email" ng-model="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <input class="form-control" type="text" name="email" ng-model="email">
           </label>
       </div>
       <div class="form-group">
         <label class="label">Password</label>
           <label class="input"> <i class="icon-append fa fa-lock"></i>
-            <input class="form-control" type="password" name="password" ng-model="password" data-smart-validate-input data-required minlength="3" data-maxnlength="20" data-message="Please enter your email password">
+            <input class="form-control" type="password" name="password" ng-model="password" data-smart-validate-input data-required data-maxnlength="20" data-message="Please enter your email password">
         <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> </label>
 
         <div class="note">
           <a ui-sref="forgotPassword">Forgot password?</a>
         </div>
       </div>
-      <!-- <section>
-       <label class="checkbox">
-          <input type="checkbox" name="remember" checked ng-model="remember">
-            <i></i>Stay signed in
-          </label>
-        </section> -->
     </fieldset>
     <footer>
       <button type="submit" class="btn btn-primary">

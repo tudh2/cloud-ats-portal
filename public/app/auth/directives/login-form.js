@@ -1,11 +1,11 @@
 define(['auth/module', 'bootstrap-validator'], function(module) {
 
-	module.registerDirective('signinForm', function() {
+	module.registerDirective('loginForm', function() {
 
 		return {
 			restrict: 'E',
 			replace: true,
-			templateUrl: 'app/auth/views/login-form.html',
+			templateUrl: 'app/auth/directives/login-form.html',
 
 			link: function(scope, form) {
 				form.bootstrapValidator({
@@ -21,9 +21,6 @@ define(['auth/module', 'bootstrap-validator'], function(module) {
 							validators : {
 								notEmpty : {
 									message : 'The email address is required'
-								},
-								regexp: {
-									message: 'The email must contain "., @" character '
 								}
 							}
 						},
