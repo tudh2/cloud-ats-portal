@@ -22,30 +22,9 @@
 
           <div class="pull-left login-desc-box-l">
             <h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of CloudATS, everywhere you go!</h4>
-            <!-- <div class="login-app-icons">
-              <a href-void class="btn btn-danger btn-sm">Frontend Template</a>
-              <a href-void class="btn btn-danger btn-sm">Find out more</a>
-            </div> -->
           </div>
 
-          <!-- <img src="styles/img/demo/iphoneview.png" alt="" class="pull-right display-image" style="width:210px">
- -->
         </div>
-
-        <!-- <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
-              </p>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <h5 class="about-heading">Not just your average template!</h5>
-            <p>
-              Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
-            </p>
-          </div>
-        </div> -->
 
       </div>
       <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
@@ -60,17 +39,18 @@
 
               <section>
                 <label class="input"> <i class="icon-append fa fa-envelope"></i>
-                  <input  type="text" name="email" ng-model="email" placeholder="Email address" email-validate >
+                  <input  type="text" name="email" ng-model="email" placeholder="Email address" email-validate>
                   <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> 
                 </label>
-                <em ng-if="checkEmailPattern" style="color: #D56161;">{{notify}}</em>
-                <em ng-if="checkEmail" style="color: #D56161;">{{message}}</em>
+                <em ng-if="checkEmailPattern" style="color: #D56161;font-size: 11px;">{{notify}}</em>
+                <em ng-if="checkEmail" style="color: #D56161; font-size: 11px;">{{message}}</em>
               </section>
 
               <section>
                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                  <input type="password" name="password" ng-model="password" placeholder="Password" id="password" minlength="3">
+                  <input type="password" name="password" ng-model="password" placeholder="Password" id="password" password-validate>
                 <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                <em ng-if="checkPass" style="color: #D56161; font-size: 11px;">{{message_pass}}</em>
               </section>
 
               <section>
@@ -96,7 +76,7 @@
                           <option value="" selected="">--choose tenant--</option>
                         </select><i></i>
                       </label>
-                      <em ng-show="chooseTenant" style="color: red;">{{alert}}</em>
+                      <em ng-show="chooseTenant" style="color: #D56161;font-size: 11px;">{{alert}}</em>
                     </div>
 
                   </div>
@@ -124,16 +104,6 @@
                 </section>
               </div>
 
-              <!-- <section>
-                <label class="checkbox">
-                  <input type="checkbox" name="subscription" id="subscription">
-                  <i></i>I want to receive news and special offers</label>
-                <label class="checkbox">
-                  <input type="checkbox" name="terms" id="terms">
-                  <i></i>I agree with the <a href="#" data-toggle="modal" data-target="#myModal"> Terms and Conditions </a>
-                </label>
-              </section> -->
-              
             </fieldset>
               <footer>
                 <button type="submit" class="btn btn-primary">
@@ -149,19 +119,6 @@
             </form>
 
           </div>
-          <!-- <p class="note text-center">*FREE Registration ends on October 2015.</p>
-          <h5 class="text-center">- Or sign in using -</h5>
-          <ul class="list-inline text-center">
-            <li>
-              <a href-void class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li>
-              <a href-void class="btn btn-info btn-circle"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-              <a href-void class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
-            </li>
-          </ul> -->
       </div>
     </div>
   </div>

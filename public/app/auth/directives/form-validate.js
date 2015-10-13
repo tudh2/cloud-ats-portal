@@ -19,7 +19,18 @@ define(['auth/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-val
                         form.find('[name=email]').parent().removeClass('state-success');
                         form.find('[name=email]').parent().addClass('state-error');
                     }
-
+                    if (scope.password.length === 0) {
+                        form.find('#password').parent().removeClass('state-success');
+                        form.find('#password').parent().addClass('state-error');
+                        scope.checkPass = true;
+                        scope.message_pass = 'Please enter the password field' ;
+                    }
+                    if (scope.password.trim() ==='' && scope.password.length > 0){
+                        form.find('#password').parent().removeClass('state-success');
+                        form.find('#password').parent().addClass('state-error');
+                        scope.checkPass = true;
+                        scope.message_pass = 'Please do not begin or end with blank space' ;
+                    }
                     if (scope.selectedTenant == null) {
                         scope.chooseTenant = true;
                         scope.alert = 'You have to choose a tenant';
@@ -27,18 +38,14 @@ define(['auth/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-val
                         form.find('.select').addClass('state-error');
 
                     }
+                    
                 });
         		form.validate(angular.extend({
 
         			rules: {
-        				password: {
-        					required: true,
-        					minlength: 3,
-        					maxlength: 20
-        				},
         				passwordConfirm: {
         					required: true,
-        					minlength: 3,
+        					minlength: 4,
         					equalTo: '#password'
         				},
         				firstname: {
@@ -53,9 +60,6 @@ define(['auth/module', 'modules/forms/common', 'jquery-maskedinput', 'jquery-val
         			},
 
         			messages: {
-        				password: {
-        					required: 'Please enter your password'
-        				},
         				passwordConfirm: {
         					required: 'Please enter your password one more time',
         					equalTo: 'Please enter the same passwordConfirm as above'

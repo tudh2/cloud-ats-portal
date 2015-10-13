@@ -6,7 +6,9 @@ define(['auth/module'], function(module) {
 		return {
 			restrict: 'A',
 			link: function(scope, element, attributes) {
-
+				
+				scope.checkEmail = false;
+				scope.checkEmailPattern = false;
 				element.on('blur', function() {
 					
 					var email = element.val();
@@ -14,7 +16,7 @@ define(['auth/module'], function(module) {
 
 					if (checkAccount == false) {
 						scope.checkEmailPattern = true;
-						scope.notify = 'The email must contain "., @" characters and not be empty';
+						scope.notify = 'The email must contain "., @" characters and not be empty, not blank space';
 						element.parent().removeClass('state-success');
 						element.parent().addClass('state-error');
 					} else {
