@@ -71,7 +71,7 @@ define(['keyword/module'], function(module) {
         });
       },
 
-      create: function(name, callback) {
+      create: function(name, showAction, valueDelay,callback) {
         var request = {
           method: 'POST',
           url: appConfig.RestEntry + '/api/v1/project/keyword',
@@ -80,7 +80,9 @@ define(['keyword/module'], function(module) {
             'X-SPACE': $cookies.get('space')
           },
           data: {
-            name: name
+            name: name,
+            showAction,
+            valueDelay
           }
         };
 

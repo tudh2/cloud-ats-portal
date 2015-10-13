@@ -8,6 +8,14 @@ define(['projects/module'], function (module) {
 
     $scope.functionalType = 'new';
 
+    $scope.delay = {
+      value : 0
+    };
+
+    $scope.showAction = {
+      status : false
+    };
+
     var $input =  $('div#createProject input[name="name"]');
 
     $input.on('keypress', function () {
@@ -30,7 +38,9 @@ define(['projects/module'], function (module) {
         switch ($scope.type) {
           case 'functional' :
             if($scope.functionalType === "new") {
-              KeywordService.create($scope.name, function(projectId) {
+              var showAction = $scope.showAction.status;
+              var valueDelay = $scope.delay.value;
+              KeywordService.create($scope.name, showAction, valueDelay, function(projectId) {
                 $state.go('app.keyword', { id : projectId });
               });
             } else if($scope.functionalType === "upload"){
