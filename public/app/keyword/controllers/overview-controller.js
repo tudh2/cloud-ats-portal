@@ -13,6 +13,14 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.dataReports = [];
 
       $scope.project = null;
+
+      $scope.showAction = {
+        status:false
+      };
+
+      $scope.delay = {
+        value:0
+      };
       
       KeywordService.get($scope.projectId, function(response) {
         $scope.project = response;
@@ -150,12 +158,30 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.edit = function () {
         loadEditModal();
         $scope.newName = angular.copy($scope.project.name);
+        $scope.showAction.status = angular.copy($scope.project.show_action);
+        $scope.delay.value = angular.copy($scope.project.value_delay);
       }
 
+      $scope.$watch('delay.value', function(newValue) {
+        var delayParentEle = $("div#project-edittion input[name='delay']").parent();
+        if($scope.delay.value !== undefined) {
+          delayParentEle.removeClass('has-error');
+        } else {
+          delayParentEle.addClass('has-error');
+        }
+      })
 
       $scope.update = function (name) {
         
         var $modal = $('#project-edittion');
+        var delayParentEle = $("div#project-edittion input[name='delay']").parent();
+
+        if ($scope.delay.value === undefined) {
+          delayParentEle.addClass('has-error');
+          delayParentEle.focus();
+          return;
+        }
+
         if (!$scope.newName) {
 
           $modal.find('.form-group').addClass('has-error');
@@ -163,7 +189,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
           return;
         }
 
-        KeywordService.update($scope.projectId, name, function (data, status) {
+        var showAction = $scope.showAction.status;
+        var valueDelay = $scope.delay.value;
+        KeywordService.update($scope.projectId, name, showAction, valueDelay, function (data, status) {
 
           switch (status) {
             case 304:
@@ -184,6 +212,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 timeout: 3000
               });
               $scope.project.name = name;
+              $scope.project.show_action = showAction;
+              $scope.project.value_delay = valueDelay;
               break;
             default:
               break;

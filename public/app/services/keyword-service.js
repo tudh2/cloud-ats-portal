@@ -81,8 +81,8 @@ define(['keyword/module'], function(module) {
           },
           data: {
             name: name,
-            showAction,
-            valueDelay
+            showAction: showAction,
+            valueDelay: valueDelay
           }
         };
 
@@ -92,7 +92,7 @@ define(['keyword/module'], function(module) {
 
         });
       },
-      update: function (id, name, callback) {
+      update: function (id, name, showAction, valueDelay, callback) {
         var request = {
           method: 'PUT',
           url: appConfig.RestEntry + '/api/v1/project/keyword',
@@ -102,7 +102,9 @@ define(['keyword/module'], function(module) {
           },
           data: {
             name: name,
-            id: id
+            id: id,
+            showAction: showAction,
+            valueDelay: valueDelay
           }
         };
 
