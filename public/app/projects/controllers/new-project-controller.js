@@ -2,7 +2,7 @@ define(['projects/module'], function (module) {
   
   'use strict';
 
-  module.registerController('NewProjectCtrl', ['$scope', '$state', 'KeywordService','KeywordUploadService', 'PerformanceService', function($scope, $state, KeywordService, KeywordUploadService, PerformanceService) {
+  module.registerController('NewProjectCtrl', ['$scope', '$state', 'KeywordService','SeleniumUploadService', 'PerformanceService', function($scope, $state, KeywordService, SeleniumUploadService, PerformanceService) {
 
     $scope.type = 'functional';
 
@@ -34,8 +34,8 @@ define(['projects/module'], function (module) {
                 $state.go('app.keyword', { id : projectId });
               });
             } else if($scope.functionalType === "upload"){
-              KeywordUploadService.create($scope.name, function(projectId) {
-                $state.go('app.keyword-upload', { id : projectId });
+              SeleniumUploadService.create($scope.name, function(projectId) {
+                $state.go('app.selenium', { id : projectId });
               });
             }
             

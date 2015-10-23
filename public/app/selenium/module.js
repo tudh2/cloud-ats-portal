@@ -7,42 +7,42 @@ define([
 
   'use strict';
 
-  var module = ng.module('app.keyword-upload', ['ui.router', 'xeditable']);
+  var module = ng.module('app.selenium', ['ui.router', 'xeditable']);
 
   module.config(function($stateProvider, $couchPotatoProvider) {
     $stateProvider
-    .state('app.keyword-upload', {
-      url: '/project/keyword-upload/:id',
+    .state('app.selenium', {
+      url: '/project/selenium/:id',
       views: {
         "content@app": {
-          templateUrl: 'app/keyword-upload/views/overview.html',
+          templateUrl: 'app/selenium/views/overview.html',
           controller: 'OverviewUploadCtrl',
           resolve: {
             deps: $couchPotatoProvider.resolveDependencies([
-              'keyword-upload/controllers/overview-upload-controller',
-              'keyword-upload/directives/tabs-header',
-              'services/keyword-upload-service',
-              'keyword-upload/directives/download-report',
+              'selenium/controllers/overview-upload-controller',
+              'selenium/directives/tabs-header',
+              'services/selenium-upload-service',
+              'selenium/directives/download-report',
               'services/event-service'
             ])
           }
         }
       },
       data: {
-        title: 'Keyword Project Details',
+        title: 'Selenium Project Detail',
         requireLogin: true
       }
-    }).state('app.keyword-upload.execution', {
+    }).state('app.selenium.execution', {
       url: '/execution',
       views: {
         'content@app': {
-          templateUrl: 'app/keyword-upload/views/execution.html',
+          templateUrl: 'app/selenium/views/execution.html',
           controller: 'ExecutionUploadCtrl',
           resolve: {
             deps: $couchPotatoProvider.resolveDependencies([
-              'keyword-upload/controllers/execution-controller',
-              'keyword-upload/directives/tabs-header',
-              'services/keyword-upload-service'
+              'selenium/controllers/execution-controller',
+              'selenium/directives/tabs-header',
+              'services/selenium-service'
             ])
           }
         }

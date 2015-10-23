@@ -1,7 +1,7 @@
-define(['keyword-upload/module'], function (module) {
+define(['selenium/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('downloadReport',['$rootScope','KeywordUploadService', function ($rootScope,KeywordUploadService) {
+	module.registerDirective('downloadReport',['$rootScope','SeleniumUploadService', function ($rootScope,SeleniumUploadService) {
 		return {
 			restrict : 'A',
 			replace : true,
@@ -13,7 +13,7 @@ define(['keyword-upload/module'], function (module) {
 
 				scope.$watch('jobId', function(newValue) {
 					if(newValue){
-	                    KeywordUploadService.download(scope.projectId, newValue ,function (data,status) {
+	                    SeleniumUploadService.download(scope.projectId, newValue ,function (data,status) {
 				          var file = new Blob([data], {type: 'application/x-gzip'});
 				          var url = (window.URL || window.webkitURL).createObjectURL(file);
 				          element.attr('href', url);

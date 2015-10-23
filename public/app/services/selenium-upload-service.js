@@ -1,7 +1,7 @@
-define(['keyword-upload/module'], function(module) {
+define(['selenium/module'], function(module) {
   'use strict';
 
-  module.registerFactory('KeywordUploadService', ['$http', '$cookies', function($http, $cookies) {
+  module.registerFactory('SeleniumUploadService', ['$http', '$cookies', function($http, $cookies) {
     return {
 
       run: function(projectId, callback) {

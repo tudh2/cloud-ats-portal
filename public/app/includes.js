@@ -31,7 +31,7 @@ define([
   'keyword/module',
   'performance/module',
   'datadriven/module',
-  'keyword-upload/module'
+  'selenium/module'
   
 ], function() {
   'use strict';

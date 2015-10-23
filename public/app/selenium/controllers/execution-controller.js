@@ -1,10 +1,10 @@
-define(['keyword-upload/module'], function (module) {
+define(['selenium/module'], function (module) {
   
   'use strict';
 
   module.registerController('ExecutionUploadCtrl', [
-    '$rootScope','$scope', '$state', '$stateParams', 'KeywordUploadService',
-    function($rootScope,$scope, $state, $stateParams, KeywordUploadService) {
+    '$rootScope','$scope', '$state', '$stateParams', 'SeleniumUploadService',
+    function($rootScope,$scope, $state, $stateParams, SeleniumUploadService) {
 
       $scope.projectId = $stateParams.id;
 
@@ -18,7 +18,7 @@ define(['keyword-upload/module'], function (module) {
             buttons: '['+$rootScope.getWord('Go to overview')+']'
           }, function (ButtonPressed) {
             if (ButtonPressed === $rootScope.getWord('Go to overview')) {
-              $state.go('app.keyword-upload', {id: $scope.projectId});
+              $state.go('app.selenium', {id: $scope.projectId});
             }
           });
           return false;
@@ -27,7 +27,7 @@ define(['keyword-upload/module'], function (module) {
         return true;
       }
 
-      KeywordUploadService.get($scope.projectId, function(project) {
+      SeleniumUploadService.get($scope.projectId, function(project) {
         $scope.project = project;
         var btnRun = $('.btn-keyword-run');
         if(project.raw_exist) {
@@ -41,7 +41,7 @@ define(['keyword-upload/module'], function (module) {
       $scope.run = function() {
         if (checkProjectStatus())
 
-        KeywordUploadService.run($scope.projectId, function (data, status) {
+        SeleniumUploadService.run($scope.projectId, function (data, status) {
           switch (status) {
             case 201:
               $.smallBox({
@@ -71,7 +71,7 @@ define(['keyword-upload/module'], function (module) {
               });
 
           }
-          $state.go('app.keyword-upload', {id:$scope.projectId});
+          $state.go('app.selenium', {id:$scope.projectId});
         });
       }
   }]);

@@ -34,7 +34,7 @@ define([
     'app.projects',
     'app.keyword',
     'app.datadriven',
-    'app.keyword-upload'
+    'app.selenium'
   ]);
 
   couchPotato.configureApp(app);

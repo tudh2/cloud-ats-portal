@@ -4,8 +4,8 @@ define(['projects/module', 'lodash'], function (module, _) {
 
   module.registerController('ProjectsCtrl', [
 
-    '$rootScope', '$scope', '$state', '$stateParams', '$templateRequest', '$compile','KeywordService', 'KeywordUploadService','PerformanceService', 'ReportService', 'EventService',
-    function ($rootScope, $scope, $state, $stateParams, $templateRequest, $compile, KeywordService, KeywordUploadService,PerformanceService, ReportService, EventService) {
+    '$rootScope', '$scope', '$state', '$stateParams', '$templateRequest', '$compile','KeywordService', 'SeleniumUploadService','PerformanceService', 'ReportService', 'EventService',
+    function ($rootScope, $scope, $state, $stateParams, $templateRequest, $compile, KeywordService, SeleniumUploadService,PerformanceService, ReportService, EventService) {
 
     $scope.searchTerms = '';
 
@@ -78,7 +78,7 @@ define(['projects/module', 'lodash'], function (module, _) {
           break;
         case 'keyword':
           if(uploadProject) {
-            $state.go('app.keyword-upload', { id : projectId });
+            $state.go('app.selenium', { id : projectId });
           } else if(!uploadProject) {
             $state.go('app.keyword', { id : projectId });
           }
@@ -196,7 +196,7 @@ define(['projects/module', 'lodash'], function (module, _) {
           //runLastSuites(project);
           if(uploadProject) {
             //runLastUploadProject();
-            $state.go('app.keyword-upload.execution', {id: project._id});
+            $state.go('app.selenium.execution', {id: project._id});
           } else if(!uploadProject) {
             //runLastSuites(project);
             $state.go('app.keyword.execution', {id: project._id});
@@ -251,7 +251,7 @@ define(['projects/module', 'lodash'], function (module, _) {
 
     var runLastUploadProject = function(project) {
 
-        KeywordUploadService.run(project._id, function (data, status) {
+        SeleniumUploadService.run(project._id, function (data, status) {
           switch (status) {
             case 201:
               $.smallBox({
@@ -281,7 +281,7 @@ define(['projects/module', 'lodash'], function (module, _) {
               });
 
           }
-          $state.go('app.keyword-upload', {id:$scope.projectId});
+          $state.go('app.selenium', {id:$scope.projectId});
         });
       }
 
@@ -341,7 +341,7 @@ define(['projects/module', 'lodash'], function (module, _) {
     };
 
     var loadKeywordUploadProjects = function() {
-      KeywordUploadService.list(function (response) {
+      SeleniumUploadService.list(function (response) {
         if ($scope.projects === undefined) $scope.projects = [];
         $scope.projects.push(response);
         $scope.projects = _.flatten($scope.projects, true);

@@ -1,8 +1,8 @@
-define(['keyword-upload/module', 'lodash'], function (module, _) {
+define(['selenium/module', 'lodash'], function (module, _) {
   'use strict';
   module.registerController('OverviewUploadCtrl', 
-    ['$scope', '$rootScope', '$state', '$stateParams', '$templateRequest', '$compile', '$cookies','KeywordUploadService','EventService',
-    function($scope, $rootScope, $state, $stateParams, $templateRequest, $compile, $cookies, KeywordUploadService,EventService) {
+    ['$scope', '$rootScope', '$state', '$stateParams', '$templateRequest', '$compile', '$cookies','SeleniumUploadService','EventService',
+    function($scope, $rootScope, $state, $stateParams, $templateRequest, $compile, $cookies, SeleniumUploadService,EventService) {
 
       $scope.projectId = $stateParams.id;
 
@@ -16,7 +16,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
 
       $scope.project = null;
 
-      KeywordUploadService.get($scope.projectId, function (data,status) {
+      SeleniumUploadService.get($scope.projectId, function (data,status) {
         if(status === 404)
           $state.go('app.projects');
         $scope.project = data;
@@ -26,13 +26,13 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
       });
 
       var getListReport = function(projectId) {
-        KeywordUploadService.getListReport(projectId,function (data,status) {
+        SeleniumUploadService.getListReport(projectId,function (data,status) {
           $scope.listLogs = data;
         });
       }
 
       $scope.redirectTo = function(jobId) {
-        $state.go('app.keyword-upload.report', {id: $scope.projectId, jobId: jobId });
+        $state.go('app.selenium.report', {id: $scope.projectId, jobId: jobId });
       }
 
       var loadModal = function() {
@@ -41,7 +41,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
         //clear modal content
         $modal.html('');
 
-        $templateRequest('app/keyword-upload/views/overview-modal-content.tpl.html').then(function(template) {
+        $templateRequest('app/selenium/views/overview-modal-content.tpl.html').then(function(template) {
           $modal.html($compile(template)($scope));
           $modal.modal('show');
         });
@@ -54,7 +54,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
 
       $scope.viewLogWithJobId = function(jobId) {
         $scope.flagViewLog = true;
-        KeywordUploadService.getReport($scope.projectId, jobId, function (data,status) {
+        SeleniumUploadService.getReport($scope.projectId, jobId, function (data,status) {
           if(data.log) {
             $scope.logWithJob = data.log;
             loadModal();
@@ -69,7 +69,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
         $scope.project.log = undefined;
         $scope.project.watchUrl = undefined
 
-        KeywordUploadService.run($scope.projectId, function (data, status) {
+        SeleniumUploadService.run($scope.projectId, function (data, status) {
           switch (status) {
             case 201:
               $.smallBox({
@@ -105,7 +105,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
         var $modal = $('#project-edittion');
 
         $modal.html('');
-        $templateRequest('app/keyword-upload/views/project-edittion-modal-content.tpl.html').then(function (template) {
+        $templateRequest('app/selenium/views/project-edittion-modal-content.tpl.html').then(function (template) {
 
           $modal.html($compile(template)($scope));
           $modal.modal('show');
@@ -128,7 +128,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
           return;
         }
 
-        KeywordUploadService.update($scope.projectId, name ,function (data, status) {
+        SeleniumUploadService.update($scope.projectId, name ,function (data, status) {
 
           switch (status) {
             case 304:
@@ -165,7 +165,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
           }, function (ButtonPressed) {
             if (ButtonPressed === $rootScope.getWord('Yes')) {
 
-              KeywordUploadService.delete($scope.projectId, function (data, status) {
+              SeleniumUploadService.delete($scope.projectId, function (data, status) {
                 if (status === 200) {
                   $.smallBox({
                     title: $rootScope.getWord('Delete project'),
@@ -199,7 +199,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
                 log: undefined,
                 result: undefined
               };
-              KeywordUploadService.getReport($scope.projectId, job._id, function (data, status) {
+              SeleniumUploadService.getReport($scope.projectId, job._id, function (data, status) {
                 if(status === 404) return;
                 $scope.project.lastRunning = data.created_date;
                 log.created_date = data.created_date;
@@ -249,7 +249,7 @@ define(['keyword-upload/module', 'lodash'], function (module, _) {
             return;
           }
 
-          KeywordUploadService.upload(projectId,$scope.file,function(data,status){
+          SeleniumUploadService.upload(projectId,$scope.file,function(data,status){
             if(status === 201) {
               $.smallBox({
                 title: $rootScope.getWord('Notification'),

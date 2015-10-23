@@ -22,8 +22,8 @@ define([
                 'projects/controllers/new-project-controller',
                 'projects/directives/smart-popover',
                 'services/keyword-service',
-                'services/keyword-upload-service',
-                'keyword-upload/directives/download-report',
+                'services/selenium-upload-service',
+                'selenium/directives/download-report',
                 'services/performance-service',
                 'services/report-service'
               ])

@@ -12,7 +12,7 @@
       <div class="col-sm-12">
         <span class="proj-id">#{{project._id.substring(0,8)}} </span>
         <span data-icon="&#xe05b;" aria-hidden="true" class="proj-type"></span>
-        <span class="text-capitalize">{{getWord(project.type)}} {{getWord('test')}} </span> 
+        <span class="text-capitalize">{{getWord(project.type)}}</span> 
         <span ng-class="{
           'label label-running': project.status === 'RUNNING',
           'label label-success': project.status === 'READY'
@@ -29,14 +29,6 @@
     <div class="row ">
       <div class="col-md-6 project-properties">
             <div class='row'>
-                <div class='col-sm-3'>
-                    <div class='blur-name'>{{getWord('Test Suites')}}</div>
-                    <div class='statistic-number'>N/A</div>
-                </div>
-                <div class='col-sm-3'>
-                    <div class='blur-name'>{{getWord('Test Cases')}}</div>
-                    <div class='statistic-number'>N/A</div>
-                </div>
                 <div class='col-sm-6'>
                     <div class='blur-name'>{{getWord('Last Running')}}</div>
                     <div class='statistic-number'>{{project.lastRunning === undefine ? 'N/A' : project.lastRunning}}</div>
@@ -80,7 +72,7 @@
             'label label-success': log.result === 'Pass'}">{{getWord(log.result)}}</span></td>
             <td>{{log.created_date}}</td>
             <td>{{project.creator._id}}</td>
-            <td><a class = 'btn-border-line btnViewLog btn-download' download='final-result' download-report job-id='log.jobId' project-id = "project._id">{{getWord('Click Here')}}</a></td>
+            <td><a class = 'btn-border-line btnViewLog btn-download' download='final-result.tar.gz' download-report job-id='log.jobId' project-id = "project._id">{{getWord('Click Here')}}</a></td>
           </tr>
         </tbody>
       </table>
@@ -92,5 +84,5 @@
     </div>
     <div class="modal fade" id="project-edittion">
     </div>
-    <div data-smart-include="app/keyword-upload/views/upload-code.tpl.html"></div>
+    <div data-smart-include="app/selenium/views/upload-code.tpl.html"></div>
 </div>
