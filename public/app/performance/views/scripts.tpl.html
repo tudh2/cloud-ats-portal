@@ -13,7 +13,7 @@
       </span>
       <span class="col-md-6 text-right">
         <button type="submit" class="btn btn-default upload-script" data-toggle="modal" data-target="#uploadScript" ng-click="clickUploadScriptButton()">{{getWord('Upload Script')}}</button>
-        <button type="submit" class="btn btn-primary create-script" data-toggle="modal" data-target="#createScript" ng-click="clickCreateScriptButton()">{{getWord('New Test Script')}}</button> 
+        <button type="submit" class="btn btn-primary create-script" data-toggle="modal" data-target="#createScript" ng-click="clickCreateScriptButton()" data-backdrop="static" data-keyboard="false">{{getWord('New Test Script')}}</button> 
       </span>
 		
 		</div>
@@ -26,7 +26,7 @@
         
 	<div class="list-testcase">
 		<div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="script in scripts | search: searchTerms track by $index">
-			<div class="tc-itemBlock" ng-click="editScript(script._id)" data-toggle="modal" data-target="#createScript">
+			<div class="tc-itemBlock" ng-click="editScript(script._id)" data-toggle="modal" data-target="#createScript" data-backdrop="static" data-keyboard="false">
 				<div class="row">
           <div class="tc-attributes col-md-12">
             <div class="tc-id">#{{script._id.substring(0,8)}}</div>
