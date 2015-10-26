@@ -71,7 +71,7 @@ define(['keyword/module'], function(module) {
         });
       },
 
-      create: function(name, callback) {
+      create: function(name, showAction, valueDelay,callback) {
         var request = {
           method: 'POST',
           url: appConfig.RestEntry + '/api/v1/project/keyword',
@@ -80,7 +80,9 @@ define(['keyword/module'], function(module) {
             'X-SPACE': $cookies.get('space')
           },
           data: {
-            name: name
+            name: name,
+            showAction: showAction,
+            valueDelay: valueDelay
           }
         };
 
@@ -90,7 +92,7 @@ define(['keyword/module'], function(module) {
 
         });
       },
-      update: function (id, name, callback) {
+      update: function (id, name, showAction, valueDelay, callback) {
         var request = {
           method: 'PUT',
           url: appConfig.RestEntry + '/api/v1/project/keyword',
@@ -100,7 +102,9 @@ define(['keyword/module'], function(module) {
           },
           data: {
             name: name,
-            id: id
+            id: id,
+            showAction: showAction,
+            valueDelay: valueDelay
           }
         };
 

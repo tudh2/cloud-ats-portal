@@ -146,6 +146,15 @@ define(['projects/module', 'lodash'], function (module, _) {
       });
     };
 
+    $scope.resetModalNewProject = function() {
+      var $input =  $('div#createProject input[name="name"]');
+      var $checkbox =  $('div#createProject input[name="showAction"]');
+      var $number =  $('div#createProject input[name="delay"]');
+      $checkbox.attr('checked',false);
+      $number.val('0');
+      $input.val('');
+    };
+
     $scope.openLastLog = function (project) {
 
       $('[data-toggle="popover"]').each(function () {

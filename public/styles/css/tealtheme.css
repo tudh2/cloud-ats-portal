@@ -1588,3 +1588,12 @@ block-darksky-color
 }.functional-treeview {
 	padding-left: 25px;
 }
+.input-delay {
+    width: 80px;
+    position: relative;
+    margin-top: 5px;
+    height: 20px;
+}
+.label-options {
+    padding-left: 0px !important;
+}

@@ -24,19 +24,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="smart-form" >
-                  <div>
                     <label class="radio state-success">
                       <input type="radio" value="functional" ng-model="type"><i></i>{{getWord('Functional')}}
                     </label>
-                  </div>
-                  <div class="functional-treeview" ng-show="type=='functional'">
-                    <label class="radio state-success">
-                      <input type="radio" value="new" ng-model="functionalType"><i></i>New Project
-                    </label>
-                    <label class="radio state-success">
-                    <input type="radio" value="upload" ng-model="functionalType"><i></i>Upload Project Code
-                    </label>
-                  </div>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -45,6 +35,38 @@
                     <input type="radio" value="performance" ng-model="type"><i></i>{{getWord('Performance')}}
                   </label>
                 </div>
+              </div>
+            </div>
+            <div class="functional-treeview smart-form" ng-show="type=='functional'">
+              <div class="new-project">
+                <label class="radio state-success">
+                  <input type="radio" value="new" ng-model="functionalType"><i></i>New Project
+                </label>
+              </div>
+              <div class="options-project" ng-if="functionalType == 'new' ">
+                <div class="row in-action-logging">
+                  <div class="col-sm-6 smart-form">
+                    <label class="checkbox">Enable In-Action Logging</label>
+                  </div>
+                  <div class="col-sm-6 smart-form">
+                    <label class="checkbox">
+                      <input type="checkbox" name="showAction" id="checkbox" ng-model="showAction.status"><i></i>
+                    </label>
+                  </div>
+                </div>
+                <div class="row delay-time">
+                  <div class="col-sm-6 smart-form">
+                    <label class="checkbox">Delay Time (s)</label>
+                  </div>
+                  <div class="col-sm-6 smart-form">
+                      <input class="input-delay form-control" name="delay" required type="number" min="0" step="1" ng-model="delay.value">
+                  </div>
+                </div>
+              </div>
+              <div class="upload-project">
+                <label class="radio state-success">
+                  <input type="radio" value="upload" ng-model="functionalType"><i></i>Upload Project Code
+                </label>
               </div>
             </div>
           </div>
