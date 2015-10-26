@@ -42,7 +42,7 @@ define([
             deps: $couchPotatoProvider.resolveDependencies([
               'selenium/controllers/execution-controller',
               'selenium/directives/tabs-header',
-              'services/selenium-service'
+              'services/selenium-upload-service'
             ])
           }
         }

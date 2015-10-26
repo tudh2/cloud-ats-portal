@@ -7,7 +7,7 @@ define(['selenium/module'], function(module) {
       run: function(projectId, callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword/' + projectId + '/run',
+          url: appConfig.RestEntry + '/api/v1/project/selenium/' + projectId + '/run',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -24,7 +24,7 @@ define(['selenium/module'], function(module) {
       delete: function (id, callback) {
         var request = {
           method: 'DELETE',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword',
+          url: appConfig.RestEntry + '/api/v1/project/selenium',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -42,7 +42,7 @@ define(['selenium/module'], function(module) {
       list: function(callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keywords',
+          url: appConfig.RestEntry + '/api/v1/project/seleniums',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -59,7 +59,7 @@ define(['selenium/module'], function(module) {
       create: function(name, callback) {
         var request = {
           method: 'POST',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword',
+          url: appConfig.RestEntry + '/api/v1/project/selenium',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -79,7 +79,7 @@ define(['selenium/module'], function(module) {
       get: function(projectId, callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword/' + projectId,
+          url: appConfig.RestEntry + '/api/v1/project/selenium/' + projectId,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -96,7 +96,7 @@ define(['selenium/module'], function(module) {
       getReport : function(projectId,job_id,callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword/'+ projectId +'/report/'+ job_id,
+          url: appConfig.RestEntry + '/api/v1/project/selenium/'+ projectId +'/report/'+ job_id,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -113,7 +113,7 @@ define(['selenium/module'], function(module) {
       download : function(projectId,job_id,callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword/'+ projectId +'/download/'+ job_id,
+          url: appConfig.RestEntry + '/api/v1/project/selenium/'+ projectId +'/download/'+ job_id,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space'),
@@ -131,7 +131,7 @@ define(['selenium/module'], function(module) {
       getListReport : function(projectId,callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword/'+ projectId +'/reports',
+          url: appConfig.RestEntry + '/api/v1/project/selenium/'+ projectId +'/reports',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
@@ -150,7 +150,7 @@ define(['selenium/module'], function(module) {
           formData.append('file',file);
           var request = {
             method: 'POST',
-            url: appConfig.RestEntry + '/api/v1/uploadProject/keyword/'+ projectId + '/upload',
+            url: appConfig.RestEntry + '/api/v1/project/selenium/'+ projectId + '/upload',
             headers: {
               'X-AUTH-TOKEN': $cookies.get('authToken'),
               'Content-Type': undefined
@@ -169,7 +169,7 @@ define(['selenium/module'], function(module) {
       update: function (id, name, callback) {
         var request = {
           method: 'PUT',
-          url: appConfig.RestEntry + '/api/v1/uploadProject/keyword',
+          url: appConfig.RestEntry + '/api/v1/project/selenium',
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
