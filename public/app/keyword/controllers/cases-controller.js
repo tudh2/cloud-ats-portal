@@ -53,7 +53,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
             $scope.customs.push(data);
             $.smallBox({
                 title: $rootScope.getWord('Notification'),
-                content: $rootScope.getWord('Your test case has created'),
+                content: $rootScope.getWord('Your test case has been created'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -91,7 +91,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
             case 201: 
               $.smallBox({
                 title: $rootScope.getWord('Notification'),
-                content: $rootScope.getWord('Your test case has created'),
+                content: $rootScope.getWord('Your test case has been created'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -117,7 +117,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
               case 200:
                 $.smallBox({
                   title: $rootScope.getWord('Notification'),
-                  content: $rootScope.getWord('Your test case has updated'),
+                  content: $rootScope.getWord('Your test case has been updated'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
@@ -156,7 +156,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
             case 200: 
               $.smallBox({
                 title: $rootScope.getWord('Notification'),
-                content: $rootScope.getWord('Your test case has deleted'),
+                content: $rootScope.getWord('Your test case has been deleted'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000

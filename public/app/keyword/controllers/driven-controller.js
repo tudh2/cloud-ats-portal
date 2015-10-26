@@ -125,7 +125,7 @@ define(['keyword/module'], function (module) {
           DataService.create($scope.driven_name.trim(), $scope.dataset, $scope.current._id, function(data, status) {
             $.smallBox({
                 title: $rootScope.getWord('Notification'),
-                content: $rootScope.getWord('Dataset has created'),
+                content: $rootScope.getWord('Dataset has been created'),
                 color: '#296191',
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
@@ -150,7 +150,7 @@ define(['keyword/module'], function (module) {
               case 200:
                 $.smallBox({
                   title: $rootScope.getWord('Notification'),
-                  content: $rootScope.getWord('Dataset has updated'),
+                  content: $rootScope.getWord('Dataset has been updated'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',
                   timeout: 3000
