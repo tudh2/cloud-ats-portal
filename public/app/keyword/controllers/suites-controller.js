@@ -140,6 +140,14 @@ define(['keyword/module', 'lodash'], function (module, _) {
           });
 
         } else {
+          var new_name = $scope.current.name;
+          var input_new_name = $('input[id="editNameSuite"]').parent();
+          if(new_name.trim().length == 0) {
+            input_new_name.addClass("has-error");
+            return;
+          } else if(new_name.trim().length > 0) {
+            input_new_name.removeClass("has-error");
+          }
 
           SuiteService.update($scope.projectId, $scope.current, function(data, status) {
 
