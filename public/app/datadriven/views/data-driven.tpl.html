@@ -18,7 +18,7 @@
       >
       <div class="col-sm-12">
         <span class="pull-left">
-          {{data.name}}
+        {{data.name.length > 28 ? data.name.substring(0,25) + '...' : data.name}}
         </span>
         <div class="smart-form check-list" 
           ng-if="data._id == current._id" ng-click="deleteDataDriven(data, $index)">

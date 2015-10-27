@@ -856,7 +856,6 @@ a:hover.viewLog, a:focus.viewLog {
 {
     font-size:12px;
 }
-
 .list-testcase {
 	padding-top: 10px;
 }
@@ -952,8 +951,12 @@ a:hover.viewLog, a:focus.viewLog {
 	position: relative;
 	margin-bottom: 10px;
 	border-bottom-color: #ADC0C6!important;
-    padding-left: 10px;
-    line-height: 30px;
+  padding-left: 10px;
+  line-height: 30px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
 }
 .format-a-keword {
 	vertical-align: middle;
@@ -1586,7 +1589,10 @@ block-darksky-color
 }
 .open-project {
 	height: 100%;
-}.functional-treeview {
+	text-overflow: ellipsis;
+  overflow: hidden;
+}
+.functional-treeview {
 	padding-left: 25px;
 }
 .input-delay {
@@ -1601,4 +1607,23 @@ block-darksky-color
 .name-suite {
 	padding-left: 13px;
     padding-right: 13px;
+}
+.tc-name {
+	text-overflow: ellipsis !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.script-name {
+	text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+.test-case-name {
+	border: none !important;
+}
+.data-of-case {
+	text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
