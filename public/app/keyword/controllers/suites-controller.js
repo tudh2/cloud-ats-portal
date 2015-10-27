@@ -11,6 +11,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.editMode = false;
 
+      $scope.oldNameSuite = '';
+
       SuiteService.list($scope.projectId, function(response) {
         $scope.suites = response;
 
@@ -102,6 +104,11 @@ define(['keyword/module', 'lodash'], function (module, _) {
           });
       }
 
+      $scope.clickEditName = function(value) {
+        $scope.editMode = true;
+        $scope.oldNameSuite = value.name;
+      }
+
       $scope.saveEditTestSuite = function() {
 
         if ($scope.current.temp) {
@@ -190,6 +197,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.cancelEditTestSuite = function() {
         $scope.editMode = false;
+        $scope.current.name = $scope.oldNameSuite;
         if (!$scope.current.temp) {
           $scope.current.cases = _.cloneDeep($scope.current.originCases);
           $scope.current.caseOutline = _.cloneDeep($scope.current.originCaseOutline);
