@@ -1627,3 +1627,12 @@ block-darksky-color
   overflow: hidden;
   white-space: nowrap;
 }
+.pr-name {
+	text-overflow: ellipsis;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.fixed-table {
+	table-layout: fixed;
+}
