@@ -90,7 +90,6 @@
 					<td class="ds-right">{{getWord('Users')}}</td>
 					<td class="ds-right">{{getWord('Ram up')}}</td>
 					<td class="ds-right">{{getWord('Loops')}}</td>
-					<td class="ds-right">{{getWord('Duration')}}</td>
 					<td class="ds-right">{{getWord('Error Rate')}} </td>
 				</tr>
 				<tr ng-repeat="project in performance_projects | orderBy:'-error_percent'|limitTo:10 track by $index">
@@ -100,7 +99,6 @@
 					<td class="ds-right">{{project.users}}</td>
 					<td class="ds-right">{{project.ram_up}}s</td>
 					<td class="ds-right">{{project.loops}}</td>
-					<td class="ds-right">{{project.duration}} second(s)</td>
 					<td class="ds-right">{{project.error_percent}}%</td>
 				</tr>
 			</table>
