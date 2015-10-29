@@ -248,6 +248,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.cancelEditTestSuite = function() {
         $scope.editMode = false;
+        var input_new_name = $('input[id="editNameSuite"]').parent();
+        input_new_name.removeClass("has-error");
+        
         $scope.current.name = $scope.oldNameSuite;
         if (!$scope.current.temp) {
           $scope.current.cases = _.cloneDeep($scope.current.originCases);
