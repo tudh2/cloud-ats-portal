@@ -13,14 +13,10 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.oldNameSuite = '';
 
-<<<<<<< HEAD
-=======
       var checkCharacterName = /[a-zA-Z0-9\_\s]+/;
 
       var checkFirstCharacterName = /^[a-zA-Z\_]/;
 
-
->>>>>>> Validate name suite
       SuiteService.list($scope.projectId, function(response) {
         $scope.suites = response;
 
@@ -188,19 +184,21 @@ define(['keyword/module', 'lodash'], function (module, _) {
           }
 
           if (checkFirstCharacterName.exec(new_name) == null) {
-            input_new_name.focus();
-            input_new_name.addClass('has-error');
-            return;
-          } else {
-            var chars = checkCharacterName.exec(new_name);
-            if (chars[0].length != new_name.length) {
               input_new_name.focus();
               input_new_name.addClass('has-error');
               return;
+            } else {
+              var chars = checkCharacterName.exec(new_name);
+              if (chars[0].length != new_name.length) {
+                input_new_name.focus();
+                input_new_name.addClass('has-error');
+                return;
+              }
             }
-          }
 
           SuiteService.update($scope.projectId, $scope.current, function(data, status) {
+
+            
             switch (status) {
 
               case 200: 
