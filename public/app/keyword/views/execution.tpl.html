@@ -26,7 +26,7 @@
           <div class="col-sm-6">
             <div class="smart-form" >
               <label class="radio state-success">
-                <input name="browser" type="radio" checked="">
+                <input name="browser" type="radio" ng-model="project.browser" value="firefox">
                 <i class="choose_browse"></i><img ng-src="/styles/img/firefox.jpg" width="60px;">
               </label>
             </div>
@@ -35,8 +35,33 @@
           <div class="col-sm-6 select-version">
             <p>{{getWord('Select Version')}}</p>
             <div class="form-group">
+              <select class="form-control" ng-model="project.version">
+                <option selected="selected">41.0.2</option>
+                <option>38.3.0esr</option>
+                <option>26.0</option>
+                <option>17.0.9esr</option>
+              </select>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 browser">
+          <div class="col-sm-6">
+            <div class="smart-form" >
+              <label class="radio state-success">
+                <input name="browser" type="radio" ng-model="project.browser" value="chrome">
+                <i class="choose_browse"></i><img ng-src="/styles/img/chrome.jpg" width="60px;">
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-6 select-version">
+            <p>{{getWord('Select Version')}}</p>
+            <div class="form-group">
               <select class="form-control">
-                <option>v1.0</option>
+                <option selected="selected">46.0.2490.80</option>
               </select>
             </div>
           </div>
@@ -56,6 +81,9 @@
                 <img ng-src="/styles/img/ubuntu.png" width="60px;">
               </label>
             </div>
+          </div>
+          <div class="col-sm-6">
+            <p>Ubuntu 14.04 64bit</p>
           </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ define(['keyword/module'], function(module) {
   module.registerFactory('KeywordService', ['$http', '$cookies', function($http, $cookies) {
     return {
 
-      run: function(projectId, listSuite, callback) {
+      run: function(projectId, listSuite, options, callback) {
         var request = {
           method: 'POST',
           url: appConfig.RestEntry + '/api/v1/project/keyword/' + projectId + '/run',
@@ -12,7 +12,10 @@ define(['keyword/module'], function(module) {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')
           },
-          data: listSuite
+          data: {
+            suites: listSuite,
+            options: options
+          }
         };
 
         $http(request).success(function(data, status) {

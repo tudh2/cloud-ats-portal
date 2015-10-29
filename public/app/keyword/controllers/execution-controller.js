@@ -31,6 +31,8 @@ define(['keyword/module'], function (module) {
 
       KeywordService.get($scope.projectId, function(project) {
         $scope.project = project;
+        $scope.project.browser = "firefox";
+        $scope.project.version = "41.0.2"
         checkProjectStatus();
       });
 
@@ -57,7 +59,11 @@ define(['keyword/module'], function (module) {
       $scope.run = function() {
         if (checkProjectStatus())
 
-        KeywordService.run($scope.projectId, selected, function (data, status) {
+        var options = {
+          browser: $scope.project.browser,
+          version: $scope.project.version
+        }
+        KeywordService.run($scope.projectId, selected, options, function (data, status) {
           switch (status) {
             case 201:
               $.smallBox({
