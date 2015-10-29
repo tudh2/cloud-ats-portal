@@ -1085,6 +1085,7 @@ a:hover.viewLog, a:focus.viewLog {
     min-width:280px;
     padding-top:140px;
     padding-bottom:90px;
+    z-index: 9;
 }
 #testcase-container
 {
@@ -1596,4 +1597,8 @@ block-darksky-color
 }
 .label-options {
     padding-left: 0px !important;
+}
+.name-suite {
+	padding-left: 13px;
+    padding-right: 13px;
 }

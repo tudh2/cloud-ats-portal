@@ -13,6 +13,10 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.oldNameSuite = '';
 
+      var checkCharacterName = /[a-zA-Z0-9\_\s]+/;
+
+      var checkFirstCharacterName = /^[a-zA-Z\_]/;
+
       SuiteService.list($scope.projectId, function(response) {
         $scope.suites = response;
 
@@ -120,6 +124,19 @@ define(['keyword/module', 'lodash'], function (module, _) {
             return false;
           }
 
+          if (checkFirstCharacterName.exec($scope.current.name) == null) {
+            $inputSuiteName.focus();
+            $inputSuiteName.parent().addClass('has-error');
+            return;
+          } else {
+            var chars = checkCharacterName.exec($scope.current.name);
+            if (chars[0].length != $scope.current.name.length) {
+              $inputSuiteName.focus();
+              $inputSuiteName.parent().addClass('has-error');
+              return;
+            }
+          }
+
           SuiteService.create($scope.projectId, $scope.current, function(data, status) {
             switch (status) {
 
@@ -133,6 +150,16 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 });
                 $scope.suites.push(data);
                 $scope.selectSuite(data);
+                break;
+
+              case 304:
+                $.smallBox({
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('This name already exists. Please try again'),
+                  color: '#c26565',
+                  iconSmall: 'fa fa-ban bounce animated',
+                  timeout: 3000
+                });
                 break;
 
               default:
@@ -156,8 +183,22 @@ define(['keyword/module', 'lodash'], function (module, _) {
             input_new_name.removeClass("has-error");
           }
 
+          if (checkFirstCharacterName.exec(new_name) == null) {
+              input_new_name.focus();
+              input_new_name.addClass('has-error');
+              return;
+            } else {
+              var chars = checkCharacterName.exec(new_name);
+              if (chars[0].length != new_name.length) {
+                input_new_name.focus();
+                input_new_name.addClass('has-error');
+                return;
+              }
+            }
+
           SuiteService.update($scope.projectId, $scope.current, function(data, status) {
 
+            
             switch (status) {
 
               case 200: 
@@ -182,6 +223,16 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 $scope.editMode = false;
                 break;
 
+              case 304:
+                $.smallBox({
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('This name already exists. Please try again'),
+                  color: '#c26565',
+                  iconSmall: 'fa fa-ban bounce animated',
+                  timeout: 3000
+                });
+                break;
+
               default:
                 $.smallBox({
                   title: $rootScope.getWord('Notification'),
@@ -197,6 +248,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.cancelEditTestSuite = function() {
         $scope.editMode = false;
+        var input_new_name = $('input[id="editNameSuite"]').parent();
+        input_new_name.removeClass("has-error");
+        
         $scope.current.name = $scope.oldNameSuite;
         if (!$scope.current.temp) {
           $scope.current.cases = _.cloneDeep($scope.current.originCases);

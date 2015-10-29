@@ -14,7 +14,10 @@
         <input id="input-new-testsuite-name" type="text" class="form-control" placeholder="{{getWord('Enter Your Test Suite Name')}}"
           ng-model="current.name" 
           ng-blur="inputNewSuiteNameBlur($event)"
-          ng-keypress="inputNewSuiteNameKeypress($event)">
+          ng-keypress="inputNewSuiteNameKeypress($event)"
+          data-popover="Suite name does not allow numberic at first character and special characters including."
+          data-popover-trigger="mouseenter"
+          data-popover-placement='right'>
       </div>
     </div>
     <div class="test-suite-items">
@@ -23,7 +26,7 @@
       ng-class="{'test-suite-selected':suite._id == current._id, 'not-allow-click': editMode && !(suite._id == current._id)}"
       ng-click="selectSuite(suite)">
 
-      <div class="col-sm-12">
+      <div class="name-suite">
         <span class="pull-left" ng-if="!editMode || !(suite._id == current._id)">
           <i class="fa" 
           ng-class="{
@@ -32,7 +35,10 @@
           }">
           </i> {{suite.name}}
         </span>
-        <input class="editNameSuite" id="editNameSuite" type="text" ng-model="suite.name" ng-if="suite._id == current._id && editMode">
+        <input class="editNameSuite form-control" id="editNameSuite" type="text" ng-model="suite.name" ng-if="suite._id == current._id && editMode"
+        data-popover="Suite name does not allow numberic at first character and special characters including."
+          data-popover-trigger="mouseenter"
+          data-popover-placement='right'>
         <div class="smart-form check-list" 
           ng-if="suite._id == current._id && !editMode" ng-click="deleteTestSuite(suite)">
           <span class="glyphicon glyphicon-remove-sign icon pull-right"></span>
