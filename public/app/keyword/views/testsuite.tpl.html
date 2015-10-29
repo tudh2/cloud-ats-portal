@@ -33,6 +33,7 @@
           </i> {{suite.name}}
         </span>
         <input class="editNameSuite" id="editNameSuite" type="text" ng-model="suite.name" ng-if="suite._id == current._id && editMode">
+        <input class="editNameSuite form-control" id="editNameSuite" type="text" ng-model="suite.name" ng-if="suite._id == current._id && editMode">
         <div class="smart-form check-list" 
           ng-if="suite._id == current._id && !editMode" ng-click="deleteTestSuite(suite)">
           <span class="glyphicon glyphicon-remove-sign icon pull-right"></span>
