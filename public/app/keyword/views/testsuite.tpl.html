@@ -20,11 +20,11 @@
     <div class="test-suite-items">
     <div class="row test-suite" 
       ng-repeat="suite in suites | search: searchTerms"
-      ng-class="{'test-suite-selected':suite._id == current._id, 'not-allow-click': editMode}"
+      ng-class="{'test-suite-selected':suite._id == current._id, 'not-allow-click': editMode && !(suite._id == current._id)}"
       ng-click="selectSuite(suite)">
 
       <div class="col-sm-12">
-        <span class="pull-left">
+        <span class="pull-left" ng-if="!editMode || !(suite._id == current._id)">
           <i class="fa" 
           ng-class="{
             'fa-circle has-case':suite.cases.length > 0,
@@ -32,8 +32,9 @@
           }">
           </i> {{suite.name}}
         </span>
+        <input class="editNameSuite" id="editNameSuite" type="text" ng-model="suite.name" ng-if="suite._id == current._id && editMode">
         <div class="smart-form check-list" 
-          ng-if="suite._id == current._id" ng-click="deleteTestSuite(suite)">
+          ng-if="suite._id == current._id && !editMode" ng-click="deleteTestSuite(suite)">
           <span class="glyphicon glyphicon-remove-sign icon pull-right"></span>
         </div>
       </div>

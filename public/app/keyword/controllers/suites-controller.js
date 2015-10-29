@@ -11,6 +11,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.editMode = false;
 
+      $scope.oldNameSuite = '';
+
       SuiteService.list($scope.projectId, function(response) {
         $scope.suites = response;
 
@@ -102,6 +104,11 @@ define(['keyword/module', 'lodash'], function (module, _) {
           });
       }
 
+      $scope.clickEditName = function(value) {
+        $scope.editMode = true;
+        $scope.oldNameSuite = value.name;
+      }
+
       $scope.saveEditTestSuite = function() {
 
         if ($scope.current.temp) {
@@ -140,6 +147,14 @@ define(['keyword/module', 'lodash'], function (module, _) {
           });
 
         } else {
+          var new_name = $scope.current.name;
+          var input_new_name = $('input[id="editNameSuite"]').parent();
+          if(new_name.trim().length == 0) {
+            input_new_name.addClass("has-error");
+            return;
+          } else if(new_name.trim().length > 0) {
+            input_new_name.removeClass("has-error");
+          }
 
           SuiteService.update($scope.projectId, $scope.current, function(data, status) {
 
@@ -182,6 +197,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.cancelEditTestSuite = function() {
         $scope.editMode = false;
+        $scope.current.name = $scope.oldNameSuite;
         if (!$scope.current.temp) {
           $scope.current.cases = _.cloneDeep($scope.current.originCases);
           $scope.current.caseOutline = _.cloneDeep($scope.current.originCaseOutline);
