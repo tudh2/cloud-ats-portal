@@ -92,7 +92,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
           selected.push(sel._id);
         });
 
-        KeywordService.run($scope.projectId, selected, function (data, status) {
+        var options = {};
+        KeywordService.run($scope.projectId, selected, options, function (data, status) {
           switch (status) {
             case 201:
               $.smallBox({
