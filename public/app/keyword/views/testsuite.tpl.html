@@ -33,7 +33,7 @@
             'fa-circle has-case':suite.cases.length > 0,
             'fa-circle-o hasnot-case':suite.cases.length < 1
           }">
-          </i> {{suite.name}}
+          </i> {{suite.name.length > 28 ? suite.name.substring(0,25) + '...' : suite.name}}
         </span>
         <input class="editNameSuite form-control" id="editNameSuite" type="text" ng-model="suite.name" ng-if="suite._id == current._id && editMode"
         data-popover="Suite name does not allow numberic at first character and special characters including."

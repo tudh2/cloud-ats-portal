@@ -28,9 +28,9 @@
 							<P class="project-name">{{getWord('Top passed Projects')}} </P>
 						</div>
 						<div class="col-sm-12 ds-box-table">
-							<table class="col-sm-12">
+							<table class="col-sm-12 fixed-table">
 								<tr class="project-name" ng-repeat="project in top_keyword_projects_pass | orderBy:'-percentPass' track by $index">
-									<td ng-click="redirectKeyword(project._id)"><a>{{project.name}}</a></td>
+									<td ng-click="redirectKeyword(project._id)" class="pr-name"><a>{{project.name}}</a></td>
 									<td class="pull-right">{{project.percentPass}}%</td>
 								</tr>
 							</table>
@@ -44,9 +44,9 @@
 							<P class="project-name">{{getWord('Top Failed projects')}} </P>
 						</div>
 						<div class="col-sm-12 ds-box-table">
-							<table class="col-sm-12">
+							<table class="col-sm-12 fixed-table">
 								<tr ng-repeat="project in top_keyword_projects_fail | orderBy:'-percentFail' track by $index">
-									<td ng-click="redirectKeyword(project._id)"><a>{{project.name}}</a></td>
+									<td ng-click="redirectKeyword(project._id)" class="pr-name"><a>{{project.name}}</a></td>
 									<td class="pull-right">{{project.percentFail}}%</td>
 								</tr>
 							</table>
@@ -60,9 +60,9 @@
 							<P class="project-name">{{getWord('5 Biggest Projects')}} </P>
 						</div>
 						<div class="col-sm-12 ds-box-table">
-							<table class="col-sm-12">
+							<table class="col-sm-12 fixed-table">
 								<tr ng-repeat="project in top_biggest_project track by $index">
-									<td ng-click="redirectKeyword(project._id)"><a>{{project.name}}</a></td>
+									<td ng-click="redirectKeyword(project._id)" class="pr-name"><a>{{project.name}}</a></td>
 									<td class="pull-right fix-size-biggest-project">{{project.totalCases}} {{getWord('test cases')}}</td>
 								</tr>
 							</table>
@@ -82,7 +82,7 @@
 			<P class="project-name">{{getWord('Top Error Projects')}}</P>
 		</div>
 		<div class="col-sm-12 ds-box-table">
-			<table class="col-sm-12">
+			<table class="col-sm-12 fixed-table">
 				<tr>
 					<td class="ds-left">{{getWord('No')}}.</td>
 					<td class="ds-left">{{getWord('Project Name')}}</td>
@@ -94,7 +94,7 @@
 				</tr>
 				<tr ng-repeat="project in performance_projects | orderBy:'-error_percent'|limitTo:10 track by $index">
 					<td class="ds-left">{{$index+1}}</td>
-					<td class="ds-left" ng-click="redirectPerformance(project._id)"><a>{{project.projectName}}</a></td>
+					<td class="ds-left pr-name" ng-click="redirectPerformance(project._id)"><a>{{project.projectName}}</a></td>
 					<td class="ds-right">{{project.samples}}</td>
 					<td class="ds-right">{{project.users}}</td>
 					<td class="ds-right">{{project.ram_up}}s</td>

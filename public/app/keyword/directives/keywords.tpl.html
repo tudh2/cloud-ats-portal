@@ -7,7 +7,7 @@
         <li>
           <span class="editinline color-keyword">
             <a class="fa fa-fw fa-folder-open txt-color-darken"></a>
-            <span style="border: none;">{{case.name}}</span>
+            <span class="test-case-name">{{case.name.length > 40 ? case.name.substring(0,40)+'...' : case.name}}</span>
           </span>
 
           <!-- action steps -->

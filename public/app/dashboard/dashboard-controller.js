@@ -11,7 +11,14 @@ define(['dashboard/module', 'lodash','morris'], function(module, _) {
       DashboardService.summary(function (data, status) {
 
         // recent finished projects
-        $scope.recent_finished_projects = JSON.parse(data.recentProjects);
+        var recent_finished_projects = JSON.parse(data.recentProjects);
+
+        _.forEach(recent_finished_projects, function (project) {
+          if (project.x.length > 20) {
+            project.x = project.x.substring(0,17) + '...';
+          }
+        });
+        $scope.recent_finished_projects = recent_finished_projects;
 
         // get top project passed
         var top_keyword_projects_pass = JSON.parse(data.topKeywordPass);

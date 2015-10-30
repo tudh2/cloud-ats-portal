@@ -11,8 +11,10 @@
      
     <div class="row list-script" style="margin-top: 10px;" ng-repeat="script in scripts | search: searchTerms track by $index">
       <div class="col-md-12">
-        <span class="pull-left script-name">{{script.name}}</span>
-        <div class="smart-form check-list">
+        <div class="col-md-9">
+          <span class="pull-left script-name">{{script.name}}</span>
+        </div>
+        <div class="smart-form check-list col-md-3">
           <label class="checkbox scriptId pull-right">
             <input type="checkbox" name="checkbox" class="checkbox-script" value="{{script._id}}" ng-click="selectScript(script._id);">
             <i></i>
