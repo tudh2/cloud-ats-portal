@@ -250,12 +250,26 @@ define(['selenium/module', 'lodash'], function (module, _) {
           $fileNames.parent().removeClass("has-error");
 
           var fileName = $scope.file.name;
+          var fileSize = $scope.file.size/1024;
           var lastIndex = _.lastIndexOf(fileName, ".");
           var extension = fileName.substring(lastIndex + 1);
           if(extension !== "zip") {
             $.smallBox({
               title: $rootScope.getWord('Notification'),
               content: $rootScope.getWord('File is not correct format !'),
+              color: '#C00000 ',
+              iconSmall: 'fa fa-check bounce animated',
+              timeout: 3000
+            });
+            $('#uploadFile').val('');
+            $scope.file = undefined;
+            return;
+          }
+
+          if(fileSize/1024 > 10) {
+            $.smallBox({
+              title: $rootScope.getWord('Notification'),
+              content: $rootScope.getWord('File size is too large. The maximum file size allowed is 10 Mb.'),
               color: '#C00000 ',
               iconSmall: 'fa fa-check bounce animated',
               timeout: 3000
