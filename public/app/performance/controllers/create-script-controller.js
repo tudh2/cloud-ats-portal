@@ -321,11 +321,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       $('#loops').bootstrapSlider('setValue', data.loops);
       $('#duration').bootstrapSlider('setValue', data.duration);
 
-      // show value slider in span tag
-      $("#usersSliderVal").text(data.number_threads);
-      $("#ramupSliderVal").text(data.ram_up);
-      $("#loopsSliderVal").text(data.loops);
-      $("#durationSliderVal").text(data.duration);
     }
 
   }]);

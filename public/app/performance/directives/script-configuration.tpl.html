@@ -8,18 +8,17 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-10">
+		<div class="col-sm-12">
 			<div class="row">
-				<div class="col-sm-5"></div>
+				<div class="col-sm-3"></div>
 				<div class="col-sm-7">
 					<span class="pull-left impress">1</span>
 					<span class="pull-right impress">1000</span>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-5">
+				<div class="col-sm-3">
 					<p class="pull-left  impress">{{getWord('Concurrent Users')}}
-						<span class="label label-success" id="usersSliderVal"> 1</span>
 					</p>
 				</div>
 				<div class="col-sm-7">
@@ -31,17 +30,21 @@
 	          data-slider-tooltip="hide"
 	          data-slider-handle="round">
 				</div>
+				<div class="col-sm-2">
+					<input id="usersSliderVal" class="form-error" style="width: 60px;" ng-model="script.number_threads" type="number" max="1000" min="1"/>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-5"></div>
+				<div class="col-sm-3"></div>
 				<div class="col-sm-7">
 					<span class="pull-left impress">0s</span>
 					<span class="pull-right impress">100s</span>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-5">
-					<p class="pull-left impress">{{getWord('Ram up')}} <span class="label label-success" id="ramupSliderVal"> 0</span></p>
+				<div class="col-sm-3">
+					<p class="pull-left impress">{{getWord('Ram up')}}
+					</p>
 				</div>
 				<div class="col-sm-7">
 					<input data-smart-uislider type="text" class="slider slider-success" id="ramup"   
@@ -52,17 +55,21 @@
 	           data-slider-tooltip="hide"
 	           data-slider-handle="round">
 				</div>
+				<div class="col-sm-2">
+					<input id="ramupSliderVal" style="width: 60px;" ng-model="script.ram_up" type="number" max="100" min="0" />
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-5"></div>
+				<div class="col-sm-3"></div>
 				<div class="col-sm-7">
 					<span class="pull-left impress">1</span>
 					<span class="pull-right impress">10</span>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-5">
-					<p class="pull-left impress">{{getWord('Loops')}} <span class="label label-success" id="loopsSliderVal"> 1</span></p>
+				<div class="col-sm-3">
+					<p class="pull-left impress">{{getWord('Loops')}}
+					</p>
 				</div>
 				<div class="col-sm-7">
 					<input data-smart-uislider type="text" class="slider slider-success" id="loops" 
@@ -71,6 +78,9 @@
 	         data-slider-selection = "before"
 	         data-slider-tooltip="hide"
 	         data-slider-handle="round">
+				</div>
+				<div class="col-sm-2">
+					<input id="loopsSliderVal" style="width: 60px;" ng-model="script.loops" type="number" max="10" min="1"/>
 				</div>
 			</div>
 			<div class="row" ng-hide='true'>
