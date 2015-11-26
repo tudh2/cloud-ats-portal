@@ -250,6 +250,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       $scope.script = {
         ram_up: 5,
         number_threads: 1,
+        number_engines: 1,
         duration: 0,
         loops: 1,
         samplers: [
@@ -320,7 +321,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       $('#ramup').bootstrapSlider('setValue', data.ram_up);
       $('#loops').bootstrapSlider('setValue', data.loops);
       $('#duration').bootstrapSlider('setValue', data.duration);
-
+      $('#engines').bootstrapSlider('setValue', data.number_engines);
     }
 
   }]);

@@ -10,6 +10,15 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="row">
+				<div class="col-sm-3">
+					<p class="pull-left impress">{{getWord('Users Concurrents')}}
+					</p>
+				</div>
+				<div class="col-sm-offset-7 col-sm-2">
+					<span class="label label-success" id="totalUsers"> {{script.number_threads * script.number_engines}}</span>
+				</div>
+			</div>
+			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-7">
 					<span class="pull-left impress">1</span>
@@ -18,12 +27,12 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-3">
-					<p class="pull-left  impress">{{getWord('Concurrent Users')}}
+					<p class="pull-left impress">{{getWord('Users Per Engine')}}
 					</p>
 				</div>
 				<div class="col-sm-7">
 					<input data-smart-uislider type="text" class="slider slider-success" id="users" 
-	          data-slider-id="usersSlider"
+	          data-slider-id="totalUsers"
 	          data-slider-min="1"
 	          data-slider-max="1000"
 	          data-slider-selection = "before"
@@ -32,6 +41,31 @@
 				</div>
 				<div class="col-sm-2">
 					<input id="usersSliderVal" class="form-error" style="width: 60px;" ng-model="script.number_threads" type="number" max="1000" min="1"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-7">
+					<span class="pull-left impress">1</span>
+					<span class="pull-right impress">5</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<p class="pull-left impress">{{getWord('Number Of Engines')}}
+					</p>
+				</div>
+				<div class="col-sm-7">
+					<input data-smart-uislider type="number" class="slider slider-success" id="engines" 
+	          data-slider-id="enginesSlider"
+	          data-slider-min="1"
+	          data-slider-max="5"
+	          data-slider-selection = "before"
+	          data-slider-tooltip="hide"
+	          data-slider-handle="round">
+				</div>
+				<div class="col-sm-2">
+					<input id="enginesSliderVal" class="form-error" style="width: 60px;" ng-model="script.number_engines" type="number" max="5" min="1"/>
 				</div>
 			</div>
 			<div class="row">
