@@ -59,6 +59,7 @@
           <th>{{getWord('Test Result')}}</th>
           <th>{{getWord('Created Date')}}</th>
           <th>{{getWord('Create By')}}</th>
+          <th>{{getWord('Download JTL File')}}</th>
         </tr>
         </thead>
         <tbody>
@@ -70,6 +71,8 @@
             <td><span class="label label-success">{{getWord(i.status)}}</span></td>
             <td>{{i.created_date}}</td>
             <td>Cloud ATS</td>
+            <td><a class = 'btn-border-line btnViewLog btn-download' 
+            download='final-result.jtl' download-report-performance job-id='i._id' project-id = "project._id">{{getWord('Click Here')}}</a></td>
           </tr>
         </tbody>
       </table>
