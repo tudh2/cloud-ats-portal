@@ -20,7 +20,8 @@ define([
 						deps: $couchPotatoProvider.resolveDependencies([
 							'performance/controllers/overview-controller',
 							'performance/directives/tabs-header-performance',
-							'services/performance-service'
+							'services/performance-service',
+							'performance/directives/download-report-performance'
 						])
 					}
 					},
