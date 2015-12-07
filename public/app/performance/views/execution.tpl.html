@@ -26,14 +26,18 @@
   <div class="col-sm-5">
     <p class="ng-binding" style="margin-top: 20px;">SUMARY INFORMATION</p>
 
-    <div class="alert alert-warning engine-warning">
-      <a href="#" class="close" data-dismiss="alert">×</a>
-      <strong>Warning!</strong> Number engines will be created : {{number_engines != undefined ? number_engines : 0}}.
-    </div>   
-    
-    <div ng-repeat="script in scripts track by $index" ng-if="script.showInfo" style="margin-top: 10px;">
-      <span>{{script.name}} runs with {{script.number_threads}} users on {{script.number_engines}} engines</span>
+    <div ng-repeat="script in scripts track by $index" ng-if="script.showInfo">
+
+      <cite>{{script.name}}</cite>
+      <ul>
+        <li>Number of threads : {{script.number_threads}}</li>
+        <li>Number of engines : {{script.number_engines}}</li>
+      </ul>
+
     </div>
+    <div class="total-engine" style="border-top: 1px solid #E2E2E2; margin-top: 10px; padding-top: 10px;" ng-if="number_engines > 0">
+      Number engines will be created : {{number_engines != undefined ? number_engines : 0}}.
+    </div>   
   </div>
 
 	<div class="col-sm-4 execution-area">
