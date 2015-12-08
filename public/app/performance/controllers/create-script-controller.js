@@ -317,11 +317,11 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
     var setConfigurationInfo = function (data) {
       // set value for input slider
-      $('#users').bootstrapSlider('setValue', data.number_threads);
-      $('#ramup').bootstrapSlider('setValue', data.ram_up);
-      $('#loops').bootstrapSlider('setValue', data.loops);
-      $('#duration').bootstrapSlider('setValue', data.duration);
-      $('#engines').bootstrapSlider('setValue', data.number_engines);
+      $('#users').slider('setValue', data.number_threads);
+      $('#ramup').slider('setValue', data.ram_up);
+      $('#loops').slider('setValue', data.loops);
+      $('#duration').slider('setValue', data.duration);
+      $('#engines').slider('setValue', data.number_engines);
     }
 
   }]);

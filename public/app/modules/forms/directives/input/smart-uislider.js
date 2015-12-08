@@ -8,9 +8,9 @@ define(['layout/module', 'bootstrap-slider'], function (module) {
             link: function (scope, tElement, tAttributes) {
                 tElement.removeAttr('smart-uislider data-smart-uislider');
 
-                tElement.bootstrapSlider();
+                tElement.slider();
                 
-                $(tElement.data('bootstrapSlider').sliderElem).prepend(tElement)
+                $(tElement.data('slider').sliderElem).prepend(tElement)
             }
         }
     });
