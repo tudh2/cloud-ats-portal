@@ -1636,3 +1636,7 @@ block-darksky-color
 .fixed-table {
 	table-layout: fixed;
 }
+.engine-warning {
+	border-right: 1px solid #E2E2E2;
+	margin-top: 10px;
+}

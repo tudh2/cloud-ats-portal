@@ -87,7 +87,8 @@
 					<td class="ds-left">{{getWord('No')}}.</td>
 					<td class="ds-left">{{getWord('Project Name')}}</td>
 					<td class="ds-right">{{getWord('Samplers')}}</td>
-					<td class="ds-right">{{getWord('Users')}}</td>
+					<td class="ds-right">{{getWord('Number Of Engine')}}</td>
+					<td class="ds-right">{{getWord('Users/Engine')}}</td>
 					<td class="ds-right">{{getWord('Ram up')}}</td>
 					<td class="ds-right">{{getWord('Loops')}}</td>
 					<td class="ds-right">{{getWord('Error Rate')}} </td>
@@ -96,6 +97,7 @@
 					<td class="ds-left">{{$index+1}}</td>
 					<td class="ds-left pr-name" ng-click="redirectPerformance(project._id)"><a>{{project.projectName}}</a></td>
 					<td class="ds-right">{{project.samples}}</td>
+					<td class="ds-right">{{project.number_engines}}</td>
 					<td class="ds-right">{{project.users}}</td>
 					<td class="ds-right">{{project.ram_up}}s</td>
 					<td class="ds-right">{{project.loops}}</td>

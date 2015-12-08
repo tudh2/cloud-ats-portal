@@ -8,10 +8,18 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
 
     $scope.samplerReport = true; 
  		$scope.projectId = $stateParams.id;
+
+    $scope.number_engines = 0;
+
+    var engines = [];
     var selected = [];
  		$scope.title = "EXECUTION";
 
     ScriptService.list($scope.projectId, function(response) {
+
+      _.forEach(response, function (script) {
+        script.showInfo = false;        
+      });
       $scope.scripts = response;
       $scope.totalScripts = response.totalScripts;
     });
@@ -37,19 +45,33 @@ define(['performance/module', 'lodash', 'morris', 'notification'], function (mod
 
         return true;
     }
+    
     // handle when user selects scripts
-    $scope.selectScript = function (scriptId) {
+    $scope.selectScript = function (script) {
+
+      script.showInfo = !script.showInfo;
+      $scope.number_engines = 0;
       var $btnRun = $('.btn.btn-primary.btn-performance-run');
-      if (_.indexOf(selected, scriptId) != -1) {
+      if (_.indexOf(selected, script._id) != -1) {
           _.remove(selected, function(sel) {
-            return sel == scriptId;
+            return sel == script._id;
           });
         } else {
-          selected.push(scriptId);
+          selected.push(script._id);
         }
 
       if (selected.length > 0) $btnRun.removeClass('disabled');
       else $btnRun.addClass('disabled');
+      
+      _.forEach(selected, function (scriptId) {
+        _.forEach($scope.scripts, function (script) {
+          if (scriptId == script._id) {
+            if (script.number_engines > $scope.number_engines) {
+              $scope.number_engines = script.number_engines;
+            }
+          }
+        });
+      });
     }
 
     //run project with projectid and list scripts

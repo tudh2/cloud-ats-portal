@@ -250,6 +250,7 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       $scope.script = {
         ram_up: 5,
         number_threads: 1,
+        number_engines: 1,
         duration: 0,
         loops: 1,
         samplers: [
@@ -316,16 +317,11 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
     var setConfigurationInfo = function (data) {
       // set value for input slider
-      $('#users').bootstrapSlider('setValue', data.number_threads);
-      $('#ramup').bootstrapSlider('setValue', data.ram_up);
-      $('#loops').bootstrapSlider('setValue', data.loops);
-      $('#duration').bootstrapSlider('setValue', data.duration);
-
-      // show value slider in span tag
-      $("#usersSliderVal").text(data.number_threads);
-      $("#ramupSliderVal").text(data.ram_up);
-      $("#loopsSliderVal").text(data.loops);
-      $("#durationSliderVal").text(data.duration);
+      $('#users').slider('setValue', data.number_threads);
+      $('#ramup').slider('setValue', data.ram_up);
+      $('#loops').slider('setValue', data.loops);
+      $('#duration').slider('setValue', data.duration);
+      $('#engines').slider('setValue', data.number_engines);
     }
 
   }]);
