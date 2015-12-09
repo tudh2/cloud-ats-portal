@@ -120,7 +120,57 @@ define(['app'], function(app) {
                 break;
             }
           });
+        },
+
+        upload: function (params,caseId, projectId, file,callback) {
+          var request = {
+            method : 'POST',
+            url: appConfig.RestEntry + '/api/v1/data/' + projectId + '/upload/' + caseId,
+            headers: {
+              'X-AUTH-TOKEN': $cookies.get('authToken'),
+              'Content-Type': undefined
+            },
+            transformRequest : function(data) {
+              var formData = new FormData();
+              formData.append('file',data.file);
+              formData.append('params',angular.toJson(data.params));
+              return formData;
+            },
+            data: {
+              file : file,
+              params : params
+            }
+          }
+
+          $http(request)
+          .success(function (data,status) {
+            callback(data,status);
+          })
+          .error(function(data,status) {
+            callback(data,status);
+          });
         }
+        /*upload: function (params,caseId, projectId, file,callback) {
+          var formData = new FormData();
+          formData.append('file',file);
+          var request = {
+            method : 'POST',
+            url: appConfig.RestEntry + '/api/v1/data/' + projectId + '/upload/' + caseId,
+            headers: {
+              'X-AUTH-TOKEN': $cookies.get('authToken'),
+              'Content-Type': undefined
+            },
+            data:formData
+          }
+
+          $http(request)
+          .success(function (data,status) {
+            callback(data,status);
+          })
+          .error(function(data,status) {
+            callback(data,status);
+          });
+        }*/
       }
   }]);
 })

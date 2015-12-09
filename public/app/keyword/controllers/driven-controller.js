@@ -11,6 +11,8 @@ define(['keyword/module'], function (module) {
 
       $scope.driven_name = "";
 
+      $scope.importType = 'table';
+
       CaseService.list($scope.projectId, function(response) {
         $scope.cases = [];
         _.forEach(response, function(caze) {
@@ -68,7 +70,6 @@ define(['keyword/module'], function (module) {
       $scope.clickToCase = function(caze) {
         $scope.current = caze;
         $scope.params = buildParamList(caze);
-
         if (caze.data_driven == null) {
           $scope.driven_name = "";
           buildDataset($scope.current);
@@ -120,7 +121,6 @@ define(['keyword/module'], function (module) {
           $input.focus();
           return;
         }
-
         if($scope.current.data_driven === null) {
           DataService.create($scope.driven_name.trim(), $scope.dataset, $scope.current._id, function(data, status) {
             $.smallBox({
@@ -165,7 +165,114 @@ define(['keyword/module'], function (module) {
         }
       };
 
+      $('body').on('click','.csv', function() {
+        if($scope.importType !== 'csv') {
+          $scope.importType = 'csv';
+          var selectElement = $('select');
+          var uploadDataElement = $('div .upload-data-form');
+          var child = selectElement.next();
+          var childFirst = child.children(':first');
+
+          childFirst.attr('disabled',true);
+          selectElement.hide();
+          uploadDataElement.show();
+        }
+      });
+
+      $('body').on('click','.table-data', function() {
+          if($scope.importType !== 'table') {
+            $scope.importType = 'table';
+            var selectElement = $('select');
+            var uploadElement = $('.upload-data-form');
+            var selectElement = $('select');
+            var child = selectElement.next();
+            var childFirst = child.children(':first');
+            childFirst.attr('disabled',false);
+            uploadElement.hide();
+            selectElement.show();
+          }
+      });
+
+      $('body').on('change','#uploadFile',function() {
+        var listFile = $('#uploadFile')[0];
+        $scope.file = listFile.files[0];
+        if($scope.file !== undefined) {
+          var fileName = $scope.file.name;
+          var lastIndex = _.lastIndexOf(fileName, ".");
+          var extension = fileName.substring(lastIndex + 1);
+          if(extension === 'csv') {
+            var selectElement = $('select');
+            var child = selectElement.next();
+            var childFirst = child.children(':first');
+            childFirst.removeAttr('disabled');
+          }
+        }
+
+      }) ;
+
+      var upload = function() {
+
+        if($scope.file === undefined) {
+          $.smallBox({
+            title: $rootScope.getWord('Notification'),
+            content: $rootScope.getWord('File is not empty !'),
+            color: '#C00000',
+            iconSmall: 'fa fa-check bounce animated',
+            timeout: 3000
+          });
+        } else if($scope.file){
+          var fileName = $scope.file.name;
+          var fileSize = $scope.file.size/1024;
+          var lastIndex = _.lastIndexOf(fileName, ".");
+          var extension = fileName.substring(lastIndex + 1);
+
+          if(fileSize/1024 > 10) {
+            $.smallBox({
+              title: $rootScope.getWord('Notification'),
+              content: $rootScope.getWord('File size is too large. The maximum file size allowed is 10 Mb.'),
+              color: '#C00000 ',
+              iconSmall: 'fa fa-check bounce animated',
+              timeout: 3000
+            });
+            $('#uploadFile').val('');
+            $scope.file = undefined;
+            return;
+          }
+          var caseId = $scope.current._id;
+          var arrayParams = buildParamList($scope.current);
+          var params = [];
+
+          for(var i = 0; i < arrayParams.length; i++) {
+            var temp = {"param":arrayParams[i]};
+            params.push(temp);
+          }
+
+          DataService.upload(params,caseId, $scope.projectId, $scope.file, function(data, status) {
+             var driven = {
+              _id : data._id,
+              name : data.name,
+              data_source : JSON.parse(data.data_source)
+            };
+
+            $scope.current.data_driven = driven;
+            var $input = $('input[name="driven-name"]');
+            $scope.driven_name = $scope.file.name;
+            $input.attr('disabled',true);
+            $('#add-datadriven').modal('hide');
+            $.smallBox({
+              title: $rootScope.getWord('Notification'),
+              content: $rootScope.getWord('Upload Success!'),
+              color: '#296191',
+              iconSmall: 'fa fa-check bounce animated',
+              timeout: 3000
+            });
+            $scope.importType = 'table';
+          });
+        }
+      }
+
       $scope.chooseDataDriven = function() {
+          $scope.importType = 'table';
           var tenant = $rootScope.context.tenant._id;
           var space = $rootScope.context.space;
           if (space === undefined) {
@@ -190,10 +297,35 @@ define(['keyword/module'], function (module) {
               options: options
             }, function (ButtonPress, Value) {
               if (ButtonPress === $rootScope.getWord('Done')) {
-                updateDataforCase(Value,data);
+                if($scope.importType === 'table') {
+                  updateDataforCase(Value,data);
+                } else if($scope.importType === 'csv') {
+                  upload();
+                }
               }
             });
+
+            var selectElement = $('select');
+            selectElement.before('<div class="check-type-import row">'
+                +'<label class="table-data col-sm-2"><input type="radio" class="radio-table" name="type" value="table" checked>Table</label>'
+                +'<label class="csv col-sm-2"><input type="radio" class="radio-csv" name="type" value="csv">CSV</label>'
+                +'</div>');
+            
+            var checkTypeImport = $('div .check-type-import');
+            checkTypeImport.after('<div class="form-content upload-data-form" hidden>'
+            +'<form class="form-horizontal ng-pristine ng-valid">'
+              +'<div class="form-group">'
+                +'<label class="col-sm-2 label-upload">Upload CSV File</label>'
+                +'<div class="col-sm-10 upload-file">'
+                  +'<input type="file" name="chooseFile" id="uploadFile">'
+                +'</div>'
+              +'</div>'
+            +'</form>'
+          +'</div>');
+
           });
+
+          
         };
 
         var updateDataforCase = function(value,data) {
