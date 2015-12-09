@@ -71,6 +71,7 @@
           <th>{{getWord('Project Result')}}</th>
           <th>{{getWord('Created Date')}}</th>
           <th>{{getWord('Create By')}}</th>
+          <th>{{getWord('Download Resource')}}</th>
         </tr>
         </thead>
         <tbody>
@@ -84,6 +85,8 @@
             'label label-success': rep.test_result === 'Pass'}">{{getWord(rep.test_result)}}</span></td>
             <td>{{rep.created_date}}</td>
             <td>{{project.creator._id}}</td>
+            <td><a class = 'btn-border-line btnViewLog btn-download' 
+            download='final-result.tar.gz' download-report-keyword job-id='rep.job_id' project-id = "project._id">{{getWord('Click Here')}}</a></td>
           </tr>
         </tbody>
       </table>
