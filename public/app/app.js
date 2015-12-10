@@ -13,6 +13,7 @@ define([
   'angular-loading-bar',
   'angular-bootstrap',
   'smartwidgets',
+  'event-source',
   'notification'
 ], function(ng, couchPotato) {
 
