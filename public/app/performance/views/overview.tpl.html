@@ -71,8 +71,11 @@
             <td><span class="label label-success">{{getWord(i.status)}}</span></td>
             <td>{{i.created_date}}</td>
             <td>Cloud ATS</td>
-            <td><a class = 'btn-border-line btnViewLog btn-download' 
-            download='final-result.jtl' download-report-performance job-id='i._id' project-id = "project._id">{{getWord('Click Here')}}</a></td>
+            <td>
+              <a class = 'btn-border-line btnViewLog btn-download' 
+            download='jtl-file.zip' ng-click="downloadJTL(project._id,i._id)" >{{getWord('Click Here')}}</a>
+            </td>
+            </td>
           </tr>
         </tbody>
       </table>
