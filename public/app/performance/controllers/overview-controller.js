@@ -193,6 +193,16 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         });
       }
 
+      $scope.downloadJTL = function(projectId,jobId) {
+        PerformanceService.download(projectId, jobId ,function (data,status) {
+          var file = new Blob([data], {type: 'application/x-zip'});
+          var link=document.createElement('a');
+          link.href=window.URL.createObjectURL(file);
+          link.download="jtl-file.zip";
+          link.click();
+        });
+      }
+
       var updateStatus = function(msg) {
         $scope.$apply(function() {
           var job = JSON.parse(msg.data);
