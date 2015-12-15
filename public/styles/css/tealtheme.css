@@ -1645,3 +1645,10 @@ div.upload-file {
 	border-right: 1px solid #E2E2E2;
 	margin-top: 10px;
 }
+.remove-row-data:hover{
+	color : red;
+	cursor : pointer;
+}
+.remove-row-data:active {
+	top : 2px;
+}

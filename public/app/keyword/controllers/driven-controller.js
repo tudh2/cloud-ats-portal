@@ -88,14 +88,18 @@ define(['keyword/module'], function (module) {
       $scope.addNewRow = function() {
         var params = buildParamList($scope.current);
         $scope.dataset.push(newRow(params));
-      }
+      };
 
       $scope.resetData = function() {
         var sizeDataset = $scope.dataset.length;
         var initObj = angular.copy($scope.copyDatasetInit);
         $scope.dataset.splice(0,sizeDataset);
         $scope.dataset.push(initObj);
-      }
+      };
+
+      $scope.removeRowData = function(_index,$event) {
+        $scope.dataset.splice(_index,1);
+      };
 
       $scope.changeParamValue = function(value, attributes) {
         var index = attributes.indexDataset;
