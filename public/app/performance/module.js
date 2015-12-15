@@ -1,11 +1,12 @@
 define([
   'angular',
   'angular-couch-potato',
-  'angular-ui-router'
+  'angular-ui-router',
+  'angular-ui-ace'
 ], function(ng, couchPotato) {
 
 	'use strict';
-	var module = ng.module('app.performance', ['ui.router']);
+	var module = ng.module('app.performance', ['ui.router', 'ui.ace']);
   
 	module.config(function ($stateProvider, $couchPotatoProvider) {
 
