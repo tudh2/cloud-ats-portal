@@ -236,6 +236,16 @@ define(['selenium/module', 'lodash'], function (module, _) {
         })
       }
 
+      $scope.downloadResult = function(projectId,jobId) {
+        SeleniumUploadService.download(projectId, jobId ,function (data,status) {
+          var file = new Blob([data], {type: 'application/x-gzip'});
+          var link=document.createElement('a');
+          link.href=window.URL.createObjectURL(file);
+          link.download="final-result.tar.gz";
+          link.click();
+        });
+      }
+
       $scope.uploadFile = function(element) {
         var $inputFile = $('input[name="chooseFile"]').parent();
         $inputFile.removeClass("has-error");
