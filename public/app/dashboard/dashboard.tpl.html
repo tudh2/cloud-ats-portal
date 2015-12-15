@@ -30,7 +30,7 @@
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12 fixed-table">
 								<tr class="project-name" ng-repeat="project in top_keyword_projects_pass | orderBy:'-percentPass' track by $index">
-									<td ng-click="redirectKeyword(project._id)" class="pr-name"><a>{{project.name}}</a></td>
+									<td ng-click="redirectKeyword(project._id)" class="pr-name" style="width: 70%"><a>{{project.name}}</a></td>
 									<td class="pull-right">{{project.percentPass}}%</td>
 								</tr>
 							</table>
@@ -46,7 +46,7 @@
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12 fixed-table">
 								<tr ng-repeat="project in top_keyword_projects_fail | orderBy:'-percentFail' track by $index">
-									<td ng-click="redirectKeyword(project._id)" class="pr-name"><a>{{project.name}}</a></td>
+									<td ng-click="redirectKeyword(project._id)" class="pr-name" style="width: 70%"><a>{{project.name}}</a></td>
 									<td class="pull-right">{{project.percentFail}}%</td>
 								</tr>
 							</table>
@@ -62,7 +62,7 @@
 						<div class="col-sm-12 ds-box-table">
 							<table class="col-sm-12 fixed-table">
 								<tr ng-repeat="project in top_biggest_project track by $index">
-									<td ng-click="redirectKeyword(project._id)" class="pr-name"><a>{{project.name}}</a></td>
+									<td ng-click="redirectKeyword(project._id)" class="pr-name" style="width: 70%"><a>{{project.name}}</a></td>
 									<td class="pull-right fix-size-biggest-project">{{project.totalCases}} {{getWord('test cases')}}</td>
 								</tr>
 							</table>
@@ -87,7 +87,8 @@
 					<td class="ds-left">{{getWord('No')}}.</td>
 					<td class="ds-left">{{getWord('Project Name')}}</td>
 					<td class="ds-right">{{getWord('Samplers')}}</td>
-					<td class="ds-right">{{getWord('Users')}}</td>
+					<td class="ds-right">{{getWord('Number Of Engine')}}</td>
+					<td class="ds-right">{{getWord('Users/Engine')}}</td>
 					<td class="ds-right">{{getWord('Ram up')}}</td>
 					<td class="ds-right">{{getWord('Loops')}}</td>
 					<td class="ds-right">{{getWord('Error Rate')}} </td>
@@ -96,6 +97,7 @@
 					<td class="ds-left">{{$index+1}}</td>
 					<td class="ds-left pr-name" ng-click="redirectPerformance(project._id)"><a>{{project.projectName}}</a></td>
 					<td class="ds-right">{{project.samples}}</td>
+					<td class="ds-right">{{project.number_engines}}</td>
 					<td class="ds-right">{{project.users}}</td>
 					<td class="ds-right">{{project.ram_up}}s</td>
 					<td class="ds-right">{{project.loops}}</td>

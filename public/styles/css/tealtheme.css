@@ -1636,3 +1636,19 @@ block-darksky-color
 .fixed-table {
 	table-layout: fixed;
 }
+.label-upload {
+    padding-top: 5px;
+}
+div.upload-file {
+	padding-left : 28px;
+}.engine-warning {
+	border-right: 1px solid #E2E2E2;
+	margin-top: 10px;
+}
+.remove-row-data:hover{
+	color : red;
+	cursor : pointer;
+}
+.remove-row-data:active {
+	top : 2px;
+}

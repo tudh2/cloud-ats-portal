@@ -16,14 +16,31 @@
         </div>
         <div class="smart-form check-list col-md-3">
           <label class="checkbox scriptId pull-right">
-            <input type="checkbox" name="checkbox" class="checkbox-script" value="{{script._id}}" ng-click="selectScript(script._id);">
+            <input type="checkbox" name="checkbox" class="checkbox-script" value="{{script._id}}" ng-click="selectScript(script);">
             <i></i>
           </label>
         </div>
       </div>
     </div>
 	</div>
-	<div class="col-sm-9 execution-area">
+  <div class="col-sm-5">
+    <p class="ng-binding" style="margin-top: 20px;">SUMARY INFORMATION</p>
+
+    <div ng-repeat="script in scripts track by $index" ng-if="script.showInfo">
+
+      <cite>{{script.name}}</cite>
+      <ul>
+        <li>Number of threads : {{script.number_threads}}</li>
+        <li>Number of engines : {{script.number_engines}}</li>
+      </ul>
+
+    </div>
+    <div class="total-engine" style="border-top: 1px solid #E2E2E2; margin-top: 10px; padding-top: 10px;" ng-if="number_engines > 0">
+      Number engines will be created : {{number_engines != undefined ? number_engines : 0}}.
+    </div>   
+  </div>
+
+	<div class="col-sm-4 execution-area">
 		<a ng-click="runPerformanceTest()" class="btn btn-primary btn-performance-run disabled">{{getWord('Run Test')}}</a>
 	</div>
 </div>

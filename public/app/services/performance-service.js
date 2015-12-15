@@ -157,6 +157,23 @@ define(['layout/module'], function (module) {
         }).error(function(data, status) {
           callback(data, status);
         });
+      },
+      download : function(projectId,job_id,callback) {
+        var request = {
+          method: 'GET',
+          url: appConfig.RestEntry + '/api/v1/project/performance/'+ projectId +'/download/'+ job_id,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space'),
+          },
+          responseType: 'blob'
+        };
+
+        $http(request).success(function(data, status, headers) {
+          callback(data, status);
+        }).error(function(data, status) {
+          callback(data,status);
+        });
       }
 		}
 	}]);

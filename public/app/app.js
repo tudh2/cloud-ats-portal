@@ -12,7 +12,7 @@ define([
   'angular-animate',
   'angular-loading-bar',
   'angular-bootstrap',
-  //'smartwidgets',
+  'event-source',
   'notification'
 ], function(ng, couchPotato) {
 

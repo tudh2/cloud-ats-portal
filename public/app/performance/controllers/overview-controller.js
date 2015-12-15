@@ -36,7 +36,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
 
         PerformanceService.log($scope.project._id, function (data, status) {
           if (status == 200) {
-            $scope.project.log = data;
+            var log = data.replace(/\u0000/g,'');
+            $scope.project.log = log;
           }
           loadModal();
         });
@@ -193,15 +194,27 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         });
       }
 
+      $scope.downloadJTL = function(projectId,jobId) {
+        PerformanceService.download(projectId, jobId ,function (data,status) {
+          var file = new Blob([data], {type: 'application/x-zip'});
+          var link=document.createElement('a');
+          link.href=window.URL.createObjectURL(file);
+          link.download="jtl-file.zip";
+          link.click();
+        });
+      }
+
       var updateStatus = function(msg) {
         $scope.$apply(function() {
           var job = JSON.parse(msg.data);
-          job.scripts = job.scripts.length;
-          job.created_date = job.runningTime;
+          
           if (job.project_id === $scope.projectId) {
+
+            $scope.project.last_running = job.runningTime;
             $scope.project.status = job.project_status;
             $scope.project.log = job.log;
             $scope.project.isBuilding = job.isBuilding;
+
             if ($scope.project.status === 'READY') {
               $.smallBox({
                 title: $rootScope.getWord('Notification'),
@@ -210,8 +223,9 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
                 iconSmall: 'fa fa-check bounce animated',
                 timeout: 3000
               });
+              job.scripts = job.scripts.length;
+              job.created_date = job.runningTime;
               $scope.project.jobs.unshift(job);
-              $scope.project.last_running = job.runningTime;
             }
           }
         })

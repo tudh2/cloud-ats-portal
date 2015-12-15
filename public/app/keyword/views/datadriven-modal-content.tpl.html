@@ -25,11 +25,13 @@
               <table class="table table-datadriven">
               <thead>
                 <tr>
+                  <th></th>
                   <th ng-repeat="param in params">{{param}}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="tr-table-datadriven" ng-repeat="data in dataset">
+                  <td><i class="glyphicon glyphicon-remove-sign remove-row-data" ng-click="removeRowData($index)" ng-show="dataset.length !== 1"></i></td>
                   <td ng-repeat="param in params" class="td-table-datadriven-value">
                     <a href-void editable-text="data[param]">{{data[param] || getWord('empty') }}</a>
                   </td>

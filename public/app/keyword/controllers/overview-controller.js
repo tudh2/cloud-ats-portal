@@ -251,6 +251,16 @@ define(['keyword/module', 'lodash'], function (module, _) {
         });
       }
 
+      $scope.downloadJTL = function(projectId,jobId) {
+        KeywordService.download(projectId, jobId ,function (data,status) {
+          var file = new Blob([data], {type: 'application/x-gzip'});
+          var link=document.createElement('a');
+          link.href=window.URL.createObjectURL(file);
+          link.download="final-result.tar.gz";
+          link.click();
+        });
+      }
+
       var updateStatus = function(msg) {
         $scope.$apply(function() {
           var job = JSON.parse(msg.data);
