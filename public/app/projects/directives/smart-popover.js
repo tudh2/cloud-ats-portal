@@ -10,7 +10,8 @@ define(['projects/module', 'lodash'], function(module, _) {
         project: '=',
         log: '&',
         open: '&',
-        report: '&'
+        report: '&',
+        download: '&'
       },
       link: function(scope, element, attributes) {
 
