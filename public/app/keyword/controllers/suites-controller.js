@@ -43,7 +43,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
         var result = _.find($scope.cases, function(sel) {
           return sel._id == caze._id;
         });
-        
+
         return result.name;
       }
 
@@ -327,6 +327,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
         };
 
         $scope.editMode = false;
+        $scope.testCaseMode.value = 'isolation';
         loadTemplate();
       };
 
