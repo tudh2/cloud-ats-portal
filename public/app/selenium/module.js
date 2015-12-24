@@ -22,7 +22,6 @@ define([
               'selenium/controllers/overview-upload-controller',
               'selenium/directives/tabs-header',
               'services/selenium-upload-service',
-              'selenium/directives/download-report',
               'services/event-service'
             ])
           }

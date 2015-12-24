@@ -251,7 +251,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
         });
       }
 
-      $scope.downloadJTL = function(projectId,jobId) {
+      $scope.downloadResult = function(projectId,jobId) {
         KeywordService.download(projectId, jobId ,function (data,status) {
           var file = new Blob([data], {type: 'application/x-gzip'});
           var link=document.createElement('a');

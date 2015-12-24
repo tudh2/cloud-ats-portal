@@ -182,6 +182,16 @@ define(['projects/module', 'lodash'], function (module, _) {
       }
     }
 
+    $scope.downloadResult = function(projectId,jobId) {
+        SeleniumUploadService.download(projectId, jobId ,function (data,status) {
+          var file = new Blob([data], {type: 'application/x-gzip'});
+          var link=document.createElement('a');
+          link.href=window.URL.createObjectURL(file);
+          link.download="final-result.tar.gz";
+          link.click();
+        });
+      }
+
     $scope.openLastReport = function(project) {
       var uploadProject = project.upload_project === undefined ? false : true;
       $('[data-toggle="popover"]').each(function () {

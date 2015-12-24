@@ -38,7 +38,24 @@
   </div>
 </div>
 
-
+<div class="col-sm-12 organize-testsuite-radio" ng-if="current.temp || editMode">
+  <div class="col-sm-8">
+    <div class="col-sm-6">
+      <div class="smart-form" >
+          <label class="radio state-success">
+            <input type="radio" value="isolation" ng-model="testCaseMode.value"><i></i>{{getWord('Isolation Running Mode')}}
+          </label>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="smart-form" >
+        <label class="radio state-success">
+          <input type="radio" value="sequence" ng-model="testCaseMode.value"><i></i>{{getWord('Sequence Running Mode')}}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
 
   <div class="col-sm-12 ">
     <div class="row">
@@ -55,7 +72,7 @@
           <div class="tc-name col-md-12">
              {{case.name}}
           </div>
-        </div>        
+        </div> 
       </div>
     </div>
 
@@ -80,7 +97,6 @@
     <div class="col-md-4 col-sm-6 test-case-item"
       ng-if="!current.temp"
       ng-repeat="case in current.cases | search: caseTerms">
-      
 
       <div class="tc-itemBlock"
         ng-class="{'test-case-selected':editMode}"
@@ -112,9 +128,7 @@
              {{case.name}}
           </div>
         </div>
-
       </div>
-
     </div>
     <!-- End test case for edit -->
       </div>
