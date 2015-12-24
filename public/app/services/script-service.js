@@ -1,7 +1,7 @@
 define(['performance/module'], function (module) {
   'use strict';
 
-  module.registerFactory('ScriptService', ['$http', '$cookies', function($http, $cookies) {
+  module.registerFactory('ScriptService', ['$http', '$cookies', '$window', function($http, $cookies, $window) {
     return {
       list: function(projectId, callback) {
         var request = {
@@ -19,12 +19,10 @@ define(['performance/module'], function (module) {
 
         });
       },
-      createScriptTestByUpload: function (files, project_id, callback) {
+      createScriptTestByUpload: function (file, name, project_id, callback) {
         var formData = new FormData();
-        $.each(files, function (key, value) {
-
-          formData.append(key, value);
-        });
+        formData.append("file", file);
+        formData.append("name", name);
         var request = {
           method: 'POST',
           url: appConfig.RestEntry + '/api/v1/project/performance/' + project_id + '/upload',
@@ -34,7 +32,6 @@ define(['performance/module'], function (module) {
             'Content-Type': undefined
           },
           data: formData
-          
         }
 
         $http(request).success(function (data, status){
@@ -70,8 +67,12 @@ define(['performance/module'], function (module) {
 
         $http(request).success(function (data, status) {
           callback (data, status);
-        }).error(function (status, data) {
-          callback(data, status);
+        }).error(function (data, status) {
+          console.log(status)
+          switch (status) {
+            case 404:
+              $window.location.href = '/404.html';
+          }
         });
       },
       delete: function (projectId, id, callback) {

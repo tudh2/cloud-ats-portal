@@ -1,14 +1,6 @@
 <div class="configuration-script configuration-form">
 	<div class="row">
 		<div class="col-sm-12">
-      <div class="form-title"> 
-        <span class="icon-equalizer configuration" aria-hidden="true"></span>
-        <h4 class="title-sampler">{{getWord('Configuration')}}</h4>
-      </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
 			<div class="row">
 				<div class="col-sm-3">
 					<p class="pull-left impress">{{getWord('Users Concurrents')}}
@@ -31,7 +23,7 @@
 					</p>
 				</div>
 				<div class="col-sm-7">
-					<input data-smart-uislider type="text" class="slider slider-success" id="users" 
+					<input data-smart-uislider type="text" class="slider slider-success" id="users" value="{{script.number_threads}}" 
 	          data-slider-id="totalUsers"
 	          data-slider-min="1"
 	          data-slider-max="1000"

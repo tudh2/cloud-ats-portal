@@ -1,0 +1,81 @@
+<div id="content">
+  <div class="row">
+  <article class="col-sm-12 col-md-12 col-lg-12">
+    
+    <div class="jarviswidget">
+    <header class="header-navtabs">
+
+      <ul id="myTab" class="nav nav-tabs pull-right">
+        <li class="active">
+          <a data-toggle="tab" href="#basic" id="basicId"><span class="hidden-mobile">{{getWord('INFORMATION')}}</span></a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#script-content" id="samplersId"><span class="hidden-mobile">{{getWord('SCRIPT CONTENT')}}</span></a>
+        </li>
+      </ul>
+    </header>
+    </div>
+
+    <div class="no-padding">
+      <div class="widget-body">
+
+        <div id="myTabContent" class="tab-content"><!-- START Tab content -->
+
+          <!-- START Basic Information & Configuration -->
+          <div class="tab-pane fade in active" id="basic">
+            <div class="basic-info row">
+              <div class="col-md-offset-1 col-md-8">
+                <div class="form-basic-info">
+                  <div class="form-content">
+                    <form class="form-horizontal">
+                      <div class="form-group">
+                        <label class="col-sm-3">{{getWord('Test Script Name')}}</label>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" ng-model="script.name" name="text-area-script">
+                        </div>
+                      </div>
+                        
+                      <configuration-script></configuration-script>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END Basic Information & Configuration -->
+
+          <!-- START Script Content -->
+          <div class="tab-pane fade in" id="script-content">
+            <code>(*) Result output configuration is not effected in runtime</code>
+            <br>
+            <code>(*) ThreadGroup configuration effects only on information tab</code>
+            <div ui-ace="{
+                useWrapMode : true,
+                showGutter: true,
+                showInvisibles: true,
+                theme:'eclipse',
+                mode: 'xml',
+                onLoad: aceLoaded,
+                onChange: aceChanged
+              }" ng-model="script.raw_content" style="height: 400px;"></div>
+          </div>
+          <!-- END Script Content -->
+
+        </div><!-- END Tab Content-->
+
+      </div>
+    </div>
+
+  </article>
+  </div>
+  <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 modal-footer" 
+        style="position: fixed; z-index: 901; bottom: 0; background-color: white;">
+          <div style="padding-right: 220px;">
+            <a class="btn btn-danger" style="float: left" ng-click="delete()">{{getWord('Delete')}}</a>
+            <a class="btn btn-primary" ng-click="update()">Update</a>
+            <a class="btn btn-default" data-ui-sref="app.performance.scripts({id : projectId})">Close</a>            
+          </div>
+      </div>
+  </div>
+</div>

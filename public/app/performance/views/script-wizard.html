@@ -1,0 +1,207 @@
+<div id="content">
+  <div class="row">
+  <article class="col-sm-12 col-md-12 col-lg-12">
+    
+    <div class="jarviswidget">
+    <header class="header-navtabs">
+
+      <ul id="myTab" class="nav nav-tabs pull-right">
+        <li class="active">
+          <a data-toggle="tab" href="#basic" id="basicId"><span class="hidden-mobile">{{getWord('INFORMATION')}}</span></a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#samplers" id="samplersId"><span class="hidden-mobile">{{getWord('SAMPLERS')}}</span></a>
+        </li>
+      </ul>
+    </header>
+    </div>
+
+    <div class="no-padding">
+      <div class="widget-body">
+
+        <div id="myTabContent" class="tab-content"><!-- START Tab content -->
+
+          <!-- START Basic Information & Configuration -->
+          <div class="tab-pane fade in active" id="basic">
+            <div class="basic-info row">
+              <div class="col-md-offset-1 col-md-8">
+                <div class="form-basic-info">
+                  <div class="form-content">
+                    <form class="form-horizontal">
+                      <div class="form-group">
+                        <label class="col-sm-3">{{getWord('Test Script Name')}}<sup class="text-red-color">*</sup></label>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" ng-model="script.name" placeholder="Enter script name">
+                        </div>
+                      </div>
+                        
+                      <configuration-script></configuration-script>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END Basic Information & Configuration -->
+
+          <!-- START Samplers -->
+          <div class="tab-pane fade in" id="samplers"> 
+            <div class="border-div">
+              <div class="row">
+                <div class="col-sm-3">
+                  <section class="smart-form">
+                    <label class="input"> <i class="icon-append fa fa-search"></i>
+                      <input type="text" ng-model="searchTerms" placeholder="Search" id="Search" class="ng-pristine ng-untouched ng-valid">
+                    </label>
+                  </section>
+                </div>
+                <div class="col-sm-3">
+                  <section class="smart-form margin-top-5">
+                    <label class="checkbox" ng-class="{'state-disabled':!organizable}">
+                      <input type="checkbox" ng-model="organizationMode" ng-disabled="!organizable">
+                      <i></i>Organization Mode
+                    </label>
+                  </section>
+                </div>
+                <div class="col-sm-6 text-right">
+                  <a class="btn btn-primary" ng-click="addSampler()">{{getWord('Add Sampler')}}</a>
+                </div>
+              </div>
+
+              <div class="row">
+                <ul class="col-sm-12 sampler-list"
+                  dnd-list="script.samplers"
+                  dnd-horizontal-list="true"
+                  dnd-external-sources="false"
+                  dnd-disable-if="!organizationMode">
+
+                  <li class="col-sm-3" 
+                    ng-repeat="sampler in script.samplers | search : searchTerms" 
+                    dnd-draggable="sampler" 
+                    dnd-effect-allowed="move"
+                    dnd-moved="script.samplers.splice($index, 1)"
+                    dnd-disable-if="!organizationMode">
+
+                    <!-- START Sampler tile -->
+                    <div class="sampler-tile">
+                      <div class="tc-itemBlock" ng-class="{'tile-selected' : selected._id == sampler._id }" id="{{sampler._id}}" 
+                        ng-click="clickSampler(sampler)">
+                        <div class="row">
+                          <div class="col-sm-8 tc-attributes">
+                            <div class ="tc-id">#{{sampler._id.substring(0, 8)}}</div>
+                          </div>
+                          <div class="col-sm-12 tc-name">
+                              {{sampler.name}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 text-right">
+                            <a href-void ng-click="deleteSampler(sampler)" class="display-none" title="Delete Sampler">
+                              <i class="fa fa-trash-o text-red-color"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Sampler tile -->      
+                  </li>
+                </ul>
+                                  
+
+                <!-- START Sampler form -->
+                <div class="col-sm-6 padding-top-5 display-none sampler-info">
+                  <div class="sampler-form shadow"> 
+                     <div class="col-sm-12 form-title">
+                      <span data-js-prompt="&amp;#xe067;" data-icon="&#xe067;" aria-hidden="true" class="glyph-item mega"></span>
+                      <h4>{{getWord('Sampler Info')}}</h4>
+                      <a href-void style="float: right;" ng-click="selected = undefined" title="Close">x</a>
+                      <hr>
+                    </div>
+                    <div class="col-sm-12">
+                      <form class="form-horizontal">
+                      <div class="form-group">
+                        <label class="col-sm-4">{{getWord('Sampler name')}} <sup class="text-red-color">*</sup></label>
+                        <div class="col-sm-8 name-sampler">
+                          <input type="text" class="form-control" placeholder="{{getWord('Enter Name')}}" ng-model="selected.name" name="name">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-4">{{getWord('Sampler method')}}</label>
+                        <div class="col-sm-8">
+                          <select class="form-control" ng-model="selected.method">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                            <option value="DELETE">DELETE</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-4">{{getWord('Sampler URL')}} <sup class="text-red-color">*</sup></label>
+                        <div class="col-sm-8 sampler-url">
+                          <input type="text" class="form-control" placeholder="{{getWord('e.g.')}} http://www.abc.com" ng-model="selected.url" name="url">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-4">{{getWord('Parameters')}}</label>
+                        <div class="col-sm-8">
+                          <div  ng-repeat="i in selected.arguments track by $index">
+                            <div class="col-sm-5 param-name">
+                                <div class="form-group">
+                                  <input type="text" class="form-control" ng-model="i.paramName" placeholder="{{getWord('Name')}}">
+                                </div>
+                            </div>
+                            <div class="col-sm-5 param-value">
+                                <div class="form-group">
+                                  <input type="text" class="form-control" ng-model="i.paramValue" placeholder="{{getWord('Value')}}">
+                              </div>
+                            </div>
+                              <div class="col-sm-2 add-remove-param-icon">
+                                <i class="fa fa-minus-circle icon text-amber-color " ng-if="selected.arguments.length > 1" ng-click="removeArgument($index)"></i> 
+                                <i class="fa fa-plus-circle icon-add text-teal-color " ng-if="$index == selected.arguments.length -1" ng-click="addArgument($index)"></i>
+                              </div>
+                           </div>
+                        </div>
+                      </div>
+                      <div class="form-group assertion-text">
+                        <label class="col-sm-4">{{getWord('Assertion text')}}</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" placeholder="{{getWord('Enter')}}" ng-model="selected.assertion_text">
+                        </div>  
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-sm-4">{{getWord('Constant time')}}(s)</label>
+                        <div class="col-sm-8">
+                          <input type="number" class="form-control" placeholder="{{getWord('miliseconds')}}" ng-model="selected.constant_time" min="0">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- END sampler form -->
+
+              </div>
+
+            </div>
+          </div>
+          <!-- END Samplers -->
+
+        </div><!-- END Tab Content-->
+
+      </div>
+    </div>
+
+  </article>
+  </div>
+  <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 modal-footer" 
+        style="position: fixed; z-index: 901; bottom: 0; background-color: white;">
+          <div style="padding-right: 220px;">
+            <a ng-if="scriptId === undefined" class="btn btn-primary" ng-click="saveScript()">Save</a>
+            <a ng-if="scriptId !== undefined" class="btn btn-primary" ng-click="updateScript()">Update</a>
+            <a class="btn btn-default" data-ui-sref="app.performance.scripts({id : projectId})">Close</a>            
+          </div>
+      </div>
+  </div>
+</div>

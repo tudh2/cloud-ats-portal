@@ -20,6 +20,7 @@ define([
               deps: $couchPotatoProvider.resolveDependencies([
                 'datadriven/controllers/data-controller',
                 'services/case-service',
+                'services/data-service',
                 'datadriven/directives/data-provider-table'
               ])
             }

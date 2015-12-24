@@ -4,8 +4,8 @@ define(['app'], function(app) {
 
   return app.factory('AuthenticationService', 
 
-    ['$http', '$q', '$log', '$cookies', '$window', '$rootScope', '$state', '$stateParams', 'EventService',
-    function($http, $q, $log, $cookies, $window, $rootScope, $state, $stateParams, EventService) {
+    ['$http', '$q', '$log', '$cookies', '$window', '$rootScope', '$state', '$stateParams',
+    function($http, $q, $log, $cookies, $window, $rootScope, $state, $stateParams) {
     
     function login(email, password, callback) {
       var request = {

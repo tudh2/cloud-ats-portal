@@ -840,6 +840,9 @@ a:hover.viewLog, a:focus.viewLog {
 	-o-box-shadow: 0px 1px 4px #01B49F;
 	-ms-box-shadow: 0px 1px 4px #01B49F;
 }
+.tc-itemBlock.organization:hover {
+  cursor: move !important;
+}
 .tc-attributes .tc-id, .tc-attributes .tc-groupName {
 	float: left;
 	width: 50%;
@@ -1339,13 +1342,7 @@ a:hover.viewLog, a:focus.viewLog {
     background-color:white;
     min-height: 400px;
 }
-.sampler-list
-{
-    padding-top:10px;
-    /*base on margin collumn of bootstrap*/
-	height: 400px;
-	overflow: auto;
-}
+
 .sampler-form .form-title {
     margin-top:10px;
 	margin-bottom: 20px;
@@ -1651,4 +1648,73 @@ div.upload-file {
 }
 .remove-row-data:active {
 	top : 2px;
+}
+
+#ribbon .breadcrumb a:hover {
+  text-decoration: underline !important;
+}
+
+.sampler-info .shadow {
+  box-shadow: 0px 1px 4px #888888;
+  -moz-box-shadow: 0px 1px 4px #888888;
+  -webkit-box-shadow: 0px 1px 4px #888888;
+  -o-box-shadow: 0px 1px 4px #888888;
+  -ms-box-shadow: 0px 1px 4px #888888;
+  border-radius: 2px;
+  background-color: white;
+  padding: 5px 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.sampler-list {
+  max-height: 400px; 
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 10px 0px 0px;
+}
+
+.sampler-list li {
+  display: block;
+  float: left;
+}
+
+.sampler-list .dndDragging {
+    opacity: 0.5;
+}
+
+.sampler-list .dndDraggingSource {
+    display: none;
+}
+
+.sampler-list .dndPlaceholder {
+    background-color: #ddd !important;
+    display: block;
+    border-radius: 2px;
+    border: 3px dashed;
+    position: relative;
+    width: 25%;
+    padding: 5px 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 80px;
+}
+
+.tile-selected {
+  box-shadow: -2px 5px 10px #888888;
+  border-radius: 2px;
+  border: 3px solid #ff7832;
+  cursor: pointer;
+}
+.tile-selected:hover {
+  cursor: pointer;
+  box-shadow: -2px 5px 10px #888888;
+}
+
+.tile-selected a {
+  display: block !important;
+  float: right;
+  padding-top: 11px;
 }

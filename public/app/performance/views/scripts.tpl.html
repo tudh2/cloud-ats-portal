@@ -1,4 +1,4 @@
-<div class="script-list" ng-controller="CreateScriptCtrl">
+<div class="script-list">
     <div class="border-div">
 	<div class="row actionMenu">
 		<div class="col-sm-3">
@@ -12,21 +12,23 @@
         <label>{{scripts.length}} {{getWord('Test Scripts')}}</label>
       </span>
       <span class="col-md-6 text-right">
-        <button type="submit" class="btn btn-default upload-script" data-toggle="modal" data-target="#uploadScript" ng-click="clickUploadScriptButton()">{{getWord('Upload Script')}}</button>
-        <button type="submit" class="btn btn-primary create-script" data-toggle="modal" data-target="#createScript" ng-click="clickCreateScriptButton()" data-backdrop="static" data-keyboard="false">{{getWord('New Test Script')}}</button> 
+
+        <a class="btn btn-default upload-script" data-toggle="modal" data-target="#uploadScript" ng-click="clickUploadScriptButton()" data-backdrop="static" data-keyboard="false">{{getWord('Upload Script')}}</a>
+
+        <a class="btn btn-primary create-script" data-ui-sref="app.performance.scripts.wizard({id: projectId})">{{getWord('New Test Script')}}</a> 
       </span>
 		
 		</div>
 	</div>
     
   <!-- Dialog -->
-  <div data-smart-include="/app/performance/views/upload-script.tpl.html"></div>
-  <div class="modal fade" id="createScript" role="dialog"></div>
+  <div class="modal fade" id="uploadScript" role="dialog">
+  </div>
   <!-- Dialog -->
         
 	<div class="list-testcase">
 		<div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="script in scripts | search: searchTerms track by $index">
-			<div class="tc-itemBlock" ng-click="editScript(script._id)" data-toggle="modal" data-target="#createScript" data-backdrop="static" data-keyboard="false">
+			<div class="tc-itemBlock" ng-click="editScript(script)">
 				<div class="row">
           <div class="tc-attributes col-md-12">
             <div class="tc-id">#{{script._id.substring(0,8)}}</div>

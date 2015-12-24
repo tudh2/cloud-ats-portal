@@ -5,15 +5,8 @@ define(['performance/module'], function (module) {
     return {
       restrict: 'EA',
       replace: true,
-      templateUrl: 'app/performance/directives/script-configuration.tpl.html',
+      templateUrl: 'app/performance/directives/configuration-script.tpl.html',
       link: function(scope, element, attributes) {
-
-        // set value for input slider
-        $('#users').slider('setValue', scope.script.number_threads);
-        $('#ramup').slider('setValue', scope.script.ram_up);
-        $('#loops').slider('setValue', scope.script.loops);
-        $('#duration').slider('setValue', scope.script.duration);
-        $('#engines').slider('setValue', scope.script.number_engines);
 
         // handle if user interact with slider 
         $("#users").on("slide", function(slideEvt) {
@@ -72,6 +65,8 @@ define(['performance/module'], function (module) {
         });
 
         scope.$watch('script.number_threads', function (newValue, oldValue) {
+          if (scope.script === undefined) return;
+
           if (newValue === undefined) {
             scope.script.number_threads = oldValue;
           }
@@ -79,6 +74,8 @@ define(['performance/module'], function (module) {
         });
 
         scope.$watch('script.loops', function (newValue, oldValue) {
+          if (scope.script === undefined) return;
+
           if (newValue === undefined) {
             scope.script.loops = oldValue;
           }
@@ -86,6 +83,7 @@ define(['performance/module'], function (module) {
         });
 
         scope.$watch('script.ram_up', function (newValue, oldValue) {
+          if (scope.script === undefined) return;
 
           if (newValue === undefined) {
             scope.script.ram_up = oldValue;
@@ -94,11 +92,12 @@ define(['performance/module'], function (module) {
         });
 
         scope.$watch('script.number_engines', function (newValue, oldValue) {
+          if (scope.script === undefined) return;
+
           if (newValue === undefined) {
             scope.script.number_engines = oldValue;
           }
           $('#engines').slider('setValue', newValue);
-         
         });
       }
     }

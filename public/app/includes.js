@@ -1,10 +1,11 @@
 define([
 
   //services
-  'services/data-service',
+  // 'services/data-service',
   'services/user-service',
   'services/authentication-service',
   'services/event-service',
+  'services/uuid-service',
 
   //layout
 

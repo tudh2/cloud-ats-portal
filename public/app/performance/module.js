@@ -2,11 +2,12 @@ define([
   'angular',
   'angular-couch-potato',
   'angular-ui-router',
-  'angular-ui-ace'
+  'angular-ui-ace',
+  'angular-drag-and-drop-lists'
 ], function(ng, couchPotato) {
 
 	'use strict';
-	var module = ng.module('app.performance', ['ui.router', 'ui.ace']);
+	var module = ng.module('app.performance', ['ui.router', 'ui.ace', 'dndLists']);
   
 	module.config(function ($stateProvider, $couchPotatoProvider) {
 
@@ -27,7 +28,7 @@ define([
 					},
 				},
 				data: {
-					title: 'Performance Project Detail',
+					title: 'Performance Project Overview',
 					requireLogin: true
 				}
 		})
@@ -40,21 +41,57 @@ define([
 					resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
 						'performance/controllers/scripts-controller',
-						'performance/controllers/upload-script-controller',
-						'performance/controllers/create-script-controller',
 						'performance/directives/tabs-header-performance',
-						'performance/directives/script-configuration',
 						'services/script-service',
-						'modules/forms/directives/input/smart-uislider'
 					])
 				}
 				},
 			},
 			data: {
-				title: 'Performance Project Detail',
+				title: 'Scripts',
 				requireLogin: true
 			}
 		})
+    .state('app.performance.scripts.editor', {
+      url: '/editor/:scriptId',
+      views: {
+        "content@app": {
+          controller: 'ScriptEditorCtrl',
+          templateUrl: 'app/performance/views/script-editor.html',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'performance/directives/configuration-script',
+              'performance/controllers/script-editor-controller',
+              'modules/forms/directives/input/smart-uislider'
+            ])
+          }
+        }
+      },
+      data: {
+        title: 'Script Editor',
+        requireLogin: true
+      }
+    })
+    .state('app.performance.scripts.wizard', {
+      url: '/wizard?scriptId',
+      views: {
+        "content@app": {
+          controller: 'ScriptWizardCtrl',
+          templateUrl: 'app/performance/views/script-wizard.html',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'performance/controllers/script-wizard-controller',
+              'performance/directives/configuration-script',
+              'modules/forms/directives/input/smart-uislider'
+            ])
+          }
+        }
+      },
+      data: {
+        title: 'Script Creator',
+        requireLogin: true
+      }
+    })
 		.state('app.performance.execution', {
 			url: '/execution',
 			views: {
@@ -71,7 +108,7 @@ define([
 				},
 			},
 			data: {
-				title: 'Performance Project Detail',
+				title: 'Execution',
 				requireLogin: true
 			}
 		})
