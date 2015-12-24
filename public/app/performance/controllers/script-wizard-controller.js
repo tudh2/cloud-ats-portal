@@ -38,6 +38,10 @@ define(['performance/module', 'lodash'], function (module) {
             });
           });
 
+          if ($scope.script.samplers.length > 1) {
+            $scope.organizable = true;
+          }
+
           $('#users').slider('setValue', $scope.script.number_threads);
           $('#ramup').slider('setValue', $scope.script.ram_up);
           $('#loops').slider('setValue', $scope.script.loops);
