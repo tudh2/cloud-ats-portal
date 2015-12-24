@@ -27,7 +27,7 @@
             <div class="smart-form" >
               <label class="radio state-success">
                 <input name="browser" type="radio" ng-model="project.browser" value="firefox">
-                <i class="choose_browse"></i><img ng-src="/styles/img/firefox.jpg" width="60px;">
+                <i class="choose_browse"></i><img ng-src="/styles/img/firefox.jpg" width="40px;">
               </label>
             </div>
           </div>
@@ -52,7 +52,7 @@
             <div class="smart-form" >
               <label class="radio state-success">
                 <input name="browser" type="radio" ng-model="project.browser" value="chrome">
-                <i class="choose_browse"></i><img ng-src="/styles/img/chrome.jpg" width="60px;">
+                <i class="choose_browse"></i><img ng-src="/styles/img/chrome.jpg" width="40px;">
               </label>
             </div>
           </div>
@@ -69,8 +69,36 @@
         </div>
 
       </div>
+      <div class="col-sm-3 browser-pool choose-browser">
+        <p>3.{{getWord('VERSION SELENIUM')}}</p>
+        <div class="row">
+          <div class="col-sm-12 browser">
+          <div class="col-sm-6">
+            <div class="smart-form" >
+              <i class="choose_browse"></i><img ng-src="/styles/img/selenium.png" width="40px;">
+            </div>
+          </div>
+
+          <div class="col-sm-6 select-version">
+            <p>{{getWord('Select Version')}}</p>
+            <div class="form-group">
+              <select class="form-control" ng-model="project.versionSelenium">
+                <option selected="selected">2.48.2</option>
+                <option>2.47.1</option>
+                <option>2.46.0</option>
+                <option>2.45.0</option>
+                <option>2.44.0</option>
+                <option>2.43.1</option>
+                <option>2.42.0</option>
+                <option>2.41.0</option>
+              </select>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
      <div class="col-sm-3 os-pool">
-        <p>3.{{getWord('SELECT OS')}}</p>
+        <p>4.{{getWord('SELECT OS')}}</p>
         <div class="row">
           <div class="col-sm-12">
           <div class="col-sm-6">
@@ -78,7 +106,7 @@
               <label class="radio state-success">
                 <input name="os" type="radio" checked="">
                 <i class="choose_browse"></i>
-                <img ng-src="/styles/img/ubuntu.png" width="60px;">
+                <img ng-src="/styles/img/ubuntu.png" width="40px;">
               </label>
             </div>
           </div>
@@ -87,9 +115,10 @@
           </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-6 btn-execution">
+            <a class="btn btn-primary btn-keyword-run disabled" ng-click="run()">{{getWord('Run Test')}}</a>
+          </div>
+        </div>
       </div>
-    <div class="col-sm-3 execution-area">
-      <a class="btn btn-primary btn-keyword-run disabled" ng-click="run()">{{getWord('Run Test')}}</a>
-      </div>
-  
 </div>

@@ -1652,3 +1652,7 @@ div.upload-file {
 .remove-row-data:active {
 	top : 2px;
 }
+.btn-execution {
+    margin-top: 50px;
+    padding-left: 140px;
+}
