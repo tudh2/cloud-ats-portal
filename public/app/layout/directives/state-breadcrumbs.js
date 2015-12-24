@@ -2,16 +2,18 @@ define(['layout/module'], function (module) {
 
   'use strict';
                                                  
-  module.registerDirective('stateBreadcrumbs', ['$rootScope', '$compile', '$state', function($rootScope, $compile, $state) {
+  module.registerDirective('stateBreadcrumbs', ['$rootScope', '$compile', '$state', '$stateParams', 
+    function($rootScope, $compile, $state, $stateParams) {
+
     return {
       restrict: 'E',
       replace: true,
       template: '<ol class="breadcrumb"><li>Home</li></ol>',
       link: function(scope, element) {
         function setBreadcrumbs(breadcrumbs) {
-          var html = '<li>{{getWord("Home")}}</li>';
+          var html = '';
           angular.forEach(breadcrumbs, function(crumb) {
-            html += '<li>{{getWord("'+crumb+'")}}</li>';
+            html += '<li><a href="#" data-ui-sref="'+crumb.name+'">{{getWord("'+crumb.title+'")}}</a></li>';
           });
 
           element.html($compile(html)(scope));  
@@ -20,7 +22,10 @@ define(['layout/module'], function (module) {
         function fetchBreadcrumbs(stateName, breadcrumbs) {
           var state = $state.get(stateName);
           if (state && state.data && state.data.title && breadcrumbs.indexOf(state.data.title) == -1) {
-            breadcrumbs.unshift(state.data.title);
+            breadcrumbs.unshift({
+              'title': state.data.title,
+              'name': state.name
+            });
           }
 
           var parentName = stateName.replace(/.?\w+$/, '');
@@ -43,7 +48,7 @@ define(['layout/module'], function (module) {
 
         processState($state.current);
 
-        $rootScope.$on('$stateChangeStart', function(event, state) {
+        $rootScope.$on('$stateChangeStart', function(event, state, params) {
           processState(state);
         });
       }
