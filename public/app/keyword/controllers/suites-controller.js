@@ -13,6 +13,10 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.oldNameSuite = '';
 
+      $scope.testCaseMode = {
+        value : 'isolation'
+      };
+
       var checkCharacterName = /[a-zA-Z0-9\_\s]+/;
 
       var checkFirstCharacterName = /^[a-zA-Z\_]/;
@@ -111,6 +115,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.clickEditName = function(value) {
         $scope.editMode = true;
         $scope.oldNameSuite = value.name;
+        $scope.testCaseMode.value = value.sequence_mode == true ? 'sequence' : 'isolation';
       }
 
       $scope.saveEditTestSuite = function() {
@@ -136,6 +141,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
               return;
             }
           }
+
+          $scope.current.sequence_mode = $scope.testCaseMode.value === 'sequence' ? true : false;
 
           SuiteService.create($scope.projectId, $scope.current, function(data, status) {
             switch (status) {
@@ -195,6 +202,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 return;
               }
             }
+
+          $scope.current.sequence_mode = $scope.testCaseMode.value === 'sequence' ? true : false;
 
           SuiteService.update($scope.projectId, $scope.current, function(data, status) {
 
@@ -278,7 +287,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
         if(!$scope.editMode && !$scope.current.temp) {
           return; 
         }
-
         var $inputSuiteName = $('#input-new-testsuite-name');
         if ($scope.current.name === undefined || $scope.current.name === '' || $scope.current.name === null) {
           $inputSuiteName.focus();
@@ -300,6 +308,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
             return e._id == caze._id;
           });
           $scope.current.caseOutline.push(caze);
+
           $element.removeClass('test-case-selected');
         }
 
@@ -318,6 +327,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
         };
 
         $scope.editMode = false;
+        $scope.testCaseMode.value = 'isolation';
         loadTemplate();
       };
 
