@@ -199,6 +199,7 @@
         style="position: fixed; z-index: 901; bottom: 0; background-color: white;">
           <div style="padding-right: 220px;">
             <a ng-if="scriptId === undefined" class="btn btn-primary" ng-click="saveScript()">Save</a>
+            <a ng-if="scriptId !== undefined" class="btn btn-danger" style="float: left" ng-click="deleteScript()">{{getWord('Delete')}}</a>
             <a ng-if="scriptId !== undefined" class="btn btn-primary" ng-click="updateScript()">Update</a>
             <a class="btn btn-default" data-ui-sref="app.performance.scripts({id : projectId})">Close</a>            
           </div>

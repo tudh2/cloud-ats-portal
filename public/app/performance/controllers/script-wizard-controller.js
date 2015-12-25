@@ -260,5 +260,35 @@ define(['performance/module', 'lodash'], function (module) {
         }
       }
 
+      $scope.deleteScript = function () {
+
+        $.SmartMessageBox({
+            title: $rootScope.getWord("Delete script"),
+            content: $rootScope.getWord("Are you sure to delete the script?"),
+            buttons: $rootScope.getWord('[No][Yes]')
+          }, function (ButtonPressed) {
+            if (ButtonPressed === "Yes" || ButtonPressed ==="はい") {
+
+              ScriptService.delete($scope.projectId, $scope.scriptId, function (data, status) {
+                if (status == 202) {
+                  $.smallBox({
+                    title: $rootScope.getWord("The script has deleted"),
+                    content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
+                    color: "#296191",
+                    iconSmall: "fa fa-check bounce animated",
+                    timeout: 4000
+                  });
+
+                  $state.go("app.performance.scripts", { id : $scope.projectId });
+                }
+              });
+            }
+            if (ButtonPressed === "No") {
+               return;
+            }
+        });
+
+      }
+
     }]);
 })

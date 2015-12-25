@@ -48,7 +48,6 @@ define(['performance/module'], function (module) {
       }
 
       $scope.update = function() {
-        console.log($scope.script);
         ScriptService.update($scope.projectId, $scope.script, function (data, status) {
         switch (status) {
           case 202 : 
