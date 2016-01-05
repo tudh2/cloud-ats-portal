@@ -1,8 +1,8 @@
-define(['datadriven/module'], function(app) {
+define(['datadriven/module'], function(module) {
   'use strict';
 
-  app.registerFactory('DataService', ['$http', '$q', '$cookies', '$rootScope', '$window', '$state',
-    function($http, $q, $cookies, $rootScope, $window, $state){
+  module.registerFactory('DataService', ['$http', '$q', '$cookies', '$state',
+    function($http, $q, $cookies, $state){
       return {
         list: function (callback) {
           var request = {

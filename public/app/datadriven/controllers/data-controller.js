@@ -1,4 +1,4 @@
-define(['datadriven/module', 'notification'], function(module) {
+define(['datadriven/module'], function(module) {
   
   'use strict';
   module.registerController('DataCtrl',['$rootScope', '$state', '$scope', '$templateRequest', '$compile', 'CaseService', 'UserService', 'DataService', 
