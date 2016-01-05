@@ -77,7 +77,27 @@ define(['keyword/module', 'lodash'], function (module, _) {
         };
 
         loadModal();        
-      },
+      };
+
+      var buildParamList = function(caze) {
+        var params = [];
+        _.forEach(caze.steps, function(step) {
+          _.forEach(step.params, function(param) {
+            var val = step[param];
+            if (val instanceof Object) {
+              val = val.value;
+            }
+
+            var startIndex = val.indexOf('${');
+            var endIndex = val.lastIndexOf('}');
+            if (startIndex == 0 && endIndex == (val.length - 1)) {
+              var variable = val.substring(startIndex + 2, endIndex);
+              params.push(variable);
+            }
+          });
+        });
+        return params;
+      };
 
       $scope.save = function() {
 
@@ -112,6 +132,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
           });
 
         } else {
+          var params = buildParamList($scope.current);
+          if(params.length == 0) $scope.current.data_driven = null;
+          
           CaseService.update($scope.projectId, $scope.current, function(data, status) {
             switch (status) {
               case 200:
