@@ -50,6 +50,10 @@ define([
             ])
           }
         }
+      },
+      data: {
+        title: 'Test Cases',
+        requireLogin: true
       }
     })
     .state('app.keyword.driven', {
@@ -67,6 +71,10 @@ define([
             ])
           }
         }
+      },
+      data: {
+        title: 'Test Data',
+        requireLogin: true
       }
     })
     .state('app.keyword.suites', {
@@ -84,6 +92,10 @@ define([
             ])
           }
         }
+      },
+      data: {
+        title: 'Test Suites',
+        requireLogin: true
       }
     })
     .state('app.keyword.execution', {
@@ -101,6 +113,10 @@ define([
             ])
           }
         }
+      },
+      data: {
+        title: 'Execution',
+        requireLogin: true
       }
     })
     .state('app.keyword.report', {
