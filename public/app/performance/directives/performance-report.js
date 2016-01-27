@@ -1,4 +1,4 @@
-define(['performance/module'], function (module) {
+define(['performance/module', 'c3'], function (module, c3) {
 	'use strict';
 
 	module.registerDirective('performanceReport', ['$state', '$rootScope', '$timeout', function ($state, $rootScope, $timeout) {
@@ -16,10 +16,6 @@ define(['performance/module'], function (module) {
 		      $state.go('app.performance.report.sampler', {reportId : report._id, index: indexNumber});
 		    }
 
-				var tmpArrayReports= [];    
-    		var hits_per_second = [];
-    		var trans_per_second = [];
-    		
     		$timeout(function () {
     			$scope.getWord = $rootScope.getWord;
     		}, 1000);
@@ -44,131 +40,106 @@ define(['performance/module'], function (module) {
 	        return report.label == $scope.summaryReport.label;
 	      });
 
+	      //transform hit per second and transaction per second to arrays
+      	_.forEach($scope.reports, function (report) {
+      		
+      		var trans = [];
+      		var hits = [];
+      		_.forIn(report.trans_per_second, function (time) {
+      			trans.push(time);
+      		});
+      		_.forIn(report.hits_per_second, function (time) {
+      			hits.push(time);
+      		});
+      		report.trans_per_second = trans;
+      		report.hits_per_second = hits;
+      	});
+
+      	//get minimum time by report type
+      	var getMinTime = function (firstObject, type) {
+  				var minTimeStamp = firstObject.timestamp;
+	      	_.forEach($scope.reports, function (report) {
+
+	      		var tempObj = (type === 'transactions') ? report.trans_per_second : report.hits_per_second;
+	      		_.forEach(tempObj, function (obj) {
+	      			if (obj.timestamp < minTimeStamp) {
+	      				minTimeStamp = obj.timestamp;
+	      			}
+	      		});
+	      	});
+	      	return minTimeStamp;
+      	}
+
+      	// create array to store list of time, value in pair for each sampler
+      	var createSamplerDataArray = function (type) {
+      		var datas = [];
+
+      		var minTimeStamp = (type === 'transactions') ? getMinTime($scope.reports[0].trans_per_second[0], type) : getMinTime($scope.reports[0].hits_per_second[0], type);
+      		_.forEach($scope.reports, function (report) {
+      			var newObj = {
+	      			label : report.label,
+	      			time : {}
+	      		};
+	      		var tempInfo = (type === 'transactions') ? report.trans_per_second : report.hits_per_second;
+	      		_.forEach(tempInfo, function (obj) {
+      				var timeTmp = (obj.timestamp - minTimeStamp) / 1000;
+		      		newObj.time[timeTmp] = obj.value;
+		      	});
+		      	datas.push(newObj);
+	      	});
+
+	      	return datas;
+      	}
+
+      	var arrayTransactions = createSamplerDataArray('transactions');
+      	// present data to draw chart
+      	var xs_value = {};
+	      var columns_value = [];
+      	var handleDataToDraw = function (data) {
+		      var i = 0;
+		      _.forEach(data, function (obj) {
+
+		      	var label = obj.label;
+		      	xs_value[label] = 'x'+i; 
+		      	
+		      	var column_x = [];
+		      	var column_data = [];
+		      	column_x.push('x'+i);
+		      	column_data.push(label);
+		      	i ++;
+		      	_.forEach(obj.time, function (value, key) {
+		      		column_x.push(key);
+		      		column_data.push(value);
+		      	});
+
+						columns_value.push(column_x);
+						columns_value.push(column_data); 	
+		      });
+      	}
+      	// start to draw transactions per second chart
+
+      	handleDataToDraw(arrayTransactions);
+	      var chart = c3.generate({
+	      	bindto: '#trans_chart',
+	      	data: {
+	      		xs: xs_value,
+	      		columns: columns_value
+	      	}
+	      });
+
 	      // start to create array to draw hits per second chart
-	      var maxLength = 0;
-	      var counterSample = 0;
-	      var reportLabel = [];  
+      	var arrayHits = createSamplerDataArray('hits');
+      	xs_value = {};
+	      columns_value = [];
+      	handleDataToDraw(arrayHits);
 
-	      _.forEach($scope.reports, function (report) {
-	        var tmpArray = [];
-	        _.forIn(report.hits_per_second, function (data) {
-	          tmpArray.push(data);
-	        });
-	        counterSample ++;  
-	        reportLabel.push(report.label);
-	        tmpArrayReports.push(tmpArray);
-	        if(tmpArray.length > maxLength){
-	          maxLength = tmpArray.length;
-	        }
-	      });     
-      
-	      // size of array and random color for each sampler
-	      var size = []; 
-	      var colors = [];
-	      var colorsSample = ["#00B4A1","#ffaa2a","#ff5050","#ff7832","#9cbe3e","#ffce32","#9855d4","#af6ee8","#3a5ea4","#4178be","#5596e6","#7cc7ff","#7cc7ff","#2dacd1","008571","#a4aeb6","#8996a0","#3a4a58","#9cbe3e","#9855d4","#5aaafa","#3a4a58"];
-	      for(var i =0; i < maxLength; i++){
-	        var tmpObj = {};      
-	             
-	        tmpObj.y = i;
-	        for(var j =0 ; j < counterSample ; j ++){
-	          var key = reportLabel[j];
-	          if(size.length < counterSample ){   
-	            size.push(key);         
-	          }                    
-	          
-	          if(colors.length < counterSample){   
-	            colors.push(colorsSample[j]);    
-
-	          } 
-
-	          if(tmpArrayReports[j][i] != null){
-	            tmpObj[key] = tmpArrayReports[j][i].value;
-	          }
-	         
-	        }                
-	        hits_per_second.push(tmpObj);
-
-	      }
-	      // fill data to chart using morris libray
-	      var $hits_per_second = $(element).find('.hit-per-second');
-	      Morris.Line({
-	        element : $hits_per_second,
-	        data : hits_per_second,
-	        xkey : 'y',
-	        ykeys : size,
-	        labels : reportLabel,
-	        lineColors : colors,
-	        parseTime : false,
-	        lineWidth: 1,
-	        pointSize: 2
+	      var chart = c3.generate({
+	      	bindto: '#hits_chart',
+	      	data: {
+	      		xs: xs_value,
+	      		columns: columns_value
+	      	}
 	      });
-
-	      // start to draw transactions per second chart
-	      size = [];
-	      //colors = [];
-	      counterSample = 0;
-	      maxLength = 0;
-	      reportLabel = []; 
-	      var $trans_per_second = $(element).find('.tran-per-second');
-	      tmpArrayReports = [];
-
-	      _.forEach($scope.reports, function (report) {
-	        var tmpArray = [];
-	        _.forIn(report.trans_per_second, function (data) {
-	          tmpArray.push(data);
-	        });
-	        counterSample ++;   
-	        reportLabel.push(report.label); 
-	        tmpArrayReports.push(tmpArray);
-	        if(tmpArray.length > maxLength){
-	          maxLength = tmpArray.length;
-	        }
-	      });     
-	      
-	      for(var i =0; i < maxLength; i++){
-	        var tmpObj = {};      
-	             
-	        tmpObj.y = i;
-	        for(var j =0 ; j < counterSample ; j ++){
-	          var key = reportLabel[j];
-	          if(size.length < counterSample ){   
-	            size.push(key);         
-	          }          
-
-	          if(tmpArrayReports[j][i] != null){
-	            tmpObj[key] = tmpArrayReports[j][i].value;
-	          }
-	         
-	        }                
-	        trans_per_second.push(tmpObj);
-
-	      }
-    
-	      // fill data to chart
-	      Morris.Line({
-	        element : $trans_per_second,
-	        data : trans_per_second,
-	        xkey : 'y',
-	        ykeys : size,
-	        labels : reportLabel,
-	        lineColors : colors,
-	        parseTime : false,
-	        lineWidth: 1,
-	        pointSize: 2
-	      });
-
-	      var colors_labels = [];
-	      var colorObject = _.zipObject(reportLabel, colors);
-
-	      _.forIn(colorObject, function (value, key) {
-	        var obj = {};
-	        obj.color = value;
-	        obj.label = key;
-	        colors_labels.push(obj);
-	      });
-
-      	$scope.colors = colors_labels;
-
 			}
 		}
 	}]);

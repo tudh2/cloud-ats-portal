@@ -12,6 +12,8 @@
 	"angular-drag-and-drop-lists":"empty:",
 	"ace-builds":"empty:",
 	"event-source":"empty:",
+	"c3":"empty",
+	"d3":"empty",
   "domReady": "empty:",
   "angular-ui-router": "empty:",
   "angular-google-maps": "empty:",

@@ -3,16 +3,16 @@
 	<div class="col-sm-12 chart-title">
 		<h3 style="padding-left:13px;">{{summaryReport.script_name}}</h3>
 	</div>		
-	<div class="col-sm-6">
-		<p class="ds-text-rotate ds-text-project hit-label-title">{{getWord('Number of hits/second')}}</p>
-		<div class="chart no-padding hit-per-second">
-		</div>
-	</div>
-	<div class="col-sm-6">
-		<p class="ds-text-rotate ds-text-project tran-label-title">{{getWord('Number of transactions/second')}}</p>
-		<div class="chart node-padding tran-per-second"></div>
-	</div>
+	
+	<div class="col-sm-12">
+		<div id="hits_chart"></div>
 
+		<h3 style="text-align: center; margin-top: 0px;">Number of hits per second</h3>
+	</div>
+	<div class="col-sm-12">
+		<div id="trans_chart"></div>
+		<h3 style="text-align: center; margin-top: 0px;">Number of transactions per second</h3>
+	</div>
 	<div class="chart-legend">
 		<div ng-repeat="color in colors" class="label-performance">
 			<div style="background-color: {{color.color}};"></div> {{color.label}}
@@ -36,7 +36,7 @@
 					<th class="text-center">{{getWord('KB/sec')}}</th>
 					<th class="text-center">{{getWord('Avg. Bytes')}}</th>
 				</tr>
-                    </thead>
+      </thead>
 				<tr>
 					<td class="label-report"><a ng-click="openReportEachSampler(summaryReport, $index)">{{summaryReport.label}}</a></td>
 					<td>{{summaryReport.summary.samples}}</td>
