@@ -7,7 +7,8 @@ define(['performance/module', 'c3'], function (module, c3) {
 			replace: true,
 			scope: {
 				reports : '=',
-				init: '&'
+				init: '&',
+				bindTo: '='
 			},
 			templateUrl: 'app/performance/directives/performance-report.tpl.html',
 			link: function($scope, element, attributes) {
@@ -119,27 +120,31 @@ define(['performance/module', 'c3'], function (module, c3) {
       	// start to draw transactions per second chart
 
       	handleDataToDraw(arrayTransactions);
-	      var chart = c3.generate({
-	      	bindto: '#trans_chart',
-	      	data: {
-	      		xs: xs_value,
-	      		columns: columns_value
-	      	}
-	      });
 
-	      // start to create array to draw hits per second chart
-      	var arrayHits = createSamplerDataArray('hits');
-      	xs_value = {};
-	      columns_value = [];
-      	handleDataToDraw(arrayHits);
+      	$timeout(function () {
 
-	      var chart = c3.generate({
-	      	bindto: '#hits_chart',
-	      	data: {
-	      		xs: xs_value,
-	      		columns: columns_value
-	      	}
-	      });
+      		var chart = c3.generate({
+		      	bindto: '#trans_chart_' + $scope.bindTo,
+		      	data: {
+		      		xs: xs_value,
+		      		columns: columns_value
+		      	}
+		      });
+		      // start to create array to draw hits per second chart
+	      	var arrayHits = createSamplerDataArray('hits');
+	      	xs_value = {};
+		      columns_value = [];
+	      	handleDataToDraw(arrayHits);
+
+		      var chart = c3.generate({
+		      	bindto: '#hits_chart_' + $scope.bindTo,
+		      	data: {
+		      		xs: xs_value,
+		      		columns: columns_value
+		      	}
+		      });
+      	});
+
 			}
 		}
 	}]);

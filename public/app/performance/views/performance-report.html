@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="col-sm-12 clearfix " id="all-chart" ng-repeat="report in reports">
-        <performance-report data-reports="report"></performance-report>
+        <performance-report data-reports="report" data-bind-to="report[0].script_id.substring(0,8)"></performance-report>
       </div>
     </div>
   </div>
