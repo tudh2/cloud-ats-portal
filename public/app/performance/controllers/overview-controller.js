@@ -207,7 +207,6 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
       var updateStatus = function(msg) {
         $scope.$apply(function() {
           var job = JSON.parse(msg.data);
-          
           if (job.project_id === $scope.projectId) {
 
             $scope.project.last_running = job.runningTime;
@@ -225,7 +224,10 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
               });
               job.scripts = job.scripts.length;
               job.created_date = job.runningTime;
-              $scope.project.jobs.unshift(job);
+              if (job.report && job.report.length > 0) {
+                $scope.project.jobs.unshift(job);
+              }
+              
             }
           }
         })

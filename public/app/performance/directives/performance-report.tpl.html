@@ -4,14 +4,15 @@
 		<h3 style="padding-left:13px;">{{summaryReport.script_name}}</h3>
 	</div>		
 	
-	<div class="col-sm-12">
+	<div class="col-sm-12" style="margin-bottom: 10px; border-bottom: 1px dotted #888888;">
+		<div class="ds-text-rotate ds-text-project">{{getWord('Number of hits/second')}}</div>
 		<div id="hits_chart_{{bindTo}}"></div>
-
-		<h3 style="text-align: center; margin-top: 0px;">{{getWord('Number of hits/second')}}</h3>
+		<div style="text-align: center; margin-bottom: 5px;"><button class="btn btn-xs btn-primary show-hide-button" ng-click="toggle('hits_chart')">{{show_hits ? 'Hide All' : 'Show All'}}</button></div>
 	</div>
 	<div class="col-sm-12">
+		<div class="ds-text-rotate ds-text-project ">{{getWord('Number of transactions/second')}} </div>
 		<div id="trans_chart_{{bindTo}}"></div>
-		<h3 style="text-align: center; margin-top: 0px;">{{getWord('Number of transactions/second')}}</h3>
+		<div style="text-align: center; margin-bottom: 5px;"><button class="btn btn-xs btn-primary show-hide-button" ng-click="toggle('trans_chart')">{{show_trans ? 'Hide All' : 'Show All'}}</button></div>
 	</div>
 	<div class="chart-legend">
 		<div ng-repeat="color in colors" class="label-performance">

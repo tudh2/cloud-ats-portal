@@ -1,4 +1,4 @@
-define(['performance/module', 'morris'], function (module) {
+define(['performance/module', 'c3'], function (module, c3) {
 
 	'use strict';
 
@@ -6,6 +6,10 @@ define(['performance/module', 'morris'], function (module) {
 		$scope.reportId = $stateParams.reportId;
     $scope.index = $stateParams.index;
     $scope.jobId = $stateParams.jobId;
+
+    $scope.minTranTime = $stateParams.tran;
+    $scope.minHitTime = $stateParams.hit;
+
 		ReportService.get($scope.reportId, function (report, status) {
 
       report.summary.throughtput = _.round(report.summary.throughtput, 2);
@@ -15,53 +19,45 @@ define(['performance/module', 'morris'], function (module) {
       report.summary.average_bytes = _.round(report.summary.average_bytes, 2);
 
       $scope.report = report;
-			var tmpHitsArray = [];
-      var i =0
-      _.forIn(report.hits_per_second, function (data) {
-        var tmpObj = data;        
-        tmpObj.timestamp = i;        
-        tmpHitsArray.push(tmpObj);
-        i ++;
+
+      var xs_value = {'data' : 'x'};
+      var columns_value = [];
+      var x_value = ['x'];
+      var dataset = ['data'];
+
+      _.forIn($scope.report.hits_per_second, function (data) {
+        var real_time = (data.timestamp - $scope.minHitTime) / 1000;
+        x_value.push(real_time);
+        dataset.push(data.value);
       });
 
-      var colorsSample = ["#008571","#ffce32","#af6ee8","#7cc7ff","#15ac9f","#ffaa2a","#3a5ea4","#2dacd1","#3bc1ac","#fd6d42","#4178be","#a4aeb6","#b4e051","#db2780","#5596e6","#8996a0","#9cbe3e","#9855d4","#5aaafa","#3a4a58"];
-      var $hits_per_second = $('.sampler-report-hits');
-      Morris.Line({
-        element : $hits_per_second,
-        data : tmpHitsArray,
-        xkey : 'timestamp',
-        ykeys : ['value'],
-        labels : ['value'],
-        lineColors: [colorsSample[$scope.index]],
-        parseTime : false,
-        lineWidth: 2,
-        pointSize: 3
+      columns_value.push(dataset);
+      columns_value.push(x_value);
+      var chart = c3.generate({
+        bindto: '.sampler-report-hits',
+        data: {
+          xs: xs_value,
+          columns: columns_value
+        }
       });
 
-      var tmpTransArray = [];
-      i = 0;
-
-      _.forIn(report.trans_per_second, function (data) {
-        var tmpObj = data;
-        tmpObj.timestamp = i;
-        tmpTransArray.push(tmpObj);
-        i ++;
-
+			x_value = ['x'];
+      dataset = ['data'];
+      _.forIn($scope.report.trans_per_second, function (data) {
+        var real_time = (data.timestamp - $scope.minTranTime) / 1000;
+        x_value.push(real_time);
+        dataset.push(data.value);
       });
 
-      var $trans_per_second = $('.sampler-report-trans');
-      Morris.Line({
-        element : $trans_per_second,
-        data : tmpTransArray,
-        xkey : 'timestamp',
-        ykeys : ['value'],
-        labels : ['value'],
-        lineColors: [colorsSample[$scope.index]],
-        parseTime : false,
-        lineWidth: 2,
-        pointSize: 3
+      columns_value.push(dataset);
+      columns_value.push(x_value);
+      var chart = c3.generate({
+        bindto: '.sampler-report-trans',
+        data: {
+          xs: xs_value,
+          columns: columns_value
+        }
       });
-
 		});
 
     $scope.backToOverviewReport = function () {

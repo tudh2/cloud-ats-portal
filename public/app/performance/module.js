@@ -134,7 +134,7 @@ define([
       }
     })
     .state('app.performance.report.sampler', {
-      url: '/sampler/:reportId/:index',
+      url: '/sampler/:reportId/:index/:hit/:tran',
       params: {
       	index: '0'
       },

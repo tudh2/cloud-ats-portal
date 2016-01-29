@@ -265,9 +265,9 @@ nav ul li a {
 }
 .ds-text-project {
 	left: -80px;
-	top:50%;
-    width:200px;
-    text-align:right;
+	margin-top:150px;
+  width:200px;
+  text-align:right;
 }
 .ds-relative {
 	position: relative;
@@ -1720,6 +1720,10 @@ div.upload-file {
 }
 
 .btn-execution {
-    margin-top: 50px;
-    padding-left: 140px;
+  margin-top: 50px;
+  padding-left: 140px;
+}
+.show-hide-button {
+	padding-right: 15px;
+  padding-left: 15px;
 }

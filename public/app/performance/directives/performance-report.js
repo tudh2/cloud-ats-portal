@@ -14,7 +14,9 @@ define(['performance/module', 'c3'], function (module, c3) {
 			link: function($scope, element, attributes) {
 
 				$scope.openReportEachSampler = function (report, indexNumber) {
-		      $state.go('app.performance.report.sampler', {reportId : report._id, index: indexNumber});
+					var origin_hits_time = getMinTime($scope.reports[0].hits_per_second[0], 'hits');
+					var origin_trans_time = getMinTime($scope.reports[0].trans_per_second[0], 'transactions');
+		      $state.go('app.performance.report.sampler', {reportId : report._id, index: indexNumber, hit : origin_hits_time, tran : origin_trans_time});
 		    }
 
     		$timeout(function () {
@@ -123,26 +125,55 @@ define(['performance/module', 'c3'], function (module, c3) {
 
       	$timeout(function () {
 
-      		var chart = c3.generate({
+      		$scope.show_trans = true;
+      		$scope.show_hits = true;
+
+      		var trans_chart = c3.generate({
 		      	bindto: '#trans_chart_' + $scope.bindTo,
 		      	data: {
 		      		xs: xs_value,
 		      		columns: columns_value
 		      	}
 		      });
+
+		      var size = $(element).find('#trans_chart_' + $scope.bindTo + ' svg g').last().parent();
+		      var chartSize = size[0].getBoundingClientRect().height + 300;
+
 		      // start to create array to draw hits per second chart
 	      	var arrayHits = createSamplerDataArray('hits');
 	      	xs_value = {};
 		      columns_value = [];
 	      	handleDataToDraw(arrayHits);
 
-		      var chart = c3.generate({
+		      var hits_chart = c3.generate({
 		      	bindto: '#hits_chart_' + $scope.bindTo,
 		      	data: {
 		      		xs: xs_value,
 		      		columns: columns_value
 		      	}
 		      });
+
+		      trans_chart.resize({height: chartSize});
+		      hits_chart.resize({height: chartSize});
+
+		      $scope.toggle = function (type) {
+	      		switch (type) {
+	      			case 'trans_chart':
+	      				if ($scope.show_trans) {
+	      					trans_chart.hide();
+	      				} else trans_chart.show();
+	      				$scope.show_trans = !$scope.show_trans;
+	      				break;
+	      			case 'hits_chart':
+	      				if ($scope.show_hits) {
+	      					hits_chart.hide();
+	      				} else hits_chart.show();
+	      				$scope.show_hits = !$scope.show_hits;
+	      				break;
+	      			default: 
+
+	      		}
+	      	}
       	});
 
 			}
