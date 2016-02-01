@@ -1,9 +1,10 @@
-define(['performance/module'], function (module) {
+define(['performance/module', 'lodash'], function (module, _) {
 
   'use strict';
 
-  module.registerController('ScriptEditorCtrl', ['$scope', '$rootScope', '$state','$stateParams', 'ScriptService', 
-    function($scope, $rootScope, $state, $stateParams, ScriptService) {
+  module.registerController('ScriptEditorCtrl', 
+    ['$scope', '$rootScope', '$state','$stateParams', '$cookies', 'Upload', 'ScriptService', 
+    function($scope, $rootScope, $state, $stateParams, $cookies, Upload, ScriptService) {
       $scope.projectId = $stateParams.id;
       $scope.scriptId = $stateParams.scriptId;
 
@@ -90,5 +91,53 @@ define(['performance/module'], function (module) {
         editor.setFontSize(14);
         editor.getSession().setFoldStyle('markbeginend');
       }
+
+      $scope.files = [];
+      $scope.progressPercentage = [];
+      console.log($scope.progressPercentage);
+
+      $scope.$watch('files', function() {
+
+        if ($scope.files === undefined || $scope.files === null) return;
+
+        for (var i = 0; i < $scope.files.length; i++) {
+          var file = $scope.files[i];
+          Upload.upload({
+            url: appConfig.RestEntry + '/api/v1/project/performance/' + $scope.scriptId + '/csv/upload',
+            data: {file: file},
+            headers: {
+              'X-AUTH-TOKEN': $cookies.get('authToken'),
+              'X-SPACE': $cookies.get('space')
+            }
+          }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+          }, function (resp) {
+            console.log('Error status ' + resp.status);
+          }, function (evt) {
+            console.log(evt.loaded)
+            console.log(evt.total);
+
+            _.forEach($scope.progressPercentage, function (val) {
+              if (val.fileName === evt.config.data.file.name) {
+                val.percent = parseInt(100.0 * evt.loaded / evt.total);
+              }
+            });
+
+            var existed = _.find($scope.progressPercentage, function (val) {
+              return val.fileName === evt.config.data.file.name;
+            })
+
+            if (existed === undefined || existed === null) {
+              $scope.progressPercentage.push({
+                'fileName': evt.config.data.file.name,
+                'percent': parseInt(100.0 * evt.loaded / evt.total)
+              });  
+            }
+            
+            console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
+          });
+        }
+      })
+
     }]);
 });

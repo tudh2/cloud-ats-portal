@@ -12,6 +12,8 @@ define([
   'angular-animate',
   'angular-loading-bar',
   'angular-bootstrap',
+  'angular-material',
+  'angular-messages',
   'event-source',
   'notification'
 ], function(ng, couchPotato) {
@@ -20,6 +22,8 @@ define([
 
     'scs.couch-potato',
     'ngAnimate',
+    'ngMaterial',
+    'ngMessages',
     'ui.router',
     'ui.bootstrap',
 

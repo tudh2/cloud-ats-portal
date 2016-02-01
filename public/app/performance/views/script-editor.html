@@ -4,10 +4,14 @@
     
     <div class="jarviswidget">
     <header class="header-navtabs">
-
       <ul id="myTab" class="nav nav-tabs pull-right">
         <li class="active">
           <a data-toggle="tab" href="#basic" id="basicId"><span class="hidden-mobile">{{getWord('INFORMATION')}}</span></a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#csv-data">
+            <span class="hidden-mobile">{{getWord('CSV DATA')}}</span>
+          </a>
         </li>
         <li>
           <a data-toggle="tab" href="#script-content" id="samplersId"><span class="hidden-mobile">{{getWord('SCRIPT CONTENT')}}</span></a>
@@ -44,8 +48,86 @@
           </div>
           <!-- END Basic Information & Configuration -->
 
+          <!-- START CSV Data -->
+          <div class="tab-pane fade in" id="csv-data" style="height: 400px;">
+
+            <section layout="row" flex>
+              <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+                <md-toolbar>
+                  <div class="md-toolbar-tools">
+                    <md-button aria-label="Upload" class="md-raised">Upload</md-button>
+                  </div>
+                </md-toolbar>
+                <md-content layout-padding>
+                  <md-button ng-click="close()" class="md-primary" hide-gt-md>
+                    Close Sidenav Left
+                  </md-button>
+                  <p hide-md show-gt-md>
+                    This sidenav is locked open on your device. To go back to the default behavior,
+                    narrow your display.
+                  </p>
+                </md-content>
+              </md-sidenav>
+              <md-content flex layout-padding>
+                <div layout="column" layout-fill layout-align="top center">
+                  <p>
+                  The left sidenav will 'lock open' on a medium (>=960px wide) device.
+                  </p>
+                  <p>
+                  The right sidenav will focus on a specific child element.
+                  </p>
+                  <div>
+                    <md-button ng-click="toggleLeft()"
+                      class="md-primary" hide-gt-md>
+                      Toggle left
+                    </md-button>
+                  </div>
+                  <div>
+                    <md-button ng-click="toggleRight()"
+                      ng-hide="isOpenRight()"
+                      class="md-primary">
+                      Toggle right
+                    </md-button>
+                  </div>
+                </div>
+                <div flex></div>
+              </md-content>
+              <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+                <md-toolbar class="md-theme-light">
+                  <h1 class="md-toolbar-tools">Sidenav Right</h1>
+                </md-toolbar>
+                <md-content layout-padding>
+                  <form>
+                    <md-input-container>
+                      <label for="testInput">Test input</label>
+                      <input type="text" id="testInput"
+                             ng-model="data" md-autofocus>
+                    </md-input-container>
+                  </form>
+                  <md-button ng-click="close()" class="md-primary">
+                    Close Sidenav Right
+                  </md-button>
+                </md-content>
+              </md-sidenav>
+            </section>
+
+            <div ng-if="false" layout="row" ng-repeat="progress in progressPercentage">
+              <p>{{progress.fileName}}</p>
+              <md-progress-linear md-mode="determinate" value="{{progress.percent}}"></md-progress-linear>  
+            </div>
+            <div ng-if="false" layout="row" layout-align="center center" class="drop-box" 
+              ngf-drop ngf-select ng-model="files" ngf-drag-over-class="'dragover'" 
+              ngf-multiple="true" ngf-allow-dir="true" accept=".csv,text/csv" ngf-pattern=".csv,text/csv">
+              <div layout="column" layout-align="center center">
+                <p class="md-headline">Empty data</p>
+                <p class="md-headline">Drop CSV file here or click to upload</p>                
+              </div>
+            </div>
+          </div>
+          <!-- END CSV Data -->
+
           <!-- START Script Content -->
-          <div class="tab-pane fade in" id="script-content">
+          <div class="tab-pane fade in" id="script-content" style="height: 400px; padding-bottom: 15px;">
             <code>(*) Result output configuration is not effected in runtime</code>
             <br>
             <code>(*) ThreadGroup configuration effects only on information tab</code>
@@ -57,8 +139,9 @@
                 mode: 'xml',
                 onLoad: aceLoaded,
                 onChange: aceChanged
-              }" ng-model="script.raw_content" style="height: 400px;"></div>
+              }" ng-model="script.raw_content" style="height: 100%;"></div>
           </div>
+          <div style="clear: both;"></div>
           <!-- END Script Content -->
 
         </div><!-- END Tab Content-->
