@@ -52,9 +52,11 @@
           <div class="tab-pane fade in" id="csv-data" style="height: 400px;">
 
             <section layout="row" flex>
-              <md-sidenav class="md-sidenav-left md-whiteframe-z2">
-                <md-toolbar md-scroll-shrink>
-                  <div class="md-toolbar-tools"></div>
+              <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+                <md-toolbar>
+                  <div class="md-toolbar-tools">
+                    <md-button aria-label="Upload" class="md-raised">Upload</md-button>
+                  </div>
                 </md-toolbar>
                 <md-content layout-padding>
                   <md-button ng-click="close()" class="md-primary" hide-gt-md>
@@ -88,7 +90,25 @@
                     </md-button>
                   </div>
                 </div>
+                <div flex></div>
               </md-content>
+              <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+                <md-toolbar class="md-theme-light">
+                  <h1 class="md-toolbar-tools">Sidenav Right</h1>
+                </md-toolbar>
+                <md-content layout-padding>
+                  <form>
+                    <md-input-container>
+                      <label for="testInput">Test input</label>
+                      <input type="text" id="testInput"
+                             ng-model="data" md-autofocus>
+                    </md-input-container>
+                  </form>
+                  <md-button ng-click="close()" class="md-primary">
+                    Close Sidenav Right
+                  </md-button>
+                </md-content>
+              </md-sidenav>
             </section>
 
             <div ng-if="false" layout="row" ng-repeat="progress in progressPercentage">
