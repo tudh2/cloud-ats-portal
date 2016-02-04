@@ -23,6 +23,8 @@
 		"ngInfiniteScroll": "~1.2.2",
 		"angular-material": "~1.0.2",
 		"angular-material-data-table": "0.9.9",
+		"angular-material-icons": "0.6.0",
+    
     "jquery": "~2.1.1",
     "jquery.easy-pie-chart": "~2.1.4",
     "angular-bootstrap": "~0.13.0",

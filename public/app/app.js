@@ -14,6 +14,7 @@ define([
   'angular-bootstrap',
   'angular-material',
   'angular-messages',
+  'angular-material-icons',
   'event-source',
   'notification'
 ], function(ng, couchPotato) {
@@ -26,7 +27,7 @@ define([
     'ngMessages',
     'ui.router',
     'ui.bootstrap',
-
+    'ngMdIcons',
     'angular-loading-bar',
 
     //App

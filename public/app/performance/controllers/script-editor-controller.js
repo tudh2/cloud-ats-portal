@@ -92,7 +92,7 @@ define(['performance/module', 'lodash'], function (module, _) {
         editor.getSession().setFoldStyle('markbeginend');
       }
 
-      $scope.files = [];
+      $scope.files = [{name:'data1.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}];
       $scope.progressPercentage = [];
       console.log($scope.progressPercentage);
 
@@ -138,6 +138,10 @@ define(['performance/module', 'lodash'], function (module, _) {
           });
         }
       })
+
+      $scope.selectCsv = function (file) {
+
+      }
 
     }]);
 });
