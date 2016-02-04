@@ -14,6 +14,7 @@
   "ngInfiniteScroll":"empty",
   "angular-material":"empty",
   "angular-material-data-table":"empty",
+	"angular-material-icons":"empty",
 	"ace-builds":"empty:",
 	"event-source":"empty:",
   "domReady": "empty:",

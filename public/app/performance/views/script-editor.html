@@ -49,7 +49,7 @@
           <!-- END Basic Information & Configuration -->
 
           <!-- START CSV Data -->
-          <div class="tab-pane fade in" id="csv-data" style="height: 400px;">
+          <div class="tab-pane fade in" id="csv-data">
 
             <section layout="row" flex>
               <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
@@ -58,14 +58,24 @@
                     <md-button aria-label="Upload" class="md-raised">Upload</md-button>
                   </div>
                 </md-toolbar>
-                <md-content layout-padding>
-                  <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
-                  </md-button>
-                  <p hide-md show-gt-md>
-                    This sidenav is locked open on your device. To go back to the default behavior,
-                    narrow your display.
-                  </p>
+                <md-content style="height: 350px;">
+                  <section>
+                    <md-subheader class="md-primary">Unread Messages</md-subheader>
+                    <md-list layout-padding>
+                      <md-list-item ng-repeat="file in files">
+                        <p>{{file.name}}</p>
+                        <md-button class="md-icon-button md-secondary">
+                          <ng-md-icon icon="delete" style="fill:#FE5151"></ng-md-icon>
+                        </md-button>
+                      </md-list-item>
+                    </md-list>  
+                  </section>
+                  <!-- <md-subheader class="md-primary header-filter">
+                    <md-input-container style="width: 100%">
+                      <input type="text" placeholder="Filter by name">
+                    </md-input-container>
+                  </md-subheader> -->
+                  
                 </md-content>
               </md-sidenav>
               <md-content flex layout-padding>
