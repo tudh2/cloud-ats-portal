@@ -4,11 +4,12 @@ define([
   'angular-ui-router',
   'angular-ui-ace',
   'angular-drag-and-drop-lists',
-  'ng-file-upload'
+  'ng-file-upload',
+  'angular-material-data-table'
 ], function(ng, couchPotato) {
 
 	'use strict';
-	var module = ng.module('app.performance', ['ui.router', 'ui.ace', 'dndLists', 'ngFileUpload']);
+	var module = ng.module('app.performance', ['ui.router', 'ui.ace', 'dndLists', 'ngFileUpload', 'md.data.table']);
   
 	module.config(function ($stateProvider, $couchPotatoProvider) {
 

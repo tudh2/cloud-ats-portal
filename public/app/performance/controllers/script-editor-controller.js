@@ -4,7 +4,7 @@ define(['performance/module', 'lodash'], function (module, _) {
 
   module.registerController('ScriptEditorCtrl', 
     ['$scope', '$rootScope', '$state','$stateParams', '$cookies', 'Upload', 'ScriptService', 
-    function($scope, $rootScope, $state, $stateParams, $cookies, Upload, ScriptService) {
+     '$mdDialog', function($scope, $rootScope, $state, $stateParams, $cookies, Upload, ScriptService, $mdDialog) {
       $scope.projectId = $stateParams.id;
       $scope.scriptId = $stateParams.scriptId;
 
@@ -17,6 +17,57 @@ define(['performance/module', 'lodash'], function (module, _) {
         $('#loops').slider('setValue', $scope.script.loops);
         $('#engines').slider('setValue', $scope.script.number_engines);
       });
+      $scope.selected = [];
+
+      $scope.query = {
+        filter: '',
+        order: name,
+        limit: 5,
+        page: 1
+      };  
+      $scope.filter = {
+        options: {
+          debounce: 500
+        }
+      };
+      $scope.$watch('[query.limit, query.page]', function (query) {
+        var  dataSelected = $scope.data.slice((query[1] - 1) * query[0], query[1] * query[0]);
+        $scope.dataSelected = dataSelected;
+      });
+
+      $scope.$watch('selected', function (newData) {
+        console.log(newData);
+      });
+      $scope.data = [
+        {id : 'id1', name : 'name1', score: 10},
+        {id : 'id2', name : 'name2', score: 7},
+        {id : 'id3', name : 'name3', score: 7},
+        {id : 'id4', name : 'name4', score: 9},
+        {id : 'id5', name : 'name5', score: 5},
+        {id : 'id6', name : 'name6', score: 4},
+        {id : 'id7', name : 'name7', score: 10},
+        {id : 'id8', name : 'name8', score: 2}, 
+        {id : 'id9', name : 'name9', score: 7},
+        {id : 'id11', name : 'name10', score: 9},
+        {id : 'id12', name : 'name11', score: 10},
+        {id : 'id13', name : 'name12', score: 3},
+        {id : 'id14', name : 'name13', score: 10}
+
+      ];
+
+      $scope.params = [];
+      _.forIn($scope.data[0], function (value, key) {
+        $scope.params.push(key);
+      });
+      $scope.addRow = function ($event) {
+        $mdDialog.show({
+          clickOutsideToClose: true,
+          focusOnOpen: false,
+          controller: 'ScriptEditorCtrl',
+          targetEvent: $event,
+          templateUrl: 'app/performance/views/add-row.tpl.html'
+        });
+      }
 
       $scope.delete = function() {
 

@@ -79,7 +79,7 @@
                 </md-content>
               </md-sidenav>
               <md-content flex layout-padding>
-                <div layout="column" layout-fill layout-align="top center">
+                <div layout="column" layout-fill layout-align="top center" ng-if="false">
                   <p>
                   The left sidenav will 'lock open' on a medium (>=960px wide) device.
                   </p>
@@ -99,6 +99,65 @@
                       Toggle right
                     </md-button>
                   </div>
+                </div>
+                <div layout="column" layout-fill layout-align="top center">
+                 
+                  <md-toolbar class="md-table-toolbar md-default" aria-hidden="false" style="">
+                  <div class="md-toolbar-tools">
+                    <md-input-container md-no-float class="md-block" flex>
+                        <ng-md-icon icon="search" style="fill:blue"></ng-md-icon>
+                      <input type="text" placeholder="Filter">
+                    </md-input-container>
+                    <md-button class="md-icon-button" aria-label="More" ng-if="selected.length">
+                      <ng-md-icon icon="delete" style="fill:#FE5151"></ng-md-icon>
+                    </md-button>
+                    <md-menu md-offset="0 -7">
+                      <md-button aria-label="Open Actions" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                        <ng-md-icon icon="menu">
+                          
+                        </ng-md-icon>
+                      </md-button>
+                      <md-menu-content>
+                        <md-menu-item>
+                          <md-button ng-click="addRow($event)">
+                            <ng-md-icon icon="add_circle"></ng-md-icon> Add Row
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button>
+                            <ng-md-icon icon="add_circle"></ng-md-icon> Add Clumn
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button>
+                            <ng-md-icon icon="remove_circle_outline"></ng-md-icon> Remove Clumn
+                          </md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                  </div>
+                </md-toolbar>
+                  <!-- exact table from live demo -->
+                  <md-table-container>
+                    <table md-table md-row-select ng-model="selected" md-progress="promise">
+                      <thead md-head md-order="query.order" md-on-reorder="onReorder">
+                        <tr md-row>
+                          <th md-column md-order-by="nameToLower"><span>Dessert (100g serving)</span></th>
+                          <th md-column md-numeric md-order-by="calories.value"><span>Calories</span></th>
+                          <th md-column md-numeric>Fat (g)</th>
+                        </tr>
+                      </thead>
+                      <tbody md-body>
+                        <tr md-row md-select="i" md-select-id="{{i}}" md-auto-select ng-repeat="i in dataSelected track by $index">
+                          <td md-cell>{{i.id}}</td>
+                          <td md-cell>{{i.name}}</td>
+                          <td md-cell>{{i.score}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </md-table-container>
+
+                  <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{data.length}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
                 </div>
                 <div flex></div>
               </md-content>

@@ -259,6 +259,7 @@ define(['keyword/module'], function (module) {
             };
 
             $scope.current.data_driven = driven;
+            console.log($scope.current.data_driven);
             var $input = $('input[name="driven-name"]');
             $scope.driven_name = $scope.file.name;
             $input.attr('disabled',true);
