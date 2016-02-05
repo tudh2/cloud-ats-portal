@@ -4,11 +4,12 @@ define([
   'angular-ui-router',
   'angular-ui-ace',
   'angular-drag-and-drop-lists',
-  'ng-file-upload'
+  'ng-file-upload',
+  'angular-material-data-table'
 ], function(ng, couchPotato) {
 
 	'use strict';
-	var module = ng.module('app.performance', ['ui.router', 'ui.ace', 'dndLists', 'ngFileUpload']);
+	var module = ng.module('app.performance', ['ui.router', 'ui.ace', 'dndLists', 'ngFileUpload', 'md.data.table']);
   
 	module.config(function ($stateProvider, $couchPotatoProvider) {
 
@@ -41,10 +42,10 @@ define([
 					templateUrl: 'app/performance/views/scripts.html',
 					resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
-						'performance/controllers/scripts-controller',
+            'performance/controllers/scripts-controller',
 						'performance/directives/tabs-header-performance',
-						'services/script-service',
-					])
+						'services/script-service'					
+          ])
 				}
 				},
 			},
@@ -157,6 +158,17 @@ define([
       }
     });
 	});
+  // module.filter('match', function() {
+  //   return function( items, text) {
+  //     var filtered = [];
+  //     angular.forEach(items, function(item) {
+  //       if(text == item.id) {
+  //         filtered.push(item);
+  //       }
+  //     });
+  //     return filtered;
+  //   };
+  // });
 	couchPotato.configureApp(module);
 
   module.run(function($couchPotato) {
