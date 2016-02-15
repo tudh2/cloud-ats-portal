@@ -1735,3 +1735,8 @@ div.upload-file {
 .dragover {
   border: 5px dashed blue;
 }
+
+.csv-list .active {
+  border-left: 2px solid #3F51B5;
+  background: #ECECEC
+}

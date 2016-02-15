@@ -55,27 +55,45 @@
               <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
                 <md-toolbar>
                   <div class="md-toolbar-tools">
-                    <md-button aria-label="Upload" class="md-raised">Upload</md-button>
+                    <md-button class="md-icon-button" ng-click="toggleFilter()" aria-label="Show/Close Filter">
+                    <md-tooltip md-autohide>Show/Close Filter</md-tooltip>
+                      <ng-md-icon icon="search"></ng-md-icon>
+                    </md-button>
+                    <h2>
+                      <span>CSV Data List</span>
+                    </h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                      <md-tooltip md-autohide>Upload New Data</md-tooltip>
+                      <ng-md-icon icon="file_upload"></ng-md-icon>
+                    </md-button>
                   </div>
                 </md-toolbar>
                 <md-content style="height: 350px;">
                   <section>
-                    <md-subheader class="md-primary">Unread Messages</md-subheader>
-                    <md-list layout-padding>
-                      <md-list-item ng-repeat="file in files">
+                    <md-subheader class="md-primary" ng-show="filterIsShow">
+                      <div layout="row">
+                        <md-input-container flex style="margin: 0px;">
+                          <label>Filter by name</label>
+                          <input type="text" ng-model="searchTerms">
+                        </md-input-container>                        
+                        <md-button class="md-icon-button" ng-click="hideFilter()" aria-label="Hide Filter" style="margin-top: 8px;">
+                          <ng-md-icon icon="close"></ng-md-icon>
+                        </md-button>
+                      </div>
+                    </md-subheader>
+                    <md-list class="csv-list">
+                      <md-list-item ng-class="{active:file.name == csvSelected.name}"
+                        ng-repeat="file in files | search: searchTerms"
+                        ng-click="selectCsv(file)">
                         <p>{{file.name}}</p>
-                        <md-button class="md-icon-button md-secondary">
+                        <md-button class="md-icon-button md-secondary" aria-label="Delete">
+                          <md-tooltip md-autohide>Delete</md-tooltip>
                           <ng-md-icon icon="delete" style="fill:#FE5151"></ng-md-icon>
                         </md-button>
                       </md-list-item>
                     </md-list>  
                   </section>
-                  <!-- <md-subheader class="md-primary header-filter">
-                    <md-input-container style="width: 100%">
-                      <input type="text" placeholder="Filter by name">
-                    </md-input-container>
-                  </md-subheader> -->
-                  
                 </md-content>
               </md-sidenav>
               <md-content flex layout-padding>

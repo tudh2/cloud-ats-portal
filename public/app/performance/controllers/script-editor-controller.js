@@ -143,11 +143,11 @@ define(['performance/module', 'lodash'], function (module, _) {
         editor.getSession().setFoldStyle('markbeginend');
       }
 
-      $scope.files = [{name:'data1.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data2.csv'}, {name:'data3.csv'}];
+      $scope.files = [{name:'data1.csv'}, {name:'data2.csv'}, {name:'data3.csv'}, {name:'data4.csv'}, {name:'data5.csv'}, {name:'data6.csv'}, {name:'data7.csv'}, {name:'data8.csv'}, {name:'data9.csv'}];
+      $scope.csvSelected = $scope.files[0];
       $scope.progressPercentage = [];
-      console.log($scope.progressPercentage);
 
-      $scope.$watch('files', function() {
+      /*$scope.$watch('files', function() {
 
         if ($scope.files === undefined || $scope.files === null) return;
 
@@ -188,10 +188,29 @@ define(['performance/module', 'lodash'], function (module, _) {
             console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
           });
         }
-      })
+      })*/
 
       $scope.selectCsv = function (file) {
+        $scope.csvSelected = file;
+      }
 
+      $scope.openFilter = function ($mdOpenMenu, ev) {
+        $mdOpenMenu(ev);
+      }
+
+      $scope.filterIsShow = false;
+
+      $scope.toggleFilter = function() {
+        if ($scope.filterIsShow) {
+          $scope.hideFilter();  
+        } else {
+          $scope.filterIsShow = true;
+        }
+      }
+
+      $scope.hideFilter = function () {
+        $scope.filterIsShow = false;
+        $scope.searchTerms = undefined;
       }
 
     }]);
