@@ -51,7 +51,7 @@
           <!-- START CSV Data -->
           <div class="tab-pane fade in" id="csv-data">
 
-            <section layout="row" flex>
+            <section layout="row" flex ng-show="totalData.length > 0">
               <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
                 <md-toolbar>
                   <div class="md-toolbar-tools">
@@ -63,10 +63,11 @@
                       <span>CSV Data List</span>
                     </h2>
                     <span flex></span>
-                    <md-button class="md-icon-button">
+                    <md-button class="md-icon-button" ng-click="addNewData($event)">
                       <md-tooltip md-autohide>Upload New Data</md-tooltip>
                       <ng-md-icon icon="file_upload"></ng-md-icon>
                     </md-button>
+                    <input type="file" accept=".csv" ng-model="newFile" onchange="angular.element(this).scope().addNewFile(this)" multiple="true" style="display: none;">
                   </div>
                 </md-toolbar>
                 <md-content style="height: 350px;">
@@ -84,10 +85,10 @@
                     </md-subheader>
                     <md-list class="csv-list">
                       <md-list-item ng-class="{active:file.name == csvSelected.name}"
-                        ng-repeat="file in files | search: searchTerms"
+                        ng-repeat="file in totalData | search: searchTerms"
                         ng-click="selectCsv(file)">
                         <p>{{file.name}}</p>
-                        <md-button class="md-icon-button md-secondary" aria-label="Delete">
+                        <md-button ng-if="file.name == csvSelected.name" class="md-icon-button md-secondary" aria-label="Delete" ng-click="deleteCsv(file)">
                           <md-tooltip md-autohide>Delete</md-tooltip>
                           <ng-md-icon icon="delete" style="fill:#FE5151"></ng-md-icon>
                         </md-button>
@@ -97,85 +98,12 @@
                 </md-content>
               </md-sidenav>
               <md-content flex layout-padding>
-                <div layout="column" layout-fill layout-align="top center" ng-if="false">
-                  <p>
-                  The left sidenav will 'lock open' on a medium (>=960px wide) device.
-                  </p>
-                  <p>
-                  The right sidenav will focus on a specific child element.
-                  </p>
-                  <div>
-                    <md-button ng-click="toggleLeft()"
-                      class="md-primary" hide-gt-md>
-                      Toggle left
-                    </md-button>
-                  </div>
-                  <div>
-                    <md-button ng-click="toggleRight()"
-                      ng-hide="isOpenRight()"
-                      class="md-primary">
-                      Toggle right
-                    </md-button>
-                  </div>
-                </div>
                 <div layout="column" layout-fill layout-align="top center">
-                 
-                  <md-toolbar class="md-table-toolbar md-default" aria-hidden="false" style="">
-                  <div class="md-toolbar-tools">
-                    <md-input-container md-no-float class="md-block" flex>
-                        <ng-md-icon icon="search" style="fill:blue"></ng-md-icon>
-                      <input type="text" placeholder="Filter">
-                    </md-input-container>
-                    <md-button class="md-icon-button" aria-label="More" ng-if="selected.length">
-                      <ng-md-icon icon="delete" style="fill:#FE5151"></ng-md-icon>
-                    </md-button>
-                    <md-menu md-offset="0 -7">
-                      <md-button aria-label="Open Actions" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                        <ng-md-icon icon="menu">
-                          
-                        </ng-md-icon>
-                      </md-button>
-                      <md-menu-content>
-                        <md-menu-item>
-                          <md-button ng-click="addRow($event)">
-                            <ng-md-icon icon="add_circle"></ng-md-icon> Add Row
-                          </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                          <md-button>
-                            <ng-md-icon icon="add_circle"></ng-md-icon> Add Clumn
-                          </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                          <md-button>
-                            <ng-md-icon icon="remove_circle_outline"></ng-md-icon> Remove Clumn
-                          </md-button>
-                        </md-menu-item>
-                      </md-menu-content>
-                    </md-menu>
-                  </div>
-                </md-toolbar>
-                  <!-- exact table from live demo -->
-                  <md-table-container>
-                    <table md-table md-row-select ng-model="selected" md-progress="promise">
-                      <thead md-head md-order="query.order" md-on-reorder="onReorder">
-                        <tr md-row>
-                          <th md-column md-order-by="nameToLower"><span>Dessert (100g serving)</span></th>
-                          <th md-column md-numeric md-order-by="calories.value"><span>Calories</span></th>
-                          <th md-column md-numeric>Fat (g)</th>
-                        </tr>
-                      </thead>
-                      <tbody md-body>
-                        <tr md-row md-select="i" md-select-id="{{i}}" md-auto-select ng-repeat="i in dataSelected track by $index">
-                          <td md-cell>{{i.id}}</td>
-                          <td md-cell>{{i.name}}</td>
-                          <td md-cell>{{i.score}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </md-table-container>
+                  <md-content laout="column" flex>
+                    <md-card id="csv-data-table">
 
-                  <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{data.length}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+                    </md-card>
+                  </md-content>
                 </div>
                 <div flex></div>
               </md-content>
@@ -198,11 +126,11 @@
               </md-sidenav>
             </section>
 
-            <div ng-if="false" layout="row" ng-repeat="progress in progressPercentage">
+            <div ng-show="false" layout="row" ng-repeat="progress in progressPercentage">
               <p>{{progress.fileName}}</p>
               <md-progress-linear md-mode="determinate" value="{{progress.percent}}"></md-progress-linear>  
             </div>
-            <div ng-if="false" layout="row" layout-align="center center" class="drop-box" 
+            <div ng-show="totalData.length === 0" layout="row" layout-align="center center" class="drop-box" 
               ngf-drop ngf-select ng-model="files" ngf-drag-over-class="'dragover'" 
               ngf-multiple="true" ngf-allow-dir="true" accept=".csv,text/csv" ngf-pattern=".csv,text/csv">
               <div layout="column" layout-align="center center">
@@ -244,7 +172,7 @@
           <div style="padding-right: 220px;">
             <a class="btn btn-danger" style="float: left" ng-click="delete()">{{getWord('Delete')}}</a>
             <a class="btn btn-primary" ng-click="update()">Update</a>
-            <a class="btn btn-default" data-ui-sref="app.performance.scripts({id : projectId})">Close</a>            
+            <a class="btn btn-default" ng-click="close()">Close</a>            
           </div>
       </div>
   </div>

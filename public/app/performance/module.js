@@ -42,10 +42,10 @@ define([
 					templateUrl: 'app/performance/views/scripts.html',
 					resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
-						'performance/controllers/scripts-controller',
+            'performance/controllers/scripts-controller',
 						'performance/directives/tabs-header-performance',
-						'services/script-service',
-					])
+						'services/script-service'					
+          ])
 				}
 				},
 			},
@@ -158,6 +158,17 @@ define([
       }
     });
 	});
+  // module.filter('match', function() {
+  //   return function( items, text) {
+  //     var filtered = [];
+  //     angular.forEach(items, function(item) {
+  //       if(text == item.id) {
+  //         filtered.push(item);
+  //       }
+  //     });
+  //     return filtered;
+  //   };
+  // });
 	couchPotato.configureApp(module);
 
   module.run(function($couchPotato) {
