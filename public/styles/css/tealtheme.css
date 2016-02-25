@@ -1725,5 +1725,45 @@ div.upload-file {
 }
 .show-hide-button {
 	padding-right: 15px;
-  padding-left: 15px;
+    padding-left: 15px;
+}
+
+/* Tudh2 : CSS for Login footer*/
+.footer-area {
+    background-color: #262625;
+    color: #e5e5e5;
+    font-size: 14px;
+    padding-bottom: 10px;
+    padding-top: 30px;
+    position: fixed;
+    bottom: 0 ;
+    width: 100%;
+}
+.footer-area ul li a {
+    color: white;
+    font-weight: 300;
+    line-height: 30px;
+    text-decoration: none;
+}
+.footer-area ul li a:hover, .footer-area a {
+    color: #ff7832;
+}
+.text_footer a {
+    color: #00b4a0;
+}
+.footer-area ul {
+    list-style: outside none none;
+}
+
+.footer-area h5 {
+    color: #e5e5e5;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 36px;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+* {
+    margin-left: 0;
+    padding: 0;
 }
