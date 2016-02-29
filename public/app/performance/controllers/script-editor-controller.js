@@ -129,34 +129,14 @@ define(['performance/module', 'lodash'], function (module, _) {
       }
 
       $scope.addColumn = function ($event) {
-        $mdDialog.show({
-          clickOutsideToClose: true,
-          focusOnOpen: false,
-          targetEvent: $event,
-          templateUrl: 'app/performance/views/add-column.tpl.html',
-          locals: {
-            params: $scope.dataSelected.params,
-            data: $scope.data
-          },
-          controller: function AddController($scope, $mdDialog, params, data) {
-
-            $scope.params = params;
-            $scope.data = data;
-
-            $scope.doAddColumnData = function() {
-              var newName = $scope.column_name;
-              $scope.params.push(newName);
-              _.forEach($scope.data, function (object) {
-                object[newName] = 'empty';
-              });
-
-              $mdDialog.hide();
-            }
-          }
-        }).then(function() {
-          $scope.originData = $scope.data;
-          reload([$scope.query.limit, $scope.query.page]);
+        var newName = 'Col ' + $scope.dataSelected.params.length;
+        $scope.dataSelected.params.push(newName);
+        _.forEach($scope.data, function (object) {
+          object[newName] = 'empty';
         });
+
+        $scope.originData = $scope.data;
+        reload([$scope.query.limit, $scope.query.page]);
       }
 
       $scope.removeColumn = function ($event) {

@@ -29,7 +29,8 @@
                     <div class="form-group">
                       <label class="col-sm-4">{{getWord('Csv Files')}}</label>
                       <div class="col-sm-8">
-                        <input type="file" accept=".csv" ng-model="csv_file">
+                        <input type="file"  ngf-select ng-model="csvFiles"
+              ngf-multiple="true" ngf-allow-dir="true" accept=".csv,text/csv" ngf-pattern=".csv,text/csv">
                       </div>
                     </div>
                   </form>
@@ -40,7 +41,7 @@
 			</div>
 			<div class="modal-footer">
 				<div class="row save-script-upload">
-					<a ng-disabled="name == null || name == '' || file === undefined" ng-click="saveUploadedScripts()" class="btn btn-primary" data-dismiss="true">{{getWord('Save')}}</a>
+					<a ng-disabled="name == null || name == '' || file === undefined" ng-click="saveUploadedScripts(csvFiles)" class="btn btn-primary" data-dismiss="true">{{getWord('Save')}}</a>
           <a class="btn btn-default"  data-dismiss="modal">{{getWord('Close')}}</a>
 				</div>
 			</div>
