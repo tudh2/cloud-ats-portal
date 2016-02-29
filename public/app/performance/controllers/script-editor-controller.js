@@ -314,8 +314,7 @@ define(['performance/module', 'lodash'], function (module, _) {
       }
 
       $scope.update = function() {
-
-        if ($scope.csvSelected) {
+        if ($scope.csvSelected && JSON.stringify($scope.data) != JSON.stringify($scope.originData)) {
           var blob = new Blob([convertArrayOfObjectsToCSV($scope.data)], {
             "type": "text/csv; charset=utf8;"
           });
