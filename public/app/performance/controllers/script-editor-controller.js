@@ -294,49 +294,58 @@ define(['performance/module', 'lodash'], function (module, _) {
         return result;
       }
 
+      var updateScriptContent = function () {
+        ScriptService.update($scope.projectId, $scope.script,  function (data, status) {
+          switch (status) {
+            case 202 : 
+              $.smallBox({
+                title: $rootScope.getWord("The script has updated"),
+                content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
+                color: "#296191",
+                iconSmall: "fa fa-check bounce animated",
+                timeout: 4000
+              });
+
+              $state.go('app.performance.scripts', { id: $scope.projectId });
+
+              break;
+            case 204 :
+              $.smallBox({
+                title: $rootScope.getWord("The script has nothing to update"),
+                content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
+                color: "#296191",
+                iconSmall: "fa fa-check bounce animated",
+                timeout: 4000
+              });
+              break;
+            case 400 :
+              $.smallBox({
+                title: $rootScope.getWord("The script is not exist"),
+                content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
+                color: "#296191",
+                iconSmall: "fa fa-check bounce animated",
+                timeout: 4000
+              });
+              break;
+            default:
+              break;
+          }
+        });
+      }
+
       $scope.update = function() {
 
-        var blob = new Blob([convertArrayOfObjectsToCSV($scope.data)], {
-          "type": "text/csv; charset=utf8;"
-        });
-        ScriptService.updateTempCSVData(blob, $scope.csvSelected.name, $scope.scriptId, $scope.csvSelected._id, function (data, status) {
-          ScriptService.update($scope.projectId, $scope.script,  function (data, status) {
-            switch (status) {
-              case 202 : 
-                $.smallBox({
-                  title: $rootScope.getWord("The script has updated"),
-                  content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
-                  color: "#296191",
-                  iconSmall: "fa fa-check bounce animated",
-                  timeout: 4000
-                });
-
-                $state.go('app.performance.scripts', { id: $scope.projectId });
-
-                break;
-              case 204 :
-                $.smallBox({
-                  title: $rootScope.getWord("The script has nothing to update"),
-                  content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
-                  color: "#296191",
-                  iconSmall: "fa fa-check bounce animated",
-                  timeout: 4000
-                });
-                break;
-              case 400 :
-                $.smallBox({
-                  title: $rootScope.getWord("The script is not exist"),
-                  content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("1 seconds ago")+"...</i>",
-                  color: "#296191",
-                  iconSmall: "fa fa-check bounce animated",
-                  timeout: 4000
-                });
-                break;
-              default:
-                break;
-            }
+        if ($scope.csvSelected) {
+          var blob = new Blob([convertArrayOfObjectsToCSV($scope.data)], {
+            "type": "text/csv; charset=utf8;"
           });
-        });
+          ScriptService.updateTempCSVData(blob, $scope.csvSelected.name, $scope.scriptId, $scope.csvSelected._id, function (data, status) {
+            updateScriptContent();
+          });
+        } else {
+          updateScriptContent();
+        }
+        
       }
 
       $scope.aceLoaded = function(editor) {
