@@ -4,10 +4,14 @@
     
     <div class="jarviswidget">
     <header class="header-navtabs">
-
       <ul id="myTab" class="nav nav-tabs pull-right">
         <li class="active">
           <a data-toggle="tab" href="#basic" id="basicId"><span class="hidden-mobile">{{getWord('INFORMATION')}}</span></a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#csv-data">
+            <span class="hidden-mobile">{{getWord('CSV DATA')}}</span>
+          </a>
         </li>
         <li>
           <a data-toggle="tab" href="#script-content" id="samplersId"><span class="hidden-mobile">{{getWord('SCRIPT CONTENT')}}</span></a>
@@ -44,8 +48,101 @@
           </div>
           <!-- END Basic Information & Configuration -->
 
+          <!-- START CSV Data -->
+          <div class="tab-pane fade in" id="csv-data">
+
+            <section layout="row" flex ng-show="totalData.length > 0">
+              <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+                <md-toolbar>
+                  <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" ng-click="toggleFilter()" aria-label="Show/Close Filter">
+                    <md-tooltip md-autohide>Show/Close Filter</md-tooltip>
+                      <ng-md-icon icon="search"></ng-md-icon>
+                    </md-button>
+                    <h2>
+                      <span>CSV Data List</span>
+                    </h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="addNewData($event)">
+                      <md-tooltip md-autohide>Upload New Data</md-tooltip>
+                      <ng-md-icon icon="file_upload"></ng-md-icon>
+                    </md-button>
+                    <input type="file" accept=".csv" ng-model="newFile" onchange="angular.element(this).scope().addNewFile(this)" multiple="true" style="display: none;">
+                  </div>
+                </md-toolbar>
+                <md-content style="height: 350px;">
+                  <section>
+                    <md-subheader class="md-primary" ng-show="filterIsShow">
+                      <div layout="row">
+                        <md-input-container flex style="margin: 0px;">
+                          <label>Filter by name</label>
+                          <input type="text" ng-model="searchTerms">
+                        </md-input-container>                        
+                        <md-button class="md-icon-button" ng-click="hideFilter()" aria-label="Hide Filter" style="margin-top: 8px;">
+                          <ng-md-icon icon="close"></ng-md-icon>
+                        </md-button>
+                      </div>
+                    </md-subheader>
+                    <md-list class="csv-list">
+                      <md-list-item ng-class="{active:file._id == csvSelected._id}"
+                        ng-repeat="file in totalData | search: searchTerms"
+                        ng-click="selectCsv(file)">
+                        <p>{{file.name}}</p>
+                        <md-button ng-if="file._id == csvSelected._id" class="md-icon-button md-secondary" aria-label="Delete" ng-click="deleteCsv(file)">
+                          <md-tooltip md-autohide>Delete</md-tooltip>
+                          <ng-md-icon icon="delete" style="fill:#FE5151"></ng-md-icon>
+                        </md-button>
+                      </md-list-item>
+                    </md-list>  
+                  </section>
+                </md-content>
+              </md-sidenav>
+              <md-content flex layout-padding>
+                <div layout="column" layout-fill layout-align="top center">
+                  <md-content laout="column" flex>
+                    <md-card id="csv-data-table">
+
+                    </md-card>
+                  </md-content>
+                </div>
+                <div flex></div>
+              </md-content>
+              <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+                <md-toolbar class="md-theme-light">
+                  <h1 class="md-toolbar-tools">Sidenav Right</h1>
+                </md-toolbar>
+                <md-content layout-padding>
+                  <form>
+                    <md-input-container>
+                      <label for="testInput">Test input</label>
+                      <input type="text" id="testInput"
+                             ng-model="data" md-autofocus>
+                    </md-input-container>
+                  </form>
+                  <md-button ng-click="close()" class="md-primary">
+                    Close Sidenav Right
+                  </md-button>
+                </md-content>
+              </md-sidenav>
+            </section>
+
+            <div ng-show="false" layout="row" ng-repeat="progress in progressPercentage">
+              <p>{{progress.fileName}}</p>
+              <md-progress-linear md-mode="determinate" value="{{progress.percent}}"></md-progress-linear>  
+            </div>
+            <div ng-show="totalData.length === 0" layout="row" layout-align="center center" class="drop-box" 
+              ngf-drop ngf-select ng-model="files" ngf-drag-over-class="'dragover'" 
+              ngf-multiple="true" ngf-allow-dir="true" accept=".csv,text/csv" ngf-pattern=".csv,text/csv">
+              <div layout="column" layout-align="center center">
+                <p class="md-headline">Empty data</p>
+                <p class="md-headline">Drop CSV file here or click to upload</p>                
+              </div>
+            </div>
+          </div>
+          <!-- END CSV Data -->
+
           <!-- START Script Content -->
-          <div class="tab-pane fade in" id="script-content">
+          <div class="tab-pane fade in" id="script-content" style="height: 400px; padding-bottom: 15px;">
             <code>(*) Result output configuration is not effected in runtime</code>
             <br>
             <code>(*) ThreadGroup configuration effects only on information tab</code>
@@ -57,8 +154,9 @@
                 mode: 'xml',
                 onLoad: aceLoaded,
                 onChange: aceChanged
-              }" ng-model="script.raw_content" style="height: 400px;"></div>
+              }" ng-model="script.raw_content" style="height: 100%;"></div>
           </div>
+          <div style="clear: both;"></div>
           <!-- END Script Content -->
 
         </div><!-- END Tab Content-->
@@ -74,7 +172,7 @@
           <div style="padding-right: 220px;">
             <a class="btn btn-danger" style="float: left" ng-click="delete()">{{getWord('Delete')}}</a>
             <a class="btn btn-primary" ng-click="update()">Update</a>
-            <a class="btn btn-default" data-ui-sref="app.performance.scripts({id : projectId})">Close</a>            
+            <a class="btn btn-default" ng-click="close()">Close</a>            
           </div>
       </div>
   </div>

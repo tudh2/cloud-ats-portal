@@ -1,0 +1,14 @@
+<div layout="column" layout-padding>
+	<form name="rowDataForm">
+		<md-input-container ng-repeat="param in params">
+	    <label>{{param}}</label>
+	    <input type="text" required name="param" ng-model="fields[param]"/>
+	    <div ng-messages="rowDataForm.param.$error">
+	    	<div ng-message="required">
+	    		This is required
+	    	</div>
+	    </div>
+	  </md-input-container>
+	  <md-button ng-click="doAddRowData()" ng-disabled="rowDataForm.$error.required">Add</md-button>
+	</form>
+</div>

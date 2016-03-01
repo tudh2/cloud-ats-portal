@@ -2,8 +2,8 @@ define(['performance/module'], function (module) {
   
   'use strict';
 
-  module.registerController('ScriptsCtrl', ['$scope', '$rootScope', '$state','$stateParams', '$templateRequest', '$compile', 'ScriptService', 
-    function($scope, $rootScope, $state, $stateParams, $templateRequest, $compile, ScriptService) {
+  module.registerController('ScriptsCtrl', ['$scope', '$rootScope', '$state','$stateParams', '$templateRequest', '$compile', 'ScriptService', 'Upload', '$cookies', 
+    function($scope, $rootScope, $state, $stateParams, $templateRequest, $compile, ScriptService, Upload, $cookies) {
  	
  		$scope.projectId = $stateParams.id;
 
@@ -43,7 +43,7 @@ define(['performance/module'], function (module) {
     }
     
     // click save after upload file
-    $scope.saveUploadedScripts = function () {
+    $scope.saveUploadedScripts = function (files) {
       $('#uploadScript').modal('hide');
       $('body').removeClass('modal-open');
       $('.modal-backdrop').remove();
@@ -64,8 +64,21 @@ define(['performance/module'], function (module) {
 
           $scope.file = undefined;
           $scope.name = undefined;
+
+          _.forEach(files, function (file) {
+            Upload.upload({
+              url: appConfig.RestEntry + '/api/v1/project/performance/' + script._id + '/csv/upload',
+              data: {file: file},
+              headers: {
+                'X-AUTH-TOKEN': $cookies.get('authToken'),
+                'X-SPACE': $cookies.get('space')
+              }
+            }).then(function (resp) {
+            });
+          });
         }
       });
+
     }
 
   }]);
