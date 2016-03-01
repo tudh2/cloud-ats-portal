@@ -1729,15 +1729,37 @@ div.upload-file {
 }
 
 /* Tudh2 : CSS for Login footer*/
-.footer-area {
-    background-color: #262625;
+
+/*.footer-area {
+    background: #262625;
     color: #e5e5e5;
-    font-size: 14px;
+    font-size: 14px ;
     padding-bottom: 10px;
     padding-top: 30px;
-    position: fixed;
-    bottom: 0 ;
+    bottom: 0;
+    display: block;
+ 	   position:absolute;
     width: 100%;
+
+}
+
+/*TEst*/
+div[data-ui-view="root"] {
+   min-height:100%;
+   position:absolute;
+   width: 100%;
+}
+#main {
+   padding:10px;
+   padding-bottom:200px;   
+}
+.footer-area {
+   background: #262625;
+   color: #e5e5e5;
+   font-size: 14px ;
+   position:absolute;
+   bottom:0;
+   width:100%;
 }
 .footer-area ul li a {
     color: white;
@@ -1754,7 +1776,6 @@ div.upload-file {
 .footer-area ul {
     list-style: outside none none;
 }
-
 .footer-area h5 {
     color: #e5e5e5;
     font-size: 14px;

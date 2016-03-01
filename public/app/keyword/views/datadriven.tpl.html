@@ -4,7 +4,7 @@
       <div class="col-md-3">
          <section class="smart-form">
             <label class="input"> <i class="icon-append fa fa-search"></i>
-              <input id="search-fld" type="text" name="param" placeholder="{{getWord('Search Test Case')}}" class="ui-autocomplete-input" autocomplete="off">                           </label>
+              <input id="search-fld" type="text" name="param" placeholder="{{getWord('Search Test Case')}}" class="ui-autocomplete-input" autocomplete="off" ng-model="searchTerms">                           </label>
 	        </section>
       </div>
        <span class="col-md-2 count-testcase" ng-if="(cases.length < 2) == true"><label>{{cases.length}} {{getWord('Test Case')}}</label></span>
@@ -25,7 +25,7 @@
 
      <!-- Test case list -->
     <div class="col-md-3 col-sm-4 col-xs-6" data-target="#add-datadriven" data-toggle="modal"
-      ng-repeat="case in cases track by $index | orderBy:'case.created_date'"  
+      ng-repeat="case in cases | orderBy:'case.created_date' | search: searchTerms"  
       ng-click="clickToCase(case)">
 
       <div class="tc-itemBlock">
