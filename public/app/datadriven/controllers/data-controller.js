@@ -35,6 +35,7 @@ define(['datadriven/module', 'lodash'], function(module, _) {
              $scope.data = JSON.parse(response.data.data_source);
              $scope.originData = angular.copy($scope.data);
              reload([$scope.query.limit, $scope.query.page]);
+             console.log($scope.params);
         });
           
         } else {
@@ -47,10 +48,11 @@ define(['datadriven/module', 'lodash'], function(module, _) {
 
       var reload = function(query) {
         var dataSelected = $scope.data.slice((query[1] - 1) * query[0], query[1] * query[0]);
-        dataSelected.params = buildParams($scope.originData[0]);
+        $scope.params = buildParams($scope.data[0]);
         $scope.dataSelected = dataSelected;
       }
-       $scope.$watch('[query.limit, query.page]', function (query) {
+
+      $scope.$watch('[query.limit, query.page]', function (query) {
         reload(query);
       });
  
@@ -165,6 +167,9 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         $input.removeClass('has-error');*/
       }
 
+      $scope.$watch('params', function (newData, oldData) {
+        console.log(newData, oldData);
+      }, true);
       $scope.updateDataDriven = function () {
        /* var $data_name = $('.data-provider div .driven-name').find('input');
         if ($data_name.val().trim() === undefined || $data_name.val().trim() === '') { 
@@ -197,7 +202,7 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           });
           dataset.push(obj);
         });*/
-
+        
         DataService.update($scope.current.name, $scope.data, $scope.current._id, function(data, status) {
           
           if (status == 200) {
