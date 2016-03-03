@@ -21,12 +21,12 @@
         </md-menu-item>
         <md-menu-item>
           <md-button ng-click="addColumn($event)">
-            <ng-md-icon icon="add_circle"></ng-md-icon> Add Clumn
+            <ng-md-icon icon="add_circle"></ng-md-icon> Add Column
           </md-button>
         </md-menu-item>
         <md-menu-item>
           <md-button ng-click="removeColumn($event)">
-            <ng-md-icon icon="remove_circle_outline"></ng-md-icon> Remove Clumn
+            <ng-md-icon icon="remove_circle_outline"></ng-md-icon> Remove Column
           </md-button>
         </md-menu-item>
       </md-menu-content>
@@ -37,7 +37,7 @@
   <table md-table md-row-select ng-model="selected" md-progress="promise">
     <thead md-head>
       <tr md-row>
-        <th md-column ng-repeat="param in dataSelected.params track by $index"><span>{{param}}</span></th>
+        <th md-column ng-repeat="param in params track by $index"><span>{{param}}</span></th>
       </tr>
     </thead>
     <tbody md-body>

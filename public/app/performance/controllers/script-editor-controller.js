@@ -53,7 +53,7 @@ define(['performance/module', 'lodash'], function (module, _) {
       $scope.originData = [];
       var reload = function(query) {
         var dataSelected = $scope.data.slice((query[1] - 1) * query[0], query[1] * query[0]);
-        dataSelected.params = buildParams($scope.originData[0]);
+        $scope.params = buildParams($scope.data[0]);
         $scope.dataSelected = dataSelected;
       }
 
@@ -68,7 +68,7 @@ define(['performance/module', 'lodash'], function (module, _) {
           data.id = i;
           i ++;
         });
-        _.forEach($scope.dataSelected.params, function (param) {
+        _.forEach($scope.params, function (param) {
           var expression = {};
           expression[param] = newData;
           
@@ -107,6 +107,7 @@ define(['performance/module', 'lodash'], function (module, _) {
         $mdDialog.show({
           clickOutsideToClose: true,
           focusOnOpen: false,
+          fullscreen: true,
           targetEvent: $event,
           templateUrl: 'app/performance/views/add-row.tpl.html',
           scope: $scope,
@@ -124,13 +125,15 @@ define(['performance/module', 'lodash'], function (module, _) {
       }
 
       $scope.addColumn = function ($event) {
-        var newName = 'Col ' + $scope.dataSelected.params.length;
-        $scope.dataSelected.params.push(newName);
+        var newName = 'Col ' + $scope.params.length;
+        console.log($scope.data.length);
+        if (!$scope.data.length) {
+          $scope.params.push(newName);
+          return;
+        }
         _.forEach($scope.data, function (object) {
           object[newName] = 'empty';
         });
-
-        $scope.originData = $scope.data;
         reload([$scope.query.limit, $scope.query.page]);
       }
 
@@ -149,8 +152,7 @@ define(['performance/module', 'lodash'], function (module, _) {
               
               _.forIn($scope.columns, function (value, key) {
                 if (value) {
-                  
-                  _.remove($scope.dataSelected.params, function (param) {
+                  _.remove($scope.params, function (param) {
                     return param === key;
                   });
 
@@ -163,19 +165,25 @@ define(['performance/module', 'lodash'], function (module, _) {
             }
           }
         }).then(function () {
-          $scope.originData = $scope.data;
           reload([$scope.query.limit, $scope.query.page]);
         });
       }
 
        $scope.deleteCsvData = function () {
+        var objTemp = $scope.data[0];
         _.forEach($scope.selected, function (object) {
           _.remove($scope.data, function (obj) {
             return obj === object;
           });
         });
+        
         $scope.selected = [];
         reload([$scope.query.limit, $scope.query.page]);
+        if (!$scope.data.length) {
+          _.forIn(objTemp, function (value, key) {
+            $scope.params.push(key);
+          });
+        }
       }
 
       $scope.delete = function() {
