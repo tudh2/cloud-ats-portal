@@ -1,16 +1,42 @@
 <div class="data-container row">
-  <div class="data-list-name">
-    <section class="smart-form search-container">
-      <label class="input"> <i class="icon-append fa fa-search"></i>
-        <input type="text" name="Search" ng-model="searchTerms" placeholder="{{getWord('Search data driven')}}" id="Search" minlength="3">
-      </label>
-    </section>
 
-    <div class="create-new-data">
-      <a class="btn btn-primary btn-create-new-data" ng-click="clickNewDataDrivenButton($event)" >
-        <i class="fa fa-plus-circle">{{getWord('New Data Driven')}}</i>
-      </a>
+  <div class="data-list-name">
+
+    <section layout="column" flex style="background: gray;">
+      <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+        <md-toobar>
+         <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Show/Close Filter" ng-click="filterIsShow=!filterIsShow">
+               <md-tooltip >Show/Close Filter</md-tooltip>
+               <ng-md-icon icon="search"></ng-md-icon>
+            </md-button>
+            <h2>
+              <span>Data Driven List</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="clickNewDataDrivenButton($event)" >
+               <md-tooltip md-autohide >Create New Data Driven</md-tooltip>
+               <ng-md-icon icon="add_circle"></ng-md-icon>
+           </md-button>
+           <input type="file" accept=".csv" multiple="true" style="display: none;">
+        </div>
+    </md-toobar>
+
+  </md-sidenav>
+  <md-subheader class="md-primary" ng-show="filterIsShow">
+    <div layout="row">
+      <md-input-container flex style="margin: 0px;">
+        <label>Filter by name</label>
+        <input type="text" ng-model="searchTerms">
+      </md-input-container>                        
+      <md-button class="md-icon-button" ng-click="filterIsShow=!filterIsShow" aria-label="Hide Filter" style="margin-top: 8px;">
+        <ng-md-icon icon="close"></ng-md-icon>
+      </md-button>
     </div>
+  </md-subheader>
+
+  </section>
+
     <div class="data-items" style="height: 500px; overflow-y: auto;">
     <div class="row data" 
       ng-repeat="data in datas | search: searchTerms track by $index" ng-class="{'data-selected':data._id == current._id , 'not-allow-click': editable}"
@@ -29,20 +55,17 @@
    </div>
   </div>
 
-  <div class="data-provider" id="data-container" ng-hide="current == undefined && dataset==[] ">
-    <div class="col-sm-12" style="overflow-y: auto;">
-      <div class="row">
-        <div class="col-sm-5 form-group driven-name">
-          <input class="form-control" ng-model="current.name" placeholder="{{getWord('Data driven name')}}" ng-disabled="!editable">
-        </div>
+  <div class="data-provider" id="data-container" >
+    <div class="col-sm-12 data-driven-table" >
+     <div smart-include="app/datadriven/views/data-table.tpl.html"></div>
+     <div ng-if="edit">
+       <md-button class="btn pull-right" ng-click="updateDataDriven()">
+        <ng-md-icon icon="add_circle"></ng-md-icon> Update
+       </md-button>
+       <md-button class="btn pull-right" ng-click="cancelEdit()">
+        <ng-md-icon icon="cancel"></ng-md-icon> Cancel
+       </md-button>
       </div>
-      <provider-table data-dataset="dataset" data-editable="editable"></provider-table>
-
-      <button ng-if="!editable && !create"  ng-click="editDataset()" class="btn btn-primary pull-right edit-button"><i class="fa fa-edit"></i> {{getWord('Edit')}}</button>
-      <button ng-if="editable && !create" class="btn btn-primary pull-right" ng-click="updateDataDriven()"><i class="fa fa-save"></i> {{getWord('Update')}}</button>
-      <button ng-if="editable" ng-click="cancelEdit()" class="btn btn-warning pull-right cancel-edit"><i class="fa fa-undo"></i> {{getWord('Cancel')}}</button>
-      <button ng-if="editable && create" ng-click="createDataDriven()" class="btn btn-primary pull-right"><i class="fa fa-save"></i> {{getWord('Save')}}</button>
-    </div>
   </div>
 
 </div>
