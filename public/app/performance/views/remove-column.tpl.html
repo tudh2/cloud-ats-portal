@@ -1,5 +1,5 @@
 <div layout="column" layout-padding>
-	<md-checkbox ng-repeat="param in params" ng-model="columns[param]">{{param}}</md-checkbox>
+	<md-checkbox ng-repeat="param in dataSelected.params" ng-model="columns[param]">{{param}}</md-checkbox>
 
 	<md-button ng-click="deleteCsvColumn()">
 		<ng-md-icon icon="delete"></ng-md-icon>Delete

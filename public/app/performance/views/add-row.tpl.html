@@ -1,6 +1,6 @@
 <div layout="column" layout-padding>
 	<form name="rowDataForm">
-		<md-input-container ng-repeat="param in params">
+		<md-input-container ng-repeat="param in dataSelected.params">
 	    <label>{{param}}</label>
 	    <input type="text" required name="param" ng-model="fields[param]"/>
 	    <div ng-messages="rowDataForm.param.$error">

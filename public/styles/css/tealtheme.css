@@ -1747,7 +1747,6 @@ div.upload-file {
 /*TEst*/
 div[data-ui-view="root"] {
    min-height:100%;
-   position:absolute;
    width: 100%;
 }
 #main {

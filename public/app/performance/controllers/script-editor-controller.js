@@ -109,15 +109,10 @@ define(['performance/module', 'lodash'], function (module, _) {
           focusOnOpen: false,
           targetEvent: $event,
           templateUrl: 'app/performance/views/add-row.tpl.html',
-          locals: {
-            params: $scope.dataSelected.params,
-            data: $scope.data
-          },
-          controller: function AddController($scope, $mdDialog, params, data) {
-
+          scope: $scope,
+          preserveScope: true,
+          controller: function () {
             $scope.fields = {};
-            $scope.params = params;
-            $scope.data = data;
             $scope.doAddRowData = function() {
               $scope.data.push($scope.fields);
               $mdDialog.hide();
@@ -145,21 +140,17 @@ define(['performance/module', 'lodash'], function (module, _) {
           focusOnOpen: false,
           targetEvent: $event,
           templateUrl: 'app/performance/views/remove-column.tpl.html',
-          locals: {
-            params: $scope.dataSelected.params,
-            data: $scope.data
-          },
-          controller: function RemoveController($scope, $mdDialog, params, data) {
+          scope: $scope,
+          preserveScope: true,
+          controller: function () {
             $scope.columns =  {};
-            $scope.params = params;
-            $scope.data = data;
 
             $scope.deleteCsvColumn = function () {
               
               _.forIn($scope.columns, function (value, key) {
                 if (value) {
                   
-                  _.remove($scope.params, function (param) {
+                  _.remove($scope.dataSelected.params, function (param) {
                     return param === key;
                   });
 
