@@ -353,6 +353,24 @@ define(['datadriven/module', 'lodash'], function(module, _) {
       }
 
       //tudh2
+
+      $scope.addNewDataDriven = function ($event) {
+        $mdDialog.show({
+          clickOutsideToClose: true,
+          focusOnOpen: false,
+          targetEvent: $event,
+          templateUrl: 'app/datadriven/views/add-new-data-driven.tpl.html',
+          locals: {
+            params: $scope.dataSelected.params,
+            data: $scope.data
+          },
+          controller: function AddController($scope, $mdDialog, params, data) {
+            console.log("NGON HANG DAY EM");
+            }
+        })
+      }
+
+
        $scope.addRow = function ($event) {
         $mdDialog.show({
           clickOutsideToClose: true,
@@ -453,6 +471,11 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         });
         $scope.selected = [];
         reload([$scope.query.limit, $scope.query.page]);
+      }
+
+      $scope.addNewData = function ($event) {
+        var el = $event.currentTarget;
+        $(el).next().click();
       }
 
       
