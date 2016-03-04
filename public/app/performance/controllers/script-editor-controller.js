@@ -126,7 +126,6 @@ define(['performance/module', 'lodash'], function (module, _) {
 
       $scope.addColumn = function ($event) {
         var newName = 'Col ' + $scope.params.length;
-        console.log($scope.data.length);
         if (!$scope.data.length) {
           $scope.params.push(newName);
           return;
