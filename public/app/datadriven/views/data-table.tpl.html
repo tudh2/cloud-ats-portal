@@ -40,7 +40,7 @@
       <tr md-row>
         <th md-column ng-repeat="param in params track by $index">
           <md-input-container  class="data-table" style="margin: 0px;height: 42px;">
-            <input value="{{param}}"/>
+            <input value="{{param}}" ng-model="params[$index]" ng-change="changeParam()"/>
           </md-input-container> 
         </th>
       </tr>
@@ -49,7 +49,7 @@
       <tr md-row md-select="i" md-select-id="{{i}}" ng-repeat="i in dataSelected track by $index">
         <td md-cell ng-repeat="(key, val) in i">
           <md-input-container style="margin: 0px;height: 42px;" class="data-table">
-            <input value="{{val}}" aria-label="{{val}}" ng-model="i[key]"/>
+            <input value="{{val}}" aria-label="{{val}}" ng-model="i[key]" ng-change="changeData()"/>
           </md-input-container>
         </td>
       </tr>

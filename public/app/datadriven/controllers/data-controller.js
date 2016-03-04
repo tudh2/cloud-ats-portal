@@ -35,7 +35,7 @@ define(['datadriven/module', 'lodash'], function(module, _) {
              $scope.data = JSON.parse(response.data.data_source);
              $scope.originData = angular.copy($scope.data);
              reload([$scope.query.limit, $scope.query.page]);
-             console.log($scope.params);
+             $scope.originParam = angular.copy($scope.params);
         });
           
         } else {
@@ -48,7 +48,8 @@ define(['datadriven/module', 'lodash'], function(module, _) {
 
       var reload = function(query) {
         var dataSelected = $scope.data.slice((query[1] - 1) * query[0], query[1] * query[0]);
-        $scope.params = buildParams($scope.data[0]);
+        var params = buildParams($scope.data[0]);
+        $scope.params = params;
         $scope.dataSelected = dataSelected;
       }
 
@@ -66,11 +67,11 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         return params;
       }
       
-      $scope.$watch('data', function (newData, oldData) {
+     /* $scope.$watch('data', function (newData, oldData) {
           if (JSON.stringify(newData) != JSON.stringify($scope.originData)) {
             $scope.edit = true;
           } else $scope.edit = false;
-      }, true);
+      }, true);*/
 
       $scope.$watch('query.filter', function (newData) {
         var filteredData = [];
@@ -79,7 +80,7 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           data.id = i;
           i ++;
         });
-        _.forEach($scope.dataSelected.params, function (param) {
+        _.forEach($scope.params, function (param) {
           var expression = {};
           expression[param] = newData;
           
@@ -107,10 +108,8 @@ define(['datadriven/module', 'lodash'], function(module, _) {
       }
 
       $scope.chooseData = function (data) {
-        $scope.editable = false;
-        $scope.create = false;
+        $scope.edit = false;
         $scope.current = data;
-        
         $scope.current.name = data.name;
 
         DataService.get($scope.current._id).then(function (response) {
@@ -119,91 +118,47 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           $scope.query.page = 1;
           $scope.query.limit = 5;
           reload([$scope.query.limit, $scope.query.page]);
+          $scope.originParam = angular.copy($scope.params);
         });
       }
 
-      $scope.clickNewDataDrivenButton = function ($event) {
-        var $element = $('#data-table');
-        $element.html('');
-
-        $templateRequest('app/datadriven/views/data-driven.tpl.html').then(function(template) {
-          $element.html($compile(template)($scope));
-        });
-        $scope.dataset = [];
-        $scope.current = undefined;
-        $scope.editable = true;
-        $scope.create = true;
+      var compareData = function (data, originData, param, originParam) {
+        if (JSON.stringify(data) != JSON.stringify(originData) || JSON.stringify(param) != JSON.stringify(originParam)) {
+          $scope.edit = true;
+        } else $scope.edit = false;
       }
 
-      $scope.editDataset = function () {
-        $scope.currentDataset = angular.copy($scope.dataset);
-        $scope.currentName = angular.copy($scope.current.name);
-        $scope.editable = true;
+      $scope.changeParam = function () {
+        compareData($scope.data, $scope.originData, $scope.params, $scope.originParam);
+      }
+
+      $scope.changeData = function () {
+        compareData($scope.data, $scope.originData, $scope.params, $scope.originParam);
       }
 
       $scope.cancelEdit = function () {
-        $scope.edit = false;
-       /* if ($scope.current === undefined || $scope.current._id === undefined) {
-          if ($scope.datas.length > 0) {
-            $scope.current = $scope.datas[0];
-            $scope.dataset = JSON.parse($scope.current.data_source);
-            $scope.editable = false;
-            $scope.create = false;
-          } else {
-            $scope.current = undefined;
-            $scope.dataset = [];
-            $('.data-provider').hide();
-          }
-        } else {
-          $scope.dataset = $scope.currentDataset;
-          $scope.current.name = $scope.currentName;
-          $scope.editable = false;
-        }*/
         $scope.data = $scope.originData;
-        reload([$scope.query.limit, $scope.query.page]);
 
+        reload([$scope.query.limit, $scope.query.page]);
         $scope.originData = angular.copy($scope.data);
-        /*var $input = $('.data-provider div .driven-name');
-        $input.removeClass('has-error');*/
       }
 
-      $scope.$watch('params', function (newData, oldData) {
-        console.log(newData, oldData);
-      }, true);
       $scope.updateDataDriven = function () {
-       /* var $data_name = $('.data-provider div .driven-name').find('input');
-        if ($data_name.val().trim() === undefined || $data_name.val().trim() === '') { 
-
-          $data_name.parent().addClass("has-error");
-          $data_name.focus();
-          return;
-        };
         
-        var fieldNames = [];
-        $('.data-provider table thead th.filedName').each(function(index, obj) {
-          var fieldName = $(obj).text().trim();
-          fieldNames[index] = fieldName;
-        });
+        var updatedData = [];
 
-        var rows = [];
-        $('.data-provider table tbody tr.fieldValues').each(function(index, tr) {
-          var row = [];
-          $(tr).find('td.cell').each(function(i, td) {
-            row[i] = $(td).text().trim();
-          });
-          rows[index] = row;
-        });
-
-        var dataset = [];
-        _.forEach(rows, function(row) {
+        _.forEach($scope.data, function (data) {
           var obj = {};
-          $(fieldNames).each(function(index, field) {
-            obj[field] = row[index];
+          _.forEach($scope.params, function (param) {
+
+            var index = _.indexOf($scope.params, param);
+            var key = Object.keys(data)[index];
+            var value = data[key];
+            obj[param] = value;
           });
-          dataset.push(obj);
-        });*/
-        
-        DataService.update($scope.current.name, $scope.data, $scope.current._id, function(data, status) {
+          updatedData.push(obj);
+        });
+        DataService.update($scope.current.name, updatedData, $scope.current._id, function(data, status) {
           
           if (status == 200) {
             $scope.create = false;
@@ -232,13 +187,6 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           }
         });
       }
-
-      $('body').on('keyup', '.data-provider div .driven-name input', function () {
-
-        if ($(this).val().trim() != "") {
-          $(this).parent().removeClass('has-error');
-        }
-      });
 
       $scope.createDataDriven = function () {
 
@@ -309,12 +257,12 @@ define(['datadriven/module', 'lodash'], function(module, _) {
                     timeout: 2000
                   });
                   $scope.datas.splice(index, 1);
-                  $scope.dataset = [];
+                  $scope.data = [];
                   if ($scope.datas.length > 0) {
                     $scope.current = $scope.datas[0];
                     DataService.get($scope.current._id).then(function (response) {
                     $scope.data = JSON.parse(response.data.data_source);
-                    $scope.params = buildParams($scope.data[0]);
+                    reload([$scope.query.limit, $scope.query.page]);
                   });
                     
                   } else {
@@ -329,27 +277,6 @@ define(['datadriven/module', 'lodash'], function(module, _) {
                return;
             }
         });
-      }
-
-
-      $scope.$watch('editable', function (value) {
-        if (value === true) {
-          disableChooseLang();
-        } else {
-          unableChooseLang();
-         }
-      });
-
-      var disableChooseLang = function () {
-        var $header = $('#header');
-        var $langOptions = $header.find('.pull-right .header-dropdown-list .dropdown .dropdown-toggle');
-        $langOptions.css('pointer-events', 'none');
-      }
-
-      var unableChooseLang = function () {
-        var $header = $('#header');
-        var $langOptions = $header.find('.pull-right .header-dropdown-list .dropdown .dropdown-toggle');
-        $langOptions.css('pointer-events', 'initial');
       }
 
       //tudh2
@@ -377,15 +304,11 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           focusOnOpen: false,
           targetEvent: $event,
           templateUrl: 'app/datadriven/views/add-row.tpl.html',
-          locals: {
-            params: $scope.dataSelected.params,
-            data: $scope.data
-          },
-          controller: function AddController($scope, $mdDialog, params, data) {
+          scope: $scope,
+          preserveScope: true,
+          controller: function AddController() {
 
             $scope.fields = {};
-            $scope.params = params;
-            $scope.data = data;
             $scope.doAddRowData = function() {
               $scope.data.push($scope.fields);
               $mdDialog.hide();
@@ -401,26 +324,23 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           focusOnOpen: false,
           targetEvent: $event,
           templateUrl: 'app/datadriven/views/add-column.tpl.html',
-          locals: {
-            params: $scope.dataSelected.params,
-            data: $scope.data
-          },
-          controller: function AddController($scope, $mdDialog, params, data) {
+          scope: $scope,
+          preserveScope: true,
+          controller: function AddController() {
 
-            $scope.data = data;
-            $scope.originData = angular.copy($scope.data);
             $scope.doAddColumnData = function() {
-              var newName = $scope.column_name ;
-              
-              $mdDialog.hide();
+              var newName = $scope.column_name;
               _.forEach($scope.data, function (object) {
                 object[newName] = 'empty';
               });
-
+              $mdDialog.hide();
             }
           }
         }).then(function() {
-          
+          if (!$scope.data.length) {
+            $scope.params.push($scope.column_name);
+            return;
+          }
           reload([$scope.query.limit, $scope.query.page]);
         });
       }
@@ -464,6 +384,8 @@ define(['datadriven/module', 'lodash'], function(module, _) {
       }
 
       $scope.deleteRowDataDriven = function () {
+
+        var objTemp = $scope.data[0];
         _.forEach($scope.selected, function (object) {
           _.remove($scope.data, function (obj) {
             return obj === object;
@@ -471,13 +393,17 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         });
         $scope.selected = [];
         reload([$scope.query.limit, $scope.query.page]);
+        
+        if (!$scope.data.length) {
+          _.forIn(objTemp, function (value, key) {
+            $scope.params.push(key);
+          });
+        }
       }
 
       $scope.addNewData = function ($event) {
         var el = $event.currentTarget;
         $(el).next().click();
       }
-
-      
     }]);
 })

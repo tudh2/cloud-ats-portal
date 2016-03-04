@@ -1,5 +1,5 @@
-<div layout="column" layout-padding>
-	<form name="rowDataForm">
+<div layout-padding>
+	<form name="rowDataForm" layout="column">
 		<md-input-container ng-repeat="param in params">
 	    <label>{{param}}</label>
 	    <input type="text" required name="param" ng-model="fields[param]"/>
