@@ -2,9 +2,9 @@
 
   <div class="data-list-name">
 
-    <section layout="column" flex style="background: gray;">
+    <section layout="column" flex >
       <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
-        <md-toobar>
+        <md-toobar style="background-color: rgb(63,81,181); color: white;">
          <div class="md-toolbar-tools">
             <md-button class="md-icon-button" aria-label="Show/Close Filter" ng-click="filterIsShow=!filterIsShow">
                <md-tooltip >Show/Close Filter</md-tooltip>
@@ -14,10 +14,25 @@
               <span>Data Driven List</span>
             </h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="clickNewDataDrivenButton($event)" >
-               <md-tooltip md-autohide >Create New Data Driven</md-tooltip>
-               <ng-md-icon icon="add_circle"></ng-md-icon>
-           </md-button>
+            <md-menu md-offset="0 -7">
+              <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                <md-tooltip md-autohide >Menu</md-tooltip>
+                <ng-md-icon icon="menu"></ng-md-icon>
+              </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-click="addColumn($event)">
+                <ng-md-icon icon="add_circle"></ng-md-icon> Create New
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="addNewData($event)">
+                  <ng-md-icon icon="file_upload"></ng-md-icon> Upload
+                </md-button>
+                <input type="file" accept=".csv" ng-model="newFile" onchange="angular.element(this).scope().addNewFile(this)" multiple="true" style="display: none;">
+              </md-menu-item>
+            </md-menu-content>
+            </md-menu>
            <input type="file" accept=".csv" multiple="true" style="display: none;">
         </div>
     </md-toobar>
