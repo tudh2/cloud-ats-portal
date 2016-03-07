@@ -82,6 +82,13 @@ define(['performance/module', 'lodash'], function (module, _) {
             }
           })
         });
+
+        _.forEach($scope.originData, function (data) {
+          delete data.id;
+        });
+        _.forEach(filteredData, function (data) {
+          delete data.id;
+        });
         $scope.data = filteredData;
         reload([$scope.query.limit, $scope.query.page]);
       });
@@ -401,10 +408,10 @@ define(['performance/module', 'lodash'], function (module, _) {
           });
         }
 
-
         $scope.csvSelected = file;
         $scope.query.page = 1;
         $scope.query.limit = 5;
+        $scope.query.filter = '';
       }
 
       $scope.deleteCsv = function (file) {
