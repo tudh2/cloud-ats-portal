@@ -236,12 +236,17 @@ define(['datadriven/module', 'lodash'], function(module, _) {
                   });
                   $scope.datas.splice(index, 1);
                   $scope.data = [];
-                  if ($scope.datas.length > 0) {
+                  if ($scope.datas.length) {
                     $scope.current = $scope.datas[0];
                     DataService.get($scope.current._id).then(function (response) {
                       $scope.data = JSON.parse(response.data.data_source);
                       reload([$scope.query.limit, $scope.query.page]);
                     });
+                  } else {
+                    $scope.data = undefined;
+                    $scope.dataSelected = undefined;
+                    $scope.params = undefined;
+                    $scope.current = undefined;
                   } 
                 }
               });
