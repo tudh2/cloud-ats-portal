@@ -41,7 +41,7 @@
       </tr>
     </thead>
     <tbody md-body>
-      <tr md-row md-select="i" md-select-id="{{i}}" ng-repeat="i in dataSelected track by $index">
+      <tr md-row md-select="i" md-select-id="{{i.$index}}" ng-repeat="i in dataSelected track by $index">
         <td md-cell ng-repeat="(key, val) in i">
           <md-input-container style="margin: 0px;height: 42px;" class="data-table">
             <input value="{{val}}" aria-label="{{val}}" ng-model="i[key]"/>

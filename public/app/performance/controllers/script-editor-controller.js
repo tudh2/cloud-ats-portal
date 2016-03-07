@@ -26,6 +26,7 @@ define(['performance/module', 'lodash'], function (module, _) {
             $scope.data = data;
             $scope.originData = angular.copy($scope.data);
             reload([$scope.query.limit, $scope.query.page]);
+            $scope.originParam = angular.copy($scope.params);
           });
         }
       });
@@ -61,7 +62,8 @@ define(['performance/module', 'lodash'], function (module, _) {
         reload(query);
       });
 
-      $scope.$watch('query.filter', function (newData) {
+      var filter = function (newData) {
+
         var filteredData = [];
         var i = 0;
         _.forEach($scope.originData, function (data) {
@@ -91,6 +93,11 @@ define(['performance/module', 'lodash'], function (module, _) {
         });
         $scope.data = filteredData;
         reload([$scope.query.limit, $scope.query.page]);
+        $scope.params = $scope.originParam;
+      }
+
+      $scope.$watch('query.filter', function (newData) {
+        filter(newData);
       });
 
       var buildParams = function (data) {
@@ -133,7 +140,6 @@ define(['performance/module', 'lodash'], function (module, _) {
 
       $scope.addColumn = function ($event) {
         var newName = 'Col ' + $scope.params.length;
-        console.log($scope.data.length);
         if (!$scope.data.length) {
           $scope.params.push(newName);
           return;
@@ -250,6 +256,7 @@ define(['performance/module', 'lodash'], function (module, _) {
               $scope.csvSelected = $scope.totalData[0];
               $scope.originData = angular.copy($scope.data);
               reload([$scope.query.limit, $scope.query.page]);
+              $scope.originParam = angular.copy($scope.params);
             });
           });
         }
@@ -320,7 +327,12 @@ define(['performance/module', 'lodash'], function (module, _) {
       }
 
       $scope.update = function() {
-        if ($scope.csvSelected && JSON.stringify($scope.data) != JSON.stringify($scope.originData)) {
+
+        if ($scope.query.filter != '') {
+          $scope.query.filter = '';
+          filter($scope.query.filter);
+        }
+        if ($scope.csvSelected && JSON.stringify($scope.data) != JSON.stringify($scope.originDataBackUp)) {
           var blob = new Blob([convertArrayOfObjectsToCSV($scope.data)], {
             "type": "text/csv; charset=utf8;"
           });
@@ -343,7 +355,9 @@ define(['performance/module', 'lodash'], function (module, _) {
           ScriptService.getCsvData($scope.scriptId, data._id, function (data, status) {
             $scope.data = data;
             $scope.originData = angular.copy($scope.data);
+            $scope.originDataBackUp = angular.copy($scope.data);
             reload([$scope.query.limit, $scope.query.page]);
+            $scope.originParam = angular.copy($scope.params);
           });
         }
       });
