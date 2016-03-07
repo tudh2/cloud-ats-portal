@@ -21,19 +21,17 @@
               </md-button>
             <md-menu-content>
               <md-menu-item>
-                <md-button ng-click="addColumn($event)">
+                <md-button ng-click="addNewDataDriven($event)">
                 <ng-md-icon icon="add_circle"></ng-md-icon> Create New
                 </md-button>
               </md-menu-item>
               <md-menu-item>
-                <md-button ng-click="addNewData($event)">
+                <md-button ngf-select="addNewFile($files)" accept=".csv"  multiple="true">
                   <ng-md-icon icon="file_upload"></ng-md-icon> Upload
                 </md-button>
-                <input type="file" accept=".csv" ng-model="newFile" onchange="angular.element(this).scope().addNewFile(this)" multiple="true" style="display: none;">
               </md-menu-item>
             </md-menu-content>
             </md-menu>
-           <input type="file" accept=".csv" multiple="true" style="display: none;">
         </div>
     </md-toobar>
 
@@ -75,7 +73,7 @@
      <div smart-include="app/datadriven/views/data-table.tpl.html"></div>
      <div ng-if="edit">
        <md-button class="btn pull-right" ng-click="updateDataDriven()">
-        <ng-md-icon icon="add_circle"></ng-md-icon> Update
+        <ng-md-icon icon="add_circle"></ng-md-icon> {{current._id ? 'Update' : 'Save'}}
        </md-button>
        <md-button class="btn pull-right" ng-click="cancelEdit()">
         <ng-md-icon icon="cancel"></ng-md-icon> Cancel

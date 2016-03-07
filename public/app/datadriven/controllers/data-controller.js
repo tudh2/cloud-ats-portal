@@ -1,17 +1,16 @@
 define(['datadriven/module', 'lodash'], function(module, _) {
   
   'use strict';
-  module.registerController('DataCtrl',['$filter', '$rootScope', '$state', '$mdDialog', '$scope', '$templateRequest', '$compile', 'CaseService', 'UserService', 'DataService', 
-  	function ($filter, $rootScope, $state, $mdDialog, $scope, $templateRequest, $compile, CaseService, UserService, DataService) {
+  module.registerController('DataCtrl',['$cookies', 'Upload', '$filter', '$rootScope', '$state', '$mdDialog', '$scope', '$templateRequest', '$compile', 'CaseService', 'UserService', 'DataService', 
+  	function ($cookies, Upload, $filter, $rootScope, $state, $mdDialog, $scope, $templateRequest, $compile, CaseService, UserService, DataService) {
 
       $scope.current = undefined;
-      $scope.dataset = [];
-      $scope.editable = false;
-      $scope.create = false;
       $scope.datas = [];
-
       $scope.selected = [];
-
+      $scope.edit = false;
+      $scope.data = [];
+      $scope.originData = [];
+      $scope.filteredData  = [];
       var bookmark;
       $scope.query = {
         filter: '',
@@ -23,25 +22,18 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           debounce: 500
         }
       };
-      $scope.edit = false;
-      $scope.data = [];
-      $scope.originData = [];
-      $scope.filteredData  = [];
+      
       DataService.list(function (data, status) {
         $scope.datas = data;
         if ($scope.datas.length > 0) {
           $scope.current = $scope.datas[0];
-             DataService.get($scope.current._id).then(function (response) {
-             $scope.data = JSON.parse(response.data.data_source);
-             $scope.originData = angular.copy($scope.data);
-             reload([$scope.query.limit, $scope.query.page]);
-             $scope.originParam = angular.copy($scope.params);
-        });
-          
-        } else {
-          $('.data-provider').find('.driven-name').hide();
-          $('.data-provider').find('.edit-button').hide();
-        }
+          DataService.get($scope.current._id).then(function (response) {
+            $scope.data = JSON.parse(response.data.data_source);
+            $scope.originData = angular.copy($scope.data);
+            reload([$scope.query.limit, $scope.query.page]);
+            $scope.originParam = angular.copy($scope.params);
+          });
+        } 
       });
 
       $scope.filterIsShow = false;
@@ -67,13 +59,7 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         return params;
       }
       
-     /* $scope.$watch('data', function (newData, oldData) {
-          if (JSON.stringify(newData) != JSON.stringify($scope.originData)) {
-            $scope.edit = true;
-          } else $scope.edit = false;
-      }, true);*/
-
-      $scope.$watch('query.filter', function (newData) {
+      var filter = function (newData) {
         var filteredData = [];
         var i = 0;
         _.forEach($scope.originData, function (data) {
@@ -94,18 +80,20 @@ define(['datadriven/module', 'lodash'], function(module, _) {
             }
           })
         });
+        _.forEach($scope.originData, function (data) {
+          delete data.id;
+        });
+        i = 0;
+         _.forEach($scope.filteredData, function (data) {
+          delete data.id;
+        });
         $scope.data = filteredData;
         reload([$scope.query.limit, $scope.query.page]);
-      });
-
-
-    
-
-      var loadDataset = function (id) {
-        DataService.get(id).then(function (response) {
-          $scope.dataset = JSON.parse(response.data.data_source);
-        });
+        $scope.params = $scope.originParam;
       }
+      $scope.$watch('query.filter', function (newData) {
+        filter(newData);
+      });
 
       $scope.chooseData = function (data) {
         $scope.edit = false;
@@ -122,29 +110,56 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         });
       }
 
-      var compareData = function (data, originData, param, originParam) {
-        if (JSON.stringify(data) != JSON.stringify(originData) || JSON.stringify(param) != JSON.stringify(originParam)) {
-          $scope.edit = true;
-        } else $scope.edit = false;
-      }
-
       $scope.changeParam = function () {
-        compareData($scope.data, $scope.originData, $scope.params, $scope.originParam);
+        $scope.edit = true;
       }
 
       $scope.changeData = function () {
-        compareData($scope.data, $scope.originData, $scope.params, $scope.originParam);
+        $scope.edit = true;
       }
 
       $scope.cancelEdit = function () {
         $scope.data = $scope.originData;
-
+        $scope.edit = false;
         reload([$scope.query.limit, $scope.query.page]);
         $scope.originData = angular.copy($scope.data);
+        if (!$scope.current._id) {
+          _.remove($scope.datas, function (data) {
+            return !data._id;
+          });
+          $scope.current = $scope.currentTag;
+        } 
       }
 
+      $scope.addNewFile = function (files) {
+        $scope.newFiles = files;
+        for (var i = 0; i < $scope.newFiles.length; i++) {
+          var file = $scope.newFiles[i];
+          Upload.upload({
+            url: appConfig.RestEntry + '/api/v1/data/' + null + '/upload/'+null,
+            data: {file: file},
+            headers: {
+              'X-AUTH-TOKEN': $cookies.get('authToken'),
+              'Content-Type': undefined
+            }
+          }).then(function (response) {
+            $scope.data = JSON.parse(response.data.data_source);
+            $scope.originData = angular.copy($scope.data);
+            $scope.query.page = 1;
+            $scope.query.limit = 5;
+            $scope.current = response.data;
+            $scope.datas.push(response.data);
+            reload([$scope.query.limit, $scope.query.page]);
+            $scope.originParam = angular.copy($scope.params);
+          });
+        }
+      }
       $scope.updateDataDriven = function () {
-        
+        if ($scope.query.filter != '') {
+          $scope.query.filter = '';
+          filter($scope.query.filter);
+        }
+
         var updatedData = [];
 
         _.forEach($scope.data, function (data) {
@@ -158,86 +173,49 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           });
           updatedData.push(obj);
         });
-        DataService.update($scope.current.name, updatedData, $scope.current._id, function(data, status) {
-          
-          if (status == 200) {
-            $scope.create = false;
-            $scope.editable = false;
-            $.smallBox({
-              title: "Data Driven",
-              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has updated.")+"</i>",
-              color: "#659265",
-              iconSmall: "fa fa-check fa-2x fadeInRight animated",
-              timeout: 2000
-            });
-            $scope.dataset = JSON.parse(data.data_source);
-            $scope.current.data_source = data.data_source;
-            $scope.edit = false;
-          }
-          if (status == 304) {
-            $scope.create = false;
-            $scope.editable = false;
-            $.smallBox({
-              title: "Data Driven",
-              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has nothing to update.")+"</i>",
-              color: "#659265",
-              iconSmall: "fa fa-check fa-2x fadeInRight animated",
-              timeout: 2000
-            });
-          }
-        });
-      }
+        if (!$scope.current._id) {
+          DataService.create($scope.current.name, updatedData, 'null', function(data, status) {
+            if (status == 200) {
+              $.smallBox({
+                title: "Data Driven",
+                content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has created.")+"</i>",
+                color: "#659265",
+                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                timeout: 2000
+              });
 
-      $scope.createDataDriven = function () {
-
-        var $data_name = $('.data-provider div .driven-name').find('input');
-        if ($data_name.val().trim() === undefined || $data_name.val().trim() === '') { 
-
-          $data_name.parent().addClass("has-error");
-          $data_name.focus();
-          return;
-        };
-        var fieldNames = [];
-        $('.data-provider table thead th.filedName').each(function(index, obj) {
-          var fieldName = $(obj).text().trim();
-          fieldNames[index] = fieldName;
-        });
-
-        var rows = [];
-        $('.data-provider table tbody tr.fieldValues').each(function(index, tr) {
-          var row = [];
-          $(tr).find('td.cell').each(function(i, td) {
-            row[i] = $(td).text().trim();
+              $scope.current._id = data._id;
+            }
           });
-          rows[index] = row;
-        });
-
-        var dataset = [];
-        _.forEach(rows, function(row) {
-          var obj = {};
-          $(fieldNames).each(function(index, field) {
-            obj[field] = row[index];
+        } else {
+          DataService.update($scope.current.name, updatedData, $scope.current._id, function(data, status) {
+            if (status == 200) {
+              $.smallBox({
+                title: "Data Driven",
+                content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has updated.")+"</i>",
+                color: "#659265",
+                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                timeout: 2000
+              });
+              $scope.data = JSON.parse(data.data_source);
+              $scope.originData = angular.copy($scope.data);
+              reload([$scope.query.limit, $scope.query.page]);
+              $scope.originParam = angular.copy($scope.params);
+              $scope.edit = false;
+            }
+            if (status == 304) {
+              $.smallBox({
+                title: "Data Driven",
+                content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has nothing to update.")+"</i>",
+                color: "#659265",
+                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                timeout: 2000
+              });
+            }
+            
           });
-          dataset.push(obj);
-        });
-
-        DataService.create($scope.current.name, dataset, 'null', function(data, status) {
-          if (status == 200) {
-            $scope.create = false;
-            $scope.editable = false;
-            $.smallBox({
-              title: "Data Driven",
-              content: "<i class='fa fa-clock-o'></i> <i>"+$rootScope.getWord("Your data driven has created.")+"</i>",
-              color: "#659265",
-              iconSmall: "fa fa-check fa-2x fadeInRight animated",
-              timeout: 2000
-            });
-
-            $scope.datas.push(data);
-            $scope.current = data;
-            $scope.dataset = JSON.parse(data.data_source);
-          }
-        });
+        }
+        $scope.edit = false;
       }
 
       $scope.deleteDataDriven = function (data, index) {
@@ -261,15 +239,10 @@ define(['datadriven/module', 'lodash'], function(module, _) {
                   if ($scope.datas.length > 0) {
                     $scope.current = $scope.datas[0];
                     DataService.get($scope.current._id).then(function (response) {
-                    $scope.data = JSON.parse(response.data.data_source);
-                    reload([$scope.query.limit, $scope.query.page]);
-                  });
-                    
-                  } else {
-                    $scope.current = undefined;
-                    $scope.dataset = [];
-                    $('.data-provider').hide();
-                  }
+                      $scope.data = JSON.parse(response.data.data_source);
+                      reload([$scope.query.limit, $scope.query.page]);
+                    });
+                  } 
                 }
               });
             }
@@ -287,18 +260,28 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           focusOnOpen: false,
           targetEvent: $event,
           templateUrl: 'app/datadriven/views/add-new-data-driven.tpl.html',
-          locals: {
-            params: $scope.dataSelected.params,
-            data: $scope.data
-          },
-          controller: function AddController($scope, $mdDialog, params, data) {
-            console.log("NGON HANG DAY EM");
+          scope: $scope,
+          preserveScope: true,
+          controller: function AddController() {
+            $scope.doAddNewData = function () {
+              $scope.currentTag = angular.copy($scope.current);
+              var data_driven_name = $scope.data_name;
+              var obj = {};
+              obj.name = data_driven_name;
+              $scope.datas.push(obj);
+              $scope.current = obj;
+              $mdDialog.hide();
+              $scope.data = [];
+              $scope.data.push({'Col 1' : 'empty'});
             }
-        })
+          }
+        }).then(function () {
+          reload([$scope.query.limit, $scope.query.page]);
+          $scope.edit = true;
+        });
       }
 
-
-       $scope.addRow = function ($event) {
+      $scope.addRow = function ($event) {
         $mdDialog.show({
           clickOutsideToClose: true,
           focusOnOpen: false,
@@ -316,6 +299,7 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           }
         }).then(function() {
           reload([$scope.query.limit, $scope.query.page]);
+          $scope.edit = true;
         });
       }
        $scope.addColumn = function ($event) {
@@ -342,6 +326,7 @@ define(['datadriven/module', 'lodash'], function(module, _) {
             return;
           }
           reload([$scope.query.limit, $scope.query.page]);
+          $scope.edit = true;
         });
       }
 
@@ -351,14 +336,10 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           focusOnOpen: false,
           targetEvent: $event,
           templateUrl: 'app/datadriven/views/remove-column.tpl.html',
-          locals: {
-            params: $scope.dataSelected.params,
-            data: $scope.data
-          },
-          controller: function RemoveController($scope, $mdDialog, params, data) {
+          scope: $scope,
+          preserveScope: true,
+          controller: function RemoveController() {
             $scope.columns =  {};
-            $scope.params = params;
-            $scope.data = data;
 
             $scope.deleteDataDrivenColumn = function () {
               
@@ -380,6 +361,7 @@ define(['datadriven/module', 'lodash'], function(module, _) {
         }).then(function () {
           $scope.originData = angular.copy($scope.data);
           reload([$scope.query.limit, $scope.query.page]);
+          $scope.edit = true;
         });
       }
 
@@ -398,12 +380,13 @@ define(['datadriven/module', 'lodash'], function(module, _) {
           _.forIn(objTemp, function (value, key) {
             $scope.params.push(key);
           });
-        }
+        } 
+        $scope.edit = true;
       }
 
       $scope.addNewData = function ($event) {
         var el = $event.currentTarget;
-        $(el).next().click();
+        $(el).parent().next().click();
       }
     }]);
 })
