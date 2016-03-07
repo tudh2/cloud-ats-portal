@@ -3,7 +3,7 @@
   <div class="md-toolbar-tools">
     <ng-md-icon icon="search"></ng-md-icon>
     <form name="filter.form" flex>
-      <input type="text" placeholder="search" ng-model-options="filter.options" ng-model="query.filter" aria-invalid="false">
+      <input type="text" placeholder="search" ng-model-options="filter.options" ng-model="query.filter" aria-invalid="false"  ng-disabled="edit">
     </form>
     <md-button class="md-icon-button" aria-label="More" ng-if="selected.length" ng-click="deleteRowDataDriven()">
       <ng-md-icon icon="delete" style="background:#FE5151"></ng-md-icon>
@@ -40,7 +40,7 @@
       <tr md-row>
         <th md-column ng-repeat="param in params track by $index">
           <md-input-container  class="data-table" style="margin: 0px;height: 42px;">
-            <input value="{{param}}" ng-model="params[$index]" ng-change="changeParam()"/>
+            <input value="{{param}}" aria-label="{{param}}" ng-model="params[$index]" ng-change="changeParam()"/>
           </md-input-container> 
         </th>
       </tr>
