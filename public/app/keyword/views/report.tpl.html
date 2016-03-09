@@ -4,17 +4,8 @@
 			<div class="col-sm-12 clearfix">
                 <div class="row">
                     <div class="col-sm-6 ">
-                        <section class="col-sm-6 smart-form ">
-                            <label class="input"> 
-                                <i class="icon-append fa fa-search"></i>
-                                <input type="text" name="Search" ng-model="Search" placeholder="Search" id="Search" minlength="3">
-                            </label>
-                        </section>
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <select class="form-control">
-                              <option selected="">{{getWord('Choose a Test Case Group')}}</option>
-                            </select>
                           </div>
                         </div>
                     </div>
@@ -62,17 +53,19 @@
 						</thead>
 						<tr ng-repeat="suiteData in suiteReports">
 							<td >{{suiteData.running_time}}</td>
-							<td >{{suiteData.name}}</td>
+							<td ><a ng-click="redirectToSuiteReport(rep.job_id)">{{suiteData.name}}</a></td>
 							<td class="text-right">{{suiteData.total_test_case}}</td>
 							<td class="text-right">{{suiteData.total_pass}}</td>
 							<td class="text-right">{{suiteData.total_fail}}</td>
 							<td class="text-right">{{suiteData.total_skip}}</td>
-							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail',
-            'label label-success': suiteData.test_result === 'Pass'}">{{getWord(suiteData.test_result)}}</span></td>
+							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail','label label-success': suiteData.test_result === 'Pass'}">{{getWord(suiteData.test_result)}}</span></td>
 						</tr>
 					</table>
 				</div>
-                </div>
+            </div>
+
+            <md-table-pagination md-limit="10" md-page="2" md-total="20" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+
 			</div>
 		</div>
 </div>

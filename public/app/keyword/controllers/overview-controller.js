@@ -25,13 +25,13 @@ define(['keyword/module', 'lodash'], function (module, _) {
       KeywordService.get($scope.projectId, function(response) {
         $scope.project = response;
         if($scope.project.lastJobId) {
-          getListReport($scope.project._id);
+          getListReport($scope.project._id, 1);
         }
       });
 
-      var getListReport = function(projectId) {
+      var getListReport = function(projectId, index) {
 
-        KeywordService.getListReport(projectId,function(data,status) {
+        KeywordService.getListReport(projectId, index, function(data,status) {
           $scope.listReports = [];
           _.forEach(data, function(job) {
             var report = { 

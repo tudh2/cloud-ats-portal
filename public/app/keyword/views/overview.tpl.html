@@ -69,7 +69,7 @@
           <th>{{getWord('Case Pass')}}</th>
           <th>{{getWord('Case Fail')}}</th>
           <th>{{getWord('Project Result')}}</th>
-          <th>{{getWord('Created Date')}}</th>
+          <th>{{getWord('Duration')}}</th>
           <th>{{getWord('Create By')}}</th>
           <th>{{getWord('Download Resource')}}</th>
         </tr>
@@ -77,7 +77,7 @@
         <tbody>
           <tr ng-repeat="rep in listReports track by $index">
             <td>{{$index+1}}</td>
-            <td class="test-report"><a ng-click="redirectTo(rep.job_id)">Report-{{rep.job_id}}</a></td>
+            <td class="test-report"><a ng-click="redirectTo(rep.job_id)">Report-{{rep.created_date}}</a></td>
             <td>{{rep.total_test_case}}</td>
             <td>{{rep.total_pass}}</td>
             <td>{{rep.total_fail}}</td>
@@ -98,4 +98,5 @@
     </div>
     <div class="modal fade" id="project-edittion">
     </div>
+    <md-table-pagination md-limit="10" md-page="1" md-total="20" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
 </div>

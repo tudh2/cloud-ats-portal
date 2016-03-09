@@ -157,7 +157,37 @@ define([
           }
         }
       }
+    })
+/*tudh2 Report Suite*/
+    .state('app.keyword.report.suite', {
+      url: '/suite',
+      views: {
+        'content@app': {
+          templateUrl: 'app/keyword/views/suite-report-detail.html',
+          controller:'SuiteReportCtrl',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'keyword/controllers/suite-report-controller'
+            ])
+          }
+        }
+      }
+    })
+    .state('app.keyword.report.suite.testcase', {
+      url: '/testcase',
+      views: {
+        'content@app': {
+          templateUrl: 'app/keyword/views/testcase-report-detail.html',
+          controller:'TestcaseReportCtrl',
+          resolve: {
+            deps: $couchPotatoProvider.resolveDependencies([
+              'keyword/controllers/testcase-report-controller'
+            ])
+          }
+        }
+      }
     });
+    
   });
 
   couchPotato.configureApp(module);

@@ -1,0 +1,91 @@
+<div id="content">
+		<div class="report-page">
+        <div class="border-div row">
+             <h3>{{getWord('Report Test Case Detail')}}</h3>
+             <label>{{getWord('Run Time : 2016/03/07 16:50')}}</label>
+             <br>
+             <div class="col-md-8">
+                 <h4>Test Case : Name </h4>
+                 <h4 style="color: blue;">Pass </h4>
+             </div>
+                 <div class="col-md-4">
+                 <section class="smart-form">
+                 <label class="input"> <i class="icon-append fa fa-search"></i>
+                 <input id="search-fld" type="text" placeholder="{{getWord('Search Test Data')}}" class="ui-autocomplete-input">                           
+                 </label>
+                 </section>
+             </div>
+        </div>
+            
+		<div class="row table-container">
+			<div class="col-sm-12">
+                <div id="Test Case 1">	    
+                    <div>
+                         <div id="data line 1">
+                             <md-button class="md-icon-button">
+                             <ng-md-icon icon="expand_more"></ng-md-icon>
+                             </md-button>
+                         	 <label>Data Line : 1 </label>
+                             <label style="color: red;">Fail </label>
+                             <label>UserName : admin, Password : 12345 </label>
+                             <div>
+                             <table id="TestcaseID" class="table tbl-project-report">
+						         <thead >
+                                 <tr>
+							         <th >{{getWord('#')}} </th>
+							         <th >{{getWord('KeyWord')}}</th>
+							         <th >{{getWord('Expected')}}</th>
+							         <th >{{getWord('Duration')}}</th>
+							         <th >{{getWord('Exception')}}</th>
+							         <th >{{getWord('Result')}}</th>
+							         <th >{{getWord('Capture')}}</th>
+                                 </tr>
+						         </thead>
+						         <tr >
+							         <td >1</td>
+							         <td >Login</td>
+							         <td >abc</td>
+							         <td >06:54</td>
+							         <td >heo</td>
+                                     <td style="color: blue;">Pass</td>
+                                     <td ><a href="">image1.png</a></td>
+						         </tr>
+						         <tr >
+							         <td >2</td>
+						             <td >Logout</td>
+						             <td >abc</td>
+							         <td >05:32</td>
+							         <td >null</td>
+                                     <td style="color: red;">Fail</td>
+                                     <td ><a href="">image2.png</a></td>
+						         </tr>
+					         </table>
+                         	
+                             </div>
+                         </div>
+                         <div id="data line 2">
+                             <md-button class="md-icon-button">
+                             <ng-md-icon icon="expand_less"></ng-md-icon>
+                             </md-button>
+                         	 <label>Data Line : 2 </label>
+                             <label style="color: blue;">Pass </label>
+                             <label>UserName : tudh2, Password : 102 </label>	
+                         </div>
+                          <div id="data line 3">
+                             <md-button class="md-icon-button">
+                             <ng-md-icon icon="expand_less"></ng-md-icon>
+                             </md-button>
+                         	 <label>Data Line : 3 </label>
+                             <label style="color: blue;">Pass </label>
+                             <label>UserName : trinhtv3, Password : 103 </label>	
+                         </div>
+                    </div>
+               </div>
+           </div>
+        </div>
+    <md-table-pagination md-limit="10" md-page="2" md-total="20" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+
+  </div>
+</div>
+
+

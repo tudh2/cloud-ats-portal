@@ -1,0 +1,61 @@
+<div id="content">
+		<div class="report-page">
+        <div class="border-div row">
+         <label>{{getWord('Test Suite : TEST SUITE NAME')}}</label>
+			   <div class="col-sm-12 clearfix">
+				    <!-- <div class="functional-report"></div> -->
+				    <div class="col-sm-8">
+                  <h1>Chart 1</h1>
+                  <div id="chart1"></div>
+            </div>
+            <div class="col-sm-4">
+                <h1>Chart 2</h1>
+                <div id="chart2"></div>
+            </div>
+			    </div>
+        </div>
+            
+			<div class="row table-container">
+				<div class="col-sm-12">
+                    <h3>{{getWord('Report Suite Detail')}}</h3>
+                    <label>{{getWord('Run Time : 2016/03/07 16:50')}}</label>
+                 <div id="Test Case 1">
+                 	<div >
+                      <label>Test Suite Name </label>
+                  </div>
+                  <div>
+                    <table id="suiteID" class="table tbl-project-report">
+						          <thead >
+                      <tr>
+							          <th >{{getWord('#')}} </th>
+							          <th >{{getWord('Test Case')}}</th>
+							          <th >{{getWord('Description')}}</th>
+							          <th >{{getWord('Duration')}}</th>
+							          <th >{{getWord('Result')}}</th>
+                      </tr>
+						          </thead>
+						          <tr >
+							          <td >1</td>
+							          <td ><a ng-click="redirectToTestCaseReport(rep.job_id)">Test Case 1</a></td>
+							          <td >test case</td>
+							          <td >06:54</td>
+                        <td style="color: blue;">Pass</td>
+						          </tr>
+						          <tr >
+							          <td >2</td>
+						           	<td ><a ng-click="redirectToTestCaseReport(rep.job_id)">Test Case 2</a></td>
+							          <td >test case</td>
+							          <td >05:32</td>
+                        <td style="color: red;">Fail</td>
+						          </tr>
+					          </table>
+                  </div>
+              </div>
+      </div>
+    </div>
+    <md-table-pagination md-limit="10" md-page="2" md-total="20" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+
+  </div>
+</div>
+
+
