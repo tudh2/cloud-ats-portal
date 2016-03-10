@@ -161,7 +161,7 @@ define(['keyword/module'], function(module) {
       getListReport : function(projectId,index,callback) {
         var request = {
           method: 'GET',
-          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/reports/'+index,
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/reports?index='+index,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space')

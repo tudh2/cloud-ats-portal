@@ -14,6 +14,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.project = null;
 
+      $scope.query = {
+        'current': 1
+      };
       $scope.showAction = {
         status:false
       };
@@ -31,8 +34,11 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       var getListReport = function(projectId, index) {
 
-        KeywordService.getListReport(projectId, index, function(data,status) {
+        KeywordService.getListReport(projectId, index, function(dataRes,status) {
           $scope.listReports = [];
+
+          var  data = JSON.parse(dataRes.result);
+          $scope.query.total = dataRes.total;
           _.forEach(data, function(job) {
             var report = { 
               created_date : job.created_date,  
@@ -53,11 +59,18 @@ define(['keyword/module', 'lodash'], function (module, _) {
               report.test_result = 'Fail';
             }
 
+            report.stt = job.stt;
             $scope.listReports.push(report);
           });
 
         });
       }
+
+      $scope.$watch('query.current', function (newPage, oldPage) {
+        if($scope.project) {
+          getListReport($scope.project._id, newPage);
+        }
+      });
 
       $scope.redirectTo = function(jobId) {
         $state.go('app.keyword.report', {id: $scope.projectId, jobId: jobId });

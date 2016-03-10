@@ -76,7 +76,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="rep in listReports track by $index">
-            <td>{{$index+1}}</td>
+            <td>{{rep.stt}}</td>
             <td class="test-report"><a ng-click="redirectTo(rep.job_id)">Report-{{rep.created_date}}</a></td>
             <td>{{rep.total_test_case}}</td>
             <td>{{rep.total_pass}}</td>
@@ -98,5 +98,5 @@
     </div>
     <div class="modal fade" id="project-edittion">
     </div>
-    <md-table-pagination md-limit="10" md-page="1" md-total="20" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+    <md-table-pagination md-limit="10" md-page="query.current" md-total="{{query.total}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
 </div>
