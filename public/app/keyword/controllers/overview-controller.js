@@ -35,34 +35,12 @@ define(['keyword/module', 'lodash'], function (module, _) {
       var getListReport = function(projectId, index) {
 
         KeywordService.getListReport(projectId, index, function(dataRes,status) {
-          $scope.listReports = [];
-
-          var  data = JSON.parse(dataRes.result);
-          $scope.query.total = dataRes.total;
-          _.forEach(data, function(job) {
-            var report = { 
-              created_date : job.created_date,  
-              job_id: job.report.functional_job_id,
-              total_test_case : 0,
-              total_pass : 0,
-              total_fail : 0 
-            };
-            _.forEach(job.report.suite_reports, function(suite) {
-              report.total_test_case += suite.total_test_case;
-              report.total_pass += suite.total_pass;
-              report.total_fail += suite.total_fail;
-            });
-
-            if(report.total_fail == 0) {
-              report.test_result = 'Pass';
-            } else {
-              report.test_result = 'Fail';
-            }
-
-            report.stt = job.stt;
-            $scope.listReports.push(report);
+          _.forEach(dataRes, function (obj) {
+            if (obj.numberFailedSuite > 0) {
+              obj.test_result = 'Fail';
+            } else obj.test_result = 'Pass';
           });
-
+          $scope.listReports = dataRes;
         });
       }
 
