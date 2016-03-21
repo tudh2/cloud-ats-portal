@@ -38,11 +38,17 @@
             
 			<div class="row table-container">
 				<div class="col-sm-12">
-                    <h3>{{getWord('Test Report')}}</h3>
+				    <div class="col-md-6">
+				        <h3>{{getWord('Test Report')}}</h3>
+				    </div>
+		            <div class="col-md-6">
+				        <div class="execute-action-list">
+				        <a class="btn-border-line btnViewLog">{{getWord('View Log')}}</a>
+				        </div>
+				    </div>
 					<table class="table tbl-project-report">
 						<thead >
                             <tr>
-							<th >{{getWord('Running')}} </th>
 							<th >{{getWord('Test Suite')}}</th>
 							<th class="text-right">{{getWord('Test Case')}}</th>
 							<th class="text-right">{{getWord('Pass')}}</th>
@@ -52,12 +58,11 @@
                                 </tr>
 						</thead>
 						<tr ng-repeat="suiteData in suiteReports">
-							<td >{{suiteData.running_time}}</td>
 							<td ><a ng-click="redirectToSuiteReport(rep.job_id)">{{suiteData.name}}</a></td>
-							<td class="text-right">{{suiteData.total_test_case}}</td>
-							<td class="text-right">{{suiteData.total_pass}}</td>
-							<td class="text-right">{{suiteData.total_fail}}</td>
-							<td class="text-right">{{suiteData.total_skip}}</td>
+							<td class="text-right">{{suiteData.totalCase}}</td>
+							<td class="text-right" style="color: #00B4A1">{{suiteData.totalPass}}</td>
+							<td class="text-right" style="color: #ff5050">{{suiteData.totalFail}}</td>
+							<td class="text-right" style="color: #ffaa2a">{{suiteData.totalSkip}}</td>
 							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail','label label-success': suiteData.test_result === 'Pass'}">{{getWord(suiteData.test_result)}}</span></td>
 						</tr>
 					</table>
