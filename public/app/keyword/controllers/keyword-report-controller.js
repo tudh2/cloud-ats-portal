@@ -17,23 +17,16 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.dataReports = [];
 
       var getDataReport = function(data) {
-        var suiteReport = JSON.parse(data.suite_reports);
 
-        _.forEach(suiteReport,function(obj,key) {
+        _.forEach(data,function(obj,key) {
             var dataReport = {
               x : obj.name,
-              P : obj.total_pass,
-              F : obj.total_fail,
-              S : obj.total_skip
+              P : obj.totalPass,
+              F : obj.totalFail,
+              S : obj.totalSkip
             };
             $scope.dataReports.push(dataReport);
-            if(obj.test_result) {
-              obj.test_result = 'Pass'
-            } else {
-              obj.test_result = 'Fail'
-            }
 
-            $scope.suiteReports.push(obj);
         })
         $scope.listSuiteReports = $scope.dataReports;
       };
@@ -48,6 +41,12 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 timeout: 3000
               });
           } else {
+              _.forEach(data, function (obj) {
+              if (obj.totalFail === 0) {
+                obj.test_result = 'Pass';
+              } else obj.test_result = 'Fail';
+            });
+            $scope.suiteReports = data;
             getDataReport(data);
           }
       });

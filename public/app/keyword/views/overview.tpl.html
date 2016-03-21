@@ -65,9 +65,9 @@
           <tr>
           <th>#</th>
           <th>{{getWord('Report Title')}}</th>
-          <th>{{getWord('Total Suite')}}</th>
-          <th>{{getWord('Suite Pass')}}</th>
-          <th>{{getWord('Suite Fail')}}</th>
+          <th>{{getWord('Total Suites')}}</th>
+          <th>{{getWord('Suites Pass')}}</th>
+          <th>{{getWord('Suites Fail')}}</th>
           <th>{{getWord('Project Result')}}</th>
           <th>{{getWord('Duration')}}</th>
           <th>{{getWord('Create By')}}</th>
@@ -77,7 +77,7 @@
         <tbody>
           <tr ng-repeat="rep in listReports track by $index">
             <td>{{rep.stt}}</td>
-            <td class="test-report"><a ng-click="redirectTo(rep.job_id)">Report-{{rep.created_date}}</a></td>
+            <td class="test-report"><a ng-click="redirectTo(rep.jobId)">Report-{{rep.created_date}}</a></td>
             <td>{{rep.numberPassedSuite + rep.numberFailedSuite}}</td>
             <td>{{rep.numberPassedSuite}}</td>
             <td>{{rep.numberFailedSuite}}</td>

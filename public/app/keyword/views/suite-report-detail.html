@@ -18,7 +18,6 @@
 			<div class="row table-container">
 				<div class="col-sm-12">
                     <h3>{{getWord('Report Suite Detail')}}</h3>
-                    <label>{{getWord('Run Time : 2016/03/07 16:50')}}</label>
                  <div id="Test Case 1">
                  	<div >
                       <label>Test Suite Name </label>
@@ -36,18 +35,43 @@
 						          </thead>
 						          <tr >
 							          <td >1</td>
-							          <td ><a ng-click="redirectToTestCaseReport(rep.job_id)">Test Case 1</a></td>
+							          <td >
+                           <md-button class="md-icon-button" >
+                             <ng-md-icon icon="expand_more"></ng-md-icon>
+                             </md-button>
+                           <a >Test Case 1</a>
+                           <ul >
+                              <li>
+                                 <a ng-click="redirectToTestCaseReport(rep.job_id)" style="color: red;">Data line 1</a>
+                              </li>
+                              <li>
+                                <a ng-click="redirectToTestCaseReport(rep.job_id)" style="color: blue;">Data line 2</a>
+                              </li>
+                           </ul>
+                        </td>
 							          <td >test case</td>
 							          <td >06:54</td>
-                        <td style="color: blue;">Pass</td>
+                        <td style="color: red;">Fail</td>
 						          </tr>
 						          <tr >
 							          <td >2</td>
 						           	<td ><a ng-click="redirectToTestCaseReport(rep.job_id)">Test Case 2</a></td>
 							          <td >test case</td>
 							          <td >05:32</td>
-                        <td style="color: red;">Fail</td>
+                        <td style="color: blue;">Pass</td>
 						          </tr>
+                       <tr >
+                        <td >3</td>
+                        <td >
+                            <md-button class="md-icon-button">
+                            <ng-md-icon icon="expand_less"></ng-md-icon>
+                            </md-button>
+                            <a >Test Case 3</a>
+                        </td>
+                        <td >test case</td>
+                        <td >05:32</td>
+                        <td style="color: blue;">Pass</td>
+                      </tr>
 					          </table>
                   </div>
               </div>

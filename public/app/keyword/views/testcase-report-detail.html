@@ -2,19 +2,10 @@
 		<div class="report-page">
         <div class="border-div row">
              <h3>{{getWord('Report Test Case Detail')}}</h3>
-             <label>{{getWord('Run Time : 2016/03/07 16:50')}}</label>
              <br>
              <div class="col-md-8">
                  <h4>Test Case : Name </h4>
-                 <h4 style="color: blue;">Pass </h4>
-             </div>
-                 <div class="col-md-4">
-                 <section class="smart-form">
-                 <label class="input"> <i class="icon-append fa fa-search"></i>
-                 <input id="search-fld" type="text" placeholder="{{getWord('Search Test Data')}}" class="ui-autocomplete-input">                           
-                 </label>
-                 </section>
-             </div>
+                 <h4 style="color: blue;">Fail </h4>
         </div>
             
 		<div class="row table-container">
@@ -22,69 +13,148 @@
                 <div id="Test Case 1">	    
                     <div>
                          <div id="data line 1">
-                             <md-button class="md-icon-button">
-                             <ng-md-icon icon="expand_more"></ng-md-icon>
-                             </md-button>
                          	 <label>Data Line : 1 </label>
                              <label style="color: red;">Fail </label>
-                             <label>UserName : admin, Password : 12345 </label>
                              <div>
                              <table id="TestcaseID" class="table tbl-project-report">
 						         <thead >
                                  <tr>
 							         <th >{{getWord('#')}} </th>
-							         <th >{{getWord('KeyWord')}}</th>
-							         <th >{{getWord('Expected')}}</th>
-							         <th >{{getWord('Duration')}}</th>
-							         <th >{{getWord('Exception')}}</th>
-							         <th >{{getWord('Result')}}</th>
-							         <th >{{getWord('Capture')}}</th>
+							         <th >{{getWord('Column 1')}}</th>
+							         <th >{{getWord('Column 2')}}</th>
+							         <th >{{getWord('Column 3')}}</th>
+							         <th >{{getWord('Column 4')}}</th>
+							         <th >{{getWord('Column 5')}}</th>
+							         <th >{{getWord('Column 6')}}</th>
                                  </tr>
 						         </thead>
 						         <tr >
 							         <td >1</td>
-							         <td >Login</td>
+							         <td >2345</td>
 							         <td >abc</td>
 							         <td >06:54</td>
 							         <td >heo</td>
-                                     <td style="color: blue;">Pass</td>
-                                     <td ><a href="">image1.png</a></td>
-						         </tr>
-						         <tr >
-							         <td >2</td>
-						             <td >Logout</td>
-						             <td >abc</td>
-							         <td >05:32</td>
-							         <td >null</td>
-                                     <td style="color: red;">Fail</td>
-                                     <td ><a href="">image2.png</a></td>
+                                     <td >ga</td>
+                                     <td >cho</td>
 						         </tr>
 					         </table>
                          	
                              </div>
                          </div>
-                         <div id="data line 2">
+                             <md-button class="md-icon-button">
+                             <ng-md-icon icon="expand_more"></ng-md-icon>
+                             </md-button>
+                             <label>Script </label>
+                             <div>
+                             <table id="TestcaseID" class="table tbl-project-report">
+                                 <thead >
+                                 <tr>
+                                     <th >{{getWord('#')}} </th>
+                                     <th >{{getWord('KeyWord')}}</th>
+                                     <th >{{getWord('Params')}}</th>
+                                     <th >{{getWord('Expected')}}</th>
+                                     <th >{{getWord('Actual')}}</th>
+                                     <th >{{getWord('Result')}}</th>
+                                     <th >{{getWord('Capture')}}</th>
+                                 </tr>
+                                 </thead>
+                                 <tr >
+                                     <td >1</td>
+                                     <td >Login</td>
+                                     <td >
+                                         <ul>
+                                             <li>
+                                                 UserName : Admin
+                                             </li>
+                                             <li>
+                                                 PassWord : 12345
+                                             </li>
+                                         </ul>
+                                     </td>
+                                     <td>avc</td>
+                                     <td>avc</td>
+                                     <td style="color: blue;">Pass</td>
+                                     <td ><a href="">image1.png</a></td>
+                                 </tr>
+                                  <tr >
+                                     <td >1</td>
+                                     <td >action</td>
+                                     <td >
+                                         <ul>
+                                             <li>
+                                                 param 1 : ga to
+                                             </li>
+                                             <li>
+                                                 param 2 : ga con
+                                             </li>
+                                             <li>
+                                                 param 3 : ga chau
+                                             </li>
+                                         </ul>
+                                     </td>
+                                     <td>avc</td>
+                                     <td>avc</td>
+                                     <td style="color: blue;">Pass</td>
+                                     <td ><a href="">image1.png</a></td>
+                                 </tr>
+                                 <tr >
+                                     <td >2</td>
+                                     <td >Logout</td>
+                                     <td ></td>
+                                     <td>avc</td>
+                                     <td>avc</td>
+                                     <td style="color: red;">Fail</td>
+                                     <td ><a href="">image2.png</a></td>
+                                 </tr>
+                             </table>
+                             </div>
+                          <div id="out-put">
                              <md-button class="md-icon-button">
                              <ng-md-icon icon="expand_less"></ng-md-icon>
                              </md-button>
-                         	 <label>Data Line : 2 </label>
-                             <label style="color: blue;">Pass </label>
-                             <label>UserName : tudh2, Password : 102 </label>	
-                         </div>
-                          <div id="data line 3">
-                             <md-button class="md-icon-button">
-                             <ng-md-icon icon="expand_less"></ng-md-icon>
-                             </md-button>
-                         	 <label>Data Line : 3 </label>
-                             <label style="color: blue;">Pass </label>
-                             <label>UserName : trinhtv3, Password : 103 </label>	
+                         	 <label>Output/Exceptions</label>
+                             <div>
+                             <table id="TestcaseID" class="table tbl-project-report">
+                                 <thead >
+                                 <tr>
+                                     <th >{{getWord('Exception')}} </th>
+                                 </tr>
+                                 </thead>
+                                 <tr >
+                                     <td >Failed tests: 
+org.ats.generated.Invitation.AddSchoolYears190860fd(org.ats.generated.Invitation)
+  Run 1: PASS
+  Run 2: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element...
+  Run 3: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element...
+
+  Invitation.CancelConfirm74ad20a9:1035 » NoSuchElement Unable to locate element...
+org.ats.generated.Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9(org.ats.generated.Invitation)
+  Run 1: PASS
+  Run 2: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
+  Run 3: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
+  Run 4: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
+
+  Invitation.ClickDeletePupilButtonAndAsserta4eba7e7:724 » NoSuchElement Unable ...
+  Invitation.ClickEditPupilWithIdbf9e281e:670 » NoSuchElement Unable to locate e...
+  Invitation.EditPupilAndAssert3fb7ad3b:678 » NoSuchElement Unable to locate ele...
+  Invitation.FindDeletePupilButton19f061db:716 » NoSuchElement Unable to locate ...
+org.ats.generated.Invitation.VerifyPupilList47881c74(org.ats.generated.Invitation)
+  Run 1: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
+  Run 2: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
+  Run 3: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
+  Run 4: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
+
+
+</td>
+                                 </tr>
+                             </table>
+                            
+                             </div>
                          </div>
                     </div>
                </div>
            </div>
         </div>
-    <md-table-pagination md-limit="10" md-page="2" md-total="20" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
-
   </div>
 </div>
 
