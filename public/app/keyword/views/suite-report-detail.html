@@ -1,83 +1,71 @@
 <div id="content">
 		<div class="report-page">
         <div class="border-div row">
-         <label>{{getWord('Test Suite : TEST SUITE NAME')}}</label>
-			   <div class="col-sm-12 clearfix">
-				    <!-- <div class="functional-report"></div> -->
-				    <div class="col-sm-8">
-                  <h1>Chart 1</h1>
-                  <div id="chart1"></div>
-            </div>
-            <div class="col-sm-4">
-                <h1>Chart 2</h1>
-                <div id="chart2"></div>
-            </div>
+          <h3>{{getWord('10 lastest reports of the suite')}}</h3>
+			     <div class="col-sm-12 clearfix">
+
+            <table class="table tbl-project-report">
+              <thead >
+                <tr>
+                  <th >{{getWord('#')}} </th>
+                  <th >{{getWord('Suite Name')}}</th>
+                  <th >{{getWord('Total Pass')}}</th>
+                  <th >{{getWord('Total Fail')}}</th>
+                  <th >{{getWord('Result')}}</th>
+                </tr>
+              </thead>
+
+                <tr ng-repeat="suite in suites track by $index">
+                  <td>{{$index + 1}}</td>
+                  <td><span class="label label-info">{{suite.name}}</span></td>
+                  <td><span class="label label-success">{{suite.totalPass}}</span></td>
+                  <td><span class='label label-error'>{{suite.totalFail}}</span></td>
+                  <td><span  ng-class="{'label label-error': suite.totalFail, 'label label-success': !suite.totalFail}">{{suite.totalFail ? 'Fail' : 'Pass'}}</span></td>
+                </tr>
+              </table>
 			    </div>
         </div>
             
 			<div class="row table-container">
 				<div class="col-sm-12">
-                    <h3>{{getWord('Report Suite Detail')}}</h3>
-                 <div id="Test Case 1">
-                 	<div >
-                      <label>Test Suite Name </label>
-                  </div>
-                  <div>
-                    <table id="suiteID" class="table tbl-project-report">
-						          <thead >
-                      <tr>
-							          <th >{{getWord('#')}} </th>
-							          <th >{{getWord('Test Case')}}</th>
-							          <th >{{getWord('Description')}}</th>
-							          <th >{{getWord('Duration')}}</th>
-							          <th >{{getWord('Result')}}</th>
-                      </tr>
-						          </thead>
-						          <tr >
-							          <td >1</td>
-							          <td >
-                           <md-button class="md-icon-button" >
-                             <ng-md-icon icon="expand_more"></ng-md-icon>
-                             </md-button>
-                           <a >Test Case 1</a>
-                           <ul >
-                              <li>
-                                 <a ng-click="redirectToTestCaseReport(rep.job_id)" style="color: red;">Data line 1</a>
-                              </li>
-                              <li>
-                                <a ng-click="redirectToTestCaseReport(rep.job_id)" style="color: blue;">Data line 2</a>
-                              </li>
-                           </ul>
-                        </td>
-							          <td >test case</td>
-							          <td >06:54</td>
-                        <td style="color: red;">Fail</td>
-						          </tr>
-						          <tr >
-							          <td >2</td>
-						           	<td ><a ng-click="redirectToTestCaseReport(rep.job_id)">Test Case 2</a></td>
-							          <td >test case</td>
-							          <td >05:32</td>
-                        <td style="color: blue;">Pass</td>
-						          </tr>
-                       <tr >
-                        <td >3</td>
-                        <td >
-                            <md-button class="md-icon-button">
-                            <ng-md-icon icon="expand_less"></ng-md-icon>
-                            </md-button>
-                            <a >Test Case 3</a>
-                        </td>
-                        <td >test case</td>
-                        <td >05:32</td>
-                        <td style="color: blue;">Pass</td>
-                      </tr>
-					          </table>
-                  </div>
-              </div>
+          <h3>{{getWord('Report Suite Detail')}}</h3>
+          <div id="Test Case 1">
+           	<div >
+                <label>Test Suite Name </label>
+            </div>
+            <div>
+              <table id="suiteID" class="table tbl-project-report">
+			          <thead >
+                  <tr>
+					          <th >{{getWord('#')}} </th>
+					          <th >{{getWord('Test Case')}}</th>
+					          <th >{{getWord('Result')}}</th>
+                  </tr>
+			          </thead>
+
+                <tr ng-repeat="i in case_reports">
+                  <td>{{i.stt}}</td>
+                  <td ng-if="!i.data_driven"><a ng-click="redirectToTestCaseReport(i.report._id)">{{i.name}}</a></td>
+                  <td  ng-if="i.data_driven">
+                    <a data-toggle="collapse" data-target="#demo">{{i.name}}</a>
+                    <div id="demo" class="collapse">
+                      <ul class="list-group">
+                        <li class="list-group-item" style="border: none;" ng-repeat="report in i.data_source">
+                        <a ng-click="redirectToTestCaseReport(report._id)">{{report._id}}</a>
+                        <span class="pull-right"  ng-class="{'label label-error': report.result === 'Fail','label label-success': report.result === 'Pass'}">{{report.result}}</span>
+                      </li>
+                      </ul>
+                    </div>
+
+                  </td>
+                  <td><span  ng-class="{'label label-error': i.result === 'Fail','label label-success': i.result === 'Pass'}">{{i.result}}</span></td>
+                </tr>
+		          </table>
+            </div>
+        </div>
       </div>
     </div>
-    <md-table-pagination md-limit="10" md-page="2" md-total="20" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+    <md-table-pagination md-limit="10" md-page="query.current" md-total="{{query.total}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
 
   </div>
 </div>

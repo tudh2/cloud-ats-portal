@@ -160,7 +160,7 @@ define([
     })
 /*tudh2 Report Suite*/
     .state('app.keyword.report.suite', {
-      url: '/suite',
+      url: '/suite/:suiteId/:suiteReportId',
       views: {
         'content@app': {
           templateUrl: 'app/keyword/views/suite-report-detail.html',

@@ -15,7 +15,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.project = null;
 
       $scope.query = {
-        'current': 1
+        'current': 1,
+        'total': 0
       };
       $scope.showAction = {
         status:false
@@ -35,6 +36,9 @@ define(['keyword/module', 'lodash'], function (module, _) {
       var getListReport = function(projectId, index) {
 
         KeywordService.getListReport(projectId, index, function(dataRes,status) {
+          if (dataRes.length) {
+            $scope.query.total = dataRes[0].total;
+          }
           _.forEach(dataRes, function (obj) {
             if (obj.numberFailedSuite > 0) {
               obj.test_result = 'Fail';

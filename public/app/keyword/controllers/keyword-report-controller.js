@@ -51,10 +51,10 @@ define(['keyword/module', 'lodash'], function (module, _) {
           }
       });
 
-      $scope.redirectToSuiteReport = function() {
-        $state.go('app.keyword.report.suite');
+      $scope.redirectToSuiteReport = function(suiteId, suiteReportId) {
+        console.log(suiteId);
+        $state.go('app.keyword.report.suite', {'suiteId': suiteId, 'suiteReportId': suiteReportId});
       }
-
 
   }]);
 });

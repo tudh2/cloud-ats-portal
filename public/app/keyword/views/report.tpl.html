@@ -59,11 +59,12 @@
                                 </tr>
 						</thead>
 						<tr ng-repeat="suiteData in suiteReports">
-							<td ><a ng-click="redirectToSuiteReport(rep.job_id)">{{suiteData.name}}</a></td>
-							<td class="text-center">{{suiteData.totalCase}}</td>
-							<td class="text-center" style="color: #00B4A1">{{suiteData.totalPass}}</td>
-							<td class="text-center" style="color: #ff5050">{{suiteData.totalFail}}</td>
-							<td class="text-center" style="color: #ffaa2a">{{suiteData.totalSkip}}</td>
+							
+							<td ><a ng-click="redirectToSuiteReport(suiteData.suiteId, suiteData._id)">{{suiteData.name}}</a></td>
+							<td class="text-right">{{suiteData.totalCase}}</td>
+							<td class="text-right" style="color: #00B4A1">{{suiteData.totalPass}}</td>
+							<td class="text-right" style="color: #ff5050">{{suiteData.totalFail}}</td>
+							<td class="text-right" style="color: #ffaa2a">{{suiteData.totalSkip}}</td>
 							<th class="text-center">{{suiteData.duration/1000}}</th>
 							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail','label label-success': suiteData.test_result === 'Pass'}">{{getWord(suiteData.test_result)}}</span></td>
 						</tr>
