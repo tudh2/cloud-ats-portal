@@ -135,7 +135,7 @@ define([
           }
         },
         data: {
-          title: 'Keyword Report',
+          title: 'Job Report',
           requireLogin: true
         }
       })
@@ -171,10 +171,14 @@ define([
             ])
           }
         }
+      },
+       data: {
+        title: 'Suite Report',
+        requireLogin: true
       }
     })
     .state('app.keyword.report.suite.testcase', {
-      url: '/testcase',
+      url: '/testcase/:caseReportId',
       views: {
         'content@app': {
           templateUrl: 'app/keyword/views/testcase-report-detail.html',
@@ -185,6 +189,10 @@ define([
             ])
           }
         }
+      },
+       data: {
+        title: 'Test Case Report',
+        requireLogin: true
       }
     });
     

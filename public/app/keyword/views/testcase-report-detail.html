@@ -1,41 +1,31 @@
 <div id="content">
-		<div class="report-page">
+	<div class="report-page">
         <div class="border-div row">
              <h3>{{getWord('Report Test Case Detail')}}</h3>
              <br>
              <div class="col-md-8">
-                 <h4>Test Case : Name </h4>
-                 <h4 style="color: blue;">Fail </h4>
+                 <h4>Test Case : <i>{{caseName}}</i></h4>
+                 <h4 style="color: red;">Fail </h4>
+            </div>
         </div>
             
 		<div class="row table-container">
 			<div class="col-sm-12">
                 <div id="Test Case 1">	    
                     <div>
-                         <div id="data line 1">
+                         <div id="data line 1" ng-if="dataSource.length" >
                          	 <label>Data Line : 1 </label>
                              <label style="color: red;">Fail </label>
                              <div>
-                             <table id="TestcaseID" class="table tbl-project-report">
+                             <table class="table tbl-project-report" ng-repeat="(key, val) in dataSource[0] track by $index">
 						         <thead >
                                  <tr>
 							         <th >{{getWord('#')}} </th>
-							         <th >{{getWord('Column 1')}}</th>
-							         <th >{{getWord('Column 2')}}</th>
-							         <th >{{getWord('Column 3')}}</th>
-							         <th >{{getWord('Column 4')}}</th>
-							         <th >{{getWord('Column 5')}}</th>
-							         <th >{{getWord('Column 6')}}</th>
-                                 </tr>
+							         <th >{{key}}</th>
 						         </thead>
 						         <tr >
-							         <td >1</td>
-							         <td >2345</td>
-							         <td >abc</td>
-							         <td >06:54</td>
-							         <td >heo</td>
-                                     <td >ga</td>
-                                     <td >cho</td>
+							         <td >{{$index+1}}</td>
+							         <td >{{val}}</td>
 						         </tr>
 					         </table>
                          	
@@ -58,53 +48,21 @@
                                      <th >{{getWord('Capture')}}</th>
                                  </tr>
                                  </thead>
-                                 <tr >
-                                     <td >1</td>
-                                     <td >Login</td>
+                                 <tr ng-repeat="step in listStep track by $index">
+                                     <td >{{$index+1}}</td>
+                                     <td >{{step.name}}</td>
                                      <td >
                                          <ul>
-                                             <li>
-                                                 UserName : Admin
-                                             </li>
-                                             <li>
-                                                 PassWord : 12345
+                                             <li ng-repeat="(key, val) in step.params[0]">
+                                                {{key}} : {{val}}
                                              </li>
                                          </ul>
                                      </td>
                                      <td>avc</td>
                                      <td>avc</td>
-                                     <td style="color: blue;">Pass</td>
+                                     <td ng-if="step.isPass == true" style="color: blue;">Pass</td>
+                                     <td ng-if="step.isPass != true" style="color: red;">Fail</td>
                                      <td ><a href="">image1.png</a></td>
-                                 </tr>
-                                  <tr >
-                                     <td >1</td>
-                                     <td >action</td>
-                                     <td >
-                                         <ul>
-                                             <li>
-                                                 param 1 : ga to
-                                             </li>
-                                             <li>
-                                                 param 2 : ga con
-                                             </li>
-                                             <li>
-                                                 param 3 : ga chau
-                                             </li>
-                                         </ul>
-                                     </td>
-                                     <td>avc</td>
-                                     <td>avc</td>
-                                     <td style="color: blue;">Pass</td>
-                                     <td ><a href="">image1.png</a></td>
-                                 </tr>
-                                 <tr >
-                                     <td >2</td>
-                                     <td >Logout</td>
-                                     <td ></td>
-                                     <td>avc</td>
-                                     <td>avc</td>
-                                     <td style="color: red;">Fail</td>
-                                     <td ><a href="">image2.png</a></td>
                                  </tr>
                              </table>
                              </div>

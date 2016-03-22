@@ -2,11 +2,10 @@ define(['keyword/module', 'lodash', 'c3'], function (module, _, c3) {
   'use strict';
 
   module.registerController('SuiteReportCtrl', ['$scope', '$state', function ($scope, $state) {
-    console.log("Report Suite");
-
-
+    
+    $scope.caseReportId ="8d752305-7d8b-4c43-bf00-d4416717d7da";
     $scope.redirectToTestCaseReport = function() {
-        $state.go('app.keyword.report.suite.testcase');
+        $state.go('app.keyword.report.suite.testcase',{'caseReportId': $scope.caseReportId});
       }
 
     var chart = c3.generate({
@@ -29,12 +28,13 @@ define(['keyword/module', 'lodash', 'c3'], function (module, _, c3) {
          axis: {
         x: {
             type: 'timeseries',
-            // if true, treat x value as localtime (Default)
-            // if false, convert to UTC internally
             localtime: true,
             tick: {
                 format: '%Y-%m-%d %H:%M:%S'
             }
+        },
+        y: {
+            min: 5,
         }
     }
 

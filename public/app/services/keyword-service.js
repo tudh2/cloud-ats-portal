@@ -174,6 +174,22 @@ define(['keyword/module'], function(module) {
 
         });
       },
+      getReportCase : function(projectId, jobId ,caseReportId,callback) {
+        var request = {
+          method: 'GET',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/report/'+jobId+'/case/'+caseReportId,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data, status);
+        }).error(function(data, status) {
+
+        });
+      },
       log: function (projectId, callback) {
         var request = {
           method: 'GET',

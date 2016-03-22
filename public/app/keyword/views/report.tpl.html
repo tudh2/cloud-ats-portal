@@ -50,19 +50,21 @@
 						<thead >
                             <tr>
 							<th >{{getWord('Test Suite')}}</th>
-							<th class="text-right">{{getWord('Test Case')}}</th>
-							<th class="text-right">{{getWord('Pass')}}</th>
-							<th class="text-right">{{getWord('Fail')}}</th>
-							<th class="text-right">{{getWord('Skip')}}</th>
+							<th class="text-center">{{getWord('Test Case')}}</th>
+							<th class="text-center">{{getWord('Pass')}}</th>
+							<th class="text-center">{{getWord('Fail')}}</th>
+							<th class="text-center">{{getWord('Skip')}}</th>
+							<th class="text-center">{{getWord('Duration(second)')}}</th>
 							<th class="text-center">{{getWord('Test Result')}}</th>
                                 </tr>
 						</thead>
 						<tr ng-repeat="suiteData in suiteReports">
 							<td ><a ng-click="redirectToSuiteReport(rep.job_id)">{{suiteData.name}}</a></td>
-							<td class="text-right">{{suiteData.totalCase}}</td>
-							<td class="text-right" style="color: #00B4A1">{{suiteData.totalPass}}</td>
-							<td class="text-right" style="color: #ff5050">{{suiteData.totalFail}}</td>
-							<td class="text-right" style="color: #ffaa2a">{{suiteData.totalSkip}}</td>
+							<td class="text-center">{{suiteData.totalCase}}</td>
+							<td class="text-center" style="color: #00B4A1">{{suiteData.totalPass}}</td>
+							<td class="text-center" style="color: #ff5050">{{suiteData.totalFail}}</td>
+							<td class="text-center" style="color: #ffaa2a">{{suiteData.totalSkip}}</td>
+							<th class="text-center">{{suiteData.duration/1000}}</th>
 							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail','label label-success': suiteData.test_result === 'Pass'}">{{getWord(suiteData.test_result)}}</span></td>
 						</tr>
 					</table>
