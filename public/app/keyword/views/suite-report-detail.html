@@ -51,8 +51,8 @@
                     <div id="demo" class="collapse">
                       <ul class="list-group">
                         <li class="list-group-item" style="border: none;" ng-repeat="report in i.data_source">
-                        <a ng-click="redirectToTestCaseReport(report._id)">{{report._id}}</a>
-                        <span class="pull-right"  ng-class="{'label label-error': report.result === 'Fail','label label-success': report.result === 'Pass'}">{{report.result}}</span>
+                        <a ng-click="redirectToTestCaseReport(report._id)">{{report.name+report.data_source}}</a>
+                        <span class="pull-right"  ng-class="{'label label-error': !report.isPass,'label label-success': report.isPass}">{{report.isPass ? 'Pass' : 'Fail'}}</span>
                       </li>
                       </ul>
                     </div>

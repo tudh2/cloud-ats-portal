@@ -4,8 +4,9 @@
              <h3>{{getWord('Report Test Case Detail')}}</h3>
              <br>
              <div class="col-md-8">
-                 <h4>Test Case : <i>{{caseName}}</i></h4>
-                 <h4 style="color: red;">Fail </h4>
+                 <h4>Test Case : <i>{{case.name}}</i></h4>
+                 <h4 ng-if="case.isPass == true" style="color: blue;">Pass</h4>
+                 <h4 ng-if="case.isPass == false" style="color: red;">Fail</h4>
             </div>
         </div>
             
@@ -13,7 +14,7 @@
 			<div class="col-sm-12">
                 <div id="Test Case 1">	    
                     <div>
-                         <div id="data line 1" ng-if="dataSource.length" >
+                         <div id="data line 1" ng-if="case.dataSource.length" >
                          	 <label>Data Line : 1 </label>
                              <label style="color: red;">Fail </label>
                              <div>
@@ -53,8 +54,8 @@
                                      <td >{{step.name}}</td>
                                      <td >
                                          <ul>
-                                             <li ng-repeat="(key, val) in step.params[0]">
-                                                {{key}} : {{val}}
+                                             <li ng-repeat="param in step.params">
+                                                <p ng-repeat="(key, val) in param">{{key}} : {{val}}</p>
                                              </li>
                                          </ul>
                                      </td>
