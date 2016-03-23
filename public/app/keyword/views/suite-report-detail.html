@@ -2,27 +2,33 @@
 		<div class="report-page">
         <div class="border-div row">
           <h3>{{getWord('10 lastest reports of the suite')}}</h3>
-			     <div class="col-sm-12 clearfix">
-
-            <table class="table tbl-project-report">
-              <thead >
-                <tr>
-                  <th >{{getWord('#')}} </th>
-                  <th >{{getWord('Suite Name')}}</th>
-                  <th >{{getWord('Total Pass')}}</th>
-                  <th >{{getWord('Total Fail')}}</th>
-                  <th >{{getWord('Result')}}</th>
-                </tr>
-              </thead>
+			     <div class="col-sm-12">
+            <div class="col-sm-7">
+              <table class="table tbl-project-report">
+                <thead >
+                  <tr>
+                    <th >{{getWord('#')}} </th>
+                    <th >{{getWord('Suite Name')}}</th>
+                    <th >{{getWord('Total Pass')}}</th>
+                    <th >{{getWord('Total Fail')}}</th>
+                    <th >{{getWord('Result')}}</th>
+                  </tr>
+                </thead>
 
                 <tr ng-repeat="suite in suites track by $index">
                   <td>{{$index + 1}}</td>
-                  <td><span class="label label-info">{{suite.name}}</span></td>
+                  <td><a class="text-info" ng-click="goToJobReport(suite.jobId)">{{suite.name}}</a></td>
                   <td><span class="label label-success">{{suite.totalPass}}</span></td>
                   <td><span class='label label-error'>{{suite.totalFail}}</span></td>
                   <td><span  ng-class="{'label label-error': suite.totalFail, 'label label-success': !suite.totalFail}">{{suite.totalFail ? 'Fail' : 'Pass'}}</span></td>
                 </tr>
               </table>
+            </div>
+            <div class="col-sm-5">
+              <div id="chart">
+                
+              </div>
+            </div>
 			    </div>
         </div>
             
@@ -45,7 +51,7 @@
 
                 <tr ng-repeat="i in case_reports">
                   <td>{{i.stt}}</td>
-                  <td ng-if="!i.data_driven"><a ng-click="redirectToTestCaseReport(i.report._id)">{{i.name}}</a></td>
+                  <td ng-if="!i.data_driven"><a ng-click="redirectToTestCaseReport(i.data_source._id)">{{i.name}}</a></td>
                   <td  ng-if="i.data_driven">
                     <a data-toggle="collapse" data-target="#demo">{{i.name}}</a>
                     <div id="demo" class="collapse">

@@ -238,6 +238,22 @@ define(['keyword/module'], function(module) {
         }).error(function(data, status) {
           callback(data,status);
         });
+      },
+      lastestJobs : function(projectId, jobId, suiteId, suiteReportId, callback) {
+        var request = {
+          method: 'GET',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/report/'+ jobId + '/suite/'+suiteId+'/'+suiteReportId+'/lastest/jobs',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space'),
+          }
+        };
+
+        $http(request).success(function(data, status, headers) {
+          callback(data, status);
+        }).error(function(data, status) {
+          callback(data,status);
+        });
       }
     }
   }]);

@@ -52,7 +52,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
       });
 
       $scope.redirectToSuiteReport = function(suiteId, suiteReportId) {
-        console.log(suiteId);
         $state.go('app.keyword.report.suite', {'suiteId': suiteId, 'suiteReportId': suiteReportId});
       }
 
