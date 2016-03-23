@@ -7,7 +7,6 @@ define(['keyword/module', 'lodash', 'c3'], function (module, _, c3) {
     $scope.suiteId = $stateParams.suiteId;
     $scope.projectId = $stateParams.id;
     $scope.suiteReportId = $stateParams.suiteReportId;
-
     $scope.query = {
       'limit': 10,
       'current': 1,
