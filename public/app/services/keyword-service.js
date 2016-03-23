@@ -158,6 +158,22 @@ define(['keyword/module'], function(module) {
           callback(data,status);
         });
       },
+      updateStatus: function (projectId, job_id, callback) {
+        var request = {
+          method: 'GET',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/report/status/'+ job_id,
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space')
+          }
+        };
+
+        $http(request).success(function(data, status) {
+          callback(data, status);
+        }).error(function(data, status) {
+          callback(data,status);
+        });
+      },
       getListReport : function(projectId,index,callback) {
         var request = {
           method: 'GET',

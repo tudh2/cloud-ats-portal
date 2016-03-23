@@ -269,38 +269,41 @@ define(['keyword/module', 'lodash'], function (module, _) {
               var report = { 
                   created_date : undefined,  
                   job_id: undefined,
-                  total_test_case : 0,
-                  total_pass : 0,
-                  total_fail : 0 
+                  numberPassedSuite : 0,
+                  numberFailedSuite : 0,
+                  duration: 0 
               };
-            	KeywordService.getReport($scope.projectId, job._id, function (data, status) {
+            	KeywordService.updateStatus($scope.projectId, job._id, function (data, status) {
                 if(status === 404) return;
                 $scope.project.lastRunning = data.created_date;
                 report.created_date = data.created_date;
-                report.job_id = data.functional_job_id;
-                var suite_reports = JSON.parse(data.suite_reports);
-                _.forEach(suite_reports, function (suite) {
-                  report.total_test_case += suite.total_test_case;
-                  report.total_pass += suite.total_pass;
-                  report.total_fail += suite.total_fail;
+                report.jobId = data.jobId;
+                report.duration = data.duration;
+                report.stt = 1;
+                report.numberPassedSuite = data.numberPassedSuite;
+                report.numberFailedSuite = data.numberFailedSuite;
+
+                if (report.numberFailedSuite) {
+                  report.test_result = 'Fail';
+                } else report.test_result = 'Pass';
+
+                if ($scope.listReports.length === 10) {
+                  $scope.listReports.pop();
+                }
+                
+                _.forEach($scope.listReports, function (iter) {
+                  iter.stt = iter.stt + 1;
                 });
 
-                if (report.total_fail === 0) {
-                  report.test_result = 'Pass';
-                } else report.test_result = 'Fail';
-                  if (report.total_fail === 0) {
-                    report.test_result = 'Pass';
-                  } else report.test_result = 'Fail';
+                $scope.listReports.unshift(report);
 
-                  $scope.listReports.unshift(report);
-
-                  $.smallBox({
-                    title: $rootScope.getWord('Notification'),
-                    content: $rootScope.getWord('The job ') + job._id + $rootScope.getWord(' has completed.'),
-                    color: '#296191',
-                    iconSmall: 'fa fa-check bounce animated',
-                    timeout: 3000
-                  });
+                $.smallBox({
+                  title: $rootScope.getWord('Notification'),
+                  content: $rootScope.getWord('The job ') + job._id + $rootScope.getWord(' has completed.'),
+                  color: '#296191',
+                  iconSmall: 'fa fa-check bounce animated',
+                  timeout: 3000
+                });
   	          });
 
             }

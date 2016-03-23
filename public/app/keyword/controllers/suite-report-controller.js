@@ -26,7 +26,6 @@ define(['keyword/module', 'lodash', 'c3'], function (module, _, c3) {
 
     KeywordService.lastestJobs($scope.projectId, $scope.jobId, $scope.suiteId, $scope.suiteReportId, function (data, status) {
       $scope.suites = JSON.parse(data.suites);
-
       var numberOfPassedCase = data.numberOfPassedCase;
       var numberOfFailedCase = data.numberOfFailedCase;
       var chart = c3.generate({
