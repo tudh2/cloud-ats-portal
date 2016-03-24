@@ -1,54 +1,53 @@
 <div id="content">
-		<div class="report-page">
-            <div class="border-div row">
+	<div class="report-page">
+    <div class="border-div row">
 			<div class="col-sm-12 clearfix">
-                <div class="row">
-                    <div class="col-sm-6 ">
-                        <div class="col-sm-6">
-                          <div class="form-group">
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 ">
-                        <p class="functional-title col-sm-6 export-bar">
-                            {{getWord('Export to')}}:
-                            <i class="fa fa-file-word-o"></i>
-                            <span>{{getWord('Word')}}</span>
-                            <i class="fa fa-file-excel-o"></i>
-                            <span>{{getWord('Excel')}}</span>
-                            <i class="fa fa-file-pdf-o"></i>
-                            <span>{{getWord('PDF')}}</span>
-                        </p>
+        <div class="row">
+          <div class="col-sm-6 ">
+            <div class="col-sm-6">
+              <div class="form-group">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 ">
+            <p class="functional-title col-sm-6 export-bar">
+              {{getWord('Export to')}}:
+              <i class="fa fa-file-word-o"></i>
+              <span>{{getWord('Word')}}</span>
+              <i class="fa fa-file-excel-o"></i>
+              <span>{{getWord('Excel')}}</span>
+              <i class="fa fa-file-pdf-o"></i>
+              <span>{{getWord('PDF')}}</span>
+            </p>
 
-                        <button type="submit" class="btn btn-default pull-right" ng-click="redirectTo();" >{{getWord('Back to project detail')}}</button>
-                    </div>
-                </div>
+            <button type="submit" class="btn btn-default pull-right" ng-click="redirectTo();" >{{getWord('Back to project detail')}}</button>
+          </div>
+        </div>
 			</div>
         
 			<div class="col-sm-12 clearfix">
-				<!-- <div class="functional-report"></div> -->
 				<morris-stacked-bar-graph data-data="listSuiteReports" data-lang="lang"></morris-stacked-bar-graph>
 				<div class="chart-legend">
-						<div><div class="block-teal-color"></div> {{getWord('Pass')}}</div>
-						<div><div class="block-red-color"></div> {{getWord('Fail')}}</div>
-						<div><div class="block-orange-color"></div> {{getWord('Skip')}}</div> 
+					<div><div class="block-teal-color"></div> {{getWord('Pass')}}</div>
+					<div><div class="block-red-color"></div> {{getWord('Fail')}}</div>
+					<div><div class="block-orange-color"></div> {{getWord('Skip')}}</div> 
 				</div>
 			</div>
-           </div>
+    </div>
             
-			<div class="row table-container">
-				<div class="col-sm-12">
-				    <div class="col-md-6">
-				        <h3>{{getWord('Test Report')}}</h3>
-				    </div>
-		            <div class="col-md-6">
-				        <div class="execute-action-list">
-				        <a class="btn-border-line btnViewLog">{{getWord('View Log')}}</a>
-				        </div>
-				    </div>
-					<table class="table tbl-project-report">
-						<thead >
-                            <tr>
+		<div class="row table-container">
+			<div class="col-sm-12">
+		    <div class="col-md-6">
+		      <h3>{{getWord('Test Report')}}</h3>
+		    </div>
+          <div class="col-md-6">
+	        <div class="execute-action-list">
+	        <a class="btn-border-line btnViewLog">{{getWord('View Log')}}</a>
+	        </div>
+		    </div>
+				<table class="table tbl-project-report">
+					<thead >
+            <tr>
 							<th >{{getWord('Test Suite')}}</th>
 							<th class="text-center">{{getWord('Test Case')}}</th>
 							<th class="text-center">{{getWord('Pass')}}</th>
@@ -56,24 +55,20 @@
 							<th class="text-center">{{getWord('Skip')}}</th>
 							<th class="text-center">{{getWord('Duration(second)')}}</th>
 							<th class="text-center">{{getWord('Test Result')}}</th>
-                                </tr>
-						</thead>
-						<tr ng-repeat="suiteData in suiteReports">
-							
-							<td ><a ng-click="redirectToSuiteReport(suiteData.suiteId, suiteData._id)">{{suiteData.name}}</a></td>
-							<td class="text-right">{{suiteData.totalCase}}</td>
-							<td class="text-right" style="color: #00B4A1">{{suiteData.totalPass}}</td>
-							<td class="text-right" style="color: #ff5050">{{suiteData.totalFail}}</td>
-							<td class="text-right" style="color: #ffaa2a">{{suiteData.totalSkip}}</td>
-							<th class="text-center">{{suiteData.duration/1000}}</th>
-							<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail','label label-success': suiteData.test_result === 'Pass'}">{{getWord(suiteData.test_result)}}</span></td>
-						</tr>
-					</table>
-				</div>
-            </div>
-
-            <md-table-pagination md-limit="10" md-page="2" md-total="20" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
-
+            </tr>
+					</thead>
+					<tr ng-repeat="suiteData in suiteReports">
+						
+						<td ><a ng-click="redirectToSuiteReport(suiteData.suiteId, suiteData._id)">{{suiteData.name}}</a></td>
+						<td class="text-right">{{suiteData.totalCase}}</td>
+						<td class="text-right" style="color: #00B4A1">{{suiteData.totalPass}}</td>
+						<td class="text-right" style="color: #ff5050">{{suiteData.totalFail}}</td>
+						<td class="text-right" style="color: #ffaa2a">{{suiteData.totalSkip}}</td>
+						<th class="text-center">{{suiteData.duration/1000}}</th>
+						<td class="text-center"><span  ng-class="{'label label-error': suiteData.test_result === 'Fail','label label-success': suiteData.test_result === 'Pass'}">{{getWord(suiteData.test_result)}}</span></td>
+					</tr>
+				</table>
 			</div>
-		</div>
+    </div>
+	</div>
 </div>

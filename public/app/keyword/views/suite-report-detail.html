@@ -1,78 +1,77 @@
 <div id="content">
-		<div class="report-page">
-        <div class="border-div row">
-          <h3>{{getWord('10 lastest reports of the suite')}}</h3>
-			     <div class="col-sm-12">
-            <div class="col-sm-7">
-              <table class="table tbl-project-report">
-                <thead >
-                  <tr>
-                    <th >{{getWord('#')}} </th>
-                    <th >{{getWord('Suite Name')}}</th>
-                    <th >{{getWord('Total Pass')}}</th>
-                    <th >{{getWord('Total Fail')}}</th>
-                    <th >{{getWord('Result')}}</th>
-                  </tr>
-                </thead>
+	<div class="report-page">
+    <div class="border-div row">
+	    <div class="col-sm-12">
+        <div class="col-sm-7">
+          <h3>{{getWord('10 Lastest reports of the suite')}}</h3>
+          <table class="table tbl-project-report">
+            <thead >
+              <tr>
+                <th >{{getWord('#')}} </th>
+                <th >{{getWord('Suite Name')}}</th>
+                <th >{{getWord('Total Pass')}}</th>
+                <th >{{getWord('Total Fail')}}</th>
+                <th >{{getWord('Result')}}</th>
+              </tr>
+            </thead>
 
-                <tr ng-repeat="suite in suites track by $index">
-                  <td>{{$index + 1}}</td>
-                  <td><a class="text-info" ng-click="goToJobReport(suite.jobId)">{{suite.name}}</a></td>
-                  <td><span class="label label-success">{{suite.totalPass}}</span></td>
-                  <td><span class='label label-error'>{{suite.totalFail}}</span></td>
-                  <td><span  ng-class="{'label label-error': suite.totalFail, 'label label-success': !suite.totalFail}">{{suite.totalFail ? 'Fail' : 'Pass'}}</span></td>
-                </tr>
-              </table>
-            </div>
-            <div class="col-sm-5">
-              <div id="chart">
-                
-              </div>
-            </div>
-			    </div>
+            <tr ng-repeat="suite in suites track by $index">
+              <td>{{$index + 1}}</td>
+              <td><a class="text-info" ng-click="goToJobReport(suite.jobId)">{{suite.name}}</a></td>
+              <td><span class="label label-success">{{suite.totalPass}}</span></td>
+              <td><span class='label label-error'>{{suite.totalFail}}</span></td>
+              <td><span  ng-class="{'label label-error': suite.totalFail, 'label label-success': !suite.totalFail}">{{suite.totalFail ? 'Fail' : 'Pass'}}</span></td>
+            </tr>
+          </table>
         </div>
+        <div class="col-sm-5">
+          <h3 class="text-center">{{getWord('Lastest running of the project')}}</h3>
+          <div id="chart">
             
-			<div class="row table-container">
-				<div class="col-sm-12">
-          <h3>{{getWord('Report Suite Detail')}}</h3>
-          <div id="Test Case 1">
-           	<div >
-                <label>Test Suite Name </label>
-            </div>
-            <div>
-              <table id="suiteID" class="table tbl-project-report">
-			          <thead >
-                  <tr>
-					          <th >{{getWord('#')}} </th>
-					          <th >{{getWord('Test Case')}}</th>
-					          <th >{{getWord('Result')}}</th>
-                  </tr>
-			          </thead>
-
-                <tr ng-repeat="i in case_reports">
-                  <td width="10%">{{i.stt}}</td>
-                  <td ng-if="!i.data_driven" width="70%"><a ng-click="redirectToTestCaseReport(i.data_source._id)">{{i.name}}</a></td>
-                  <td  ng-if="i.data_driven" width="70%">
-                    <a data-toggle="collapse" data-target="#demo">{{i.name}}</a>
-                    <div id="demo" class="collapse">
-                      <ul class="list-group">
-                        <li class="list-group-item" style="border: none;" ng-repeat="report in i.data_source">
-                          <a ng-click="redirectToTestCaseReport(report._id)">{{report.name+report.data_source}}</a>
-                          <span class="pull-right"  ng-class="{'label label-error': !report.isPass,'label label-success': report.isPass}">{{report.isPass ? 'Pass' : 'Fail'}}</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </td>
-                  <td width="20%"><span  ng-class="{'label label-error': i.result === 'Fail','label label-success': i.result === 'Pass'}">{{i.result}}</span></td>
+          </div>
+        </div>
+	    </div>
+    </div>
+            
+		<div class="row table-container">
+			<div class="col-sm-12">
+        <h3>{{getWord('Report Suite Detail')}}</h3>
+        <div id="Test Case 1">
+         	<div >
+            <label>Test Suite Name </label>
+          </div>
+          <div>
+            <table id="suiteID" class="table tbl-project-report">
+		          <thead >
+                <tr>
+				          <th >{{getWord('#')}} </th>
+				          <th >{{getWord('Test Case')}}</th>
+				          <th >{{getWord('Result')}}</th>
                 </tr>
-		          </table>
-            </div>
+		          </thead>
+
+              <tr ng-repeat="i in case_reports">
+                <td width="10%">{{i.stt}}</td>
+                <td ng-if="!i.data_driven" width="70%"><a ng-click="redirectToTestCaseReport(i.data_source._id)">{{i.name}}</a></td>
+                <td  ng-if="i.data_driven" width="70%">
+                  <a data-toggle="collapse" data-target="#demo">{{i.name}}</a>
+                  <div id="demo" class="collapse">
+                    <ul class="list-group">
+                      <li class="list-group-item" style="border: none;" ng-repeat="report in i.data_source">
+                        <a ng-click="redirectToTestCaseReport(report._id)">{{report.name+report.data_source}}</a>
+                        <span class="pull-right"  ng-class="{'label label-error': !report.isPass,'label label-success': report.isPass}">{{report.isPass ? 'Pass' : 'Fail'}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+                <td width="20%"><span  ng-class="{'label label-error': i.result === 'Fail','label label-success': i.result === 'Pass'}">{{i.result}}</span></td>
+              </tr>
+	          </table>
+          </div>
         </div>
       </div>
     </div>
-    <md-table-pagination md-limit="10" md-page="query.current" md-total="{{query.total}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
-
+    <md-table-pagination md-limit="10" md-page="query.current" md-total="{{query.total}}" md-on-paginate="onPaginate" md-page-select md-options="[10]"></md-table-pagination>
   </div>
 </div>
 

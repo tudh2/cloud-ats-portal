@@ -17,10 +17,10 @@ define(['keyword/module', 'lodash', 'c3'], function (module, _, c3) {
       KeywordService.suiteReports($scope.projectId, $scope.jobId, $scope.suiteId, $scope.suiteReportId, index, function (data, status) {
         $scope.case_reports = JSON.parse(data.reports);
         $scope.query.total = data.totalCase;
-
         _.forEach($scope.case_reports, function (obj) {
           obj.data_source = JSON.parse(obj.data_source);
         });
+
       });
     }
 
@@ -41,7 +41,8 @@ define(['keyword/module', 'lodash', 'c3'], function (module, _, c3) {
             Fail : '#ff5050'
           },
           type: 'pie',
-          onclick: function (d, i) {},
+          onclick: function (d, i) {
+          },
           onmouseover: function (d, i) {},
           onmouseout: function (d, i) {}
         }

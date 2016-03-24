@@ -1,119 +1,117 @@
 <div id="content">
 	<div class="report-page">
-        <div class="border-div row">
-             <h3>{{getWord('Report Test Case Detail')}}</h3>
-             <br>
-             <div class="col-md-8">
-                 <h4>Test Case : <i>{{case.name}}</i></h4>
-                 <h4 ng-if="case.isPass == true" style="color: blue;">Pass</h4>
-                 <h4 ng-if="case.isPass == false" style="color: red;">Fail</h4>
-            </div>
-        </div>
+    <div class="border-div row">
+      <h3>{{getWord('Report Test Case Detail')}}</h3>
+      <br>
+      <div class="col-md-8">
+        <h4>Test Case : <i>{{case.name}}</i></h4>
+        <h4 ng-if="case.isPass == true" style="color: blue;">Pass</h4>
+        <h4 ng-if="case.isPass == false" style="color: red;">Fail</h4>
+      </div>
+    </div>
             
 		<div class="row table-container">
 			<div class="col-sm-12">
-                <div id="Test Case 1">	    
-                    <div>
-                         <div id="data line 1" ng-if="case.dataSource.length" >
-                         	 <label>Data Line : 1 </label>
-                             <label style="color: red;">Fail </label>
-                             <div>
-                             <table class="table tbl-project-report" ng-repeat="(key, val) in dataSource[0] track by $index">
-						         <thead >
-                                 <tr>
-							         <th >{{getWord('#')}} </th>
-							         <th >{{key}}</th>
-						         </thead>
-						         <tr >
-							         <td >{{$index+1}}</td>
-							         <td >{{val}}</td>
-						         </tr>
-					         </table>
-                         	
-                             </div>
-                         </div>
-                             <md-button class="md-icon-button">
-                             <ng-md-icon icon="expand_more"></ng-md-icon>
-                             </md-button>
-                             <label>Script </label>
-                             <div>
-                             <table id="TestcaseID" class="table tbl-project-report">
-                                 <thead >
-                                 <tr>
-                                     <th >{{getWord('#')}} </th>
-                                     <th >{{getWord('KeyWord')}}</th>
-                                     <th >{{getWord('Params')}}</th>
-                                     <th >{{getWord('Expected')}}</th>
-                                     <th >{{getWord('Actual')}}</th>
-                                     <th >{{getWord('Result')}}</th>
-                                     <th >{{getWord('Capture')}}</th>
-                                 </tr>
-                                 </thead>
-                                 <tr ng-repeat="step in listStep track by $index">
-                                     <td >{{$index+1}}</td>
-                                     <td >{{step.name}}</td>
-                                     <td >
-                                         <ul>
-                                             <li ng-repeat="param in step.params">
-                                                <p ng-repeat="(key, val) in param">{{key}} : {{val}}</p>
-                                             </li>
-                                         </ul>
-                                     </td>
-                                     <td>avc</td>
-                                     <td>avc</td>
-                                     <td ng-if="step.isPass == true" style="color: blue;">Pass</td>
-                                     <td ng-if="step.isPass != true" style="color: red;">Fail</td>
-                                     <td ><a href="">image1.png</a></td>
-                                 </tr>
-                             </table>
-                             </div>
-                          <div id="out-put">
-                             <md-button class="md-icon-button">
-                             <ng-md-icon icon="expand_less"></ng-md-icon>
-                             </md-button>
-                         	 <label>Output/Exceptions</label>
-                             <div>
-                             <table id="TestcaseID" class="table tbl-project-report">
-                                 <thead >
-                                 <tr>
-                                     <th >{{getWord('Exception')}} </th>
-                                 </tr>
-                                 </thead>
-                                 <tr >
-                                     <td >Failed tests: 
-org.ats.generated.Invitation.AddSchoolYears190860fd(org.ats.generated.Invitation)
-  Run 1: PASS
-  Run 2: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element...
-  Run 3: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element...
-
-  Invitation.CancelConfirm74ad20a9:1035 » NoSuchElement Unable to locate element...
-org.ats.generated.Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9(org.ats.generated.Invitation)
-  Run 1: PASS
-  Run 2: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
-  Run 3: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
-  Run 4: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
-
-  Invitation.ClickDeletePupilButtonAndAsserta4eba7e7:724 » NoSuchElement Unable ...
-  Invitation.ClickEditPupilWithIdbf9e281e:670 » NoSuchElement Unable to locate e...
-  Invitation.EditPupilAndAssert3fb7ad3b:678 » NoSuchElement Unable to locate ele...
-  Invitation.FindDeletePupilButton19f061db:716 » NoSuchElement Unable to locate ...
-org.ats.generated.Invitation.VerifyPupilList47881c74(org.ats.generated.Invitation)
-  Run 1: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-  Run 2: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-  Run 3: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-  Run 4: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-
-
-</td>
-                                 </tr>
-                             </table>
-                            
-                             </div>
-                         </div>
-                    </div>
+        <div id="Test Case 1">	    
+          <div>
+            <div id="data line 1" ng-if="case.dataSource.length" >
+             	<label>Data Line : 1 </label>
+              <label style="color: red;">Fail </label>
+              <div>
+                <table class="table tbl-project-report" ng-repeat="(key, val) in dataSource[0] track by $index">
+                  <thead >
+                    <tr>
+                      <th >{{getWord('#')}} </th>
+                      <th >{{key}}</th>
+                    </tr>
+                  </thead>
+                  <tr >
+                    <td >{{$index+1}}</td>
+                    <td >{{val}}</td>
+                  </tr>
+                </table>
+             	
+              </div>
+            </div>
+            <md-button class="md-icon-button">
+            <ng-md-icon icon="expand_more"></ng-md-icon>
+            </md-button>
+            <label>Script </label>
+            <div>
+              <table id="TestcaseID" class="table tbl-project-report">
+                <thead >
+                  <tr>
+                    <th >{{getWord('#')}} </th>
+                    <th >{{getWord('KeyWord')}}</th>
+                    <th >{{getWord('Params')}}</th>
+                    <th >{{getWord('Expected')}}</th>
+                    <th >{{getWord('Actual')}}</th>
+                    <th >{{getWord('Result')}}</th>
+                    <th >{{getWord('Capture')}}</th>
+                  </tr>
+                </thead>
+                <tr ng-repeat="step in listStep track by $index">
+                  <td >{{$index+1}}</td>
+                  <td >{{step.name}}</td>
+                  <td >
+                    <ul>
+                      <li ng-repeat="param in step.params">
+                        <p ng-repeat="(key, val) in param">{{key}} : {{val}}</p>
+                      </li>
+                    </ul>
+                  </td>
+                  <td>avc</td>
+                  <td>avc</td>
+                  <td ng-if="step.isPass == true" style="color: blue;">Pass</td>
+                  <td ng-if="step.isPass != true" style="color: red;">Fail</td>
+                  <td ><a href="">image1.png</a></td>
+                </tr>
+             </table>
                </div>
-           </div>
+            <div id="out-put">
+              <md-button class="md-icon-button">
+              <ng-md-icon icon="expand_less"></ng-md-icon>
+              </md-button>
+           	  <label>Output/Exceptions</label>
+              <div>
+              <table id="TestcaseID" class="table tbl-project-report">
+                <thead >
+                  <tr>
+                    <th >{{getWord('Exception')}} </th>
+                  </tr>
+                </thead>
+                <tr >
+                  <td >Failed tests: 
+org.ats.generated.Invitation.AddSchoolYears190860fd(org.ats.generated.Invitation)
+Run 1: PASS
+Run 2: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element...
+Run 3: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element...
+
+Invitation.CancelConfirm74ad20a9:1035 » NoSuchElement Unable to locate element...
+org.ats.generated.Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9(org.ats.generated.Invitation)
+Run 1: PASS
+Run 2: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
+Run 3: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
+Run 4: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
+
+Invitation.ClickDeletePupilButtonAndAsserta4eba7e7:724 » NoSuchElement Unable ...
+Invitation.ClickEditPupilWithIdbf9e281e:670 » NoSuchElement Unable to locate e...
+Invitation.EditPupilAndAssert3fb7ad3b:678 » NoSuchElement Unable to locate ele...
+Invitation.FindDeletePupilButton19f061db:716 » NoSuchElement Unable to locate ...
+org.ats.generated.Invitation.VerifyPupilList47881c74(org.ats.generated.Invitation)
+Run 1: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
+Run 2: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
+Run 3: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
+Run 4: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
   </div>
 </div>
 
