@@ -8,10 +8,6 @@ define(['projects/module'], function (module) {
 
     $scope.functionalType = 'new';
 
-    $scope.showAction = {
-      status:false
-    };
-
     $scope.delay = {
       value:0
     };
@@ -49,9 +45,8 @@ define(['projects/module'], function (module) {
         switch ($scope.type) {
           case 'functional' :
             if($scope.functionalType === "new") {
-              var showAction = $scope.showAction.status;
               var valueDelay = $scope.delay.value;
-              KeywordService.create($scope.name, showAction, valueDelay, function(projectId) {
+              KeywordService.create($scope.name, valueDelay, function(projectId) {
                 $state.go('app.keyword', { id : projectId });
               });
             } else if($scope.functionalType === "upload"){

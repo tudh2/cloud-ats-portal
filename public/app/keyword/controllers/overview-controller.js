@@ -18,9 +18,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
         'current': 1,
         'total': 0
       };
-      $scope.showAction = {
-        status:false
-      };
 
       $scope.delay = {
         value:0
@@ -154,7 +151,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.edit = function () {
         loadEditModal();
         $scope.newName = angular.copy($scope.project.name);
-        $scope.showAction.status = angular.copy($scope.project.show_action);
         $scope.delay.value = angular.copy($scope.project.value_delay);
       }
 
@@ -185,9 +181,8 @@ define(['keyword/module', 'lodash'], function (module, _) {
           return;
         }
 
-        var showAction = $scope.showAction.status;
         var valueDelay = $scope.delay.value;
-        KeywordService.update($scope.projectId, name, showAction, valueDelay, function (data, status) {
+        KeywordService.update($scope.projectId, name, valueDelay, function (data, status) {
 
           switch (status) {
             case 304:
@@ -208,7 +203,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 timeout: 3000
               });
               $scope.project.name = name;
-              $scope.project.show_action = showAction;
               $scope.project.value_delay = valueDelay;
               break;
             default:

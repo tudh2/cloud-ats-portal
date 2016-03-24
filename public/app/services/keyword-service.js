@@ -74,7 +74,7 @@ define(['keyword/module'], function(module) {
         });
       },
 
-      create: function(name, showAction, valueDelay,callback) {
+      create: function(name, valueDelay,callback) {
         var request = {
           method: 'POST',
           url: appConfig.RestEntry + '/api/v1/project/keyword',
@@ -84,7 +84,6 @@ define(['keyword/module'], function(module) {
           },
           data: {
             name: name,
-            showAction: showAction,
             valueDelay: valueDelay
           }
         };
@@ -95,7 +94,7 @@ define(['keyword/module'], function(module) {
 
         });
       },
-      update: function (id, name, showAction, valueDelay, callback) {
+      update: function (id, name, valueDelay, callback) {
         var request = {
           method: 'PUT',
           url: appConfig.RestEntry + '/api/v1/project/keyword',
@@ -106,7 +105,6 @@ define(['keyword/module'], function(module) {
           data: {
             name: name,
             id: id,
-            showAction: showAction,
             valueDelay: valueDelay
           }
         };
