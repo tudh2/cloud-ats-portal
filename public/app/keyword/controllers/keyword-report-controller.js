@@ -55,5 +55,30 @@ define(['keyword/module', 'lodash'], function (module, _) {
         $state.go('app.keyword.report.suite', {'suiteId': suiteId, 'suiteReportId': suiteReportId});
       }
 
+      $scope.redirectToOverview = function () {
+        $state.go('app.keyword', {'id': $scope.projectId});
+      }
+
+      var loadModal = function() {
+        var $modal = $('#project-log');
+
+        //clear modal content
+        $modal.html('');
+
+        $templateRequest('app/keyword/views/overview-modal-content.tpl.html').then(function(template) {
+          $modal.html($compile(template)($scope));
+          $modal.modal('show');
+        });
+      };
+
+      $scope.project = {};
+      $scope.viewLog = function () {
+        KeywordService.jobLog($scope.projectId, $scope.jobId, function (data, status) {
+          if (status == 200) {
+            $scope.project.log = data;
+          }
+          loadModal();
+        });
+      }
   }]);
 });

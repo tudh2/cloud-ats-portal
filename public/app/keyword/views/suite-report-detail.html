@@ -56,12 +56,16 @@
                 <td  ng-if="i.data_driven" width="70%">
                   <a data-toggle="collapse" data-target="#demo">{{i.name}}</a>
                   <div id="demo" class="collapse">
-                    <ul class="list-group">
-                      <li class="list-group-item" style="border: none;" ng-repeat="report in i.data_source">
-                        <a ng-click="redirectToTestCaseReport(report._id)">{{report.name+report.data_source}}</a>
-                        <span class="pull-right"  ng-class="{'label label-error': !report.isPass,'label label-success': report.isPass}">{{report.isPass ? 'Pass' : 'Fail'}}</span>
-                      </li>
-                    </ul>
+                    <table width="100%" class="fixed-table">
+                      <tr ng-repeat="report in i.data_source" class="margin-bottom-10 padding-10">
+                        <td width="80%" class="pr-name padding-5">
+                          <a ng-click="redirectToTestCaseReport(report._id)">{{report.name+report.data_source}}</a>
+                        </td>
+                        <td width="20%" class="padding-5">
+                          <span class="pull-right"  ng-class="{'label label-error': !report.isPass,'label label-success': report.isPass}">{{report.isPass ? 'Pass' : 'Fail'}}</span>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
                 </td>
                 <td width="20%"><span  ng-class="{'label label-error': i.result === 'Fail','label label-success': i.result === 'Pass'}">{{i.result}}</span></td>
