@@ -5,8 +5,6 @@
       <br>
       <div class="col-md-8">
         <h4>Test Case : <i>{{case.name}}</i></h4>
-        <h4 ng-if="case.isPass == true" style="color: blue;">Pass</h4>
-        <h4 ng-if="case.isPass == false" style="color: red;">Fail</h4>
       </div>
     </div>
             
@@ -14,21 +12,19 @@
 			<div class="col-sm-12">
         <div id="Test Case 1">	    
           <div>
-            <div id="data line 1" ng-if="case.dataSource.length" >
-             	<label>Data Line : 1 </label>
-              <label style="color: red;">Fail </label>
+            <div id="data line 1" ng-if="case.data_source.length" >
+              <h4 ng-if="case.isPass == true" style="color: blue;">Pass</h4>
+              <h4 ng-if="case.isPass == false" style="color: red;">Fail</h4>
               <div>
-                <table class="table tbl-project-report" ng-repeat="(key, val) in dataSource[0] track by $index">
-                  <thead >
+                <table class="table tbl-project-report">
                     <tr>
-                      <th >{{getWord('#')}} </th>
-                      <th >{{key}}</th>
+                      <th width="40%">Variable Name</th>
+                      <th >Value</th>
                     </tr>
-                  </thead>
-                  <tr >
-                    <td >{{$index+1}}</td>
-                    <td >{{val}}</td>
-                  </tr>
+                    <tr ng-repeat="(key, val) in case.data_source[0] track by $index">
+                      <td >{{key}}</td>
+                      <td >{{val}}</td>
+                    </tr>  
                 </table>
              	
               </div>

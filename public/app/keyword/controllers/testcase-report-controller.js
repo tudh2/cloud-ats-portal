@@ -11,7 +11,11 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
     KeywordService.getReportCase($scope.projectId, $scope.jobId, $scope.caseReportId, function(data) {
           $scope.case = JSON.parse(data.case);
+          if ($scope.case.data_source) {
+            $scope.case.data_source = JSON.parse($scope.case.data_source);
+          }
           $scope.listStep = data.listStep;
+          console.log($scope.case);
       });
 
   }]);
