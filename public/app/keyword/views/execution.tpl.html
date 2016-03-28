@@ -35,7 +35,7 @@
           <div class="col-sm-6 select-version">
             <p>{{getWord('Select Version')}}</p>
             <div class="form-group">
-              <select class="form-control" ng-model="project.version">
+              <select class="form-control" ng-model="project.browserVersion">
                 <option selected="selected">41.0.2</option>
                 <option>38.3.0esr</option>
                 <option>26.0</option>
@@ -68,6 +68,28 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-sm-12 browser">
+          <div class="col-sm-6">
+            <div class="smart-form" >
+              <label class="radio state-success">
+                <input name="browser" type="radio" ng-model="project.browser" value="ie">
+                <i class="choose_browse"></i><img ng-src="/styles/img/ie.png" width="40px;">
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-6 select-version">
+            <p>{{getWord('Select Version')}}</p>
+            <div class="form-group">
+              <select class="form-control">
+                <option selected="selected">11</option>
+              </select>
+            </div>
+          </div>
+          </div>
+        </div>
+
       </div>
       <div class="col-sm-3 browser-pool choose-browser">
         <p>3.{{getWord('VERSION SELENIUM')}}</p>
@@ -82,7 +104,7 @@
           <div class="col-sm-6 select-version">
             <p>{{getWord('Select Version')}}</p>
             <div class="form-group">
-              <select class="form-control" ng-model="project.versionSelenium">
+              <select class="form-control" ng-model="project.seleniumVersion">
                 <option selected="selected">2.48.2</option>
                 <option>2.47.1</option>
                 <option>2.46.0</option>
@@ -104,7 +126,7 @@
           <div class="col-sm-6">
             <div class="smart-form">
               <label class="radio state-success">
-                <input name="os" type="radio" checked="">
+                <input name="os" type="radio" checked="checked" ng-model="project.os" value="ubuntu">
                 <i class="choose_browse"></i>
                 <img ng-src="/styles/img/ubuntu.png" width="40px;">
               </label>
@@ -112,6 +134,22 @@
           </div>
           <div class="col-sm-6">
             <p>Ubuntu 14.04 64bit</p>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+          <div class="col-sm-6">
+            <div class="smart-form">
+              <label class="radio state-success">
+                <input name="os" type="radio" disabled="disabled" ng-model="project.os" value="windows">
+                <i class="choose_browse"></i>
+                <img ng-src="/styles/img/window.jpg" width="40px;">
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <p>Windows Server 2012</p>
           </div>
           </div>
         </div>

@@ -84,7 +84,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
           selected.push(sel._id);
         });
 
-        var options = {};
+        var options = $scope.project.lastJobOptions;
         KeywordService.run($scope.projectId, selected, options, function (data, status) {
           switch (status) {
             case 201:

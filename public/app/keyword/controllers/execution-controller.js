@@ -32,8 +32,24 @@ define(['keyword/module'], function (module) {
       KeywordService.get($scope.projectId, function(project) {
         $scope.project = project;
         $scope.project.browser = "firefox";
-        $scope.project.version = "41.0.2";
-        $scope.project.versionSelenium = "2.48.2";
+        $scope.project.browserVersion = "41.0.2";
+        $scope.project.seleniumVersion = "2.48.2";
+        $scope.project.os = "ubuntu";
+        
+        $scope.$watch('project.browser', function(newValue, oldValue, scope) {
+          if (newValue === 'ie') scope.project.os = "windows";
+          else scope.project.os = "ubuntu";
+        });
+
+        $scope.$watch('project.os', function(newValue, oldValue, scope) {
+          if (newValue === 'windows' && scope.project.browser !== 'ie') {
+            scope.project.os = 'ubuntu';
+          }
+          if (newValue === 'ubuntu' && scope.project.browser === 'ie') {
+            scope.project.os = 'windows'; 
+          }
+        });
+
         checkProjectStatus();
       });
 
@@ -62,8 +78,8 @@ define(['keyword/module'], function (module) {
 
         var options = {
           browser: $scope.project.browser,
-          version: $scope.project.version,
-          versionSelenium : $scope.project.versionSelenium
+          browser_version: $scope.project.browserVersion,
+          selenium_version : $scope.project.seleniumVersion
         };
         KeywordService.run($scope.projectId, selected, options, function (data, status) {
           switch (status) {
