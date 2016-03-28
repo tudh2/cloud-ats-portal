@@ -69,7 +69,7 @@
           <th>{{getWord('Suites Pass')}}</th>
           <th>{{getWord('Suites Fail')}}</th>
           <th>{{getWord('Project Result')}}</th>
-          <th>{{getWord('Duration')}}</th>
+          <th>{{getWord('Duration(s)')}}</th>
           <th>{{getWord('Create By')}}</th>
           <th>{{getWord('Download Resource')}}</th>
         </tr>
@@ -83,7 +83,7 @@
             <td>{{rep.numberFailedSuite}}</td>
             <td><span ng-class="{'label label-error': rep.test_result === 'Fail',
             'label label-success': rep.test_result === 'Pass'}">{{getWord(rep.test_result)}}</span></td>
-            <td>{{rep.duration}} seconds</td>
+            <td>{{rep.duration}}</td>
             <td>{{project.creator._id}}</td>
             <td><a class = 'btn-border-line btnViewLog btn-download' 
             download='final-result.tar.gz' ng-click="downloadResult(project._id,rep.jobId)">{{getWord('Click Here')}}</a></td>
