@@ -284,6 +284,23 @@ define(['keyword/module'], function(module) {
         }).error(function(data, status) {
           callback(data,status);
         });
+      },
+      showImage : function (projectId, jobId, suiteId, suiteReportId, caseReportId, callback) {
+        var request = {
+          method: 'GET',
+          responseType: "arraybuffer",
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/report/'+ jobId + '/suite/'+suiteId+'/'+suiteReportId+'/case/'+caseReportId+'/image',
+          headers: {
+            'X-AUTH-TOKEN': $cookies.get('authToken'),
+            'X-SPACE': $cookies.get('space'),
+          }
+        };
+
+        $http(request).success(function(data, status, headers) {
+          callback(data, status);
+        }).error(function(data, status) {
+          callback(data,status);
+        });
       }
     }
   }]);

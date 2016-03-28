@@ -40,8 +40,6 @@
                     <th >{{getWord('#')}} </th>
                     <th >{{getWord('KeyWord')}}</th>
                     <th >{{getWord('Params')}}</th>
-                    <th >{{getWord('Expected')}}</th>
-                    <th >{{getWord('Actual')}}</th>
                     <th >{{getWord('Result')}}</th>
                     <th >{{getWord('Capture')}}</th>
                   </tr>
@@ -56,14 +54,13 @@
                       </li>
                     </ul>
                   </td>
-                  <td>avc</td>
-                  <td>avc</td>
                   <td ng-if="step.isPass == true" style="color: blue;">Pass</td>
                   <td ng-if="step.isPass != true" style="color: red;">Fail</td>
                   <td ><a href="">image1.png</a></td>
                 </tr>
              </table>
-               </div>
+            </div>
+            <a ng-if="case.hasImage" ng-click="showImage()">Show image</a>
             <div id="out-put">
               <md-button class="md-icon-button">
               <ng-md-icon icon="expand_less"></ng-md-icon>
@@ -103,6 +100,9 @@ Run 4: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
                   </tr>
                 </table>
               </div>
+            </div>
+            <div class="modal fade" id="image-case">
+              
             </div>
           </div>
         </div>
