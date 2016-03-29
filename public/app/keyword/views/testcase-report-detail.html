@@ -1,7 +1,7 @@
 <div id="content">
 	<div class="report-page">
     <div class="border-div row">
-      <h4><i>{{case.name}}</i>
+      <h4><strong>{{case.name}}</strong>
       <span ng-class="{'label label-error': !case.isPass,'label label-success': case.isPass}">{{case.isPass ? 'Pass' : 'Fail'}}</span></h4>
     </div>
             
@@ -42,8 +42,8 @@
                       </li>
                     </ul>
                   </td>
-                  <td ng-if="step.isPass == true" style="color: blue;">Pass</td>
-                  <td ng-if="step.isPass != true" style="color: red;">Fail</td>
+                  <td ng-if="step.isPass == true"><span class="label label-success">Pass</span></td>
+                  <td ng-if="step.isPass != true"><span class="label label-error">Fail</span></td>
                   <td ><a ng-if="case.hasImage && $index === (listStep.length -1)" ng-click="showImage()">Show image</a></td>
                 </tr>
              </table>
