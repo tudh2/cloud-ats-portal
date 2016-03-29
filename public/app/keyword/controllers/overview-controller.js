@@ -22,6 +22,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
       $scope.delay = {
         value:0
       };
+      $scope.listReports = [];
       
       KeywordService.get($scope.projectId, function(response) {
         $scope.project = response;
@@ -269,6 +270,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
               };
             	KeywordService.updateStatus($scope.projectId, job._id, function (data, status) {
                 if(status === 404) return;
+                $scope.project.log = data.log;
                 $scope.project.lastRunning = data.created_date;
                 report.created_date = data.created_date;
                 report.jobId = data.jobId;
