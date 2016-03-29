@@ -21,6 +21,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
         $scope.case.data_source = JSON.parse($scope.case.data_source);
       }
       $scope.listStep = data.listStep;
+      $scope.skips = $scope.case.skipped_steps;
     });
 
     var loadModal = function() {

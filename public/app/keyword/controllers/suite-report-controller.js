@@ -20,7 +20,6 @@ define(['keyword/module', 'lodash', 'c3'], function (module, _, c3) {
         _.forEach($scope.case_reports, function (obj) {
           obj.data_source = JSON.parse(obj.data_source);
         });
-
       });
     }
 

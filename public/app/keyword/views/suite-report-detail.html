@@ -50,12 +50,12 @@
                 </tr>
 		          </thead>
 
-              <tr ng-repeat="i in case_reports">
+              <tr ng-repeat="i in case_reports track by $index">
                 <td width="10%">{{i.stt}}</td>
                 <td ng-if="!i.data_driven" width="70%"><a ng-click="redirectToTestCaseReport(i.data_source._id)">{{i.name}}</a></td>
                 <td  ng-if="i.data_driven" width="70%">
-                  <a data-toggle="collapse" data-target="#demo">{{i.name}}</a>
-                  <div id="demo" class="collapse">
+                  <a data-toggle="collapse" data-target="{{'#'+$index}}">{{i.name}}</a>
+                  <div id="{{$index}}" class="collapse">
                     <table width="100%" class="fixed-table">
                       <tr ng-repeat="report in i.data_source" class="margin-bottom-10 padding-10">
                         <td width="80%" class="pr-name padding-5">

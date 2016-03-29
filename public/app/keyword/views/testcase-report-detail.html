@@ -1,38 +1,25 @@
 <div id="content">
 	<div class="report-page">
     <div class="border-div row">
-      <h3>{{getWord('Report Test Case Detail')}}</h3>
-      <br>
-      <div class="col-md-8">
-        <h4>Test Case : <i>{{case.name}}</i></h4>
-      </div>
+      <h4><i>{{case.name}}</i> <span ng-class="{'label label-success' : case.isPass == true, 'label label-error' : 'case.isPass == false'}">{{case.isPass ? 'Pass' : 'Fail'}}</span></h4>
     </div>
             
 		<div class="row table-container">
 			<div class="col-sm-12">
         <div id="Test Case 1">	    
-          <div>
             <div id="data line 1" ng-if="case.data_source.length" >
-              <h4 ng-if="case.isPass == true" style="color: blue;">Pass</h4>
-              <h4 ng-if="case.isPass == false" style="color: red;">Fail</h4>
-              <div>
-                <table class="table tbl-project-report">
-                    <tr>
-                      <th width="40%">Variable Name</th>
-                      <th >Value</th>
-                    </tr>
-                    <tr ng-repeat="(key, val) in case.data_source[0] track by $index">
-                      <td >{{key}}</td>
-                      <td >{{val}}</td>
-                    </tr>  
-                </table>
-             	
-              </div>
+              <table class="table tbl-project-report">
+                  <tr>
+                    <th width="40%">Variable Name</th>
+                    <th >Value</th>
+                  </tr>
+                  <tr ng-repeat="(key, val) in case.data_source[0] track by $index">
+                    <td >{{key}}</td>
+                    <td >{{val}}</td>
+                  </tr>  
+              </table>
             </div>
-            <md-button class="md-icon-button">
-            <ng-md-icon icon="expand_more"></ng-md-icon>
-            </md-button>
-            <label>Script </label>
+            <span class="label label-primary">Script </span>
             <div>
               <table id="TestcaseID" class="table tbl-project-report">
                 <thead >
@@ -56,56 +43,43 @@
                   </td>
                   <td ng-if="step.isPass == true" style="color: blue;">Pass</td>
                   <td ng-if="step.isPass != true" style="color: red;">Fail</td>
-                  <td ><a href="">image1.png</a></td>
+                  <td ><a ng-if="case.hasImage && $index === (listStep.length -1)" ng-click="showImage()">Show image</a></td>
                 </tr>
              </table>
             </div>
-            <a ng-if="case.hasImage" ng-click="showImage()">Show image</a>
-            <div id="out-put">
-              <md-button class="md-icon-button">
-              <ng-md-icon icon="expand_less"></ng-md-icon>
-              </md-button>
-           	  <label>Output/Exceptions</label>
-              <div>
-              <table id="TestcaseID" class="table tbl-project-report">
+            <div ng-if="skips.length > 0">
+              <span class="label label-danger">Skipped steps</span>
+              <table class="table tbl-project-report">
                 <thead >
                   <tr>
-                    <th >{{getWord('Exception')}} </th>
+                    <th >{{getWord('#')}} </th>
+                    <th >{{getWord('KeyWord')}}</th>
+                    <th >{{getWord('Params')}}</th>
                   </tr>
                 </thead>
-                <tr >
-                  <td >Failed tests: 
-org.ats.generated.Invitation.AddSchoolYears190860fd(org.ats.generated.Invitation)
-Run 1: PASS
-Run 2: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element...
-Run 3: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element...
-
-Invitation.CancelConfirm74ad20a9:1035 » NoSuchElement Unable to locate element...
-org.ats.generated.Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9(org.ats.generated.Invitation)
-Run 1: PASS
-Run 2: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
-Run 3: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
-Run 4: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t...
-
-Invitation.ClickDeletePupilButtonAndAsserta4eba7e7:724 » NoSuchElement Unable ...
-Invitation.ClickEditPupilWithIdbf9e281e:670 » NoSuchElement Unable to locate e...
-Invitation.EditPupilAndAssert3fb7ad3b:678 » NoSuchElement Unable to locate ele...
-Invitation.FindDeletePupilButton19f061db:716 » NoSuchElement Unable to locate ...
-org.ats.generated.Invitation.VerifyPupilList47881c74(org.ats.generated.Invitation)
-Run 1: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-Run 2: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-Run 3: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-Run 4: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-                    </td>
-                  </tr>
-                </table>
+                <tr ng-repeat="step in skips track by $index">
+                  <td >{{$index+1}}</td>
+                  <td >{{step.type}}</td>
+                  <td >
+                    <ul>
+                      <li ng-repeat="(key, val) in step" ng-if="(key !=='params') && (key !== 'description') && (key !== 'type')">
+                        <p>{{key}} : {{val}}</p>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div id="out-put">
+           	  <span class="label label-default">Exceptions</span><br>
+              <div class="text-info padding-10">
+                Failed tests: org.ats.generated.Invitation.AddSchoolYears190860fd(org.ats.generated.Invitation) Run 1: PASS Run 2: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element... Run 3: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element... Invitation.CancelConfirm74ad20a9:1035 » NoSuchElement Unable to locate element... org.ats.generated.Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9(org.ats.generated.Invitation) Run 1: PASS Run 2: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t... Run 3: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t... Run 4: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t... Invitation.ClickDeletePupilButtonAndAsserta4eba7e7:724 » NoSuchElement Unable ... Invitation.ClickEditPupilWithIdbf9e281e:670 » NoSuchElement Unable to locate e... Invitation.EditPupilAndAssert3fb7ad3b:678 » NoSuchElement Unable to locate ele... Invitation.FindDeletePupilButton19f061db:716 » NoSuchElement Unable to locate ... org.ats.generated.Invitation.VerifyPupilList47881c74(org.ats.generated.Invitation) Run 1: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false] Run 2: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false] Run 3: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false] Run 4:Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
               </div>
             </div>
             <div class="modal fade" id="image-case">
               
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
