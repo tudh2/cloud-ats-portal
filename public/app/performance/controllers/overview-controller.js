@@ -2,8 +2,8 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
   'use strict';
 
   module.registerController('OverviewPerformanceCtrl', 
-    ['$scope', '$rootScope', '$stateParams', '$state', '$templateRequest', '$compile', 'PerformanceService', 'EventService',
-    function($scope, $rootScope, $stateParams, $state, $templateRequest, $compile, PerformanceService, EventService) {
+    ['$window', '$scope', '$rootScope', '$stateParams', '$state', '$templateRequest', '$compile', 'PerformanceService', 'EventService',
+    function($window,$scope, $rootScope, $stateParams, $state, $templateRequest, $compile, PerformanceService, EventService) {
 
     	$scope.projectId = $stateParams.id;
       $scope.title = 'OVERVIEWS'
@@ -198,9 +198,24 @@ define(['performance/module', 'lodash', 'notification'], function (module, _) {
         PerformanceService.download(projectId, jobId ,function (data,status) {
           var file = new Blob([data], {type: 'application/x-zip'});
           var link=document.createElement('a');
-          link.href=window.URL.createObjectURL(file);
           link.download="jtl-file.zip";
-          link.click();
+          var browser ="";
+          var userAgent = $window.navigator.userAgent;
+          var browsers = {chrome: /chrome/i, safari: /safari/i, firefox: /firefox/i, ie: /internet explorer/i};
+          for(var key in browsers) {
+            if (browsers[key].test(userAgent)) {
+                browser = key;
+            }
+          };
+          if (browser === "safari" || browser === "firefox") {
+            link.href= window.URL.createObjectURL(file) ;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          } else {
+            link.href = window.navigator.msSaveOrOpenBlob(file,"jtl-file.zip");
+            link.click();
+          }
         });
       }
 
