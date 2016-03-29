@@ -159,6 +159,7 @@ define(['performance/module', 'c3'], function (module, c3) {
 		      $scope.toggle = function (type) {
 	      		switch (type) {
 	      			case 'trans_chart':
+	      			  	//trans_chart.toggle();
 	      				if ($scope.show_trans) {
 	      					trans_chart.hide();
 	      				} else trans_chart.show();
@@ -167,6 +168,8 @@ define(['performance/module', 'c3'], function (module, c3) {
 	      			case 'hits_chart':
 	      				if ($scope.show_hits) {
 	      					hits_chart.hide();
+	      					hits_chart.legend.hide();
+	      					hits_chart.legend.show();
 	      				} else hits_chart.show();
 	      				$scope.show_hits = !$scope.show_hits;
 	      				break;
