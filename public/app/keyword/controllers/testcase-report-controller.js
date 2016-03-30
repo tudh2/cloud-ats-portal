@@ -36,10 +36,19 @@ define(['keyword/module', 'lodash'], function (module, _) {
       });
     };
 
-    $scope.showImage = function () {
+    $scope.showImage = function (step) {
+
+      var name = step.params[0].file;
+      if (!name){
+        name = '';
+      }
+      getImage(name);  
+    }
+
+    var getImage = function (name) {
       loadModal();
-      KeywordService.showImage($scope.projectId, $scope.jobId, $scope.suiteId, $scope.suiteReportId, $scope.caseReportId, function (data, status) {
-         // Prep the response for Base64 encoding
+      KeywordService.showImage($scope.projectId, $scope.jobId, $scope.suiteId, $scope.suiteReportId, $scope.caseReportId, name, function (data, status) {
+           // Prep the response for Base64 encoding
         var uInt8Array = new Uint8Array(data);
         var i = uInt8Array.length;
         var binaryString = new Array(i);
@@ -51,7 +60,6 @@ define(['keyword/module', 'lodash'], function (module, _) {
         // Base64 encoded image and assign it to the scope
         $scope.image = window.btoa(data);
       });
-
     }
   }]);
 });

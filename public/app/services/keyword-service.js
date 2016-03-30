@@ -285,11 +285,11 @@ define(['keyword/module'], function(module) {
           callback(data,status);
         });
       },
-      showImage : function (projectId, jobId, suiteId, suiteReportId, caseReportId, callback) {
+      showImage : function (projectId, jobId, suiteId, suiteReportId, caseReportId, stepName, callback) {
         var request = {
           method: 'GET',
           responseType: "arraybuffer",
-          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/report/'+ jobId + '/suite/'+suiteId+'/'+suiteReportId+'/case/'+caseReportId+'/image',
+          url: appConfig.RestEntry + '/api/v1/project/keyword/'+ projectId +'/report/'+ jobId + '/suite/'+suiteId+'/'+suiteReportId+'/case/'+caseReportId+'/image?step='+stepName,
           headers: {
             'X-AUTH-TOKEN': $cookies.get('authToken'),
             'X-SPACE': $cookies.get('space'),

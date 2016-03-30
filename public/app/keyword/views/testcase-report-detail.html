@@ -44,7 +44,7 @@
                   </td>
                   <td ng-if="step.isPass == true"><span class="label label-success">Pass</span></td>
                   <td ng-if="step.isPass != true"><span class="label label-error">Fail</span></td>
-                  <td ><a ng-if="case.hasImage && $index === (listStep.length -1)" ng-click="showImage()">Show image</a></td>
+                  <td ><a ng-if="(case.hasImage && $index === (listStep.length -1)) || step.name ==='saveScreenshot '" ng-click="showImage(step)">Show image</a></td>
                 </tr>
              </table>
             </div>
