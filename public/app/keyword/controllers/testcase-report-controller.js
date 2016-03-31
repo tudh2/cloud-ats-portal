@@ -36,18 +36,12 @@ define(['keyword/module', 'lodash'], function (module, _) {
       });
     };
 
-    $scope.showImage = function (step) {
-
-      var name = undefined;
-
-      if (step){
-        name = step.params[0].file;
-      } else name = '';
-      getImage(name); 
+    $scope.showImageByName = function (value, isName) {
+      getImage(value, isName); 
     }
 
-    var getImage = function (name) {
-      KeywordService.showImage($scope.projectId, $scope.jobId, $scope.suiteId, $scope.suiteReportId, $scope.caseReportId, name, function (data, status) {
+    var getImage = function (value, isName) {
+      KeywordService.showImage($scope.projectId, $scope.jobId, $scope.suiteId, $scope.suiteReportId, $scope.caseReportId, value, isName, function (data, status) {
            // Prep the response for Base64 encoding
         var uInt8Array = new Uint8Array(data);
         var i = uInt8Array.length;

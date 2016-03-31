@@ -148,7 +148,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
                 break;
               case 204:
                 $.smallBox({
-                  title: $rootScopegetWord('Notification'),
+                  title: $rootScope.getWord('Notification'),
                   content: $rootScope.getWord('Your test case has nothing to update'),
                   color: '#296191',
                   iconSmall: 'fa fa-check bounce animated',

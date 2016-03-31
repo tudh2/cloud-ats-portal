@@ -45,7 +45,8 @@
                   </td>
                   <td ng-if="step.isPass == true"><span class="label label-success">Pass</span></td>
                   <td ng-if="step.isPass != true"><span class="label label-error">Fail</span></td>
-                  <td ><a ng-if="step.name ==='saveScreenshot '" ng-click="showImage(step)">Show image</a></td>
+                  <td ng-if="step.name ==='saveScreenshot '"><a ng-click="showImageByName(step.params[0].file, true)">Show image</a></td>
+                  <td ng-if="step.hasImage"><a ng-click="showImageByName(step._id, false)">Show image</a></td>
                 </tr>
              </table>
               <a ng-if="case.hasImage" ng-click="showImage(step)">Show image</a>
@@ -72,12 +73,6 @@
                   </td>
                 </tr>
               </table>
-            </div>
-            <div id="out-put">
-           	  <span class="label label-default">Exceptions</span><br>
-              <div class="text-info padding-10">
-                Failed tests: org.ats.generated.Invitation.AddSchoolYears190860fd(org.ats.generated.Invitation) Run 1: PASS Run 2: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element... Run 3: Invitation.AddSchoolYears190860fd:123 » NoSuchElement Unable to locate element... Invitation.CancelConfirm74ad20a9:1035 » NoSuchElement Unable to locate element... org.ats.generated.Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9(org.ats.generated.Invitation) Run 1: PASS Run 2: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t... Run 3: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t... Run 4: Invitation.ClickAddAndSaveCreatedStudentsc00bf1b9:437 » NoSuchElement Unable t... Invitation.ClickDeletePupilButtonAndAsserta4eba7e7:724 » NoSuchElement Unable ... Invitation.ClickEditPupilWithIdbf9e281e:670 » NoSuchElement Unable to locate e... Invitation.EditPupilAndAssert3fb7ad3b:678 » NoSuchElement Unable to locate ele... Invitation.FindDeletePupilButton19f061db:716 » NoSuchElement Unable to locate ... org.ats.generated.Invitation.VerifyPupilList47881c74(org.ats.generated.Invitation) Run 1: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false] Run 2: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false] Run 3: Invitation.VerifyPupilList47881c74:649 expected [true] but found [false] Run 4:Invitation.VerifyPupilList47881c74:649 expected [true] but found [false]
-              </div>
             </div>
             <div class="modal fade" id="image-case">
               
