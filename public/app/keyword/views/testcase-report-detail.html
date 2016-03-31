@@ -40,13 +40,15 @@
                       <li ng-repeat="param in step.params">
                         <p ng-repeat="(key, val) in param">{{key}} : {{val}}</p>
                       </li>
+                      <span ng-if="step.output">{{step.output}}</span>
                     </ul>
                   </td>
                   <td ng-if="step.isPass == true"><span class="label label-success">Pass</span></td>
                   <td ng-if="step.isPass != true"><span class="label label-error">Fail</span></td>
-                  <td ><a ng-if="(case.hasImage && $index === (listStep.length -1)) || step.name ==='saveScreenshot '" ng-click="showImage(step)">Show image</a></td>
+                  <td ><a ng-if="step.name ==='saveScreenshot '" ng-click="showImage(step)">Show image</a></td>
                 </tr>
              </table>
+              <a ng-if="case.hasImage" ng-click="showImage(step)">Show image</a>
             </div>
             <div ng-if="skips.length > 0">
               <span class="label label-danger">Skipped steps</span>

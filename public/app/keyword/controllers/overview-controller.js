@@ -243,6 +243,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
 
       $scope.downloadResult = function(projectId,jobId) {
         KeywordService.download(projectId, jobId ,function (data,status) {
+          console.log(data);
           var file = new Blob([data], {type: 'application/x-gzip'});
           var link=document.createElement('a');
           link.href=window.URL.createObjectURL(file);
