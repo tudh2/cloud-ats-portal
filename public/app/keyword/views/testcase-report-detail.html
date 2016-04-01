@@ -33,20 +33,25 @@
                   </tr>
                 </thead>
                 <tr ng-repeat="step in listStep track by $index">
-                  <td >{{$index+1}}</td>
-                  <td >{{step.name}}</td>
-                  <td >
+                  <td width="5%">{{$index+1}}</td>
+                  <td width="20%">
+                    <a ng-if="step.output" ng-click="showOutput($event, step.output)">{{step.name}}</a>
+                    <span ng-if="!step.output">{{step.name}}</span>
+                  </td>
+                  <td width="45%">
                     <ul>
                       <li ng-repeat="param in step.params">
                         <p ng-repeat="(key, val) in param">{{key}} : {{val}}</p>
                       </li>
-                      <span ng-if="step.output">{{step.output}}</span>
                     </ul>
                   </td>
-                  <td ng-if="step.isPass == true"><span class="label label-success">Pass</span></td>
-                  <td ng-if="step.isPass != true"><span class="label label-error">Fail</span></td>
-                  <td ng-if="step.name ==='saveScreenshot '"><a ng-click="showImageByName(step.params[0].file, true)">Show image</a></td>
-                  <td ng-if="step.hasImage"><a ng-click="showImageByName(step._id, false)">Show image</a></td>
+                  <td width="10%" ng-if="step.isPass == true"><span class="label label-success">Pass</span></td>
+                  <td width="10%" ng-if="step.isPass != true"><span class="label label-error">Fail</span></td>
+
+                  <td width="20%">
+                    <a ng-if="step.name ==='saveScreenshot '"ng-click="showImageByName(step.params[0].file, true)">Show image</a>
+                    <a ng-if="step.hasImage" ng-click="showImageByName(step._id, false)">Show image</a>
+                  </td>
                 </tr>
              </table>
               <a ng-if="case.hasImage" ng-click="showImage(step)">Show image</a>
