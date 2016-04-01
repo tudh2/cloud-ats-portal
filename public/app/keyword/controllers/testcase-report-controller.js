@@ -41,7 +41,7 @@ define(['keyword/module', 'lodash'], function (module, _) {
       var tr = ele.closest('tr');
       var nextClassTr = $(tr).next().attr('class');
       if (nextClassTr !== 'step-output') {
-        $(tr).parent().append('<tr class="step-output"><td colspan="5" width="100%" style="border-top: none;">'+output+'</td></tr>');
+        $(tr).after('<tr class="step-output"><td colspan="5" width="100%" style="border-top: none;">'+output+'</td></tr>');
       } else $(tr).next().remove();
     }
 
